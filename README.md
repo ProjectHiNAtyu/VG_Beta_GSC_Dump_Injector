@@ -34,60 +34,60 @@ All other commands are almost always incorrect and may cause a crash.
 
 s4_func
 
-getxuid
-waitframe
-setdvarifuninitialized
-int
-getdvarint
-getdvar
-isalive
-istrue
-isdefined
-gettime
-spawnstruct
-isint
-getentitynumber
-loadfx
-precachemodel
-getentarray
-visionsetnaked
-getent
-setdvar
-randomfloat
-wait
-spawn
-endon
+- getxuid
+- waitframe
+- setdvarifuninitialized
+- int
+- getdvarint
+- getdvar
+- isalive
+- istrue
+- isdefined
+- gettime
+- spawnstruct
+- isint
+- getentitynumber
+- loadfx
+- precachemodel
+- getentarray
+- visionsetnaked
+- getent
+- setdvar
+- randomfloat
+- wait
+- spawn
+- endon
 
 ----------
 s4_mesh
 
-iprintln
-iprintlnbold
-ishost
-linkto
-delete
+- iprintln
+- iprintlnbold
+- ishost
+- linkto
+- delete
 
 ----------
 
 s4_token
 
-main
-_effect
-isnightmap
-init
-buildweapon
-getweaponrootname
-origin
-_bullet_trace
-killcament
-getgametype
+- main
+- _effect
+- isnightmap
+- init
+- buildweapon
+- getweaponrootname
+- origin
+- _bullet_trace
+- killcament
+- getgametype
 
-scripts\engine\trace::
-scripts\engine\utility::
-scripts\mp\utility\player::
-scripts\cp_mp\utility\game_utility::
-scripts\mp\art::
-scripts\mp\class::
-scripts\mp\utility\weapon::
-scripts\cp_mp\vehicles\vehicle_spawn::
-scripts\mp\utility\game::
+- scripts\engine\trace::
+- scripts\engine\utility::
+- scripts\mp\utility\player::
+- scripts\cp_mp\utility\game_utility::
+- scripts\mp\art::
+- scripts\mp\class::
+- scripts\mp\utility\weapon::
+- scripts\cp_mp\vehicles\vehicle_spawn::
+- scripts\mp\utility\game::
