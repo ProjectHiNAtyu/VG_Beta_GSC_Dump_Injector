@@ -74,6 +74,8 @@ s4_func
 - float
 - getgroundposition
 - rotatevector
+- weaponclass
+- newclienthudelem
 
 ----------
 
@@ -95,6 +97,17 @@ s4_mesh
 - playfx
 - destroy
 - notifyonplayercommand
+- usinggamepad
+- moveto
+- rotateto
+- dontinterpolate
+- getstance
+- issprintsliding
+- playerads
+- issprinting
+- getcurrentweapon
+- setshader
+- fadeovertime
 
 ----------
 
@@ -129,6 +142,20 @@ s4_token
 - players
 - array_remove
 - is_equal
+- ter_op
+- weapons
+- characters
+- _hasperk
+- owner
+- attacker
+- outlineenableforplayer
+- team
+- basename
+- waittill_any_2
+- isreallyalive
+- outlinedisable
+- horzalign
+- vertalign
 
 - scripts\engine\trace::
 - scripts\engine\utility::
@@ -141,3 +168,6 @@ s4_token
 - scripts\mp\utility\game::
 - scripts\common\utility::
 - scripts\engine\math::
+- scripts\mp\utility\perk::
+- scripts\mp\utility\outline::
+- scripts\mp\battlechatter_mp::
