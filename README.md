@@ -57,8 +57,26 @@ s4_func
 - wait
 - spawn
 - endon
+- anglestoforward
+- vectornormalize
+- anglestoup
+- anglestoright
+- vectordot
+- newhudelem
+- distancesquared
+- distance
+- clamp
+- vectortoangles
+- getarraykeys
+- max
+- tablelookupbyrow
+- strtok
+- float
+- getgroundposition
+- rotatevector
 
 ----------
+
 s4_mesh
 
 - iprintln
@@ -66,6 +84,17 @@ s4_mesh
 - ishost
 - linkto
 - delete
+- setorigin
+- setplayerangles
+- setclientomnvar
+- getplayerangles
+- geteye
+- getvieworigin
+- delete
+- setmodel
+- playfx
+- destroy
+- notifyonplayercommand
 
 ----------
 
@@ -81,6 +110,25 @@ s4_token
 - _bullet_trace
 - killcament
 - getgametype
+- player
+- v
+- alignx
+- fontscale
+- alpha
+- x
+- y
+- model
+- angles
+- archived
+- sort
+- color
+- aligny
+- classname
+- array_remove_index
+- ray_trace
+- players
+- array_remove
+- is_equal
 
 - scripts\engine\trace::
 - scripts\engine\utility::
@@ -91,3 +139,5 @@ s4_token
 - scripts\mp\utility\weapon::
 - scripts\cp_mp\vehicles\vehicle_spawn::
 - scripts\mp\utility\game::
+- scripts\common\utility::
+- scripts\engine\math::
