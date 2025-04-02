@@ -3,6 +3,6 @@
 
 _id_56DF()
 {
-    if ( !_id_0A69::_id_CA3E() )
+    if ( !scripts\mp\utility\game::_id_CA3E() )
         _id_0A75::_id_C28E( _id_0767::_id_56D4 );
 }

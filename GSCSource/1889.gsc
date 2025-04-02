@@ -11,7 +11,7 @@ _id_2F5D( var_0, var_1 )
     var_2 = self;
     var_2 _id_2F81( var_0 );
     var_3 = getdvarint( "scr_calloutmarkerping_zoffset_entity_enemy", 82 );
-    var_4 = var_1._id_02EA + ( 0, 0, var_3 );
+    var_4 = var_1.origin + ( 0, 0, var_3 );
     var_5 = 1;
     var_6 = var_2 _meth_87A2( 1 );
     var_7 = var_2 _meth_87A2( 2 );
@@ -217,16 +217,16 @@ _id_0B5A( var_0, var_1 )
     if ( !isdefined( var_0 ) )
         return 0;
 
-    if ( !_func_0117( var_0 ) )
+    if ( !isplayer( var_0 ) )
         return 0;
 
-    if ( !isdefined( var_0._id_045B ) )
+    if ( !isdefined( var_0.team ) )
         return 0;
 
-    if ( var_0._id_045B == "neutral" )
+    if ( var_0.team == "neutral" )
         return 0;
 
-    return var_0._id_045B != var_1._id_045B;
+    return var_0.team != var_1.team;
 }
 
 _id_0B5C( var_0 )
@@ -235,12 +235,12 @@ _id_0B5C( var_0 )
         return 0;
 
     if ( !_func_02DB( var_0 ) )
-        return _func_0121( var_0._id_048F, "brloot_plunder_extraction" );
+        return issubstr( var_0._id_048F, "brloot_plunder_extraction" );
 
-    if ( !isdefined( var_0._id_02AE ) )
+    if ( !isdefined( var_0.model ) )
         return 0;
 
-    return var_0._id_02AE == "military_skyhook_far";
+    return var_0.model == "military_skyhook_far";
 }
 
 _id_0B59( var_0 )
@@ -284,7 +284,7 @@ _id_2F74( var_0 )
     if ( !_func_02DB( var_0 ) )
         return 0;
 
-    return _func_0121( var_0._id_00DE, "grenade" ) || _func_0121( var_0._id_00DE, "c4_" ) || _func_0121( var_0._id_00DE, "proximity_explosive_" ) || _func_0121( var_0._id_00DE, "claymore_" );
+    return issubstr( var_0.classname, "grenade" ) || issubstr( var_0.classname, "c4_" ) || issubstr( var_0.classname, "proximity_explosive_" ) || issubstr( var_0.classname, "claymore_" );
 }
 
 _id_2F58( var_0, var_1 )
@@ -292,7 +292,7 @@ _id_2F58( var_0, var_1 )
     if ( var_0 _meth_81D2() || var_0 _meth_8603() )
         return 0;
 
-    if ( !isai( var_0 ) )
+    if ( !isalive( var_0 ) )
         return 0;
 
     if ( istrue( var_0._id_9AA6 ) && !isdefined( var_1 ) )
@@ -301,7 +301,7 @@ _id_2F58( var_0, var_1 )
     if ( istrue( var_0._id_7245 ) )
         return 0;
 
-    if ( var_0 _id_099C::_id_8AB5() )
+    if ( var_0 scripts\cp_mp\utility\player_utility::_id_8AB5() )
         return 0;
 
     return 1;
@@ -409,7 +409,7 @@ _id_0B51( var_0 )
 {
     var_1 = self;
 
-    if ( isai( var_1 ) )
+    if ( isalive( var_1 ) )
         return;
 
     if ( !_id_0B61( var_0 ) )
@@ -435,11 +435,11 @@ _id_2F93( var_0 )
 
 _id_0B5E( var_0 )
 {
-    if ( !_id_099D::_id_8A10( "challenges", "onPing" ) )
+    if ( !scripts\cp_mp\utility\script_utility::issharedfuncdefined( "challenges", "onPing" ) )
         return;
 
     if ( _id_0B61( var_0 ) )
-        self [[ _id_099D::_id_6D05( "challenges", "onPing" ) ]]( "object" );
+        self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "challenges", "onPing" ) ]]( "object" );
     else if ( _id_0B60( var_0 ) )
     {
         var_1 = self _meth_878E( var_0 );
@@ -448,13 +448,13 @@ _id_0B5E( var_0 )
         {
             if ( _id_0B5A( var_1, self ) )
             {
-                self [[ _id_099D::_id_6D05( "challenges", "onPing" ) ]]( "enemy" );
+                self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "challenges", "onPing" ) ]]( "enemy" );
                 return;
             }
 
-            if ( !_func_0117( var_1 ) )
+            if ( !isplayer( var_1 ) )
             {
-                self [[ _id_099D::_id_6D05( "challenges", "onPing" ) ]]( "object" );
+                self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "challenges", "onPing" ) ]]( "object" );
                 return;
             }
 
@@ -463,9 +463,9 @@ _id_0B5E( var_0 )
         }
     }
     else if ( _id_0B5F( var_0 ) )
-        self [[ _id_099D::_id_6D05( "challenges", "onPing" ) ]]( "danger" );
+        self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "challenges", "onPing" ) ]]( "danger" );
     else if ( var_0 == 6 || var_0 == -1 )
-        self [[ _id_099D::_id_6D05( "challenges", "onPing" ) ]]( "object" );
+        self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "challenges", "onPing" ) ]]( "object" );
 }
 
 _id_2F95( var_0, var_1 )
@@ -493,16 +493,16 @@ _id_2F96( var_0, var_1 )
         return "";
 
     var_4 = 0;
-    var_5 = strtok( level._id_2BC5 );
+    var_5 = tablelookupgetnumrows( level._id_2BC5 );
     var_6 = undefined;
 
     for ( var_7 = var_4; var_7 < var_5; var_7++ )
     {
-        var_8 = _func_021E( level._id_2BC5, var_7, 1 );
+        var_8 = tablelookupbyrow( level._id_2BC5, var_7, 1 );
 
         if ( var_8 == var_3 )
         {
-            var_6 = _func_021E( level._id_2BC5, var_7, 12 );
+            var_6 = tablelookupbyrow( level._id_2BC5, var_7, 12 );
 
             if ( var_6 == "" )
             {
@@ -525,58 +525,58 @@ _id_2F96( var_0, var_1 )
 
     var_9 = "";
 
-    if ( _func_0121( var_6, "_PLUNDER_CASH" ) )
+    if ( issubstr( var_6, "_PLUNDER_CASH" ) )
         var_9 = "ping_plunder_loot";
-    else if ( _func_0121( var_6, "ARMORY_KIOSK" ) )
+    else if ( issubstr( var_6, "ARMORY_KIOSK" ) )
     {
-        if ( !isai( var_2 ) )
+        if ( !isalive( var_2 ) )
             var_9 = "ping_response_helpme";
         else
             var_9 = "ping_plunder_vendor";
     }
-    else if ( _func_0121( var_6, "_SHOTGUN" ) )
+    else if ( issubstr( var_6, "_SHOTGUN" ) )
         var_9 = "ping_ammo_shotgun";
-    else if ( _func_0121( var_6, "_AMMO_LAUNCHER" ) )
+    else if ( issubstr( var_6, "_AMMO_LAUNCHER" ) )
         var_9 = "ping_ammo_launcher";
-    else if ( _func_0121( var_6, "_SNIPER" ) )
+    else if ( issubstr( var_6, "_SNIPER" ) )
         var_9 = "ping_ammo_highcal";
-    else if ( _func_0121( var_6, "_AR_LMG" ) )
+    else if ( issubstr( var_6, "_AR_LMG" ) )
         var_9 = "ping_ammo_midcaliber";
-    else if ( _func_0121( var_6, "_PISTOL_SMG" ) )
+    else if ( issubstr( var_6, "_PISTOL_SMG" ) )
         var_9 = "ping_ammo_smallcal";
-    else if ( _func_0121( var_6, "ARMOR" ) )
+    else if ( issubstr( var_6, "ARMOR" ) )
         var_9 = "ping_pickup_armor";
-    else if ( _func_0121( var_6, "_AR" ) )
+    else if ( issubstr( var_6, "_AR" ) )
         var_9 = "ping_weapon_assaultrifle";
-    else if ( _func_0121( var_6, "_SM" ) )
+    else if ( issubstr( var_6, "_SM" ) )
         var_9 = "ping_weapon_smg";
-    else if ( _func_0121( var_6, "_SH" ) )
+    else if ( issubstr( var_6, "_SH" ) )
         var_9 = "ping_weapon_shotgun";
-    else if ( _func_0121( var_6, "_PI" ) )
+    else if ( issubstr( var_6, "_PI" ) )
         var_9 = "ping_weapon_pistol";
-    else if ( _func_0121( var_6, "_SN" ) )
+    else if ( issubstr( var_6, "_SN" ) )
         var_9 = "ping_weapon_sniper";
-    else if ( _func_0121( var_6, "_LM" ) )
+    else if ( issubstr( var_6, "_LM" ) )
         var_9 = "ping_weapon_lmg";
-    else if ( _func_0121( var_6, "_LA" ) )
+    else if ( issubstr( var_6, "_LA" ) )
         var_9 = "ping_weapon_launcher";
     else if ( var_6 == "MP/BR_TYPE_GENERIC_ME" )
         var_9 = "ping_pickup_riotshield";
-    else if ( _func_0121( var_6, "CONCUSSION" ) || _func_0121( var_6, "DECOY" ) || _func_0121( var_6, "FLASH" ) || _func_0121( var_6, "GAS_BR" ) || _func_0121( var_6, "HEARTBEAT" ) || _func_0121( var_6, "SMOKE" ) || _func_0121( var_6, "SNAPSHOT" ) )
+    else if ( issubstr( var_6, "CONCUSSION" ) || issubstr( var_6, "DECOY" ) || issubstr( var_6, "FLASH" ) || issubstr( var_6, "GAS_BR" ) || issubstr( var_6, "HEARTBEAT" ) || issubstr( var_6, "SMOKE" ) || issubstr( var_6, "SNAPSHOT" ) )
         var_9 = "ping_ammo_grenadetactical";
-    else if ( _func_0121( var_6, "ATMINE" ) || _func_0121( var_6, "CLAYMORE" ) || _func_0121( var_6, "C4" ) || _func_0121( var_6, "FRAG" ) || _func_0121( var_6, "SEMTEX" ) || _func_0121( var_6, "THERMITE" ) || _func_0121( var_6, "THROWING" ) || _func_0121( var_6, "MOLOTOV" ) )
+    else if ( issubstr( var_6, "ATMINE" ) || issubstr( var_6, "CLAYMORE" ) || issubstr( var_6, "C4" ) || issubstr( var_6, "FRAG" ) || issubstr( var_6, "SEMTEX" ) || issubstr( var_6, "THERMITE" ) || issubstr( var_6, "THROWING" ) || issubstr( var_6, "MOLOTOV" ) )
         var_9 = "ping_ammo_grenadelethal";
-    else if ( _func_0121( var_6, "TACTICAL_COVER" ) || _func_0121( var_6, "TROPHY" ) || _func_0121( var_6, "RECONDRONE" ) || _func_0121( var_6, "EMPDRONE" ) || _func_0121( var_6, "DEADSILENCE" ) || _func_0121( var_6, "AMMO_DROP" ) || _func_0121( var_6, "SUPPORT_BOX" ) || _func_0121( var_6, "TAC_INSERT" ) || _func_0121( var_6, "ADVANCED_SUPPLY_DROP" ) )
+    else if ( issubstr( var_6, "TACTICAL_COVER" ) || issubstr( var_6, "TROPHY" ) || issubstr( var_6, "RECONDRONE" ) || issubstr( var_6, "EMPDRONE" ) || issubstr( var_6, "DEADSILENCE" ) || issubstr( var_6, "AMMO_DROP" ) || issubstr( var_6, "SUPPORT_BOX" ) || issubstr( var_6, "TAC_INSERT" ) || issubstr( var_6, "ADVANCED_SUPPLY_DROP" ) )
         var_9 = "ping_pickup_generic";
-    else if ( _func_0121( var_6, "RESPAWN_TOKEN" ) || _func_0121( var_6, "LOOT_CACHE" ) || _func_0121( var_6, "CONTRACT" ) || _func_0121( var_6, "GASMASK" ) )
+    else if ( issubstr( var_6, "RESPAWN_TOKEN" ) || issubstr( var_6, "LOOT_CACHE" ) || issubstr( var_6, "CONTRACT" ) || issubstr( var_6, "GASMASK" ) )
         var_9 = "ping_pickup_generic";
     else if ( var_6 == "EQUIPMENT/ADRENALINE_BR" || var_6 == "MP_BR_INGAME/KIOSK_ITEM_SELF_REVIVE" )
         var_9 = "ping_pickup_health";
     else if ( var_6 == "KILLSTREAKS/MANUAL_TURRET" )
         var_9 = "ping_killstreaks_shieldturret_open";
-    else if ( _func_0121( var_6, "KILLSTREAK" ) )
+    else if ( issubstr( var_6, "KILLSTREAK" ) )
         var_9 = "ping_pickup_generic";
-    else if ( _func_0121( var_6, "_PLUNDER_EXTRACT" ) )
+    else if ( issubstr( var_6, "_PLUNDER_EXTRACT" ) )
         var_9 = "ping_plunder_bank";
     else
     {
@@ -599,8 +599,8 @@ _id_2F81( var_0 )
     {
         if ( var_0 == 0 )
         {
-            if ( _id_099D::_id_8A10( "ping", "calloutMarkerPing_squadLeaderBeaconKillForPlayer" ) )
-                [[ _id_099D::_id_6D05( "ping", "calloutMarkerPing_squadLeaderBeaconKillForPlayer" ) ]]( var_1 );
+            if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "ping", "calloutMarkerPing_squadLeaderBeaconKillForPlayer" ) )
+                [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "ping", "calloutMarkerPing_squadLeaderBeaconKillForPlayer" ) ]]( var_1 );
         }
 
         var_1 _meth_8715( var_0 );
@@ -628,7 +628,7 @@ _id_2F8C( var_0, var_1 )
     {
 
     }
-    else if ( _func_0117( var_1 ) )
+    else if ( isplayer( var_1 ) )
         var_1 waittill( "disconnect" );
     else
         var_1 waittill( "death" );
@@ -641,7 +641,7 @@ _id_2F8D( var_0, var_1 )
     self endon( "predictiveCalloutClear_" + var_0 );
     _id_0B64( "watchPlayerDeathOrDisconnect: " + var_0 );
     var_2 = _id_6AAB( var_1 );
-    _id_077B::_id_1087E( "death_or_disconnect", "self_pickedupitem_" + var_2 );
+    scripts\engine\utility::waittill_any_2( "death_or_disconnect", "self_pickedupitem_" + var_2 );
     _id_2F81( var_0 );
 }
 
@@ -662,10 +662,10 @@ _id_2F8E( var_0, var_1 )
         if ( !isdefined( var_2 ) )
             return;
 
-        var_2 _id_077B::_id_1087E( "death", "fulton_takeoff" );
+        var_2 scripts\engine\utility::waittill_any_2( "death", "fulton_takeoff" );
     }
     else
-        level _id_077B::_id_1087F( "pickedupweapon_kill_callout_" + var_1._id_048F + var_1._id_02EA, "lootcache_opened_kill_callout" + var_1._id_02EA, "dropbag_kill_callout_" + var_1._id_02EA );
+        level scripts\engine\utility::_id_1087F( "pickedupweapon_kill_callout_" + var_1._id_048F + var_1.origin, "lootcache_opened_kill_callout" + var_1.origin, "dropbag_kill_callout_" + var_1.origin );
 
     _id_0B64( "Watch scriptable death Remove ID: " + var_0 );
     _id_2F81( var_0 );
@@ -766,7 +766,7 @@ _id_2F9C( var_0, var_1, var_2, var_3 )
 
     var_6 = var_4 _id_2F91( var_0, var_3 );
     var_7 = var_6 + var_1;
-    var_8 = _func_020F();
+    var_8 = spawnstruct();
     var_8._id_E05D = var_7;
     var_8._id_B9CC = var_0;
     var_8._id_3139 = 0;
@@ -778,7 +778,7 @@ _id_2F92( var_0, var_1, var_2 )
 {
     var_3 = self;
 
-    if ( !isdefined( var_3 ) || !_func_0117( var_3 ) )
+    if ( !isdefined( var_3 ) || !isplayer( var_3 ) )
         return 0;
 
     var_4 = gettime();
@@ -821,9 +821,9 @@ _id_2F94()
         wait 10;
         var_0 = gettime();
 
-        for ( var_1 = 0; var_1 < level._id_B758.size; var_1++ )
+        for ( var_1 = 0; var_1 < level.players.size; var_1++ )
         {
-            var_2 = level._id_B758[var_1];
+            var_2 = level.players[var_1];
 
             if ( !isdefined( var_2 ) || !isdefined( var_2._id_2FA4 ) )
                 continue;
@@ -896,7 +896,7 @@ _id_2F9E( var_0, var_1, var_2, var_3 )
 {
     var_4 = self;
 
-    if ( !isdefined( var_4 ) || !_func_0117( var_4 ) )
+    if ( !isdefined( var_4 ) || !isplayer( var_4 ) )
         return;
 
     if ( !isdefined( var_1 ) )
@@ -905,13 +905,13 @@ _id_2F9E( var_0, var_1, var_2, var_3 )
     if ( !isdefined( var_0 ) || var_0 == "" )
         return;
 
-    if ( _func_0117( var_2 ) )
+    if ( isplayer( var_2 ) )
         var_5 = var_2;
     else
         var_5 = var_4;
 
-    if ( _id_099D::_id_8A10( "sound", "trySayLocalSound" ) )
-        level thread [[ _id_099D::_id_6D05( "sound", "trySayLocalSound" ) ]]( var_5, var_0, undefined, undefined, var_3 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "sound", "trySayLocalSound" ) )
+        level thread [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "sound", "trySayLocalSound" ) ]]( var_5, var_0, undefined, undefined, var_3 );
 }
 
 _id_2F79()
@@ -935,15 +935,15 @@ _id_2F79()
     for (;;)
     {
         if ( var_4 == 1 )
-            var_6 = distancesquared( self._id_02EA, var_2 );
+            var_6 = distancesquared( self.origin, var_2 );
         else
         {
             var_6 = var_3;
-            var_7 = [[ _id_099D::_id_6D05( "game", "getFriendlyPlayers" ) ]]( self._id_045B, 1 );
+            var_7 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "game", "getFriendlyPlayers" ) ]]( self.team, 1 );
 
             foreach ( var_9 in var_7 )
             {
-                var_10 = distancesquared( var_9._id_02EA, var_2 );
+                var_10 = distancesquared( var_9.origin, var_2 );
 
                 if ( var_10 < var_6 )
                     var_6 = var_10;
@@ -976,7 +976,7 @@ _id_2F7F( var_0 )
 {
     var_1 = 0;
 
-    foreach ( var_3 in level._id_B758 )
+    foreach ( var_3 in level.players )
     {
         var_3 _id_2F80();
 
@@ -1042,7 +1042,7 @@ _id_2F9F( var_0, var_1 )
 
     wait( getdvarfloat( "scr_calloutmarkerping_delay_between_vo_and_sfx_secs_acked", 0.5 ) );
 
-    if ( _func_0117( var_1 ) )
+    if ( isplayer( var_1 ) )
         var_2 _id_2F9E( var_3, var_0, var_1 );
     else if ( isdefined( var_2 ) )
         var_2 _id_2F9E( var_3, var_0 );
@@ -1078,7 +1078,7 @@ _id_2F83( var_0, var_1 )
     self endon( "predictiveCalloutClear_" + var_0 );
     var_2 = 0.25;
     var_3 = 0;
-    var_4 = self._id_045B;
+    var_4 = self.team;
 
     for (;;)
     {
@@ -1117,11 +1117,11 @@ _id_0B67( var_0, var_1, var_2 )
 {
     var_3 = self;
     var_4 = 0;
-    var_5 = [[ _id_099D::_id_6D05( "game", "getFriendlyPlayers" ) ]]( var_2, 1 );
+    var_5 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "game", "getFriendlyPlayers" ) ]]( var_2, 1 );
 
     foreach ( var_7 in var_5 )
     {
-        if ( var_7 _id_099C::_id_88BC() && var_7._id_FFF1 == var_1 )
+        if ( var_7 scripts\cp_mp\utility\player_utility::isinvehicle() && var_7._id_FFF1 == var_1 )
         {
             var_3 _meth_8716( var_0, var_7 );
             var_4++;

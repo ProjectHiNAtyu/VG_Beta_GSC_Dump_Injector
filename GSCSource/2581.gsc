@@ -3,8 +3,8 @@
 
 _id_7EA4()
 {
-    thread _id_0A1D::_id_021D();
-    thread _id_0A0B::_id_021D();
+    thread _id_0A1D::init();
+    thread _id_0A0B::init();
     level._id_11C4["actor_s4_mp_guard_dog"]["setup_model_func"] = ::_id_D7B5;
     level._id_11C4["actor_s4_mp_attack_dog"]["setup_model_func"] = ::_id_D752;
 }
@@ -15,34 +15,34 @@ _id_AA31( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
     self._id_7536 = 0;
     var_1._id_8FE4 = gettime();
 
-    if ( _func_0117( var_1 ) && isdefined( self._id_02F2 ) && var_1 != self._id_02F2 )
+    if ( isplayer( var_1 ) && isdefined( self.owner ) && var_1 != self.owner )
     {
 
     }
 
-    self _meth_827B( "kstreak_dog_death" );
+    self playsound( "kstreak_dog_death" );
 
     if ( self._id_4CCD == "guard_dog" )
     {
-        level thread _id_0789::_id_F756( self._id_02F2, "gdog_kia" );
-        level thread _id_0789::_id_F756( var_1, "gdog_ekia" );
+        level thread scripts\mp\battlechatter_mp::_id_F756( self.owner, "gdog_kia" );
+        level thread scripts\mp\battlechatter_mp::_id_F756( var_1, "gdog_ekia" );
     }
     else
     {
-        level thread _id_0789::_id_F756( self._id_02F2, "adog_kia" );
-        level thread _id_0789::_id_F756( var_1, "adog_ekia" );
+        level thread scripts\mp\battlechatter_mp::_id_F756( self.owner, "adog_kia" );
+        level thread scripts\mp\battlechatter_mp::_id_F756( var_1, "adog_ekia" );
     }
 
     if ( isdefined( self._id_FE8E ) )
     {
-        if ( isdefined( self._id_02F2 ) )
-            self._id_FE8E disableoffhandweapons( self._id_02F2 );
+        if ( isdefined( self.owner ) )
+            self._id_FE8E disableplayeruse( self.owner );
 
-        self._id_FE8E _meth_809A();
+        self._id_FE8E delete();
     }
 
     _id_07CE::_id_AA33( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 0 );
-    scripts\cp_mp\utility\script_utility::_id_4365();
+    _id_09C6::_id_4365();
     self notify( "killanimscript" );
 }
 
@@ -53,12 +53,12 @@ _id_AA3D( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
 
     if ( self._id_4CCD == "guard_dog" )
     {
-        if ( var_1 == self._id_02F2 )
-            level thread _id_0789::_id_F756( self._id_02F2, "gdog_selfdamage" );
-        else if ( var_1._id_045B != self._id_02F2._id_045B )
-            level thread _id_0789::_id_F756( var_1, "gdog_enmydamage" );
-        else if ( var_1._id_045B == self._id_02F2._id_045B )
-            level thread _id_0789::_id_F756( var_1, "gdog_allydamage" );
+        if ( var_1 == self.owner )
+            level thread scripts\mp\battlechatter_mp::_id_F756( self.owner, "gdog_selfdamage" );
+        else if ( var_1.team != self.owner.team )
+            level thread scripts\mp\battlechatter_mp::_id_F756( var_1, "gdog_enmydamage" );
+        else if ( var_1.team == self.owner.team )
+            level thread scripts\mp\battlechatter_mp::_id_F756( var_1, "gdog_allydamage" );
     }
 
     var_12 = var_2;
@@ -71,14 +71,14 @@ _id_AA3D( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
             var_12 = 1;
     }
 
-    if ( self._id_01FF - var_12 > 0 )
+    if ( self.health - var_12 > 0 )
         _id_0AD7::_id_AA87( var_0, var_1, var_12, var_3, var_4, var_5, var_6, var_7, var_8, var_9 );
 
-    if ( _func_0117( var_1 ) )
+    if ( isplayer( var_1 ) )
     {
         if ( isdefined( self._id_1DD2 ) && self._id_1DD2 != "attacking" )
         {
-            if ( distancesquared( self._id_02EA, var_1._id_02EA ) <= self._id_4CA6 )
+            if ( distancesquared( self.origin, var_1.origin ) <= self._id_4CA6 )
                 _id_0AD7::_id_D550( var_1 );
         }
     }
@@ -97,7 +97,7 @@ _id_B289( var_0 )
 
 _id_B3C4()
 {
-    return !( _id_099C::_id_88BC( 1 ) || self _meth_86B5() || self isskydiving() || self _meth_87AC() );
+    return !( scripts\cp_mp\utility\player_utility::isinvehicle( 1 ) || self _meth_86B5() || self isskydiving() || self _meth_87AC() );
 }
 
 _id_B5E6( var_0 )
@@ -107,7 +107,7 @@ _id_B5E6( var_0 )
     if ( _id_B3C4() )
     {
         thread _id_0823::dog_whistle( self );
-        var_1 = _id_0990::_id_E9FE( var_0, _func_034C( "s4_ks_gesture_dog_whistle_mp" ) );
+        var_1 = _id_0990::_id_E9FE( var_0, makeweapon( "s4_ks_gesture_dog_whistle_mp" ) );
     }
 }
 
@@ -116,8 +116,8 @@ _id_E116( var_0, var_1, var_2, var_3 )
     if ( !( isdefined( var_0 ) && isdefined( var_1 ) ) )
     {
         var_4 = self [[ level._id_6D2C ]]();
-        var_0 = var_4._id_02EA;
-        var_1 = var_4._id_0054;
+        var_0 = var_4.origin;
+        var_1 = var_4.angles;
     }
 
     self._id_E3D5 = "dog";
@@ -125,15 +125,15 @@ _id_E116( var_0, var_1, var_2, var_3 )
 
     if ( isdefined( var_2 ) )
     {
-        scripts\cp_mp\utility\script_utility::_id_D129( var_2._id_045B, var_2 );
-        self _meth_884D( 3, var_2._id_045B );
+        _id_09C6::_id_D129( var_2.team, var_2 );
+        self _meth_884D( 3, var_2.team );
     }
 
     level notify( "spawned_agent", self );
-    _id_0AD7::_id_021D();
-    thread _id_0AD7::_id_0271();
-    self settext( "Dogs" );
-    self switchtoweaponimmediate();
+    _id_0AD7::init();
+    thread _id_0AD7::main();
+    self _meth_838F( "Dogs" );
+    self takeallweapons();
     wait 0.1;
 }
 
@@ -141,16 +141,16 @@ _id_D7B5( var_0 )
 {
     self._id_1874 = "dog";
     self._id_1068F = "unitednations";
-    self setmode( "c_s4_doberman_03" );
-    self setmodel( "c_s4_ger_shepherd_03" );
+    self setmodel( "c_s4_doberman_03" );
+    self setmode( "c_s4_ger_shepherd_03" );
 }
 
 _id_D752( var_0 )
 {
     self._id_1874 = "dog";
     self._id_1068F = "unitednations";
-    self setmode( "c_s4_doberman_01" );
-    self setmodel( "c_s4_ger_shepherd_01" );
+    self setmodel( "c_s4_doberman_01" );
+    self setmode( "c_s4_ger_shepherd_01" );
 }
 
 _id_B3C2( var_0, var_1 )
@@ -173,13 +173,13 @@ _id_B3C2( var_0, var_1 )
         return 0;
     }
 
-    if ( scripts\cp_mp\utility\script_utility::_id_6B8C( var_0 ) >= 3 )
+    if ( _id_09C6::_id_6B8C( var_0 ) >= 3 )
     {
         self iprintlnbold( &"KILLSTREAKS_TOO_MANY_DOGS" );
         return 0;
     }
 
-    if ( scripts\cp_mp\utility\script_utility::_id_6B95( self ) >= 4 )
+    if ( _id_09C6::_id_6B95( self ) >= 4 )
     {
         self iprintlnbold( &"KILLSTREAKS_AGENT_MAX" );
         return 0;
@@ -187,13 +187,13 @@ _id_B3C2( var_0, var_1 )
 
     var_2 = _func_00AE();
 
-    if ( scripts\cp_mp\utility\script_utility::_id_6B8C() >= var_2 )
+    if ( _id_09C6::_id_6B8C() >= var_2 )
     {
         self iprintlnbold( &"KILLSTREAKS/UNAVAILABLE" );
         return 0;
     }
 
-    if ( !_id_0A74::_id_89D3( self ) )
+    if ( !scripts\mp\utility\player::isreallyalive( self ) )
         return 0;
 
     return 1;

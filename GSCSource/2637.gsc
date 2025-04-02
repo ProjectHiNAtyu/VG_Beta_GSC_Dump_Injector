@@ -77,8 +77,8 @@ _id_8263()
 
 _id_4038( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _func_0205( "script_model", var_1 );
-    var_4 setmode( "prop_suitcase_bomb" );
+    var_4 = spawn( "script_model", var_1 );
+    var_4 setmodel( "prop_suitcase_bomb" );
     var_4._id_8E16 = var_0;
     var_4._id_5EE4 = var_2;
 
@@ -93,12 +93,12 @@ _id_4038( var_0, var_1, var_2, var_3 )
 
 _id_524E()
 {
-    self makeunusable();
+    self makeuseable();
     thread _id_ED10();
     var_0 = _id_8E15( self._id_8E16 );
     self._id_411E = _id_3FE5( var_0, self._id_5EE4 );
     _id_07AD::_id_D8C6( &"MP/PLANTING_EXPLOSIVE" );
-    self _meth_832B( _id_8E14( self._id_8E16 ) );
+    self sethintstring( _id_8E14( self._id_8E16 ) );
     self _meth_83A0( 0 );
     level thread _id_ED0F( self );
 }
@@ -117,11 +117,11 @@ _id_ED10()
 
 _id_D8C2( var_0 )
 {
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
-        if ( var_2._id_045B != var_0 || isdefined( var_2._id_ED0D ) )
+        if ( var_2.team != var_0 || isdefined( var_2._id_ED0D ) )
         {
-            self disableoffhandweapons( var_2 );
+            self disableplayeruse( var_2 );
             continue;
         }
 
@@ -140,44 +140,44 @@ _id_ED0F( var_0 )
     {
         case 1:
         default:
-            if ( var_1._id_045B == "allies" )
+            if ( var_1.team == "allies" )
                 _id_0A4C::_id_BEB2( "dx_mpb_ovl_rolesa_beacons", var_1 );
             else
                 _id_0A4C::_id_BEB2( "dx_mpb_aqcm_rolesb_beacons", var_1 );
 
-            var_1 _id_07F2::_id_6FDA( "super_tac_ops_spawn" );
-            var_1 _id_07F2::_id_6FDC( 400000 );
-            var_1._id_0309["tac_ops_super"] = "super_tac_ops_spawn";
+            var_1 scripts\mp\supers::_id_6FDA( "super_tac_ops_spawn" );
+            var_1 scripts\mp\supers::_id_6FDC( 400000 );
+            var_1.pers["tac_ops_super"] = "super_tac_ops_spawn";
             var_2[0] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_COMMAND_1";
             var_2[1] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_COMMAND_2";
             break;
         case 5:
-            if ( var_1._id_045B == "allies" )
+            if ( var_1.team == "allies" )
                 _id_0A4C::_id_BEB2( "dx_mpb_ovl_rolesa_sigint", var_1 );
             else
                 _id_0A4C::_id_BEB2( "dx_mpb_aqcm_rolesb_intel", var_1 );
 
             var_1 _id_70FE();
-            var_1 _id_07F2::_id_6FDA( "super_tacops_uav" );
-            var_1 _id_07F2::_id_6FDC( 400000 );
-            var_1._id_0309["tac_ops_super"] = "super_tacops_uav";
+            var_1 scripts\mp\supers::_id_6FDA( "super_tacops_uav" );
+            var_1 scripts\mp\supers::_id_6FDC( 400000 );
+            var_1.pers["tac_ops_super"] = "super_tacops_uav";
             var_2[0] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_SIGINT_1";
             var_2[1] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_SIGINT_2";
             var_2[2] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_SIGINT_3";
             break;
         case 2:
             _id_0A4C::_id_BEB2( "dx_mpb_ovl_rolesa_jtac", var_1 );
-            var_1 _id_07F2::_id_6FDA( "super_tacops_heli" );
-            var_1 _id_07F2::_id_6FDC( 400000 );
-            var_1._id_0309["tac_ops_super"] = "super_tacops_heli";
+            var_1 scripts\mp\supers::_id_6FDA( "super_tacops_heli" );
+            var_1 scripts\mp\supers::_id_6FDC( 400000 );
+            var_1.pers["tac_ops_super"] = "super_tacops_heli";
             var_2[0] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_AIR_1";
             var_2[1] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_AIR_2";
             break;
         case 10:
             _id_0A4C::_id_BEB2( "dx_mpb_aqcm_rolesb_bio", var_1 );
-            var_1 _id_07F2::_id_6FDA( "super_tac_ops_gas" );
-            var_1 _id_07F2::_id_6FDC( 400000 );
-            var_1._id_0309["tac_ops_super"] = "super_tac_ops_gas";
+            var_1 scripts\mp\supers::_id_6FDA( "super_tac_ops_gas" );
+            var_1 scripts\mp\supers::_id_6FDC( 400000 );
+            var_1.pers["tac_ops_super"] = "super_tac_ops_gas";
             var_1._id_ED0B = 1;
             var_2[0] = &"MISC_MESSAGES_MP_TO_ALLY_ROLE_GAS_1";
             var_2[1] = &"MISC_MESSAGES_MP_TO_ALLY_ROLE_GAS_2";
@@ -185,17 +185,17 @@ _id_ED0F( var_0 )
         case 8:
         case 3:
             _id_0A4C::_id_BEB2( "dx_mpb_ovl_rolesa_artillery", var_1 );
-            var_1 _id_07F2::_id_6FDA( "super_tacops_artillery" );
-            var_1 _id_07F2::_id_6FDC( 400000 );
-            var_1._id_0309["tac_ops_super"] = "super_tacops_artillery";
+            var_1 scripts\mp\supers::_id_6FDA( "super_tacops_artillery" );
+            var_1 scripts\mp\supers::_id_6FDC( 400000 );
+            var_1.pers["tac_ops_super"] = "super_tacops_artillery";
             var_2[0] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_ARTILLERY_1";
             var_2[1] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_ARTILLERY_2";
             break;
         case 4:
             _id_0A4C::_id_BEB2( "dx_mpb_ovl_rolesa_armor", var_1 );
-            var_1 _id_07F2::_id_6FDA( "super_tacops_juggernaut" );
-            var_1 _id_07F2::_id_6FDC( 400000 );
-            var_1._id_0309["tac_ops_super"] = "super_tacops_juggernaut";
+            var_1 scripts\mp\supers::_id_6FDA( "super_tacops_juggernaut" );
+            var_1 scripts\mp\supers::_id_6FDC( 400000 );
+            var_1.pers["tac_ops_super"] = "super_tacops_juggernaut";
             var_2[0] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_JUGG_1";
             var_2[1] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_JUGG_2";
             break;
@@ -206,23 +206,23 @@ _id_ED0F( var_0 )
             var_2[1] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_STEALTH_2";
             break;
         case 6:
-            if ( var_1._id_045B == "allies" )
+            if ( var_1.team == "allies" )
                 _id_0A4C::_id_BEB2( "dx_mpb_ovl_rolesa_medic8", var_1 );
             else
                 _id_0A4C::_id_BEB2( "dx_mpb_aqcm_rolesb_medic", var_1 );
 
-            var_1 _id_07F2::_id_6FDA( "super_tac_ops_supply_pack" );
-            var_1 _id_07F2::_id_6FDC( 400000 );
-            var_1._id_0309["tac_ops_super"] = "super_tac_ops_supply_pack";
+            var_1 scripts\mp\supers::_id_6FDA( "super_tac_ops_supply_pack" );
+            var_1 scripts\mp\supers::_id_6FDC( 400000 );
+            var_1.pers["tac_ops_super"] = "super_tac_ops_supply_pack";
             var_1._id_ED16 = 1;
             var_2[0] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_MEDIC_1";
             var_2[1] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_MEDIC_2";
             break;
         case 9:
             _id_0A4C::_id_BEB2( "dx_mpb_aqcm_rolesb_engineer", var_1 );
-            var_1 _id_07F2::_id_6FDA( "super_tacops_turret" );
-            var_1 _id_07F2::_id_6FDC( 400000 );
-            var_1._id_0309["tac_ops_super"] = "super_tacops_turret";
+            var_1 scripts\mp\supers::_id_6FDA( "super_tacops_turret" );
+            var_1 scripts\mp\supers::_id_6FDC( 400000 );
+            var_1.pers["tac_ops_super"] = "super_tacops_turret";
             var_2[0] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_ENGINEER_1";
             var_2[1] = &"MISC_MESSAGES_MP/TO_ALLY_ROLE_ENGINEER_2";
             break;
@@ -230,17 +230,17 @@ _id_ED0F( var_0 )
 
     var_1 thread _id_47EB( var_2 );
     var_1 _id_4AD0();
-    var_0 _meth_809A();
+    var_0 delete();
 }
 
 _id_6FD7()
 {
     self._id_ED1E = 1;
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_coldblooded" );
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_tracker_jammer" );
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_blindeye" );
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_engineer" );
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_ghost" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_coldblooded" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_tracker_jammer" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_blindeye" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_engineer" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_ghost" );
 }
 
 _id_47EB( var_0 )
@@ -257,10 +257,10 @@ _id_4AD0()
     for ( var_0 = 0; var_0 < level._id_ED1D.size; var_0++ )
     {
         if ( isdefined( level._id_ED1D[var_0] ) )
-            level._id_ED1D[var_0] disableoffhandweapons( self );
+            level._id_ED1D[var_0] disableplayeruse( self );
     }
 
-    var_1 = level._id_ED0E[self._id_045B];
+    var_1 = level._id_ED0E[self.team];
 
     for ( var_0 = 0; var_0 < var_1.size; var_0++ )
     {
@@ -294,9 +294,9 @@ _id_3FE5( var_0, var_1 )
     level._id_ED0E[var_1][level._id_ED0E[var_1].size] = var_2;
     _id_07D0::_id_A88C( var_2 );
 
-    foreach ( var_4 in level._id_B758 )
+    foreach ( var_4 in level.players )
     {
-        if ( isdefined( var_4._id_045B ) && var_4._id_045B == var_1 )
+        if ( isdefined( var_4.team ) && var_4.team == var_1 )
         {
             _id_07D0::_id_A88A( var_2, var_4 );
             continue;
@@ -313,10 +313,10 @@ _id_90BB()
     if ( !isdefined( level._id_ED0E ) )
         return;
 
-    foreach ( var_1 in level._id_ED0E[self._id_045B] )
+    foreach ( var_1 in level._id_ED0E[self.team] )
         _id_07D0::_id_A88A( var_1, self );
 
-    foreach ( var_1 in level._id_ED0E[_id_0A69::_id_6BC3( self._id_045B )[0]] )
+    foreach ( var_1 in level._id_ED0E[scripts\mp\utility\game::_id_6BC3( self.team )[0]] )
         _id_07D0::_id_A88B( var_1, self );
 }
 
@@ -365,8 +365,8 @@ _id_E432( var_0 )
     if ( !isdefined( var_0._id_ED1C ) )
     {
         var_0 thread _id_E42E();
-        var_0._id_ED1C = _id_0A69::_id_6BC3( var_0._id_045B )[0];
-        var_1 = _id_0A7C::_id_6DAC( _id_0A69::_id_6BC3( var_0._id_045B )[0], "players" );
+        var_0._id_ED1C = scripts\mp\utility\game::_id_6BC3( var_0.team )[0];
+        var_1 = scripts\mp\utility\teams::_id_6DAC( scripts\mp\utility\game::_id_6BC3( var_0.team )[0], "players" );
 
         foreach ( var_3 in var_1 )
         {
@@ -382,7 +382,7 @@ _id_E42E()
     self endon( "disconnect" );
     self endon( "refresh_spot_timer" );
     level endon( "game_ended" );
-    _id_077B::_id_108F3( "death", 3 );
+    scripts\engine\utility::_id_108F3( "death", 3 );
     _id_FB25( self );
 }
 
@@ -397,8 +397,8 @@ _id_FB25( var_0 )
     if ( !isdefined( var_0._id_ED1C ) )
         return;
 
-    var_1 = level._id_B7EB[_id_0A69::_id_6BC3( var_0._id_ED1C )[0]];
-    var_2 = _id_0A7C::_id_6DAC( var_0._id_ED1C, "players" );
+    var_1 = level._id_B7EB[scripts\mp\utility\game::_id_6BC3( var_0._id_ED1C )[0]];
+    var_2 = scripts\mp\utility\teams::_id_6DAC( var_0._id_ED1C, "players" );
     var_0._id_ED1C = undefined;
 
     foreach ( var_4 in var_2 )
@@ -411,7 +411,7 @@ _id_7358( var_0 )
 {
     wait 5;
 
-    if ( _func_0107( var_0 ) == 0 )
+    if ( isbot( var_0 ) == 0 )
         var_0 thread _id_E441();
 }
 
@@ -419,11 +419,11 @@ _id_E441()
 {
     for (;;)
     {
-        var_0 = _id_0A7C::_id_6DAC( _id_0A69::_id_6BC3( self._id_045B )[0], "players" );
+        var_0 = scripts\mp\utility\teams::_id_6DAC( scripts\mp\utility\game::_id_6BC3( self.team )[0], "players" );
 
         foreach ( var_2 in var_0 )
         {
-            if ( !isdefined( var_2 ) || var_2 == self || !_id_0A74::_id_89D3( var_2 ) || istrue( var_2._id_ED1E ) )
+            if ( !isdefined( var_2 ) || var_2 == self || !scripts\mp\utility\player::isreallyalive( var_2 ) || istrue( var_2._id_ED1E ) )
                 continue;
 
             if ( distancesquared( self geteye(), var_2 geteye() ) < 7290000 )
@@ -442,30 +442,30 @@ _id_F1CF( var_0 )
     if ( !isdefined( level._id_ED21 ) )
         level._id_ED21 = [];
 
-    if ( !isdefined( level._id_ED21[var_0._id_02F2._id_045B] ) )
-        level._id_ED21[var_0._id_02F2._id_045B] = [];
+    if ( !isdefined( level._id_ED21[var_0.owner.team] ) )
+        level._id_ED21[var_0.owner.team] = [];
 
-    var_1 = level._id_ED21[var_0._id_02F2._id_045B].size;
+    var_1 = level._id_ED21[var_0.owner.team].size;
 
     if ( var_1 >= 4 )
     {
-        var_2 = level._id_ED21[var_0._id_02F2._id_045B][0];
-        level._id_ED21[var_0._id_02F2._id_045B] = _id_077B::_id_1B9C( level._id_ED21[var_0._id_02F2._id_045B], 0 );
+        var_2 = level._id_ED21[var_0.owner.team][0];
+        level._id_ED21[var_0.owner.team] = scripts\engine\utility::array_remove_index( level._id_ED21[var_0.owner.team], 0 );
         var_2 _id_4E87();
     }
 
-    var_0._id_045B = var_0._id_02F2._id_045B;
-    var_0._id_F177 = ( var_0._id_0054[0], var_0._id_0054[1], 0 );
+    var_0.team = var_0.owner.team;
+    var_0._id_F177 = ( var_0.angles[0], var_0.angles[1], 0 );
     var_0 waittill( "missile_stuck" );
-    var_3 = _id_4037( self, var_0._id_02EA );
-    var_1 = level._id_ED21[var_3._id_02F2._id_045B].size;
-    level._id_ED21[var_0._id_02F2._id_045B][var_1] = var_3;
-    var_0 _meth_809A();
+    var_3 = _id_4037( self, var_0.origin );
+    var_1 = level._id_ED21[var_3.owner.team].size;
+    level._id_ED21[var_0.owner.team][var_1] = var_3;
+    var_0 delete();
 }
 
 _id_4E87()
 {
-    self _meth_809A();
+    self delete();
 }
 
 _id_EB53()
@@ -491,14 +491,14 @@ _id_4037( var_0, var_1 )
     var_2 = "equipment";
     var_3 = 20;
     var_4 = 20;
-    var_5 = _func_0205( "script_model", var_1 + ( 0, 0, 10 ) );
+    var_5 = spawn( "script_model", var_1 + ( 0, 0, 10 ) );
     var_6 = "equipment_resupply_bag";
     var_5 _meth_85AD();
-    var_5 setmode( var_6 );
-    var_5._id_02F2 = var_0;
-    var_5._id_045B = var_0._id_045B;
+    var_5 setmodel( var_6 );
+    var_5.owner = var_0;
+    var_5.team = var_0.team;
     var_5._id_048F = var_2;
-    var_7 = _func_0205( "trigger_radius", var_1, 0, var_3, var_4 );
+    var_7 = spawn( "trigger_radius", var_1, 0, var_3, var_4 );
     var_7 thread _id_10C0E( var_5 );
     var_7 thread _id_10C0D( var_5 );
     return var_5;
@@ -510,7 +510,7 @@ _id_10C0D( var_0 )
     var_0 waittill( "death" );
 
     if ( isdefined( self ) )
-        self _meth_809A();
+        self delete();
 }
 
 _id_10C0E( var_0 )
@@ -521,20 +521,20 @@ _id_10C0E( var_0 )
     {
         self waittill( "trigger", var_1 );
 
-        if ( !_func_0117( var_1 ) || !isai( var_1 ) )
+        if ( !isplayer( var_1 ) || !isalive( var_1 ) )
             continue;
 
-        level._id_ED21[var_0._id_045B] = _id_077B::_id_1B96( level._id_ED21[var_0._id_045B], var_0 );
-        var_1._id_01FF = var_1._id_027F;
+        level._id_ED21[var_0.team] = scripts\engine\utility::array_remove( level._id_ED21[var_0.team], var_0 );
+        var_1.health = var_1.maxhealth;
         scripts\mp\weapons::_id_CB9D( var_1 );
-        var_1 _meth_8275( "scavenger_pack_pickup" );
-        var_0 _meth_809A();
+        var_1 playlocalsound( "scavenger_pack_pickup" );
+        var_0 delete();
     }
 }
 
 _id_70FD()
 {
-    _id_07F2::_id_6FDA( "super_tacops_heli", 1 );
+    scripts\mp\supers::_id_6FDA( "super_tacops_heli", 1 );
 }
 
 _id_FE77()
@@ -558,7 +558,7 @@ _id_10C21( var_0 )
     self endon( "microTurret_spawned" );
     self endon( "microTurret_end" );
     self waittill( "equip_deploy_end", var_1, var_2, var_3, var_4 );
-    _id_07F2::_id_6FDC( 400000 );
+    scripts\mp\supers::_id_6FDC( 400000 );
 }
 
 _id_FEED()

@@ -78,7 +78,7 @@ _id_894C( var_0 )
     return isdefined( var_0._id_ABD4 ) && var_0._id_ABD4 > 0;
 }
 
-enabledcollisionnotifies( var_0 )
+enableoobimmunity( var_0 )
 {
     if ( !isdefined( var_0._id_ABD4 ) )
         var_0._id_ABD4 = 0;
@@ -92,7 +92,7 @@ enabledcollisionnotifies( var_0 )
     }
 }
 
-_id_4AB4( var_0 )
+disableoobimmunity( var_0 )
 {
     var_0._id_ABD4--;
 
@@ -114,7 +114,7 @@ _id_3940( var_0, var_1 )
 
     var_2 = undefined;
 
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
         var_2 = ::_id_B666;
     else if ( isdefined( var_0._id_ABD5 ) )
     {
@@ -206,7 +206,7 @@ _id_AAB6( var_0 )
     var_2 = _id_6AD9( var_0 );
     var_3 = _id_6DE3( var_0, var_2 );
 
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
         var_1 = ::_id_B68E;
     else if ( isdefined( var_0._id_ABD5 ) )
     {
@@ -241,7 +241,7 @@ _id_AACD( var_0, var_1, var_2 )
     var_0 notify( "exit_oob" );
     var_3 = undefined;
 
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
         var_3 = ::_id_B692;
     else if ( isdefined( var_0._id_ABD5 ) )
     {
@@ -255,7 +255,7 @@ _id_AACD( var_0, var_1, var_2 )
     {
         if ( isdefined( var_0._id_ABD3 ) )
         {
-            var_0._id_ABD7 = int( _func_0147( 0, var_0._id_ABD3 - gettime() ) );
+            var_0._id_ABD7 = int( max( 0, var_0._id_ABD3 - gettime() ) );
             var_0._id_ABD3 = undefined;
             var_5 = _id_6AD9( var_0 );
             var_6 = _id_6DE3( var_0, var_5 );
@@ -272,11 +272,11 @@ _id_AB35( var_0 )
 {
     var_1 = undefined;
 
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
     {
         var_2 = 1;
 
-        if ( level._id_60D1 == "br" )
+        if ( level.gametype == "br" )
         {
             if ( istrue( level._id_7E4F ) )
                 var_2 = 0;
@@ -299,7 +299,7 @@ _id_AB35( var_0 )
 
 _id_10BB5( var_0, var_1 )
 {
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
         var_0 endon( "death_or_disconnect" );
     else
         var_0 endon( "death" );
@@ -313,7 +313,7 @@ _id_10BB5( var_0, var_1 )
 
 _id_10BB4( var_0, var_1 )
 {
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
         var_0 endon( "death_or_disconnect" );
     else
         var_0 endon( "death" );
@@ -330,17 +330,17 @@ _id_B68E( var_0, var_1, var_2 )
 {
     var_3 = 1;
 
-    if ( _id_0999::_id_88E4() && level._id_60D1 == "arm" && isdefined( var_2 ) && var_2 == "restricted" )
+    if ( scripts\cp_mp\utility\game_utility::_id_88E4() && level.gametype == "arm" && isdefined( var_2 ) && var_2 == "restricted" )
         var_3 = 2;
 
-    self _meth_82F6( "ui_out_of_bounds_type", var_3 );
-    self _meth_82F6( "ui_out_of_bounds_countdown", self._id_ABD3 );
+    self setclientomnvar( "ui_out_of_bounds_type", var_3 );
+    self setclientomnvar( "ui_out_of_bounds_countdown", self._id_ABD3 );
 }
 
 _id_B692( var_0, var_1, var_2 )
 {
-    self _meth_82F6( "ui_out_of_bounds_type", 0 );
-    self _meth_82F6( "ui_out_of_bounds_countdown", 0 );
+    self setclientomnvar( "ui_out_of_bounds_type", 0 );
+    self setclientomnvar( "ui_out_of_bounds_countdown", 0 );
 }
 
 _id_B720( var_0, var_1 )
@@ -356,29 +356,29 @@ _id_B720( var_0, var_1 )
 
 _id_B666( var_0 )
 {
-    self _meth_82F6( "ui_out_of_bounds_type", 0 );
-    self _meth_82F6( "ui_out_of_bounds_countdown", 0 );
+    self setclientomnvar( "ui_out_of_bounds_type", 0 );
+    self setclientomnvar( "ui_out_of_bounds_countdown", 0 );
 }
 
 _id_B721( var_0, var_1 )
 {
-    var_2 = self._id_02EA;
-    var_3 = _id_077A::_id_C042( self._id_02EA, self._id_02EA - ( 0, 0, 1000 ), self );
+    var_2 = self.origin;
+    var_3 = scripts\engine\trace::ray_trace( self.origin, self.origin - ( 0, 0, 1000 ), self );
 
     if ( isdefined( var_3["hittype"] != "hittype_none" ) && isdefined( var_3["position"] ) )
         var_2 = var_3["position"];
 
-    var_4 = _func_0205( "script_model", var_2 );
-    var_4 setmode( "ks_minefield_mp" );
-    var_4 _meth_8312( self );
-    var_4 setorigin( self );
-    var_4 _meth_8373( "warning_click", "on", 0 );
+    var_4 = spawn( "script_model", var_2 );
+    var_4 setmodel( "ks_minefield_mp" );
+    var_4 setentityowner( self );
+    var_4 setotherent( self );
+    var_4 setscriptablepartstate( "warning_click", "on", 0 );
     var_5 = _id_B722( var_4, var_0, var_1 );
 
     if ( istrue( var_5 ) )
         wait 2;
 
-    var_4 _meth_809A();
+    var_4 delete();
 }
 
 _id_B722( var_0, var_1, var_2 )
@@ -391,10 +391,10 @@ _id_B722( var_0, var_1, var_2 )
     if ( isdefined( var_2 ) )
         self endon( var_2 );
 
-    _id_07B7::_id_1084D( 0.3 );
-    var_0 _meth_8373( "explosion", "on", 0 );
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( 0.3 );
+    var_0 setscriptablepartstate( "explosion", "on", 0 );
     wait 0.05;
-    self _meth_80B7( 2000, self._id_02EA, self, var_0, "MOD_EXPLOSIVE", "s4_minefield_mp" );
+    self dodamage( 2000, self.origin, self, var_0, "MOD_EXPLOSIVE", "s4_minefield_mp" );
     return 1;
 }
 
@@ -402,36 +402,36 @@ _id_8DB7( var_0, var_1, var_2 )
 {
     var_3 = 1;
 
-    if ( _id_0999::_id_88E4() && level._id_60D1 == "arm" && isdefined( var_2 ) && var_2 == "restricted" )
+    if ( scripts\cp_mp\utility\game_utility::_id_88E4() && level.gametype == "arm" && isdefined( var_2 ) && var_2 == "restricted" )
         var_3 = 2;
 
-    if ( isdefined( self._id_02F2 ) )
+    if ( isdefined( self.owner ) )
     {
-        self._id_02F2 _meth_82F6( "ui_out_of_bounds_type", var_3 );
-        self._id_02F2 _meth_82F6( "ui_out_of_bounds_countdown", self._id_ABD3 );
+        self.owner setclientomnvar( "ui_out_of_bounds_type", var_3 );
+        self.owner setclientomnvar( "ui_out_of_bounds_countdown", self._id_ABD3 );
     }
 }
 
 _id_8DB9( var_0, var_1, var_2 )
 {
-    if ( isdefined( self._id_02F2 ) )
+    if ( isdefined( self.owner ) )
     {
-        self._id_02F2 _meth_82F6( "ui_out_of_bounds_type", 0 );
-        self._id_02F2 _meth_82F6( "ui_out_of_bounds_countdown", 0 );
+        self.owner setclientomnvar( "ui_out_of_bounds_type", 0 );
+        self.owner setclientomnvar( "ui_out_of_bounds_countdown", 0 );
     }
 }
 
 _id_8DC6( var_0, var_1 )
 {
-    _id_0A6F::_id_4C35( 10000, self._id_02F2, self, self._id_045B, self._id_02EA, "MOD_EXPLOSIVE", "s4_v2_mp" );
+    _id_0A6F::_id_4C35( 10000, self.owner, self, self.team, self.origin, "MOD_EXPLOSIVE", "s4_v2_mp" );
 }
 
 _id_8DB0()
 {
-    if ( isdefined( self._id_02F2 ) )
+    if ( isdefined( self.owner ) )
     {
-        self._id_02F2 _meth_82F6( "ui_out_of_bounds_type", 0 );
-        self._id_02F2 _meth_82F6( "ui_out_of_bounds_countdown", 0 );
+        self.owner setclientomnvar( "ui_out_of_bounds_type", 0 );
+        self.owner setclientomnvar( "ui_out_of_bounds_countdown", 0 );
     }
 }
 
@@ -445,7 +445,7 @@ _id_8DC8()
 
 _id_10BBC()
 {
-    if ( _id_0A69::_id_98BC() && _id_0A69::_id_6A43() != "arm" && _id_0A69::_id_6A43() != "br" )
+    if ( scripts\mp\utility\game::_id_98BC() && scripts\mp\utility\game::getgametype() != "arm" && scripts\mp\utility\game::getgametype() != "br" )
         return;
 
     if ( isdefined( level._id_ACFC ) )
@@ -465,7 +465,7 @@ _id_10BB9( var_0 )
 {
     var_0._id_550B = [];
 
-    if ( _id_0A69::_id_6A43() != "br" )
+    if ( scripts\mp\utility\game::getgametype() != "br" )
         _id_07A8::_id_60A3( "prematch_done" );
 
     if ( !isdefined( var_0 ) )
@@ -483,7 +483,7 @@ _id_10BBA( var_0 )
     {
         var_0 waittill( "trigger", var_1 );
 
-        if ( _func_0117( var_1 ) && ( isdefined( var_1._id_2DE8 ) || isdefined( var_1._id_84C8 ) ) )
+        if ( isplayer( var_1 ) && ( isdefined( var_1._id_2DE8 ) || isdefined( var_1._id_84C8 ) ) )
             continue;
 
         if ( !_id_8399( var_0, var_1 ) )
@@ -543,7 +543,7 @@ _id_AACF( var_0, var_1 )
     var_2 = var_1 getentitynumber();
     var_0._id_550B[var_2] = undefined;
     _id_4AB3( var_1 );
-    var_1._id_ABD8 = _id_077B::_id_1B96( var_1._id_ABD8, var_0 );
+    var_1._id_ABD8 = scripts\engine\utility::array_remove( var_1._id_ABD8, var_0 );
 
     if ( var_1._id_ABD8.size == 0 )
         var_1._id_ABD8 = undefined;
@@ -614,7 +614,7 @@ _id_AAB7( var_0, var_1 )
         var_3[var_3.size] = var_5;
 
     var_1._id_ABD6 = var_3;
-    enabledcollisionnotifies( var_1 );
+    enableoobimmunity( var_1 );
 }
 
 _id_AACE( var_0, var_1 )
@@ -626,7 +626,7 @@ _id_AACE( var_0, var_1 )
     if ( var_1._id_ABD6.size == 0 )
         var_1._id_ABD6 = undefined;
 
-    _id_4AB4( var_1 );
+    disableoobimmunity( var_1 );
 }
 
 _id_8399( var_0, var_1 )
@@ -638,27 +638,27 @@ _id_8399( var_0, var_1 )
 
         var_2 = 0;
 
-        if ( var_1 _id_09B4::_id_8ADC() )
+        if ( var_1 scripts\cp_mp\vehicles\vehicle::_id_8ADC() )
             var_2 = 1;
 
         if ( var_2 )
         {
-            if ( var_2 && isdefined( var_1._id_045B ) && var_1._id_045B != "neutral" && var_1._id_045B != var_0._id_CE70 )
+            if ( var_2 && isdefined( var_1.team ) && var_1.team != "neutral" && var_1.team != var_0._id_CE70 )
                 return 0;
 
-            if ( var_2 && isdefined( var_1._id_02F2 ) && var_1._id_02F2._id_045B != var_0._id_CE70 )
+            if ( var_2 && isdefined( var_1.owner ) && var_1.owner.team != var_0._id_CE70 )
                 return 0;
 
             if ( var_2 && isdefined( var_1._id_A911 ) )
             {
                 foreach ( var_4 in var_1._id_A911 )
                 {
-                    if ( var_4._id_045B != var_0._id_CE70 )
+                    if ( var_4.team != var_0._id_CE70 )
                         return 0;
                 }
             }
         }
-        else if ( var_1._id_045B != var_0._id_CE70 )
+        else if ( var_1.team != var_0._id_CE70 )
             return 0;
     }
 
@@ -669,21 +669,21 @@ _id_839A( var_0 )
 {
     if ( isdefined( var_0 ) )
     {
-        if ( _func_0117( var_0 ) )
+        if ( isplayer( var_0 ) )
         {
-            if ( var_0 _id_099C::_giveweapon() )
+            if ( var_0 scripts\cp_mp\utility\player_utility::_id_0C14() )
                 return 1;
         }
 
         if ( isdefined( var_0._id_ABD5 ) )
         {
-            if ( var_0 _id_09B4::_id_8ADC() )
+            if ( var_0 scripts\cp_mp\vehicles\vehicle::_id_8ADC() )
             {
                 if ( !istrue( var_0._id_87E1 ) )
                     return 1;
             }
 
-            if ( isdefined( var_0._id_EA0B ) && _id_88D1( var_0._id_EA0B._id_EA0F ) )
+            if ( isdefined( var_0.streakinfo ) && _id_88D1( var_0.streakinfo._id_EA0F ) )
                 return 1;
         }
     }
@@ -697,7 +697,7 @@ _id_6BB1()
 
     if ( !isdefined( var_0 ) )
     {
-        var_0 = _func_020F();
+        var_0 = spawnstruct();
         var_0._id_54AE = [];
         var_0._id_5757 = [];
         var_0._id_AD00 = [];
@@ -727,16 +727,16 @@ _id_6DE3( var_0, var_1 )
 {
     var_2 = "default";
 
-    if ( level._id_60D1 == "br" )
+    if ( level.gametype == "br" )
         return "br";
 
     if ( isdefined( var_1 ) && isdefined( var_1._id_CE70 ) )
         return "restricted";
 
-    if ( isdefined( var_0 ) && var_0 _id_09B4::_id_8ADC() )
+    if ( isdefined( var_0 ) && var_0 scripts\cp_mp\vehicles\vehicle::_id_8ADC() )
         return "default";
 
-    if ( isdefined( var_0 ) && isdefined( var_0._id_EA0B ) )
+    if ( isdefined( var_0 ) && isdefined( var_0.streakinfo ) )
         return "default";
 
     if ( isdefined( var_1 ) && isdefined( var_1._id_0375 ) && var_1._id_0375 == "MineField" )
@@ -753,7 +753,7 @@ _id_6963( var_0 )
         case "minefield":
         case "br":
         case "default":
-            return _id_0A69::_id_6B1F();
+            return scripts\mp\utility\game::_id_6B1F();
     }
 
     return undefined;
@@ -764,13 +764,13 @@ _id_6BD1( var_0 )
     switch ( var_0 )
     {
         case "minefield":
-            return _id_0A69::_id_6B20();
+            return scripts\mp\utility\game::_id_6B20();
         case "restricted":
-            return _id_0A69::_id_6B21();
+            return scripts\mp\utility\game::_id_6B21();
         case "br":
-            return _id_0A69::_id_6B1E();
+            return scripts\mp\utility\game::_id_6B1E();
         case "default":
-            return _id_0A69::_id_6B22();
+            return scripts\mp\utility\game::_id_6B22();
     }
 
     return undefined;

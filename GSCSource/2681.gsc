@@ -6,66 +6,66 @@ _id_57A8()
     if ( isdefined( self._id_036D ) )
         wait( self._id_036D );
 
-    self _meth_827B( level._id_CC39[self._id_CE3C] );
+    self playsound( level._id_CC39[self._id_CE3C] );
 }
 
 _id_B8DE( var_0, var_1, var_2 )
 {
     if ( level._id_E427 )
     {
-        if ( isdefined( level._id_B758[0] ) )
-            level._id_B758[0] _meth_8275( var_0 );
+        if ( isdefined( level.players[0] ) )
+            level.players[0] playlocalsound( var_0 );
     }
     else if ( isdefined( var_1 ) )
     {
         if ( isdefined( var_2 ) )
         {
-            for ( var_3 = 0; var_3 < level._id_B758.size; var_3++ )
+            for ( var_3 = 0; var_3 < level.players.size; var_3++ )
             {
-                var_4 = level._id_B758[var_3];
+                var_4 = level.players[var_3];
 
                 if ( var_4 _meth_81E1() && !var_4 _meth_81E2() )
                     continue;
 
-                if ( isdefined( var_4._id_0309["team"] ) && var_4._id_0309["team"] == var_1 && !_id_077B::_id_1B78( var_2, var_4 ) )
-                    var_4 _meth_8275( var_0 );
+                if ( isdefined( var_4.pers["team"] ) && var_4.pers["team"] == var_1 && !scripts\engine\utility::array_contains( var_2, var_4 ) )
+                    var_4 playlocalsound( var_0 );
             }
 
             return;
         }
 
-        for ( var_3 = 0; var_3 < level._id_B758.size; var_3++ )
+        for ( var_3 = 0; var_3 < level.players.size; var_3++ )
         {
-            var_4 = level._id_B758[var_3];
+            var_4 = level.players[var_3];
 
             if ( var_4 _meth_81E1() && !var_4 _meth_81E2() )
                 continue;
 
-            if ( isdefined( var_4._id_0309["team"] ) && var_4._id_0309["team"] == var_1 )
-                var_4 _meth_8275( var_0 );
+            if ( isdefined( var_4.pers["team"] ) && var_4.pers["team"] == var_1 )
+                var_4 playlocalsound( var_0 );
         }
 
         return;
     }
     else if ( isdefined( var_2 ) )
     {
-        for ( var_3 = 0; var_3 < level._id_B758.size; var_3++ )
+        for ( var_3 = 0; var_3 < level.players.size; var_3++ )
         {
-            if ( level._id_B758[var_3] _meth_81E1() && !level._id_B758[var_3] _meth_81E2() )
+            if ( level.players[var_3] _meth_81E1() && !level.players[var_3] _meth_81E2() )
                 continue;
 
-            if ( !_id_077B::_id_1B78( var_2, level._id_B758[var_3] ) )
-                level._id_B758[var_3] _meth_8275( var_0 );
+            if ( !scripts\engine\utility::array_contains( var_2, level.players[var_3] ) )
+                level.players[var_3] playlocalsound( var_0 );
         }
     }
     else
     {
-        for ( var_3 = 0; var_3 < level._id_B758.size; var_3++ )
+        for ( var_3 = 0; var_3 < level.players.size; var_3++ )
         {
-            if ( level._id_B758[var_3] _meth_81E1() && !level._id_B758[var_3] _meth_81E2() )
+            if ( level.players[var_3] _meth_81E1() && !level.players[var_3] _meth_81E2() )
                 continue;
 
-            level._id_B758[var_3] _meth_8275( var_0 );
+            level.players[var_3] playlocalsound( var_0 );
         }
     }
 }
@@ -78,15 +78,15 @@ _id_B2CA( var_0, var_1 )
 _id_B2CB( var_0, var_1 )
 {
     if ( isdefined( var_1 ) )
-        _func_019D( self gettagorigin( var_1 ), var_0 );
+        playsoundatpos( self gettagorigin( var_1 ), var_0 );
     else
-        _func_019D( self._id_02EA, var_0 );
+        playsoundatpos( self.origin, var_0 );
 }
 
 _id_B8A7( var_0, var_1, var_2 )
 {
-    var_0 _meth_8275( var_1 );
-    var_0 _meth_827B( var_2, var_0 );
+    var_0 playlocalsound( var_1 );
+    var_0 playsound( var_2, var_0 );
 }
 
 _id_B373( var_0, var_1 )
@@ -113,7 +113,7 @@ _id_B373( var_0, var_1 )
             var_2 = "effort_exploded";
             break;
         case "MOD_MELEE":
-            if ( var_1 _meth_8622( "bayonet", 1 ) || var_1._id_0084 == "s4_me_knife_mp" )
+            if ( var_1 _meth_8622( "bayonet", 1 ) || var_1.basename == "s4_me_knife_mp" )
                 var_2 = "effort_stabbed";
             else
                 var_2 = "effort_bludgeoned";
@@ -127,11 +127,11 @@ _id_B373( var_0, var_1 )
         default:
             var_2 = "effort_death";
 
-            if ( var_1._id_0084 == "s4_gas_usa_mk5cn_mp" )
+            if ( var_1.basename == "s4_gas_usa_mk5cn_mp" )
                 var_2 = "gas_player_death";
 
             break;
     }
 
-    level thread _id_0789::_id_F756( self, var_2 );
+    level thread scripts\mp\battlechatter_mp::_id_F756( self, var_2 );
 }

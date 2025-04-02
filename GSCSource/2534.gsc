@@ -4,7 +4,7 @@
 _id_8B55()
 {
     level._id_8B5F = [];
-    level._id_0BA3["jammer_destroyed"] = _func_0139( "vfx/s4/equipment/vfx_jammer_damaged" );
+    level._effect["jammer_destroyed"] = loadfx( "vfx/s4/equipment/vfx_jammer_damaged" );
 }
 
 _id_8B4C()
@@ -40,24 +40,24 @@ _id_8B4D( var_0 )
         var_2--;
     }
 
-    var_0._id_02F2 = self;
+    var_0.owner = self;
     var_0._id_75CE = var_0 thread _id_0766::_id_D587( 0, -1.5 );
     level._id_8B5F[var_1][var_2] = var_0;
-    var_3 = self._id_02EA;
-    var_4 = _func_0205( "script_model", var_3 );
+    var_3 = self.origin;
+    var_4 = spawn( "script_model", var_3 );
     var_0._id_CC46 = var_4;
-    var_0._id_CC46._id_02F2 = self;
-    var_0._id_CC46._id_045B = self._id_045B;
-    var_0._id_CC46 setorigin( self );
+    var_0._id_CC46.owner = self;
+    var_0._id_CC46.team = self.team;
+    var_0._id_CC46 setotherent( self );
     var_0 _meth_86FB( "equipment" );
 
-    if ( level._id_EF62 )
-        var_0 _meth_8703( self._id_045B );
+    if ( level.teambased )
+        var_0 _meth_8703( self.team );
     else
         var_0 _meth_8703( self );
 
     var_0 thread _id_8B4E( self );
-    var_0 thread scripts\engine\utility::_id_C330( ::_id_8B4F, 1, 1 );
+    var_0 thread _id_07A4::_id_C330( ::_id_8B4F, 1, 1 );
     var_0._id_CC46 thread _id_8B5D( self );
 }
 
@@ -84,36 +84,36 @@ _id_8B4E( var_0 )
 
 _id_8B57( var_0 )
 {
-    var_1 = var_0._id_A90B;
+    var_1 = var_0.objweapon;
     var_2 = var_0._id_9CBF;
-    return _id_079A::_id_744C( var_1, var_2, var_0._id_0134 );
+    return _id_079A::_id_744C( var_1, var_2, var_0.damage );
 }
 
 _id_8B53( var_0 )
 {
-    var_1 = var_0._id_006E;
+    var_1 = var_0.attacker;
 
-    if ( isdefined( self._id_02F2 ) && istrue( _id_099C::_id_B779( self._id_02F2, var_1 ) ) )
+    if ( isdefined( self.owner ) && istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_1 ) ) )
     {
-        var_1 _id_0789::_id_553B( self );
-        var_2 = self._id_02F2 getentitynumber();
+        var_1 scripts\mp\battlechatter_mp::_id_553B( self );
+        var_2 = self.owner getentitynumber();
 
         if ( level._id_8B5F[var_2].size > 1 )
-            self._id_02F2 thread _id_0A64::_id_9120( "ja_destroyed_m" );
+            self.owner thread _id_0A64::_id_9120( "ja_destroyed_m" );
         else
-            self._id_02F2 thread _id_0A64::_id_9120( "ja_destroyed_s" );
+            self.owner thread _id_0A64::_id_9120( "ja_destroyed_s" );
     }
 
-    _func_0196( level._id_0BA3["jammer_destroyed"], self._id_02EA );
-    earthquake( 0.5, 1, self._id_02EA, 512 );
+    playfx( level._effect["jammer_destroyed"], self.origin );
+    earthquake( 0.5, 1, self.origin, 512 );
     _id_8B4F();
 }
 
 _id_8B4F()
 {
-    self._id_02F2 notify( "jammer_destroyed" );
+    self.owner notify( "jammer_destroyed" );
     var_0 = [];
-    var_1 = self._id_02F2 getentitynumber();
+    var_1 = self.owner getentitynumber();
 
     for ( var_2 = 0; var_2 < level._id_8B5F[var_1].size; var_2++ )
     {
@@ -126,8 +126,8 @@ _id_8B4F()
     level._id_8B5F[var_1] = var_0;
     _id_0766::_id_D586( self._id_75CE );
     self._id_CC46 _id_8B50();
-    self _meth_8373( "hacked", "neutral", 0 );
-    self _meth_809A();
+    self setscriptablepartstate( "hacked", "neutral", 0 );
+    self delete();
 }
 
 _id_8B5D( var_0 )
@@ -138,13 +138,13 @@ _id_8B5D( var_0 )
     self endon( "scramble_super_finished" );
 
     if ( !isdefined( var_0 ) )
-        var_0 = self._id_02F2;
+        var_0 = self.owner;
 
     self._id_5354 = [];
     var_1 = 0;
     var_2 = 500.0;
-    var_3 = _func_02C4( [ "physicscontents_characterproxy" ] );
-    var_4 = self._id_02EA;
+    var_3 = physics_createcontents( [ "physicscontents_characterproxy" ] );
+    var_4 = self.origin;
     var_5 = ( var_2, var_2, 3000 );
     var_6 = var_4 - var_5;
     var_7 = var_4 + var_5;
@@ -153,24 +153,24 @@ _id_8B5D( var_0 )
     {
         var_8 = isbotmatchmakingenabled( var_6, var_7, var_3, [] );
 
-        foreach ( var_10 in level._id_B758 )
+        foreach ( var_10 in level.players )
         {
-            if ( _id_077B::_id_1B78( var_8, var_10 ) )
+            if ( scripts\engine\utility::array_contains( var_8, var_10 ) )
             {
                 var_11 = var_10;
                 var_12 = 0;
 
-                if ( _id_099D::_id_8A10( "perk", "hasPerk" ) )
-                    var_12 = var_11 [[ _id_099D::_id_6D05( "perk", "hasPerk" ) ]]( "specialty_scrambler_resist" );
+                if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "perk", "hasPerk" ) )
+                    var_12 = var_11 [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "perk", "hasPerk" ) ]]( "specialty_scrambler_resist" );
 
-                var_13 = distance2dsquared( self._id_02EA, var_11._id_02EA );
+                var_13 = distance2dsquared( self.origin, var_11.origin );
                 var_14 = var_2 * var_2;
 
-                if ( isdefined( var_11 ) && var_13 < var_14 && var_11 _id_099C::_giveweapon() && !var_12 )
+                if ( isdefined( var_11 ) && var_13 < var_14 && var_11 scripts\cp_mp\utility\player_utility::_id_0C14() && !var_12 )
                 {
-                    if ( var_1 || level._id_EF62 && var_11._id_045B != self._id_045B && var_11._id_045B != "spectator" || !level._id_EF62 && var_11 != self._id_02F2 )
+                    if ( var_1 || level.teambased && var_11.team != self.team && var_11.team != "spectator" || !level.teambased && var_11 != self.owner )
                     {
-                        if ( var_11 _id_099C::_id_8AB5() )
+                        if ( var_11 scripts\cp_mp\utility\player_utility::_id_8AB5() )
                             continue;
 
                         if ( var_11 _id_8B52( self, var_1 ) )
@@ -181,15 +181,15 @@ _id_8B5D( var_0 )
                     }
                     else if ( isdefined( var_11._id_CC45 ) && var_11._id_CC45 == self )
                     {
-                        if ( _id_077B::_id_1B78( self._id_5354, var_11 ) )
-                            self._id_5354 = _id_077B::_id_1B96( self._id_5354, var_11 );
+                        if ( scripts\engine\utility::array_contains( self._id_5354, var_11 ) )
+                            self._id_5354 = scripts\engine\utility::array_remove( self._id_5354, var_11 );
                         else
-                            self._id_5354 = _id_077B::_id_1BA9( self._id_5354 );
+                            self._id_5354 = scripts\engine\utility::_id_1BA9( self._id_5354 );
 
                         if ( var_11 _id_8B52( self, var_1 ) )
                             continue;
 
-                        if ( var_11 _id_099C::_id_8AB5() )
+                        if ( var_11 scripts\cp_mp\utility\player_utility::_id_8AB5() )
                             continue;
 
                         var_11 notify( "scramble_off" );
@@ -221,14 +221,14 @@ _id_8B52( var_0, var_1 )
             if ( var_5._id_7854 != "scrambler_drone_guard" )
                 continue;
 
-            if ( level._id_EF62 )
+            if ( level.teambased )
             {
-                if ( !isdefined( var_1 ) && var_5._id_045B == self._id_045B )
+                if ( !isdefined( var_1 ) && var_5.team == self.team )
                     var_3 = var_5._id_5F53;
                 else
                     var_3 = var_5._id_5354;
             }
-            else if ( !isdefined( var_1 ) && var_5._id_02F2 == self )
+            else if ( !isdefined( var_1 ) && var_5.owner == self )
                 var_3 = var_5._id_5F53;
             else
                 var_3 = var_5._id_5354;
@@ -240,7 +240,7 @@ _id_8B52( var_0, var_1 )
             {
                 foreach ( var_7 in var_3 )
                 {
-                    if ( self == var_7 || isdefined( var_7._id_02F2 ) && self == var_7._id_02F2 )
+                    if ( self == var_7 || isdefined( var_7.owner ) && self == var_7.owner )
                     {
                         var_2 = 1;
                         break;
@@ -267,7 +267,7 @@ _id_8B5A( var_0, var_1, var_2 )
 
         var_3._id_CC45 = var_1;
 
-        if ( !_id_077B::_id_1B78( var_1._id_5354, var_3 ) )
+        if ( !scripts\engine\utility::array_contains( var_1._id_5354, var_3 ) )
             var_1._id_5354[var_1._id_5354.size] = var_3;
 
         var_3 thread _id_8B56( var_1, var_2 );
@@ -285,12 +285,12 @@ _id_8B5A( var_0, var_1, var_2 )
 _id_8B56( var_0, var_1 )
 {
     level endon( "game_ended" );
-    _id_077B::_id_1087E( "death", "scramble_off" );
+    scripts\engine\utility::waittill_any_2( "death", "scramble_off" );
 
     if ( isdefined( self ) )
     {
         if ( isdefined( var_0 ) && isdefined( var_0._id_5354 ) )
-            var_0._id_5354 = _id_077B::_id_1B96( var_0._id_5354, self );
+            var_0._id_5354 = scripts\engine\utility::array_remove( var_0._id_5354, self );
     }
 
     _id_8B5A( 0, var_0, var_1 );
@@ -309,7 +309,7 @@ _id_8B5C( var_0 )
 
     for (;;)
     {
-        var_5 = distance2dsquared( var_0._id_02EA, self._id_02EA );
+        var_5 = distance2dsquared( var_0.origin, self.origin );
 
         if ( var_5 > var_4 )
             var_2 = 0;
@@ -356,8 +356,8 @@ _id_8B50()
             {
                 var_2 = var_1;
 
-                if ( isdefined( var_2._id_02F2 ) )
-                    var_2 = var_2._id_02F2;
+                if ( isdefined( var_2.owner ) )
+                    var_2 = var_2.owner;
 
                 var_2 notify( "scramble_off" );
             }
@@ -376,5 +376,5 @@ _id_8B50()
 
 _id_8B58( var_0 )
 {
-    self _meth_8373( "hacked", "active", 0 );
+    self setscriptablepartstate( "hacked", "active", 0 );
 }

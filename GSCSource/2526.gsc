@@ -4,7 +4,7 @@
 _id_4518()
 {
     level._id_4520 = [];
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     level._id_451F = var_0;
     var_0._id_5B74 = [];
     var_0._id_5B75 = [];
@@ -51,7 +51,7 @@ _id_4518()
 _id_451E( var_0 )
 {
     var_0 endon( "death" );
-    _id_0A77::_id_BD07( "decoy grenade spawn", var_0._id_02F2 );
+    _id_0A77::_id_BD07( "decoy grenade spawn", var_0.owner );
     var_0._id_B781 = [];
     var_0 _id_0764::_id_D151( ::_id_450D );
     var_0 _id_0764::_id_1510( 0 );
@@ -93,21 +93,21 @@ _id_451E( var_0 )
 _id_4507()
 {
     self endon( "death" );
-    self setorigin( self._id_02F2 );
-    self _meth_8373( "beacon", "active", 0 );
+    self setotherent( self.owner );
+    self setscriptablepartstate( "beacon", "active", 0 );
     var_0 = _id_4512();
 
     for (;;)
     {
         _id_450F( var_0 );
-        wait( _func_01B7( 1.5, 3.5 ) );
+        wait( randomfloatrange( 1.5, 3.5 ) );
     }
 }
 
 _id_450C()
 {
-    self _meth_8373( "destroy", "active", 0 );
-    self _meth_8373( "beacon", "neutral", 0 );
+    self setscriptablepartstate( "destroy", "active", 0 );
+    self setscriptablepartstate( "beacon", "neutral", 0 );
     thread _id_450B( 0.1 );
 }
 
@@ -121,13 +121,13 @@ _id_450B( var_0 )
     _id_451D( self getentitynumber() );
     _id_079A::_id_A0ED();
     wait( var_0 );
-    self _meth_809A();
+    self delete();
 }
 
 _id_450F( var_0 )
 {
     var_1 = _id_4513();
-    var_2 = 1 + _func_01B8( var_1._id_5B5C[var_0] );
+    var_2 = 1 + randomint( var_1._id_5B5C[var_0] );
 
     for (;;)
     {
@@ -137,7 +137,7 @@ _id_450F( var_0 )
         if ( var_2 == 0 )
             break;
 
-        wait( _func_01B7( var_1._id_5B59[var_0], var_1._id_5B58[var_0] ) );
+        wait( randomfloatrange( var_1._id_5B59[var_0], var_1._id_5B58[var_0] ) );
     }
 }
 
@@ -146,16 +146,16 @@ _id_450E( var_0 )
     var_1 = _id_4514();
     var_2 = _id_4510( var_1 );
     var_3 = _id_4511( var_1, var_0, var_2 );
-    var_4 = self._id_02F2 _meth_8570();
+    var_4 = self.owner getheldoffhand();
 
-    if ( !isdefined( var_4 ) || var_4._id_0084 != "s4_frag_usa_mk2_mp" )
-        self._id_02F2 _id_0A7F::_hasperk( "s4_decoy_grenade_mp", self._id_02EA, var_3, 100, 1, self );
+    if ( !isdefined( var_4 ) || var_4.basename != "s4_frag_usa_mk2_mp" )
+        self.owner scripts\mp\utility\weapon::_id_0C1F( "s4_decoy_grenade_mp", self.origin, var_3, 100, 1, self );
 
-    self _meth_82F0( 1 );
-    self _meth_8373( "beacon", "active", 0 );
-    self _meth_8373( "weaponFire", var_0 + "Fire", 0 );
-    self _meth_8373( "weaponSounds", var_0 + "Fire", 0 );
-    _func_024D( self._id_02EA, self._id_045B, self._id_02F2 );
+    self setcandamage( 1 );
+    self setscriptablepartstate( "beacon", "active", 0 );
+    self setscriptablepartstate( "weaponFire", var_0 + "Fire", 0 );
+    self setscriptablepartstate( "weaponSounds", var_0 + "Fire", 0 );
+    _func_024D( self.origin, self.team, self.owner );
     _id_4509();
     var_5 = _id_4513();
     wait( var_5._id_5B72[var_0] );
@@ -163,26 +163,26 @@ _id_450E( var_0 )
 
 _id_4509()
 {
-    var_0 = _id_06BB::_id_B7A3( self._id_02EA, 800 );
+    var_0 = scripts\common\utility::_id_B7A3( self.origin, 800 );
 
     foreach ( var_2 in var_0 )
     {
-        if ( !var_2 _id_099C::_giveweapon() )
+        if ( !var_2 scripts\cp_mp\utility\player_utility::_id_0C14() )
             continue;
 
-        if ( !istrue( _id_099C::_id_B779( self._id_02F2, var_2 ) ) )
+        if ( !istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_2 ) ) )
             continue;
 
         thread _id_450A( var_2 );
-        self._id_02F2 _id_079A::_id_3A9F( "equip_decoy" );
-        self._id_02F2 _id_0A7B::_id_7D93( "decoyHits", 1 );
+        self.owner _id_079A::_id_3A9F( "equip_decoy" );
+        self.owner _id_0A7B::_id_7D93( "decoyHits", 1 );
     }
 }
 
 _id_450A( var_0 )
 {
     var_0 endon( "disconnect" );
-    var_1 = self._id_02F2;
+    var_1 = self.owner;
     var_1 endon( "disconnect" );
     self notify( "decoy_debuffEnemy_" + var_0 getentitynumber() );
     self endon( "decoy_debuffEnemy_" + var_0 getentitynumber() );
@@ -190,14 +190,14 @@ _id_450A( var_0 )
     if ( !isdefined( self._id_B781[var_0 getentitynumber()] ) )
         self._id_B781[var_0 getentitynumber()] = var_0;
 
-    var_2 = var_0 _id_077B::_id_108F5( "death", 5 );
+    var_2 = var_0 scripts\engine\utility::_id_108F5( "death", 5 );
 
     if ( isdefined( self ) )
         self._id_B781[var_0 getentitynumber()] = undefined;
 
     if ( isdefined( var_0._id_8FE6 ) && var_0._id_8FE6 != var_1 )
     {
-        if ( var_2 == "death" && _id_099C::_id_B779( var_0, var_1 ) )
+        if ( var_2 == "death" && scripts\cp_mp\utility\player_utility::_id_B779( var_0, var_1 ) )
             var_1 thread _id_0A76::_id_6FE6( "assist_decoy" );
     }
 }
@@ -208,7 +208,7 @@ _id_451C()
 
     for (;;)
     {
-        var_0 = self._id_02EA;
+        var_0 = self.origin;
         waitframe();
         self._id_AA25 = var_0;
     }
@@ -223,19 +223,19 @@ _id_451B()
 
 _id_450D( var_0 )
 {
-    var_0._id_103C0 _id_4515( var_0._id_006E );
+    var_0._id_103C0 _id_4515( var_0.attacker );
     var_0._id_103C0 thread _id_450C();
 }
 
 _id_4516( var_0 )
 {
-    scripts\mp\weapons::_id_553D( self._id_02F2, var_0._id_006E, var_0._id_A90B, var_0._id_9CBF );
-    return var_0._id_0134;
+    scripts\mp\weapons::_id_553D( self.owner, var_0.attacker, var_0.objweapon, var_0._id_9CBF );
+    return var_0.damage;
 }
 
 _id_4517( var_0 )
 {
-    _id_4515( var_0._id_006E, var_0._id_A90B );
+    _id_4515( var_0.attacker, var_0.objweapon );
     thread _id_450C();
 }
 
@@ -252,7 +252,7 @@ _id_4512()
         var_2[var_4] = var_1;
     }
 
-    var_6 = _func_01B8( var_1 );
+    var_6 = randomint( var_1 );
 
     for ( var_4 = 0; var_4 < var_2.size; var_4++ )
     {
@@ -268,7 +268,7 @@ _id_4514()
     if ( !isdefined( self._id_AA25 ) )
         return undefined;
 
-    return ( self._id_02EA - self._id_AA25 ) / level._id_5F1B;
+    return ( self.origin - self._id_AA25 ) / level._id_5F1B;
 }
 
 _id_4510( var_0 )
@@ -276,16 +276,16 @@ _id_4510( var_0 )
     var_1 = undefined;
 
     if ( !isdefined( var_0 ) )
-        var_1 = ( 0, _func_01B8( 360 ), 0 );
+        var_1 = ( 0, randomint( 360 ), 0 );
     else if ( var_0 * ( 1, 1, 0 ) == ( 0, 0, 0 ) )
-        var_1 = ( 0, _func_01B8( 360 ), 0 );
-    else if ( _func_01B8( 100 ) < 20 )
-        var_1 = ( 0, _func_01B8( 360 ), 0 );
+        var_1 = ( 0, randomint( 360 ), 0 );
+    else if ( randomint( 100 ) < 20 )
+        var_1 = ( 0, randomint( 360 ), 0 );
     else
     {
-        var_1 = _func_025B( var_0 * ( 1, 1, 0 ) );
+        var_1 = vectortoangles( var_0 * ( 1, 1, 0 ) );
         var_2 = _func_000B( var_1[1] );
-        var_2 = var_2 + _func_000A( -30.0 + _func_01B8( 61 ) );
+        var_2 = var_2 + _func_000A( -30.0 + randomint( 61 ) );
         var_1 = ( var_1[0], var_2, var_1[2] );
     }
 
@@ -296,8 +296,8 @@ _id_4511( var_0, var_1, var_2 )
 {
     var_3 = _id_4513();
     var_4 = var_0;
-    var_4 = var_4 + anglestoup( var_2 ) * _func_01B7( var_3._id_5B60[var_1], var_3._id_5B5E[var_1] );
-    var_4 = var_4 + anglestoforward( var_2 ) * _func_01B7( var_3._id_5B5F[var_1], var_3._id_5B5D[var_1] );
+    var_4 = var_4 + anglestoup( var_2 ) * randomfloatrange( var_3._id_5B60[var_1], var_3._id_5B5E[var_1] );
+    var_4 = var_4 + anglestoforward( var_2 ) * randomfloatrange( var_3._id_5B5F[var_1], var_3._id_5B5D[var_1] );
     return var_4;
 }
 
@@ -316,8 +316,8 @@ _id_4519()
 
 _id_451A()
 {
-    var_0 = _id_077A::_id_3EC3( 0, 1, 0, 0, 1, 1 );
-    var_1 = self._id_02EA + ( 0, 0, 1 );
+    var_0 = scripts\engine\trace::_id_3EC3( 0, 1, 0, 0, 1, 1 );
+    var_1 = self.origin + ( 0, 0, 1 );
     var_2 = var_1 + ( 0, 0, -5 );
     var_3 = _func_02BC( var_1, var_2, var_0, self, 0, "physicsquery_closest", 1 );
 
@@ -329,10 +329,10 @@ _id_451A()
 
 _id_4515( var_0, var_1 )
 {
-    if ( isdefined( var_0 ) && istrue( _id_099C::_id_B779( self._id_02F2, var_0 ) ) )
+    if ( isdefined( var_0 ) && istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_0 ) ) )
     {
         var_0 notify( "destroyed_equipment" );
-        var_0 _id_0A28::_id_6FCD( self, var_1 );
+        var_0 scripts\mp\killstreaks\killstreaks::_id_6FCD( self, var_1 );
     }
 }
 

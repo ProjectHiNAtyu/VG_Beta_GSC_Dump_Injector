@@ -3,7 +3,7 @@
 
 _id_7EDA()
 {
-    _id_0A28::_id_C25C( "body_armor", ::_id_F76B );
+    scripts\mp\killstreaks\killstreaks::_id_C25C( "body_armor", ::_id_F76B );
 }
 
 _id_F76B( var_0 )

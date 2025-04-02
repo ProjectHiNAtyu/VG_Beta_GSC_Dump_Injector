@@ -17,13 +17,13 @@ _id_D045( var_0, var_1 )
 
 _id_5AC3()
 {
-    if ( !level._id_EF62 || istrue( level._id_4A61 ) )
+    if ( !level.teambased || istrue( level._id_4A61 ) )
         return undefined;
 
     if ( !_id_07EE::_id_1AE4() )
         _id_07EE::_id_FD30();
 
-    var_0 = _id_6DB4( _id_07EE::_id_686B()._id_045B );
+    var_0 = _id_6DB4( _id_07EE::_id_686B().team );
     var_1 = [];
 
     foreach ( var_3 in var_0 )
@@ -33,13 +33,13 @@ _id_5AC3()
         if ( !isdefined( var_4 ) )
             continue;
 
-        var_5 = _func_020F();
-        var_5._id_02EA = var_4;
-        var_5._id_0054 = _id_6912( var_3, var_5._id_02EA );
-        var_5.health = -1;
+        var_5 = spawnstruct();
+        var_5.origin = var_4;
+        var_5.angles = _id_6912( var_3, var_5.origin );
+        var_5._id_0219 = -1;
         var_5._id_2C6D = 1;
         var_5._id_87FC = 1;
-        var_5._id_02F2 = var_3;
+        var_5.owner = var_3;
         var_5 _id_07EE::_id_E349();
 
         if ( isdefined( var_3._id_173F ) && isdefined( var_3._id_173F._id_B6C7 ) )
@@ -73,52 +73,52 @@ _id_5AC3()
 
 _id_5AE7( var_0 )
 {
-    if ( !level._id_EF62 || istrue( level._id_4A61 ) )
+    if ( !level.teambased || istrue( level._id_4A61 ) )
         return undefined;
 
     if ( !_id_07EE::_id_1AE4() )
         _id_07EE::_id_FD30();
 
-    var_1 = _func_020F();
+    var_1 = spawnstruct();
     var_1._id_E350 = undefined;
-    var_1._id_E263 = ( 0, var_0._id_0054[1], 0 );
+    var_1._id_E263 = ( 0, var_0.angles[1], 0 );
     var_1 = _id_31F6( var_1, var_0 );
 
     if ( !isdefined( var_1._id_E350 ) )
     {
-        var_1._id_E350 = var_0._id_02EA;
-        var_1._id_E263 = var_0._id_0054;
+        var_1._id_E350 = var_0.origin;
+        var_1._id_E263 = var_0.angles;
     }
 
     if ( isdefined( var_0._id_FFF1 ) )
     {
-        var_2 = _id_09BA::_id_1018D( var_0._id_FFF1, 1 );
+        var_2 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1018D( var_0._id_FFF1, 1 );
 
         if ( var_2.size > 0 && istrue( _id_09B8::_id_10114( var_0._id_FFF1 ) ) )
         {
-            var_3 = _func_020F();
+            var_3 = spawnstruct();
             var_3._id_FE99 = 1;
             var_3._id_54C5 = "spawned_player";
-            thread _id_09BA::_id_1017C( var_0._id_FFF1, var_2[0], self, var_3 );
-            var_1._id_E350 = var_0._id_FFF1._id_02EA;
-            var_1._id_E263 = var_0._id_FFF1._id_0054;
+            thread scripts\cp_mp\vehicles\vehicle_occupancy::_id_1017C( var_0._id_FFF1, var_2[0], self, var_3 );
+            var_1._id_E350 = var_0._id_FFF1.origin;
+            var_1._id_E263 = var_0._id_FFF1.angles;
             self._id_E306 = 1;
             _id_0A7B::_id_7D93( "spawnSelectVehicle", 1 );
         }
         else if ( !isdefined( var_1._id_E350 ) )
         {
-            var_1._id_E350 = var_0._id_FFF1._id_02EA + anglestoforward( var_0._id_FFF1._id_0054 ) * -200 + ( 0, 0, 64 );
-            var_1._id_E263 = ( 0, var_0._id_FFF1._id_0054[1], 0 );
+            var_1._id_E350 = var_0._id_FFF1.origin + anglestoforward( var_0._id_FFF1.angles ) * -200 + ( 0, 0, 64 );
+            var_1._id_E263 = ( 0, var_0._id_FFF1.angles[1], 0 );
         }
     }
 
-    var_4 = _func_020F();
-    var_4._id_02EA = var_1._id_E350;
-    var_4._id_0054 = var_1._id_E263;
-    var_4.health = -1;
+    var_4 = spawnstruct();
+    var_4.origin = var_1._id_E350;
+    var_4.angles = var_1._id_E263;
+    var_4._id_0219 = -1;
     var_4._id_2C6D = 1;
     var_4._id_87FC = 1;
-    var_4._id_02F2 = var_0;
+    var_4.owner = var_0;
     var_4 _id_07EE::_id_E349();
 
     if ( isdefined( var_0._id_173F ) && isdefined( var_0._id_173F._id_B6C7 ) )
@@ -138,16 +138,16 @@ _id_31F6( var_0, var_1 )
     var_8 = 1;
     var_9 = 1;
     var_10 = var_2 / ( 80 - var_2 );
-    var_11 = var_1._id_0054;
+    var_11 = var_1.angles;
     var_12 = 1;
     var_13 = undefined;
-    var_14 = var_1._id_02EA;
+    var_14 = var_1.origin;
 
     if ( var_1 _meth_872F() )
         var_14 = var_1 _meth_8721();
 
     var_15 = var_14 + ( 0, 0, var_5 );
-    var_16 = _func_02C4( [ "physicscontents_item", "physicscontents_water", "physicscontents_glass", "physicscontents_vehicle", "physicscontents_playerclip" ] );
+    var_16 = physics_createcontents( [ "physicscontents_item", "physicscontents_water", "physicscontents_glass", "physicscontents_vehicle", "physicscontents_playerclip" ] );
     var_17 = [ var_1 ];
 
     while ( var_8 < var_7 )
@@ -159,7 +159,7 @@ _id_31F6( var_0, var_1 )
         }
         else
         {
-            var_13 = anglestoforward( var_11 + ( 0, _id_077B::_id_F07F( var_9, var_6, var_6 * -1 ) * var_8, 0 ) );
+            var_13 = anglestoforward( var_11 + ( 0, scripts\engine\utility::ter_op( var_9, var_6, var_6 * -1 ) * var_8, 0 ) );
             var_9 = !var_9;
 
             if ( var_9 == 1 )
@@ -168,7 +168,7 @@ _id_31F6( var_0, var_1 )
 
         var_18 = var_14 - var_13 * var_3 + ( 0, 0, var_5 );
         var_19 = var_15 - var_13 * var_2 * 0.5;
-        var_20 = _id_077A::_id_B5F4( var_19, var_18, ( 0, 0, 0 ), var_17, var_16 );
+        var_20 = scripts\engine\trace::_id_B5F4( var_19, var_18, ( 0, 0, 0 ), var_17, var_16 );
         var_21 = var_20["shape_position"];
         var_22 = 0;
 
@@ -183,29 +183,29 @@ _id_31F6( var_0, var_1 )
             var_23 = 0;
             var_19 = var_21;
             var_24 = var_19 + ( 0, 0, -80 );
-            var_25 = _id_077A::_id_B5F4( var_19, var_24, ( 0, 0, 0 ), var_17, var_16 );
+            var_25 = scripts\engine\trace::_id_B5F4( var_19, var_24, ( 0, 0, 0 ), var_17, var_16 );
 
             if ( var_25["fraction"] < 1 )
             {
-                var_26 = _func_025B( var_13 );
+                var_26 = vectortoangles( var_13 );
                 var_19 = var_25["shape_position"] + ( 0, 0, 10 );
                 var_27 = var_19 + anglestoforward( var_26 ) * -32;
                 var_28 = var_27 + ( 0, 0, -80 );
-                var_29 = _id_077A::_id_C042( var_27, var_28, var_17, var_16 );
+                var_29 = scripts\engine\trace::ray_trace( var_27, var_28, var_17, var_16 );
 
                 if ( var_29["fraction"] == 1.0 )
                     continue;
 
                 var_30 = var_19 + anglestoright( var_26 ) * -32;
                 var_31 = var_30 + ( 0, 0, -80 );
-                var_32 = _id_077A::_id_C042( var_30, var_31, var_17, var_16 );
+                var_32 = scripts\engine\trace::ray_trace( var_30, var_31, var_17, var_16 );
 
                 if ( var_32["fraction"] == 1.0 )
                     continue;
 
                 var_33 = var_19 + anglestoright( var_26 ) * 32;
                 var_34 = var_33 + ( 0, 0, -80 );
-                var_35 = _id_077A::_id_C042( var_33, var_28, var_17, var_16 );
+                var_35 = scripts\engine\trace::ray_trace( var_33, var_28, var_17, var_16 );
 
                 if ( var_35["fraction"] == 1.0 )
                     continue;
@@ -230,7 +230,7 @@ _id_CBE8( var_0 )
 
 _id_6912( var_0, var_1 )
 {
-    var_2 = ( 0, var_0._id_0054[1], 0 );
+    var_2 = ( 0, var_0.angles[1], 0 );
     return var_2;
 }
 
@@ -238,9 +238,9 @@ _id_6DB4( var_0 )
 {
     var_1 = [];
 
-    foreach ( var_3 in level._id_B758 )
+    foreach ( var_3 in level.players )
     {
-        if ( var_3._id_045B != var_0 )
+        if ( var_3.team != var_0 )
             continue;
 
         if ( var_3 == self )
@@ -249,33 +249,33 @@ _id_6DB4( var_0 )
         if ( !_id_3188( var_3 ) )
             continue;
 
-        if ( !var_3 _id_0A74::_id_8970() )
+        if ( !var_3 scripts\mp\utility\player::_id_8970() )
             continue;
 
         var_1[var_1.size] = var_3;
     }
 
-    return _id_077B::_id_1B94( var_1 );
+    return scripts\engine\utility::_id_1B94( var_1 );
 }
 
 _id_3188( var_0 )
 {
-    if ( var_0._id_0392 != "playing" )
+    if ( var_0.sessionstate != "playing" )
         return 0;
 
-    if ( !_id_0A74::_id_89D3( var_0 ) )
+    if ( !scripts\mp\utility\player::isreallyalive( var_0 ) )
         return 0;
 
-    if ( !var_0 _meth_81D7() )
+    if ( !var_0 isonground() )
         return 0;
 
-    if ( var_0 isonground() )
+    if ( var_0 isonladder() )
         return 0;
 
-    if ( var_0 _id_077B::_id_8848() )
+    if ( var_0 scripts\engine\utility::_id_8848() )
         return 0;
 
-    if ( var_0._id_01FF < var_0._id_027F && ( !isdefined( var_0._id_8F9E ) || gettime() < var_0._id_8F9E + 3000 ) )
+    if ( var_0.health < var_0.maxhealth && ( !isdefined( var_0._id_8F9E ) || gettime() < var_0._id_8F9E + 3000 ) )
         return 0;
 
     return 1;
@@ -287,29 +287,29 @@ _id_5AE6( var_0 )
     var_2 = _id_5AC2( var_0, var_1, 0.5 );
 
     if ( isdefined( var_2 ) )
-        return var_2._id_02EA;
+        return var_2.origin;
 
     return undefined;
 }
 
 _id_5AC2( var_0, var_1, var_2 )
 {
-    var_3 = _func_00B5( var_0._id_02EA, 192, 64, var_1, "Path", 1 );
+    var_3 = _func_00B5( var_0.origin, 192, 64, var_1, "Path", 1 );
     var_4 = undefined;
 
     if ( isdefined( var_3 ) && var_3.size > 0 )
     {
-        var_5 = anglestoforward( var_0._id_0054 );
+        var_5 = anglestoforward( var_0.angles );
 
         foreach ( var_7 in var_3 )
         {
-            if ( isdefined( level._id_20C4 ) && _id_077B::_id_1B78( level._id_20C4, var_7 ) )
+            if ( isdefined( level._id_20C4 ) && scripts\engine\utility::array_contains( level._id_20C4, var_7 ) )
                 continue;
 
-            var_8 = _func_025A( var_7._id_02EA - var_0._id_02EA );
-            var_9 = _func_0257( var_5, var_8 );
+            var_8 = vectornormalize( var_7.origin - var_0.origin );
+            var_9 = vectordot( var_5, var_8 );
 
-            if ( var_9 <= var_2 && !_func_01A0( var_7._id_02EA ) )
+            if ( var_9 <= var_2 && !_func_01A0( var_7.origin ) )
             {
                 var_4 = var_7;
 
@@ -330,7 +330,7 @@ _id_8268( var_0 )
     var_0._id_9024 = [];
     var_0._id_9024["allies"] = 0;
     var_0._id_9024["axis"] = 0;
-    var_0._id_172D = _func_020F();
+    var_0._id_172D = spawnstruct();
     var_0._id_172D._id_15FA = 0;
     var_0._id_172D._id_53E5 = 0;
     var_0._id_172D._id_F26F = 0;
@@ -338,7 +338,7 @@ _id_8268( var_0 )
     var_0._id_172D._id_C008 = 0;
     var_0._id_172D._id_9C65 = 0;
     var_0._id_172D._id_E39C = 0;
-    var_0._id_172D._id_E39A = 0;
+    var_0._id_172D.spawntype = 0;
 }
 
 _id_FD2F( var_0, var_1 )
@@ -347,8 +347,8 @@ _id_FD2F( var_0, var_1 )
     var_1 = istrue( var_1 );
     var_3 = "all";
 
-    if ( level._id_EF62 )
-        var_3 = _id_0A7C::_id_69E2( var_2 )[0];
+    if ( level.teambased )
+        var_3 = scripts\mp\utility\teams::_id_69E2( var_2 )[0];
 
     foreach ( var_5 in var_0 )
     {
@@ -420,7 +420,7 @@ _id_F0D1( var_0 )
         return "bad";
     }
 
-    if ( isdefined( var_0._id_5FC3 ) && level._id_5FC0._id_8716[self._id_045B] && var_0._id_5FC3 != self._id_045B )
+    if ( isdefined( var_0._id_5FC3 ) && level._id_5FC0._id_8716[self.team] && var_0._id_5FC3 != self.team )
     {
         var_0._id_20CF = 7;
         return "bad";
@@ -477,13 +477,13 @@ _id_6D6B( var_0 )
 
     foreach ( var_5 in var_0 )
     {
-        if ( _func_0034( var_5._id_02EA ) && !_func_01A0( var_5._id_02EA ) )
+        if ( _func_0034( var_5.origin ) && !_func_01A0( var_5.origin ) )
         {
             var_6 = undefined;
 
             foreach ( var_8 in var_2 )
             {
-                var_9 = distancesquared( var_5._id_02EA, var_8._id_02EA );
+                var_9 = distancesquared( var_5.origin, var_8.origin );
 
                 if ( !isdefined( var_6 ) || var_9 < var_6 )
                     var_6 = var_9;
@@ -520,7 +520,7 @@ _id_9743( var_0, var_1 )
 _id_6D2D( var_0, var_1, var_2, var_3, var_4 )
 {
     level._id_E2F1._id_E34D = var_0;
-    var_5 = _id_07EE::_id_4030( self, self._id_0309["team"] );
+    var_5 = _id_07EE::_id_4030( self, self.pers["team"] );
     _id_07EE::_id_D455( var_5 );
     _id_C61F();
     _id_6D35();
@@ -575,7 +575,7 @@ _id_6D2D( var_0, var_1, var_2, var_3, var_4 )
 
         if ( isdefined( var_10 ) )
         {
-            var_10._id_E39A = 7;
+            var_10.spawntype = 7;
             level._id_E2F1._id_2C6E = 0;
 
             if ( isdefined( var_10._id_2C6C ) )
@@ -587,14 +587,14 @@ _id_6D2D( var_0, var_1, var_2, var_3, var_4 )
         _id_9743( "UNABLE TO BUDDY SPAWN. EXTREMELY BAD", self );
     }
 
-    if ( level._id_EF62 && !_id_0A69::_id_873A() )
+    if ( level.teambased && !scripts\mp\utility\game::_id_873A() )
     {
-        var_11 = level._id_E2F1._id_8F80[self._id_045B];
+        var_11 = level._id_E2F1._id_8F80[self.team];
 
         if ( isdefined( var_11 ) && gettime() - var_11 < 5000 )
-            var_7 = var_0[_func_01B8( var_0.size )];
+            var_7 = var_0[randomint( var_0.size )];
         else
-            level._id_E2F1._id_8F80[self._id_045B] = gettime();
+            level._id_E2F1._id_8F80[self.team] = gettime();
     }
 
     return var_7;
@@ -612,23 +612,23 @@ _id_6D34( var_0, var_1 )
     {
         var_5 = _id_F0D1( var_4 );
         var_2[var_5][var_2[var_5].size] = var_4;
-        var_4._id_8F86[_id_077B::_id_F07F( isdefined( self._id_E317 ), self._id_E317, self._id_045B )] = var_5;
+        var_4._id_8F86[scripts\engine\utility::ter_op( isdefined( self._id_E317 ), self._id_E317, self.team )] = var_5;
 
-        if ( isdefined( var_4._id_172D ) && isdefined( var_4._id_172D._id_E39A ) )
+        if ( isdefined( var_4._id_172D ) && isdefined( var_4._id_172D.spawntype ) )
         {
             if ( var_5 == "primary" )
             {
-                var_4._id_172D._id_E39A = var_1 + 1;
+                var_4._id_172D.spawntype = var_1 + 1;
                 continue;
             }
 
             if ( var_5 == "secondary" )
             {
-                var_4._id_172D._id_E39A = var_1 + 2;
+                var_4._id_172D.spawntype = var_1 + 2;
                 continue;
             }
 
-            var_4._id_172D._id_E39A = var_1 + 3;
+            var_4._id_172D.spawntype = var_1 + 3;
         }
     }
 
@@ -675,8 +675,8 @@ _id_6D35()
 
     if ( _id_07EE::_id_8832( "preferNearGroupsOfTeamMates" ) )
     {
-        var_1.teambased = [];
-        var_1.teambased[var_0] = _id_07EE::_id_2EDB( var_0 );
+        var_1._id_EF65 = [];
+        var_1._id_EF65[var_0] = _id_07EE::_id_2EDB( var_0 );
     }
 
     if ( _id_07EE::_id_8832( "preferOccupiedLanes" ) || _id_07EE::_id_8832( "preferToBalanceLanes" ) )
@@ -685,17 +685,17 @@ _id_6D35()
 
         foreach ( var_3 in level._id_E2F1._id_8E95 )
         {
-            foreach ( var_5 in level._id_B758 )
+            foreach ( var_5 in level.players )
             {
                 var_6 = _id_07EE::_id_6D40( var_5 );
 
-                if ( !_id_0A74::_id_89D3( var_5 ) )
+                if ( !scripts\mp\utility\player::isreallyalive( var_5 ) )
                     continue;
 
-                if ( !var_5 _id_0A74::_id_8970() )
+                if ( !var_5 scripts\mp\utility\player::_id_8970() )
                     continue;
 
-                if ( _func_0119( var_5._id_02EA, var_3 ) )
+                if ( _func_0119( var_5.origin, var_3 ) )
                 {
                     if ( !isdefined( var_1._id_A915[var_6] ) )
                         var_1._id_A915[var_6] = 0;
@@ -726,7 +726,7 @@ _id_6A80( var_0 )
 _id_E4A9()
 {
     self endon( "death_or_disconnect" );
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
 
     for (;;)
     {
@@ -737,12 +737,12 @@ _id_E4A9()
 
         if ( !isdefined( var_0._id_E350 ) )
         {
-            var_0._id_E350 = self._id_02EA;
-            var_0._id_E263 = self._id_0054;
+            var_0._id_E350 = self.origin;
+            var_0._id_E263 = self.angles;
             var_1 = 1;
         }
 
-        thread _id_0997::_id_4F28( var_0._id_E350, 16, 0.1, _id_077B::_id_F07F( var_1, ( 1, 0, 0 ), ( 0, 1, 0 ) ) );
+        thread _id_0997::_id_4F28( var_0._id_E350, 16, 0.1, scripts\engine\utility::ter_op( var_1, ( 1, 0, 0 ), ( 0, 1, 0 ) ) );
         thread _id_0997::_id_4F12( var_0._id_E350, var_0._id_E263, 0.1, 1.0 );
         wait 0.1;
     }

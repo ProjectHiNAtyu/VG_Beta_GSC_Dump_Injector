@@ -3,13 +3,13 @@
 
 _id_7F68()
 {
-    if ( !_id_077B::_id_0FB9( "init_flags", ::_id_7F68 ) )
+    if ( !scripts\engine\utility::_id_0FB9( "init_flags", ::_id_7F68 ) )
         return;
 
     level._id_5BE0 = [];
     level._id_5C25 = [];
     level._id_627F = 0;
-    level._id_5BFF = _func_020F();
+    level._id_5BFF = spawnstruct();
     level._id_5BFF _id_1CE8();
 }
 

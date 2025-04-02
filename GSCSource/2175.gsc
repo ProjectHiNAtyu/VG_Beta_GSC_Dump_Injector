@@ -8,9 +8,9 @@ _id_7EFB()
     foreach ( var_1 in [ "_autosave_stealthcheck", "_patrol_endon_spotted_flag", "_spawner_stealth_default", "_idle_call_idle_func" ] )
         level._id_701C[var_1] = ::_id_7020;
 
-    _id_077B::_id_5BF1( "stealth_spotted" );
-    _id_077B::_id_5BF1( "stealth_enabled" );
-    _id_077B::_id_5BF1( "stealth_music_pause" );
+    scripts\engine\utility::_id_5BF1( "stealth_spotted" );
+    scripts\engine\utility::_id_5BF1( "stealth_enabled" );
+    scripts\engine\utility::_id_5BF1( "stealth_music_pause" );
 }
 
 _id_7020( var_0, var_1, var_2, var_3, var_4 )

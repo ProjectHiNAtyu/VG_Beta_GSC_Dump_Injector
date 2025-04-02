@@ -10,7 +10,7 @@ _id_100ED( var_0, var_1, var_2 )
     {
         if ( istrue( var_1 ) )
         {
-            var_4 = _func_020F();
+            var_4 = spawnstruct();
             var_3._id_102F4[var_0] = var_4;
             var_4._id_CFB3 = [];
         }
@@ -39,7 +39,7 @@ _id_100EB( var_0, var_1, var_2 )
     {
         if ( istrue( var_1 ) )
         {
-            var_4 = _func_020F();
+            var_4 = spawnstruct();
             var_0._id_8332 = var_4;
             var_4._id_4A71 = 0;
             var_4._id_B9A8 = [];
@@ -150,12 +150,12 @@ _id_100E3( var_0, var_1 )
 
 _id_100F4()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     level._id_FFF1._id_8312 = var_0;
     var_0._id_102F4 = [];
     var_0._id_4A71 = 0;
     _id_0778::_id_CEBE( ::_id_10107 );
-    [[ _id_099D::_id_6D05( "vehicle_interact", "init" ) ]]();
+    [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_interact", "init" ) ]]();
 }
 
 _id_10107( var_0, var_1, var_2, var_3, var_4, var_5 )
@@ -175,7 +175,7 @@ _id_10107( var_0, var_1, var_2, var_3, var_4, var_5 )
                     {
                         var_8 = _id_100EA( var_6, var_7 );
                         var_9 = var_8._id_1F6C;
-                        thread _id_09BA::_id_1017C( var_6, var_9, var_3 );
+                        thread scripts\cp_mp\vehicles\vehicle_occupancy::_id_1017C( var_6, var_9, var_3 );
                     }
                 }
             }
@@ -229,10 +229,10 @@ _id_100FF( var_0 )
     if ( !isdefined( var_0 ) )
         return 0;
 
-    if ( !var_0 _id_099C::_giveweapon() )
+    if ( !var_0 scripts\cp_mp\utility\player_utility::_id_0C14() )
         return 0;
 
-    if ( !var_0 _id_06BB::_id_86F6() )
+    if ( !var_0 scripts\common\utility::_id_86F6() )
         return 0;
 
     if ( var_0 isskydiving() || var_0 _meth_86B4() )
@@ -272,16 +272,16 @@ _id_10102( var_0, var_1 )
 
 _id_100FE( var_0, var_1 )
 {
-    if ( level._id_EF62 )
+    if ( level.teambased )
     {
         var_2 = _id_100F3( var_1 );
 
-        if ( isdefined( var_2 ) && var_2 != var_0._id_045B )
+        if ( isdefined( var_2 ) && var_2 != var_0.team )
             return 0;
     }
     else
     {
-        var_3 = _id_09BA::_id_101A6( var_1 );
+        var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A6( var_1 );
 
         if ( isdefined( var_3 ) && var_3 != var_0 )
             return 0;
@@ -321,22 +321,22 @@ _id_100E6( var_0 )
     if ( !isdefined( var_2 ) )
         return;
 
-    if ( level._id_EF62 )
+    if ( level.teambased )
     {
-        var_3 = _id_09BA::_id_101AB( var_0 );
+        var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101AB( var_0 );
 
         if ( isdefined( var_3 ) )
             var_2._id_1F6E = var_3;
         else
         {
             var_4 = undefined;
-            var_5 = _id_09BA::_id_101A8( var_0 );
+            var_5 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A8( var_0 );
 
             foreach ( var_7 in var_5 )
             {
                 if ( isdefined( var_7 ) )
                 {
-                    var_4 = var_7._id_045B;
+                    var_4 = var_7.team;
                     break;
                 }
             }
@@ -368,7 +368,7 @@ _id_100EA( var_0, var_1, var_2, var_3 )
     {
         if ( istrue( var_2 ) )
         {
-            var_5 = _func_020F();
+            var_5 = spawnstruct();
             var_4._id_B9A8[var_1] = var_5;
             var_5._id_49AD = 1;
             var_5._id_4A67 = undefined;
@@ -445,7 +445,7 @@ _id_100E5( var_0, var_1 )
 
     foreach ( var_7 in var_4 )
     {
-        if ( _id_09BA::_id_101F6( var_0, var_7 ) )
+        if ( scripts\cp_mp\vehicles\vehicle_occupancy::_id_101F6( var_0, var_7 ) )
         {
             var_5 = var_7;
             break;
@@ -472,7 +472,7 @@ _id_100F7( var_0 )
     var_2 = getarraykeys( var_1._id_B9A8 );
 
     foreach ( var_4 in var_2 )
-        var_0 _meth_8373( var_4, "vehicle_unusable" );
+        var_0 setscriptablepartstate( var_4, "vehicle_unusable" );
 }
 
 _id_10110( var_0 )
@@ -498,15 +498,15 @@ _id_10110( var_0 )
 
         if ( var_3._id_4A67 )
         {
-            var_0 _meth_8373( var_4, "vehicle_unusable" );
+            var_0 setscriptablepartstate( var_4, "vehicle_unusable" );
             continue;
         }
 
-        var_0 _meth_8373( var_4, "vehicle_use" );
+        var_0 setscriptablepartstate( var_4, "vehicle_use" );
     }
 }
 
 _id_100F5()
 {
-    var_0 = _func_01D1( "#x35bfee712601a40d6", 0 );
+    var_0 = setdvarifuninitialized( "#x35bfee712601a40d6", 0 );
 }

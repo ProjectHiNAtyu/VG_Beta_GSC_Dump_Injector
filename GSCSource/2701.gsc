@@ -3,7 +3,7 @@
 
 _id_9CE2()
 {
-    _id_099D::_id_C2A5( "medium_transport", "spawnCallback", ::_id_9CE6 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "medium_transport", "spawnCallback", ::_id_9CE6 );
     _id_9CE3();
     _id_9CE4();
     scripts\mp\utility\killstreak::_id_10228( "medium_transport", _id_09AF::_id_9CD5 );
@@ -11,8 +11,8 @@ _id_9CE2()
 
 _id_9CE4()
 {
-    var_0 = _id_09BB::_id_10274( "medium_transport", 1 );
-    var_0._id_0DD8 = _id_09BB::vehicle_spawn;
+    var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10274( "medium_transport", 1 );
+    var_0._id_0DD8 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn;
 }
 
 _id_9CE3()
@@ -31,7 +31,7 @@ _id_9CE6( var_0, var_1 )
 {
     var_2 = _id_09AF::_id_9CCE( var_0, var_1 );
 
-    if ( isdefined( var_2 ) && _id_09BB::_id_10270() )
+    if ( isdefined( var_2 ) && scripts\cp_mp\vehicles\vehicle_spawn::_id_10270() )
         var_2._id_AA96 = ::_id_9CE5;
 
     return var_2;
@@ -44,9 +44,9 @@ _id_9CE5()
 
 _id_9CE7()
 {
-    var_0 = _id_09BC::_id_6E22( self );
-    var_1 = _func_020F();
-    _id_09BC::_id_3D43( var_0, var_1 );
-    var_2 = _func_020F();
-    var_3 = _id_09BB::vehicle_spawn_spawnvehicle( "medium_transport", var_1, var_2 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_tracking::_id_6E22( self );
+    var_1 = spawnstruct();
+    scripts\cp_mp\vehicles\vehicle_tracking::_id_3D43( var_0, var_1 );
+    var_2 = spawnstruct();
+    var_3 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028E( "medium_transport", var_1, var_2 );
 }

@@ -3,16 +3,16 @@
 
 _id_80E8()
 {
-    _id_077B::_id_3EF9( "fastrope_anim", ::_id_599F );
-    _id_077B::_id_3EF9( "vehicle_door_anim", ::_id_4DA2 );
-    _id_06BD::_id_80E8();
+    scripts\engine\utility::_id_3EF9( "fastrope_anim", ::_id_599F );
+    scripts\engine\utility::_id_3EF9( "vehicle_door_anim", ::_id_4DA2 );
+    scripts\common\vehicle::_id_80E8();
 }
 
 _id_599F( var_0, var_1, var_2 )
 {
-    var_0 _meth_80BE();
+    var_0 dontinterpolate();
     var_0 _meth_82C9();
-    var_0 _meth_853E( _func_00C1( var_1 ), var_0._id_02EA, var_0._id_0054, var_2 );
+    var_0 _meth_853E( _func_00C1( var_1 ), var_0.origin, var_0.angles, var_2 );
 }
 
 _id_4DA2( var_0, var_1 )
@@ -23,20 +23,20 @@ _id_4DA2( var_0, var_1 )
 
 _id_102EA()
 {
-    _id_077B::_id_3EF9( "set_vehicle_anims_apc", ::_id_D40A );
-    _id_077B::_id_3EF9( "set_vehicle_anims_asierra", ::_id_D40B );
-    _id_077B::_id_3EF9( "set_vehicle_anims_blima", ::_id_D40C );
-    _id_077B::_id_3EF9( "set_vehicle_anims_decho_civ", ::_id_D40F );
-    _id_077B::_id_3EF9( "set_vehicle_anims_decho_police", ::_id_D410 );
-    _id_077B::_id_3EF9( "set_vehicle_anims_decho_rebel", ::_id_D411 );
-    _id_077B::_id_3EF9( "set_vehicle_anims_mkilo", ::_id_D412 );
-    _id_077B::_id_3EF9( "set_vehicle_anims_mkilo23_ai_infil", ::_id_D413 );
-    _id_077B::_id_3EF9( "set_vehicle_anims_skilo", ::_id_D418 );
-    _id_077B::_id_3EF9( "set_vehicle_anims_techo", ::_id_D419 );
-    _id_077B::_id_3EF9( "set_vehicle_anims_tromeo", ::_id_D41A );
-    _id_077B::_id_3EF9( "set_vehicle_anims_vindia", ::_id_D41C );
-    _id_077B::_id_3EF9( "set_vehicle_anims_ralfa", ::_id_D416 );
-    _id_077B::_id_3EF9( "use_turret", ::_id_FE1C );
+    scripts\engine\utility::_id_3EF9( "set_vehicle_anims_apc", ::_id_D40A );
+    scripts\engine\utility::_id_3EF9( "set_vehicle_anims_asierra", ::_id_D40B );
+    scripts\engine\utility::_id_3EF9( "set_vehicle_anims_blima", ::_id_D40C );
+    scripts\engine\utility::_id_3EF9( "set_vehicle_anims_decho_civ", ::_id_D40F );
+    scripts\engine\utility::_id_3EF9( "set_vehicle_anims_decho_police", ::_id_D410 );
+    scripts\engine\utility::_id_3EF9( "set_vehicle_anims_decho_rebel", ::_id_D411 );
+    scripts\engine\utility::_id_3EF9( "set_vehicle_anims_mkilo", ::_id_D412 );
+    scripts\engine\utility::_id_3EF9( "set_vehicle_anims_mkilo23_ai_infil", ::_id_D413 );
+    scripts\engine\utility::_id_3EF9( "set_vehicle_anims_skilo", ::_id_D418 );
+    scripts\engine\utility::_id_3EF9( "set_vehicle_anims_techo", ::_id_D419 );
+    scripts\engine\utility::_id_3EF9( "set_vehicle_anims_tromeo", ::_id_D41A );
+    scripts\engine\utility::_id_3EF9( "set_vehicle_anims_vindia", ::_id_D41C );
+    scripts\engine\utility::_id_3EF9( "set_vehicle_anims_ralfa", ::_id_D416 );
+    scripts\engine\utility::_id_3EF9( "use_turret", ::_id_FE1C );
 }
 
 #using_animtree("mp_vehicles_always_loaded");
@@ -361,8 +361,8 @@ _id_FE1C( var_0, var_1 )
     var_4 = var_0 gettagangles( "tag_gunner" );
 
     if ( self _meth_81CB() )
-        self _meth_8415();
+        self unlink();
 
     self _meth_80F9( var_3, var_4 );
-    self linkto( var_0, "tag_gunner", 0 );
+    self _meth_820C( var_0, "tag_gunner", 0 );
 }

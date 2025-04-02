@@ -56,7 +56,7 @@ _id_F5AE( var_0 )
 trigger_set_dvar( var_0 )
 {
     var_1 = var_0._id_0375;
-    var_2 = var_0._id_0457;
+    var_2 = var_0.target;
 
     for (;;)
     {

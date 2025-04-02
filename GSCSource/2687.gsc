@@ -3,13 +3,13 @@
 
 _id_68C6( var_0 )
 {
-    var_1 = stopfxontag( "mp/attachmenttable.csv", 4, var_0, 2 );
+    var_1 = _func_021D( "mp/attachmenttable.csv", 4, var_0, 2 );
     return var_1;
 }
 
 _id_6962( var_0 )
 {
-    var_1 = _func_034D( var_0 );
+    var_1 = getcompleteweaponname( var_0 );
 
     if ( istrue( var_0._id_022A ) )
         var_1 = _func_00D6( var_1, 4 );
@@ -121,7 +121,7 @@ _id_69F9( var_0 )
         case "adrenaline_br_fake":
         case "bandage_br_fake":
         case "gesture_vest_plate_br":
-            if ( _id_0A69::_id_6A43() == "br" )
+            if ( scripts\mp\utility\game::getgametype() == "br" )
                 var_1 = "equipment_other";
 
             break;
@@ -139,8 +139,8 @@ _id_881A( var_0 )
 
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
-        var_1 = var_0._id_0084;
+    if ( isweapon( var_0 ) )
+        var_1 = var_0.basename;
     else
         var_1 = var_0;
 
@@ -157,15 +157,15 @@ _id_8A63( var_0 )
     if ( !isdefined( var_0 ) )
         return 0;
 
-    return isdefined( _id_07F2::_id_6D89( var_0 ) );
+    return isdefined( scripts\mp\supers::_id_6D89( var_0 ) );
 }
 
 _id_8A5C( var_0 )
 {
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
-        var_1 = var_0._id_0084;
+    if ( isweapon( var_0 ) )
+        var_1 = var_0.basename;
     else
         var_1 = var_0;
 
@@ -191,8 +191,8 @@ _id_885C( var_0 )
 
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
-        var_1 = var_0._id_0084;
+    if ( isweapon( var_0 ) )
+        var_1 = var_0.basename;
     else
         var_1 = var_0;
 
@@ -215,8 +215,8 @@ _id_88F1( var_0 )
 {
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
-        var_1 = var_0._id_0084;
+    if ( isweapon( var_0 ) )
+        var_1 = var_0.basename;
     else
         var_1 = var_0;
 
@@ -231,13 +231,13 @@ _id_88F1( var_0 )
 
 _id_6E59( var_0 )
 {
-    if ( _func_036D( var_0 ) && _func_036F( var_0 ) )
+    if ( isweapon( var_0 ) && isnullweapon( var_0 ) )
         return "other";
 
     if ( _func_0120( var_0 ) && ( var_0 == "none" || var_0 == "alt_none" ) )
         return "other";
 
-    var_1 = _id_6E6C( var_0 );
+    var_1 = getweaponrootname( var_0 );
     var_2 = _id_10D97( var_1 );
 
     if ( !isdefined( var_2 ) )
@@ -268,8 +268,8 @@ _id_87C3( var_0 )
 {
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
-        var_1 = var_0._id_0084;
+    if ( isweapon( var_0 ) )
+        var_1 = var_0.basename;
     else
         var_1 = var_0;
 
@@ -287,7 +287,7 @@ _id_87C3( var_0 )
 
 _id_688D( var_0 )
 {
-    var_1 = _id_6E6C( var_0 );
+    var_1 = getweaponrootname( var_0 );
     var_2 = level._id_10D62[var_1];
 
     if ( !isdefined( var_2 ) )
@@ -313,7 +313,7 @@ _id_1D89( var_0, var_1 )
     {
         var_3 = _func_0225( "mp/attachmentcombos.csv", 0, var_1 );
 
-        if ( stopfxontag( "mp/attachmentcombos.csv", 0, var_0, var_3 ) == "no" )
+        if ( _func_021D( "mp/attachmentcombos.csv", 0, var_0, var_3 ) == "no" )
             var_2 = 0;
     }
 
@@ -327,8 +327,8 @@ _id_1D8A( var_0, var_1, var_2, var_3, var_4 )
 
     var_5 = undefined;
 
-    if ( _func_036D( var_2 ) )
-        var_5 = _func_034D( var_2 );
+    if ( isweapon( var_2 ) )
+        var_5 = getcompleteweaponname( var_2 );
     else
         var_5 = var_2;
 
@@ -373,12 +373,12 @@ _id_0B1B( var_0, var_1 )
     return isdefined( var_2 ) && isdefined( var_3 ) && var_3 == var_2;
 }
 
-_id_6E6C( var_0 )
+getweaponrootname( var_0 )
 {
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
-        var_1 = var_0._id_0084;
+    if ( isweapon( var_0 ) )
+        var_1 = var_0.basename;
     else
         var_1 = var_0;
 
@@ -388,7 +388,7 @@ _id_6E6C( var_0 )
         return var_2;
 
     var_3 = var_1;
-    var_4 = _func_021A( var_1, "_" );
+    var_4 = strtok( var_1, "_" );
     var_5 = 0;
 
     if ( var_4[0] == "alt" )
@@ -398,7 +398,7 @@ _id_6E6C( var_0 )
     {
         var_6 = [ "ar", "sm", "lm", "sh", "sn", "dm", "pi", "la", "me", "mr", "sr", "mg", "gw" ];
 
-        if ( _id_077B::_id_1B78( var_6, var_4[var_5 + 1] ) )
+        if ( scripts\engine\utility::array_contains( var_6, var_4[var_5 + 1] ) )
             var_1 = var_4[var_5] + "_" + var_4[var_5 + 1] + "_" + var_4[var_5 + 2];
         else
             var_1 = var_4[var_5] + "_" + var_4[var_5 + 1];
@@ -412,7 +412,7 @@ _id_6E6C( var_0 )
 
 _id_69B9( var_0 )
 {
-    var_1 = _id_6E6C( var_0 );
+    var_1 = getweaponrootname( var_0 );
 
     if ( isdefined( level._id_10DAE[var_1] ) && isdefined( level._id_10DAE[var_1]._id_1CC5 ) )
         var_0 = level._id_10DAE[var_1]._id_1CC5;
@@ -430,8 +430,8 @@ getweapongroup( var_0 )
 
 _id_6E4D( var_0 )
 {
-    if ( _func_036D( var_0 ) )
-        return var_0._id_0084;
+    if ( isweapon( var_0 ) )
+        return var_0.basename;
 
     if ( _func_0120( var_0 ) && var_0 == "none" )
         return "none";
@@ -443,12 +443,12 @@ _id_6E5A( var_0 )
 {
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
-        var_1 = var_0._id_0084;
+    if ( isweapon( var_0 ) )
+        var_1 = var_0.basename;
     else
         var_1 = var_0;
 
-    var_2 = _id_6E6C( var_1 );
+    var_2 = getweaponrootname( var_1 );
     return "mp/gunsmith/" + _func_00D6( var_2, 4 ) + "_attachments.csv";
 }
 
@@ -488,7 +488,7 @@ _id_6E11()
 
     foreach ( var_3 in var_1 )
     {
-        var_4 = visionsetnight( var_3 );
+        var_4 = weaponclass( var_3 );
 
         if ( !_id_88DC( var_3 ) && var_4 != "grenade" && var_4 != "rocketlauncher" && self getweaponammostock( var_3 ) != 0 )
             var_0[var_0.size] = var_3;
@@ -503,18 +503,18 @@ _id_8964( var_0 )
     {
         var_1 = undefined;
 
-        if ( _func_036D( var_0 ) )
-            var_1 = _func_034D( var_0 _meth_8626() );
+        if ( isweapon( var_0 ) )
+            var_1 = getcompleteweaponname( var_0 _meth_8626() );
         else if ( _func_0120( var_0 ) )
         {
             var_1 = var_0;
 
-            if ( _func_0121( var_1, "alt_" ) )
+            if ( issubstr( var_1, "alt_" ) )
                 var_1 = _func_00D6( var_1, 4, var_0.size );
         }
 
-        var_2 = isdefined( self._id_0309["primaryWeapon"] ) && self._id_0309["primaryWeapon"] == var_1;
-        var_3 = isdefined( self._id_0309["secondaryWeapon"] ) && self._id_0309["secondaryWeapon"] == var_1;
+        var_2 = isdefined( self.pers["primaryWeapon"] ) && self.pers["primaryWeapon"] == var_1;
+        var_3 = isdefined( self.pers["secondaryWeapon"] ) && self.pers["secondaryWeapon"] == var_1;
 
         if ( !var_2 && !var_3 )
             return 1;
@@ -603,12 +603,12 @@ _id_1D81( var_0, var_1 )
 {
     var_2 = undefined;
 
-    if ( _func_036D( var_1 ) )
-        var_2 = _func_034D( var_1 );
+    if ( isweapon( var_1 ) )
+        var_2 = getcompleteweaponname( var_1 );
     else
         var_2 = var_1;
 
-    var_3 = _id_6E6C( var_1 );
+    var_3 = getweaponrootname( var_1 );
 
     if ( var_3 != var_2 )
     {
@@ -623,7 +623,7 @@ _id_1D81( var_0, var_1 )
             return level._id_1D7A[var_4][var_0];
         else
         {
-            var_6 = _func_021A( var_4, "_" );
+            var_6 = strtok( var_4, "_" );
 
             if ( var_6.size > 3 )
             {
@@ -714,9 +714,9 @@ _id_10DBB( var_0 )
     return undefined;
 }
 
-_id_6CB6( var_0 )
+getrandomweaponfromgroup( var_0 )
 {
-    var_1 = _func_01B9( 0, level._id_10D96[var_0].size );
+    var_1 = randomintrange( 0, level._id_10D96[var_0].size );
     return level._id_10D96[var_0][var_1];
 }
 
@@ -787,7 +787,7 @@ _id_10D63( var_0 )
 
 _id_8753( var_0, var_1 )
 {
-    var_2 = _func_021A( var_0, "_" );
+    var_2 = strtok( var_0, "_" );
     return _id_8754( var_2, var_1 );
 }
 
@@ -804,7 +804,7 @@ _id_8754( var_0, var_1 )
 
         if ( var_0.size >= 3 + var_3 && ( var_0[var_3] == "iw6" || var_0[var_3] == "iw7" ) )
         {
-            if ( visionsetnight( var_0[var_3] + "_" + var_0[var_3 + 1] + "_" + var_0[var_3 + 2] ) == "sniper" )
+            if ( weaponclass( var_0[var_3] + "_" + var_0[var_3 + 1] + "_" + var_0[var_3 + 2] ) == "sniper" )
                 var_2 = var_0[var_3 + 1] + "scope" == var_1;
         }
     }
@@ -819,7 +819,7 @@ _id_6E4C( var_0 )
         if ( var_0 == "none" )
             return [];
     }
-    else if ( var_0._id_0084 == "none" )
+    else if ( var_0.basename == "none" )
         return [];
 
     var_1 = getweaponattachments( var_0 );
@@ -843,11 +843,11 @@ _id_6B8A()
     var_0 = [];
     var_1 = 0;
 
-    for ( var_2 = stopfxontag( "mp/attachmenttable.csv", 0, var_1, 5 ); var_2 != ""; var_2 = stopfxontag( "mp/attachmenttable.csv", 0, var_1, 5 ) )
+    for ( var_2 = _func_021D( "mp/attachmenttable.csv", 0, var_1, 5 ); var_2 != ""; var_2 = _func_021D( "mp/attachmenttable.csv", 0, var_1, 5 ) )
     {
-        var_3 = stopfxontag( "mp/attachmenttable.csv", 0, var_1, 2 );
+        var_3 = _func_021D( "mp/attachmenttable.csv", 0, var_1, 2 );
 
-        if ( var_3 != "none" && var_3 != "rail" && !_id_077B::_id_1B78( var_0, var_2 ) )
+        if ( var_3 != "none" && var_3 != "rail" && !scripts\engine\utility::array_contains( var_0, var_2 ) )
             var_0[var_0.size] = var_2;
 
         var_1++;
@@ -864,11 +864,11 @@ _id_6BBD()
     var_0 = [];
     var_1 = 0;
 
-    for ( var_2 = stopfxontag( "mp/attachmenttable.csv", 0, var_1, 5 ); var_2 != ""; var_2 = stopfxontag( "mp/attachmenttable.csv", 0, var_1, 5 ) )
+    for ( var_2 = _func_021D( "mp/attachmenttable.csv", 0, var_1, 5 ); var_2 != ""; var_2 = _func_021D( "mp/attachmenttable.csv", 0, var_1, 5 ) )
     {
-        var_3 = stopfxontag( "mp/attachmenttable.csv", 0, var_1, 2 );
+        var_3 = _func_021D( "mp/attachmenttable.csv", 0, var_1, 2 );
 
-        if ( var_3 == "rail" && !_id_077B::_id_1B78( var_0, var_2 ) )
+        if ( var_3 == "rail" && !scripts\engine\utility::array_contains( var_0, var_2 ) )
             var_0[var_0.size] = var_2;
 
         var_1++;
@@ -905,9 +905,9 @@ _id_9AB4( var_0, var_1, var_2 )
 
     var_4 = 0;
 
-    if ( var_3._id_0084 != "none" )
+    if ( var_3.basename != "none" )
     {
-        if ( isdefined( var_1 ) && !_func_0117( var_1 ) )
+        if ( isdefined( var_1 ) && !isplayer( var_1 ) )
         {
             var_5 = _id_6895( var_0 );
 
@@ -916,37 +916,37 @@ _id_9AB4( var_0, var_1, var_2 )
                 switch ( var_5 )
                 {
                     case "glconc":
-                        var_3 = _func_034C( "s4_stun_gbr_n69_mp" );
+                        var_3 = makeweapon( "s4_stun_gbr_n69_mp" );
                         break;
                     case "glflash":
-                        var_3 = _func_034C( "flash_grenade_mp" );
+                        var_3 = makeweapon( "flash_grenade_mp" );
                         break;
                     case "glsnap":
-                        var_3 = _func_034C( "snapshot_grenade_mp" );
+                        var_3 = makeweapon( "snapshot_grenade_mp" );
                         break;
                     case "glincendiary":
-                        var_3 = _func_034C( "s4_thermite_mp" );
+                        var_3 = makeweapon( "s4_thermite_mp" );
                         break;
                 }
             }
         }
 
-        switch ( var_3._id_0084 )
+        switch ( var_3.basename )
         {
             case "pop_rocket_proj_mp":
-                var_3 = _func_034C( "pop_rocket_mp" );
+                var_3 = makeweapon( "pop_rocket_mp" );
                 break;
             case "tur_gun_mp":
             case "tur_gun_faridah_mp":
-                var_3 = _func_034C( "iw8_turret_50cal_mp" );
+                var_3 = makeweapon( "iw8_turret_50cal_mp" );
                 break;
             case "tur_gun_lighttank_mp":
             case "tur_bradley_mp":
-                var_3 = _func_034C( "lighttank_tur_mp" );
+                var_3 = makeweapon( "lighttank_tur_mp" );
                 break;
             case "tur_bradley_ks_mp":
             case "tur_gun_lighttank_ks_mp":
-                var_3 = _func_034C( "lighttank_tur_ks_mp" );
+                var_3 = makeweapon( "lighttank_tur_ks_mp" );
                 break;
             case "ks_remote_drone_mp":
                 var_3 = _func_0370();
@@ -955,14 +955,14 @@ _id_9AB4( var_0, var_1, var_2 )
     }
     else if ( isdefined( var_1 ) )
     {
-        if ( isdefined( var_1._id_A90B ) )
+        if ( isdefined( var_1.objweapon ) )
         {
-            var_3 = _func_034C( var_1._id_A90B._id_0084 );
+            var_3 = makeweapon( var_1.objweapon.basename );
             var_4 = 1;
         }
         else if ( isdefined( var_1._id_10D06 ) )
         {
-            var_3 = _func_034C( var_1._id_10D06 );
+            var_3 = makeweapon( var_1._id_10D06 );
             var_4 = 1;
         }
     }
@@ -994,7 +994,7 @@ _id_1D75( var_0, var_1 )
     if ( !_id_1D73( var_1, var_0 ) )
         return 0;
 
-    if ( _id_077B::_id_EA55( var_0, "laststand_" ) )
+    if ( scripts\engine\utility::string_starts_with( var_0, "laststand_" ) )
         return 0;
 
     return 1;
@@ -1040,23 +1040,23 @@ _id_D68E( var_0, var_1, var_2 )
 
     if ( var_3 == 100 )
     {
-        self _meth_825B();
+        self player_recoilscaleoff();
         return;
     }
 
-    self player_recoilscaleoff( var_3 );
+    self player_recoilscaleon( var_3 );
 }
 
-_hasperk( var_0, var_1, var_2, var_3, var_4, var_5 )
+_id_0C1F( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    var_6 = self _meth_849A( var_0, var_1, var_2, var_3, var_5 );
+    var_6 = self launchgrenade( var_0, var_1, var_2, var_3, var_5 );
 
     if ( !isdefined( var_4 ) )
         var_6._id_A6AC = 1;
     else
         var_6._id_A6AC = var_4;
 
-    var_6 setorigin( self );
+    var_6 setotherent( self );
     return var_6;
 }
 
@@ -1067,14 +1067,14 @@ _id_7163( var_0 )
 
 _id_714C()
 {
-    return !_func_036F( self _meth_8570() );
+    return !isnullweapon( self getheldoffhand() );
 }
 
 _id_6A5A()
 {
-    var_0 = self _meth_8570();
+    var_0 = self getheldoffhand();
 
-    if ( isdefined( self._id_62D2 ) && var_0 == _func_0378( self._id_62D2 ) )
+    if ( isdefined( self._id_62D2 ) && var_0 == makeweaponfromstring( self._id_62D2 ) )
         var_0 = _func_0370();
 
     return var_0;
@@ -1082,7 +1082,7 @@ _id_6A5A()
 
 _id_10DA0( var_0, var_1 )
 {
-    var_2 = var_0._id_0084;
+    var_2 = var_0.basename;
 
     if ( _id_8A63( var_2 ) )
         return 1;
@@ -1118,7 +1118,7 @@ _id_10DDA( var_0 )
     if ( _id_88DC( var_0 ) )
         return 0;
 
-    var_1 = visionsetnight( var_0 );
+    var_1 = weaponclass( var_0 );
     return var_1 == "rifle" || var_1 == "mg" || var_1 == "sniper" || var_1 == "smg" || var_1 == "spread";
 }
 
@@ -1142,12 +1142,12 @@ _id_8A1E( var_0 )
 
 _id_1D70( var_0 )
 {
-    return isdefined( var_0 ) && _id_077B::_id_EA55( var_0, "cos_" );
+    return isdefined( var_0 ) && scripts\engine\utility::string_starts_with( var_0, "cos_" );
 }
 
 _id_1D73( var_0, var_1 )
 {
-    var_2 = _id_6E6C( var_0 );
+    var_2 = getweaponrootname( var_0 );
     return _id_1D74( var_2, var_1 );
 }
 
@@ -1192,9 +1192,9 @@ _id_10D85( var_0 )
     var_1 = "none";
     var_2 = -1;
 
-    if ( isdefined( var_0 ) && !_func_036F( var_0 ) )
+    if ( isdefined( var_0 ) && !isnullweapon( var_0 ) )
     {
-        var_1 = visionsetnight( var_0 );
+        var_1 = weaponclass( var_0 );
 
         switch ( var_1 )
         {
@@ -1223,8 +1223,8 @@ _id_876D( var_0 )
 
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
-        var_1 = var_0._id_0084;
+    if ( isweapon( var_0 ) )
+        var_1 = var_0.basename;
     else
         var_1 = var_0;
 
@@ -1246,8 +1246,8 @@ _id_88DC( var_0 )
 
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
-        var_1 = var_0._id_0084;
+    if ( isweapon( var_0 ) )
+        var_1 = var_0.basename;
     else
         var_1 = var_0;
 
@@ -1259,7 +1259,7 @@ _id_88DC( var_0 )
 
 _id_88DA( var_0 )
 {
-    return isdefined( var_0 ) && isdefined( var_0._id_1031C ) && isdefined( var_0._id_EA0B );
+    return isdefined( var_0 ) && isdefined( var_0._id_1031C ) && isdefined( var_0.streakinfo );
 }
 
 _id_10D64( var_0 )
@@ -1267,8 +1267,8 @@ _id_10D64( var_0 )
     var_1 = 1;
     var_2 = undefined;
 
-    if ( _func_036D( var_0 ) )
-        var_2 = var_0._id_0084;
+    if ( isweapon( var_0 ) )
+        var_2 = var_0.basename;
     else
         var_2 = var_0;
 
@@ -1282,8 +1282,8 @@ _id_8AE1( var_0 )
 {
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
-        var_1 = var_0._id_0084;
+    if ( isweapon( var_0 ) )
+        var_1 = var_0.basename;
     else
         var_1 = var_0;
 
@@ -1318,25 +1318,25 @@ _id_8860( var_0 )
 {
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
-        var_1 = var_0._id_0084;
+    if ( isweapon( var_0 ) )
+        var_1 = var_0.basename;
     else
         var_1 = var_0;
 
-    if ( _func_0121( var_1, "ges_plyr" ) )
+    if ( issubstr( var_1, "ges_plyr" ) )
         return 1;
-    else if ( _func_0121( var_1, "devilhorns_mp" ) )
+    else if ( issubstr( var_1, "devilhorns_mp" ) )
         return 1;
     else
         return 0;
 }
 
-_id_6E58( var_0 )
+getweaponfullname( var_0 )
 {
     if ( _func_0120( var_0 ) )
         return var_0;
     else
-        return _func_034D( var_0 );
+        return getcompleteweaponname( var_0 );
 }
 
 _id_B375( var_0, var_1 )
@@ -1372,12 +1372,12 @@ _id_B375( var_0, var_1 )
     if ( isdefined( var_0 ) )
         var_3 = var_0;
 
-    self _meth_827B( var_3 );
+    self playsound( var_3 );
 
     foreach ( var_6 in var_2 )
     {
         foreach ( var_8 in var_6 )
-            _func_0196( level._id_0BA3["atomize_body"], var_8["org"] + var_4, anglestoforward( var_8["angles"] ) );
+            playfx( level._effect["atomize_body"], var_8["org"] + var_4, anglestoforward( var_8["angles"] ) );
 
         wait 0.01;
     }
@@ -1385,13 +1385,13 @@ _id_B375( var_0, var_1 )
 
 _id_89AD( var_0 )
 {
-    if ( _func_036F( var_0 ) )
+    if ( isnullweapon( var_0 ) )
         return 0;
 
-    if ( var_0.horzalign != "primary" && var_0.horzalign != "altmode" )
+    if ( var_0._id_0226 != "primary" && var_0._id_0226 != "altmode" )
         return 0;
 
-    switch ( var_0._id_00DE )
+    switch ( var_0.classname )
     {
         case "pistol":
         case "rifle":
@@ -1408,12 +1408,12 @@ _id_89AD( var_0 )
 
 _id_890D( var_0 )
 {
-    return var_0._id_0084 == "s4_knifestab_mp";
+    return var_0.basename == "s4_knifestab_mp";
 }
 
 _id_88DF( var_0 )
 {
-    return _id_6E6C( var_0 ) == "s4_me_knife_mp";
+    return getweaponrootname( var_0 ) == "s4_me_knife_mp";
 }
 
 _id_890F( var_0 )
@@ -1428,29 +1428,29 @@ _id_890F( var_0 )
 
 _id_8843( var_0 )
 {
-    return _id_6E6C( var_0 ) == "s4_me_fists";
+    return getweaponrootname( var_0 ) == "s4_me_fists";
 }
 
 _id_875E( var_0 )
 {
-    return var_0._id_0084 == "iw8_cyberemp_mp" || var_0._id_0084 == "iw7_tdefball_mp";
+    return var_0.basename == "iw8_cyberemp_mp" || var_0.basename == "iw7_tdefball_mp";
 }
 
 _id_875A( var_0 )
 {
-    return _id_6E6C( var_0 ) == "iw7_axe";
+    return getweaponrootname( var_0 ) == "iw7_axe";
 }
 
 _id_8A86( var_0 )
 {
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
+    if ( isweapon( var_0 ) )
     {
-        if ( _func_036F( var_0 ) )
+        if ( isnullweapon( var_0 ) )
             return 0;
 
-        var_1 = var_0._id_0084;
+        var_1 = var_0.basename;
     }
     else
     {
@@ -1460,19 +1460,19 @@ _id_8A86( var_0 )
         var_1 = var_0;
     }
 
-    return _func_0121( var_1, "throwing_knife" );
+    return issubstr( var_1, "throwing_knife" );
 }
 
 _id_8A3A( var_0 )
 {
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
+    if ( isweapon( var_0 ) )
     {
-        if ( _func_036F( var_0 ) )
+        if ( isnullweapon( var_0 ) )
             return 0;
 
-        var_1 = var_0._id_0084;
+        var_1 = var_0.basename;
     }
     else
     {
@@ -1489,12 +1489,12 @@ _id_886E( var_0 )
 {
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
+    if ( isweapon( var_0 ) )
     {
-        if ( _func_036F( var_0 ) )
+        if ( isnullweapon( var_0 ) )
             return 0;
 
-        var_1 = var_0._id_0084;
+        var_1 = var_0.basename;
     }
     else
     {
@@ -1523,7 +1523,7 @@ _id_7E72( var_0, var_1 )
         foreach ( var_3 in var_1 )
         {
             self givemaxammo( var_3 );
-            self _meth_83B5( var_3, visionsetthermal( var_3 ) );
+            self setweaponammoclip( var_3, weaponclipsize( var_3 ) );
         }
 
         wait( var_0 );
@@ -1542,16 +1542,16 @@ _id_6D08( var_0 )
     if ( !_func_021C( var_0 ) )
         return var_1;
 
-    var_2 = int( strtok( "mobile/weapons.csv" ) );
+    var_2 = int( tablelookupgetnumrows( "mobile/weapons.csv" ) );
 
     for ( var_3 = 0; var_3 < var_2; var_3++ )
     {
-        var_4 = _func_021E( "mobile/weapons.csv", var_3, 1 );
+        var_4 = tablelookupbyrow( "mobile/weapons.csv", var_3, 1 );
 
         if ( var_4 == "" )
             continue;
 
-        var_1 = _id_077B::_id_1B63( var_1, var_4 );
+        var_1 = scripts\engine\utility::array_add( var_1, var_4 );
     }
 
     return var_1;
@@ -1561,13 +1561,13 @@ _id_6C0C( var_0 )
 {
     var_1 = [];
 
-    for ( var_2 = 1; _func_021C( var_0 ) && stopfxontag( var_0, 0, var_2, 0 ) != ""; var_2++ )
+    for ( var_2 = 1; _func_021C( var_0 ) && _func_021D( var_0, 0, var_2, 0 ) != ""; var_2++ )
     {
-        var_1[var_2 - 1] = _func_020F();
-        var_3 = stopfxontag( var_0, 0, var_2, 1 );
-        var_4 = stopfxontag( var_0, 0, var_2, 2 );
-        var_5 = stopfxontag( var_0, 0, var_2, 3 );
-        var_1[var_2 - 1]._id_02EA = ( float( var_3 ), float( var_4 ), float( var_5 ) );
+        var_1[var_2 - 1] = spawnstruct();
+        var_3 = _func_021D( var_0, 0, var_2, 1 );
+        var_4 = _func_021D( var_0, 0, var_2, 2 );
+        var_5 = _func_021D( var_0, 0, var_2, 3 );
+        var_1[var_2 - 1].origin = ( float( var_3 ), float( var_4 ), float( var_5 ) );
     }
 
     return var_1;
@@ -1591,7 +1591,7 @@ _id_E3A6( var_0, var_1 )
     {
         var_7 = var_2[var_6];
         var_8 = 0;
-        var_9 = scripts\cp_mp\hostmigration::_id_2CEE( var_7, "none", "none", var_8 );
+        var_9 = scripts\mp\class::buildweapon_blueprint( var_7, "none", "none", var_8 );
         var_4[var_4.size] = var_9;
     }
 
@@ -1603,16 +1603,16 @@ _id_E3A6( var_0, var_1 )
     {
         var_16 = 17;
         var_17 = var_4[var_12 % var_13];
-        var_18 = _func_034D( var_17 );
-        var_19 = _func_0205( "weapon_" + var_18, var_15._id_02EA, var_16 );
+        var_18 = getcompleteweaponname( var_17 );
+        var_19 = spawn( "weapon_" + var_18, var_15.origin, var_16 );
         level._id_10DBE[level._id_10DBE.size] = var_19;
 
-        if ( var_17._id_0084 != "s4_me_rindigo_mp" )
-            var_19._id_0054 = ( 0, 90, 90 );
+        if ( var_17.basename != "s4_me_rindigo_mp" )
+            var_19.angles = ( 0, 90, 90 );
         else
-            var_19._id_0054 = ( -90, 0, 90 );
+            var_19.angles = ( -90, 0, 90 );
 
-        var_19 _meth_81F5( visionsetthermal( var_17 ), _func_0276( var_17 ) );
+        var_19 _meth_81F5( weaponclipsize( var_17 ), weaponmaxammo( var_17 ) );
         var_12++;
     }
 

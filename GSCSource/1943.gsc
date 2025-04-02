@@ -11,7 +11,7 @@ _id_D880( var_0, var_1, var_2 )
     var_4 = [];
     var_5 = getentarray( "minimap_corner", "targetname" );
 
-    if ( isdefined( _id_0999::_id_6AF9() ) && _id_0A69::_id_6A43() != "war" && _id_0999::_id_6B0E() != "mp_donetsk" )
+    if ( isdefined( scripts\cp_mp\utility\game_utility::_id_6AF9() ) && scripts\mp\utility\game::getgametype() != "war" && scripts\cp_mp\utility\game_utility::_id_6B0E() != "mp_donetsk" )
     {
         if ( level._id_96B5 != "locale_6" )
         {
@@ -23,18 +23,18 @@ _id_D880( var_0, var_1, var_2 )
         else
         {
             var_4 = [];
-            var_4[0] = _func_0205( "script_origin", ( -1040, 12288, -136 ) );
-            var_4[1] = _func_0205( "script_origin", ( 44016, -32768, -136 ) );
+            var_4[0] = spawn( "script_origin", ( -1040, 12288, -136 ) );
+            var_4[1] = spawn( "script_origin", ( 44016, -32768, -136 ) );
         }
 
         var_0 = var_0 + "_" + level._id_96B5;
         var_1 = var_1 + "_" + level._id_96B5;
     }
-    else if ( _id_0999::_id_6B0E() == "mp_donetsk" || _id_0999::_id_6B0E() == "mp_br_quarry" )
+    else if ( scripts\cp_mp\utility\game_utility::_id_6B0E() == "mp_donetsk" || scripts\cp_mp\utility\game_utility::_id_6B0E() == "mp_br_quarry" )
     {
         var_4 = [];
-        var_4[0] = _func_0205( "script_origin", ( -65536, 86016, 5400 ) );
-        var_4[1] = _func_0205( "script_origin", ( 81920, -61440, -2048 ) );
+        var_4[0] = spawn( "script_origin", ( -65536, 86016, 5400 ) );
+        var_4[1] = spawn( "script_origin", ( 81920, -61440, -2048 ) );
     }
     else
         var_4 = _id_6964( var_5, 0 );
@@ -42,29 +42,29 @@ _id_D880( var_0, var_1, var_2 )
     if ( var_4.size != 2 )
         return;
 
-    var_6 = ( var_4[0]._id_02EA[0], var_4[0]._id_02EA[1], 0 );
-    var_7 = ( var_4[1]._id_02EA[0], var_4[1]._id_02EA[1], 0 );
+    var_6 = ( var_4[0].origin[0], var_4[0].origin[1], 0 );
+    var_7 = ( var_4[1].origin[0], var_4[1].origin[1], 0 );
     var_8 = var_7 - var_6;
-    var_9 = ( cos( _func_00B9() ), _func_01FE( _func_00B9() ), 0 );
+    var_9 = ( cos( _func_00B9() ), sin( _func_00B9() ), 0 );
     var_10 = ( 0 - var_9[1], var_9[0], 0 );
 
-    if ( _func_0257( var_8, var_10 ) > 0 )
+    if ( vectordot( var_8, var_10 ) > 0 )
     {
-        if ( _func_0257( var_8, var_9 ) > 0 )
+        if ( vectordot( var_8, var_9 ) > 0 )
         {
             var_11 = var_7;
             var_12 = var_6;
         }
         else
         {
-            var_13 = _id_FFD5( var_9, _func_0257( var_8, var_9 ) );
+            var_13 = _id_FFD5( var_9, vectordot( var_8, var_9 ) );
             var_11 = var_7 - var_13;
             var_12 = var_6 + var_13;
         }
     }
-    else if ( _func_0257( var_8, var_9 ) > 0 )
+    else if ( vectordot( var_8, var_9 ) > 0 )
     {
-        var_13 = _id_FFD5( var_9, _func_0257( var_8, var_9 ) );
+        var_13 = _id_FFD5( var_9, vectordot( var_8, var_9 ) );
         var_11 = var_6 + var_13;
         var_12 = var_7 - var_13;
     }
@@ -76,8 +76,8 @@ _id_D880( var_0, var_1, var_2 )
 
     if ( var_3 > 0 )
     {
-        var_14 = _func_0257( var_11 - var_12, var_9 );
-        var_15 = _func_0257( var_11 - var_12, var_10 );
+        var_14 = vectordot( var_11 - var_12, var_9 );
+        var_15 = vectordot( var_11 - var_12, var_10 );
         var_16 = var_15 / var_14;
 
         if ( var_16 < var_3 )
@@ -95,13 +95,13 @@ _id_D880( var_0, var_1, var_2 )
         var_12 = var_12 - var_18;
     }
 
-    var_4[0]._id_02EA = var_11;
-    var_4[1]._id_02EA = var_12;
-    level._id_9AB0 = _func_0257( var_11 - var_12, var_9 );
+    var_4[0].origin = var_11;
+    var_4[1].origin = var_12;
+    level._id_9AB0 = vectordot( var_11 - var_12, var_9 );
     level._id_9A9A = var_4;
-    level._id_9A9A[0]._id_0054 = _func_0305( _func_025A( level._id_9A9A[1]._id_02EA - level._id_9A9A[0]._id_02EA ), ( 0, 0, 1 ) );
+    level._id_9A9A[0].angles = _func_0305( vectornormalize( level._id_9A9A[1].origin - level._id_9A9A[0].origin ), ( 0, 0, 1 ) );
     level._id_9A9A[0] _meth_8004( 45.0 );
-    level._id_9A9A[1]._id_0054 = _func_0305( _func_025A( level._id_9A9A[0]._id_02EA - level._id_9A9A[1]._id_02EA ), ( 0, 0, 1 ) );
+    level._id_9A9A[1].angles = _func_0305( vectornormalize( level._id_9A9A[0].origin - level._id_9A9A[1].origin ), ( 0, 0, 1 ) );
     level._id_9A9A[1] _meth_8004( 45.0 );
 
     if ( !isdefined( var_2 ) || var_2 < 1 )
@@ -131,7 +131,7 @@ _id_6964( var_0, var_1 )
     {
         foreach ( var_4 in var_0 )
         {
-            if ( !isdefined( var_4._id_0375 ) || isdefined( var_4._id_0375 ) && !_func_0121( var_4._id_0375, "locale" ) )
+            if ( !isdefined( var_4._id_0375 ) || isdefined( var_4._id_0375 ) && !issubstr( var_4._id_0375, "locale" ) )
                 var_2[var_2.size] = var_4;
         }
     }

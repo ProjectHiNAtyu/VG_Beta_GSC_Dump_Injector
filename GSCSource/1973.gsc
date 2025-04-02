@@ -7,8 +7,8 @@ _id_1090( var_0 )
 
     if ( !isdefined( self._id_EA67 ) )
     {
-        var_1 = _func_020F( self._id_7641 );
-        var_1._id_030F = self;
+        var_1 = spawnstruct( self._id_7641 );
+        var_1.player = self;
         var_1._id_7AF8 = 0;
         self._id_7641 = var_1;
         var_1._id_7AF8 = var_1._id_7AF8 + var_0;
@@ -27,7 +27,7 @@ _id_EAC3( var_0 )
 
     if ( var_1._id_7AF8 > 0 )
     {
-        var_1._id_7AF8 = _func_0147( 0, var_1._id_7AF8 - var_0 );
+        var_1._id_7AF8 = max( 0, var_1._id_7AF8 - var_0 );
 
         if ( var_1._id_7AF8 <= 0 )
             thread _id_7642();
@@ -48,13 +48,13 @@ _id_7644( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     if ( var_4 == "MOD_SUICIDE" )
         return [ 0, var_2, var_3 ];
 
-    if ( isdefined( var_1 ) && ( var_1._id_00DE == "trigger_hurt" || var_1._id_00DE == "worldspawn" ) )
+    if ( isdefined( var_1 ) && ( var_1.classname == "trigger_hurt" || var_1.classname == "worldspawn" ) )
         return [ 0, var_2, var_3 ];
 
     if ( !var_0 _id_7553() )
         return [ 0, var_2, var_3 ];
 
-    if ( _id_0A7F::_id_876D( var_5 ) )
+    if ( scripts\mp\utility\weapon::_id_876D( var_5 ) )
         return [ 0, var_2, var_3 ];
 
     if ( var_0 _id_7554() )
@@ -98,7 +98,7 @@ _id_7642()
     self endon( "disconnect" );
     self endon( "heavyArmor_removed" );
 
-    if ( !_id_0A69::_id_873A() )
+    if ( !scripts\mp\utility\game::_id_873A() )
         self._id_7641._id_8513 = 1;
 
     self notify( "heavyArmor_broken" );
@@ -110,7 +110,7 @@ _id_7643( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
 {
     var_11 = [];
 
-    if ( _id_0A7F::_id_8A63( var_5 ) )
+    if ( scripts\mp\utility\weapon::_id_8A63( var_5 ) )
         var_11[var_11.size] = 1.33;
 
     if ( _func_010E( var_4 ) )

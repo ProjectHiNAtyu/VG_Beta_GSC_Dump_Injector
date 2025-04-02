@@ -5,11 +5,11 @@ dead_drop_try_use()
 {
     if ( self._id_EA10 == 0 )
     {
-        _id_07B9::_id_DC9F( "MP/DEAD_DROP_NO_POINTS_TO_STORE" );
+        scripts\mp\hud_message::_id_DC9F( "MP/DEAD_DROP_NO_POINTS_TO_STORE" );
         return 0;
     }
 
-    _id_0A28::_id_CB45();
+    scripts\mp\killstreaks\killstreaks::_id_CB45();
     thread dead_drop_await_death();
     return 1;
 }
@@ -18,5 +18,5 @@ dead_drop_await_death()
 {
     self endon( "disconnect" );
     self waittill( "spawned_player" );
-    _id_0A28::_id_9692();
+    scripts\mp\killstreaks\killstreaks::_id_9692();
 }

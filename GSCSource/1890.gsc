@@ -8,7 +8,7 @@ _id_815C( var_0 )
 
     if ( !isdefined( self._id_4074 ) )
     {
-        self._id_4074 = _func_020F();
+        self._id_4074 = spawnstruct();
         self._id_4074._id_25CC = 0;
         self._id_4074._id_25CD = [];
     }
@@ -58,7 +58,7 @@ _id_743D( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
         _id_C18A( var_0, var_4, var_7, var_8 );
     else if ( _id_DB1A( var_1 ) )
     {
-        var_0 _meth_809A();
+        var_0 delete();
         return;
     }
     else if ( _id_DB7C( var_1 ) )
@@ -75,22 +75,22 @@ _id_7D34( var_0, var_1, var_2, var_3, var_4 )
 
 _id_7D35( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_0 _meth_8373( "effects", "impact" );
+    var_0 setscriptablepartstate( "effects", "impact" );
 
-    if ( isdefined( var_1 ) && ( _func_0117( var_1 ) || _func_0102( var_1 ) ) )
+    if ( isdefined( var_1 ) && ( isplayer( var_1 ) || isagent( var_1 ) ) )
         var_5 = 1.1;
     else
         var_5 = 2;
 
-    var_0._id_01EA = _func_0143( "semtex_bolt_mp", var_0._id_02EA, ( 0, 0, 0 ), var_5 );
-    var_0._id_01EA._id_0054 = var_0._id_0054;
-    var_0._id_01EA _meth_820B( var_0, "tag_origin" );
+    var_0._id_01EA = magicgrenademanual( "semtex_bolt_mp", var_0.origin, ( 0, 0, 0 ), var_5 );
+    var_0._id_01EA.angles = var_0.angles;
+    var_0._id_01EA linkto( var_0, "tag_origin" );
     thread _id_578E( var_0, var_5 );
 }
 
 _id_7D36( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_0 _meth_8373( "effects", "impact" );
+    var_0 setscriptablepartstate( "effects", "impact" );
     thread _id_F0FF( var_0, var_1, var_2, var_3 );
     thread _id_F0FE( var_0, var_1 );
     thread _id_F0FD( var_0 );
@@ -100,64 +100,64 @@ _id_7D37( var_0, var_1, var_2, var_3, var_4 )
 {
     if ( _id_EAAD( var_1, var_4 ) )
     {
-        var_0 _meth_8373( "impact", "active" );
+        var_0 setscriptablepartstate( "impact", "active" );
 
-        if ( _id_099D::_id_8A10( "weapons", "gas_createTrigger" ) )
-            thread [[ _id_099D::_id_6D05( "weapons", "gas_createTrigger" ) ]]( var_0._id_02EA, self, 5, 0.45 );
+        if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "weapons", "gas_createTrigger" ) )
+            thread [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "weapons", "gas_createTrigger" ) ]]( var_0.origin, self, 5, 0.45 );
 
         thread _id_EAA4( var_0 );
     }
     else
-        var_0 _meth_8373( "impact", "dud" );
+        var_0 setscriptablepartstate( "impact", "dud" );
 }
 
 _id_578E( var_0, var_1 )
 {
     self endon( "disconnect" );
     var_0 endon( "entitydeleted" );
-    var_0._id_01EA _id_077B::_id_108AC( var_1, "explode" );
-    var_0 _meth_8373( "effects", "explode" );
-    var_2 = _func_034C( "semtex_bolt_mp" );
-    var_3 = _func_034C( "semtex_bolt_splash_mp" );
+    var_0._id_01EA scripts\engine\utility::_id_108AC( var_1, "explode" );
+    var_0 setscriptablepartstate( "effects", "explode" );
+    var_2 = makeweapon( "semtex_bolt_mp" );
+    var_3 = makeweapon( "semtex_bolt_splash_mp" );
     var_2._id_AE4E = var_0._id_04CE;
     var_3._id_AE4E = var_0._id_04CE;
 
-    if ( isdefined( var_0._id_EA8C ) && isai( var_0._id_EA8C ) )
+    if ( isdefined( var_0._id_EA8C ) && isalive( var_0._id_EA8C ) )
     {
         var_0._id_EA8C _id_0996::_id_5EAC();
-        var_0._id_EA8C _meth_80B7( 110, var_0._id_02EA, self, undefined, "MOD_EXPLOSIVE", var_2 );
+        var_0._id_EA8C dodamage( 110, var_0.origin, self, undefined, "MOD_EXPLOSIVE", var_2 );
         var_0._id_EA8C _id_0996::_id_5EAD();
     }
 
-    _func_01B5( var_0._id_02EA, 160, 110, 35, self, "MOD_EXPLOSIVE", var_3 );
+    _func_01B5( var_0.origin, 160, 110, 35, self, "MOD_EXPLOSIVE", var_3 );
     wait 0.05;
 
     if ( !var_0 _id_FF44() )
         return;
 
-    var_0 _meth_809A();
+    var_0 delete();
 }
 
 _id_F0FF( var_0, var_1, var_2, var_3 )
 {
     self endon( "disconnect" );
     var_0 endon( "entitydeleted" );
-    var_4 = _func_034C( "thermite_bolt_mp" );
+    var_4 = makeweapon( "thermite_bolt_mp" );
     var_4._id_AE4E = var_0._id_04CE;
 
-    if ( isdefined( var_0._id_EA8C ) && isai( var_0._id_EA8C ) )
+    if ( isdefined( var_0._id_EA8C ) && isalive( var_0._id_EA8C ) )
     {
-        if ( var_1 _id_09B4::_id_8ADC() || isdefined( var_1._id_00DE ) && var_1._id_00DE == "misc_turret" )
+        if ( var_1 scripts\cp_mp\vehicles\vehicle::_id_8ADC() || isdefined( var_1.classname ) && var_1.classname == "misc_turret" )
             var_5 = 1.0;
         else
             var_5 = 0.25;
 
         var_6 = int( 4.5 / var_5 );
 
-        while ( isdefined( var_1 ) && isdefined( var_0 ) && isai( var_1 ) && var_6 > 0 )
+        while ( isdefined( var_1 ) && isdefined( var_0 ) && isalive( var_1 ) && var_6 > 0 )
         {
             var_1 _id_0996::_id_5EAC();
-            var_1 _meth_80B7( 5, var_0._id_02EA, self, var_0, "MOD_FIRE", var_4, var_3 );
+            var_1 dodamage( 5, var_0.origin, self, var_0, "MOD_FIRE", var_4, var_3 );
             var_1 _id_0996::_id_5EAD();
             var_6--;
             wait( var_5 );
@@ -170,18 +170,18 @@ _id_F0FE( var_0, var_1 )
     self endon( "disconnect" );
     var_0 endon( "entitydeleted" );
     var_2 = int( 18.0 );
-    var_3 = _func_034C( "thermite_bolt_radius_mp" );
+    var_3 = makeweapon( "thermite_bolt_radius_mp" );
     var_3._id_AE4E = var_0._id_04CE;
-    var_0._id_F100 = var_3._id_0084;
+    var_0._id_F100 = var_3.basename;
 
     while ( var_2 > 0 )
     {
-        if ( isdefined( var_0._id_EA8C ) && isai( var_0._id_EA8C ) )
+        if ( isdefined( var_0._id_EA8C ) && isalive( var_0._id_EA8C ) )
             var_0._id_EA8C _id_0996::_id_1079( "thermiteBoltStuck", 0, 0, ::_id_F0F0 );
 
-        var_0 _meth_8287( var_0._id_02EA, 50, 5, 3, self, "MOD_FIRE", var_3 );
+        var_0 radiusdamage( var_0.origin, 50, 5, 3, self, "MOD_FIRE", var_3 );
 
-        if ( isdefined( var_0._id_EA8C ) && isai( var_0._id_EA8C ) )
+        if ( isdefined( var_0._id_EA8C ) && isalive( var_0._id_EA8C ) )
             var_0._id_EA8C _id_0996::_id_C47C( "thermiteBoltStuck", 0 );
 
         var_2--;
@@ -211,14 +211,14 @@ _id_F0FD( var_0 )
     if ( !var_0 _id_FF44() )
         return;
 
-    var_0 _meth_8373( "effects", "burnEnd" );
-    wait( _func_01B7( 0.3, 2.0 ) );
+    var_0 setscriptablepartstate( "effects", "burnEnd" );
+    wait( randomfloatrange( 0.3, 2.0 ) );
 
     if ( !var_0 _id_FF44() )
         return;
 
     var_0 _id_25CE();
-    var_0 setmode( "weapon_wm_sn_crossbow_bolt_fire_static_dst" );
+    var_0 setmodel( "weapon_wm_sn_crossbow_bolt_fire_static_dst" );
 }
 
 _id_EAA4( var_0 )
@@ -229,7 +229,7 @@ _id_EAA4( var_0 )
     if ( !var_0 _id_FF44() )
         return;
 
-    var_0 _meth_809A();
+    var_0 delete();
 }
 
 _id_EAAD( var_0, var_1 )
@@ -237,10 +237,10 @@ _id_EAAD( var_0, var_1 )
     if ( !isdefined( var_0 ) )
         return 0;
 
-    if ( !_func_0117( var_0 ) && !_func_0102( var_0 ) )
+    if ( !isplayer( var_0 ) && !isagent( var_0 ) )
         return 0;
 
-    if ( isdefined( var_0._id_045B ) && self._id_045B == var_0._id_045B )
+    if ( isdefined( var_0.team ) && self.team == var_0.team )
         return 0;
 
     if ( var_1 == "riotshield" )
@@ -252,11 +252,11 @@ _id_EAAD( var_0, var_1 )
 _id_E28D( var_0, var_1, var_2, var_3 )
 {
     var_4 = _id_6905( var_2 );
-    var_5 = _func_0205( "script_model", var_0 );
-    var_5 setmode( var_4 );
-    var_5._id_0054 = _func_025B( var_1 );
+    var_5 = spawn( "script_model", var_0 );
+    var_5 setmodel( var_4 );
+    var_5.angles = vectortoangles( var_1 );
     var_5 _id_D4FE( var_2 );
-    var_5._id_02F2 = self;
+    var_5.owner = self;
     var_5._id_1725 = var_2;
     var_5._id_04CE = var_3;
     var_5._id_87C1 = 1;
@@ -279,13 +279,13 @@ _id_DB93( var_0 )
 
 _id_99E9( var_0 )
 {
-    var_1 = var_0._id_02EA + anglestoforward( var_0._id_0054 ) * 15;
-    var_2 = _func_0017( anglestoup( var_0._id_0054 ), anglestoright( var_0._id_0054 ), anglestoforward( var_0._id_0054 ) );
-    var_3 = _func_0205( "trigger_rotatable_radius", var_1, 0, 64, 79 );
-    var_3._id_0054 = var_2;
+    var_1 = var_0.origin + anglestoforward( var_0.angles ) * 15;
+    var_2 = _func_0017( anglestoup( var_0.angles ), anglestoright( var_0.angles ), anglestoforward( var_0.angles ) );
+    var_3 = spawn( "trigger_rotatable_radius", var_1, 0, 64, 79 );
+    var_3.angles = var_2;
     var_3._id_045A = "bolt_pickup";
     var_3 _meth_80DB();
-    var_3 _meth_820B( var_0 );
+    var_3 linkto( var_0 );
     var_0._id_B0A2 = var_3;
     var_0 thread _id_25C8();
     return var_0;
@@ -296,7 +296,7 @@ _id_C4F3( var_0 )
     var_0 notify( "removePickup" );
 
     if ( isdefined( var_0._id_B0A2 ) )
-        var_0._id_B0A2 _meth_809A();
+        var_0._id_B0A2 delete();
 }
 
 _id_25C8()
@@ -309,13 +309,13 @@ _id_25C8()
     {
         self._id_B0A2 waittill( "trigger", var_0 );
 
-        if ( !_func_0117( var_0 ) )
+        if ( !isplayer( var_0 ) )
             continue;
 
-        if ( !var_0 _id_099C::_giveweapon() )
+        if ( !var_0 scripts\cp_mp\utility\player_utility::_id_0C14() )
             continue;
 
-        if ( isdefined( self._id_EA8C ) && isai( self._id_EA8C ) )
+        if ( isdefined( self._id_EA8C ) && isalive( self._id_EA8C ) )
             continue;
 
         var_1 = _id_6817( var_0 getweaponslistprimaries() );
@@ -324,7 +324,7 @@ _id_25C8()
             continue;
 
         if ( var_0 _id_25C7( var_1 ) )
-            self _meth_809A();
+            self delete();
     }
 }
 
@@ -344,17 +344,17 @@ _id_6817( var_0 )
 
 _id_25C7( var_0 )
 {
-    var_1 = _func_0276( var_0 );
+    var_1 = weaponmaxammo( var_0 );
     var_2 = self getweaponammostock( var_0 );
 
     if ( var_2 >= var_1 )
         return 0;
 
-    var_3 = int( _func_0148( var_1, var_2 + 1 ) );
-    self setweaponammoclip( var_0, var_3 );
+    var_3 = int( min( var_1, var_2 + 1 ) );
+    self setweaponammostock( var_0, var_3 );
 
-    if ( _id_099D::_id_8A10( "damage", "hudIconType" ) )
-        self [[ _id_099D::_id_6D05( "damage", "hudIconType" ) ]]( "crossbowbolt" );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "damage", "hudIconType" ) )
+        self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "damage", "hudIconType" ) ]]( "crossbowbolt" );
 
     return 1;
 }
@@ -403,7 +403,7 @@ _id_9A21( var_0 )
         {
             if ( var_1.size >= 24 && var_3._id_4738 )
             {
-                var_3 _meth_809A();
+                var_3 delete();
                 continue;
             }
 
@@ -420,7 +420,7 @@ _id_697A( var_0 )
 
     foreach ( var_3 in var_0._id_006B )
     {
-        if ( _func_0121( var_3, "bolt" ) )
+        if ( issubstr( var_3, "bolt" ) )
         {
             var_1 = var_3;
             break;
@@ -523,11 +523,11 @@ _id_DBBF( var_0, var_1, var_2, var_3 )
 
 _id_C18A( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _id_0777::_id_FFDB( var_2, var_1 );
-    var_5 = abs( _func_0257( var_2, var_1 ) );
-    var_6 = _id_0777::_id_5878( 2300, 1000, var_5 );
+    var_4 = scripts\engine\math::_id_FFDB( var_2, var_1 );
+    var_5 = abs( vectordot( var_2, var_1 ) );
+    var_6 = scripts\engine\math::_id_5878( 2300, 1000, var_5 );
     var_4 = var_4 * var_6;
-    var_0 _meth_8254( var_3, var_4 );
+    var_0 physicslaunchserver( var_3, var_4 );
 }
 
 _id_DB1A( var_0 )
@@ -535,7 +535,7 @@ _id_DB1A( var_0 )
     if ( !isdefined( var_0 ) )
         return 0;
 
-    if ( _func_0102( var_0 ) && var_0 _id_86C0() && !isai( var_0 ) && !isdefined( var_0 _meth_8122() ) )
+    if ( isagent( var_0 ) && var_0 _id_86C0() && !isalive( var_0 ) && !isdefined( var_0 _meth_8122() ) )
         return 1;
 
     return 0;
@@ -556,7 +556,7 @@ _id_86C0()
 
 _id_94FE( var_0, var_1, var_2 )
 {
-    if ( ( _func_0117( var_1 ) || _func_0102( var_1 ) ) && !isai( var_1 ) )
+    if ( ( isplayer( var_1 ) || isagent( var_1 ) ) && !isalive( var_1 ) )
     {
         var_3 = var_1 _meth_8122();
 
@@ -564,26 +564,26 @@ _id_94FE( var_0, var_1, var_2 )
             var_1 = var_3;
     }
 
-    if ( _func_0117( var_1 ) && var_0._id_1725 != "bolt_stun" )
+    if ( isplayer( var_1 ) && var_0._id_1725 != "bolt_stun" )
     {
-        var_0 _meth_847B( var_1 );
+        var_0 hidefromplayer( var_1 );
 
         if ( isdefined( var_0._id_B0A2 ) )
-            var_0._id_B0A2 _meth_847B( var_1 );
+            var_0._id_B0A2 hidefromplayer( var_1 );
     }
 
     if ( isdefined( var_2 ) )
-        var_0 _meth_820B( var_1, var_2 );
+        var_0 linkto( var_1, var_2 );
     else
-        var_0 _meth_820B( var_1 );
+        var_0 linkto( var_1 );
 
-    if ( _func_0117( var_1 ) || _func_0102( var_1 ) || var_1 _id_09B4::_id_8ADC() || isdefined( var_1._id_00DE ) && var_1._id_00DE == "misc_turret" )
+    if ( isplayer( var_1 ) || isagent( var_1 ) || var_1 scripts\cp_mp\vehicles\vehicle::_id_8ADC() || isdefined( var_1.classname ) && var_1.classname == "misc_turret" )
     {
         var_0._id_EA8C = var_1;
         var_0 thread _id_C51D( var_1 );
     }
 
-    var_0 _meth_824C();
+    var_0 notsolid();
     var_0 thread _id_25CF( var_1 );
     var_0 thread _id_25CA( var_1, "vehicle_deleted" );
     var_0 thread _id_25CA( var_1, "detonated" );
@@ -603,7 +603,7 @@ _id_FF44()
 _id_C51D( var_0 )
 {
     self endon( "entitydeleted" );
-    var_0 _id_077B::_id_1087F( "entitydeleted", "death", "disconnect" );
+    var_0 scripts\engine\utility::_id_1087F( "entitydeleted", "death", "disconnect" );
 
     if ( !_id_FF44() )
         return;
@@ -611,13 +611,13 @@ _id_C51D( var_0 )
     self._id_EA8C = undefined;
 
     if ( isdefined( var_0 ) && isdefined( var_0._id_A533 ) )
-        self _meth_809A();
+        self delete();
 }
 
 _id_25CF( var_0 )
 {
     self endon( "entitydeleted" );
-    var_0 _id_077B::_id_1087E( "entitydeleted", "disconnect" );
+    var_0 scripts\engine\utility::waittill_any_2( "entitydeleted", "disconnect" );
 
     if ( !_id_FF44() )
         return;
@@ -631,10 +631,10 @@ _id_25CE( var_0 )
         var_0 = ( 0, 0, 100 );
 
     if ( self _meth_81CB() )
-        self _meth_8415();
+        self unlink();
 
-    self _meth_83CE();
-    self _meth_8254( self._id_02EA, var_0 );
+    self solid();
+    self physicslaunchserver( self.origin, var_0 );
 }
 
 _id_25CA( var_0, var_1 )
@@ -645,7 +645,7 @@ _id_25CA( var_0, var_1 )
     if ( !_id_FF44() )
         return;
 
-    self _meth_809A();
+    self delete();
 }
 
 _id_25CB()
@@ -653,18 +653,18 @@ _id_25CB()
     self waittill( "entitydeleted" );
 
     if ( isdefined( self._id_B0A2 ) )
-        self._id_B0A2 _meth_809A();
+        self._id_B0A2 delete();
 
     if ( isdefined( self._id_01EA ) )
-        self._id_01EA _meth_809A();
+        self._id_01EA delete();
 }
 
 _id_89F9( var_0 )
 {
-    if ( !_func_0117( var_0 ) )
+    if ( !isplayer( var_0 ) )
         return 0;
 
-    if ( [[ _id_099D::_id_6D05( "player", "isEnemy" ) ]]( var_0 ) )
+    if ( [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "player", "isEnemy" ) ]]( var_0 ) )
         return 0;
     else
         return 1;
@@ -672,10 +672,10 @@ _id_89F9( var_0 )
 
 _id_89F8( var_0 )
 {
-    if ( !_func_0102( var_0 ) )
+    if ( !isagent( var_0 ) )
         return 0;
 
-    if ( isdefined( var_0._id_002E ) && self._id_045B == var_0._id_002E )
+    if ( isdefined( var_0._id_002E ) && self.team == var_0._id_002E )
         return 1;
 
     return 0;

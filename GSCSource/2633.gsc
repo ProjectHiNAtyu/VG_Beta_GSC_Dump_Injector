@@ -6,10 +6,10 @@ _id_E91E()
     var_0 = self._id_900A;
     var_1 = _func_0370();
 
-    if ( _id_0A7F::_id_88DF( var_0 ) || _id_0A7F::_id_8A63( var_0 ) || _id_0A7F::_id_88DC( var_0 ) || _id_0A7F::_id_885C( var_0 ) || scripts\mp\hud_message::_id_89EF( var_0._id_0084 ) || _id_0A7F::_id_8A1E( var_0._id_0084 ) || !_id_E929( var_0 ) || var_0._id_0084 == "iw8_lm_dblmg_mp" || var_0._id_0084 == "s4_me_fists_mp" )
+    if ( scripts\mp\utility\weapon::_id_88DF( var_0 ) || scripts\mp\utility\weapon::_id_8A63( var_0 ) || scripts\mp\utility\weapon::_id_88DC( var_0 ) || scripts\mp\utility\weapon::_id_885C( var_0 ) || _id_07E2::_id_89EF( var_0.basename ) || scripts\mp\utility\weapon::_id_8A1E( var_0.basename ) || !_id_E929( var_0 ) || var_0.basename == "iw8_lm_dblmg_mp" || var_0.basename == "s4_me_fists_mp" )
     {
-        if ( _id_099D::_id_8A10( "hud", "showErrorMessage" ) )
-            self [[ _id_099D::_id_6D05( "hud", "showErrorMessage" ) ]]( "MP/SUPPORT_BOX_INCOMPAT" );
+        if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "hud", "showErrorMessage" ) )
+            self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "hud", "showErrorMessage" ) ]]( "MP/SUPPORT_BOX_INCOMPAT" );
 
         return 0;
     }
@@ -25,13 +25,13 @@ _id_E91E()
         var_0 = var_0 _meth_8626();
     }
     else
-        var_1 = var_0 _meth_8625();
+        var_1 = var_0 getaltweapon();
 
     var_3 = [];
     var_4 = 0;
     var_5 = 0;
 
-    if ( !_func_036F( var_1 ) )
+    if ( !isnullweapon( var_1 ) )
         var_3[var_3.size] = var_1;
 
     var_3[var_3.size] = var_0;
@@ -43,7 +43,7 @@ _id_E91E()
         if ( var_7 _meth_8622( "akimbo", 1 ) )
             var_8 = 1;
 
-        if ( _func_036E( var_7, var_0, 0 ) )
+        if ( issameweapon( var_7, var_0, 0 ) )
         {
             var_9 = scripts\mp\weapons::_id_689C( var_7 );
             var_10 = var_9 * 1;
@@ -60,27 +60,27 @@ _id_E91E()
                     var_9 = self getweaponammoclip( var_7, "left" ) + self getweaponammoclip( var_7, "right" );
                     var_4 = self getweaponammostock( var_7 );
                     var_11 = var_9 + var_4;
-                    var_12 = int( _func_0148( _func_0276( var_7 ), var_11 + var_10 ) );
-                    self setweaponammoclip( var_7, var_12 );
-                    self _meth_83B5( var_7, 0, "left" );
-                    self _meth_83B5( var_7, 0, "right" );
+                    var_12 = int( min( weaponmaxammo( var_7 ), var_11 + var_10 ) );
+                    self setweaponammostock( var_7, var_12 );
+                    self setweaponammoclip( var_7, 0, "left" );
+                    self setweaponammoclip( var_7, 0, "right" );
                 }
                 else
                 {
                     var_9 = self getweaponammoclip( var_7 );
                     var_4 = self getweaponammostock( var_7 );
                     var_11 = var_9 + var_4;
-                    var_13 = _func_0276( var_7 );
+                    var_13 = weaponmaxammo( var_7 );
                     var_14 = var_11 + var_10;
                     var_5 = int( var_14 - var_13 );
-                    var_15 = int( _func_0148( var_13, var_14 ) );
+                    var_15 = int( min( var_13, var_14 ) );
 
-                    if ( var_7._id_0084 == "iw8_lm_dblmg_mp" )
-                        self _meth_83B5( var_7, var_9 + var_10 );
+                    if ( var_7.basename == "iw8_lm_dblmg_mp" )
+                        self setweaponammoclip( var_7, var_9 + var_10 );
                     else
                     {
-                        self setweaponammoclip( var_7, var_15 );
-                        self _meth_83B5( var_7, 0 );
+                        self setweaponammostock( var_7, var_15 );
+                        self setweaponammoclip( var_7, 0 );
                     }
                 }
             }
@@ -114,10 +114,10 @@ _id_E92E( var_0, var_1, var_2 )
 
         if ( var_3 > 0 )
         {
-            thread _id_07B9::_id_DCE0( "stopping_power_loaded" );
+            thread scripts\mp\hud_message::showsplash( "stopping_power_loaded" );
 
             if ( var_2 > 0 )
-                self setweaponammoclip( var_0, var_1 + var_2 );
+                self setweaponammostock( var_0, var_1 + var_2 );
 
             break;
         }
@@ -130,8 +130,8 @@ _id_E92E( var_0, var_1, var_2 )
     if ( self._id_EB06._id_E768._id_C17B == "super_ammo_resupply_drop" )
         var_4 = 1;
 
-    if ( _id_099D::_id_8A10( "supers", "superUseFinished" ) )
-        [[ _id_099D::_id_6D05( "supers", "superUseFinished" ) ]]( undefined, undefined, undefined, var_4 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "supers", "superUseFinished" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "supers", "superUseFinished" ) ]]( undefined, undefined, undefined, var_4 );
 }
 
 _id_E927( var_0, var_1, var_2 )
@@ -140,19 +140,19 @@ _id_E927( var_0, var_1, var_2 )
         var_0._id_75BE = [];
     else
     {
-        var_3 = var_0._id_75BE[var_1._id_0084];
+        var_3 = var_0._id_75BE[var_1.basename];
 
         if ( isdefined( var_3 ) )
             var_3 thread _id_E92C();
     }
 
-    var_4 = _func_020F();
-    var_4._id_030F = var_0;
-    var_4._id_A90B = var_1;
+    var_4 = spawnstruct();
+    var_4.player = var_0;
+    var_4.objweapon = var_1;
     var_4._id_C93A = var_2;
     var_4._id_6261 = 0;
     var_4._id_024B = 0;
-    var_0._id_75BE[var_1._id_0084] = var_4;
+    var_0._id_75BE[var_1.basename] = var_4;
     var_4 thread _id_E923();
     var_4 thread _id_E924();
     var_4 thread _id_E925();
@@ -166,7 +166,7 @@ _id_E927( var_0, var_1, var_2 )
 _id_E920()
 {
     self endon( "death_or_disconnect" );
-    self _meth_8568();
+    self cancelreload();
     wait 0.05;
     return 1;
 }
@@ -174,25 +174,25 @@ _id_E920()
 _id_E92F()
 {
     self endon( "stoppingPower_removeHCR" );
-    self._id_030F endon( "disconnect" );
+    self.player endon( "disconnect" );
 
-    while ( self._id_030F hasweapon( self._id_A90B ) )
+    while ( self.player hasweapon( self.objweapon ) )
     {
-        if ( _id_E928( self._id_030F getcurrentweapon() ) )
+        if ( _id_E928( self.player getcurrentweapon() ) )
         {
             if ( !self._id_6261 )
             {
-                self._id_030F scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_bulletdamage" );
+                self.player scripts\mp\utility\perk::_id_6FA5( "specialty_bulletdamage" );
                 self._id_6261 = 1;
             }
         }
         else if ( self._id_6261 )
         {
-            self._id_030F scripts\mp\tac_ops\hostage_utility::_id_C4EF( "specialty_bulletdamage" );
+            self.player scripts\mp\utility\perk::removeperk( "specialty_bulletdamage" );
             self._id_6261 = 0;
         }
 
-        self._id_030F waittill( "weapon_change" );
+        self.player waittill( "weapon_change" );
     }
 
     thread _id_E92C();
@@ -201,11 +201,11 @@ _id_E92F()
 _id_E930()
 {
     self endon( "stoppingPower_removeHCR" );
-    self._id_030F endon( "disconnect" );
+    self.player endon( "disconnect" );
 
-    while ( self._id_030F hasweapon( self._id_A90B ) )
+    while ( self.player hasweapon( self.objweapon ) )
     {
-        self._id_030F waittill( "weapon_fired", var_0 );
+        self.player waittill( "weapon_fired", var_0 );
 
         if ( _id_E928( var_0 ) )
         {
@@ -216,7 +216,7 @@ _id_E930()
         }
     }
 
-    self._id_030F thread _id_E92D( self._id_A90B );
+    self.player thread _id_E92D( self.objweapon );
     thread _id_E92C();
 }
 
@@ -227,13 +227,13 @@ _id_E92D( var_0 )
     if ( !isdefined( self ) )
         return;
 
-    var_1 = _id_0A7F::_id_6E6C( var_0 );
+    var_1 = scripts\mp\utility\weapon::getweaponrootname( var_0 );
 
     if ( var_1 != "s4_ar_stango44" )
         return;
 
     self._id_8F9D = 1;
-    _id_077B::_id_108AD( 2, "weapon_fired", "weapon_change" );
+    scripts\engine\utility::_id_108AD( 2, "weapon_fired", "weapon_change" );
     self._id_8F9D = undefined;
 }
 
@@ -241,10 +241,10 @@ _id_E92C()
 {
     self notify( "stoppingPower_removeHCR" );
 
-    if ( isdefined( self._id_030F ) )
+    if ( isdefined( self.player ) )
     {
         if ( self._id_6261 )
-            self._id_030F scripts\mp\tac_ops\hostage_utility::_id_C4EF( "specialty_bulletdamage" );
+            self.player scripts\mp\utility\perk::removeperk( "specialty_bulletdamage" );
 
         _id_E922();
     }
@@ -254,22 +254,22 @@ _id_E92A()
 {
     self notify( "stoppingPower_removeHCR" );
 
-    if ( isdefined( self._id_030F ) )
+    if ( isdefined( self.player ) )
         _id_E922();
 }
 
 _id_E922()
 {
-    if ( isdefined( self._id_030F._id_75BE ) )
+    if ( isdefined( self.player._id_75BE ) )
     {
-        var_0 = self._id_A90B._id_0084;
-        var_1 = self._id_030F._id_75BE[var_0];
+        var_0 = self.objweapon.basename;
+        var_1 = self.player._id_75BE[var_0];
 
         if ( var_1 == self )
-            self._id_030F._id_75BE[var_0] = undefined;
+            self.player._id_75BE[var_0] = undefined;
 
-        self._id_030F _id_0793::_id_AAD4( "super_support_box", self._id_024B );
-        _id_0780::_id_9751( self._id_030F, level._id_EB28._id_E76A["super_support_box"]._id_7C71, self._id_024B, 0 );
+        self.player _id_0793::_id_AAD4( "super_support_box", self._id_024B );
+        _id_0780::_id_9751( self.player, level._id_EB28._id_E76A["super_support_box"]._id_7C71, self._id_024B, 0 );
     }
 }
 
@@ -277,13 +277,13 @@ _id_E92B( var_0 )
 {
     if ( isdefined( var_0 ) )
     {
-        var_1 = var_0._id_0084;
+        var_1 = var_0.basename;
         var_2 = self._id_75BE[var_1];
 
         if ( isdefined( var_2 ) )
         {
             _id_0A7B::_id_7D93( "stoppingPowerKills", 1 );
-            _id_07F2::_id_3A9C( "super_support_box" );
+            scripts\mp\supers::_id_3A9C( "super_support_box" );
             var_2._id_024B++;
         }
     }
@@ -291,23 +291,23 @@ _id_E92B( var_0 )
 
 _id_E928( var_0 )
 {
-    var_1 = self._id_030F _meth_810A( self._id_A90B );
-    var_2 = self._id_030F _meth_810A( var_0 );
+    var_1 = self.player _meth_810A( self.objweapon );
+    var_2 = self.player _meth_810A( var_0 );
     var_3 = var_1 == var_2;
-    return _func_036E( var_0, self._id_A90B, 1 ) && var_3;
+    return issameweapon( var_0, self.objweapon, 1 ) && var_3;
 }
 
 _id_E923()
 {
-    self._id_030F endon( "disconnect" );
+    self.player endon( "disconnect" );
     self endon( "stoppingPower_removeHCR" );
-    self._id_030F waittill( "death" );
+    self.player waittill( "death" );
     thread _id_E92C();
 }
 
 _id_E924()
 {
-    self._id_030F endon( "disconnect" );
+    self.player endon( "disconnect" );
     self endon( "stoppingPower_removeHCR" );
     level waittill( "game_ended" );
     thread _id_E92C();
@@ -315,24 +315,24 @@ _id_E924()
 
 _id_E925()
 {
-    self._id_030F endon( "disconnect" );
+    self.player endon( "disconnect" );
     self endon( "stoppingPower_removeHCR" );
-    self._id_030F waittill( "all_perks_cleared" );
+    self.player waittill( "all_perks_cleared" );
     thread _id_E92A();
 }
 
 _id_E926()
 {
-    self._id_030F endon( "death_or_disconnect" );
-    self._id_030F scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_fastreload" );
-    self._id_030F _id_077B::_id_1087F( "weapon_fired", "weapon_change", "stoppingPower_removeHCR" );
-    self._id_030F scripts\mp\tac_ops\hostage_utility::_id_C4EF( "specialty_fastreload" );
+    self.player endon( "death_or_disconnect" );
+    self.player scripts\mp\utility\perk::_id_6FA5( "specialty_fastreload" );
+    self.player scripts\engine\utility::_id_1087F( "weapon_fired", "weapon_change", "stoppingPower_removeHCR" );
+    self.player scripts\mp\utility\perk::removeperk( "specialty_fastreload" );
 }
 
 _id_E91F()
 {
     self endon( "death_or_disconnect" );
-    _id_06BB::_id_1559( 0 );
+    scripts\common\utility::_id_1559( 0 );
     wait 0.4;
-    _id_06BB::_id_1559( 1 );
+    scripts\common\utility::_id_1559( 1 );
 }

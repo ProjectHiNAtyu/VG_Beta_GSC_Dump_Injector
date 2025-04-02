@@ -3,7 +3,7 @@
 
 _id_3560()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     var_0._id_2550 = [];
     var_0._id_2552 = [];
     var_0._id_254D = [];
@@ -19,7 +19,7 @@ _id_3560()
 _id_355B( var_0, var_1 )
 {
     if ( !isdefined( self._id_355D ) )
-        self._id_355D = _func_020F();
+        self._id_355D = spawnstruct();
 
     var_2 = self._id_355D;
     thread _id_355C();
@@ -35,7 +35,7 @@ _id_355B( var_0, var_1 )
         var_4 = var_3 + var_1;
         var_2._id_F263[var_0] = ( var_3, var_4, var_1 );
         _id_355E();
-        self _meth_8373( "chilled", "active", 0 );
+        self setscriptablepartstate( "chilled", "active", 0 );
         thread _id_3563();
     }
     else
@@ -60,7 +60,7 @@ _id_3564( var_0 )
     {
         self notify( "chillEnd" );
         _id_355F();
-        self _meth_8373( "chilled", "neutral", 0 );
+        self setscriptablepartstate( "chilled", "neutral", 0 );
         self._id_355D = undefined;
         scripts\mp\weapons::_id_FCCA();
     }
@@ -80,26 +80,26 @@ _id_3561()
 
 _id_3562()
 {
-    self _meth_8373( "chilled", "neutral", 0 );
+    self setscriptablepartstate( "chilled", "neutral", 0 );
 
     foreach ( var_1 in level._id_355D._id_2550 )
-        self _meth_8373( var_1, "neutral", 0 );
+        self setscriptablepartstate( var_1, "neutral", 0 );
 }
 
 _id_355E()
 {
-    _id_06BB::_id_1559( 0 );
-    _id_06BB::_id_1557( 0 );
-    _id_06BB::_id_1564( 0 );
-    _id_06BB::_id_152B( 0 );
+    scripts\common\utility::_id_1559( 0 );
+    scripts\common\utility::_id_1557( 0 );
+    scripts\common\utility::_id_1564( 0 );
+    scripts\common\utility::_id_152B( 0 );
 }
 
 _id_355F()
 {
-    _id_06BB::_id_1559( 1 );
-    _id_06BB::_id_1557( 1 );
-    _id_06BB::_id_1564( 1 );
-    _id_06BB::_id_152B( 1 );
+    scripts\common\utility::_id_1559( 1 );
+    scripts\common\utility::_id_1557( 1 );
+    scripts\common\utility::_id_1564( 1 );
+    scripts\common\utility::_id_152B( 1 );
 }
 
 _id_355C()
@@ -108,14 +108,14 @@ _id_355C()
     var_0 = self._id_355D;
     var_1 = level._id_355D;
     var_2 = var_0._id_254F;
-    var_3 = _id_077B::_id_F07F( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_stun_resistance" ), 0, 1 );
+    var_3 = scripts\engine\utility::ter_op( scripts\mp\utility\perk::_hasperk( "specialty_stun_resistance" ), 0, 1 );
     var_4 = var_1._id_2550[var_3];
     var_5 = var_1._id_2552[var_3];
     var_6 = var_1._id_254D[var_3];
 
     if ( !isdefined( var_2 ) )
     {
-        self _meth_8373( var_4, var_5, 0 );
+        self setscriptablepartstate( var_4, var_5, 0 );
         var_0._id_254F = var_3;
     }
     else
@@ -126,16 +126,16 @@ _id_355C()
         var_7 = var_1._id_2550[var_2];
 
         if ( var_7 != var_4 )
-            self _meth_8373( var_7, "neutral", 0 );
+            self setscriptablepartstate( var_7, "neutral", 0 );
 
-        self _meth_8373( var_4, var_5, 0 );
+        self setscriptablepartstate( var_4, var_5, 0 );
         var_0._id_254F = var_3;
     }
 
     self notify( "chillBlind" );
     self endon( "chillBlind" );
-    _id_077B::_id_108A5( var_6, "chillEnd" );
-    self _meth_8373( var_4, "neutral", 0 );
+    scripts\engine\utility::_id_108A5( var_6, "chillEnd" );
+    self setscriptablepartstate( var_4, "neutral", 0 );
     var_0._id_254F = undefined;
 }
 

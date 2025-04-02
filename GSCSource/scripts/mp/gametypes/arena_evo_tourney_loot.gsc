@@ -18,7 +18,7 @@ _id_9844()
     if ( isdefined( level.s4_armory_kiosk_scriptable_names ) )
     {
         foreach ( var_2 in level.s4_armory_kiosk_scriptable_names )
-            var_0 = _id_077B::_id_1B72( var_0, _func_03BB( var_2, "classname" ) );
+            var_0 = scripts\engine\utility::_id_1B72( var_0, _func_03BB( var_2, "classname" ) );
     }
     else
         var_0 = _func_03BB( level._id_CAA8, "classname" );
@@ -28,10 +28,10 @@ _id_9844()
 
     foreach ( var_7 in var_0 )
     {
-        var_7 _meth_8373( level._id_CAA6, "visible" );
+        var_7 setscriptablepartstate( level._id_CAA6, "visible" );
         var_8 = var_5[var_4 % var_5.size];
 
-        switch ( var_7._id_00DE )
+        switch ( var_7.classname )
         {
             case "scriptable_arena_evo_plunder_box_weapons":
                 var_8 = 2;
@@ -82,7 +82,7 @@ _id_9844()
             }
         }
 
-        var_12 = var_7._id_02EA + ( 0, 0, 50 );
+        var_12 = var_7.origin + ( 0, 0, 50 );
         var_13 = _id_07D0::_id_C56F( 99 );
         _id_07D0::_id_A854( var_13, "current", var_12, var_11 );
         _func_0171( var_13, 0 );
@@ -150,14 +150,14 @@ _id_0E96( var_0, var_1 )
     if ( var_2 == "equipmentLoot" )
     {
         var_0 _id_D153( var_1, "arena_evo_loadout_override_equipment_primary" );
-        var_0 scripts\engine\trace::_id_6F76( var_1, "primary" );
+        var_0 scripts\mp\equipment::_id_6F76( var_1, "primary" );
         var_0 scripts\mp\gametypes\arena_evo_tourney_util::_id_B608( 1 );
     }
 
     if ( var_2 == "tacticalLoot" )
     {
         var_0 _id_D153( var_1, "arena_evo_loadout_override_equipment_secondary" );
-        var_0 scripts\engine\trace::_id_6F76( var_1, "secondary" );
+        var_0 scripts\mp\equipment::_id_6F76( var_1, "secondary" );
         var_0 scripts\mp\gametypes\arena_evo_tourney_util::_id_B608( 1 );
     }
 
@@ -165,7 +165,7 @@ _id_0E96( var_0, var_1 )
     {
         _id_1ABE( var_0, var_1 );
         var_0 _id_1087( ::_id_1ABE, 1, var_1 );
-        var_0 _meth_82F6( "ui_arena_evo_display_perk_info", gettime() );
+        var_0 setclientomnvar( "ui_arena_evo_display_perk_info", gettime() );
     }
 }
 
@@ -226,21 +226,21 @@ _id_1A5D( var_0, var_1, var_2 )
         level._id_10CE1[var_0] = var_2;
     }
 
-    level._id_1A57[var_0] = _func_020F();
+    level._id_1A57[var_0] = spawnstruct();
     level._id_1A57[var_0]._id_CF18 = var_0;
     level._id_1A57[var_0]._id_9883 = var_1;
 
     if ( !_id_8AF0( var_1 ) )
         level._id_1A57[var_0]._id_FE71 = var_2;
 
-    if ( _id_077B::_id_85A4( var_1, "groundLoot" ) )
-        level._id_1A57["groundLoot"] = _id_077B::_id_1B63( level._id_1A57["groundLoot"], level._id_1A57[var_0] );
+    if ( scripts\engine\utility::is_equal( var_1, "groundLoot" ) )
+        level._id_1A57["groundLoot"] = scripts\engine\utility::array_add( level._id_1A57["groundLoot"], level._id_1A57[var_0] );
 
-    if ( _id_077B::_id_85A4( var_1, "groundLoot_handicap" ) )
-        level._id_1A57["groundLoot_handicap"] = _id_077B::_id_1B63( level._id_1A57["groundLoot_handicap"], level._id_1A57[var_0] );
+    if ( scripts\engine\utility::is_equal( var_1, "groundLoot_handicap" ) )
+        level._id_1A57["groundLoot_handicap"] = scripts\engine\utility::array_add( level._id_1A57["groundLoot_handicap"], level._id_1A57[var_0] );
 
-    if ( _id_077B::_id_85A4( var_1, "weaponLoot" ) )
-        level._id_1A57["weaponLoot"] = _id_077B::_id_1B63( level._id_1A57["weaponLoot"], level._id_1A57[var_0] );
+    if ( scripts\engine\utility::is_equal( var_1, "weaponLoot" ) )
+        level._id_1A57["weaponLoot"] = scripts\engine\utility::array_add( level._id_1A57["weaponLoot"], level._id_1A57[var_0] );
 }
 
 _id_1AD6( var_0 )
@@ -264,11 +264,11 @@ _id_9884( var_0, var_1, var_2, var_3, var_4, var_5 )
     if ( _id_8869( var_6._id_9883 ) || _id_88D8( var_6._id_9883 ) || var_6._id_9883 == "groundLoot_handicap" )
     {
         if ( var_6._id_CF18 == "arena_evo_loot_cash" || var_6._id_CF18 == "arena_evo_loot" )
-            var_3 _meth_8275( "ui_mp_ch_money_pickup" );
+            var_3 playlocalsound( "ui_mp_ch_money_pickup" );
         else if ( var_6._id_CF18 == "arena_evo_loot_ammo" )
-            var_3 _meth_8275( "ui_mp_ch_ammo_pickup" );
+            var_3 playlocalsound( "ui_mp_ch_ammo_pickup" );
         else
-            var_3 _meth_8275( "grenade_pickup" );
+            var_3 playlocalsound( "grenade_pickup" );
     }
 
     if ( isdefined( var_6._id_FE71 ) )
@@ -353,13 +353,13 @@ _id_0CC2( var_0, var_1 )
     }
 
     if ( var_3 != -1 )
-        var_2 setclientomnvar( "ui_arena_evo_active_killstreak", var_3, var_1 );
+        var_2 _meth_82F7( "ui_arena_evo_active_killstreak", var_3, var_1 );
 }
 
 _id_1AB5( var_0 )
 {
-    var_0 scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_tracker" );
-    var_0 thread _id_07B9::_id_DCE0( "br_specialty_tracker" );
+    var_0 scripts\mp\utility\perk::_id_6FA5( "specialty_tracker" );
+    var_0 thread scripts\mp\hud_message::showsplash( "br_specialty_tracker" );
 }
 
 _id_1AC0( var_0 )
@@ -370,7 +370,7 @@ _id_1AC0( var_0 )
 
 _id_1AB4( var_0 )
 {
-    var_1 = scripts\mp\gametypes\arena_evo_tourney_util::_id_66F5( var_0._id_0309["team"] );
+    var_1 = scripts\mp\gametypes\arena_evo_tourney_util::_id_66F5( var_0.pers["team"] );
 
     if ( var_1 == getdvarint( "scr_arena_evo_team_health", 12 ) )
     {
@@ -382,32 +382,32 @@ _id_1AB4( var_0 )
 
     if ( arenatournament_bring_back_teammate( var_0 ) )
     {
-        thread _id_081F::snd_mp_champ_hill_1up_get( var_0, var_0._id_0309["team"] );
+        thread _id_081F::snd_mp_champ_hill_1up_get( var_0, var_0.pers["team"] );
         return;
     }
 
-    scripts\mp\gametypes\arena_evo_tourney_util::_id_C433( var_0._id_0309["team"], -1 );
+    scripts\mp\gametypes\arena_evo_tourney_util::_id_C433( var_0.pers["team"], -1 );
 
-    if ( isdefined( var_0 ) && _func_0117( var_0 ) )
+    if ( isdefined( var_0 ) && isplayer( var_0 ) )
     {
         if ( !isdefined( var_0._id_E75C ) )
             var_0._id_E75C = 1;
         else
             var_0._id_E75C = var_0._id_E75C + 1;
 
-        var_0 _meth_82F6( "ui_arena_evo_stat_extra_lives", var_0._id_E75C );
-        thread _id_081F::snd_mp_champ_hill_1up_get( var_0, var_0._id_0309["team"] );
+        var_0 setclientomnvar( "ui_arena_evo_stat_extra_lives", var_0._id_E75C );
+        thread _id_081F::snd_mp_champ_hill_1up_get( var_0, var_0.pers["team"] );
     }
 }
 
 arenatournament_bring_back_teammate( var_0 )
 {
-    foreach ( var_0 in _id_077B::_id_1B94( scripts\mp\gametypes\arena_evo_tourney_util::_id_668A( var_0._id_0309["team"] ) ) )
+    foreach ( var_0 in scripts\engine\utility::_id_1B94( scripts\mp\gametypes\arena_evo_tourney_util::_id_668A( var_0.pers["team"] ) ) )
     {
         if ( !var_0 scripts\mp\gametypes\arena_evo_tourney_util::_id_865B() )
         {
             var_0 scripts\mp\gametypes\arena_evo_tourney_util::_id_51F7();
-            var_0 thread _id_07D9::_id_E282();
+            var_0 thread scripts\mp\playerlogic::_id_E282();
             return 1;
         }
     }
@@ -419,16 +419,16 @@ _id_1AB7( var_0 )
 {
     var_0 _id_B38D( 3 );
 
-    if ( !scripts\mp\gametypes\arena_evo_tourney_util::_id_85E8( var_0._id_0309["team"] ) )
-        var_0 _meth_82F6( "ui_arena_armor_picked_up", gettime() );
+    if ( !scripts\mp\gametypes\arena_evo_tourney_util::_id_85E8( var_0.pers["team"] ) )
+        var_0 setclientomnvar( "ui_arena_armor_picked_up", gettime() );
 }
 
 _id_1AB8( var_0 )
 {
     var_0 _id_B38D( 1 );
 
-    if ( !scripts\mp\gametypes\arena_evo_tourney_util::_id_85E8( var_0._id_0309["team"] ) )
-        var_0 _meth_82F6( "ui_arena_armor_picked_up", gettime() );
+    if ( !scripts\mp\gametypes\arena_evo_tourney_util::_id_85E8( var_0.pers["team"] ) )
+        var_0 setclientomnvar( "ui_arena_armor_picked_up", gettime() );
 }
 
 _id_1AB9( var_0 )
@@ -445,18 +445,18 @@ _id_1ABA( var_0 )
 
 _id_1AB6( var_0 )
 {
-    var_0 scripts\cp_mp\hostmigration::_id_C54F();
+    var_0 scripts\mp\class::_id_C54F();
 }
 
 _id_1ABD( var_0 )
 {
-    var_0 scripts\cp_mp\hostmigration::_id_6F94( var_0._id_0309["team"], "custom" + ( _func_01B8( 10 ) + 1 ) );
+    var_0 scripts\mp\class::_id_6F94( var_0.pers["team"], "custom" + ( randomint( 10 ) + 1 ) );
     var_0 _id_0CC2( "loadout", 1 );
 }
 
 _id_1ABF( var_0 )
 {
-    var_1 = _id_099B::_id_4034( "warmachine", var_0 );
+    var_1 = scripts\cp_mp\utility\killstreak_utility::_id_4034( "warmachine", var_0 );
     var_0 _id_1087( ::_id_1AC3, 0, "s4_la_walpha2_mp" );
     var_0 _id_0CC2( "s4_la_walpha2_mp", 1 );
     var_0 thread _id_0A3D::_id_F7A4( var_1 );
@@ -464,7 +464,7 @@ _id_1ABF( var_0 )
 
 arenatournament_loot_give_player_lmg_streak( var_0 )
 {
-    var_1 = _id_099B::_id_4034( "lmg_streak", var_0 );
+    var_1 = scripts\cp_mp\utility\killstreak_utility::_id_4034( "lmg_streak", var_0 );
     var_0 _id_1087( ::arenatournament_loot_run_lmg_streak, 0, "lmg_streak" );
     var_0 _id_0CC2( "lmg_streak", 1 );
     var_0 thread _id_0A29::_id_F78D( var_1 );
@@ -473,7 +473,7 @@ arenatournament_loot_give_player_lmg_streak( var_0 )
 _id_1ABC( var_0 )
 {
     var_0 _id_098F::_id_F78B( 1 );
-    var_1 = _id_099B::_id_4034( "juggernaut", var_0 );
+    var_1 = scripts\cp_mp\utility\killstreak_utility::_id_4034( "juggernaut", var_0 );
     var_0 _id_1087( ::_id_1AC1, 0, "flamethrower" );
     var_0 _id_0CC2( "flamethrower", 1 );
 }
@@ -487,7 +487,7 @@ _id_1ABB( var_0 )
 _id_1AC2( var_0, var_1 )
 {
     var_0 _id_CA3A( "uav" );
-    level thread scripts\mp\gametypes\arena_evo_tourney_gameplay_modifiers::_id_CA09( var_0._id_0309["team"] );
+    level thread scripts\mp\gametypes\arena_evo_tourney_gameplay_modifiers::_id_CA09( var_0.pers["team"] );
 }
 
 _id_1AC1( var_0, var_1 )
@@ -499,16 +499,16 @@ _id_1AC1( var_0, var_1 )
 _id_1AC3( var_0, var_1, var_2 )
 {
     var_0 _id_CA3A( "warmachine" );
-    var_0._id_0309["wmStreakAmmo"] = var_2;
-    var_3 = var_0 _id_099B::_id_4034( "warmachine", var_0 );
+    var_0.pers["wmStreakAmmo"] = var_2;
+    var_3 = var_0 scripts\cp_mp\utility\killstreak_utility::_id_4034( "warmachine", var_0 );
     var_0 _id_0A3D::_id_F7A4( var_3 );
 }
 
 arenatournament_loot_run_lmg_streak( var_0, var_1, var_2 )
 {
     var_0 _id_CA3A( "lmg_streak" );
-    var_0._id_0309["mgStreakAmmo"] = var_2;
-    var_3 = var_0 _id_099B::_id_4034( "lmg_streak", var_0 );
+    var_0.pers["mgStreakAmmo"] = var_2;
+    var_3 = var_0 scripts\cp_mp\utility\killstreak_utility::_id_4034( "lmg_streak", var_0 );
     var_0 _id_0A29::_id_F78D( var_3 );
 }
 
@@ -517,7 +517,7 @@ _setperkuiomnvars()
     var_0 = self;
 
     for ( var_1 = 0; var_1 < 6; var_1++ )
-        var_0 _meth_82F6( "ui_spawn_perk_" + var_1, -1 );
+        var_0 setclientomnvar( "ui_spawn_perk_" + var_1, -1 );
 
     if ( isdefined( var_0.arena_evo_perks ) )
     {
@@ -526,7 +526,7 @@ _setperkuiomnvars()
         foreach ( var_4 in var_0.arena_evo_perks )
         {
             var_5 = _id_0A44::_id_6C07( var_4 );
-            var_0 _meth_82F6( "ui_spawn_perk_" + var_2, var_5 );
+            var_0 setclientomnvar( "ui_spawn_perk_" + var_2, var_5 );
             var_2++;
         }
     }
@@ -534,25 +534,25 @@ _setperkuiomnvars()
 
 _id_1ABE( var_0, var_1 )
 {
-    if ( !var_0 scripts\mp\tac_ops\hostage_utility::_id_0BF6( var_1 ) )
-        var_0 scripts\mp\tac_ops\hostage_utility::_id_6FA5( var_1 );
+    if ( !var_0 scripts\mp\utility\perk::_hasperk( var_1 ) )
+        var_0 scripts\mp\utility\perk::_id_6FA5( var_1 );
 
     if ( !isdefined( var_0.arena_evo_perks ) )
         var_0.arena_evo_perks = [ var_1 ];
 
-    if ( !_id_077B::_id_1B78( var_0.arena_evo_perks, var_1 ) )
-        var_0.arena_evo_perks = _id_077B::_id_1B63( var_0.arena_evo_perks, var_1 );
+    if ( !scripts\engine\utility::array_contains( var_0.arena_evo_perks, var_1 ) )
+        var_0.arena_evo_perks = scripts\engine\utility::array_add( var_0.arena_evo_perks, var_1 );
 
     var_0 _setperkuiomnvars();
 
-    if ( _id_077B::_id_85A4( var_1, "specialty_van_demolition" ) )
+    if ( scripts\engine\utility::is_equal( var_1, "specialty_van_demolition" ) )
         var_0 _id_0A42::_id_D8CB();
 }
 
 _id_CA3A( var_0 )
 {
     var_1 = self;
-    var_1 thread _id_07B9::_id_DCE0( var_0 );
+    var_1 thread scripts\mp\hud_message::showsplash( var_0 );
 }
 
 _id_1087( var_0, var_1, var_2 )
@@ -565,14 +565,14 @@ _id_1087( var_0, var_1, var_2 )
     if ( !isdefined( var_3._id_6099 ) )
         var_3._id_6099 = [];
 
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
     var_4._id_5FF7 = var_0;
     var_4._id_AE2D = var_2;
 
     if ( istrue( var_1 ) )
-        var_3._id_6099 = _id_077B::_id_1B63( var_3._id_6099, var_4 );
+        var_3._id_6099 = scripts\engine\utility::array_add( var_3._id_6099, var_4 );
     else
-        var_3._id_A499 = _id_077B::_id_1B63( var_3._id_A499, var_4 );
+        var_3._id_A499 = scripts\engine\utility::array_add( var_3._id_A499, var_4 );
 }
 
 _id_C4DC()
@@ -589,16 +589,16 @@ _id_C4DC()
 _id_1ACD()
 {
     _id_46D2();
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
 
     for ( var_1 = 0; var_1 < 10; var_1++ )
         var_0 _id_0FEA( var_1 + 1 );
 
     if ( !isdefined( level._id_9834 ) )
     {
-        level._id_9834 = _func_020F();
+        level._id_9834 = spawnstruct();
         level._id_9834._id_982C = [ 6, 7, 8, 9, 10 ];
-        level._id_9834.health = 0;
+        level._id_9834._id_0219 = 0;
     }
 
     var_2 = scripts\mp\gametypes\arena_evo_tourney_util::_id_65E4( 1 );
@@ -607,33 +607,33 @@ _id_1ACD()
 
     if ( var_3 > var_0._id_7E83.size )
     {
-        var_4 = var_0._id_7E83[level._id_9834._id_982C[level._id_9834.health]];
-        level._id_9834.health++;
+        var_4 = var_0._id_7E83[level._id_9834._id_982C[level._id_9834._id_0219]];
+        level._id_9834._id_0219++;
 
-        if ( level._id_9834.health >= level._id_9834._id_982C.size )
-            level._id_9834.health = 0;
+        if ( level._id_9834._id_0219 >= level._id_9834._id_982C.size )
+            level._id_9834._id_0219 = 0;
     }
     else
         var_4 = var_0._id_7E83[var_3];
 
-    var_5 = _id_077B::_id_6D7C( "arena_evo_weapon_drop_struct", "targetname" );
+    var_5 = scripts\engine\utility::_id_6D7C( "arena_evo_weapon_drop_struct", "targetname" );
 
     foreach ( var_7 in var_5 )
     {
         if ( getdvarint( "scr_arena_evo_run_cash_grab_event", 0 ) && scripts\mp\gametypes\arena_evo_tourney_util::_id_88B5() && scripts\mp\gametypes\arena_evo_tourney_util::_id_65E4( 1 ) > 0 )
         {
-            foreach ( var_9 in _id_077B::_id_6D7C( var_7._id_0457, "targetname" ) )
-                _id_E181( "arena_evo_loot_cash", var_9._id_02EA );
+            foreach ( var_9 in scripts\engine\utility::_id_6D7C( var_7.target, "targetname" ) )
+                _id_E181( "arena_evo_loot_cash", var_9.origin );
 
             continue;
         }
-        else if ( _id_077B::_id_85A4( var_7._id_0457, "weapon_drops_catwalk" ) )
+        else if ( scripts\engine\utility::is_equal( var_7.target, "weapon_drops_catwalk" ) )
         {
             if ( !getdvarint( "scr_arena_evo_loot_test", 0 ) )
                 continue;
         }
 
-        if ( _id_077B::_id_85A4( var_7._id_0375, "spawn_all_weapons" ) )
+        if ( scripts\engine\utility::is_equal( var_7._id_0375, "spawn_all_weapons" ) )
             [var_12, var_13] = var_7 _id_E249();
         else
         {
@@ -650,24 +650,24 @@ _id_1ACD()
             {
                 if ( istrue( var_9._id_878F ) )
                 {
-                    _id_E181( "arena_evo_loot_extra_life", var_9._id_02EA + ( 0, 0, 10 ) );
+                    _id_E181( "arena_evo_loot_extra_life", var_9.origin + ( 0, 0, 10 ) );
 
                     for ( var_1 = 0; var_1 < 2; var_1++ )
                     {
-                        if ( _func_01B8( 100 ) < getdvarint( "scr_arena_evo_loot_drop_center_chance", 0 ) )
+                        if ( randomint( 100 ) < getdvarint( "scr_arena_evo_loot_drop_center_chance", 0 ) )
                         {
-                            var_18 = var_9._id_02EA + ( 64 * cos( _func_01B8( 360 ) ), 64 * _func_01FE( _func_01B8( 360 ) ), 2 );
-                            var_19 = _id_077B::_id_BFC7( level._id_1A57["weaponLoot"] )._id_CF18;
+                            var_18 = var_9.origin + ( 64 * cos( randomint( 360 ) ), 64 * sin( randomint( 360 ) ), 2 );
+                            var_19 = scripts\engine\utility::random( level._id_1A57["weaponLoot"] )._id_CF18;
                             var_19 = _id_0A78::_id_EA60( var_19, "_mp" );
-                            _id_E181( _id_671A( var_19, [ "comm", "unco" ] ), var_18, ( 0, _func_01B8( 360 ), 0 ) );
+                            _id_E181( _id_671A( var_19, [ "comm", "unco" ] ), var_18, ( 0, randomint( 360 ), 0 ) );
                         }
                     }
                 }
                 else
                 {
-                    for ( var_1 = 0; var_1 < _func_01B8( var_17 ) + 1; var_1++ )
+                    for ( var_1 = 0; var_1 < randomint( var_17 ) + 1; var_1++ )
                     {
-                        [var_21, var_22, var_23] = scripts\mp\gametypes\br_pickups::_id_6AAE( 2 * var_1, var_9._id_02EA, var_9._id_0054, undefined, undefined, _func_01B8( 32 ) + 32 );
+                        [var_21, var_22, var_23] = scripts\mp\gametypes\br_pickups::_id_6AAE( 2 * var_1, var_9.origin, var_9.angles, undefined, undefined, randomint( 32 ) + 32 );
                         _id_E181( "arena_evo_loot_cash", var_21 );
                     }
                 }
@@ -684,16 +684,16 @@ _id_1ACD()
             for ( var_1 = 0; var_1 < var_24; var_1++ )
             {
                 if ( !istrue( var_9._id_878F ) )
-                    var_18 = var_9._id_02EA + ( 32 * cos( _func_01B8( 360 ) ), 32 * _func_01FE( _func_01B8( 360 ) ), 0 );
+                    var_18 = var_9.origin + ( 32 * cos( randomint( 360 ) ), 32 * sin( randomint( 360 ) ), 0 );
                 else
-                    var_18 = var_9._id_02EA;
+                    var_18 = var_9.origin;
 
-                var_25 = ( 0, _func_01B8( 360 ), 0 );
+                var_25 = ( 0, randomint( 360 ), 0 );
 
                 if ( getdvarint( "scr_arena_evo_loot_test", 0 ) )
                 {
                     var_25 = ( 0, 0, 0 );
-                    var_18 = var_9._id_02EA;
+                    var_18 = var_9.origin;
                 }
 
                 if ( !getdvarint( "scr_arena_evo_weapon_drops_enabled", 0 ) )
@@ -720,7 +720,7 @@ _id_B38D( var_0 )
     if ( !isdefined( var_1._id_9440 ) || var_1._id_9440 == 0 )
     {
         _id_07C1::_id_943C( var_1, var_0, 0 );
-        self _meth_82F6( "ui_light_armor_state", 1 );
+        self setclientomnvar( "ui_light_armor_state", 1 );
         thread _id_09EC::_id_E803();
     }
     else
@@ -737,7 +737,7 @@ _id_B38D( var_0 )
 _id_E24D( var_0, var_1 )
 {
     var_2 = self;
-    var_3 = _func_01FF( _id_077B::_id_6D7C( var_2._id_0457, "targetname" ), var_2._id_02EA );
+    var_3 = _func_01FF( scripts\engine\utility::_id_6D7C( var_2.target, "targetname" ), var_2.origin );
     var_3[0]._id_878F = 1;
 
     foreach ( var_5 in var_3 )
@@ -786,8 +786,8 @@ _id_E249()
                 if ( var_9 != "" )
                     var_8 = var_9;
 
-                var_10 = _func_020F();
-                var_10._id_02EA = var_0._id_02EA + ( var_3 * var_1 - var_2, var_4 * var_1 - var_2, 0 );
+                var_10 = spawnstruct();
+                var_10.origin = var_0.origin + ( var_3 * var_1 - var_2, var_4 * var_1 - var_2, 0 );
                 var_0._id_E433[var_0._id_E433.size] = var_10;
                 var_10._id_0375 = var_6 + "_" + var_8;
             }
@@ -795,14 +795,14 @@ _id_E249()
 
         var_3++;
         var_4 = 0;
-        var_12 = _id_077B::_id_1B72( level._id_1A57["groundLoot"], level._id_1A57["groundLoot_handicap"] );
-        var_12 = _id_077B::_id_1B63( var_12, level._id_1A57["arena_evo_loot_extra_life"] );
+        var_12 = scripts\engine\utility::_id_1B72( level._id_1A57["groundLoot"], level._id_1A57["groundLoot_handicap"] );
+        var_12 = scripts\engine\utility::array_add( var_12, level._id_1A57["arena_evo_loot_extra_life"] );
 
         foreach ( var_14 in var_12 )
         {
             var_4++;
-            var_10 = _func_020F();
-            var_10._id_02EA = var_0._id_02EA + ( var_3 * var_1 - var_2, var_4 * var_1 - var_2, 0 );
+            var_10 = spawnstruct();
+            var_10.origin = var_0.origin + ( var_3 * var_1 - var_2, var_4 * var_1 - var_2, 0 );
             var_0._id_E433[var_0._id_E433.size] = var_10;
             var_10._id_0375 = var_14._id_CF18;
         }
@@ -830,8 +830,8 @@ _id_80F7()
 
         for ( var_3 = var_1; var_3 < _func_0220( var_0 ); var_3 = var_3 + 2 )
         {
-            var_4 = _func_021E( var_0, 0, var_3 );
-            var_5 = _func_021E( var_0, 0, var_3 + 1 );
+            var_4 = tablelookupbyrow( var_0, 0, var_3 );
+            var_5 = tablelookupbyrow( var_0, 0, var_3 + 1 );
 
             if ( !isdefined( level._id_1A67[var_4] ) )
                 level._id_1A67[var_4] = [ var_4 ];
@@ -839,20 +839,20 @@ _id_80F7()
             if ( !isdefined( level._id_1A6A[var_4] ) )
                 level._id_1A6A[var_4] = [ var_4 ];
 
-            level._id_1A6A[var_4] = _func_021E( var_0, 1, var_3 );
+            level._id_1A6A[var_4] = tablelookupbyrow( var_0, 1, var_3 );
 
-            for ( var_6 = var_2; var_6 < strtok( var_0 ); var_6++ )
+            for ( var_6 = var_2; var_6 < tablelookupgetnumrows( var_0 ); var_6++ )
             {
                 if ( !isdefined( level._id_1A68[var_4] ) )
                     level._id_1A68[var_4] = [];
 
-                var_7 = _func_021E( var_0, var_6, var_3 );
+                var_7 = tablelookupbyrow( var_0, var_6, var_3 );
 
-                if ( _id_077B::_id_85A4( var_7, "none" ) )
+                if ( scripts\engine\utility::is_equal( var_7, "none" ) )
                     break;
 
                 level._id_1A67[var_4][level._id_1A67[var_4].size] = var_7;
-                var_8 = int( _func_021E( var_0, var_6, var_3 + 1 ) );
+                var_8 = int( tablelookupbyrow( var_0, var_6, var_3 + 1 ) );
 
                 if ( !isdefined( level._id_1A68[var_4][var_7] ) )
                     level._id_1A68[var_4][var_7] = var_8;
@@ -877,7 +877,7 @@ _id_38A1()
         {
             var_2 = var_1._id_5FDB;
             var_3 = level._id_2A6F._id_2A3F[var_14];
-            var_4 = _func_021A( var_2, "+" );
+            var_4 = strtok( var_2, "+" );
             var_5 = [];
 
             foreach ( var_7 in level._id_1A67[var_1._id_2305] )
@@ -887,7 +887,7 @@ _id_38A1()
 
                 var_8 = level._id_1A68[var_1._id_2305][var_7] - 1;
 
-                if ( var_8 > var_3 && _id_077B::_id_1B78( var_4, var_7 ) )
+                if ( var_8 > var_3 && scripts\engine\utility::array_contains( var_4, var_7 ) )
                     var_5[var_5.size] = var_7;
             }
 
@@ -897,7 +897,7 @@ _id_38A1()
                 var_10 = var_10 _meth_8668( var_12 );
 
             level._id_2A51[var_14]._id_5FDC = var_10;
-            level._id_2A51[var_14]._id_5FDB = _func_034D( var_10 );
+            level._id_2A51[var_14]._id_5FDB = getcompleteweaponname( var_10 );
         }
     }
 }
@@ -905,21 +905,21 @@ _id_38A1()
 _id_6EEC( var_0 )
 {
     var_1 = self;
-    var_2 = _func_034C( var_0 );
+    var_2 = makeweapon( var_0 );
     var_3 = var_1 scripts\mp\gametypes\arena_evo_tourney_weapon_util::_id_1AAA( var_0 );
     var_4 = var_1 _id_1AAB( var_2, 0, var_3 );
 
     foreach ( var_6 in var_1 getweaponslistprimaries() )
     {
-        if ( !is_valid_loadout_weapon( var_6._id_0084 ) )
-            var_1 takeallweapons( var_6 );
+        if ( !is_valid_loadout_weapon( var_6.basename ) )
+            var_1 takeweapon( var_6 );
     }
 
     if ( var_1 getweaponslistprimaries().size >= 2 )
-        var_1 takeallweapons( var_1 getcurrentprimaryweapon() );
+        var_1 takeweapon( var_1 getcurrentprimaryweapon() );
 
-    var_1 _id_099A::_id_0BEB( var_4 );
-    var_8 = var_1 _id_099A::_id_4D21( var_4, 1 );
+    var_1 scripts\cp_mp\utility\inventory_utility::_giveweapon( var_4 );
+    var_8 = var_1 scripts\cp_mp\utility\inventory_utility::_id_4D21( var_4, 1 );
     var_1 scripts\mp\gametypes\arena_evo_tourney_util::_id_B608();
 
     if ( !var_1 _id_1AAD( var_0 ) )
@@ -938,7 +938,7 @@ _id_681B( var_0, var_1 )
 
     if ( isdefined( var_1 ) )
     {
-        if ( !isdefined( var_1._id_10DC7 ) || var_1._id_10DC7.size == 0 )
+        if ( !isdefined( var_1.weapons ) || var_1.weapons.size == 0 )
             return undefined;
 
         if ( isdefined( var_1._id_3369 ) && var_1._id_3369 != "" )
@@ -948,24 +948,24 @@ _id_681B( var_0, var_1 )
             return level._id_10CE1[var_3];
         }
 
-        if ( isdefined( var_1._id_10DC7 ) )
+        if ( isdefined( var_1.weapons ) )
         {
             var_1._id_10DD6++;
 
             if ( isdefined( var_1._id_9C48 ) && var_1._id_9C48 != -1 && var_1._id_10DD6 >= var_1._id_9C48 )
                 return undefined;
 
-            var_4 = var_1._id_10DC7[var_1._id_10DCE];
+            var_4 = var_1.weapons[var_1._id_10DCE];
             var_1._id_10DCE++;
 
-            if ( var_1._id_10DCE >= var_1._id_10DC7.size )
+            if ( var_1._id_10DCE >= var_1.weapons.size )
                 var_1._id_10DCE = 0;
 
             return level._id_10CE1[var_4];
         }
     }
 
-    return _id_077B::_id_BFC7( level._id_10CE1 );
+    return scripts\engine\utility::random( level._id_10CE1 );
 }
 
 _id_0FEA( var_0 )
@@ -994,8 +994,8 @@ _id_0FEA( var_0 )
 
     var_5 = getdvarint( "scr_arena_evo_override_weapons_for_round_" + var_0 + "_count", -1 );
     var_6 = getdvar( "scr_arena_evo_override_weapons_for_round_" + var_0 + "_center", "" );
-    self._id_7E83[var_0] = _func_020F();
-    self._id_7E83[var_0]._id_10DC7 = var_2;
+    self._id_7E83[var_0] = spawnstruct();
+    self._id_7E83[var_0].weapons = var_2;
     self._id_7E83[var_0]._id_9C48 = var_5;
     self._id_7E83[var_0]._id_3369 = var_6;
     self._id_7E83[var_0]._id_10DD6 = 0;
@@ -1004,8 +1004,8 @@ _id_0FEA( var_0 )
 
 _id_6837( var_0 )
 {
-    var_1 = _func_020F();
-    var_1._id_10DC7 = var_0._id_10DC7;
+    var_1 = spawnstruct();
+    var_1.weapons = var_0.weapons;
     var_1._id_9C48 = var_0._id_9C48;
     var_1._id_3369 = var_0._id_3369;
     var_1._id_10DD6 = 0;
@@ -1016,18 +1016,18 @@ _id_6837( var_0 )
 _id_B3E2()
 {
     var_0 = self;
-    var_0 _meth_82F6( "ui_base_purchase_menu_response", 2 );
-    var_0 _meth_82F6( "ui_base_open_purchase_menu", 0 );
+    var_0 setclientomnvar( "ui_base_purchase_menu_response", 2 );
+    var_0 setclientomnvar( "ui_base_open_purchase_menu", 0 );
 }
 
 _id_E1BD( var_0, var_1 )
 {
     var_2 = self;
-    var_3 = getgroundposition( var_2._id_02EA + ( 0, 0, 12 ), 4 ) + ( 0, 0, 12 );
+    var_3 = getgroundposition( var_2.origin + ( 0, 0, 12 ), 4 ) + ( 0, 0, 12 );
     var_4 = 0;
     var_5 = [];
     var_6 = 32;
-    var_7 = _func_01B8( 360 );
+    var_7 = randomint( 360 );
 
     if ( level._id_1A57["groundLoot"].size == 0 )
         return;
@@ -1055,27 +1055,27 @@ _id_E1BD( var_0, var_1 )
             var_14 = 360 / var_11[var_13].size;
             var_4 = var_13 * 32;
 
-            foreach ( var_12, var_16 in _id_077B::_id_1B94( var_11[var_13] ) )
+            foreach ( var_12, var_16 in scripts\engine\utility::_id_1B94( var_11[var_13] ) )
             {
                 var_17 = ( var_6 + var_4 ) * cos( var_14 * var_12 + var_7 );
-                var_18 = ( var_6 + var_4 ) * _func_01FE( var_14 * var_12 + var_7 );
+                var_18 = ( var_6 + var_4 ) * sin( var_14 * var_12 + var_7 );
                 var_19 = 0;
                 var_20 = var_3 + ( var_17, var_18, var_19 );
 
                 if ( var_16._id_9883 == "weaponLoot" )
                 {
-                    _id_E181( _id_671A( var_16._id_CF18, scripts\mp\gametypes\arena_evo_tourney_weapon_util::arenatournament_get_weapon_rarity_from_level( var_16._id_CF18, var_16.weaponlevel ) ), var_20, ( 0, _func_01B8( 360 ), 0 ), undefined, var_2, var_12 );
+                    _id_E181( _id_671A( var_16._id_CF18, scripts\mp\gametypes\arena_evo_tourney_weapon_util::arenatournament_get_weapon_rarity_from_level( var_16._id_CF18, var_16.weaponlevel ) ), var_20, ( 0, randomint( 360 ), 0 ), undefined, var_2, var_12 );
                     continue;
                 }
 
                 var_21 = undefined;
 
                 if ( !isdefined( var_1 ) || var_1 == self )
-                    var_21 = scripts\mp\gametypes\arena_evo_tourney_util::_id_67A2( var_2._id_0309["team"] );
+                    var_21 = scripts\mp\gametypes\arena_evo_tourney_util::_id_67A2( var_2.pers["team"] );
                 else
-                    var_21 = var_1._id_0309["team"];
+                    var_21 = var_1.pers["team"];
 
-                _id_E181( var_16._id_CF18, var_20, ( 0, _func_01B8( 360 ), 0 ), var_21, var_2, var_12 );
+                _id_E181( var_16._id_CF18, var_20, ( 0, randomint( 360 ), 0 ), var_21, var_2, var_12 );
             }
         }
     }
@@ -1089,7 +1089,7 @@ _id_6546( var_0 )
     {
         if ( getdvarint( "scr_arena_evo_elimination_loot_drop_from_inventory", 1 ) )
         {
-            var_2 = scripts\mp\gametypes\arena_evo_tourney_util::_id_668A( var_1._id_0309["team"] );
+            var_2 = scripts\mp\gametypes\arena_evo_tourney_util::_id_668A( var_1.pers["team"] );
             var_3 = [];
 
             foreach ( var_5 in var_2 )
@@ -1102,7 +1102,7 @@ _id_6546( var_0 )
                     {
                         var_9 = level._id_1A57[var_8];
                         var_9.weaponlevel = var_5 scripts\mp\gametypes\arena_evo_tourney_weapon_util::_id_1AAA( var_8 );
-                        var_3 = _id_077B::_id_1B63( var_3, var_9 );
+                        var_3 = scripts\engine\utility::array_add( var_3, var_9 );
                     }
                 }
             }
@@ -1113,10 +1113,10 @@ _id_6546( var_0 )
                 var_12 = var_12 + var_5._id_8D57;
 
             var_15 = int( var_12 / 100 );
-            var_15 = _func_0148( 10, var_15 );
+            var_15 = min( 10, var_15 );
 
             for ( var_16 = 0; var_16 < var_15; var_16++ )
-                var_3 = _id_077B::_id_1B63( var_3, level._id_1A57["arena_evo_loot_cash"] );
+                var_3 = scripts\engine\utility::array_add( var_3, level._id_1A57["arena_evo_loot_cash"] );
 
             var_17 = 0;
 
@@ -1129,7 +1129,7 @@ _id_6546( var_0 )
             var_20 = int( var_17 / 25 );
 
             for ( var_16 = 0; var_16 < var_20; var_16++ )
-                var_3 = _id_077B::_id_1B63( var_3, level._id_1A57["arena_evo_loot_armor"] );
+                var_3 = scripts\engine\utility::array_add( var_3, level._id_1A57["arena_evo_loot_armor"] );
         }
         else
         {
@@ -1137,25 +1137,25 @@ _id_6546( var_0 )
 
             for ( var_16 = 0; var_16 < 3; var_16++ )
             {
-                var_21 = _id_077B::_id_1B94( level._id_1A57["weaponLoot"] );
-                var_21 = _id_077B::_id_1BAC( var_21, 0, 3 );
-                var_22 = _id_077B::_id_1B94( level._id_1A57["groundLoot"] );
-                var_23 = _id_077B::_id_1B72( var_22, var_21 );
-                var_3 = _id_077B::_id_1B72( var_3, var_23 );
+                var_21 = scripts\engine\utility::_id_1B94( level._id_1A57["weaponLoot"] );
+                var_21 = scripts\engine\utility::_id_1BAC( var_21, 0, 3 );
+                var_22 = scripts\engine\utility::_id_1B94( level._id_1A57["groundLoot"] );
+                var_23 = scripts\engine\utility::_id_1B72( var_22, var_21 );
+                var_3 = scripts\engine\utility::_id_1B72( var_3, var_23 );
             }
         }
     }
     else
     {
-        var_3 = _id_077B::_id_1BAC( _id_077B::_id_1B94( level._id_1A57["groundLoot"] ), 0, _func_01B8( level._id_1A57["groundLoot"].size + 1 ) );
+        var_3 = scripts\engine\utility::_id_1BAC( scripts\engine\utility::_id_1B94( level._id_1A57["groundLoot"] ), 0, randomint( level._id_1A57["groundLoot"].size + 1 ) );
 
         if ( var_3.size == 0 )
-            var_3 = [ _id_077B::_id_BFC7( level._id_1A57["groundLoot"] ) ];
+            var_3 = [ scripts\engine\utility::random( level._id_1A57["groundLoot"] ) ];
 
-        var_24 = scripts\mp\gametypes\arena_evo_tourney_util::_id_67A2( var_1._id_0309["team"] );
+        var_24 = scripts\mp\gametypes\arena_evo_tourney_util::_id_67A2( var_1.pers["team"] );
 
         if ( _id_DB2F( var_24 ) )
-            var_3 = _id_077B::_id_1B63( var_3, _id_077B::_id_BFC7( level._id_1A57["groundLoot_handicap"] ) );
+            var_3 = scripts\engine\utility::array_add( var_3, scripts\engine\utility::random( level._id_1A57["groundLoot_handicap"] ) );
     }
 
     return var_3;
@@ -1164,7 +1164,7 @@ _id_6546( var_0 )
 _id_DB2F( var_0 )
 {
     var_1 = _id_64BA( var_0 );
-    return _func_01B6( 1 ) < var_1;
+    return randomfloat( 1 ) < var_1;
 }
 
 _id_64BA( var_0 )
@@ -1184,7 +1184,7 @@ _id_64BA( var_0 )
         }
     }
 
-    if ( _id_077B::_id_85A4( var_0, var_2 ) )
+    if ( scripts\engine\utility::is_equal( var_0, var_2 ) )
         return 0;
 
     var_8 = var_1 - var_3;
@@ -1206,18 +1206,18 @@ _id_671A( var_0, var_1 )
     if ( !isdefined( var_1 ) )
         var_1 = [ "epic", "lege" ];
 
-    if ( !isalive( var_1 ) )
+    if ( !_func_0106( var_1 ) )
         var_1 = [ var_1 ];
 
     var_0 = _id_0A78::_id_EA60( var_0, "_mp" );
-    var_0 = "chloot_weapon_" + var_0 + "_" + _id_077B::_id_BFC7( var_1 );
+    var_0 = "chloot_weapon_" + var_0 + "_" + scripts\engine\utility::random( var_1 );
     return var_0;
 }
 
 _id_E181( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
     if ( !isdefined( var_2 ) )
-        var_2 = ( 0, _func_01B8( 360 ), 0 );
+        var_2 = ( 0, randomint( 360 ), 0 );
 
     if ( isdefined( var_3 ) )
         var_6 = _func_01FB( var_3 ) + 1;
@@ -1226,8 +1226,8 @@ _id_E181( var_0, var_1, var_2, var_3, var_4, var_5 )
 
     if ( isdefined( var_4 ) )
     {
-        var_1 = var_4._id_02EA;
-        var_2 = _id_077B::_id_5CB9( var_4 getplayerangles() );
+        var_1 = var_4.origin;
+        var_2 = scripts\engine\utility::_id_5CB9( var_4 getplayerangles() );
     }
 
     if ( should_adjust_drop_origin( var_0 ) )
@@ -1235,7 +1235,7 @@ _id_E181( var_0, var_1, var_2, var_3, var_4, var_5 )
         if ( isdefined( var_5 ) )
             [var_1, var_2, var_8] = scripts\mp\gametypes\br_pickups::_id_6AAE( var_5, var_1, var_2, var_4 );
         else
-            var_1 = _id_077B::_id_4FE0( var_1 + ( 0, 0, 8 ), 50, -200, ( 0, 0, 1 ) ) + ( 0, 0, 12 );
+            var_1 = scripts\engine\utility::_id_4FE0( var_1 + ( 0, 0, 8 ), 50, -200, ( 0, 0, 1 ) ) + ( 0, 0, 12 );
     }
 
     var_9 = scripts\mp\gametypes\br_pickups::_id_E333( var_0, var_1, var_2, 0, 1, var_6 );
@@ -1249,7 +1249,7 @@ _id_E181( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 should_adjust_drop_origin( var_0 )
 {
-    if ( _id_077B::_id_85A4( var_0, "arena_evo_loot_extra_life" ) )
+    if ( scripts\engine\utility::is_equal( var_0, "arena_evo_loot_extra_life" ) )
         return 0;
 
     return 1;
@@ -1307,9 +1307,9 @@ _id_1AD3( var_0, var_1, var_2 )
 
     foreach ( var_7 in var_3 getweaponslistprimaries() )
     {
-        if ( _id_077B::_id_85A4( getweaponbasename( var_7 ), var_4 ) )
+        if ( scripts\engine\utility::is_equal( getweaponbasename( var_7 ), var_4 ) )
         {
-            var_3 _id_099A::_id_0D6A( var_7 );
+            var_3 scripts\cp_mp\utility\inventory_utility::_takeweapon( var_7 );
             var_5 = 1;
         }
     }
@@ -1318,8 +1318,8 @@ _id_1AD3( var_0, var_1, var_2 )
 
     if ( var_5 )
     {
-        var_3 _id_099A::_id_0BEB( var_0 );
-        var_9 = var_3 _id_099A::_id_4D21( var_0, 1 );
+        var_3 scripts\cp_mp\utility\inventory_utility::_giveweapon( var_0 );
+        var_9 = var_3 scripts\cp_mp\utility\inventory_utility::_id_4D21( var_0, 1 );
     }
 
     var_3 scripts\mp\gametypes\arena_evo_tourney_util::_id_B608();
@@ -1336,7 +1336,7 @@ _id_1AD3( var_0, var_1, var_2 )
 
 _id_1A9E( var_0, var_1, var_2, var_3, var_4 )
 {
-    if ( !isdefined( var_0 ) || !_func_0117( var_0 ) )
+    if ( !isdefined( var_0 ) || !isplayer( var_0 ) )
         return;
 
     if ( !isdefined( var_1 ) )
@@ -1364,15 +1364,15 @@ _id_1A9E( var_0, var_1, var_2, var_3, var_4 )
         if ( var_2 == "firstblood" )
         {
             var_5 = 1;
-            var_0 thread _id_07B9::_id_DCE0( "firstblood" );
+            var_0 thread scripts\mp\hud_message::showsplash( "firstblood" );
         }
 
         var_0 thread _id_07A5::_id_8D6A( var_2, var_5 );
     }
 
-    var_0 thread _id_07E1::_id_CC06( var_1, 0 );
-    var_0 _meth_82F6( "ui_base_current_cash", var_0._id_8D57 );
-    var_0 _meth_82F6( "ui_arena_evo_stat_total_cash", var_0._id_E76F );
+    var_0 thread scripts\mp\rank::_id_CC06( var_1, 0 );
+    var_0 setclientomnvar( "ui_base_current_cash", var_0._id_8D57 );
+    var_0 setclientomnvar( "ui_arena_evo_stat_total_cash", var_0._id_E76F );
 }
 
 _id_8705( var_0, var_1 )
@@ -1472,7 +1472,7 @@ _id_1AD1( var_0 )
 
     if ( isdefined( var_6 ) )
     {
-        var_0 _id_07B9::_id_DCE0( "weapon_upgrade", var_6 );
+        var_0 scripts\mp\hud_message::showsplash( "weapon_upgrade", var_6 );
         scripts\mp\gametypes\arena_evo_tourney_util::arenatournament_dlog_record_purchase_event( var_0, var_2, var_4, var_6, 1 );
     }
 }
@@ -1495,7 +1495,7 @@ _id_1AC5()
 {
     var_0 = self;
 
-    if ( _func_0107( var_0 ) )
+    if ( isbot( var_0 ) )
         return;
 
     if ( !istrue( level._id_BB8F ) )
@@ -1511,7 +1511,7 @@ _id_1AC5()
     else if ( istrue( var_0._id_C322 ) && !var_1 )
     {
         var_0._id_C322 = 0;
-        var_0 _meth_82F6( "ui_arena_remind_upgrades", 0 );
+        var_0 setclientomnvar( "ui_arena_remind_upgrades", 0 );
         var_0 notify( "noLongerAffordUpgrade" );
     }
 }
@@ -1520,7 +1520,7 @@ _id_1AC8( var_0 )
 {
     var_1 = self;
     var_1._id_8D57 = var_1._id_8D57 - var_0;
-    var_1 _meth_82F6( "ui_base_current_cash", var_1._id_8D57 );
+    var_1 setclientomnvar( "ui_base_current_cash", var_1._id_8D57 );
 }
 
 _id_1AA7()
@@ -1558,7 +1558,7 @@ _id_1AA9( var_0, var_1 )
         }
     }
 
-    var_9 = scripts\cp_mp\hostmigration::_id_2CEB( var_4, var_5, "none", "none", -1 );
+    var_9 = scripts\mp\class::buildweapon( var_4, var_5, "none", "none", -1 );
     return var_9;
 }
 
@@ -1600,7 +1600,7 @@ _id_1AAB( var_0, var_1, var_2 )
         }
     }
 
-    var_10 = scripts\cp_mp\hostmigration::_id_2CEB( var_5, var_7, "none", "none", -1 );
+    var_10 = scripts\mp\class::buildweapon( var_5, var_7, "none", "none", -1 );
     return var_10;
 }
 
@@ -1634,7 +1634,7 @@ _id_AD2A( var_0, var_1, var_2 )
     var_0._id_9654 = _id_6346( "arena_evo_loadout_override_equipment_secondary" );
 
     if ( istrue( var_2 ) )
-        var_3 scripts\cp_mp\hostmigration::_id_9637( var_0 );
+        var_3 scripts\mp\class::_id_9637( var_0 );
 
     var_3 _id_962A( var_0 );
 }
@@ -1643,14 +1643,14 @@ arena_evo_get_weapon_set_array()
 {
     var_0 = _func_00BE( "ui_arena_evo_loadout_select" );
     var_1 = getdvar( "arena_evo_weapon_set_" + var_0, "" );
-    var_2 = _func_021A( var_1, "," );
+    var_2 = strtok( var_1, "," );
     return var_2;
 }
 
 _id_962A( var_0 )
 {
-    var_0._id_9673 = scripts\cp_mp\hostmigration::_id_2CEB( var_0._id_966C, var_0._id_966E, "none", "none" );
-    var_0._id_9671 = _func_034D( var_0._id_9673 );
+    var_0._id_9673 = scripts\mp\class::buildweapon( var_0._id_966C, var_0._id_966E, "none", "none" );
+    var_0._id_9671 = getcompleteweaponname( var_0._id_9673 );
 
     if ( var_0._id_967B == "none" )
     {
@@ -1659,8 +1659,8 @@ _id_962A( var_0 )
     }
     else
     {
-        var_0._id_9682 = scripts\cp_mp\hostmigration::_id_2CEB( var_0._id_967B, var_0._id_967D, "none", "none" );
-        var_0._id_9680 = _func_034D( var_0._id_9682 );
+        var_0._id_9682 = scripts\mp\class::buildweapon( var_0._id_967B, var_0._id_967D, "none", "none" );
+        var_0._id_9680 = getcompleteweaponname( var_0._id_9682 );
     }
 
     if ( var_0._id_9666 != "none" )
@@ -1677,14 +1677,14 @@ _id_654F( var_0 )
     if ( !isdefined( level._id_1A67[var_0] ) )
         return [];
 
-    var_2 = scripts\cp_mp\hostmigration::_id_2CEB( var_0, [], "none", "none" );
+    var_2 = scripts\mp\class::buildweapon( var_0, [], "none", "none" );
     var_3 = var_1 _id_1AA9( var_2 );
     return getweaponattachments( var_3 );
 }
 
 _id_860F( var_0 )
 {
-    return _id_077B::_id_85A4( var_0, "loadout" ) || _id_077B::_id_85A4( var_0, "s4_la_walpha2_mp" ) || _id_077B::_id_85A4( var_0, "flamethrower" ) || _id_077B::_id_85A4( var_0, "lmg_streak" );
+    return scripts\engine\utility::is_equal( var_0, "loadout" ) || scripts\engine\utility::is_equal( var_0, "s4_la_walpha2_mp" ) || scripts\engine\utility::is_equal( var_0, "flamethrower" ) || scripts\engine\utility::is_equal( var_0, "lmg_streak" );
 }
 
 _id_3129( var_0 )
@@ -1720,11 +1720,11 @@ playerhasitem( var_0 )
     if ( !isdefined( var_3 ) )
         var_3 = [];
 
-    var_4 = _id_077B::_id_1B72( var_2, var_3 );
+    var_4 = scripts\engine\utility::_id_1B72( var_2, var_3 );
 
     foreach ( var_6 in var_4 )
     {
-        if ( _id_077B::_id_85A4( var_6._id_AE2D, var_0 ) )
+        if ( scripts\engine\utility::is_equal( var_6._id_AE2D, var_0 ) )
             return 1;
     }
 
@@ -1762,18 +1762,18 @@ run_match_start_funcs()
         var_0 _id_C4DC();
     }
 
-    if ( isdefined( var_0._id_0309["wmStreakAmmo"] ) && var_0._id_0309["wmStreakAmmo"] > 0 )
-        _id_1AC3( var_0, 0, var_0._id_0309["wmStreakAmmo"] );
+    if ( isdefined( var_0.pers["wmStreakAmmo"] ) && var_0.pers["wmStreakAmmo"] > 0 )
+        _id_1AC3( var_0, 0, var_0.pers["wmStreakAmmo"] );
 
-    if ( isdefined( var_0._id_0309["mgStreakAmmo"] ) && var_0._id_0309["mgStreakAmmo"] > 0 )
-        arenatournament_loot_run_lmg_streak( var_0, 0, var_0._id_0309["mgStreakAmmo"] );
+    if ( isdefined( var_0.pers["mgStreakAmmo"] ) && var_0.pers["mgStreakAmmo"] > 0 )
+        arenatournament_loot_run_lmg_streak( var_0, 0, var_0.pers["mgStreakAmmo"] );
 }
 
 arenatournament_at_max_flamenauts()
 {
     var_0 = 0;
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
         if ( var_2 playerhasitem( "flamethrower" ) )
             var_0++;

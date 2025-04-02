@@ -19,7 +19,7 @@ _id_2F0E( var_0, var_1 )
 
 _id_2F0F( var_0, var_1 )
 {
-    var_2 = level._id_B758;
+    var_2 = level.players;
 
     foreach ( var_4 in var_2 )
     {
@@ -41,7 +41,7 @@ _id_0B9B( var_0, var_1, var_2 )
         {
             var_5 = var_3[var_4];
 
-            if ( !isalive( var_5 ) )
+            if ( !_func_0106( var_5 ) )
                 continue;
 
             var_6 = var_5[0];
@@ -58,20 +58,20 @@ _id_0B9B( var_0, var_1, var_2 )
             if ( isdefined( var_7 ) )
             {
                 if ( isdefined( var_2 ) )
-                    _id_077B::_id_DD5A( var_7, var_6, self, var_2, var_8 );
+                    scripts\engine\utility::_id_DD5A( var_7, var_6, self, var_2, var_8 );
                 else
-                    _id_077B::_id_DD59( var_7, var_6, self, var_8 );
+                    scripts\engine\utility::_id_DD59( var_7, var_6, self, var_8 );
 
                 continue;
             }
 
             if ( isdefined( var_2 ) )
             {
-                _id_077B::_id_DD59( self, var_6, var_2, var_8 );
+                scripts\engine\utility::_id_DD59( self, var_6, var_2, var_8 );
                 continue;
             }
 
-            _id_077B::_id_DD58( self, var_6, var_8 );
+            scripts\engine\utility::_id_DD58( self, var_6, var_8 );
         }
 
         var_0._id_0B4F[var_1] = _id_0C7C( var_3 );
@@ -101,7 +101,7 @@ _id_0AF1( var_0, var_1, var_2, var_3, var_4 )
 
     foreach ( var_6 in var_0._id_0B4F[var_1] )
     {
-        if ( isalive( var_6 ) && var_6[0] == var_2 )
+        if ( _func_0106( var_6 ) && var_6[0] == var_2 )
         {
             if ( !isdefined( var_3 ) || var_6[1] == var_3 )
                 return;
@@ -116,14 +116,14 @@ _id_0AF1( var_0, var_1, var_2, var_3, var_4 )
 
 _id_0BD2( var_0, var_1 )
 {
-    return _id_077B::_id_EA4F( var_0 ) + _id_077B::_id_EA4F( var_1 );
+    return scripts\engine\utility::_id_EA4F( var_0 ) + scripts\engine\utility::_id_EA4F( var_1 );
 }
 
 _id_C37B( var_0, var_1 )
 {
     self notify( _id_0BD2( var_0, var_1 ) );
     self endon( _id_0BD2( var_0, var_1 ) );
-    _id_077B::_id_1087E( "death", "remove_callbacks" );
+    scripts\engine\utility::waittill_any_2( "death", "remove_callbacks" );
     _id_C37A( var_0, var_1, self );
 }
 
@@ -159,7 +159,7 @@ _id_0C8D( var_0, var_1, var_2, var_3, var_4 )
 
     foreach ( var_7, var_6 in var_0._id_0B4F[var_1] )
     {
-        if ( isalive( var_6 ) && var_6[0] == var_2 )
+        if ( _func_0106( var_6 ) && var_6[0] == var_2 )
         {
             if ( !isdefined( var_6[1] ) && !isdefined( var_3 ) || isdefined( var_6[1] ) && var_6[1] == var_3 )
             {
@@ -179,7 +179,7 @@ _id_0C7C( var_0 )
 
     foreach ( var_3 in var_0 )
     {
-        if ( _func_0113( var_3 ) && var_3 == 0 )
+        if ( isint( var_3 ) && var_3 == 0 )
             continue;
 
         var_1[var_1.size] = var_3;

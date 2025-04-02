@@ -3,7 +3,7 @@
 
 _id_673B( var_0 )
 {
-    if ( _id_06BB::_id_8A2C() )
+    if ( scripts\common\utility::_id_8A2C() )
         var_0 = var_0 + 1;
 
     return level._id_496C[var_0];
@@ -44,18 +44,18 @@ _id_ADC7()
     if ( !_id_ADC8() )
         return 0;
 
-    return _func_01B8( 100 ) > 25;
+    return randomint( 100 ) > 25;
 }
 
 _id_ADC8()
 {
-    if ( !isai( self._id_017D ) )
+    if ( !isalive( self._id_017D ) )
         return 0;
 
-    if ( !_func_0117( self._id_017D ) )
+    if ( !isplayer( self._id_017D ) )
         return 0;
 
-    if ( !isai( level._id_ADCF ) || level._id_ADCF._id_036A != "pain" )
+    if ( !isalive( level._id_ADCF ) || level._id_ADCF._id_036A != "pain" )
         level._id_ADCF = self;
 
     if ( self == level._id_ADCF )
@@ -63,7 +63,7 @@ _id_ADC8()
 
     var_0 = self._id_013E;
 
-    if ( !_func_036F( var_0 ) && var_0.ignoreme )
+    if ( !isnullweapon( var_0 ) && var_0.ignoreme )
         return 0;
 
     return 1;
@@ -71,13 +71,13 @@ _id_ADC8()
 
 _id_D121()
 {
-    if ( scripts\anim\utility_common::_id_874C() && isai( self._id_017D ) )
+    if ( scripts\anim\utility_common::_id_874C() && isalive( self._id_017D ) )
     {
         _id_D6C5();
         return;
     }
 
-    if ( _func_0117( self._id_017D ) )
+    if ( isplayer( self._id_017D ) )
     {
         _id_C612();
 
@@ -90,7 +90,7 @@ _id_D121()
 
     if ( isdefined( self._id_036A ) && self._id_036A == "move" )
     {
-        if ( _id_077B::_id_0F4F() && isdefined( self._id_0B3E._id_909E ) && ( self._id_0B3E._id_909E._id_048F == "Exposed 3D" || self._id_0B3E._id_909E._id_048F == "Path 3D" ) )
+        if ( scripts\engine\utility::_id_0F4F() && isdefined( self._id_0B3E._id_909E ) && ( self._id_0B3E._id_909E._id_048F == "Exposed 3D" || self._id_0B3E._id_909E._id_048F == "Path 3D" ) )
             self._id_001D = self._id_0082;
         else if ( scripts\anim\utility::_id_87BC() )
             self._id_001D = anim._id_10988 * self._id_0082;
@@ -125,7 +125,7 @@ _id_D6C5()
     self._id_DFBA++;
     var_2 = level._id_60C7;
 
-    if ( _func_0117( self._id_017D ) )
+    if ( isplayer( self._id_017D ) )
         var_2 = self._id_017D._id_60C7;
 
     if ( _id_DB5A() )
@@ -152,13 +152,13 @@ _id_DB5A()
     if ( isdefined( self._id_A42B ) && self._id_A42B )
         return 0;
 
-    if ( self._id_045B == "allies" )
+    if ( self.team == "allies" )
         return 0;
 
     if ( isdefined( self._id_8FFE ) && self._id_017D == self._id_8FFE )
         return 0;
 
-    if ( distancesquared( self._id_02EA, self._id_017D._id_02EA ) > 250000 )
+    if ( distancesquared( self.origin, self._id_017D.origin ) > 250000 )
         return 0;
 
     return 1;
@@ -174,7 +174,7 @@ _id_C617()
     if ( !self _meth_81B9() )
         return;
 
-    if ( _func_036F( self._id_04CE ) )
+    if ( isnullweapon( self._id_04CE ) )
         return;
 
     if ( scripts\anim\utility_common::_id_874C() )
@@ -186,16 +186,16 @@ _id_C617()
         return;
     }
 
-    if ( !isai( self._id_017D ) )
+    if ( !isalive( self._id_017D ) )
         return;
 
-    if ( !_func_0117( self._id_017D ) )
+    if ( !isplayer( self._id_017D ) )
     {
         self._id_001D = self._id_0082;
         return;
     }
 
-    var_0 = distance( self._id_017D._id_02EA, self._id_02EA );
+    var_0 = distance( self._id_017D.origin, self.origin );
     _id_D5ED( self._id_017D._id_7218._id_9F8D + var_0 * self._id_017D._id_7218._id_9F8F );
 }
 
@@ -219,7 +219,7 @@ _id_D5ED( var_0 )
 
 _id_4546()
 {
-    if ( self._id_045B == "allies" )
+    if ( self.team == "allies" )
         self._id_4E1E = 0.6;
 
     if ( self _meth_81B9() )
@@ -233,7 +233,7 @@ _id_4546()
 
 _id_01EE()
 {
-    if ( self._id_045B == "allies" )
+    if ( self.team == "allies" )
     {
         self._id_01EE = 0.9;
         self._id_01F0 = 0.9;

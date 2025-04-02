@@ -6,7 +6,7 @@ _id_80E8()
     if ( isdefined( level._id_4ADB ) && level._id_4ADB )
         return;
 
-    if ( !_id_077B::_id_0FB9( "vehicles", ::_id_80E8 ) )
+    if ( !scripts\engine\utility::_id_0FB9( "vehicles", ::_id_80E8 ) )
         return;
 
     thread _id_80EA();
@@ -22,15 +22,15 @@ _id_3845()
 
 _id_80EA()
 {
-    _id_077B::_id_3F13( "aircraft_wash_math" );
+    scripts\engine\utility::_id_3F13( "aircraft_wash_math" );
     _id_06C0::_id_10253();
-    level._id_FFF1._id_775C = _id_077B::_id_1B72( level._id_FFF1._id_775C, _id_077B::_id_6D7D( "helicopter_crash_location", "targetname" ) );
+    level._id_FFF1._id_775C = scripts\engine\utility::_id_1B72( level._id_FFF1._id_775C, scripts\engine\utility::_id_6D7D( "helicopter_crash_location", "targetname" ) );
     _id_06C0::_id_10254();
     var_0 = _id_06C0::_id_10237();
     _id_06C0::_id_D82F( var_0 );
     level._id_FFF1._id_7511 = getentarray( "script_vehicle", "code_classname" ).size > 0;
-    _id_077B::_id_CD54( "add_hint_string", "invulerable_frags", &"SCRIPT/INVULERABLE_FRAGS" );
-    _id_077B::_id_CD54( "add_hint_string", "invulerable_bullets", &"SCRIPT/INVULERABLE_BULLETS" );
+    scripts\engine\utility::_id_CD54( "add_hint_string", "invulerable_frags", &"SCRIPT/INVULERABLE_FRAGS" );
+    scripts\engine\utility::_id_CD54( "add_hint_string", "invulerable_bullets", &"SCRIPT/INVULERABLE_BULLETS" );
 }
 
 _id_1022A( var_0, var_1, var_2 )
@@ -106,7 +106,7 @@ _id_E23C( var_0 )
         if ( _func_011D( var_4 ) )
         {
             var_5 = _id_06C0::_id_10279( var_4 );
-            var_1 = _id_077B::_id_1B63( var_1, var_5 );
+            var_1 = scripts\engine\utility::array_add( var_1, var_5 );
         }
     }
 
@@ -153,7 +153,7 @@ _id_102E4()
 
 _id_10137( var_0, var_1, var_2 )
 {
-    if ( !isalive( var_0 ) )
+    if ( !_func_0106( var_0 ) )
         var_0 = [ var_0 ];
 
     _id_06BE::_id_9592( var_0, var_1, var_2 );
@@ -164,9 +164,9 @@ _id_10137( var_0, var_1, var_2 )
         {
             var_3 = self._id_C828;
             _id_102CE();
-            _id_077B::_id_5456( "unloaded" );
-            var_3 = _id_077B::_id_1BA2( var_3 );
-            var_3 = _id_077B::_id_1B97( var_3, self._id_C828 );
+            scripts\engine\utility::_id_5456( "unloaded" );
+            var_3 = scripts\engine\utility::_id_1BA2( var_3 );
+            var_3 = scripts\engine\utility::_id_1B97( var_3, self._id_C828 );
 
             if ( var_3.size > 0 )
             {
@@ -192,12 +192,12 @@ _id_10137( var_0, var_1, var_2 )
 
 _id_E236()
 {
-    var_0 = _id_06BB::_id_E232();
+    var_0 = scripts\common\utility::_id_E232();
 
     if ( isdefined( self._id_CE4A ) )
     {
         if ( !_id_887C() )
-            var_0 _meth_8436( self._id_CE4A );
+            var_0 vehicle_setspeed( self._id_CE4A );
     }
 
     thread _id_06C2::_id_70C4( var_0 );
@@ -206,12 +206,12 @@ _id_E236()
 
 _id_1D4E( var_0 )
 {
-    self _meth_8438( var_0._id_02EA, var_0._id_0054 );
+    self _meth_8438( var_0.origin, var_0.angles );
 
     if ( !_id_887C() )
     {
         waitframe();
-        self attach( var_0 );
+        self _meth_801F( var_0 );
     }
 
     thread _id_1022A( var_0, 1 );
@@ -219,11 +219,11 @@ _id_1D4E( var_0 )
 
 _id_1D4F( var_0 )
 {
-    self _meth_8438( var_0._id_02EA, var_0._id_0054 );
+    self _meth_8438( var_0.origin, var_0.angles );
     waitframe();
 
     if ( !_id_887C() )
-        self attach( var_0 );
+        self _meth_801F( var_0 );
 
     thread _id_1022A( var_0 );
     _id_06C2::_id_70C4( self );
@@ -281,19 +281,19 @@ _id_100B0()
         if ( isdefined( var_2._id_3D78 ) && var_2._id_3D78 == 1 )
             break;
 
-        var_0 = _id_077B::_id_1B63( var_0, var_2 );
+        var_0 = scripts\engine\utility::array_add( var_0, var_2 );
         var_2._id_3D78 = 1;
 
-        if ( !isdefined( var_2._id_0457 ) )
+        if ( !isdefined( var_2.target ) )
             break;
 
         if ( !_id_887C() )
         {
-            var_2 = _func_00E5( var_2._id_0457, "targetname" );
+            var_2 = _func_00E5( var_2.target, "targetname" );
             continue;
         }
 
-        var_2 = _id_077B::_id_69E3( var_2._id_0457, "targetname" );
+        var_2 = scripts\engine\utility::_id_69E3( var_2.target, "targetname" );
     }
 
     return var_0;
@@ -356,25 +356,25 @@ _id_51D9()
 _id_1024E( var_0 )
 {
     if ( isdefined( self._id_761F ) )
-        self._id_01FF = var_0 + self._id_761F;
+        self.health = var_0 + self._id_761F;
     else
-        self._id_01FF = var_0;
+        self.health = var_0;
 
-    self._id_41A9 = self._id_01FF;
+    self._id_41A9 = self.health;
 }
 
 _id_100AE()
 {
     if ( isdefined( self._id_761F ) )
-        return self._id_01FF - self._id_761F;
+        return self.health - self._id_761F;
     else
-        return self._id_01FF;
+        return self.health;
 }
 
 _id_100AF()
 {
     if ( isdefined( self._id_761F ) )
-        return self._id_027F - self._id_761F;
+        return self.maxhealth - self._id_761F;
     else
-        return self._id_027F;
+        return self.maxhealth;
 }

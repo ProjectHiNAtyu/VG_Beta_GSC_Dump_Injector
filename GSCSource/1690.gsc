@@ -3,10 +3,10 @@
 
 _id_35E4()
 {
-    var_0 = distancesquared( self._id_02EA, self._id_0B3E._id_03A1 );
+    var_0 = distancesquared( self.origin, self._id_0B3E._id_03A1 );
 
     if ( var_0 > 160000 )
-        self._id_0B3E._id_039B = _func_01B9( 1, 5 );
+        self._id_0B3E._id_039B = randomintrange( 1, 5 );
     else
         self._id_0B3E._id_039B = 10;
 
@@ -45,25 +45,25 @@ _id_44FB()
     else
         var_3 = 1.5;
 
-    var_4 = var_2 + _func_01B6( var_3 );
+    var_4 = var_2 + randomfloat( var_3 );
     return int( var_4 * 10.0 );
 }
 
 _id_44FA()
 {
     var_0 = self._id_00C4;
-    var_1 = visionsetnight( self._id_04CE );
+    var_1 = weaponclass( self._id_04CE );
 
-    if ( visionsetnight( self._id_04CE ) == "mg" )
+    if ( weaponclass( self._id_04CE ) == "mg" )
     {
-        var_2 = _func_01B6( 10 );
+        var_2 = randomfloat( 10 );
 
         if ( var_2 < 3 )
-            var_0 = _func_01B9( 2, 6 );
+            var_0 = randomintrange( 2, 6 );
         else if ( var_2 < 8 )
-            var_0 = _func_01B9( 6, 12 );
+            var_0 = randomintrange( 6, 12 );
         else
-            var_0 = _func_01B9( 12, 20 );
+            var_0 = randomintrange( 12, 20 );
     }
 
     return var_0;
@@ -72,15 +72,15 @@ _id_44FA()
 _id_44F9( var_0 )
 {
     var_1 = 5;
-    var_2 = visionsetnaked( self._id_04CE );
+    var_2 = _func_0268( self._id_04CE );
 
     if ( var_2 )
         var_3 = var_2;
     else
     {
         var_3 = _id_C16F( var_1, var_0 );
-        var_3 = var_3 + _func_01B9( -2, 3 );
-        var_3 = int( _func_0147( var_3, 1 ) );
+        var_3 = var_3 + randomintrange( -2, 3 );
+        var_3 = int( max( var_3, 1 ) );
     }
 
     if ( var_3 <= self._id_00C4 )

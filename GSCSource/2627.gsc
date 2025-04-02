@@ -17,7 +17,7 @@ _id_AFC4()
 
     for (;;)
     {
-        if ( !self._id_AFD8._id_8AAB && _id_07F2::_id_8A61() )
+        if ( !self._id_AFD8._id_8AAB && scripts\mp\supers::_id_8A61() )
         {
             if ( self._id_AFD8._id_8AA1 )
             {
@@ -26,7 +26,7 @@ _id_AFC4()
                 if ( 1 )
                 {
                     self._id_AFD8._id_EB06 = "super_select";
-                    _id_07F2::_id_6FDA( self._id_AFD8._id_EB06, 0, 1 );
+                    scripts\mp\supers::_id_6FDA( self._id_AFD8._id_EB06, 0, 1 );
 
                     if ( isdefined( level._id_AFC5 ) )
                         [[ level._id_AFC5 ]]();
@@ -34,7 +34,7 @@ _id_AFC4()
             }
 
             if ( var_0 )
-                thread _id_07F2::_id_DCE9();
+                thread scripts\mp\supers::_id_DCE9();
         }
 
         self waittill( "super_ready", var_0 );
@@ -54,21 +54,21 @@ _id_AFD4()
 
     if ( !var_2 || var_3 || var_4 || self._id_AFD8._id_5E9B )
     {
-        var_5 = _id_07F2::_id_6D83( var_0 );
-        self _meth_82F6( "ui_perk_package_super1", var_5 );
-        var_6 = _id_07F2::_id_6D83( var_1 );
-        self _meth_82F6( "ui_perk_package_super2", var_6 );
+        var_5 = scripts\mp\supers::_id_6D83( var_0 );
+        self setclientomnvar( "ui_perk_package_super1", var_5 );
+        var_6 = scripts\mp\supers::_id_6D83( var_1 );
+        self setclientomnvar( "ui_perk_package_super2", var_6 );
 
-        if ( isdefined( _id_07F2::_id_698D() ) )
+        if ( isdefined( scripts\mp\supers::getcurrentsuper() ) )
         {
             if ( self._id_AFD8._id_5E9B )
-                _id_07F2::_id_D6ED( 0 );
+                scripts\mp\supers::_id_D6ED( 0 );
             else
             {
-                var_7 = _id_07F2::_id_6990();
+                var_7 = scripts\mp\supers::_id_6990();
                 var_8 = var_7 - 0;
-                var_8 = _func_0147( var_8, 0 );
-                _id_07F2::_id_D6ED( var_8 );
+                var_8 = max( var_8, 0 );
+                scripts\mp\supers::_id_D6ED( var_8 );
             }
         }
 
@@ -77,32 +77,32 @@ _id_AFD4()
             self._id_AFD8._id_8AA1 = 0;
             _id_AFD3( 0 );
             self._id_AFD8._id_EB06 = undefined;
-            _id_07F2::_id_3963();
+            scripts\mp\supers::_id_3963();
         }
         else if ( var_1 == "none" )
         {
             self._id_AFD8._id_8AA1 = 0;
             _id_AFD3( 3 );
             self._id_AFD8._id_EB06 = var_0;
-            _id_07F2::_id_6FDA( self._id_AFD8._id_EB06, 1, 0 );
+            scripts\mp\supers::_id_6FDA( self._id_AFD8._id_EB06, 1, 0 );
         }
         else if ( var_0 == "none" )
         {
             self._id_AFD8._id_8AA1 = 0;
             _id_AFD3( 4 );
             self._id_AFD8._id_EB06 = var_1;
-            _id_07F2::_id_6FDA( self._id_AFD8._id_EB06, 1, 0 );
+            scripts\mp\supers::_id_6FDA( self._id_AFD8._id_EB06, 1, 0 );
         }
         else
         {
             self._id_AFD8._id_8AA1 = 1;
             _id_AFD3( 0 );
             self._id_AFD8._id_EB06 = "super_select";
-            _id_07F2::_id_6FDA( self._id_AFD8._id_EB06, 1, 0 );
+            scripts\mp\supers::_id_6FDA( self._id_AFD8._id_EB06, 1, 0 );
         }
 
-        if ( _id_07F2::_id_8A61() )
-            thread _id_07F2::_id_DCE9();
+        if ( scripts\mp\supers::_id_8A61() )
+            thread scripts\mp\supers::_id_DCE9();
 
         self._id_AFD8._id_5E9B = 0;
         self._id_AFD8._id_5BC5 = var_0;
@@ -123,7 +123,7 @@ _id_AFCF()
 
 _id_AFD3( var_0 )
 {
-    self _meth_82F6( "ui_perk_package_state", var_0 );
+    self setclientomnvar( "ui_perk_package_state", var_0 );
     self._id_AFD8._id_E744 = var_0;
 }
 
@@ -149,11 +149,11 @@ _id_AFC9()
 
 _id_AFCE()
 {
-    self._id_AFD8 = self._id_0309["perkPackageData"];
+    self._id_AFD8 = self.pers["perkPackageData"];
 
     if ( !isdefined( self._id_AFD8 ) )
     {
-        self._id_AFD8 = _func_020F();
+        self._id_AFD8 = spawnstruct();
         self._id_AFD8._id_E744 = 0;
         self._id_AFD8._id_5E9B = 0;
         self._id_AFD8._id_8AAB = 0;
@@ -161,8 +161,8 @@ _id_AFCE()
         self._id_AFD8._id_CFE5 = undefined;
         self._id_AFD8._id_EB06 = "super_select";
         self._id_AFD8._id_8AA1 = 0;
-        self._id_0309["perkPackageData"] = self._id_AFD8;
-        self _meth_82F6( "ui_perk_package_state", self._id_AFD8._id_E744 );
+        self.pers["perkPackageData"] = self._id_AFD8;
+        self setclientomnvar( "ui_perk_package_state", self._id_AFD8._id_E744 );
     }
 }
 
@@ -190,10 +190,10 @@ _id_AFD0()
 
 _id_AFDE()
 {
-    _id_06BB::_id_1527( 0 );
-    _id_06BB::allow_equipment( 0 );
-    self _meth_824A( "perkPackageMenu_option1", "+smoke" );
-    self _meth_824A( "perkPackageMenu_option2", "+frag" );
+    scripts\common\utility::_id_1527( 0 );
+    scripts\common\utility::allow_equipment( 0 );
+    self notifyonplayercommand( "perkPackageMenu_option1", "+smoke" );
+    self notifyonplayercommand( "perkPackageMenu_option2", "+frag" );
     thread _id_AFDB();
     var_0 = _id_AFDD();
     var_0 = istrue( var_0 );
@@ -202,13 +202,13 @@ _id_AFDE()
     {
         self notify( "perkPackage_endMenuThink" );
 
-        if ( isai( self ) )
+        if ( isalive( self ) )
         {
-            self notifyonplayercommand( "perkPackageMenu_option1", "+smoke" );
-            self notifyonplayercommand( "perkPackageMenu_option2", "+frag" );
-            _id_07F2::_id_EB4D( 0, 1 );
-            _id_06BB::_id_1527( 1 );
-            _id_06BB::allow_equipment( 1 );
+            self _meth_824B( "perkPackageMenu_option1", "+smoke" );
+            self _meth_824B( "perkPackageMenu_option2", "+frag" );
+            scripts\mp\supers::_id_EB4D( 0, 1 );
+            scripts\common\utility::_id_1527( 1 );
+            scripts\common\utility::allow_equipment( 1 );
         }
 
         if ( var_0 )
@@ -216,7 +216,7 @@ _id_AFDE()
         else
         {
             self._id_AFD8._id_EB06 = "super_select";
-            _id_07F2::_id_6FDA( self._id_AFD8._id_EB06, 0, 1 );
+            scripts\mp\supers::_id_6FDA( self._id_AFD8._id_EB06, 0, 1 );
         }
     }
 }
@@ -228,7 +228,7 @@ _id_AFDD()
     self endon( "giveLoadout_start" );
     _id_AFD3( 2 );
     wait 0.3;
-    var_0 = _id_077B::_id_10897( "perkPackageMenu_option1", "perkPackageMenu_option2", "perkPackageMenu_close", "death" );
+    var_0 = scripts\engine\utility::_id_10897( "perkPackageMenu_option1", "perkPackageMenu_option2", "perkPackageMenu_close", "death" );
     var_1 = 0;
 
     if ( var_0 == "perkPackageMenu_option1" )
@@ -272,13 +272,13 @@ _id_AFDB()
 
 _id_AFDA()
 {
-    if ( self useanimtree() || self _meth_8021() || self adsbuttonpressed() || self _meth_822E() )
+    if ( self usebuttonpressed() || self attackbuttonpressed() || self adsbuttonpressed() || self meleebuttonpressed() )
         return 0;
 
-    if ( !_id_06BB::_id_86C1() )
+    if ( !scripts\common\utility::_id_86C1() )
         return 0;
 
-    if ( self isonground() )
+    if ( self isonladder() )
         return 0;
 
     return 1;
@@ -300,12 +300,12 @@ _id_AFC3()
     {
         if ( isdefined( var_0 ) )
         {
-            var_1 = _id_07F2::_id_698D();
+            var_1 = scripts\mp\supers::getcurrentsuper();
 
             if ( !isdefined( var_1 ) || var_1._id_E768._id_C17B != var_0 )
             {
                 self._id_AFD8._id_EB06 = var_0;
-                _id_07F2::_id_6FDA( self._id_AFD8._id_EB06, 0, 1 );
+                scripts\mp\supers::_id_6FDA( self._id_AFD8._id_EB06, 0, 1 );
 
                 if ( 1 )
                 {
@@ -327,9 +327,9 @@ _id_AFC3()
 _id_AFC6()
 {
     thread _id_AFD6();
-    var_0 = _id_07F2::_id_6991();
+    var_0 = scripts\mp\supers::_id_6991();
     var_1 = level._id_EB28._id_E76A[var_0]._id_04CE;
-    var_2 = _func_034C( var_1 );
+    var_2 = makeweapon( var_1 );
     thread _id_AFDC( 0.3 );
     var_3 = 0;
 
@@ -342,13 +342,13 @@ _id_AFC6()
     if ( istrue( var_3 ) )
         var_4 = 0;
     else
-        var_4 = _id_07F2::_id_F75D( var_2 );
+        var_4 = scripts\mp\supers::_id_F75D( var_2 );
 
     if ( !istrue( var_4 ) )
     {
         _id_AFD3( 1 );
         self._id_AFD8._id_EB06 = "super_select";
-        _id_07F2::_id_6FDA( self._id_AFD8._id_EB06, 0, 1 );
+        scripts\mp\supers::_id_6FDA( self._id_AFD8._id_EB06, 0, 1 );
     }
 
     return var_4;
@@ -378,7 +378,7 @@ _id_AFD5( var_0 )
 
     for (;;)
     {
-        var_3 = self _meth_8570();
+        var_3 = self getheldoffhand();
 
         if ( isdefined( var_3 ) && var_3 == var_0 )
         {
@@ -396,7 +396,7 @@ _id_AFD5( var_0 )
 
     for (;;)
     {
-        var_3 = self _meth_8570();
+        var_3 = self getheldoffhand();
 
         if ( !isdefined( var_3 ) || var_3 != var_1 )
             return 1;
@@ -410,11 +410,11 @@ _id_AFDC( var_0 )
     level endon( "game_ended" );
     self endon( "death_or_disconnect" );
     self endon( "giveLoadout_start" );
-    _id_06BB::_id_1536( 0, "field_upgrade_pro" );
-    _id_06BB::_id_1537( 0, "field_upgrade_pro" );
+    scripts\common\utility::_id_1536( 0, "field_upgrade_pro" );
+    scripts\common\utility::_id_1537( 0, "field_upgrade_pro" );
     wait( var_0 );
-    _id_06BB::_id_1536( 1, "field_upgrade_pro" );
-    _id_06BB::_id_1537( 1, "field_upgrade_pro" );
+    scripts\common\utility::_id_1536( 1, "field_upgrade_pro" );
+    scripts\common\utility::_id_1537( 1, "field_upgrade_pro" );
 }
 
 _id_AFCA( var_0 )
@@ -427,7 +427,7 @@ _id_AFCB( var_0 )
     _id_AFCE();
     self._id_AFD8._id_8AA1 = 0;
     self._id_AFD8._id_EB06 = var_0;
-    _id_07F2::_id_6FDA( self._id_AFD8._id_EB06, 0, 1 );
+    scripts\mp\supers::_id_6FDA( self._id_AFD8._id_EB06, 0, 1 );
 }
 
 _id_AFCC( var_0, var_1 )

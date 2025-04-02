@@ -3,17 +3,17 @@
 
 _id_62F4()
 {
-    if ( isdefined( self._id_5254._id_7E83._id_045B ) )
-        return self._id_5254._id_7E83._id_045B;
+    if ( isdefined( self._id_5254._id_7E83.team ) )
+        return self._id_5254._id_7E83.team;
 
     var_0 = [];
 
     foreach ( var_2 in level._id_EF86 )
         var_0[var_2] = 0;
 
-    foreach ( var_5 in level._id_B758 )
+    foreach ( var_5 in level.players )
     {
-        var_2 = var_5._id_0309["team"];
+        var_2 = var_5.pers["team"];
 
         if ( !isdefined( var_2 ) || var_2 == "spectator" )
             continue;
@@ -25,34 +25,34 @@ _id_62F4()
     {
         if ( var_8 == 0 )
         {
-            self._id_5254._id_7E83._id_045B = var_2;
+            self._id_5254._id_7E83.team = var_2;
             break;
         }
     }
 
-    if ( !isdefined( self._id_5254._id_7E83._id_045B ) )
-        self._id_5254._id_7E83._id_045B = _id_077B::_id_BFC7( level._id_EF86 );
+    if ( !isdefined( self._id_5254._id_7E83.team ) )
+        self._id_5254._id_7E83.team = scripts\engine\utility::random( level._id_EF86 );
 
-    return self._id_5254._id_7E83._id_045B;
+    return self._id_5254._id_7E83.team;
 }
 
 _id_6797()
 {
     var_0 = [];
 
-    if ( isdefined( self._id_0457 ) )
+    if ( isdefined( self.target ) )
     {
-        var_1 = _id_077B::_id_6D7C( self._id_0457, "targetname" );
+        var_1 = scripts\engine\utility::_id_6D7C( self.target, "targetname" );
 
         foreach ( var_3 in var_1 )
             var_0[var_0.size] = var_3;
 
-        var_5 = getentarray( self._id_0457, "targetname" );
+        var_5 = getentarray( self.target, "targetname" );
 
         foreach ( var_7 in var_5 )
             var_0[var_0.size] = var_7;
 
-        var_9 = _func_00B3( self._id_0457, "targetname" );
+        var_9 = _func_00B3( self.target, "targetname" );
 
         foreach ( var_11 in var_9 )
             var_0[var_0.size] = var_11;
@@ -73,23 +73,23 @@ _id_6E18( var_0 )
         return "builtin method";
     else if ( _func_03AA( var_0 ) )
         return "animation";
-    else if ( isalive( var_0 ) )
+    else if ( _func_0106( var_0 ) )
         return "array";
     else if ( _func_02D9( var_0 ) )
         var_1 = "struct";
-    else if ( _func_02DA( var_0 ) )
+    else if ( isvector( var_0 ) )
         var_1 = "vector";
     else if ( _func_02DB( var_0 ) )
         var_1 = "entity";
     else if ( _func_02DC( var_0 ) )
         var_1 = "node";
-    else if ( _func_0113( var_0 ) )
+    else if ( isint( var_0 ) )
         var_1 = "int";
     else if ( _func_010F( var_0 ) )
         var_1 = "float";
     else if ( _func_0120( var_0 ) )
         var_1 = "string";
-    else if ( isint( var_0 ) )
+    else if ( _func_0114( var_0 ) )
         var_1 = "istring";
     else
         var_1 = "unknown";
@@ -163,24 +163,24 @@ _id_525D( var_0 )
 {
     var_0 endon( "death" );
     self waittill( "encounter_end" );
-    var_0 _meth_809A();
+    var_0 delete();
 }
 
 _id_4AC2( var_0 )
 {
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
         var_0 _meth_86A6( var_2 );
 }
 
 _id_524A( var_0 )
 {
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
         var_0 _meth_86A5( var_2 );
 }
 
 _id_108BB( var_0, var_1, var_2 )
 {
-    var_10 = _func_020F();
+    var_10 = spawnstruct();
 
     if ( isdefined( var_2 ) )
     {
@@ -193,7 +193,7 @@ _id_108BB( var_0, var_1, var_2 )
     if ( isdefined( var_1 ) && var_1 < var_10._id_010E )
         var_10._id_010E = var_1;
 
-    _id_077B::_id_1BBA( var_0, ::_id_108BE, var_10 );
+    scripts\engine\utility::_id_1BBA( var_0, ::_id_108BE, var_10 );
 
     while ( var_10._id_010E > 0 )
         var_10 waittill( "waittill_dead guy died" );
@@ -205,12 +205,12 @@ _id_108BC( var_0, var_1, var_2 )
 
     foreach ( var_5 in var_0 )
     {
-        if ( isai( var_5 ) && !var_5._id_0212 )
+        if ( isalive( var_5 ) && !var_5._id_0212 )
             var_3[var_3.size] = var_5;
     }
 
     var_0 = var_3;
-    var_7 = _func_020F();
+    var_7 = spawnstruct();
 
     if ( isdefined( var_2 ) )
     {
@@ -223,7 +223,7 @@ _id_108BC( var_0, var_1, var_2 )
     if ( isdefined( var_1 ) && var_1 < var_7._id_010E )
         var_7._id_010E = var_1;
 
-    _id_077B::_id_1BBA( var_0, ::_id_108BD, var_7 );
+    scripts\engine\utility::_id_1BBA( var_0, ::_id_108BD, var_7 );
 
     while ( var_7._id_010E > 0 )
         var_7 waittill( "waittill_dead_guy_dead_or_dying" );
@@ -253,7 +253,7 @@ _id_6548( var_0, var_1 )
 
     foreach ( var_5 in var_2 )
     {
-        if ( !isai( var_5 ) )
+        if ( !isalive( var_5 ) )
             continue;
 
         switch ( var_1 )
@@ -288,7 +288,7 @@ _id_108BE( var_0 )
 
 _id_108BD( var_0 )
 {
-    _id_077B::_id_108C3( "death", "long_death" );
+    scripts\engine\utility::_id_108C3( "death", "long_death" );
     var_0._id_010E--;
     var_0 notify( "waittill_dead_guy_dead_or_dying" );
 }

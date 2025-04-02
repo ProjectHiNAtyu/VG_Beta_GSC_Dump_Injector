@@ -95,7 +95,7 @@ _id_1097E( var_0, var_1, var_2, var_3, var_4 )
     {
         self waittill( var_0, var_8 );
 
-        if ( isalive( var_8 ) )
+        if ( _func_0106( var_8 ) )
         {
             foreach ( var_10 in var_8 )
             {
@@ -142,7 +142,7 @@ _id_B346( var_0, var_1, var_2, var_3 )
     {
         self waittill( var_2, var_8 );
 
-        if ( !isalive( var_8 ) )
+        if ( !_func_0106( var_8 ) )
             var_8 = [ var_8 ];
 
         foreach ( var_10 in var_8 )
@@ -171,9 +171,9 @@ _id_68A6( var_0, var_1, var_2 )
     if ( isdefined( var_2 ) && var_2 )
     {
         var_9 = ( var_1[0], var_1[1], 0 );
-        var_10 = _func_025A( var_9 );
+        var_10 = vectornormalize( var_9 );
 
-        if ( _func_0257( var_10, var_0 ) < 0 )
+        if ( vectordot( var_10, var_0 ) < 0 )
             var_7 = 0;
         else if ( var_5 > 0 )
             var_7 = var_3 / var_5;
@@ -184,7 +184,7 @@ _id_68A6( var_0, var_1, var_2 )
     if ( abs( var_6 ) > 0.001 && var_6 * var_4 >= 0 )
         var_8 = var_4 / var_6;
 
-    var_11 = _func_020F();
+    var_11 = spawnstruct();
     var_11._id_10FDB = var_7;
     var_11._id_04E3 = var_8;
     return var_11;
@@ -198,17 +198,17 @@ _id_6E15( var_0, var_1, var_2 )
     var_3 = ( 0, 0, 1 ) * var_2;
     var_4 = var_0 + var_3;
     var_5 = var_1 + var_3;
-    return self _meth_8008( var_4, var_5, self._id_0333 + 4, self._id_0201 - var_2, 1 );
+    return self _meth_8008( var_4, var_5, self._id_0333 + 4, self.height - var_2, 1 );
 }
 
 _id_6CE2( var_0 )
 {
     var_1 = _func_00B0( var_0 );
     var_2 = self _meth_8215( var_1 );
-    var_3 = _id_6E15( self._id_02EA, var_2 );
-    var_4 = distance( self._id_02EA, var_3 );
-    var_5 = distance( self._id_02EA, var_2 );
-    return _func_0148( 1.0, var_4 / var_5 );
+    var_3 = _id_6E15( self.origin, var_2 );
+    var_4 = distance( self.origin, var_3 );
+    var_5 = distance( self.origin, var_2 );
+    return min( 1.0, var_4 / var_5 );
 }
 
 _id_CAD8( var_0, var_1, var_2, var_3 )
@@ -246,13 +246,13 @@ _id_CAD7( var_0, var_1, var_2, var_3, var_4 )
 _id_6C9B( var_0 )
 {
     var_1 = self _meth_810F( var_0 );
-    return _func_01B8( var_1 );
+    return randomint( var_1 );
 }
 
 _id_689E( var_0 )
 {
-    var_1 = _func_025B( var_0 );
-    var_2 = _func_000B( var_1[1] - self._id_0054[1] );
+    var_1 = vectortoangles( var_0 );
+    var_2 = _func_000B( var_1[1] - self.angles[1] );
     return _func_0321( var_2 );
 }
 
@@ -317,7 +317,7 @@ _id_A5F5( var_0, var_1, var_2 )
 {
     self notify( "Notetrack_Timeout" );
     self endon( "Notetrack_Timeout" );
-    var_1 = _func_0147( 0.05, var_1 );
+    var_1 = max( 0.05, var_1 );
     wait( var_1 );
 
     if ( isdefined( var_2 ) )
@@ -338,8 +338,8 @@ _id_4E68( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     }
     else
     {
-        var_8 = _id_077B::_id_6D7A( self._id_530B._id_0457, "targetname" );
-        var_8 = var_8._id_02EA;
+        var_8 = scripts\engine\utility::_id_6D7A( self._id_530B.target, "targetname" );
+        var_8 = var_8.origin;
         var_10 = _func_00BB( var_2, "highest_point" );
         var_9 = var_10[0];
     }
@@ -349,7 +349,7 @@ _id_4E68( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 
 _id_4E69( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
 {
-    var_9 = abs( self._id_02EA[2] - var_6[2] );
+    var_9 = abs( self.origin[2] - var_6[2] );
     var_10 = _func_00BB( var_3, var_4 );
     var_11 = var_10[0];
     var_12 = var_11;

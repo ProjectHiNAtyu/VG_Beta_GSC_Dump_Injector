@@ -3,46 +3,46 @@
 
 _id_101D8()
 {
-    _id_099D::_id_C2A5( "vehicle_occupancy", "onEnterVehicle", ::_id_101DA );
-    _id_099D::_id_C2A5( "vehicle_occupancy", "onExitVehicle", ::_id_101DB );
-    _id_099D::_id_C2A5( "vehicle_occupancy", "registerInstance", ::_id_101DC );
-    _id_099D::_id_C2A5( "vehicle_occupancy", "deregisterInstance", ::_id_101D2 );
-    _id_099D::_id_C2A5( "vehicle_occupancy", "updateOwner", ::_id_101E4 );
-    _id_099D::_id_C2A5( "vehicle_occupancy", "registerSentient", ::_id_101DD );
-    _id_099D::_id_C2A5( "vehicle_occupancy", "unregisterSentient", ::_id_101E2 );
-    _id_099D::_id_C2A5( "vehicle_occupancy", "isSentient", ::_id_101D9 );
-    _id_099D::_id_C2A5( "vehicle_occupancy", "takeRiotShield", ::_id_101E1 );
-    _id_099D::_id_C2A5( "vehicle_occupancy", "giveRiotShield", ::_id_101D4 );
-    _id_099D::_id_C2A5( "vehicle_occupancy", "updateRiotShield", ::_id_101E5 );
-    _id_099D::_id_C2A5( "vehicle_occupancy", "hideCashBag", ::_id_101D5 );
-    _id_099D::_id_C2A5( "vehicle_occupancy", "showCashBag", ::_id_101DE );
-    _id_099D::_id_C2A5( "vehicle_occupancy", "changedSeats", ::_id_101D1 );
-    scripts\mp\gamescore::_id_C22D( "vehicle", [ "gesture", "killstreaks", "supers", "cp_munitions" ] );
-    scripts\mp\gamescore::_id_C22D( "vehicle_passenger", [ "gesture", "supers", "cp_munitions" ] );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_occupancy", "onEnterVehicle", ::_id_101DA );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_occupancy", "onExitVehicle", ::_id_101DB );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_occupancy", "registerInstance", ::_id_101DC );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_occupancy", "deregisterInstance", ::_id_101D2 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_occupancy", "updateOwner", ::_id_101E4 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_occupancy", "registerSentient", ::_id_101DD );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_occupancy", "unregisterSentient", ::_id_101E2 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_occupancy", "isSentient", ::_id_101D9 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_occupancy", "takeRiotShield", ::_id_101E1 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_occupancy", "giveRiotShield", ::_id_101D4 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_occupancy", "updateRiotShield", ::_id_101E5 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_occupancy", "hideCashBag", ::_id_101D5 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_occupancy", "showCashBag", ::_id_101DE );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_occupancy", "changedSeats", ::_id_101D1 );
+    scripts\mp\playeractions::_id_C22D( "vehicle", [ "gesture", "killstreaks", "supers", "cp_munitions" ] );
+    scripts\mp\playeractions::_id_C22D( "vehicle_passenger", [ "gesture", "supers", "cp_munitions" ] );
 }
 
 _id_101DA( var_0, var_1, var_2, var_3 )
 {
-    var_2 scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_ghost" );
-    var_2 scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_tracker_jammer" );
-    var_4 = level._id_60D1 == "br";
+    var_2 scripts\mp\utility\perk::_id_6FA5( "specialty_ghost" );
+    var_2 scripts\mp\utility\perk::_id_6FA5( "specialty_tracker_jammer" );
+    var_4 = level.gametype == "br";
 
-    if ( !var_4 || _id_09BA::_id_101BA( var_0, var_1 ) )
-        var_2 scripts\mp\gamescore::_id_156E( "vehicle", 0 );
+    if ( !var_4 || scripts\cp_mp\vehicles\vehicle_occupancy::_id_101BA( var_0, var_1 ) )
+        var_2 scripts\mp\playeractions::_id_156E( "vehicle", 0 );
     else if ( var_4 )
-        var_2 scripts\mp\gamescore::_id_156E( "vehicle_passenger", 0 );
+        var_2 scripts\mp\playeractions::_id_156E( "vehicle_passenger", 0 );
 
     if ( getdvar( "scr_br_gametype", "" ) == "dmz" )
         scripts\mp\gametypes\br_plunder::_id_B918( var_2, 0, 1 );
 
     _id_101E1( var_2 );
-    _id_07D3::enabledcollisionnotifies( var_2 );
+    scripts\mp\outofbounds::enableoobimmunity( var_2 );
 
-    if ( _id_07D3::_id_894B( var_0, 1 ) )
+    if ( scripts\mp\outofbounds::_id_894B( var_0, 1 ) )
         var_0 thread scripts\mp\utility\killstreak::_id_10221( var_2 );
 
-    if ( isdefined( var_2._id_045B ) && isdefined( var_2._id_E493 ) && istrue( var_0._id_89BF ) )
-        thread _id_07F0::_id_C19F( var_2._id_045B, var_2._id_E493 );
+    if ( isdefined( var_2.team ) && isdefined( var_2._id_E493 ) && istrue( var_0._id_89BF ) )
+        thread _id_07F0::_id_C19F( var_2.team, var_2._id_E493 );
 
     _id_101E3( var_0 );
 }
@@ -53,28 +53,28 @@ _id_101DB( var_0, var_1, var_2, var_3 )
     {
         if ( !istrue( var_3._id_B67A ) )
         {
-            var_2 scripts\mp\tac_ops\hostage_utility::_id_C4EF( "specialty_ghost" );
-            var_2 scripts\mp\tac_ops\hostage_utility::_id_C4EF( "specialty_tracker_jammer" );
-            var_4 = level._id_60D1 == "br";
+            var_2 scripts\mp\utility\perk::removeperk( "specialty_ghost" );
+            var_2 scripts\mp\utility\perk::removeperk( "specialty_tracker_jammer" );
+            var_4 = level.gametype == "br";
 
-            if ( !var_4 || _id_09BA::_id_101BA( var_0, var_1 ) )
-                var_2 scripts\mp\gamescore::_id_156E( "vehicle", 1 );
+            if ( !var_4 || scripts\cp_mp\vehicles\vehicle_occupancy::_id_101BA( var_0, var_1 ) )
+                var_2 scripts\mp\playeractions::_id_156E( "vehicle", 1 );
             else if ( var_4 )
-                var_2 scripts\mp\gamescore::_id_156E( "vehicle_passenger", 1 );
+                var_2 scripts\mp\playeractions::_id_156E( "vehicle_passenger", 1 );
 
             if ( getdvar( "scr_br_gametype", "" ) == "dmz" )
                 scripts\mp\gametypes\br_plunder::_id_B918( var_2, 1, 1 );
 
-            if ( _id_07D3::_id_894B( var_0, 1 ) )
+            if ( scripts\mp\outofbounds::_id_894B( var_0, 1 ) )
                 var_0 thread scripts\mp\utility\killstreak::_id_10223( var_2 );
 
-            _id_07D3::_id_4AB4( var_2 );
+            scripts\mp\outofbounds::disableoobimmunity( var_2 );
         }
 
         _id_101D4( var_2, var_3._id_B67A, var_3._id_B6F4 );
 
-        if ( isdefined( var_2._id_045B ) && isdefined( var_2._id_E493 ) && istrue( var_0._id_89BF ) )
-            thread _id_07F0::_id_C19F( var_3._id_045B, var_3._id_E493 );
+        if ( isdefined( var_2.team ) && isdefined( var_2._id_E493 ) && istrue( var_0._id_89BF ) )
+            thread _id_07F0::_id_C19F( var_3.team, var_3._id_E493 );
 
         var_2 notify( "vehicle_exit" );
     }
@@ -84,19 +84,19 @@ _id_101DB( var_0, var_1, var_2, var_3 )
 
 _id_101D1( var_0, var_1, var_2, var_3 )
 {
-    var_4 = level._id_60D1 == "br";
+    var_4 = level.gametype == "br";
 
     if ( var_4 && isdefined( var_2 ) && isdefined( var_3 ) )
     {
-        if ( _id_09BA::_id_101BA( var_1, var_2 ) )
+        if ( scripts\cp_mp\vehicles\vehicle_occupancy::_id_101BA( var_1, var_2 ) )
         {
-            var_0 scripts\mp\gamescore::_id_156E( "vehicle", 1 );
-            var_0 scripts\mp\gamescore::_id_156E( "vehicle_passenger", 0 );
+            var_0 scripts\mp\playeractions::_id_156E( "vehicle", 1 );
+            var_0 scripts\mp\playeractions::_id_156E( "vehicle_passenger", 0 );
         }
-        else if ( _id_09BA::_id_101BA( var_1, var_3 ) )
+        else if ( scripts\cp_mp\vehicles\vehicle_occupancy::_id_101BA( var_1, var_3 ) )
         {
-            var_0 scripts\mp\gamescore::_id_156E( "vehicle_passenger", 1 );
-            var_0 scripts\mp\gamescore::_id_156E( "vehicle", 0 );
+            var_0 scripts\mp\playeractions::_id_156E( "vehicle_passenger", 1 );
+            var_0 scripts\mp\playeractions::_id_156E( "vehicle", 0 );
         }
     }
 }
@@ -110,7 +110,7 @@ _id_101E3( var_0 )
         var_0._id_9B6F = 1;
 
     var_1 = var_0._id_9B6F;
-    var_2 = _id_09BA::_id_10189( var_0 );
+    var_2 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10189( var_0 );
     var_0._id_9B6F = var_2.size > 0;
 
     if ( var_1 && !var_0._id_9B6F )
@@ -120,14 +120,14 @@ _id_101E3( var_0 )
 
     if ( var_0._id_9B6F )
     {
-        if ( level._id_EF62 )
+        if ( level.teambased )
         {
             var_3 = [];
 
             foreach ( var_5 in var_2 )
             {
-                if ( !_id_077B::_id_1B78( var_3, var_5._id_045B ) )
-                    var_3[var_3.size] = var_5._id_045B;
+                if ( !scripts\engine\utility::array_contains( var_3, var_5.team ) )
+                    var_3[var_3.size] = var_5.team;
             }
 
             var_0 _meth_8703( var_3 );
@@ -149,16 +149,16 @@ _id_101D2( var_0 )
 
 _id_101D5( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _id_09BA::_id_101A0( var_0._id_1031C, var_1 );
+    var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( var_0._id_1031C, var_1 );
 
     if ( istrue( var_4._id_DC8B ) )
         return;
 
-    if ( isdefined( level._id_987A ) && _id_077B::_id_1B78( level._id_987A, var_2 ) )
+    if ( isdefined( level._id_987A ) && scripts\engine\utility::array_contains( level._id_987A, var_2 ) )
     {
         if ( isdefined( var_2._id_1D55 ) )
         {
-            _func_0218( level._id_0BA3["vfx_br_cashLeaderBag"], var_2, "j_bag_left" );
+            stopfxontag( level._effect["vfx_br_cashLeaderBag"], var_2, "j_bag_left" );
             var_2 hidepart( "j_bag_left", "accessory_money_bag_large_closed_player" );
         }
     }
@@ -166,17 +166,17 @@ _id_101D5( var_0, var_1, var_2, var_3 )
 
 _id_101DE( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _id_09BA::_id_101A0( var_0._id_1031C, var_1 );
+    var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( var_0._id_1031C, var_1 );
 
     if ( istrue( var_4._id_DC8B ) )
         return;
 
-    if ( isdefined( level._id_987A ) && _id_077B::_id_1B78( level._id_987A, var_2 ) )
+    if ( isdefined( level._id_987A ) && scripts\engine\utility::array_contains( level._id_987A, var_2 ) )
     {
         if ( isdefined( var_2._id_1D55 ) )
         {
-            var_2 _meth_83C8( "j_bag_left", "accessory_money_bag_large_closed_player" );
-            _func_0197( level._id_0BA3["vfx_br_cashLeaderBag"], var_2, "j_bag_left" );
+            var_2 showpart( "j_bag_left", "accessory_money_bag_large_closed_player" );
+            playfxontag( level._effect["vfx_br_cashLeaderBag"], var_2, "j_bag_left" );
         }
     }
 }
@@ -195,14 +195,14 @@ _id_101E1( var_0, var_1, var_2 )
 
     foreach ( var_8 in var_6 )
     {
-        if ( _func_036F( var_8 ) )
+        if ( isnullweapon( var_8 ) )
             continue;
 
-        if ( scripts\mp\hud_message::_id_89EF( var_8 ) )
+        if ( _id_07E2::_id_89EF( var_8 ) )
         {
             var_3 = var_8;
 
-            if ( _func_036E( var_3, var_0 getcurrentprimaryweapon() ) )
+            if ( issameweapon( var_3, var_0 getcurrentprimaryweapon() ) )
                 var_4 = 1;
 
             continue;
@@ -212,7 +212,7 @@ _id_101E1( var_0, var_1, var_2 )
         {
             var_9 = var_8 _meth_8626();
 
-            if ( var_9.horzalign != "primary" )
+            if ( var_9._id_0226 != "primary" )
                 continue;
 
             var_5 = var_8;
@@ -221,17 +221,17 @@ _id_101E1( var_0, var_1, var_2 )
 
     if ( isdefined( var_3 ) )
     {
-        var_0 _id_099A::_id_0D6A( var_3 );
+        var_0 scripts\cp_mp\utility\inventory_utility::_takeweapon( var_3 );
         var_0._id_C87F = var_3;
         var_0._id_C878 = var_4;
 
         if ( istrue( var_4 ) )
             _id_101E5( var_0, var_1, var_2 );
 
-        var_0 scripts\cp_mp\hostmigration::_id_C87E( var_5 );
+        var_0 scripts\mp\class::_id_C87E( var_5 );
         var_0 notify( "modified_riot_shield" );
         var_0 endon( "modified_riot_shield" );
-        var_0 childthread _id_099A::_id_5EB7( var_5 );
+        var_0 childthread scripts\cp_mp\utility\inventory_utility::_id_5EB7( var_5 );
     }
 }
 
@@ -241,14 +241,14 @@ _id_101D4( var_0, var_1, var_2 )
     {
         if ( !istrue( var_1 ) && !istrue( var_2 ) )
         {
-            var_0 _id_099A::_id_0BEB( var_0._id_C87F );
-            var_0 scripts\cp_mp\hostmigration::_id_F42F();
+            var_0 scripts\cp_mp\utility\inventory_utility::_giveweapon( var_0._id_C87F );
+            var_0 scripts\mp\class::_id_F42F();
 
             if ( istrue( var_0._id_C878 ) )
             {
                 var_0 notify( "modified_riot_shield" );
                 var_0 endon( "modified_riot_shield" );
-                var_0 childthread _id_099A::_id_0D67( var_0._id_C87F );
+                var_0 childthread scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate( var_0._id_C87F );
             }
         }
 
@@ -265,13 +265,13 @@ _id_101E5( var_0, var_1, var_2 )
         if ( !isdefined( var_2 ) )
             return;
 
-        if ( _id_09BA::_id_101BA( var_1, var_2 ) )
+        if ( scripts\cp_mp\vehicles\vehicle_occupancy::_id_101BA( var_1, var_2 ) )
             return;
 
-        if ( _id_09BA::_id_1025A( var_1, var_2 ) )
+        if ( scripts\cp_mp\vehicles\vehicle_occupancy::_id_1025A( var_1, var_2 ) )
             return;
 
-        var_3 = _id_09BA::_id_101A0( var_1._id_1031C, var_2 );
+        var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( var_1._id_1031C, var_2 );
 
         if ( isdefined( var_3._id_F888 ) )
             return;
@@ -282,20 +282,20 @@ _id_101E5( var_0, var_1, var_2 )
 
 _id_101DD( var_0 )
 {
-    var_1 = _id_09BA::_id_101A1( var_0._id_1031C );
+    var_1 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A1( var_0._id_1031C );
 
     if ( !isdefined( var_1._id_0464 ) )
         return;
 
-    if ( level._id_EF62 )
+    if ( level.teambased )
     {
-        var_2 = var_0._id_045B;
+        var_2 = var_0.team;
 
-        if ( isdefined( var_0._id_045B ) && var_0._id_045B == "neutral" )
+        if ( isdefined( var_0.team ) && var_0.team == "neutral" )
             var_2 = undefined;
 
-        if ( !isdefined( var_2 ) && isdefined( var_0._id_02F2 ) )
-            var_2 = var_0._id_02F2._id_045B;
+        if ( !isdefined( var_2 ) && isdefined( var_0.owner ) )
+            var_2 = var_0.owner.team;
 
         if ( isdefined( var_2 ) )
         {

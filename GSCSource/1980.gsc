@@ -12,7 +12,7 @@ _id_8B88()
     {
         var_0 = self getcurrentweapon();
 
-        if ( var_0._id_0084 == "iw8_la_juliet_mp" && _id_8B7F() )
+        if ( var_0.basename == "iw8_la_juliet_mp" && _id_8B7F() )
         {
             self._id_8B63._id_E93F = 0;
             thread _id_8B82();
@@ -26,11 +26,11 @@ _id_8B88()
 
 _id_8B73()
 {
-    self._id_8B63 = _func_020F();
+    self._id_8B63 = spawnstruct();
 
     if ( !isdefined( level._id_8B63 ) )
     {
-        level._id_8B63 = _func_020F();
+        level._id_8B63 = spawnstruct();
         level._id_8B63._id_E75B = [];
         level._id_8B63._id_E75B["off"] = [];
         level._id_8B63._id_E75B["off"]["enter"] = ::_id_8B75;
@@ -59,7 +59,7 @@ _id_8B7A()
         return;
 
     self._id_8B63._id_118F = undefined;
-    self._id_8B63._id_0457 = undefined;
+    self._id_8B63.target = undefined;
     self._id_8B63._id_96F0 = undefined;
     self._id_8B63._id_1031A = undefined;
     self._id_8B63._id_71B2 = 0;
@@ -68,7 +68,7 @@ _id_8B7A()
     if ( isdefined( self._id_8B63._id_71B3 ) )
     {
         self._id_8B63._id_71B3 _id_0765::_id_47E6();
-        self._id_8B63._id_71B3 _meth_809A();
+        self._id_8B63._id_71B3 delete();
     }
 
     self._id_8B63._id_71B3 = undefined;
@@ -79,16 +79,16 @@ _id_8B7A()
 
 _id_8B75( var_0 )
 {
-    if ( isdefined( self._id_8B63._id_0457 ) )
+    if ( isdefined( self._id_8B63.target ) )
     {
-        _id_09A2::_id_C4D3( self._id_8B63._id_0457, self );
-        self._id_8B63._id_0457 = undefined;
+        scripts\cp_mp\utility\weapon_utility::_id_C4D3( self._id_8B63.target, self );
+        self._id_8B63.target = undefined;
     }
 
     if ( isdefined( self._id_8B63._id_71B3 ) )
     {
         self._id_8B63._id_71B3 _id_0765::_id_47E6();
-        self._id_8B63._id_71B3 _meth_809A();
+        self._id_8B63._id_71B3 delete();
     }
 
     self._id_8B63._id_71B3 = undefined;
@@ -98,7 +98,7 @@ _id_8B75( var_0 )
 
 _id_8B77()
 {
-    if ( self player_recoilscaleon() >= 0.9 )
+    if ( self playerads() >= 0.9 )
         _id_8B79( "scanning" );
 }
 
@@ -114,17 +114,17 @@ _id_8B65()
 
     if ( isdefined( self._id_8B63 ) )
     {
-        if ( isdefined( self._id_8B63._id_0457 ) )
+        if ( isdefined( self._id_8B63.target ) )
         {
-            _id_09A2::_id_C4D3( self._id_8B63._id_0457, self );
+            scripts\cp_mp\utility\weapon_utility::_id_C4D3( self._id_8B63.target, self );
             self _meth_8458();
-            self._id_8B63._id_0457 = undefined;
+            self._id_8B63.target = undefined;
         }
 
         if ( isdefined( self._id_8B63._id_71B3 ) )
         {
             self._id_8B63._id_71B3 _id_0765::_id_47E6();
-            self._id_8B63._id_71B3 _meth_809A();
+            self._id_8B63._id_71B3 delete();
             self._id_8B63._id_71B3 = undefined;
         }
     }
@@ -148,26 +148,26 @@ _id_8B7D()
 
     if ( isdefined( var_0 ) )
     {
-        if ( _id_8B81( var_0._id_02EA ) )
+        if ( _id_8B81( var_0.origin ) )
         {
             _id_8B79( "too_close" );
             return;
         }
 
-        if ( isdefined( self._id_8B63._id_0457 ) && self._id_8B63._id_0457 == var_0 )
+        if ( isdefined( self._id_8B63.target ) && self._id_8B63.target == var_0 )
             var_1 = 1;
 
-        self._id_8B63._id_0457 = var_0;
+        self._id_8B63.target = var_0;
 
-        if ( isdefined( self._id_8B63._id_0457 ) )
-            _id_09A2::_id_10BC( self._id_8B63._id_0457, self );
+        if ( isdefined( self._id_8B63.target ) )
+            scripts\cp_mp\utility\weapon_utility::_id_10BC( self._id_8B63.target, self );
 
         if ( !isdefined( self._id_8B87 ) )
-            _id_9B6B( self._id_8B63._id_0457 );
+            _id_9B6B( self._id_8B63.target );
 
         _id_8B79( "hold" );
     }
-    else if ( self _meth_8021() )
+    else if ( self attackbuttonpressed() )
     {
         if ( self._id_8B63._id_71B2 >= 1 )
         {
@@ -215,15 +215,15 @@ _id_8B7D()
             return;
 
         var_8 = _func_0016( self._id_8B63._id_71B6 );
-        self._id_8B63._id_71B3 = _id_077B::_id_E20C( var_8 );
+        self._id_8B63._id_71B3 = scripts\engine\utility::spawn_tag_origin( var_8 );
         self._id_8B63._id_71B3 _id_0765::_id_C2A8( 1 );
-        self._id_8B63._id_0457 = self._id_8B63._id_71B3;
+        self._id_8B63.target = self._id_8B63._id_71B3;
         self._id_8B63._id_71B2 = 0;
         self._id_8B63._id_71B6 = undefined;
         self._id_8B63._id_71B4 = undefined;
 
         if ( !isdefined( self._id_8B87 ) )
-            _id_9B6B( self._id_8B63._id_0457 );
+            _id_9B6B( self._id_8B63.target );
 
         _id_8B79( "hold" );
     }
@@ -231,13 +231,13 @@ _id_8B7D()
 
 _id_8B70( var_0 )
 {
-    if ( !isdefined( self._id_8B63._id_0457 ) )
+    if ( !isdefined( self._id_8B63.target ) )
         return;
 
     _id_8B7E( 2 );
     self._id_8B63._id_96F0 = gettime();
     self._id_8B63._id_9896 = 0;
-    self _meth_845A( self._id_8B63._id_0457 );
+    self _meth_845A( self._id_8B63.target );
     thread _id_8B74( "javelin_clu_acquiring_lock", 0.5 );
 }
 
@@ -245,7 +245,7 @@ _id_8B72()
 {
     var_0 = 0;
 
-    if ( !isdefined( self._id_8B63._id_0457 ) )
+    if ( !isdefined( self._id_8B63.target ) )
     {
         _id_8B79( "scanning" );
         return;
@@ -253,19 +253,19 @@ _id_8B72()
 
     var_1 = 0;
 
-    if ( !var_0 && ( self._id_8B63._id_0457 _id_09B4::_id_8ADC() && _id_09B4::_id_10122( self._id_8B63._id_0457, self ) ) )
+    if ( !var_0 && ( self._id_8B63.target scripts\cp_mp\vehicles\vehicle::_id_8ADC() && scripts\cp_mp\vehicles\vehicle::_id_10122( self._id_8B63.target, self ) ) )
     {
         _id_8B79( "scanning" );
         var_1 = 1;
     }
 
-    if ( !_id_8B64( self._id_8B63._id_0457 ) )
+    if ( !_id_8B64( self._id_8B63.target ) )
     {
         _id_8B79( "scanning" );
         var_1 = 1;
     }
 
-    if ( _id_8B81( self._id_8B63._id_0457._id_02EA ) )
+    if ( _id_8B81( self._id_8B63.target.origin ) )
     {
         _id_8B79( "too_close" );
         var_1 = 1;
@@ -273,14 +273,14 @@ _id_8B72()
 
     if ( var_1 )
     {
-        if ( isdefined( self._id_8B63._id_0457 ) )
-            _id_09A2::_id_C4D3( self._id_8B63._id_0457, self );
+        if ( isdefined( self._id_8B63.target ) )
+            scripts\cp_mp\utility\weapon_utility::_id_C4D3( self._id_8B63.target, self );
 
         self _meth_8458();
-        self._id_8B63._id_0457 = undefined;
+        self._id_8B63.target = undefined;
 
         if ( isdefined( self._id_8B63._id_71B3 ) )
-            self._id_8B63._id_71B3 _meth_809A();
+            self._id_8B63._id_71B3 delete();
     }
 
     var_2 = gettime() - self._id_8B63._id_96F0;
@@ -301,17 +301,17 @@ _id_8B69( var_0 )
 {
     _id_8B7E( 3 );
 
-    if ( !isdefined( self._id_8B63._id_0457 ) )
+    if ( !isdefined( self._id_8B63.target ) )
         return;
 
-    if ( _func_0117( self._id_8B63._id_0457 ) )
-        self visionsetthermalforplayer( self._id_8B63._id_0457, ( 0, 0, 64 ), 0 );
+    if ( isplayer( self._id_8B63.target ) )
+        self _meth_8457( self._id_8B63.target, ( 0, 0, 64 ), 0 );
     else if ( isdefined( self._id_8B63._id_71B3 ) )
-        self visionsetthermalforplayer( self._id_8B63._id_0457, ( 0, 0, 0 ), 1 );
+        self _meth_8457( self._id_8B63.target, ( 0, 0, 0 ), 1 );
     else
     {
-        var_1 = _id_8B6E( self._id_8B63._id_0457 );
-        self visionsetthermalforplayer( self._id_8B63._id_0457, var_1, 0 );
+        var_1 = _id_8B6E( self._id_8B63.target );
+        self _meth_8457( self._id_8B63.target, var_1, 0 );
     }
 
     thread _id_8B74( "javelin_clu_lock", 1.6 );
@@ -321,32 +321,32 @@ _id_8B6B()
 {
     var_0 = 0;
 
-    if ( !isdefined( self._id_8B63._id_0457 ) )
+    if ( !isdefined( self._id_8B63.target ) )
     {
         _id_8B79( "scanning" );
         return;
     }
 
-    if ( !var_0 && ( self._id_8B63._id_0457 _id_09B4::_id_8ADC() && _id_09B4::_id_10122( self._id_8B63._id_0457, self ) ) )
+    if ( !var_0 && ( self._id_8B63.target scripts\cp_mp\vehicles\vehicle::_id_8ADC() && scripts\cp_mp\vehicles\vehicle::_id_10122( self._id_8B63.target, self ) ) )
         _id_8B79( "scanning" );
 
-    if ( !_id_8B64( self._id_8B63._id_0457 ) )
+    if ( !_id_8B64( self._id_8B63.target ) )
         _id_8B79( "scanning" );
 
-    if ( _id_8B81( self._id_8B63._id_0457._id_02EA ) )
+    if ( _id_8B81( self._id_8B63.target.origin ) )
         _id_8B79( "too_close" );
 }
 
 _id_8B6A()
 {
-    if ( isdefined( self._id_8B63._id_0457 ) )
-        _id_09A2::_id_C4D3( self._id_8B63._id_0457, self );
+    if ( isdefined( self._id_8B63.target ) )
+        scripts\cp_mp\utility\weapon_utility::_id_C4D3( self._id_8B63.target, self );
 
     self _meth_8458();
-    self._id_8B63._id_0457 = undefined;
+    self._id_8B63.target = undefined;
 
     if ( isdefined( self._id_8B63._id_71B3 ) )
-        self._id_8B63._id_71B3 _meth_809A();
+        self._id_8B63._id_71B3 delete();
 
     self notify( "stop_lockon_sound" );
     self _meth_83EE( "javelin_clu_lock" );
@@ -363,7 +363,7 @@ _id_8B84()
 
     if ( isdefined( var_0 ) )
     {
-        if ( !_id_8B81( var_0._id_02EA ) )
+        if ( !_id_8B81( var_0.origin ) )
         {
             _id_8B79( "scanning" );
             return;
@@ -385,7 +385,7 @@ _id_8B78()
 {
     if ( isdefined( self._id_8B63._id_E744 ) && self._id_8B63._id_E744 != "off" )
     {
-        if ( self player_recoilscaleon() < 0.9 )
+        if ( self playerads() < 0.9 )
             _id_8B79( "off" );
     }
 }
@@ -395,7 +395,7 @@ _id_8B64( var_0 )
     if ( !isdefined( var_0 ) )
         return 0;
 
-    var_1 = self _meth_845E( var_0._id_02EA, 35, 120, 80 );
+    var_1 = self _meth_845E( var_0.origin, 35, 120, 80 );
 
     if ( !var_1 )
         return 0;
@@ -405,7 +405,7 @@ _id_8B64( var_0 )
 
     if ( isdefined( self._id_8B63._id_71B3 ) )
     {
-        if ( !self _meth_8021() )
+        if ( !self attackbuttonpressed() )
             return 0;
     }
 
@@ -418,7 +418,7 @@ _id_8B68()
     var_1 = self getplayerangles();
     var_2 = anglestoforward( var_1 );
     var_3 = var_0 + var_2 * 15000;
-    var_4 = _id_077A::_id_0B4C( var_0, var_3, 0, undefined );
+    var_4 = scripts\engine\trace::_bullet_trace( var_0, var_3, 0, undefined );
 
     if ( var_4["surfacetype"] == "surftype_none" && var_4["hittype"] == "hittype_none" )
         return undefined;
@@ -436,7 +436,7 @@ _id_8B68()
 _id_8B81( var_0 )
 {
     var_1 = 1100;
-    var_2 = distance( self._id_02EA, var_0 );
+    var_2 = distance( self.origin, var_0 );
 
     if ( var_2 < var_1 )
         return 1;
@@ -451,7 +451,7 @@ _id_8B74( var_0, var_1 )
 
     for (;;)
     {
-        self _meth_8275( var_0 );
+        self playlocalsound( var_0 );
         wait( var_1 );
     }
 }
@@ -536,15 +536,15 @@ _id_8B7B()
             if ( !isdefined( var_4 ) )
                 continue;
 
-            var_5 = self _meth_845E( var_4._id_02EA, 35, 120, 80 );
+            var_5 = self _meth_845E( var_4.origin, 35, 120, 80 );
 
-            if ( var_5 && distancesquared( var_4._id_02EA, self._id_02EA ) <= var_1 )
+            if ( var_5 && distancesquared( var_4.origin, self.origin ) <= var_1 )
                 var_2[var_2.size] = var_4;
         }
 
         if ( var_2.size != 0 )
         {
-            var_7 = _func_01FF( var_2, self._id_02EA );
+            var_7 = _func_01FF( var_2, self.origin );
 
             if ( _id_8B85( var_7[0] ) )
                 return var_7[0];
@@ -627,22 +627,22 @@ _id_8B80( var_0 )
 _id_8B6F( var_0 )
 {
     if ( var_0 )
-        self _meth_82F6( "ui_javelin_view", 1 );
+        self setclientomnvar( "ui_javelin_view", 1 );
     else
-        self _meth_82F6( "ui_javelin_view", 0 );
+        self setclientomnvar( "ui_javelin_view", 0 );
 }
 
 _id_8B7E( var_0 )
 {
-    self _meth_82F6( "ui_javelin_state", var_0 );
+    self setclientomnvar( "ui_javelin_state", var_0 );
 }
 
 _id_9B6B( var_0 )
 {
     var_1 = scripts\cp\cp_weapon::_id_EEDC( "javelincrosshair", self, var_0, self );
 
-    if ( var_0._id_02AE == "tag_origin" )
-        var_0 _meth_83C3();
+    if ( var_0.model == "tag_origin" )
+        var_0 show();
 
     self._id_8B87 = 1;
     thread _id_10C13( var_0, var_1, 1 );
@@ -652,7 +652,7 @@ _id_10C13( var_0, var_1, var_2 )
 {
     level endon( "game_ended" );
 
-    while ( isdefined( self._id_8B63._id_0457 ) && self._id_8B63._id_E744 != "off" )
+    while ( isdefined( self._id_8B63.target ) && self._id_8B63._id_E744 != "off" )
         waitframe();
 
     if ( isdefined( var_1 ) )
@@ -668,17 +668,17 @@ _id_8B6C()
 
     if ( isdefined( self._id_8B63 ) )
     {
-        if ( isdefined( self._id_8B63._id_0457 ) )
+        if ( isdefined( self._id_8B63.target ) )
         {
-            _id_09A2::_id_C4D3( self._id_8B63._id_0457, self );
+            scripts\cp_mp\utility\weapon_utility::_id_C4D3( self._id_8B63.target, self );
             self _meth_8458();
-            self._id_8B63._id_0457 = undefined;
+            self._id_8B63.target = undefined;
         }
 
         if ( isdefined( self._id_8B63._id_71B3 ) )
         {
             self._id_8B63._id_71B3 _id_0765::_id_47E6();
-            self._id_8B63._id_71B3 _meth_809A();
+            self._id_8B63._id_71B3 delete();
         }
     }
 

@@ -66,6 +66,6 @@ listentotriggernotify( var_0 )
         if ( !_func_0094( var_1 ) )
             continue;
 
-        _func_00D7( var_0, var_1, self._id_02EA );
+        _func_00D7( var_0, var_1, self.origin );
     }
 }

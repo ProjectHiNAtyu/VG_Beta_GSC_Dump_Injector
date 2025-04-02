@@ -11,7 +11,7 @@ _id_AB4C()
         return;
 
     level._id_B66C = 1;
-    _id_077B::_id_80B0();
+    scripts\engine\utility::_id_80B0();
     scripts\mp\team_mvp_characters_util::_id_C1BB();
 
     if ( getdvarint( "scr_show_3tile_lobby", 0 ) )
@@ -24,14 +24,14 @@ _id_AB4C()
     _id_0768::_id_81BF();
     self _meth_865B();
     wait 0.5;
-    _id_077B::_id_0FB3( "vfx_frag_gren_im", "vfx/iw8/weap/_explo/vfx_explo_frag_gren.vfx" );
+    scripts\engine\utility::_id_0FB3( "vfx_frag_gren_im", "vfx/iw8/weap/_explo/vfx_explo_frag_gren.vfx" );
 }
 
 run_explosions()
 {
     level endon( "game_ended" );
-    var_0 = _id_077B::_id_6D7A( "frontend3_explosion_struct", "targetname" );
-    var_1 = _id_077B::_id_6D7C( var_0._id_0457, "targetname" );
+    var_0 = scripts\engine\utility::_id_6D7A( "frontend3_explosion_struct", "targetname" );
+    var_1 = scripts\engine\utility::_id_6D7C( var_0.target, "targetname" );
 
     for (;;)
     {
@@ -39,8 +39,8 @@ run_explosions()
 
         foreach ( var_3 in var_1 )
         {
-            _func_0196( _id_077B::_id_6A40( "vfx_frag_gren_im" ), var_3._id_02EA );
-            wait( _func_01B8( 3 ) + 2 );
+            playfx( scripts\engine\utility::getfx( "vfx_frag_gren_im" ), var_3.origin );
+            wait( randomint( 3 ) + 2 );
         }
     }
 }
@@ -54,12 +54,12 @@ _id_2F04()
     thread scripts\cp_mp\gunbench_adjustiments::lui_update_gunbench();
 }
 
-_id_0271()
+main()
 {
-    scripts\mp\maps\mp_frontend3\mp_frontend3_precache::_id_0271();
-    scripts\mp\maps\mp_frontend3\gen\mp_frontend3_art::_id_0271();
-    scripts\mp\maps\mp_frontend3\mp_frontend3_fx::_id_0271();
-    scripts\mp\maps\mp_frontend3\mp_frontend3_lighting::_id_0271();
+    scripts\mp\maps\mp_frontend3\mp_frontend3_precache::main();
+    scripts\mp\maps\mp_frontend3\gen\mp_frontend3_art::main();
+    scripts\mp\maps\mp_frontend3\mp_frontend3_fx::main();
+    scripts\mp\maps\mp_frontend3\mp_frontend3_lighting::main();
     game["attackers"] = "allies";
     game["defenders"] = "axis";
     _id_0768::_id_3EBD();
@@ -68,7 +68,7 @@ _id_0271()
     level._id_F487 = 0;
     level._id_2F25 = ::_id_2F04;
     init_frontend_lighting_transitions();
-    _id_077B::_id_5BF1( "floor1" );
+    scripts\engine\utility::_id_5BF1( "floor1" );
 }
 
 init_frontend_lighting_transitions()
@@ -107,10 +107,10 @@ add_frontend_transition( var_0, var_1, var_2, var_3 )
     if ( !isdefined( level.frontend_transition_adds ) )
         level.frontend_transition_adds = [];
 
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
     var_4.from = var_0;
     var_4.to = var_1;
-    var_4._id_02BA = var_2;
+    var_4.name = var_2;
     var_4._id_5FF7 = var_3;
     level.frontend_transition_adds[level.frontend_transition_adds.size] = var_4;
 }
@@ -124,13 +124,13 @@ _id_B221()
     if ( isdefined( var_0 ) )
     {
         var_1 = level._id_5FBC.size;
-        level._id_5FBC[var_1] = _id_077B::_id_E20C();
-        level._id_5FBC[var_1]._id_02EA = var_0._id_02EA;
-        level._id_5FBC[var_1]._id_0054 = var_0._id_0054;
+        level._id_5FBC[var_1] = scripts\engine\utility::spawn_tag_origin();
+        level._id_5FBC[var_1].origin = var_0.origin;
+        level._id_5FBC[var_1].angles = var_0.angles;
         level._id_5FBC[var_1]._id_045A = "wallSteam1_fx1";
-        level._id_5FBC[var_1] _meth_83C3();
+        level._id_5FBC[var_1] show();
         var_2 = getent( "lobby_floor_01", "targetname" );
-        level._id_5FBC[var_1] _meth_820B( var_2 );
+        level._id_5FBC[var_1] linkto( var_2 );
         level._id_5FBC[var_1]._id_6076 = "steamFXWall";
     }
 
@@ -139,13 +139,13 @@ _id_B221()
     if ( isdefined( var_3 ) )
     {
         var_1 = level._id_5FBC.size;
-        level._id_5FBC[var_1] = _id_077B::_id_E20C();
-        level._id_5FBC[var_1]._id_02EA = var_3._id_02EA;
-        level._id_5FBC[var_1]._id_0054 = var_3._id_0054;
+        level._id_5FBC[var_1] = scripts\engine\utility::spawn_tag_origin();
+        level._id_5FBC[var_1].origin = var_3.origin;
+        level._id_5FBC[var_1].angles = var_3.angles;
         level._id_5FBC[var_1]._id_045A = "wallSteam2_fx1";
-        level._id_5FBC[var_1] _meth_83C3();
+        level._id_5FBC[var_1] show();
         var_4 = getent( "lobby_floor_02", "targetname" );
-        level._id_5FBC[var_1] _meth_820B( var_4 );
+        level._id_5FBC[var_1] linkto( var_4 );
         level._id_5FBC[var_1]._id_6076 = "steamFXWall";
     }
 
@@ -154,13 +154,13 @@ _id_B221()
     if ( isdefined( var_5 ) )
     {
         var_1 = level._id_5FBC.size;
-        level._id_5FBC[var_1] = _id_077B::_id_E20C();
-        level._id_5FBC[var_1]._id_02EA = var_5._id_02EA;
-        level._id_5FBC[var_1]._id_0054 = var_5._id_0054;
+        level._id_5FBC[var_1] = scripts\engine\utility::spawn_tag_origin();
+        level._id_5FBC[var_1].origin = var_5.origin;
+        level._id_5FBC[var_1].angles = var_5.angles;
         level._id_5FBC[var_1]._id_045A = "wallSteam3_fx1";
-        level._id_5FBC[var_1] _meth_83C3();
+        level._id_5FBC[var_1] show();
         var_4 = getent( "lobby_floor_02", "targetname" );
-        level._id_5FBC[var_1] _meth_820B( var_4 );
+        level._id_5FBC[var_1] linkto( var_4 );
         level._id_5FBC[var_1]._id_6076 = "steamFXWall";
     }
 
@@ -169,13 +169,13 @@ _id_B221()
     if ( isdefined( var_6 ) )
     {
         var_1 = level._id_5FBC.size;
-        level._id_5FBC[var_1] = _id_077B::_id_E20C();
-        level._id_5FBC[var_1]._id_02EA = var_6._id_02EA;
-        level._id_5FBC[var_1]._id_0054 = var_6._id_0054;
+        level._id_5FBC[var_1] = scripts\engine\utility::spawn_tag_origin();
+        level._id_5FBC[var_1].origin = var_6.origin;
+        level._id_5FBC[var_1].angles = var_6.angles;
         level._id_5FBC[var_1]._id_045A = "wallSteam3_fx1";
-        level._id_5FBC[var_1] _meth_83C3();
+        level._id_5FBC[var_1] show();
         var_4 = getent( "lobby_floor_02", "targetname" );
-        level._id_5FBC[var_1] _meth_820B( var_4 );
+        level._id_5FBC[var_1] linkto( var_4 );
         level._id_5FBC[var_1]._id_6076 = "steamFXWall";
     }
 
@@ -184,13 +184,13 @@ _id_B221()
     if ( isdefined( var_7 ) )
     {
         var_1 = level._id_5FBC.size;
-        level._id_5FBC[var_1] = _id_077B::_id_E20C();
-        level._id_5FBC[var_1]._id_02EA = var_7._id_02EA;
-        level._id_5FBC[var_1]._id_0054 = var_7._id_0054;
+        level._id_5FBC[var_1] = scripts\engine\utility::spawn_tag_origin();
+        level._id_5FBC[var_1].origin = var_7.origin;
+        level._id_5FBC[var_1].angles = var_7.angles;
         level._id_5FBC[var_1]._id_045A = "wallSteam3_fx1";
-        level._id_5FBC[var_1] _meth_83C3();
+        level._id_5FBC[var_1] show();
         var_2 = getent( "lobby_floor_01", "targetname" );
-        level._id_5FBC[var_1] _meth_820B( var_2 );
+        level._id_5FBC[var_1] linkto( var_2 );
         level._id_5FBC[var_1]._id_6076 = "steamFXFloor";
     }
 
@@ -199,13 +199,13 @@ _id_B221()
     if ( isdefined( var_8 ) )
     {
         var_1 = level._id_5FBC.size;
-        level._id_5FBC[var_1] = _id_077B::_id_E20C();
-        level._id_5FBC[var_1]._id_02EA = var_8._id_02EA;
-        level._id_5FBC[var_1]._id_0054 = var_8._id_0054;
+        level._id_5FBC[var_1] = scripts\engine\utility::spawn_tag_origin();
+        level._id_5FBC[var_1].origin = var_8.origin;
+        level._id_5FBC[var_1].angles = var_8.angles;
         level._id_5FBC[var_1]._id_045A = "wallSteam3_fx1";
-        level._id_5FBC[var_1] _meth_83C3();
+        level._id_5FBC[var_1] show();
         var_2 = getent( "lobby_floor_01", "targetname" );
-        level._id_5FBC[var_1] _meth_820B( var_2 );
+        level._id_5FBC[var_1] linkto( var_2 );
         level._id_5FBC[var_1]._id_6076 = "steamFXFloor";
     }
 
@@ -214,13 +214,13 @@ _id_B221()
     if ( isdefined( var_9 ) )
     {
         var_1 = level._id_5FBC.size;
-        level._id_5FBC[var_1] = _id_077B::_id_E20C();
-        level._id_5FBC[var_1]._id_02EA = var_9._id_02EA;
-        level._id_5FBC[var_1]._id_0054 = var_9._id_0054;
+        level._id_5FBC[var_1] = scripts\engine\utility::spawn_tag_origin();
+        level._id_5FBC[var_1].origin = var_9.origin;
+        level._id_5FBC[var_1].angles = var_9.angles;
         level._id_5FBC[var_1]._id_045A = "wallSteam3_fx1";
-        level._id_5FBC[var_1] _meth_83C3();
+        level._id_5FBC[var_1] show();
         var_4 = getent( "lobby_floor_02", "targetname" );
-        level._id_5FBC[var_1] _meth_820B( var_4 );
+        level._id_5FBC[var_1] linkto( var_4 );
         level._id_5FBC[var_1]._id_6076 = "steamFXFloor";
     }
 
@@ -231,11 +231,11 @@ _id_B221()
         foreach ( var_12 in var_10 )
         {
             var_1 = level._id_5FBC.size;
-            level._id_5FBC[var_1] = _id_077B::_id_E20C();
-            level._id_5FBC[var_1]._id_02EA = var_12._id_02EA;
-            level._id_5FBC[var_1]._id_0054 = var_12._id_0054;
+            level._id_5FBC[var_1] = scripts\engine\utility::spawn_tag_origin();
+            level._id_5FBC[var_1].origin = var_12.origin;
+            level._id_5FBC[var_1].angles = var_12.angles;
             level._id_5FBC[var_1]._id_045A = "firevfx";
-            level._id_5FBC[var_1] _meth_83C3();
+            level._id_5FBC[var_1] show();
 
             switch ( var_12._id_0375 )
             {
@@ -268,15 +268,15 @@ endlesslobbyfloor2tiles()
 
     if ( getdvarint( "scr_VAN_55455", 0 ) )
     {
-        foreach ( var_6 in _id_077B::_id_1B72( var_1, var_3 ) )
-            var_6 _meth_809A();
+        foreach ( var_6 in scripts\engine\utility::_id_1B72( var_1, var_3 ) )
+            var_6 delete();
 
         var_1 = [];
         var_3 = [];
     }
 
     foreach ( var_6 in var_4 )
-        var_6 _meth_809A();
+        var_6 delete();
 
     var_4 = [];
 
@@ -286,21 +286,21 @@ endlesslobbyfloor2tiles()
     if ( isdefined( var_1 ) && var_1.size >= 1 )
     {
         foreach ( var_11 in var_1 )
-            var_11 _meth_820B( var_0 );
+            var_11 linkto( var_0 );
     }
 
     if ( isdefined( var_3 ) && var_3.size >= 1 )
     {
         foreach ( var_11 in var_3 )
-            var_11 _meth_820B( var_2 );
+            var_11 linkto( var_2 );
     }
 
-    var_15 = var_0._id_02EA;
-    var_16 = var_2._id_02EA;
+    var_15 = var_0.origin;
+    var_16 = var_2.origin;
     var_17 = distance( var_15, var_16 );
     var_18 = 25.662;
     var_19 = var_17 / var_18;
-    var_20 = var_15 + _func_025A( var_15 - var_16 ) * var_17;
+    var_20 = var_15 + vectornormalize( var_15 - var_16 ) * var_17;
     var_21 = 1;
     wait 0.05;
 
@@ -308,35 +308,35 @@ endlesslobbyfloor2tiles()
     {
         if ( var_21 )
         {
-            _id_077B::_id_5BFB( "floor1" );
+            scripts\engine\utility::_id_5BFB( "floor1" );
             var_2 hide();
-            var_2 _meth_80BE();
-            var_2._id_02EA = var_2._id_02EA + ( 0, 0, -1000 );
+            var_2 dontinterpolate();
+            var_2.origin = var_2.origin + ( 0, 0, -1000 );
             waitframe();
-            var_2 _meth_80BE();
-            var_2._id_02EA = var_16 + ( 0, 0, -1000 );
+            var_2 dontinterpolate();
+            var_2.origin = var_16 + ( 0, 0, -1000 );
             waitframe();
-            var_2 _meth_80BE();
-            var_2._id_02EA = var_16;
-            var_2 _meth_83C3();
-            var_2 _meth_823B( var_15, var_19 );
-            var_0 _meth_823B( var_20, var_19 );
+            var_2 dontinterpolate();
+            var_2.origin = var_16;
+            var_2 show();
+            var_2 moveto( var_15, var_19 );
+            var_0 moveto( var_20, var_19 );
         }
         else
         {
-            _id_077B::_id_5BE4( "floor1" );
+            scripts\engine\utility::_id_5BE4( "floor1" );
             var_0 hide();
-            var_0 _meth_80BE();
-            var_0._id_02EA = var_0._id_02EA + ( 0, 0, -1000 );
+            var_0 dontinterpolate();
+            var_0.origin = var_0.origin + ( 0, 0, -1000 );
             waitframe();
-            var_0 _meth_80BE();
-            var_0._id_02EA = var_16 + ( 0, 0, -1000 );
+            var_0 dontinterpolate();
+            var_0.origin = var_16 + ( 0, 0, -1000 );
             waitframe();
-            var_0 _meth_80BE();
-            var_0._id_02EA = var_16;
-            var_0 _meth_83C3();
-            var_0 _meth_823B( var_15, var_19 );
-            var_2 _meth_823B( var_20, var_19 );
+            var_0 dontinterpolate();
+            var_0.origin = var_16;
+            var_0 show();
+            var_0 moveto( var_15, var_19 );
+            var_2 moveto( var_20, var_19 );
         }
 
         var_21 = !var_21;
@@ -356,8 +356,8 @@ endlesslobbyfloor3tiles()
 
     if ( getdvarint( "scr_VAN_55455", 0 ) )
     {
-        foreach ( var_7 in _id_077B::_id_1B72( var_1, var_3, var_5 ) )
-            var_7 _meth_809A();
+        foreach ( var_7 in scripts\engine\utility::_id_1B72( var_1, var_3, var_5 ) )
+            var_7 delete();
 
         var_1 = [];
         var_3 = [];
@@ -370,29 +370,29 @@ endlesslobbyfloor3tiles()
     if ( isdefined( var_1 ) && var_1.size >= 1 )
     {
         foreach ( var_10 in var_1 )
-            var_10 _meth_820B( var_0 );
+            var_10 linkto( var_0 );
     }
 
     if ( isdefined( var_3 ) && var_3.size >= 1 )
     {
         foreach ( var_10 in var_3 )
-            var_10 _meth_820B( var_2 );
+            var_10 linkto( var_2 );
     }
 
     if ( isdefined( var_5 ) && var_5.size >= 1 )
     {
         foreach ( var_10 in var_5 )
-            var_10 _meth_820B( var_4 );
+            var_10 linkto( var_4 );
     }
 
-    var_16 = var_0._id_02EA;
-    var_17 = var_2._id_02EA;
-    var_18 = var_4._id_02EA;
+    var_16 = var_0.origin;
+    var_17 = var_2.origin;
+    var_18 = var_4.origin;
     var_19 = distance( var_17, var_18 ) / 2;
     var_20 = 25.662 * getdvarfloat( "scr_movespeed_scaler", 1.0 );
     var_21 = var_19 / var_20;
     var_22 = var_21 * 0.5;
-    var_23 = var_18 + _func_025A( var_18 - var_16 ) * var_19;
+    var_23 = var_18 + vectornormalize( var_18 - var_16 ) * var_19;
     var_24 = 2;
     wait 0.05;
 
@@ -401,50 +401,50 @@ endlesslobbyfloor3tiles()
         if ( var_24 == 1 )
         {
             var_0 hide();
-            var_0 _meth_80BE();
-            var_0._id_02EA = var_0._id_02EA + ( 0, 0, -1000 );
+            var_0 dontinterpolate();
+            var_0.origin = var_0.origin + ( 0, 0, -1000 );
             waitframe();
-            var_0 _meth_80BE();
-            var_0._id_02EA = var_17 + ( 0, 0, -1000 );
+            var_0 dontinterpolate();
+            var_0.origin = var_17 + ( 0, 0, -1000 );
             waitframe();
-            var_0 _meth_80BE();
-            var_0._id_02EA = var_17;
-            var_0 _meth_83C3();
-            var_0 _meth_823B( var_16, var_21 );
-            var_2 _meth_823B( var_23, var_21 );
-            var_4 _meth_823B( var_18, var_21 );
+            var_0 dontinterpolate();
+            var_0.origin = var_17;
+            var_0 show();
+            var_0 moveto( var_16, var_21 );
+            var_2 moveto( var_23, var_21 );
+            var_4 moveto( var_18, var_21 );
         }
         else if ( var_24 == 2 )
         {
             var_2 hide();
-            var_2 _meth_80BE();
-            var_2._id_02EA = var_2._id_02EA + ( 0, 0, -1000 );
+            var_2 dontinterpolate();
+            var_2.origin = var_2.origin + ( 0, 0, -1000 );
             waitframe();
-            var_2 _meth_80BE();
-            var_2._id_02EA = var_17 + ( 0, 0, -1000 );
+            var_2 dontinterpolate();
+            var_2.origin = var_17 + ( 0, 0, -1000 );
             waitframe();
-            var_2 _meth_80BE();
-            var_2._id_02EA = var_17;
-            var_2 _meth_83C3();
-            var_2 _meth_823B( var_16, var_21 );
-            var_4 _meth_823B( var_23, var_21 );
-            var_0 _meth_823B( var_18, var_21 );
+            var_2 dontinterpolate();
+            var_2.origin = var_17;
+            var_2 show();
+            var_2 moveto( var_16, var_21 );
+            var_4 moveto( var_23, var_21 );
+            var_0 moveto( var_18, var_21 );
         }
         else
         {
             var_4 hide();
-            var_4 _meth_80BE();
-            var_4._id_02EA = var_4._id_02EA + ( 0, 0, -1000 );
+            var_4 dontinterpolate();
+            var_4.origin = var_4.origin + ( 0, 0, -1000 );
             waitframe();
-            var_4 _meth_80BE();
-            var_4._id_02EA = var_17 + ( 0, 0, -1000 );
+            var_4 dontinterpolate();
+            var_4.origin = var_17 + ( 0, 0, -1000 );
             waitframe();
-            var_4 _meth_80BE();
-            var_4._id_02EA = var_17;
-            var_4 _meth_83C3();
-            var_4 _meth_823B( var_16, var_21 );
-            var_0 _meth_823B( var_23, var_21 );
-            var_2 _meth_823B( var_18, var_21 );
+            var_4 dontinterpolate();
+            var_4.origin = var_17;
+            var_4 show();
+            var_4 moveto( var_16, var_21 );
+            var_0 moveto( var_23, var_21 );
+            var_2 moveto( var_18, var_21 );
         }
 
         wait( var_21 );

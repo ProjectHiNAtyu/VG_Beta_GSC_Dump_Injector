@@ -11,13 +11,13 @@ _id_20F2()
         switch ( var_1._id_CD8C )
         {
             case "_a":
-                level._id_454D[game["attackers"]] = var_1._id_02EA;
+                level._id_454D[game["attackers"]] = var_1.origin;
                 break;
             case "_b":
-                level._id_4540 = var_1._id_02EA;
+                level._id_4540 = var_1.origin;
                 break;
             case "_c":
-                level._id_454D[game["defenders"]] = var_1._id_02EA;
+                level._id_454D[game["defenders"]] = var_1.origin;
                 break;
         }
     }
@@ -33,8 +33,8 @@ _id_2109()
     {
         foreach ( var_2 in var_0 )
         {
-            level._id_210C = _id_07EE::_id_5783( level._id_210C, var_2._id_02EA );
-            level._id_210B = _id_07EE::_id_5782( level._id_210B, var_2._id_02EA );
+            level._id_210C = _id_07EE::_id_5783( level._id_210C, var_2.origin );
+            level._id_210B = _id_07EE::_id_5782( level._id_210B, var_2.origin );
         }
     }
     else
@@ -82,13 +82,13 @@ _id_20EF()
 
 _id_3529( var_0 )
 {
-    if ( level._id_9AA7 == "mp_divide" )
+    if ( level.mapname == "mp_divide" )
     {
-        var_0[0]._id_02EA = ( -261, 235, 610 );
-        var_0[1]._id_02EA = ( -211, 235, 610 );
-        var_0[2]._id_02EA = ( -311, 235, 610 );
-        var_0[3]._id_02EA = ( -311, 500, 610 );
-        var_0[4]._id_02EA = ( -211, 500, 610 );
+        var_0[0].origin = ( -261, 235, 610 );
+        var_0[1].origin = ( -211, 235, 610 );
+        var_0[2].origin = ( -311, 235, 610 );
+        var_0[3].origin = ( -311, 500, 610 );
+        var_0[4].origin = ( -211, 500, 610 );
     }
 }
 
@@ -96,11 +96,11 @@ _id_68D5()
 {
     var_0 = undefined;
 
-    if ( _id_0A69::_id_6A43() == "tdef" )
-        var_0 = _id_077B::_id_6D7C( "tdef_ball_start", "targetname" );
+    if ( scripts\mp\utility\game::getgametype() == "tdef" )
+        var_0 = scripts\engine\utility::_id_6D7C( "tdef_ball_start", "targetname" );
 
     if ( !isdefined( var_0 ) || !var_0.size )
-        var_0 = _id_077B::_id_6D7C( "ball_start", "targetname" );
+        var_0 = scripts\engine\utility::_id_6D7C( "ball_start", "targetname" );
 
     if ( level._id_CB1D > 1 )
         var_0 = _id_E028( var_0 );
@@ -112,7 +112,7 @@ _id_68D6()
 {
     var_0 = undefined;
 
-    if ( _id_0A69::_id_6A43() == "tdef" )
+    if ( scripts\mp\utility\game::getgametype() == "tdef" )
         var_0 = getentarray( "tdef_ball_pickup", "targetname" );
 
     if ( !isdefined( var_0 ) || !var_0.size )
@@ -127,9 +127,9 @@ _id_68D6()
 _id_68D4( var_0 )
 {
     if ( isdefined( var_0 ) )
-        var_1 = var_0._id_02EA;
+        var_1 = var_0.origin;
     else if ( level._id_48BE )
-        var_1 = level._id_B758[0]._id_02EA + ( 0, 0, 30 );
+        var_1 = level.players[0].origin + ( 0, 0, 30 );
     else
         var_1 = level._id_4540;
 
@@ -139,20 +139,20 @@ _id_68D4( var_0 )
 _id_20E3( var_0 )
 {
     var_1 = 30;
-    var_2 = _func_020F();
-    var_2._id_02EA = var_0;
+    var_2 = spawnstruct();
+    var_2.origin = var_0;
     var_3 = var_0;
     var_2 _id_20F7();
-    var_2._id_02EA = var_2._id_718A + ( 0, 0, var_1 );
+    var_2.origin = var_2._id_718A + ( 0, 0, var_1 );
     var_2._id_7D63 = 0;
 
-    if ( level._id_9AA7 == "mp_desert" )
+    if ( level.mapname == "mp_desert" )
         var_3 = var_2._id_718A;
 
-    if ( level._id_9AA7 == "mp_divide" )
+    if ( level.mapname == "mp_divide" )
         var_3 = var_2._id_718A;
 
-    if ( _id_0A69::_id_6A43() == "tdef" )
+    if ( scripts\mp\utility\game::getgametype() == "tdef" )
         level._id_216B[level._id_216B.size] = _id_3F76( var_3 );
 
     level._id_212E[level._id_212E.size] = var_2;
@@ -160,19 +160,19 @@ _id_20E3( var_0 )
 
 _id_20F7( var_0 )
 {
-    var_1 = self._id_02EA + ( 0, 0, 32 );
-    var_2 = self._id_02EA + ( 0, 0, -1000 );
-    var_3 = _id_077A::_id_3EC3( 1, 1, 1, 1, 0, 1, 1 );
+    var_1 = self.origin + ( 0, 0, 32 );
+    var_2 = self.origin + ( 0, 0, -1000 );
+    var_3 = scripts\engine\trace::_id_3EC3( 1, 1, 1, 1, 0, 1, 1 );
     var_4 = [];
-    var_5 = _id_077A::_id_C042( var_1, var_2, var_4, var_3 );
+    var_5 = scripts\engine\trace::ray_trace( var_1, var_2, var_4, var_3 );
     self._id_718A = var_5["position"];
     return var_5["fraction"] != 0 && var_5["fraction"] != 1;
 }
 
 _id_3F76( var_0 )
 {
-    var_1 = _func_0205( "script_model", var_0 );
-    var_1 setmode( "ctf_game_flag_base" );
+    var_1 = spawn( "script_model", var_0 );
+    var_1 setmodel( "ctf_game_flag_base" );
     var_1 _meth_85A2();
     var_1._id_228F = var_0;
     return var_1;
@@ -181,10 +181,10 @@ _id_3F76( var_0 )
 _id_DC85( var_0 )
 {
     if ( isdefined( var_0._id_0B39[0] ) )
-        var_0._id_0B39[0] _meth_809A();
+        var_0._id_0B39[0] delete();
 
     var_1 = undefined;
-    var_2 = var_0._id_045B;
+    var_2 = var_0.team;
     var_3 = var_0 _meth_81D2();
 
     if ( var_3 )
@@ -192,10 +192,10 @@ _id_DC85( var_0 )
     else if ( var_2 == "spectator" )
         var_2 = "allies";
 
-    var_4 = _func_0208( level._id_0BA3["ball_base_glow"], self._id_228F, var_0 );
+    var_4 = _func_0208( level._effect["ball_base_glow"], self._id_228F, var_0 );
     var_4 _meth_8321();
     var_0._id_0B39[0] = var_4;
-    _func_024B( var_4 );
+    triggerfx( var_4 );
 }
 
 _id_212D( var_0, var_1 )
@@ -204,25 +204,25 @@ _id_212D( var_0, var_1 )
         var_0 = 0;
 
     if ( isdefined( var_1 ) )
-        var_2 = _func_0205( "script_model", var_1 );
+        var_2 = spawn( "script_model", var_1 );
     else
         var_2 = level._id_212E[level._id_218A.size];
 
-    var_3 = _func_0205( "script_model", var_2._id_02EA );
+    var_3 = spawn( "script_model", var_2.origin );
     var_3 _meth_85A2();
 
-    if ( _id_0A69::_id_6A43() == "ball" || getdvarint( "scr_uplink_create_ball" ) == 1 )
+    if ( scripts\mp\utility\game::getgametype() == "ball" || getdvarint( "scr_uplink_create_ball" ) == 1 )
     {
-        var_3 setmode( "offhand_wm_emp" );
+        var_3 setmodel( "offhand_wm_emp" );
         var_3 setnodeploy( 1 );
-        level._id_2193 = _func_034C( "iw7_uplinkball_mp" );
+        level._id_2193 = makeweapon( "iw7_uplinkball_mp" );
         level._id_2185 = 1000000;
     }
     else
     {
-        var_3 setmode( "offhand_wm_emp" );
+        var_3 setmodel( "offhand_wm_emp" );
         var_3 setnodeploy( 1 );
-        level._id_2193 = _func_034C( "iw7_tdefball_mp" );
+        level._id_2193 = makeweapon( "iw7_tdefball_mp" );
         level._id_2185 = 250000;
     }
 
@@ -232,16 +232,16 @@ _id_212D( var_0, var_1 )
     if ( isdefined( level._id_2134 ) && level._id_2134.size > 0 )
     {
         var_5 = level._id_2134[var_0];
-        var_5._id_02EA = var_3._id_02EA;
+        var_5.origin = var_3.origin;
     }
     else
-        var_5 = _func_0205( "trigger_radius", var_3._id_02EA - ( 0, 0, var_4 / 2 ), 0, var_4, var_4 );
+        var_5 = spawn( "trigger_radius", var_3.origin - ( 0, 0, var_4 / 2 ), 0, var_4, var_4 );
 
     var_5 _meth_80DB();
-    var_5 _meth_820B( var_3 );
+    var_5 linkto( var_3 );
     var_5._id_A509 = 1;
     var_5._id_94FD = 1;
-    var_5._id_22FB = var_5._id_02EA;
+    var_5._id_22FB = var_5.origin;
     var_5._id_A509 = 1;
     var_6 = [ var_3 ];
     var_7 = _id_07AD::_id_3F86( "any", var_5, var_6, ( 0, 0, 32 ) );
@@ -267,7 +267,7 @@ _id_212D( var_0, var_1 )
     var_7._id_B71C = undefined;
     var_7._id_AEA1 = undefined;
     var_7._id_AEA0 = undefined;
-    var_7._id_1042E[0] enableoffhandprimaryweapons( 1 );
+    var_7._id_1042E[0] _meth_85A8( 1 );
 
     if ( isdefined( level._id_DC9D ) )
     {
@@ -328,7 +328,7 @@ _id_212D( var_0, var_1 )
     var_7 _id_20E4( var_2 );
     level._id_218A[level._id_218A.size] = var_7;
 
-    if ( _id_0A69::_id_6A43() == "tdef" )
+    if ( scripts\mp\utility\game::getgametype() == "tdef" )
         level._id_218A[0] thread _id_E6B7();
 
     if ( !istrue( level._id_48BE ) )
@@ -336,11 +336,11 @@ _id_212D( var_0, var_1 )
 
     var_7 thread _id_210A();
     var_8 = [ "physicscontents_clipshot", "physicscontents_missileclip", "physicscontents_vehicle", "physicscontents_characterproxy", "physicscontents_glass", "physicscontents_itemclip" ];
-    var_9 = _func_02C4( var_8 );
+    var_9 = physics_createcontents( var_8 );
     level._id_2186 = var_9;
     level._id_218F = 10;
 
-    if ( _id_0A69::_id_6A43() == "tdef" )
+    if ( scripts\mp\utility\game::getgametype() == "tdef" )
         level._id_218F = 20;
 }
 
@@ -349,9 +349,9 @@ _id_20E7( var_0 )
     if ( isdefined( self._id_504E ) && self._id_504E >= gettime() )
         return 0;
 
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
     {
-        if ( !var_0 _id_06BB::_id_8702() )
+        if ( !var_0 scripts\common\utility::_id_8702() )
             return 0;
 
         if ( isdefined( var_0._id_9A4F ) && var_0._id_9A4F )
@@ -373,21 +373,21 @@ _id_20E7( var_0 )
 
         var_2 = var_0._id_33CA;
 
-        if ( isdefined( var_2 ) && var_0 _meth_81EA() )
+        if ( isdefined( var_2 ) && var_0 isswitchingweapon() )
         {
             if ( !_id_FF2C( var_2 ) )
                 return 0;
         }
 
-        if ( var_0 _id_099A::_id_873B() )
+        if ( var_0 scripts\cp_mp\utility\inventory_utility::_id_873B() )
         {
-            var_2 = var_0 _id_099A::_id_6987();
+            var_2 = var_0 scripts\cp_mp\utility\inventory_utility::_id_6987();
 
             if ( !_id_FF2C( var_2 ) )
                 return 0;
         }
 
-        if ( var_0 _id_0A74::_id_8AB5() )
+        if ( var_0 scripts\mp\utility\player::_id_8AB5() )
             return 0;
 
         if ( var_0 _id_B546() )
@@ -422,17 +422,17 @@ _id_210F( var_0, var_1 )
     if ( isdefined( level._id_BA02 ) && level._id_BA02 == 2 && istrue( level._id_BA03 ) && isdefined( self._id_8F90 ) && self._id_8F90 != var_0 )
         var_2 = 1;
 
-    if ( _id_0A69::_id_6A43() == "tdef" )
+    if ( scripts\mp\utility\game::getgametype() == "tdef" )
     {
         var_0 scripts\mp\gametypes\tdef::_id_6D04();
-        level thread scripts\mp\gametypes\tdef::_id_1F9C( var_0._id_045B );
+        level thread scripts\mp\gametypes\tdef::_id_1F9C( var_0.team );
 
         if ( !level._id_F260 )
-            level _id_07AC::_id_AF63();
+            level scripts\mp\gamelogic::pausetimer();
     }
 
     if ( istrue( level._id_BA02 ) )
-        level _id_FD64( var_0._id_045B, 0, 0, var_2 );
+        level _id_FD64( var_0.team, 0, 0, var_2 );
 
     level._id_FED2 = 0;
     level._id_39F4 = undefined;
@@ -440,50 +440,50 @@ _id_210F( var_0, var_1 )
     var_3 = self._id_1042E[0] _meth_8151();
 
     if ( isdefined( var_3 ) )
-        self._id_1042E[0] _meth_8415();
+        self._id_1042E[0] unlink();
 
     if ( !istrue( level._id_48BE ) )
-        var_0 scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_ballcarrier" );
+        var_0 scripts\mp\utility\perk::_id_6FA5( "specialty_ballcarrier" );
 
     var_0._id_20E8 = self;
     var_0._id_A850 = 1;
-    self._id_32AF scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_sprintfire" );
+    self._id_32AF scripts\mp\utility\perk::_id_6FA5( "specialty_sprintfire" );
     self._id_32AF._id_7577 = 1;
 
     if ( !istrue( level._id_48BE ) )
         var_0 _id_07C1::_id_D5D5( var_0, level._id_32B0 );
 
     if ( !istrue( level._id_48BE ) )
-        thread _id_2123( var_0._id_045B, "mp_uplink_ball_pickedup_friendly", "mp_uplink_ball_pickedup_enemy" );
+        thread _id_2123( var_0.team, "mp_uplink_ball_pickedup_friendly", "mp_uplink_ball_pickedup_enemy" );
 
-    var_0 _id_06BB::_id_1562( 0 );
-    var_0 scripts\engine\trace::_id_1512( 0, "obj_ball" );
-    self._id_1042E[0] _meth_8254( self._id_1042E[0]._id_02EA, ( 0, 0, 0 ) );
+    var_0 scripts\common\utility::_id_1562( 0 );
+    var_0 scripts\mp\equipment::_id_1512( 0, "obj_ball" );
+    self._id_1042E[0] physicslaunchserver( self._id_1042E[0].origin, ( 0, 0, 0 ) );
     self._id_1042E[0] _meth_8544();
-    self._id_1042E[0] _id_07CD::_id_A65F();
+    self._id_1042E[0] scripts\mp\movers::_id_A65F();
     self._id_AE74 = 0;
     self._id_1042E[0] _id_E89A();
-    self._id_1042E[0] _meth_83C3();
+    self._id_1042E[0] show();
     self._id_1042E[0] hide( 1 );
-    self._id_1042E[0] _meth_820B( var_0, "j_wrist_ri", ( 0, 0, 0 ), var_0._id_0054 );
-    self._id_1042E[0] _meth_8373( "uplink_drone_hide", "hide", 0 );
-    self._id_047A _id_07CD::_id_E8A0();
+    self._id_1042E[0] linkto( var_0, "j_wrist_ri", ( 0, 0, 0 ), var_0.angles );
+    self._id_1042E[0] setscriptablepartstate( "uplink_drone_hide", "hide", 0 );
+    self._id_047A scripts\mp\movers::_id_E8A0();
     self._id_417C._id_7D63 = 0;
     var_4 = 0;
 
     if ( isdefined( self._id_BD8D ) )
     {
         var_4 = 1;
-        self._id_BD8D _meth_809A();
+        self._id_BD8D delete();
     }
 
-    var_5 = var_0._id_045B;
-    var_6 = _id_0A69::_id_6BC3( var_0._id_045B )[0];
-    self._id_1042E[0] setorigin( var_0 );
+    var_5 = var_0.team;
+    var_6 = scripts\mp\utility\game::_id_6BC3( var_0.team )[0];
+    self._id_1042E[0] setotherent( var_0 );
 
     if ( var_4 )
     {
-        if ( self._id_8F92 == var_0._id_045B )
+        if ( self._id_8F92 == var_0.team )
         {
             if ( !istrue( level._id_48BE ) )
                 _id_0A64::_id_E772( "pass_complete", var_5 );
@@ -498,20 +498,20 @@ _id_210F( var_0, var_1 )
 
             var_0 thread _id_0788::_id_6F9C( "mode_uplink_intercept" );
 
-            if ( _func_0117( var_0 ) )
-                var_0 thread _id_06BB::_id_F737( level._id_9B9C, "pickup_interception", var_0._id_02EA );
+            if ( isplayer( var_0 ) )
+                var_0 thread scripts\common\utility::_id_F737( level._id_9B9C, "pickup_interception", var_0.origin );
         }
     }
     else
     {
-        if ( !istrue( level._id_48BE ) && self._id_8F92 != var_0._id_045B )
+        if ( !istrue( level._id_48BE ) && self._id_8F92 != var_0.team )
         {
             _id_0A64::_id_E772( "ally_own_drone", var_5 );
             _id_0A64::_id_E772( "enemy_own_drone", var_6 );
         }
 
-        if ( _func_0117( var_0 ) )
-            var_0 thread _id_06BB::_id_F737( level._id_9B9C, "pickup", var_0._id_02EA );
+        if ( isplayer( var_0 ) )
+            var_0 thread scripts\common\utility::_id_F737( level._id_9B9C, "pickup", var_0.origin );
     }
 
     if ( !istrue( level._id_48BE ) )
@@ -519,10 +519,10 @@ _id_210F( var_0, var_1 )
 
     self._id_8F91 = 0;
     self._id_8F90 = var_0;
-    self._id_8F92 = var_0._id_045B;
-    self._id_AD9B = var_0._id_045B;
+    self._id_8F92 = var_0.team;
+    self._id_AD9B = var_0.team;
     _id_2164( self._id_AD9B );
-    var_0 _meth_83B5( level._id_2193, 1 );
+    var_0 setweaponammoclip( level._id_2193, 1 );
 
     if ( level._id_39F9 )
         var_0 _meth_80CB( 1 );
@@ -530,7 +530,7 @@ _id_210F( var_0, var_1 )
     var_0 thread _id_B606( self );
 
     if ( !istrue( level._id_48BE ) )
-        _id_07AC::_id_D580( var_0, 1 );
+        scripts\mp\gamelogic::_id_D580( var_0, 1 );
 
     self notify( "physics_timeout" );
 }
@@ -552,7 +552,7 @@ _id_48AA()
 
 _id_6F81( var_0 )
 {
-    if ( _id_0A69::_id_6A43() == "tdef" )
+    if ( scripts\mp\utility\game::getgametype() == "tdef" )
         var_1 = 15000;
     else
         var_1 = 10000;
@@ -562,7 +562,7 @@ _id_6F81( var_0 )
     if ( var_2 )
         return 0;
 
-    if ( isdefined( self._id_8F90 ) && var_0._id_045B == self._id_8F90._id_045B && gettime() < level._id_2187 + var_1 )
+    if ( isdefined( self._id_8F90 ) && var_0.team == self._id_8F90.team && gettime() < level._id_2187 + var_1 )
         return 0;
 
     return 1;
@@ -578,10 +578,10 @@ _id_FC16()
 
     self._id_A774++;
 
-    if ( _id_0A69::_id_6B40() < 1 )
+    if ( scripts\mp\utility\game::_id_6B40() < 1 )
         return 0;
 
-    self._id_29C8 = self._id_A774 / _id_0A69::_id_6B40();
+    self._id_29C8 = self._id_A774 / scripts\mp\utility\game::_id_6B40();
 
     if ( self._id_29C8 < 4 )
         return 0;
@@ -591,18 +591,18 @@ _id_FC16()
 
 _id_2123( var_0, var_1, var_2 )
 {
-    var_3 = _id_0A69::_id_6BC3( var_0 )[0];
+    var_3 = scripts\mp\utility\game::_id_6BC3( var_0 )[0];
 
-    foreach ( var_5 in level._id_B758 )
+    foreach ( var_5 in level.players )
     {
-        if ( var_5._id_045B == var_0 )
+        if ( var_5.team == var_0 )
         {
-            var_5 _meth_8275( var_1 );
+            var_5 playlocalsound( var_1 );
             continue;
         }
 
-        if ( var_5._id_045B == var_3 )
-            var_5 _meth_8275( var_2 );
+        if ( var_5.team == var_3 )
+            var_5 playlocalsound( var_2 );
     }
 }
 
@@ -618,10 +618,10 @@ _id_212A( var_0, var_1, var_2, var_3 )
     var_5 = ( 0, 0, 0 );
     var_6 = self._id_32AF;
 
-    if ( isdefined( var_6 ) && var_6._id_045B != "spectator" )
+    if ( isdefined( var_6 ) && var_6.team != "spectator" )
     {
-        var_7 = var_6._id_02EA;
-        var_5 = var_6._id_0054;
+        var_7 = var_6.origin;
+        var_5 = var_6.angles;
         var_6 notify( "ball_dropped" );
     }
     else if ( isdefined( var_1 ) )
@@ -632,19 +632,19 @@ _id_212A( var_0, var_1, var_2, var_3 )
     var_7 = var_7 + ( 0, 0, 40 );
 
     if ( isdefined( self._id_BD8D ) )
-        self._id_BD8D _meth_809A();
+        self._id_BD8D delete();
 
     for ( var_8 = 0; var_8 < self._id_1042E.size; var_8++ )
     {
-        self._id_1042E[var_8]._id_02EA = var_7;
-        self._id_1042E[var_8]._id_0054 = var_5;
-        self._id_1042E[var_8] _meth_83C3();
+        self._id_1042E[var_8].origin = var_7;
+        self._id_1042E[var_8].angles = var_5;
+        self._id_1042E[var_8] show();
         var_9 = self._id_1042E[var_8] _meth_8151();
 
         if ( isdefined( var_9 ) )
-            self._id_1042E[var_8] _meth_8415();
+            self._id_1042E[var_8] unlink();
 
-        self._id_1042E[var_8] _meth_8373( "uplink_drone_hide", "show", 0 );
+        self._id_1042E[var_8] setscriptablepartstate( "uplink_drone_hide", "show", 0 );
     }
 
     if ( istrue( var_3 ) || istrue( var_2 ) )
@@ -656,12 +656,12 @@ _id_212A( var_0, var_1, var_2, var_3 )
         level._id_CBF8 = 0;
 
     if ( level._id_CBF8 > 0 )
-        self._id_047A._id_02EA = self._id_047A._id_02EA - ( 0, 0, 10000 );
+        self._id_047A.origin = self._id_047A.origin - ( 0, 0, 10000 );
     else
-        self._id_047A._id_02EA = var_7;
+        self._id_047A.origin = var_7;
 
     _id_20F3();
-    self._id_411F = self._id_047A._id_02EA;
+    self._id_411F = self._id_047A.origin;
 
     if ( !istrue( level._id_48BE ) )
         thread _id_20F9( 0 );
@@ -679,7 +679,7 @@ _id_212A( var_0, var_1, var_2, var_3 )
     if ( !var_0 )
     {
         var_10 = self._id_8F92;
-        var_11 = _id_0A69::_id_6BC3( var_10 )[0];
+        var_11 = scripts\mp\utility\game::_id_6BC3( var_10 )[0];
 
         if ( !istrue( level._id_48BE ) && !isdefined( var_1 ) && !istrue( var_2 ) )
         {
@@ -698,13 +698,13 @@ _id_212A( var_0, var_1, var_2, var_3 )
         _id_211C( var_14 );
     }
 
-    var_15 = _func_020F();
+    var_15 = spawnstruct();
     var_15._id_32C6 = self;
     var_15._id_43D6 = ::_id_2113;
-    self._id_047A thread _id_07CD::_id_73E7( var_15 );
+    self._id_047A thread scripts\mp\movers::_id_73E7( var_15 );
 
     if ( level._id_F260 )
-        level _id_07AC::_id_C725();
+        level scripts\mp\gamelogic::resumetimer();
 
     return 1;
 }
@@ -713,7 +713,7 @@ _id_20E9( var_0 )
 {
     if ( isdefined( self._id_32AF ) )
     {
-        if ( _id_0A69::_id_6A43() == "tdef" )
+        if ( scripts\mp\utility\game::getgametype() == "tdef" )
             self._id_32AF scripts\mp\gametypes\tdef::_id_6D04();
 
         self._id_32AF._id_216D = undefined;
@@ -724,26 +724,26 @@ _id_20E9( var_0 )
 
         if ( !istrue( level._id_48BE ) )
         {
-            self._id_32AF scripts\mp\tac_ops\hostage_utility::_id_C4EF( "specialty_ballcarrier" );
+            self._id_32AF scripts\mp\utility\perk::removeperk( "specialty_ballcarrier" );
             self._id_32AF _id_07C1::_id_943E( self._id_32AF );
         }
 
         if ( self._id_32AF._id_7577 )
-            self._id_32AF scripts\mp\tac_ops\hostage_utility::_id_C4EF( "specialty_sprintfire" );
+            self._id_32AF scripts\mp\utility\perk::removeperk( "specialty_sprintfire" );
 
         self._id_32AF._id_7577 = 0;
 
         if ( level._id_39F9 )
             self._id_32AF _meth_80CB( 0 );
 
-        self._id_32AF _id_06BB::_id_1562( 1 );
+        self._id_32AF scripts\common\utility::_id_1562( 1 );
 
         if ( istrue( var_0 ) )
-            self._id_32AF scripts\engine\trace::_id_1512( 1, "obj_ball" );
+            self._id_32AF scripts\mp\equipment::_id_1512( 1, "obj_ball" );
 
         self._id_32AF _meth_8543( 0 );
         self._id_32AF._id_A850 = 0;
-        self._id_1042E[0] setorigin( undefined );
+        self._id_1042E[0] setotherent( undefined );
     }
 }
 
@@ -752,49 +752,49 @@ _id_2112()
     _id_20E4( level._id_212E[self._id_216F] );
     _id_2126();
     var_0 = self._id_1042E[0];
-    var_0 _id_07CD::_id_A65F();
+    var_0 scripts\mp\movers::_id_A65F();
     var_1 = var_0 _meth_8151();
 
     if ( isdefined( var_1 ) )
-        var_0 _meth_8415();
+        var_0 unlink();
 
     self._id_1042E[0] _id_E89A();
-    var_0 _meth_8254( var_0._id_02EA, ( 0, 0, 0 ) );
+    var_0 physicslaunchserver( var_0.origin, ( 0, 0, 0 ) );
     var_0 _meth_8544();
     _id_20F3();
 
     if ( isdefined( self._id_BD8D ) )
-        self._id_BD8D _meth_809A();
+        self._id_BD8D delete();
 
     var_2 = "none";
     var_3 = self._id_8F92;
 
     if ( isdefined( var_3 ) )
-        var_2 = _id_0A69::_id_6BC3( var_3 )[0];
+        var_2 = scripts\mp\utility\game::_id_6BC3( var_3 )[0];
 
     self._id_8F92 = "none";
     _id_20E9( 1 );
-    self._id_047A _id_07CD::_id_E8A0();
+    self._id_047A scripts\mp\movers::_id_E8A0();
     _id_2163();
 
-    if ( _id_0A69::_id_6A43() != "tdef" )
+    if ( scripts\mp\utility\game::getgametype() != "tdef" )
     {
         _id_07AD::_id_D678( var_0._id_22FB + ( 0, 0, 4000 ), ( 0, 0, 0 ) );
-        var_0 _meth_823B( var_0._id_22FB, 3, 0, 3 );
+        var_0 moveto( var_0._id_22FB, 3, 0, 3 );
         var_0 _meth_82A7( ( 0, 720, 0 ), 3, 0, 3 );
     }
     else
     {
         if ( !level._id_F260 )
-            level _id_07AC::_id_AF63();
+            level scripts\mp\gamelogic::pausetimer();
 
         var_0 hide( 1 );
-        self._id_1042E[0] _meth_8373( "uplink_drone_hide", "hide", 0 );
+        self._id_1042E[0] setscriptablepartstate( "uplink_drone_hide", "hide", 0 );
         thread _id_10821( var_0 );
     }
 
     if ( !istrue( level._id_48BE ) )
-        _func_019D( var_0._id_22FB, "mp_uplink_ball_reset" );
+        playsoundatpos( var_0._id_22FB, "mp_uplink_ball_reset" );
 
     if ( !self._id_8F91 && isdefined( var_3 ) && isdefined( var_2 ) )
     {
@@ -812,18 +812,18 @@ _id_2112()
 
     self._id_AD9B = "any";
 
-    if ( _id_0A69::_id_6A43() == "ball" || level._id_48BE )
+    if ( scripts\mp\utility\game::getgametype() == "ball" || level._id_48BE )
         thread _id_20F5( 3 );
 
     if ( !istrue( level._id_48BE ) )
         thread _id_20F4( var_0, 3 );
 
-    thread _id_06BB::_id_F737( level._id_9B9C, "obj_return", var_0._id_22FB );
+    thread scripts\common\utility::_id_F737( level._id_9B9C, "obj_return", var_0._id_22FB );
 }
 
 _id_20ED()
 {
-    self._id_1042E[0] _meth_824C();
+    self._id_1042E[0] notsolid();
 }
 
 _id_2114()
@@ -862,7 +862,7 @@ _id_2118()
     {
         thread _id_2115();
         var_1 = self._id_AE81;
-        var_2 = self._id_AE81._id_02EA;
+        var_2 = self._id_AE81.origin;
         wait 0.15;
 
         if ( isdefined( self._id_AE81 ) )
@@ -878,7 +878,7 @@ _id_212C()
     self endon( "death_or_disconnect" );
     self endon( "drop_object" );
 
-    if ( _id_0A69::_id_6A43() != "tdef" )
+    if ( scripts\mp\utility\game::getgametype() != "tdef" )
     {
         var_0 = getdvarfloat( "scr_ball_shoot_extra_pitch", 0 );
         var_1 = getdvarfloat( "scr_ball_shoot_force", 825 );
@@ -896,24 +896,24 @@ _id_212C()
         if ( var_2 != level._id_2193 )
             continue;
 
-        self _meth_83B5( var_2, 0 );
+        self setweaponammoclip( var_2, 0 );
         break;
     }
 
     if ( isdefined( self._id_32C6 ) )
     {
-        thread _id_07C5::_id_9780( "pass", self._id_02EA );
+        thread _id_07C5::_id_9780( "pass", self.origin );
 
         if ( !istrue( level._id_48BE ) )
-            self _meth_827B( "mp_uplink_ball_pass" );
+            self playsound( "mp_uplink_ball_pass" );
 
         wait 0.15;
 
-        if ( self _meth_81E6() )
+        if ( self issprintsliding() )
         {
             var_0 = -12;
 
-            if ( _id_0A69::_id_6A43() == "tdef" )
+            if ( scripts\mp\utility\game::getgametype() == "tdef" )
                 var_1 = var_1 + 200;
         }
 
@@ -948,7 +948,7 @@ _id_2168()
     {
         self waittill( "weapon_change", var_1 );
 
-        if ( isdefined( var_1 ) && _id_0A7F::_id_8A63( var_1._id_0084 ) )
+        if ( isdefined( var_1 ) && scripts\mp\utility\weapon::_id_8A63( var_1.basename ) )
             break;
     }
 
@@ -973,7 +973,7 @@ _id_EB10()
             _id_20F6();
             break;
         case "super_rewind":
-            _id_077B::_id_1087E( "teleport_success", "rewind_success" );
+            scripts\engine\utility::waittill_any_2( "teleport_success", "rewind_success" );
             _id_20F6();
             break;
     }
@@ -992,14 +992,14 @@ _id_2115()
 {
     self endon( "death_or_disconnect" );
     self._id_AE7E = 1;
-    self allowlean( 0 );
+    self allowmelee( 0 );
 
     while ( level._id_2193 == self getcurrentweapon() )
         waitframe();
 
-    self allowlean( 1 );
+    self allowmelee( 1 );
     self._id_AE7E = 0;
-    scripts\engine\trace::_id_1512( 1, "obj_ball" );
+    scripts\mp\equipment::_id_1512( 1, "obj_ball" );
 }
 
 _id_211D( var_0, var_1, var_2 )
@@ -1013,7 +1013,7 @@ _id_2116( var_0, var_1, var_2 )
     _id_212A( 1 );
 
     if ( isdefined( var_1 ) )
-        var_2 = var_1._id_02EA;
+        var_2 = var_1.origin;
 
     var_3 = var_0 _id_6BF3();
     var_4 = var_0 _id_6BF2();
@@ -1028,30 +1028,30 @@ _id_2116( var_0, var_1, var_2 )
     var_6 = var_4 * 60;
     var_7 = var_3 + var_5;
     var_8 = var_1 _id_6DA4();
-    var_9 = _id_077A::_id_E406( var_7, var_8, level._id_218F, var_0, level._id_2186, 0 );
+    var_9 = scripts\engine\trace::_id_E406( var_7, var_8, level._id_218F, var_0, level._id_2186, 0 );
     var_10 = 1.0;
 
     if ( var_9["fraction"] < 1 )
     {
-        if ( var_9["hittype"] == "hittype_entity" && isdefined( var_9["entity"] ) && _func_0117( var_9["entity"] ) )
-            var_10 = _func_0147( 0.1, 0.7 * var_9["fraction"] );
+        if ( var_9["hittype"] == "hittype_entity" && isdefined( var_9["entity"] ) && isplayer( var_9["entity"] ) )
+            var_10 = max( 0.1, 0.7 * var_9["fraction"] );
         else
             var_10 = 0.7 * var_9["fraction"];
 
-        _id_07AD::_id_D678( var_7 + var_5 * var_10, self._id_1042E[0]._id_0054 );
+        _id_07AD::_id_D678( var_7 + var_5 * var_10, self._id_1042E[0].angles );
     }
     else
-        _id_07AD::_id_D678( var_9["position"], self._id_1042E[0]._id_0054 );
+        _id_07AD::_id_D678( var_9["position"], self._id_1042E[0].angles );
 
     if ( isdefined( var_1 ) )
     {
-        self._id_BD8D = _id_09A2::_id_0C2D( _func_034C( "uplinkball_tracking_mp" ), var_7 + var_6 * var_10, var_8, var_0 );
-        self._id_BD8D _meth_8232( var_1, var_1 _id_6DA3() );
+        self._id_BD8D = scripts\cp_mp\utility\weapon_utility::_magicbullet( makeweapon( "uplinkball_tracking_mp" ), var_7 + var_6 * var_10, var_8, var_0 );
+        self._id_BD8D missile_settargetent( var_1, var_1 _id_6DA3() );
     }
 
-    self._id_047A._id_02EA = self._id_047A._id_02EA - ( 0, 0, 10000 );
+    self._id_047A.origin = self._id_047A.origin - ( 0, 0, 10000 );
     var_1 thread _id_116B( self._id_BD8D );
-    self._id_1042E[0] _meth_820B( self._id_BD8D );
+    self._id_1042E[0] linkto( self._id_BD8D );
     _id_20F3();
     _id_20F0();
     _id_20ED();
@@ -1063,7 +1063,7 @@ _id_2116( var_0, var_1, var_2 )
     thread _id_2131();
     thread _id_2133( var_1 );
 
-    if ( _id_0A69::_id_6A43() == "ball" )
+    if ( scripts\mp\utility\game::getgametype() == "ball" )
         thread scripts\mp\gametypes\ball::_id_2117();
 }
 
@@ -1078,19 +1078,19 @@ _id_B606( var_0 )
     {
         var_1 = undefined;
 
-        if ( !self isonground() )
+        if ( !self isonladder() )
         {
             var_2 = [];
 
-            foreach ( var_4 in level._id_B758 )
+            foreach ( var_4 in level.players )
             {
-                if ( !isdefined( var_4._id_045B ) )
+                if ( !isdefined( var_4.team ) )
                     continue;
 
-                if ( var_4._id_045B != self._id_045B )
+                if ( var_4.team != self.team )
                     continue;
 
-                if ( !_id_0A74::_id_89D3( var_4 ) )
+                if ( !scripts\mp\utility\player::isreallyalive( var_4 ) )
                     continue;
 
                 if ( !var_0 _id_20E7( var_4 ) )
@@ -1134,16 +1134,16 @@ _id_FF4D( var_0, var_1, var_2 )
     if ( var_7 > level._id_2185 )
         return 0;
 
-    var_8 = _func_025A( var_6 - var_4 );
-    var_9 = _func_0257( var_5, var_8 );
+    var_8 = vectornormalize( var_6 - var_4 );
+    var_9 = vectordot( var_5, var_8 );
 
     if ( var_9 > var_3 )
     {
         var_10 = var_5 * 30;
         var_11 = var_4 + var_10;
-        var_12 = _id_077A::_id_E406( var_11, var_6, level._id_218F, var_1, level._id_2186, 0 );
+        var_12 = scripts\engine\trace::_id_E406( var_11, var_6, level._id_218F, var_1, level._id_2186, 0 );
 
-        if ( isdefined( var_12["entity"] ) && _func_0117( var_12["entity"] ) || var_12["fraction"] > 0.8 )
+        if ( isdefined( var_12["entity"] ) && isplayer( var_12["entity"] ) || var_12["fraction"] > 0.8 )
         {
             var_2._id_AE76 = var_9;
             var_0._id_90A9 = var_4;
@@ -1165,14 +1165,14 @@ _id_B607()
 
     if ( isdefined( self._id_32C6._id_AEA1 ) && isdefined( self._id_32C6._id_AEA0 ) )
     {
-        _id_0A72::_id_ACB7( self._id_32C6._id_AEA1, self._id_32C6._id_AEA0 );
+        scripts\mp\utility\outline::outlinedisable( self._id_32C6._id_AEA1, self._id_32C6._id_AEA0 );
         self._id_32C6._id_AEA1 = undefined;
         self._id_32C6._id_AEA0 = undefined;
     }
 
     if ( isdefined( self._id_32C6._id_B71D ) && isdefined( self._id_32C6._id_B71C ) )
     {
-        _id_0A72::_id_ACB7( self._id_32C6._id_B71D, self._id_32C6._id_B71C );
+        scripts\mp\utility\outline::outlinedisable( self._id_32C6._id_B71D, self._id_32C6._id_B71C );
         self._id_32C6._id_B71D = undefined;
         self._id_32C6._id_B71C = undefined;
     }
@@ -1182,22 +1182,22 @@ _id_B607()
 
     var_0 = [];
     var_1 = [];
-    var_2 = _id_0A69::_id_6BC3( self._id_045B )[0];
+    var_2 = scripts\mp\utility\game::_id_6BC3( self.team )[0];
     var_3 = undefined;
     var_4 = undefined;
 
-    foreach ( var_6 in level._id_B758 )
+    foreach ( var_6 in level.players )
     {
         if ( var_6 == self )
             continue;
 
-        if ( var_6._id_045B == self._id_045B )
+        if ( var_6.team == self.team )
         {
             var_0[var_0.size] = var_6;
             continue;
         }
 
-        if ( var_6._id_045B == var_2 )
+        if ( var_6.team == var_2 )
             var_1[var_1.size] = var_6;
     }
 
@@ -1205,13 +1205,13 @@ _id_B607()
         var_9 = isdefined( self._id_AE81 ) && self._id_AE81 == var_6;
 
     if ( isdefined( self._id_AE81 ) )
-        var_3 = _id_0A72::_id_ACBD( self._id_AE81, self, "outline_depth_cyan", "level_script" );
+        var_3 = scripts\mp\utility\outline::outlineenableforplayer( self._id_AE81, self, "outline_depth_cyan", "level_script" );
 
     self._id_32C6._id_AEA1 = var_3;
     self._id_32C6._id_AEA0 = self._id_AE81;
 
-    if ( _id_0A69::_id_6A43() == "tdef" && var_0.size > 0 )
-        var_4 = _id_0A72::_id_ACBF( self, self._id_045B, "outlinefill_nodepth_cyan", "level_script" );
+    if ( scripts\mp\utility\game::getgametype() == "tdef" && var_0.size > 0 )
+        var_4 = scripts\mp\utility\outline::_id_ACBF( self, self.team, "outlinefill_nodepth_cyan", "level_script" );
 
     self._id_32C6._id_B71D = var_4;
     self._id_32C6._id_B71C = self;
@@ -1224,7 +1224,7 @@ _id_116B( var_0 )
 
     while ( isdefined( var_1 ) && isdefined( var_0 ) )
     {
-        var_0 _meth_8232( var_1, var_1 _id_6DA3() );
+        var_0 missile_settargetent( var_1, var_1 _id_6DA3() );
         waitframe();
     }
 }
@@ -1284,9 +1284,9 @@ _id_B5B8( var_0 )
         self._id_AE81 = var_0;
         var_4 = [];
 
-        foreach ( var_6 in level._id_B758 )
+        foreach ( var_6 in level.players )
         {
-            if ( var_6._id_045B == self._id_045B && var_6 != self && var_6 != var_0 )
+            if ( var_6.team == self.team && var_6 != self && var_6 != var_0 )
                 var_4[var_4.size] = var_6;
         }
 
@@ -1299,13 +1299,13 @@ _id_B5B8( var_0 )
 _id_B3DE()
 {
     if ( isdefined( self._id_AE7B ) )
-        self._id_AE7B delete();
+        self._id_AE7B destroy();
 
     var_0 = [];
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
-        if ( var_2._id_045B == self._id_045B && var_2 != self )
+        if ( var_2.team == self.team && var_2 != self )
             var_0[var_0.size] = var_2;
     }
 
@@ -1334,15 +1334,15 @@ _id_FF2C( var_0 )
 {
     var_1 = undefined;
 
-    if ( _func_036D( var_0 ) )
+    if ( isweapon( var_0 ) )
     {
-        if ( _func_036F( var_0 ) )
+        if ( isnullweapon( var_0 ) )
             return 0;
 
         if ( var_0 == level._id_2193 )
             return 0;
 
-        var_1 = var_0._id_0084;
+        var_1 = var_0.basename;
     }
 
     if ( _func_0120( var_0 ) )
@@ -1350,7 +1350,7 @@ _id_FF2C( var_0 )
         if ( var_0 == "none" )
             return 0;
 
-        if ( var_0 == level._id_2193._id_0084 )
+        if ( var_0 == level._id_2193.basename )
             return 0;
 
         var_1 = var_0;
@@ -1359,7 +1359,7 @@ _id_FF2C( var_0 )
     if ( _id_0A6F::_id_89E1( var_1 ) )
         return 0;
 
-    if ( _id_0A7F::_id_88DC( var_0 ) )
+    if ( scripts\mp\utility\weapon::_id_88DC( var_0 ) )
         return 0;
 
     return 1;
@@ -1374,7 +1374,7 @@ _id_210E()
     {
         if ( !isdefined( self._id_AE81 ) && !isdefined( self._id_32AF ) && !self._id_7D50 )
         {
-            if ( self._id_1042E[0]._id_02EA != self._id_1042E[0]._id_22FB + ( 0, 0, 4000 ) )
+            if ( self._id_1042E[0].origin != self._id_1042E[0]._id_22FB + ( 0, 0, 4000 ) )
             {
                 _id_2126();
 
@@ -1398,9 +1398,9 @@ _id_2132()
     for (;;)
     {
         if ( isdefined( var_0 ) )
-            self._id_900F = _func_025A( self._id_BD8D._id_02EA - var_0 );
+            self._id_900F = vectornormalize( self._id_BD8D.origin - var_0 );
 
-        var_0 = self._id_BD8D._id_02EA;
+        var_0 = self._id_BD8D.origin;
         waitframe();
     }
 }
@@ -1415,7 +1415,7 @@ _id_2131()
     for ( var_1 = var_0; var_1 < var_0 + 2000; var_1 = gettime() )
         waitframe();
 
-    self._id_BD8D _meth_809A();
+    self._id_BD8D delete();
 }
 
 _id_2133( var_0 )
@@ -1429,13 +1429,13 @@ _id_2133( var_0 )
         if ( !isdefined( var_0 ) )
             break;
 
-        if ( !_id_0A74::_id_89D3( var_0 ) )
+        if ( !scripts\mp\utility\player::isreallyalive( var_0 ) )
             break;
 
         waitframe();
     }
 
-    self._id_BD8D _meth_809A();
+    self._id_BD8D delete();
 }
 
 _id_2110()
@@ -1443,12 +1443,12 @@ _id_2110()
     self endon( "reset" );
     self._id_BD8D waittill( "death" );
     waittillframeend;
-    self._id_047A._id_02EA = self._id_411F;
+    self._id_047A.origin = self._id_411F;
     var_0 = self._id_1042E[0];
 
     if ( !isdefined( self._id_32AF ) && !self._id_7D50 )
     {
-        if ( var_0._id_02EA != var_0._id_22FB + ( 0, 0, 4000 ) )
+        if ( var_0.origin != var_0._id_22FB + ( 0, 0, 4000 ) )
         {
             _id_2126();
 
@@ -1467,7 +1467,7 @@ _id_2111()
 {
     self._id_1042E[0] endon( "pass_end" );
     self._id_BD8D waittill( "projectile_impact_player", var_0 );
-    self._id_047A._id_02EA = self._id_1042E[0]._id_02EA;
+    self._id_047A.origin = self._id_1042E[0].origin;
     self._id_047A notify( "trigger", var_0 );
 }
 
@@ -1475,7 +1475,7 @@ _id_211C( var_0, var_1 )
 {
     var_2 = self._id_1042E[0];
     var_2._id_AC6B = undefined;
-    var_3 = var_2._id_02EA;
+    var_3 = var_2.origin;
     var_4 = var_2;
 
     if ( isdefined( var_1 ) )
@@ -1485,30 +1485,30 @@ _id_211C( var_0, var_1 )
         var_5 = anglestoright( var_0 );
         var_3 = var_3 + ( var_5[0], var_5[1], 0 ) * 7;
 
-        if ( var_1 _meth_81E6() )
+        if ( var_1 issprintsliding() )
             var_3 = var_3 + ( 0, 0, 10 );
 
         var_6 = var_3;
-        var_7 = _func_025A( var_0 ) * 80;
+        var_7 = vectornormalize( var_0 ) * 80;
         var_8 = [ "physicscontents_clipshot", "physicscontents_missileclip", "physicscontents_vehicle", "physicscontents_characterproxy", "physicscontents_glass", "physicscontents_itemclip" ];
-        var_9 = _func_02C4( var_8 );
-        var_10 = _id_077A::_id_E406( var_6, var_6 + var_7, 38, var_1, var_9 );
+        var_9 = physics_createcontents( var_8 );
+        var_10 = scripts\engine\trace::_id_E406( var_6, var_6 + var_7, 38, var_1, var_9 );
 
         if ( var_10["fraction"] < 1 )
         {
             var_11 = 0.7 * var_10["fraction"];
-            _id_07AD::_id_D678( var_6 + var_7 * var_11, var_2._id_0054 );
+            _id_07AD::_id_D678( var_6 + var_7 * var_11, var_2.angles );
         }
         else
-            _id_07AD::_id_D678( var_10["position"], var_2._id_0054 );
+            _id_07AD::_id_D678( var_10["position"], var_2.angles );
     }
 
-    self._id_1042E[0] _meth_8254( var_2._id_02EA, var_0 );
+    self._id_1042E[0] physicslaunchserver( var_2.origin, var_0 );
     self._id_1042E[0] thread _id_0A67::_id_C1FB();
-    self._id_1042E[0] _meth_84FB();
+    self._id_1042E[0] physics_registerforcollisioncallback();
     _id_0A67::_id_C1FA( self._id_1042E[0], ::_id_2107 );
-    self._id_1042E[0]._id_02EA = self._id_047A._id_02EA;
-    self._id_047A _meth_820B( self._id_1042E[0] );
+    self._id_1042E[0].origin = self._id_047A.origin;
+    self._id_047A linkto( self._id_1042E[0] );
     level._id_39F4 = self._id_1042E[0];
     level._id_39F7 = var_4;
     level._id_39F6 = var_0;
@@ -1516,7 +1516,7 @@ _id_211C( var_0, var_1 )
     thread _id_211F( var_1 );
     thread _id_211A();
 
-    if ( _id_0A69::_id_6A43() == "ball" )
+    if ( scripts\mp\utility\game::getgametype() == "ball" )
         thread scripts\mp\gametypes\ball::_id_2121();
 
     thread _id_2120( var_1 );
@@ -1536,7 +1536,7 @@ _id_2120( var_0 )
     {
         var_2 waittill( "trigger", var_3 );
 
-        if ( !_func_0117( var_3 ) && !_func_0102( var_3 ) )
+        if ( !isplayer( var_3 ) && !isagent( var_3 ) )
             continue;
 
         if ( isdefined( var_0 ) && var_0 == var_3 && var_3 _id_B546() )
@@ -1545,7 +1545,7 @@ _id_2120( var_0 )
         if ( self._id_504E >= gettime() )
             continue;
 
-        if ( var_1._id_02EA == var_1._id_22FB + ( 0, 0, 4000 ) )
+        if ( var_1.origin == var_1._id_22FB + ( 0, 0, 4000 ) )
             continue;
 
         if ( !_id_20E7( var_3 ) )
@@ -1567,17 +1567,17 @@ _id_211B( var_0 )
 
     if ( isdefined( var_0 ) && var_0 )
     {
-        var_4 = _func_0130( var_3 ) * 0.4;
+        var_4 = length( var_3 ) * 0.4;
         thread _id_10C06();
     }
     else
-        var_4 = _func_0130( var_3 ) / 10;
+        var_4 = length( var_3 ) / 10;
 
-    var_5 = _func_025A( var_3 );
+    var_5 = vectornormalize( var_3 );
     var_5 = ( -1, -1, -0.5 ) * var_5;
-    var_1 _meth_8254( var_1._id_02EA, ( 0, 0, 0 ) );
+    var_1 physicslaunchserver( var_1.origin, ( 0, 0, 0 ) );
     var_1 _meth_8544();
-    var_1 _meth_8254( var_1._id_02EA, var_5 * var_4 );
+    var_1 physicslaunchserver( var_1.origin, var_5 * var_4 );
     var_1._id_B03C = 1;
 }
 
@@ -1588,13 +1588,13 @@ _id_B03A()
     for (;;)
     {
         self waittill( "projectile_impact", var_0, var_1, var_2, var_3 );
-        var_4 = level._id_0BA3["ball_physics_impact"];
+        var_4 = level._effect["ball_physics_impact"];
 
-        if ( isdefined( var_3 ) && isdefined( level._id_0BA3["ball_physics_impact_" + var_3] ) )
-            var_4 = level._id_0BA3["ball_physics_impact_" + var_3];
+        if ( isdefined( var_3 ) && isdefined( level._effect["ball_physics_impact_" + var_3] ) )
+            var_4 = level._effect["ball_physics_impact_" + var_3];
 
         if ( !istrue( level._id_48BE ) )
-            _func_0196( var_4, var_0, var_1 );
+            playfx( var_4, var_0, var_1 );
 
         wait 0.3;
     }
@@ -1604,7 +1604,7 @@ _id_2107( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
 {
     var_9 = var_0 _meth_846D( 0 );
     var_10 = _func_029C( var_9 );
-    var_11 = _func_0130( var_10 );
+    var_11 = length( var_10 );
 
     if ( isdefined( var_0._id_B84A ) || var_11 < 70 )
         return;
@@ -1612,7 +1612,7 @@ _id_2107( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
     var_0 endon( "death" );
     var_0._id_B84A = 1;
     var_12 = "mp_uplink_ball_bounce";
-    var_0 _meth_827B( var_12 );
+    var_0 playsound( var_12 );
     var_13 = _func_0140( var_12 );
     wait 0.1;
     var_0._id_B84A = undefined;
@@ -1638,19 +1638,19 @@ _id_2127( var_0, var_1 )
     level._id_2188 = 1;
     self._id_7D50 = 0;
     var_2 = self._id_1042E[0];
-    var_2 _meth_8254( var_2._id_02EA, ( 0, 0, 0 ) );
+    var_2 physicslaunchserver( var_2.origin, ( 0, 0, 0 ) );
     var_2 _meth_8544();
 
     if ( !istrue( level._id_48BE ) )
     {
-        _func_019D( var_2._id_02EA, "mp_uplink_ball_out_of_bounds" );
-        _func_0196( _id_077B::_id_6A40( "ball_teleport" ), var_2._id_02EA );
+        playsoundatpos( var_2.origin, "mp_uplink_ball_out_of_bounds" );
+        playfx( scripts\engine\utility::getfx( "ball_teleport" ), var_2.origin );
     }
 
     if ( isdefined( self._id_32AF ) )
-        self._id_32AF _id_077B::_id_46C3( 0.05, ::_id_B607 );
+        self._id_32AF scripts\engine\utility::_id_46C3( 0.05, ::_id_B607 );
 
-    self._id_1042E[0] _meth_8373( "uplink_drone_hide", "show", 0 );
+    self._id_1042E[0] setscriptablepartstate( "uplink_drone_hide", "show", 0 );
     thread _id_07AD::_id_C78A();
 }
 
@@ -1672,11 +1672,11 @@ _id_20F5( var_0 )
 
     if ( !istrue( level._id_48BE ) )
     {
-        _func_0196( level._id_0BA3["ball_download_end"], self._id_411F );
+        playfx( level._effect["ball_download_end"], self._id_411F );
         thread _id_20F9( 0, 1 );
     }
 
-    if ( _id_0A69::_id_6A43() == "tdef" )
+    if ( scripts\mp\utility\game::getgametype() == "tdef" )
     {
         level _id_FD64( "neutral", 1, 1 );
         level._id_218A[0] thread _id_E6B7();
@@ -1690,13 +1690,13 @@ _id_10821( var_0 )
     _id_07AD::_id_1574( "none" );
 
     if ( level._id_2169 != 0 )
-        _id_07B7::_id_1084D( level._id_2169 );
+        scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( level._id_2169 );
 
     if ( level._id_F260 )
-        level _id_07AC::_id_C725();
+        level scripts\mp\gamelogic::resumetimer();
 
     _id_07AD::_id_D678( var_0._id_22FB, ( 0, 0, 0 ) );
-    self._id_1042E[0] _meth_8373( "uplink_drone_hide", "show", 0 );
+    self._id_1042E[0] setscriptablepartstate( "uplink_drone_hide", "show", 0 );
     thread _id_20F5( 0 );
     var_0 _meth_82A7( ( 0, 720, 0 ), 3, 0, 3 );
 }
@@ -1708,14 +1708,14 @@ _id_E6B7()
     self endon( "pickup_object" );
     self notify( "hoverAnimStart" );
     self endon( "hoverAnimStart" );
-    var_0 = self._id_1042E[0]._id_02EA;
-    self._id_1042E[0] rotatevelocity( 2000, 60, 0.2, 0.2 );
+    var_0 = self._id_1042E[0].origin;
+    self._id_1042E[0] rotateyaw( 2000, 60, 0.2, 0.2 );
 
     for (;;)
     {
-        self._id_1042E[0] _meth_823B( var_0 + ( 0, 0, 5 ), 1, 0.5, 0.5 );
+        self._id_1042E[0] moveto( var_0 + ( 0, 0, 5 ), 1, 0.5, 0.5 );
         wait 1;
-        self._id_1042E[0] _meth_823B( var_0 - ( 0, 0, 5 ), 1, 0.5, 0.5 );
+        self._id_1042E[0] moveto( var_0 - ( 0, 0, 5 ), 1, 0.5, 0.5 );
         wait 1;
     }
 }
@@ -1736,13 +1736,13 @@ _id_211E()
     {
         for ( var_3 = 0; var_3 < 2; var_3++ )
         {
-            if ( var_0._id_02EA[var_3] > level._id_210B[var_3] + var_1[var_3] )
+            if ( var_0.origin[var_3] > level._id_210B[var_3] + var_1[var_3] )
             {
                 _id_2127( 1, 1 );
                 return;
             }
 
-            if ( var_0._id_02EA[var_3] < level._id_210C[var_3] - var_2[var_3] )
+            if ( var_0.origin[var_3] < level._id_210C[var_3] - var_2[var_3] )
             {
                 _id_2127( 1, 1 );
                 return;
@@ -1861,7 +1861,7 @@ _id_210A()
 {
     for (;;)
     {
-        var_0 = _id_077B::_id_10897( "pickup_object", "dropped", "reset", "ball_ready" );
+        var_0 = scripts\engine\utility::_id_10897( "pickup_object", "dropped", "reset", "ball_ready" );
 
         switch ( var_0 )
         {
@@ -1883,13 +1883,13 @@ _id_20EC( var_0 )
 {
     self endon( "death_or_disconnect" );
     var_0 endon( "reset" );
-    var_1 = _func_020F();
+    var_1 = spawnstruct();
     var_1 endon( "timer_done" );
     var_1 thread _id_F24D( 1.5 );
     var_0 waittill( "pickup_object" );
     var_1 _id_F246();
 
-    if ( !isdefined( var_0._id_32AF ) || var_0._id_32AF._id_045B == self._id_045B )
+    if ( !isdefined( var_0._id_32AF ) || var_0._id_32AF.team == self.team )
         return;
 
     var_0._id_32AF endon( "disconnect" );
@@ -1927,7 +1927,7 @@ _id_2165()
 
 _id_2164( var_0 )
 {
-    if ( _id_0A69::_id_6A43() == "ball" )
+    if ( scripts\mp\utility\game::getgametype() == "ball" )
         var_1 = "waypoint_escort";
     else
         var_1 = "waypoint_defend_round";
@@ -1937,7 +1937,7 @@ _id_2164( var_0 )
 
 _id_2163()
 {
-    if ( _id_0A69::_id_6A43() == "ball" )
+    if ( scripts\mp\utility\game::getgametype() == "ball" )
         var_0 = "waypoint_ball_download";
     else
         var_0 = "waypoint_reset_marker";
@@ -1952,34 +1952,34 @@ _id_2167()
 
 _id_2126()
 {
-    self._id_1042E[0] _meth_83CE();
+    self._id_1042E[0] solid();
 }
 
 _id_20F3()
 {
-    self._id_1042E[0] _meth_80BE();
+    self._id_1042E[0] dontinterpolate();
     self._id_20F8 = 0;
 }
 
 _id_20E4( var_0 )
 {
     foreach ( var_2 in self._id_1042E )
-        var_2._id_22FB = var_0._id_02EA;
+        var_2._id_22FB = var_0.origin;
 
-    self._id_047A._id_22FB = var_0._id_02EA;
+    self._id_047A._id_22FB = var_0.origin;
     self._id_417C = var_0;
     var_0._id_7D63 = 1;
 }
 
 _id_20F0()
 {
-    if ( isdefined( self._id_8D49 ) )
-        self._id_8D49 _meth_809A();
+    if ( isdefined( self.killcament ) )
+        self.killcament delete();
 
-    self._id_8D49 = _func_0205( "script_model", self._id_1042E[0]._id_02EA );
-    self._id_8D49 _meth_820B( self._id_1042E[0] );
-    self._id_8D49 _meth_824C();
-    self._id_8D49 setscriptablepartstate( "explosive" );
+    self.killcament = spawn( "script_model", self._id_1042E[0].origin );
+    self.killcament linkto( self._id_1042E[0] );
+    self.killcament notsolid();
+    self.killcament _meth_8374( "explosive" );
 }
 
 _id_812A()
@@ -2025,7 +2025,7 @@ _id_FD64( var_0, var_1, var_2, var_3 )
     else
         level._id_216E = int( gettime() + 1000 * level._id_218B );
 
-    _func_01E4( "ui_hardpoint_timer", level._id_216E );
+    setomnvar( "ui_hardpoint_timer", level._id_216E );
 
     if ( var_5 > 0 && ( istrue( var_3 ) || !var_1 && level._id_218C ) )
         level._id_20E2 thread _id_2189( var_0, var_4 );
@@ -2047,7 +2047,7 @@ _id_2189( var_0, var_1 )
     if ( !istrue( level._id_2188 ) )
     {
         _id_07AD::_id_1574( "none" );
-        _id_212A( 1, self._id_047A._id_02EA, 1 );
+        _id_212A( 1, self._id_047A.origin, 1 );
         _id_2127( 1, 1 );
     }
 }
@@ -2056,7 +2056,7 @@ _id_218E( var_0, var_1 )
 {
     level endon( "game_ended" );
     level endon( "pause_ball_timer" );
-    var_2 = _id_077B::_id_F07F( isdefined( var_1 ), var_1, int( level._id_218B * 1000 + gettime() ) );
+    var_2 = scripts\engine\utility::ter_op( isdefined( var_1 ), var_1, int( level._id_218B * 1000 + gettime() ) );
     level _id_C720( var_1 );
     thread _id_10C17();
     level thread _id_743C( var_2 );
@@ -2113,16 +2113,16 @@ _id_743C( var_0 )
     level endon( "game_ended" );
     level endon( "disconnect" );
     level waittill( "host_migration_begin" );
-    _func_01E4( "ui_objective_timer_stopped", 1 );
-    var_1 = _id_07B7::_id_10956();
+    setomnvar( "ui_objective_timer_stopped", 1 );
+    var_1 = scripts\mp\hostmigration::_id_10956();
 
     if ( !level._id_218D )
-        _func_01E4( "ui_objective_timer_stopped", 0 );
+        setomnvar( "ui_objective_timer_stopped", 0 );
 
     if ( var_1 > 0 )
-        _func_01E4( "ui_hardpoint_timer", level._id_216E + var_1 );
+        setomnvar( "ui_hardpoint_timer", level._id_216E + var_1 );
     else
-        _func_01E4( "ui_hardpoint_timer", level._id_216E );
+        setomnvar( "ui_hardpoint_timer", level._id_216E );
 }
 
 _id_10C17()
@@ -2168,12 +2168,12 @@ _id_FC0D( var_0 )
     if ( !level._id_218D && var_1 )
     {
         level._id_218D = 1;
-        _func_01E4( "ui_objective_timer_stopped", 1 );
+        setomnvar( "ui_objective_timer_stopped", 1 );
     }
     else if ( level._id_218D && !var_1 )
     {
         level._id_218D = 0;
-        _func_01E4( "ui_objective_timer_stopped", 0 );
+        setomnvar( "ui_objective_timer_stopped", 0 );
     }
 }
 
@@ -2202,8 +2202,8 @@ _id_20FA( var_0 )
 {
     if ( _id_20F8() )
     {
-        self._id_1042E[0] _meth_8373( "uplink_drone_idle", "normal", 0 );
-        self._id_1042E[0] _meth_8373( "uplink_drone_tail", "normal", 0 );
+        self._id_1042E[0] setscriptablepartstate( "uplink_drone_idle", "normal", 0 );
+        self._id_1042E[0] setscriptablepartstate( "uplink_drone_tail", "normal", 0 );
     }
 }
 
@@ -2219,8 +2219,8 @@ _id_20F9( var_0, var_1 )
 
     if ( !_id_20F8() )
     {
-        self._id_1042E[0] _meth_8373( "uplink_drone_idle", "normal", 0 );
-        self._id_1042E[0] _meth_8373( "uplink_drone_tail", "normal", 0 );
+        self._id_1042E[0] setscriptablepartstate( "uplink_drone_idle", "normal", 0 );
+        self._id_1042E[0] setscriptablepartstate( "uplink_drone_tail", "normal", 0 );
         self._id_20F8 = 1;
     }
 }
@@ -2240,13 +2240,13 @@ _id_20FB()
 
 _id_E89A()
 {
-    self _meth_8373( "uplink_drone_idle", "off", 0 );
-    self _meth_8373( "uplink_drone_tail", "off", 0 );
+    self setscriptablepartstate( "uplink_drone_idle", "off", 0 );
+    self setscriptablepartstate( "uplink_drone_tail", "off", 0 );
 }
 
 _id_20F4( var_0, var_1 )
 {
-    _id_077B::_id_108F3( "pickup_object", var_1 );
+    scripts\engine\utility::_id_108F3( "pickup_object", var_1 );
     level._id_CBF8 = 0;
     level notify( "goal_ready" );
 }
@@ -2264,7 +2264,7 @@ _id_A211()
 
         if ( !isdefined( level._id_218A[0]._id_32AF ) )
         {
-            level._id_218A[0]._id_1042E[0] _meth_8254( level._id_218A[0]._id_1042E[0]._id_02EA, ( 0, 0, 0 ) );
+            level._id_218A[0]._id_1042E[0] physicslaunchserver( level._id_218A[0]._id_1042E[0].origin, ( 0, 0, 0 ) );
             level._id_218A[0]._id_1042E[0] _meth_8544();
 
             while ( !isdefined( level._id_218A[0]._id_32AF ) )
@@ -2281,7 +2281,7 @@ _id_A211()
                         break;
                 }
 
-                level._id_218A[0]._id_1042E[0] _meth_823B( self._id_02EA + ( 0, 0, var_0 ), 0.3, 0.15, 0.1 );
+                level._id_218A[0]._id_1042E[0] moveto( self.origin + ( 0, 0, var_0 ), 0.3, 0.15, 0.1 );
                 wait 0.1;
             }
         }
@@ -2321,14 +2321,14 @@ _id_6FB7()
     self endon( "death_or_disconnect" );
     level endon( "game_ended" );
 
-    if ( _id_077B::_id_864F() )
+    if ( scripts\engine\utility::is_player_gamepad_enabled() )
     {
-        self _meth_824A( "call_ball", "+actionslot 3" );
+        self notifyonplayercommand( "call_ball", "+actionslot 3" );
         self iprintlnbold( &"PLATFORM/UPLINK_PRACTICE_SLOT3" );
     }
     else
     {
-        self _meth_824A( "call_ball", "+actionslot 7" );
+        self notifyonplayercommand( "call_ball", "+actionslot 7" );
         self iprintlnbold( &"PLATFORM/UPLINK_PRACTICE_SLOT7" );
     }
 
@@ -2434,5 +2434,5 @@ _id_6DA4()
 _id_6DA3()
 {
     var_0 = _id_6DA4();
-    return ( 0, 0, var_0[2] - self._id_02EA[2] );
+    return ( 0, 0, var_0[2] - self.origin[2] );
 }

@@ -19,7 +19,7 @@ _id_9FFD( var_0, var_1, var_2 )
 _id_10EB( var_0, var_1, var_2 )
 {
     level._id_EF67[var_1]["teamCount"]++;
-    level._id_EF67[var_1]["players"] = _id_077B::_id_1B63( level._id_EF67[var_1]["players"], var_0 );
+    level._id_EF67[var_1]["players"] = scripts\engine\utility::array_add( level._id_EF67[var_1]["players"], var_0 );
 
     if ( var_2 )
         _id_114F( var_0, var_1 );
@@ -28,41 +28,41 @@ _id_10EB( var_0, var_1, var_2 )
 _id_C4FB( var_0, var_1 )
 {
     level._id_EF67[var_1]["teamCount"]--;
-    level._id_EF67[var_1]["players"] = _id_077B::_id_1B96( level._id_EF67[var_1]["players"], var_0 );
+    level._id_EF67[var_1]["players"] = scripts\engine\utility::array_remove( level._id_EF67[var_1]["players"], var_0 );
 }
 
 _id_114F( var_0, var_1, var_2 )
 {
     level._id_EF67[var_1]["aliveCount"]++;
-    level._id_EF67[var_1]["alivePlayers"] = _id_077B::_id_1B63( level._id_EF67[var_1]["alivePlayers"], var_0 );
+    level._id_EF67[var_1]["alivePlayers"] = scripts\engine\utility::array_add( level._id_EF67[var_1]["alivePlayers"], var_0 );
 
     if ( level._id_A2E9 )
         level._id_EF67[var_1]["deathEvent"] = 0;
 
     _id_FF40( "add", var_1, var_0 );
 
-    if ( _id_0A69::_id_98BC() )
+    if ( scripts\mp\utility\game::_id_98BC() )
         return;
 
-    if ( istrue( var_2 ) && _id_885E( var_1 ) && !_id_0999::_id_89D2() )
+    if ( istrue( var_2 ) && _id_885E( var_1 ) && !scripts\cp_mp\utility\game_utility::_id_89D2() )
     {
         foreach ( var_0 in level._id_EF67[var_1]["players"] )
-            var_0 _meth_8275( "mp_bodycount_tick_positive" );
+            var_0 playlocalsound( "mp_bodycount_tick_positive" );
 
         var_5 = _id_69DE( var_1 );
 
         foreach ( var_0 in var_5 )
-            var_0 _meth_8275( "mp_bodycount_tick_negative" );
+            var_0 playlocalsound( "mp_bodycount_tick_negative" );
     }
 }
 
 _id_C4B0( var_0, var_1, var_2 )
 {
     level._id_EF67[var_1]["aliveCount"]--;
-    level._id_EF67[var_1]["alivePlayers"] = _id_077B::_id_1B96( level._id_EF67[var_1]["alivePlayers"], var_0 );
+    level._id_EF67[var_1]["alivePlayers"] = scripts\engine\utility::array_remove( level._id_EF67[var_1]["alivePlayers"], var_0 );
     _id_FF40( "remove", var_1, var_0 );
 
-    if ( istrue( var_2 ) && _id_885E( var_1 ) && !_id_0999::_id_89D2() )
+    if ( istrue( var_2 ) && _id_885E( var_1 ) && !scripts\cp_mp\utility\game_utility::_id_89D2() )
     {
         var_3 = "mp_bodycount_tick_negative";
         var_4 = "mp_bodycount_tick_positive";
@@ -78,7 +78,7 @@ _id_C4B0( var_0, var_1, var_2 )
 
         }
 
-        if ( !_id_0A69::_id_98BC() )
+        if ( !scripts\mp\utility\game::_id_98BC() )
         {
             var_7 = _id_69DE( var_1 );
 
@@ -98,14 +98,14 @@ _id_FF40( var_0, var_1, var_2 )
 
     if ( var_0 == "disconnect" )
     {
-        var_4 = _id_077B::_id_1B78( level._id_EF67[var_1]["alivePlayers"], var_2 );
+        var_4 = scripts\engine\utility::array_contains( level._id_EF67[var_1]["alivePlayers"], var_2 );
 
         if ( var_4 && var_3 )
-            var_2 _id_07D9::_id_C496( 1 );
+            var_2 scripts\mp\playerlogic::_id_C496( 1 );
     }
     else if ( var_0 == "add" )
     {
-        var_6 = _id_077B::_id_1B99( level._id_EF67[var_1]["alivePlayers"] );
+        var_6 = scripts\engine\utility::_id_1B99( level._id_EF67[var_1]["alivePlayers"] );
 
         if ( var_6.size < level._id_EF67[var_1]["alivePlayers"].size )
         {
@@ -128,12 +128,12 @@ _id_FF40( var_0, var_1, var_2 )
         else
             var_9 = "WARNING: alivePlayers and aliveCount are out of sync!";
 
-        _func_03BA( "dlog_event_alive_count_mismatch", [ "alive_players", var_7, "alive_count", var_8, "event", var_0, "team", var_1, "player_xuid", var_2 getxuid(), "player_name", var_2._id_02BA ] );
+        _func_03BA( "dlog_event_alive_count_mismatch", [ "alive_players", var_7, "alive_count", var_8, "event", var_0, "team", var_1, "player_xuid", var_2 getxuid(), "player_name", var_2.name ] );
         _id_0A78::_id_479A( var_9 );
 
         if ( var_3 )
         {
-            level._id_EF67[var_1]["alivePlayers"] = _id_077B::_id_1B99( level._id_EF67[var_1]["alivePlayers"] );
+            level._id_EF67[var_1]["alivePlayers"] = scripts\engine\utility::_id_1B99( level._id_EF67[var_1]["alivePlayers"] );
             level._id_EF67[var_1]["aliveCount"] = level._id_EF67[var_1]["alivePlayers"].size;
             [[ level._id_FC72 ]]();
         }
@@ -151,7 +151,7 @@ _id_6DAB( var_0, var_1 )
 _id_69E2( var_0 )
 {
     var_1 = level._id_EF86;
-    var_1 = _id_077B::_id_1B96( var_1, var_0 );
+    var_1 = scripts\engine\utility::array_remove( var_1, var_0 );
     return var_1;
 }
 
@@ -163,7 +163,7 @@ _id_6A3A( var_0, var_1 )
     {
         foreach ( var_4 in level._id_EF67[var_0]["alivePlayers"] )
         {
-            if ( isdefined( var_4 ) && isai( var_4 ) && !isdefined( var_4._id_59C0 ) )
+            if ( isdefined( var_4 ) && isalive( var_4 ) && !isdefined( var_4._id_59C0 ) )
                 var_2[var_2.size] = var_4;
         }
     }
@@ -187,7 +187,7 @@ _id_69DE( var_0, var_1 )
         {
             foreach ( var_7 in level._id_EF67[var_5]["alivePlayers"] )
             {
-                if ( isdefined( var_7 ) && isai( var_7 ) && !isdefined( var_7._id_59C0 ) )
+                if ( isdefined( var_7 ) && isalive( var_7 ) && !isdefined( var_7._id_59C0 ) )
                     var_2[var_2.size] = var_7;
             }
 
@@ -214,7 +214,7 @@ _id_69DC( var_0, var_1 )
 
 _id_885E( var_0 )
 {
-    return isdefined( var_0 ) && _id_077B::_id_1B78( level._id_EF86, var_0 );
+    return isdefined( var_0 ) && scripts\engine\utility::array_contains( level._id_EF86, var_0 );
 }
 
 _id_6A10( var_0 )
@@ -241,7 +241,7 @@ _id_6DBC( var_0 )
 _id_6DB2( var_0 )
 {
     if ( !isdefined( level._id_EF67[var_0]["teamIcon"] ) )
-        level._id_EF67[var_0]["teamIcon"] = stopfxontag( "mp/factionTable.csv", 0, game[var_0], 5 );
+        level._id_EF67[var_0]["teamIcon"] = _func_021D( "mp/factionTable.csv", 0, game[var_0], 5 );
 
     return level._id_EF67[var_0]["teamIcon"];
 }
@@ -249,7 +249,7 @@ _id_6DB2( var_0 )
 _id_6DB1( var_0 )
 {
     if ( !isdefined( level._id_EF67[var_0]["headIcon"] ) )
-        level._id_EF67[var_0]["headIcon"] = stopfxontag( "mp/factionTable.csv", 0, game[var_0], 7 );
+        level._id_EF67[var_0]["headIcon"] = _func_021D( "mp/factionTable.csv", 0, game[var_0], 7 );
 
     return level._id_EF67[var_0]["headIcon"];
 }
@@ -257,7 +257,7 @@ _id_6DB1( var_0 )
 _id_6DC1( var_0 )
 {
     if ( !isdefined( level._id_EF67[var_0]["soundInfix"] ) )
-        level._id_EF67[var_0]["soundInfix"] = stopfxontag( "mp/factionTable.csv", 0, game[var_0], 8 );
+        level._id_EF67[var_0]["soundInfix"] = _func_021D( "mp/factionTable.csv", 0, game[var_0], 8 );
 
     return level._id_EF67[var_0]["soundInfix"];
 }
@@ -265,7 +265,7 @@ _id_6DC1( var_0 )
 _id_699B( var_0 )
 {
     if ( !isdefined( level._id_EF67[var_0]["customizationInfix"] ) )
-        level._id_EF67[var_0]["customizationInfix"] = stopfxontag( "mp/factionTable.csv", 0, game[var_0], 10 );
+        level._id_EF67[var_0]["customizationInfix"] = _func_021D( "mp/factionTable.csv", 0, game[var_0], 10 );
 
     return level._id_EF67[var_0]["customizationInfix"];
 }
@@ -299,7 +299,7 @@ _id_6DAE( var_0 )
                 break;
         }
 
-        level._id_EF67[var_0]["teamFaction"] = stopfxontag( "mp/mapInfo.csv", 0, _id_0999::_id_6B0E(), var_1 );
+        level._id_EF67[var_0]["teamFaction"] = _func_021D( "mp/mapInfo.csv", 0, scripts\cp_mp\utility\game_utility::_id_6B0E(), var_1 );
 
         if ( level._id_EF67[var_0]["teamFaction"] == "" )
             level._id_EF67[var_0]["teamFaction"] = "USMC";
@@ -312,12 +312,12 @@ _id_6DAE( var_0 )
 
 _id_6999()
 {
-    var_0 = _id_0A69::_id_6A43();
+    var_0 = scripts\mp\utility\game::getgametype();
     return getdvarint( "scr_" + var_0 + "_teamcount", -1 );
 }
 
 _id_EF59()
 {
-    _id_099D::_id_C2A5( "team_utility", "getFriendlyPlayers", ::_id_6A3A );
-    _id_099D::_id_C2A5( "team_utility", "getEnemyPlayers", ::_id_69DE );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "team_utility", "getFriendlyPlayers", ::_id_6A3A );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "team_utility", "getEnemyPlayers", ::_id_69DE );
 }

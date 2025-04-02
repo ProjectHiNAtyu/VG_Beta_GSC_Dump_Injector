@@ -3,7 +3,7 @@
 
 _id_1B39()
 {
-    var_0 = scripts\engine\trace::_id_69F6( "health" );
+    var_0 = scripts\mp\equipment::_id_69F6( "health" );
 
     if ( var_0 <= 0 )
         return;
@@ -19,13 +19,13 @@ _id_1B39()
 
     var_1 = self._id_29E8 + 5;
     var_2 = clamp( var_1, 0, self._id_2A57 );
-    var_3 = _func_0147( 1, getdvarint( "scr_br_armor_heal_amount", 50 ) );
+    var_3 = max( 1, getdvarint( "scr_br_armor_heal_amount", 50 ) );
     var_2 = int( var_2 / var_3 ) * var_3 + var_3;
     self._id_29E8 = clamp( var_2, 0, self._id_2A57 );
     var_4 = self._id_29E8 / self._id_2A57;
     var_5 = int( var_4 * 100 );
     scripts\mp\gametypes\br_public::_id_FC17( "armorHealthRatio", int( self._id_29E8 ) );
-    scripts\engine\trace::_id_4538( "health", 1 );
+    scripts\mp\equipment::_id_4538( "health", 1 );
     _id_0793::_id_ABBE( "armor_plate" );
     self notify( "armor_plate_inserted" );
 }
@@ -34,7 +34,7 @@ _id_1B36()
 {
     var_0 = self._id_29E8 + 5;
     var_1 = clamp( var_0, 0, self._id_2A57 );
-    var_2 = _func_0147( 1, getdvarint( "scr_br_armor_heal_amount", 50 ) );
+    var_2 = max( 1, getdvarint( "scr_br_armor_heal_amount", 50 ) );
     var_1 = int( var_1 / var_2 ) * var_2;
     var_3 = clamp( var_1, 0, self._id_2A57 );
 
@@ -71,8 +71,8 @@ _id_FE23( var_0, var_1 )
             return;
     }
 
-    var_2 = _func_034C( "armor_plate_deploy_mp" );
-    var_3 = _id_099B::_id_4034( "", self );
+    var_2 = makeweapon( "armor_plate_deploy_mp" );
+    var_3 = scripts\cp_mp\utility\killstreak_utility::_id_4034( "", self );
     var_3._id_1B4C = var_2;
     thread _id_10AC1();
     _id_F2D8( 1 );
@@ -84,15 +84,15 @@ _id_10AC1()
     self endon( "armor_plate_done" );
     self endon( "armor_repair_end" );
     self endon( "disconnect" );
-    _id_077B::_id_108C3( "death", "last_stand_start" );
+    scripts\engine\utility::_id_108C3( "death", "last_stand_start" );
     _id_F2D8( 0 );
 }
 
 _id_F2D8( var_0 )
 {
-    _id_06BB::_id_155F( !var_0 );
-    self allowlean( !var_0 );
-    _id_06BB::_id_1527( !var_0 );
+    scripts\common\utility::_id_155F( !var_0 );
+    self allowmelee( !var_0 );
+    scripts\common\utility::_id_1527( !var_0 );
     self._id_82CE = var_0;
 }
 
@@ -161,7 +161,7 @@ _id_82CC( var_0 )
     while ( _id_DB10() )
     {
         var_7 = self._id_5532["health"];
-        var_8 = scripts\engine\trace::_id_69F6( "health" );
+        var_8 = scripts\mp\equipment::_id_69F6( "health" );
 
         if ( isdefined( var_7 ) && isdefined( var_8 ) && var_8 > 0 && self._id_29E8 < self._id_2A57 )
         {
@@ -191,7 +191,7 @@ _id_8730()
 {
     if ( isdefined( self._id_FFF1 ) )
     {
-        var_0 = _id_09BA::_id_101A4( self._id_FFF1, self );
+        var_0 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A4( self._id_FFF1, self );
 
         if ( var_0 == "driver" )
             return 0;
@@ -202,7 +202,7 @@ _id_8730()
 
     if ( self._id_29E8 == self._id_2A57 )
     {
-        _id_07B9::_id_DC9F( level._id_2A6F._id_2A68 );
+        scripts\mp\hud_message::_id_DC9F( level._id_2A6F._id_2A68 );
         return 0;
     }
 
@@ -211,7 +211,7 @@ _id_8730()
 
 _id_DB10()
 {
-    var_0 = _id_077B::_id_864F() && self _meth_876C();
+    var_0 = scripts\engine\utility::is_player_gamepad_enabled() && self _meth_876C();
     var_1 = isdefined( self._id_1B3B ) && self._id_1B3B > 0;
     return var_0 || var_1;
 }
@@ -227,13 +227,13 @@ _id_1B40()
 {
     self endon( "armor_repair_end" );
     self endon( "disconnect" );
-    self _meth_824A( "try_armor_repair_cancel", "+weapnext" );
-    self _meth_824A( "try_armor_repair_cancel", "+weapprev" );
-    self _meth_824A( "try_armor_repair_cancel", "+attack" );
-    self _meth_824A( "try_armor_repair_cancel", "+smoke" );
-    self _meth_824A( "try_armor_repair_cancel", "+frag" );
-    self _meth_824A( "try_armor_repair_cancel", "+melee_zoom" );
-    _id_077B::_id_10882( "death", "mantle_start", "try_armor_repair_cancel", "last_stand_start", "special_weapon_fired", "armor_plate_done" );
+    self notifyonplayercommand( "try_armor_repair_cancel", "+weapnext" );
+    self notifyonplayercommand( "try_armor_repair_cancel", "+weapprev" );
+    self notifyonplayercommand( "try_armor_repair_cancel", "+attack" );
+    self notifyonplayercommand( "try_armor_repair_cancel", "+smoke" );
+    self notifyonplayercommand( "try_armor_repair_cancel", "+frag" );
+    self notifyonplayercommand( "try_armor_repair_cancel", "+melee_zoom" );
+    scripts\engine\utility::_id_10882( "death", "mantle_start", "try_armor_repair_cancel", "last_stand_start", "special_weapon_fired", "armor_plate_done" );
     thread _id_1B42();
 }
 
@@ -265,14 +265,14 @@ _id_1B3F()
 _id_1B42()
 {
     self endon( "disconnect" );
-    self notifyonplayercommand( "try_armor_repair_cancel", "+weapnext" );
-    self notifyonplayercommand( "try_armor_repair_cancel", "+attack" );
-    self notifyonplayercommand( "try_armor_repair_cancel", "+smoke" );
-    self notifyonplayercommand( "try_armor_repair_cancel", "+frag" );
-    self notifyonplayercommand( "try_armor_repair_cancel", "+melee_zoom" );
+    self _meth_824B( "try_armor_repair_cancel", "+weapnext" );
+    self _meth_824B( "try_armor_repair_cancel", "+attack" );
+    self _meth_824B( "try_armor_repair_cancel", "+smoke" );
+    self _meth_824B( "try_armor_repair_cancel", "+frag" );
+    self _meth_824B( "try_armor_repair_cancel", "+melee_zoom" );
     self notify( "armor_repair_end" );
 
-    while ( self._id_0122._id_0084 == "armor_plate_deploy_mp" )
+    while ( self._id_0122.basename == "armor_plate_deploy_mp" )
         waitframe();
 
     waitframe();
@@ -283,10 +283,10 @@ _id_1B07()
 {
     self endon( "death_or_disconnect" );
 
-    while ( self _meth_81EA() )
+    while ( self isswitchingweapon() )
         waitframe();
 
-    if ( self._id_0122._id_0084 == "armor_plate_deploy_mp" )
+    if ( self._id_0122.basename == "armor_plate_deploy_mp" )
         _id_0990::getrankforxp( self._id_0122 );
 
     thread _id_1B42();

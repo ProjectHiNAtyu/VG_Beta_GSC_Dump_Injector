@@ -3,13 +3,13 @@
 
 _id_10145()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     var_0._id_102F4 = [];
     var_0._id_9EBD = [];
     level._id_FFF1._id_9EE0 = var_0;
 
-    if ( _id_099D::_id_8A10( "vehicle_mines", "init" ) )
-        [[ _id_099D::_id_6D05( "vehicle_mines", "init" ) ]]();
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_mines", "init" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_mines", "init" ) ]]();
 }
 
 _id_10140()
@@ -24,7 +24,7 @@ _id_10142( var_0, var_1 )
 
     if ( !isdefined( var_3 ) && istrue( var_1 ) )
     {
-        var_3 = _func_020F();
+        var_3 = spawnstruct();
         var_3._id_5FBD = 90;
         var_3._id_206B = 115;
         var_3._id_9183 = 38;
@@ -46,7 +46,7 @@ _id_10141( var_0, var_1 )
 
     if ( !isdefined( var_3 ) && istrue( var_1 ) )
     {
-        var_3 = _func_020F();
+        var_3 = spawnstruct();
         var_3._id_0333 = 10;
         var_3._id_F60F = undefined;
         var_2._id_9EBD[var_0] = var_3;
@@ -76,45 +76,45 @@ _id_1014A( var_0, var_1 )
             return 0;
     }
 
-    if ( var_0 _id_09B4::_id_8ADE() )
+    if ( var_0 scripts\cp_mp\vehicles\vehicle::_id_8ADE() )
         return 0;
 
-    var_4 = anglestoforward( var_0._id_0054 ) * var_2._id_5FBD;
-    var_5 = anglestoforward( var_0._id_0054 ) * -1 * var_2._id_5FBD;
-    var_6 = anglestoright( var_0._id_0054 ) * -1 * var_2._id_9183;
-    var_7 = anglestoright( var_0._id_0054 ) * var_2._id_C855;
-    var_8 = var_0._id_02EA + var_4 + var_6;
-    var_9 = var_0._id_02EA + var_4 + var_7;
-    var_10 = var_0._id_02EA + var_5 + var_6;
-    var_11 = var_0._id_02EA + var_5 + var_7;
+    var_4 = anglestoforward( var_0.angles ) * var_2._id_5FBD;
+    var_5 = anglestoforward( var_0.angles ) * -1 * var_2._id_5FBD;
+    var_6 = anglestoright( var_0.angles ) * -1 * var_2._id_9183;
+    var_7 = anglestoright( var_0.angles ) * var_2._id_C855;
+    var_8 = var_0.origin + var_4 + var_6;
+    var_9 = var_0.origin + var_4 + var_7;
+    var_10 = var_0.origin + var_5 + var_6;
+    var_11 = var_0.origin + var_5 + var_7;
     var_12 = ( var_9 - var_8 ) * ( 1, 1, 0 );
     var_13 = ( var_8 - var_10 ) * ( 1, 1, 0 );
-    var_14 = var_8 - var_1._id_02EA;
-    var_15 = _func_0257( _func_025A( _id_10144( var_12 ) ), var_14 );
+    var_14 = var_8 - var_1.origin;
+    var_15 = vectordot( vectornormalize( _id_10144( var_12 ) ), var_14 );
 
     if ( var_15 > var_3._id_0333 )
         return 0;
 
-    var_15 = _func_0257( _func_025A( _id_10144( var_13 ) ), var_14 );
+    var_15 = vectordot( vectornormalize( _id_10144( var_13 ) ), var_14 );
 
     if ( var_15 > var_3._id_0333 )
         return 0;
 
     var_16 = ( var_10 - var_11 ) * ( 1, 1, 0 );
     var_17 = ( var_11 - var_9 ) * ( 1, 1, 0 );
-    var_14 = var_11 - var_1._id_02EA;
-    var_15 = _func_0257( _func_025A( _id_10144( var_16 ) ), var_14 );
+    var_14 = var_11 - var_1.origin;
+    var_15 = vectordot( vectornormalize( _id_10144( var_16 ) ), var_14 );
 
     if ( var_15 > var_3._id_0333 )
         return 0;
 
-    var_15 = _func_0257( _func_025A( _id_10144( var_17 ) ), var_14 );
+    var_15 = vectordot( vectornormalize( _id_10144( var_17 ) ), var_14 );
 
     if ( var_15 > var_3._id_0333 )
         return 0;
 
-    var_14 = var_0._id_02EA + anglestoup( var_0._id_0054 ) * var_2._id_292E - var_1._id_02EA;
-    var_15 = _func_0257( var_14, anglestoup( var_0._id_0054 ) );
+    var_14 = var_0.origin + anglestoup( var_0.angles ) * var_2._id_292E - var_1.origin;
+    var_15 = vectordot( var_14, anglestoup( var_0.angles ) );
 
     if ( var_15 > var_2._id_4B75 )
         return 0;
@@ -136,27 +136,27 @@ _id_10147( var_0, var_1 )
     if ( isdefined( var_3._id_F60F ) )
         thread [[ var_3._id_F60F ]]( var_0, var_1 );
 
-    if ( _id_099D::_id_8A10( "vehicle_mines", "trigger" ) )
-        thread [[ _id_099D::_id_6D05( "vehicle_mines", "trigger" ) ]]( var_0, var_1 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_mines", "trigger" ) )
+        thread [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_mines", "trigger" ) ]]( var_0, var_1 );
 }
 
 _id_10146( var_0 )
 {
-    if ( level._id_EF62 )
+    if ( level.teambased )
     {
-        var_1 = var_0._id_045B;
+        var_1 = var_0.team;
 
         if ( !isdefined( var_1 ) )
         {
-            if ( isdefined( var_0._id_02F2 ) )
-                var_1 = var_0._id_02F2._id_045B;
+            if ( isdefined( var_0.owner ) )
+                var_1 = var_0.owner.team;
         }
 
         if ( isdefined( var_1 ) )
-            return _id_09B4::_id_10123( self, var_1 );
+            return scripts\cp_mp\vehicles\vehicle::_id_10123( self, var_1 );
     }
-    else if ( isdefined( var_0._id_02F2 ) )
-        return _id_09B4::_id_10122( self, var_0._id_02F2 );
+    else if ( isdefined( var_0.owner ) )
+        return scripts\cp_mp\vehicles\vehicle::_id_10122( self, var_0.owner );
 
     return 0;
 }
@@ -168,5 +168,5 @@ _id_10144( var_0 )
 
 _id_10143()
 {
-    return _func_02C4( [ "physicscontents_water", "physicscontents_glass", "physicscontents_item", "physicscontents_vehicle", "physicscontents_ainosight" ] );
+    return physics_createcontents( [ "physicscontents_water", "physicscontents_glass", "physicscontents_item", "physicscontents_vehicle", "physicscontents_ainosight" ] );
 }

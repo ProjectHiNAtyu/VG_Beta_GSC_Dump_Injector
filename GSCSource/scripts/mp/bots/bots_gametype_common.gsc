@@ -9,7 +9,7 @@ _id_26E9()
 
     foreach ( var_4 in level._id_A8D5 )
     {
-        var_0[var_2] = _id_077B::_id_BFC7( var_4._id_292C )._id_02EA;
+        var_0[var_2] = scripts\engine\utility::random( var_4._id_292C ).origin;
         var_1[var_2] = "zone" + var_4._id_A8CE;
         var_2++;
     }
@@ -29,14 +29,14 @@ _id_26EB( var_0, var_1, var_2, var_3 )
         var_9 = var_8._id_047A;
 
         if ( isdefined( var_9._id_292B ) )
-            var_4[var_6] = var_9._id_292B._id_02EA;
+            var_4[var_6] = var_9._id_292B.origin;
         else
         {
-            var_9._id_A3E5 = _func_0080( var_9._id_02EA );
+            var_9._id_A3E5 = _func_0080( var_9.origin );
 
             if ( !isdefined( var_9._id_A3E5 ) || var_9._id_A3E5 _meth_8249() )
             {
-                var_10 = _func_00B5( var_9._id_02EA, 256, 0 );
+                var_10 = _func_00B5( var_9.origin, 256, 0 );
 
                 if ( var_10.size > 0 )
                     var_9._id_A3E5 = var_10[0];
@@ -45,13 +45,13 @@ _id_26EB( var_0, var_1, var_2, var_3 )
             if ( !isdefined( var_9._id_A3E5 ) )
                 continue;
 
-            if ( distance( var_9._id_A3E5._id_02EA, var_9._id_02EA ) > 130 )
+            if ( distance( var_9._id_A3E5.origin, var_9.origin ) > 130 )
             {
                 var_9._id_A3E5 = undefined;
                 continue;
             }
 
-            var_4[var_6] = var_9._id_A3E5._id_02EA;
+            var_4[var_6] = var_9._id_A3E5.origin;
         }
 
         var_5[var_6] = var_1 + var_8._id_A8CE;
@@ -87,9 +87,9 @@ _id_26E8( var_0, var_1, var_2, var_3 )
         {
             var_14 = var_10[var_12][var_13];
             var_14._id_866C = 1;
-            var_14._id_BD9E[var_12] = _id_09D1::_id_5500( var_14._id_02EA, var_0[var_11], "prone" );
+            var_14._id_BD9E[var_12] = _id_09D1::_id_5500( var_14.origin, var_0[var_11], "prone" );
             wait 0.05;
-            var_14._id_407F[var_12] = _id_09D1::_id_5500( var_14._id_02EA, var_0[var_11], "crouch" );
+            var_14._id_407F[var_12] = _id_09D1::_id_5500( var_14.origin, var_0[var_11], "crouch" );
             wait 0.05;
         }
     }
@@ -127,9 +127,9 @@ _id_26E8( var_0, var_1, var_2, var_3 )
     }
     else
     {
-        level._id_54FC = _id_077B::_id_1B72( level._id_54FC, var_0 );
-        level._id_54FA = _id_077B::_id_1B72( level._id_54FA, var_1 );
-        level._id_54FD = _id_077B::_id_1B74( level._id_54FD, var_10 );
+        level._id_54FC = scripts\engine\utility::_id_1B72( level._id_54FC, var_0 );
+        level._id_54FA = scripts\engine\utility::_id_1B72( level._id_54FA, var_1 );
+        level._id_54FD = scripts\engine\utility::_id_1B74( level._id_54FD, var_10 );
     }
 
     level._id_54FE = 1;
@@ -137,15 +137,15 @@ _id_26E8( var_0, var_1, var_2, var_3 )
 
 _id_26CC( var_0, var_1 )
 {
-    if ( var_1._id_00DE == "trigger_radius" )
+    if ( var_1.classname == "trigger_radius" )
     {
-        var_2 = _func_00B4( var_1._id_02EA, var_1._id_0333, 0, 100 );
-        var_3 = _id_077B::_id_1B97( var_2, var_0 );
+        var_2 = _func_00B4( var_1.origin, var_1._id_0333, 0, 100 );
+        var_3 = scripts\engine\utility::_id_1B97( var_2, var_0 );
 
         if ( var_3.size > 0 )
-            var_0 = _id_077B::_id_1B72( var_0, var_3 );
+            var_0 = scripts\engine\utility::_id_1B72( var_0, var_3 );
     }
-    else if ( var_1._id_00DE == "trigger_multiple" || var_1._id_00DE == "trigger_use_touch" )
+    else if ( var_1.classname == "trigger_multiple" || var_1.classname == "trigger_use_touch" )
     {
         var_4[0] = var_1 _meth_8174( 1, 1, 1 );
         var_4[1] = var_1 _meth_8174( 1, 1, -1 );
@@ -159,20 +159,20 @@ _id_26CC( var_0, var_1 )
 
         foreach ( var_7 in var_4 )
         {
-            var_8 = distance( var_7, var_1._id_02EA );
+            var_8 = distance( var_7, var_1.origin );
 
             if ( var_8 > var_5 )
                 var_5 = var_8;
         }
 
-        var_2 = _func_00B4( var_1._id_02EA, var_5, 0, 200 );
+        var_2 = _func_00B4( var_1.origin, var_5, 0, 200 );
 
         foreach ( var_11 in var_2 )
         {
-            if ( !_func_0119( var_11._id_02EA, var_1 ) )
+            if ( !_func_0119( var_11.origin, var_1 ) )
             {
-                if ( _func_0119( var_11._id_02EA + ( 0, 0, 40 ), var_1 ) || _func_0119( var_11._id_02EA + ( 0, 0, 80 ), var_1 ) || _func_0119( var_11._id_02EA + ( 0, 0, 120 ), var_1 ) )
-                    var_0 = _id_077B::_id_1B63( var_0, var_11 );
+                if ( _func_0119( var_11.origin + ( 0, 0, 40 ), var_1 ) || _func_0119( var_11.origin + ( 0, 0, 80 ), var_1 ) || _func_0119( var_11.origin + ( 0, 0, 120 ), var_1 ) )
+                    var_0 = scripts\engine\utility::array_add( var_0, var_11 );
             }
         }
     }
@@ -202,7 +202,7 @@ _id_2783( var_0 )
 
     foreach ( var_3 in level._id_AE69 )
     {
-        if ( _id_0A67::_id_8A7B( var_3 ) && isdefined( var_3._id_045B ) && var_3._id_045B == var_0 )
+        if ( _id_0A67::_id_8A7B( var_3 ) && isdefined( var_3.team ) && var_3.team == var_0 )
             var_1++;
     }
 
@@ -213,12 +213,12 @@ _id_2781( var_0, var_1, var_2 )
 {
     var_3 = _id_2784( "attacker", var_0 );
 
-    foreach ( var_5 in level._id_B758 )
+    foreach ( var_5 in level.players )
     {
-        if ( !_func_0104( var_5 ) && isdefined( var_5._id_045B ) && var_5._id_045B == var_0 )
+        if ( !isai( var_5 ) && isdefined( var_5.team ) && var_5.team == var_0 )
         {
-            if ( var_5 _id_2786() || distancesquared( var_1, var_5._id_02EA ) > spawnstruct( var_2 ) )
-                var_3 = _id_077B::_id_1B63( var_3, var_5 );
+            if ( var_5 _id_2786() || distancesquared( var_1, var_5.origin ) > _func_0214( var_2 ) )
+                var_3 = scripts\engine\utility::array_add( var_3, var_5 );
         }
     }
 
@@ -229,12 +229,12 @@ _id_2782( var_0, var_1, var_2 )
 {
     var_3 = _id_2784( "defender", var_0 );
 
-    foreach ( var_5 in level._id_B758 )
+    foreach ( var_5 in level.players )
     {
-        if ( !_func_0104( var_5 ) && isdefined( var_5._id_045B ) && var_5._id_045B == var_0 )
+        if ( !isai( var_5 ) && isdefined( var_5.team ) && var_5.team == var_0 )
         {
-            if ( var_5 _id_2787() || distancesquared( var_1, var_5._id_02EA ) <= spawnstruct( var_2 ) )
-                var_3 = _id_077B::_id_1B63( var_3, var_5 );
+            if ( var_5 _id_2787() || distancesquared( var_1, var_5.origin ) <= _func_0214( var_2 ) )
+                var_3 = scripts\engine\utility::array_add( var_3, var_5 );
         }
     }
 
@@ -270,7 +270,7 @@ _id_2784( var_0, var_1 )
 
     foreach ( var_4 in level._id_AE69 )
     {
-        if ( isdefined( var_4._id_045B ) && isai( var_4 ) && _id_0A67::_id_8A7B( var_4 ) && var_4._id_045B == var_1 && isdefined( var_4._id_C8B8 ) && var_4._id_C8B8 == var_0 )
+        if ( isdefined( var_4.team ) && isalive( var_4 ) && _id_0A67::_id_8A7B( var_4 ) && var_4.team == var_1 && isdefined( var_4._id_C8B8 ) && var_4._id_C8B8 == var_0 )
             var_2[var_2.size] = var_4;
     }
 
@@ -279,10 +279,10 @@ _id_2784( var_0, var_1 )
 
 _id_2789()
 {
-    var_0 = [[ level._id_2778 ]]( self._id_045B );
-    var_1 = [[ level._id_2779 ]]( self._id_045B );
-    var_2 = [[ level._id_277D ]]( self._id_045B );
-    var_3 = [[ level._id_2780 ]]( self._id_045B );
+    var_0 = [[ level._id_2778 ]]( self.team );
+    var_1 = [[ level._id_2779 ]]( self.team );
+    var_2 = [[ level._id_277D ]]( self.team );
+    var_3 = [[ level._id_2780 ]]( self.team );
     var_4 = level._id_285E[self._id_B010];
 
     if ( var_4 == "active" )
@@ -293,7 +293,7 @@ _id_2789()
 
             foreach ( var_7 in var_0 )
             {
-                if ( _func_0104( var_7 ) && level._id_285E[var_7._id_B010] == "stationary" && var_7 _id_26F8() )
+                if ( isai( var_7 ) && level._id_285E[var_7._id_B010] == "stationary" && var_7 _id_26F8() )
                 {
                     var_7._id_C8B8 = undefined;
                     var_5 = 1;
@@ -321,7 +321,7 @@ _id_2789()
 
             foreach ( var_10 in var_1 )
             {
-                if ( _func_0104( var_10 ) && level._id_285E[var_10._id_B010] == "active" && var_10 _id_26F7() )
+                if ( isai( var_10 ) && level._id_285E[var_10._id_B010] == "active" && var_10 _id_26F7() )
                 {
                     var_10._id_C8B8 = undefined;
                     var_5 = 1;
@@ -371,7 +371,7 @@ _id_277C()
 
                     foreach ( var_11 in var_4 )
                     {
-                        if ( _func_0104( var_11 ) && var_11 _id_26F8() )
+                        if ( isai( var_11 ) && var_11 _id_26F8() )
                         {
                             if ( level._id_285E[var_11._id_B010] == "stationary" )
                             {
@@ -380,12 +380,12 @@ _id_277C()
                                 break;
                             }
                             else
-                                var_8 = _id_077B::_id_1B63( var_8, var_11 );
+                                var_8 = scripts\engine\utility::array_add( var_8, var_11 );
                         }
                     }
 
                     if ( !var_9 && var_8.size > 0 )
-                        _id_077B::_id_BFC7( var_8 ) _id_278C( "defender" );
+                        scripts\engine\utility::random( var_8 ) _id_278C( "defender" );
                 }
 
                 if ( var_5.size > var_7 )
@@ -395,7 +395,7 @@ _id_277C()
 
                     foreach ( var_16 in var_5 )
                     {
-                        if ( _func_0104( var_16 ) && var_16 _id_26F7() )
+                        if ( isai( var_16 ) && var_16 _id_26F7() )
                         {
                             if ( level._id_285E[var_16._id_B010] == "active" )
                             {
@@ -404,12 +404,12 @@ _id_277C()
                                 break;
                             }
                             else
-                                var_13 = _id_077B::_id_1B63( var_13, var_16 );
+                                var_13 = scripts\engine\utility::array_add( var_13, var_16 );
                         }
                     }
 
                     if ( !var_14 && var_13.size > 0 )
-                        _id_077B::_id_BFC7( var_13 ) _id_278C( "attacker" );
+                        scripts\engine\utility::random( var_13 ) _id_278C( "attacker" );
                 }
             }
         }
@@ -456,7 +456,7 @@ _id_27B2( var_0 )
 
     foreach ( var_4 in var_1 )
     {
-        if ( !var_4 _meth_8249() && !_id_077B::_id_8928( var_4 ) && var_4._id_048F != "Begin" && var_4._id_048F != "End" )
+        if ( !var_4 _meth_8249() && !scripts\engine\utility::_id_8928( var_4 ) && var_4._id_048F != "Begin" && var_4._id_048F != "End" )
             var_2[var_2.size] = var_4;
     }
 
@@ -480,7 +480,7 @@ _id_26EE( var_0 )
         foreach ( var_9 in var_7 )
         {
             var_10 = _id_110CF( var_5, var_9[0], var_9[1] );
-            var_1[var_3] = var_10._id_02EA;
+            var_1[var_3] = var_10.origin;
             var_11 = var_5._id_A8CE + "_" + var_6;
             var_2[var_3] = var_11;
             var_5._id_54FA[var_5._id_54FA.size] = var_11;
@@ -494,19 +494,19 @@ _id_26EE( var_0 )
 
 _id_2EB6( var_0 )
 {
-    var_1 = _func_020F();
+    var_1 = spawnstruct();
     var_1._id_9E8C = ( 999999, 999999, 999999 );
     var_1._id_9C17 = ( -999999, -999999, -999999 );
 
     foreach ( var_3 in var_0._id_A565 )
     {
-        var_1._id_9E8C = ( _func_0148( var_3._id_02EA[0], var_1._id_9E8C[0] ), _func_0148( var_3._id_02EA[1], var_1._id_9E8C[1] ), _func_0148( var_3._id_02EA[2], var_1._id_9E8C[2] ) );
-        var_1._id_9C17 = ( _func_0147( var_3._id_02EA[0], var_1._id_9C17[0] ), _func_0147( var_3._id_02EA[1], var_1._id_9C17[1] ), _func_0147( var_3._id_02EA[2], var_1._id_9C17[2] ) );
+        var_1._id_9E8C = ( min( var_3.origin[0], var_1._id_9E8C[0] ), min( var_3.origin[1], var_1._id_9E8C[1] ), min( var_3.origin[2], var_1._id_9E8C[2] ) );
+        var_1._id_9C17 = ( max( var_3.origin[0], var_1._id_9C17[0] ), max( var_3.origin[1], var_1._id_9C17[1] ), max( var_3.origin[2], var_1._id_9C17[2] ) );
     }
 
     var_1._id_3360 = ( ( var_1._id_9E8C[0] + var_1._id_9C17[0] ) / 2, ( var_1._id_9E8C[1] + var_1._id_9C17[1] ) / 2, ( var_1._id_9E8C[2] + var_1._id_9C17[2] ) / 2 );
     var_1._id_739B = ( var_1._id_9C17[0] - var_1._id_3360[0], var_1._id_9C17[1] - var_1._id_3360[1], var_1._id_9C17[2] - var_1._id_3360[2] );
-    var_1._id_0333 = _func_0147( var_1._id_739B[0], var_1._id_739B[1] );
+    var_1._id_0333 = max( var_1._id_739B[0], var_1._id_739B[1] );
     return var_1;
 }
 
@@ -518,7 +518,7 @@ _id_110CF( var_0, var_1, var_2 )
 
     foreach ( var_7 in var_0._id_A565 )
     {
-        var_8 = distance2dsquared( var_7._id_02EA, var_3 );
+        var_8 = distance2dsquared( var_7.origin, var_3 );
 
         if ( var_8 < var_5 )
         {
@@ -536,7 +536,7 @@ _id_A0DD()
     self endon( "monitor_zone_control" );
     self endon( "death" );
     level endon( "game_ended" );
-    var_0 = self._id_02EA;
+    var_0 = self.origin;
 
     if ( !isdefined( var_0 ) )
         var_0 = self._id_411F;
@@ -570,7 +570,7 @@ _id_A0AC()
     for (;;)
     {
         if ( self._id_263D )
-            var_1 = _id_077B::_id_6460( self._id_AD9B );
+            var_1 = scripts\engine\utility::_id_6460( self._id_AD9B );
         else
             var_1 = self._id_AD9B;
 
@@ -589,7 +589,7 @@ _id_5A9A( var_0 )
 
     foreach ( var_4 in level._id_A8D5 )
     {
-        var_5 = distancesquared( var_4._id_411F, var_0._id_02EA );
+        var_5 = distancesquared( var_4._id_411F, var_0.origin );
 
         if ( var_5 < var_2 )
         {
@@ -607,12 +607,12 @@ _id_654B( var_0, var_1 )
 
     foreach ( var_4 in level._id_AE69 )
     {
-        if ( !isdefined( var_4._id_045B ) )
+        if ( !isdefined( var_4.team ) )
             continue;
 
-        if ( _id_0A74::_id_89D3( var_4 ) && _id_0A67::_id_8A7B( var_4 ) && var_4._id_045B == var_0 )
+        if ( scripts\mp\utility\player::isreallyalive( var_4 ) && _id_0A67::_id_8A7B( var_4 ) && var_4.team == var_0 )
         {
-            if ( !isdefined( var_1 ) || var_1 && _func_0104( var_4 ) && isdefined( var_4._id_C8B8 ) )
+            if ( !isdefined( var_1 ) || var_1 && isai( var_4 ) && isdefined( var_4._id_C8B8 ) )
                 var_2[var_2.size] = var_4;
         }
     }
@@ -631,27 +631,27 @@ _id_637F( var_0, var_1 )
 
         var_3 = self _meth_802F( "strategyLevel" ) * 0.3;
         var_4 = ( self _meth_802F( "strategyLevel" ) + 1 ) * 0.15;
-        var_5 = _id_077B::_id_1B94( var_0._id_292C );
+        var_5 = scripts\engine\utility::_id_1B94( var_0._id_292C );
 
         foreach ( var_7 in var_5 )
         {
-            if ( !_id_077B::_id_1B78( var_2, var_7 ) )
+            if ( !scripts\engine\utility::array_contains( var_2, var_7 ) )
                 var_2[var_2.size] = var_7;
         }
 
-        if ( _func_01B6( 1.0 ) < var_3 )
+        if ( randomfloat( 1.0 ) < var_3 )
         {
             return var_2[0];
             return;
         }
 
-        if ( _func_01B6( 1.0 ) < var_4 )
+        if ( randomfloat( 1.0 ) < var_4 )
         {
             return var_2[1];
             return;
         }
 
-        return _id_077B::_id_BFC7( var_2 );
+        return scripts\engine\utility::random( var_2 );
         return;
         return;
     }
@@ -664,20 +664,20 @@ _id_637E( var_0 )
     var_1 = self _meth_804A( var_0._id_292C, "node_hide_anywhere", "ignore_occupancy" );
     var_2 = self _meth_802F( "strategyLevel" ) * 0.3;
     var_3 = ( self _meth_802F( "strategyLevel" ) + 1 ) * 0.15;
-    var_4 = _id_077B::_id_1B94( var_0._id_292C );
+    var_4 = scripts\engine\utility::_id_1B94( var_0._id_292C );
 
     foreach ( var_6 in var_4 )
     {
-        if ( !_id_077B::_id_1B78( var_1, var_6 ) )
+        if ( !scripts\engine\utility::array_contains( var_1, var_6 ) )
             var_1[var_1.size] = var_6;
     }
 
-    if ( _func_01B6( 1.0 ) < var_2 )
+    if ( randomfloat( 1.0 ) < var_2 )
         return var_1[0];
-    else if ( _func_01B6( 1.0 ) < var_3 )
+    else if ( randomfloat( 1.0 ) < var_3 )
         return var_1[1];
     else
-        return _id_077B::_id_BFC7( var_1 );
+        return scripts\engine\utility::random( var_1 );
 }
 
 _id_266D( var_0, var_1, var_2, var_3 )
@@ -689,7 +689,7 @@ _id_266D( var_0, var_1, var_2, var_3 )
     else if ( self _meth_802F( "strategyLevel" ) >= 2 )
         var_4 = 80;
 
-    if ( _func_01B8( 100 ) < var_4 && !( isdefined( var_3 ) && var_3 ) )
+    if ( randomint( 100 ) < var_4 && !( isdefined( var_3 ) && var_3 ) )
     {
         self _meth_805A( "prone" );
         wait 0.2;
@@ -715,7 +715,7 @@ _id_A66C()
     var_0 = _id_5A9A( self );
     self waittill( "bulletwhizby", var_1 );
 
-    if ( !isdefined( var_1._id_045B ) || var_1._id_045B != self._id_045B )
+    if ( !isdefined( var_1.team ) || var_1.team != self.team )
     {
         var_2 = var_0._id_FEE5 - var_0._id_4122;
 
@@ -729,7 +729,7 @@ _id_A66B()
     self endon( "stop_usebutton_watcher" );
     self waittill( "damage", var_0, var_1 );
 
-    if ( !isdefined( var_1._id_045B ) || var_1._id_045B != self._id_045B )
+    if ( !isdefined( var_1.team ) || var_1.team != self.team )
         self notify( "use_interrupted" );
 }
 
@@ -739,11 +739,11 @@ _id_62F1( var_0 )
 
     if ( !istrue( level._id_DD41 ) )
     {
-        var_2 = _id_654B( _id_077B::_id_6460( self._id_045B ) );
+        var_2 = _id_654B( scripts\engine\utility::_id_6460( self.team ) );
 
         foreach ( var_4 in var_2 )
         {
-            if ( !_func_0104( var_4 ) )
+            if ( !isai( var_4 ) )
                 continue;
 
             var_5 = 0;
@@ -753,7 +753,7 @@ _id_62F1( var_0 )
             else if ( var_0 == "defuse" )
                 var_5 = 500 + var_4 _meth_802F( "strategyLevel" ) * 500;
 
-            if ( distancesquared( var_4._id_02EA, self._id_02EA ) < spawnstruct( var_5 ) )
+            if ( distancesquared( var_4.origin, self.origin ) < _func_0214( var_5 ) )
                 var_1[var_1.size] = var_4;
         }
     }

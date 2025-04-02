@@ -5,9 +5,9 @@ _id_2F71()
 {
     _id_0761::_id_2F72();
     _id_0A65::_id_C277( _id_0761::_id_2F7A );
-    _id_099D::_id_C2A5( "ping", "calloutMarkerPing_squadLeaderBeaconShouldCreate", ::_id_2F8A );
-    _id_099D::_id_C2A5( "ping", "calloutMarkerPing_squadLeaderBeaconKillForPlayer", ::_id_2F88 );
-    level._id_0BA3["vfx_br_beacon_circle"] = _func_0139( "vfx/_requests/br_gameplay/vfx_br_beacon_circle" );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "ping", "calloutMarkerPing_squadLeaderBeaconShouldCreate", ::_id_2F8A );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "ping", "calloutMarkerPing_squadLeaderBeaconKillForPlayer", ::_id_2F88 );
+    level._effect["vfx_br_beacon_circle"] = loadfx( "vfx/_requests/br_gameplay/vfx_br_beacon_circle" );
 }
 
 _id_2F8A( var_0, var_1, var_2 )
@@ -22,16 +22,16 @@ _id_2F8A( var_0, var_1, var_2 )
 _id_2F87( var_0 )
 {
     var_1 = self;
-    var_2 = _id_077B::_id_6A40( "vfx_br_beacon_circle" );
-    var_3 = [[ _id_099D::_id_6D05( "game", "getFriendlyPlayers" ) ]]( var_1._id_045B, 1 );
+    var_2 = scripts\engine\utility::getfx( "vfx_br_beacon_circle" );
+    var_3 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "game", "getFriendlyPlayers" ) ]]( var_1.team, 1 );
 
     foreach ( var_5 in var_3 )
     {
         if ( isdefined( var_5._id_E497 ) )
-            var_5._id_E497 _meth_809A();
+            var_5._id_E497 delete();
 
         var_5._id_E497 = _func_0208( var_2, var_0, var_5 );
-        _func_024B( var_5._id_E497 );
+        triggerfx( var_5._id_E497 );
         var_5._id_E497 _meth_8321();
         var_5._id_E495 = var_0;
         var_5._id_E496 = 892.5;
@@ -49,13 +49,13 @@ _id_2F89()
     if ( !istrue( var_0._id_E498 ) )
         return;
 
-    if ( _id_077B::_id_89A0( var_0._id_02EA, var_0._id_E495, var_0._id_E496 ) )
+    if ( scripts\engine\utility::_id_89A0( var_0.origin, var_0._id_E495, var_0._id_E496 ) )
     {
-        if ( _id_099D::_id_8A10( "rank", "scoreEventPopup" ) )
-            var_0 thread [[ _id_099D::_id_6D05( "rank", "scoreEventPopup" ) ]]( "br_beacon_bonus" );
+        if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "rank", "scoreEventPopup" ) )
+            var_0 thread [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "rank", "scoreEventPopup" ) ]]( "br_beacon_bonus" );
     }
 
-    var_0._id_E497 _meth_809A();
+    var_0._id_E497 delete();
     var_0._id_E495 = undefined;
     var_0._id_E496 = undefined;
     var_0._id_E498 = undefined;
@@ -68,7 +68,7 @@ _id_2F88( var_0 )
 
     if ( isdefined( var_0._id_E497 ) )
     {
-        var_0._id_E497 _meth_809A();
+        var_0._id_E497 delete();
         var_0._id_E495 = undefined;
         var_0._id_E496 = undefined;
         var_0._id_E498 = undefined;

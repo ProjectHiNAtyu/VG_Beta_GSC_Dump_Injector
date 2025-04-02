@@ -3,7 +3,7 @@
 
 _id_1C4F( var_0, var_1 )
 {
-    self._id_1C08 = _func_020F();
+    self._id_1C08 = spawnstruct();
     self._id_1C08._id_188F = [];
     self._id_1C08._id_5F20 = 0;
     self._id_1C90 = var_0;
@@ -42,7 +42,7 @@ _id_733B()
     if ( isdefined( self._id_0DB6 ) )
         return;
 
-    self._id_0DB6 = _func_020F();
+    self._id_0DB6 = spawnstruct();
     self._id_0120 = "stand";
     self._id_0DB6._id_A222 = "stop";
     self._id_0DB6._id_E3B4 = "none";
@@ -66,9 +66,9 @@ _id_733B()
 
 _id_1855( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _func_0205( "script_model", var_2 );
-    var_4._id_0054 = var_3;
-    var_4 setmode( level._id_CC35[var_0] );
+    var_4 = spawn( "script_model", var_2 );
+    var_4.angles = var_3;
+    var_4 setmodel( level._id_CC35[var_0] );
     self._id_1851 = var_4;
 }
 
@@ -139,7 +139,7 @@ _id_DBA4()
     if ( isdefined( self._id_013E ) )
     {
         var_1 = getweaponbasename( self._id_013E );
-        var_2 = _func_0121( var_1, "thermite" ) || isdefined( self._id_013E._id_026F ) && _func_0121( self._id_013E._id_026F, "boltfire" );
+        var_2 = issubstr( var_1, "thermite" ) || isdefined( self._id_013E._id_026F ) && issubstr( self._id_013E._id_026F, "boltfire" );
 
         if ( var_2 && isdefined( self._id_0DB6._id_900D ) && gettime() - self._id_0DB6._id_900D < 2000 )
             return 0;
@@ -200,20 +200,20 @@ _id_1C80( var_0 )
         case "face node":
             var_1 = 1024.0;
 
-            if ( _id_077B::_id_0F4F() )
+            if ( scripts\engine\utility::_id_0F4F() )
             {
-                var_2 = self._id_0054;
+                var_2 = self.angles;
 
-                if ( isdefined( self._id_02CD ) && distancesquared( self._id_02EA, self._id_02CD._id_02EA ) < var_1 )
+                if ( isdefined( self._id_02CD ) && distancesquared( self.origin, self._id_02CD.origin ) < var_1 )
                     var_2 = _id_08C8::_id_6B7D( self._id_02CD );
 
                 self _meth_8250( "face angle 3d", var_2 );
             }
             else
             {
-                var_3 = self._id_0054[1];
+                var_3 = self.angles[1];
 
-                if ( isdefined( self._id_02CD ) && distancesquared( self._id_02EA, self._id_02CD._id_02EA ) < var_1 )
+                if ( isdefined( self._id_02CD ) && distancesquared( self.origin, self._id_02CD.origin ) < var_1 )
                     var_3 = _id_08C8::_id_6B7E( self._id_02CD );
 
                 self _meth_8250( "face angle", var_3 );
@@ -235,9 +235,9 @@ _id_1C7F( var_0 )
 
             if ( isdefined( var_1 ) )
             {
-                var_2 = var_1 - self._id_02EA;
-                var_3 = _func_025A( var_2 );
-                var_4 = _func_025B( var_3 );
+                var_2 = var_1 - self.origin;
+                var_3 = vectornormalize( var_2 );
+                var_4 = vectortoangles( var_3 );
                 self _meth_8250( "face angle", var_4[1] );
                 break;
             }
@@ -249,10 +249,10 @@ _id_1C7F( var_0 )
             self _meth_8250( var_0 );
             break;
         case "face node":
-            var_5 = self._id_0054[1];
+            var_5 = self.angles[1];
             var_6 = 1024.0;
 
-            if ( isdefined( self._id_02CD ) && distancesquared( self._id_02EA, self._id_02CD._id_02EA ) < var_6 )
+            if ( isdefined( self._id_02CD ) && distancesquared( self.origin, self._id_02CD.origin ) < var_6 )
                 var_5 = _id_08C8::_id_6B7E( self._id_02CD );
 
             self _meth_8250( "face angle", var_5 );
@@ -274,21 +274,21 @@ _id_1C5D( var_0, var_1, var_2 )
 
 _id_4E27( var_0, var_1 )
 {
-    if ( distance2dsquared( self._id_02EA, var_0._id_02EA ) < 16 )
+    if ( distance2dsquared( self.origin, var_0.origin ) < 16 )
     {
 
     }
 
-    var_0 _meth_8739( "away", self._id_02EA );
+    var_0 _meth_8739( "away", self.origin );
 
     if ( var_0 _meth_8728() )
     {
-        var_2 = _func_03BB( undefined, undefined, var_0._id_02EA, 64 );
+        var_2 = _func_03BB( undefined, undefined, var_0.origin, 64 );
 
         foreach ( var_4 in var_2 )
         {
             if ( var_4 _meth_8728() )
-                var_4 _meth_8739( "away", self._id_02EA );
+                var_4 _meth_8739( "away", self.origin );
         }
     }
 }
@@ -305,10 +305,10 @@ _id_4E24( var_0 )
     if ( !isdefined( var_1 ) || var_1 == "closed" || var_1 == "setup" )
         return 0;
 
-    var_2 = self._id_02EA - var_0._id_02EA;
-    var_3 = vectordot( var_2 );
+    var_2 = self.origin - var_0.origin;
+    var_3 = _func_025C( var_2 );
     var_4 = _func_000B( var_3 - var_0._id_39B2[1] );
-    var_5 = _func_000B( var_0._id_0054[1] - var_0._id_39B2[1] );
+    var_5 = _func_000B( var_0.angles[1] - var_0._id_39B2[1] );
     return var_4 * var_5 > 0;
 }
 
@@ -353,14 +353,14 @@ _id_1C6B( var_0, var_1 )
 
     _id_08C8::_id_D549( "asm" );
 
-    if ( _func_0104( self ) )
+    if ( isai( self ) )
         self _meth_86D5( var_1 );
 }
 
 _id_1C74()
 {
     self _meth_8018( "noclip" );
-    self _meth_8250( "face angle", self._id_0054[1] );
+    self _meth_8250( "face angle", self.angles[1] );
     _id_0009::_id_1C17();
     _id_0694::_id_23D8();
     self _meth_85C8( self._id_1C90, "animscripted" );

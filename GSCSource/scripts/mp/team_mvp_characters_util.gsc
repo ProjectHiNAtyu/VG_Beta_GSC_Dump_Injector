@@ -3,15 +3,15 @@
 
 create_client_character_camera( var_0, var_1, var_2 )
 {
-    var_3 = _func_0205( "script_model", var_0 );
-    var_3._id_0054 = ( 0, var_1[1], 0 );
-    var_3 setmode( "tag_player" );
+    var_3 = spawn( "script_model", var_0 );
+    var_3.angles = ( 0, var_1[1], 0 );
+    var_3 setmodel( "tag_player" );
 
     if ( istrue( var_2 ) )
     {
-        var_4 = _func_0205( "script_model", var_3._id_02EA );
-        var_4 setmode( "tag_player" );
-        var_4 _meth_820B( var_3, "tag_player", ( 0, 0, 0 ), ( 0, 90, 0 ) );
+        var_4 = spawn( "script_model", var_3.origin );
+        var_4 setmodel( "tag_player" );
+        var_4 linkto( var_3, "tag_player", ( 0, 0, 0 ), ( 0, 90, 0 ) );
         var_3._id_176A = var_4;
     }
 
@@ -31,12 +31,12 @@ attach_player_to_camera_view( var_0 )
 
 run_delta_motion_on_client_character( var_0, var_1, var_2 )
 {
-    var_3 = _func_0205( "script_model", var_1 );
-    var_3 setmode( "tag_origin" );
-    var_3._id_0054 = var_2;
+    var_3 = spawn( "script_model", var_1 );
+    var_3 setmodel( "tag_origin" );
+    var_3.angles = var_2;
     var_3 _meth_82CB( var_0, "clientCharacterAnim" );
-    self _meth_8415();
-    self _meth_820B( var_3, "tag_origin" );
+    self unlink();
+    self linkto( var_3, "tag_origin" );
     return var_3;
 }
 
@@ -51,12 +51,12 @@ _id_C9A4( var_0, var_1, var_2, var_3 )
     var_0 notify( "run_animation_on_camera" );
     var_0 endon( "run_animation_on_camera" );
     var_0 _meth_82C9();
-    var_0._id_02EA = var_2;
+    var_0.origin = var_2;
 
     if ( isdefined( var_3 ) )
-        var_0._id_0054 = var_3;
+        var_0.angles = var_3;
     else
-        var_0._id_0054 = ( 0, 0, 0 );
+        var_0.angles = ( 0, 0, 0 );
 
     var_0 _meth_82CB( var_1, "clientCharacterAnim" );
 }
@@ -65,8 +65,8 @@ spawn_props_and_animate( var_0, var_1, var_2 )
 {
     if ( var_0[5] != "none" )
     {
-        var_3 = _func_021A( var_0[5], "," );
-        var_4 = _func_021A( var_0[6], "," );
+        var_3 = strtok( var_0[5], "," );
+        var_4 = strtok( var_0[6], "," );
 
         foreach ( var_7, var_6 in var_3 )
             level thread spawn_prop_and_animate_internal( var_0, var_6, var_4[var_7], var_1, var_2 );
@@ -76,12 +76,12 @@ spawn_props_and_animate( var_0, var_1, var_2 )
 spawn_prop_and_animate_internal( var_0, var_1, var_2, var_3, var_4 )
 {
     var_5 = var_0[0];
-    var_6 = _func_0205( "script_model", var_3 );
-    var_6 setmode( var_1 );
-    var_6._id_0054 = var_4;
+    var_6 = spawn( "script_model", var_3 );
+    var_6 setmodel( var_1 );
+    var_6.angles = var_4;
     var_6 _meth_82CB( var_2, "client_character_prop_anim" );
     wait( _id_6335( var_5 ) );
-    var_6 _meth_809A();
+    var_6 delete();
 }
 
 #using_animtree("client_character");
@@ -198,7 +198,7 @@ _id_C1BA( var_0, var_1, var_2 )
         level._id_10E52 = [];
 
     if ( isdefined( var_2 ) )
-        level._id_10E52[var_0] = _func_0148( var_2, _func_0079( var_1 ) );
+        level._id_10E52[var_0] = min( var_2, _func_0079( var_1 ) );
     else
         level._id_10E52[var_0] = _func_0079( var_1 );
 }

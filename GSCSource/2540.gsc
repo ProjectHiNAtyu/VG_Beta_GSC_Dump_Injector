@@ -3,7 +3,7 @@
 
 _id_E804()
 {
-    level._id_0BA3["steel_bib_bullet_impact"] = _func_0139( "vfx/s4/killstreaks/vfx_imp_armor_ks.vfx" );
+    level._effect["steel_bib_bullet_impact"] = loadfx( "vfx/s4/killstreaks/vfx_imp_armor_ks.vfx" );
 }
 
 _id_E802( var_0 )
@@ -12,15 +12,15 @@ _id_E802( var_0 )
 
     if ( 1 )
     {
-        var_1 = _func_034C( "s4_ks_steel_bib_mp" );
+        var_1 = makeweapon( "s4_ks_steel_bib_mp" );
         self _meth_8529( var_1 );
         _id_07C1::_id_D5D5( self, 150, 0 );
-        level thread _id_0789::_id_F756( self, "use_armor" );
+        level thread scripts\mp\battlechatter_mp::_id_F756( self, "use_armor" );
         var_2 = self _meth_876B( "ui_light_armor_state" );
 
         if ( var_2 != 1 )
         {
-            self _meth_82F6( "ui_light_armor_state", 1 );
+            self setclientomnvar( "ui_light_armor_state", 1 );
             thread _id_E803();
         }
 
@@ -40,9 +40,9 @@ _id_E803()
 
     if ( var_0 == 1 )
     {
-        self _meth_8373( "armor_break", "armor_break", 0 );
-        self _meth_82F6( "ui_light_armor_state", 2 );
-        self _meth_8275( "mp_fldupgrds_steel_bib_break" );
+        self setscriptablepartstate( "armor_break", "armor_break", 0 );
+        self setclientomnvar( "ui_light_armor_state", 2 );
+        self playlocalsound( "mp_fldupgrds_steel_bib_break" );
     }
 }
 
@@ -52,7 +52,7 @@ steel_bib_clear_ui()
 
     if ( var_0 == 1 )
     {
-        self _meth_8373( "armor_break", "armor_break", 0 );
-        self _meth_82F6( "ui_light_armor_state", 2 );
+        self setscriptablepartstate( "armor_break", "armor_break", 0 );
+        self setclientomnvar( "ui_light_armor_state", 2 );
     }
 }

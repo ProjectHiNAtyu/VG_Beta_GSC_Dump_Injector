@@ -3,7 +3,7 @@
 
 _id_3D1F()
 {
-    _id_099D::_id_C2A5( "cop_car", "spawnCallback", ::_id_3D23 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "cop_car", "spawnCallback", ::_id_3D23 );
     _id_3D20();
     _id_3D21();
     scripts\mp\utility\killstreak::_id_10228( "cop_car", _id_09A8::_id_3D12 );
@@ -11,10 +11,10 @@ _id_3D1F()
 
 _id_3D21()
 {
-    var_0 = _id_09BB::_id_10274( "cop_car", 1 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10274( "cop_car", 1 );
     var_0 = _id_09B6::_id_1003F( "cop_car" );
-    var_0._id_37D9 = "medium_light";
-    var_0._id_0DD8 = _id_09BB::vehicle_spawn;
+    var_0.class = "medium_light";
+    var_0._id_0DD8 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn;
 }
 
 _id_3D20()
@@ -33,7 +33,7 @@ _id_3D23( var_0, var_1 )
 {
     var_2 = _id_09A8::_id_3D0B( var_0, var_1 );
 
-    if ( isdefined( var_2 ) && _id_09BB::_id_10270() )
+    if ( isdefined( var_2 ) && scripts\cp_mp\vehicles\vehicle_spawn::_id_10270() )
         var_2._id_AA96 = ::_id_3D22;
 
     return var_2;
@@ -46,9 +46,9 @@ _id_3D22()
 
 _id_3D24()
 {
-    var_0 = _id_09BC::_id_6E22( self );
-    var_1 = _func_020F();
-    _id_09BC::_id_3D43( var_0, var_1 );
-    var_2 = _func_020F();
-    var_3 = _id_09BB::vehicle_spawn_spawnvehicle( "cop_car", var_1, var_2 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_tracking::_id_6E22( self );
+    var_1 = spawnstruct();
+    scripts\cp_mp\vehicles\vehicle_tracking::_id_3D43( var_0, var_1 );
+    var_2 = spawnstruct();
+    var_3 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028E( "cop_car", var_1, var_2 );
 }

@@ -13,7 +13,7 @@ _id_DF29( var_0, var_1 )
 
 _id_DF2A( var_0, var_1, var_2 )
 {
-    _id_077B::_id_5C04( var_1 );
+    scripts\engine\utility::_id_5C04( var_1 );
     _id_081E::_id_DF1E( var_0, var_2 );
 }
 
@@ -39,7 +39,7 @@ _id_A337( var_0, var_1 )
 
 _id_A338( var_0, var_1, var_2 )
 {
-    _id_077B::_id_5C04( var_1 );
+    scripts\engine\utility::_id_5C04( var_1 );
     _id_081E::_id_DF1E( var_0, var_2 );
 }
 

@@ -3,13 +3,13 @@
 
 _id_823D( var_0 )
 {
-    if ( !isdefined( self._id_0309[var_0] ) )
-        self._id_0309[var_0] = 0;
+    if ( !isdefined( self.pers[var_0] ) )
+        self.pers[var_0] = 0;
 }
 
 _id_6C0A( var_0 )
 {
-    return self._id_0309[var_0];
+    return self.pers[var_0];
 }
 
 _id_7D93( var_0, var_1 )
@@ -17,7 +17,7 @@ _id_7D93( var_0, var_1 )
     if ( _id_4ABA() )
         return;
 
-    if ( !_func_0117( self ) )
+    if ( !isplayer( self ) )
         return;
 
     if ( isdefined( self._id_911D[var_0] ) )
@@ -41,7 +41,7 @@ _id_D543( var_0 )
         var_0 = 65000;
 
     self._id_0190 = var_0;
-    self._id_0309["extrascore0"] = var_0;
+    self.pers["extrascore0"] = var_0;
 }
 
 _id_D544( var_0 )
@@ -53,7 +53,7 @@ _id_D544( var_0 )
         var_0 = 255;
 
     self._id_0191 = var_0;
-    self._id_0309["extrascore1"] = var_0;
+    self.pers["extrascore1"] = var_0;
 }
 
 _id_D545( var_0 )
@@ -65,7 +65,7 @@ _id_D545( var_0 )
         var_0 = 65000;
 
     self._id_0192 = var_0;
-    self._id_0309["extrascore2"] = var_0;
+    self.pers["extrascore2"] = var_0;
 }
 
 _id_D546( var_0 )
@@ -77,7 +77,7 @@ _id_D546( var_0 )
         var_0 = 65000;
 
     self._id_0193 = var_0;
-    self._id_0309["extrascore3"] = var_0;
+    self.pers["extrascore3"] = var_0;
 }
 
 _id_4ABA()
@@ -96,7 +96,7 @@ _id_6C2A()
     if ( _func_0329() )
         return "privateloadouts";
 
-    if ( level._id_C016 && !_id_0A69::_id_873A() )
+    if ( level._id_C016 && !scripts\mp\utility\game::_id_873A() )
         return "rankedloadouts";
 
     return "privateloadouts";
@@ -109,10 +109,10 @@ _id_D652()
 
 _id_3194()
 {
-    if ( _id_0A69::_id_6A43() == "infect" )
+    if ( scripts\mp\utility\game::getgametype() == "infect" )
         return 0;
 
-    if ( _id_0A69::_id_6A43() == "br" && !_id_07A8::_id_609F( "prematch_done" ) )
+    if ( scripts\mp\utility\game::getgametype() == "br" && !_id_07A8::_id_609F( "prematch_done" ) )
         return 0;
 
     return level._id_C016 && !istrue( level._id_7D18 );

@@ -5,7 +5,7 @@ _id_E2FC( var_0 )
 {
     level endon( "game_ended" );
     wait 1;
-    var_1 = _id_077B::_id_6D7C( "hvt", "targetname" );
+    var_1 = scripts\engine\utility::_id_6D7C( "hvt", "targetname" );
     var_2 = undefined;
     var_3 = undefined;
     level._id_1593 = 1;
@@ -19,13 +19,13 @@ _id_E2FC( var_0 )
             foreach ( var_5 in var_1 )
             {
                 if ( var_5._id_CD8C == var_0 )
-                    var_3 = var_5._id_02EA;
+                    var_3 = var_5.origin;
             }
 
-            var_2 thread [[ var_2 scripts\cp_mp\utility\script_utility::_id_11EC( "spawn" ) ]]( var_3, ( 0, 0, 0 ) );
-            var_2._id_045B = "axis";
+            var_2 thread [[ var_2 _id_09C6::_id_11EC( "spawn" ) ]]( var_3, ( 0, 0, 0 ) );
+            var_2.team = "axis";
             var_2 _id_09D1::_id_289E( "veteran" );
-            var_2._id_ACD2 = _id_0A72::_id_ACBF( var_2, var_2._id_045B, "outline_nodepth_cyan", "lowest" );
+            var_2._id_ACD2 = scripts\mp\utility\outline::_id_ACBF( var_2, var_2.team, "outline_nodepth_cyan", "lowest" );
             continue;
         }
 
@@ -46,7 +46,7 @@ _id_E2FC( var_0 )
         level._id_7C01 = 0;
 
     level._id_7C01++;
-    var_2 scripts\engine\trace::_id_38F9();
+    var_2 scripts\mp\equipment::_id_38F9();
     level._id_F2AA = var_2;
 }
 
@@ -58,7 +58,7 @@ _id_7C00( var_0 )
 
 _id_7C0D( var_0 )
 {
-    var_0._id_8D77 = _id_0A72::_id_ACBF( var_0, _id_0A69::_id_6BC3( var_0._id_045B )[0], "outline_depth_orange", "lowest" );
+    var_0._id_8D77 = scripts\mp\utility\outline::_id_ACBF( var_0, scripts\mp\utility\game::_id_6BC3( var_0.team )[0], "outline_depth_orange", "lowest" );
     var_0._id_F3FB._id_10418 = "any";
     var_0._id_F3FB _id_07AD::_id_D60F( "waypoint_blitz_defend", "waypoint_capture_kill" );
     var_0 thread _id_7C03();
@@ -74,14 +74,14 @@ _id_7C03()
 _id_7BFF( var_0 )
 {
     if ( isdefined( var_0._id_8D77 ) )
-        _id_0A72::_id_ACB7( var_0._id_8D77, var_0 );
+        scripts\mp\utility\outline::outlinedisable( var_0._id_8D77, var_0 );
 
     if ( isdefined( var_0._id_ACD2 ) )
-        _id_0A72::_id_ACB7( var_0._id_ACD2, var_0 );
+        scripts\mp\utility\outline::outlinedisable( var_0._id_ACD2, var_0 );
 
     var_0 notify( "hvt_timeout" );
     var_0._id_A533 = 1;
-    var_0 _meth_83FD();
+    var_0 suicide();
 }
 
 _id_7C02()
@@ -100,8 +100,8 @@ _id_7C02()
         if ( isdefined( level._id_AB39 ) )
             [[ level._id_AB39 ]]( "allies" );
 
-        _func_01E4( "ui_hardpoint_timer", 0 );
-        _func_01E4( "ui_hardpoint", -1 );
+        setomnvar( "ui_hardpoint_timer", 0 );
+        setomnvar( "ui_hardpoint", -1 );
     }
 }
 

@@ -30,23 +30,23 @@ _id_ECB6( var_0 )
     waitframe();
 
     if ( isdefined( var_0 ) )
-        var_0 _meth_809A();
+        var_0 delete();
 }
 
 _id_ECAA( var_0, var_1, var_2, var_3 )
 {
     self._id_ECE6 = 1;
-    var_4 = _func_02C4( [ "physicscontents_characterproxy", "physicscontents_playerclip", "physicscontents_water", "physicscontents_vehicle" ] );
+    var_4 = physics_createcontents( [ "physicscontents_characterproxy", "physicscontents_playerclip", "physicscontents_water", "physicscontents_vehicle" ] );
     var_5 = _id_ECA8( self );
-    var_6 = anglestoforward( self._id_0054 );
-    var_7 = self._id_02EA + var_6 * 32;
+    var_6 = anglestoforward( self.angles );
+    var_7 = self.origin + var_6 * 32;
     var_8 = _id_099E::_id_CEDA( var_7, 140, 20 );
     var_9 = undefined;
     var_10 = 0;
 
     foreach ( var_12 in var_8 )
     {
-        var_13 = distancesquared( var_12._id_02EA, var_7 );
+        var_13 = distancesquared( var_12.origin, var_7 );
 
         if ( isdefined( var_9 ) && var_10 <= var_13 )
             continue;
@@ -104,7 +104,7 @@ _id_ECAA( var_0, var_1, var_2, var_3 )
     }
 
     var_26 = self getplayerangles() * ( 0, 1, 0 );
-    var_27 = self._id_02EA + ( 0, 0, 24 );
+    var_27 = self.origin + ( 0, 0, 24 );
     var_28 = anglestoforward( var_26 );
     var_29 = 29.5;
     var_30 = var_27 + var_28 * var_29;
@@ -259,7 +259,7 @@ _id_EC90( var_0, var_1, var_2 )
     if ( !isdefined( var_4 ) )
         return var_0;
 
-    var_5 = _func_0148( var_3, 15 );
+    var_5 = min( var_3, 15 );
     var_6 = anglestoforward( var_1 );
     var_7 = var_0 + var_6 * var_5;
 
@@ -277,7 +277,7 @@ _id_EC90( var_0, var_1, var_2 )
 
 _id_ECA3( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_5 = _func_0301( var_2 );
+    var_5 = anglestoleft( var_2 );
     var_6 = anglestoforward( var_2 );
     var_7 = -1 * var_6;
     var_8 = undefined;
@@ -309,15 +309,15 @@ _id_ECA3( var_0, var_1, var_2, var_3, var_4 )
 
 _id_ECA0( var_0 )
 {
-    var_1 = _id_077B::_id_F07F( istrue( var_0 ), "MP/TAC_COVER_PLACE_IN_DOORWAY", "MP/TAC_COVER_CANNOT_PLACE" );
+    var_1 = scripts\engine\utility::ter_op( istrue( var_0 ), "MP/TAC_COVER_PLACE_IN_DOORWAY", "MP/TAC_COVER_CANNOT_PLACE" );
 
-    if ( _id_099D::_id_8A10( "hud", "showErrorMessage" ) )
-        self [[ _id_099D::_id_6D05( "hud", "showErrorMessage" ) ]]( var_1 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "hud", "showErrorMessage" ) )
+        self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "hud", "showErrorMessage" ) ]]( var_1 );
 
-    self _meth_827E( "iw8_deployable_cover_plant_fail", self );
+    self playsoundtoplayer( "iw8_deployable_cover_plant_fail", self );
 
-    if ( scripts\engine\trace::_id_753F( "equip_tac_cover" ) )
-        scripts\engine\trace::_id_7DD2( "equip_tac_cover", 1 );
+    if ( scripts\mp\equipment::_id_753F( "equip_tac_cover" ) )
+        scripts\mp\equipment::_id_7DD2( "equip_tac_cover", 1 );
 }
 
 _id_EC9F()
@@ -330,10 +330,10 @@ _id_ECB4( var_0, var_1, var_2, var_3 )
     self endon( "death_or_disconnect" );
     self endon( "tac_cover_taken" );
     level endon( "game_ended" );
-    var_4 = anglestoforward( self._id_0054 );
+    var_4 = anglestoforward( self.angles );
     var_5 = var_0._id_39B2 + ( 0, 90, 0 );
     var_6 = anglestoforward( var_5 );
-    var_7 = _func_0257( var_4, var_6 );
+    var_7 = vectordot( var_4, var_6 );
     var_8 = var_7 > 0;
     var_9 = var_0 _meth_872D();
     var_0 _id_099E::_id_4DF1( 1, "tac_cover_door" );
@@ -341,7 +341,7 @@ _id_ECB4( var_0, var_1, var_2, var_3 )
     if ( isdefined( var_1 ) )
         var_1 _id_099E::_id_4DF1( 1, "tac_cover_door" );
 
-    var_10 = _id_077B::_id_F07F( var_8, ( 0, 90, 0 ), ( 0, -90, 0 ) );
+    var_10 = scripts\engine\utility::ter_op( var_8, ( 0, 90, 0 ), ( 0, -90, 0 ) );
     var_11 = ( 0, 0, -1 );
     var_12 = var_0._id_39B3 + var_11;
     var_13 = _func_0047( var_0._id_39B2, var_10 );
@@ -358,25 +358,25 @@ _id_ECB1( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     var_0 = _id_EC90( var_0, var_1, var_4 );
     self notify( "tac_cover_spawned" );
     var_3 = istrue( var_3 );
-    var_7 = _func_0205( "script_model", var_0 );
-    var_7._id_0054 = var_1;
-    var_7._id_02F2 = self;
-    var_7._id_045B = self._id_045B;
-    var_7._id_DDEC = scripts\engine\trace::_id_5ACA( "equip_tac_cover" );
+    var_7 = spawn( "script_model", var_0 );
+    var_7.angles = var_1;
+    var_7.owner = self;
+    var_7.team = self.team;
+    var_7._id_DDEC = scripts\mp\equipment::_id_5ACA( "equip_tac_cover" );
     var_7._id_57AE = 1;
-    var_7._id_8A5A = _id_077B::_id_F07F( var_3, 1, undefined );
+    var_7._id_8A5A = scripts\engine\utility::ter_op( var_3, 1, undefined );
     var_7._id_EB2E = level._id_EB28._id_E76A["super_tac_cover"]._id_7C71;
     var_7._id_10D06 = "s4_tac_cover_mp";
     var_7 _id_0765::_id_C2A7( 2, ::_id_EC9F );
     var_7 _id_07E9::_id_C2A4( "Tactical_Static", self );
-    var_7 _meth_8312( self );
-    var_7 setorigin( self );
-    var_7 setmode( "wm_equip_gen_deployable_cover_00" );
-    var_7 _meth_884D( 3, self._id_045B );
+    var_7 setentityowner( self );
+    var_7 setotherent( self );
+    var_7 setmodel( "wm_equip_gen_deployable_cover_00" );
+    var_7 _meth_884D( 3, self.team );
 
     if ( isdefined( var_2 ) )
     {
-        var_7 _meth_820B( var_2 );
+        var_7 linkto( var_2 );
         var_7 thread _id_EC9E();
     }
 
@@ -415,8 +415,8 @@ _id_ECB1( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     thread scripts\mp\weapons::_id_ACC5( var_7 );
     var_7 _meth_86FB( "equipment" );
 
-    if ( level._id_EF62 )
-        var_7 _meth_8703( self._id_045B );
+    if ( level.teambased )
+        var_7 _meth_8703( self.team );
     else
         var_7 _meth_8703( self );
 
@@ -441,12 +441,12 @@ _id_ECB2( var_0 )
     if ( !isdefined( level._id_ECE3 ) )
         return;
 
-    var_1 = _func_0205( "script_model", var_0._id_02EA );
-    var_1 _meth_80BE();
-    var_1._id_0054 = var_0._id_0054;
-    var_1 _meth_808C( level._id_ECE3 );
-    var_1 _meth_820B( var_0 );
-    var_1 _meth_8312( self );
+    var_1 = spawn( "script_model", var_0.origin );
+    var_1 dontinterpolate();
+    var_1.angles = var_0.angles;
+    var_1 clonebrushmodeltoscriptmodel( level._id_ECE3 );
+    var_1 linkto( var_0 );
+    var_1 setentityowner( self );
     return var_1;
 }
 
@@ -457,13 +457,13 @@ _id_EC99( var_0, var_1 )
     if ( !istrue( var_0 ) )
         var_2 = 0.2 + _id_ECA2();
 
-    var_3 = self._id_027F;
+    var_3 = self.maxhealth;
 
-    if ( isdefined( self._id_013D ) && self._id_013D < self._id_027F )
+    if ( isdefined( self._id_013D ) && self._id_013D < self.maxhealth )
         var_3 = self._id_013D;
 
-    self._id_02F2 _id_0793::_id_AAD4( "super_tac_cover", int( var_3 ) );
-    _id_0780::_id_9751( self._id_02F2, self._id_EB2E, int( var_3 ), istrue( var_1 ) );
+    self.owner _id_0793::_id_AAD4( "super_tac_cover", int( var_3 ) );
+    _id_0780::_id_9751( self.owner, self._id_EB2E, int( var_3 ), istrue( var_1 ) );
     thread _id_EC9A( var_2 );
     thread _id_EC96( var_2 );
 }
@@ -488,14 +488,14 @@ _id_EC9A( var_0 )
     }
 
     if ( isdefined( self._id_3A3B ) )
-        self._id_3A3B _meth_809A();
+        self._id_3A3B delete();
 }
 
 _id_EC96( var_0 )
 {
     self notify( "death" );
     level._id_9ECB[self getentitynumber()] = undefined;
-    var_1 = self._id_02F2;
+    var_1 = self.owner;
 
     if ( isdefined( var_1 ) )
         var_1 scripts\mp\weapons::_id_C48A( self );
@@ -507,10 +507,10 @@ _id_EC96( var_0 )
     }
 
     if ( isdefined( self._id_3A3B ) )
-        self._id_3A3B _meth_809A();
+        self._id_3A3B delete();
 
     wait( var_0 );
-    self _meth_809A();
+    self delete();
 }
 
 _id_EC9D()
@@ -543,8 +543,8 @@ _id_ECB0( var_0 )
     {
         if ( var_0 )
         {
-            var_1 = scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_rugged_eqp" );
-            var_2 = _id_077B::_id_F07F( var_1, 1250, 1000 );
+            var_1 = scripts\mp\utility\perk::_hasperk( "specialty_rugged_eqp" );
+            var_2 = scripts\engine\utility::ter_op( var_1, 1250, 1000 );
             var_3 = "hitequip";
             thread _id_079A::_id_A0EC( var_2, var_3, ::_id_ECA7, ::_id_ECA6, 0 );
             self _meth_8406();
@@ -561,11 +561,11 @@ _id_ECA6( var_0 )
 {
     var_1 = _id_EC8F( var_0 );
 
-    if ( isdefined( self._id_02F2 ) )
+    if ( isdefined( self.owner ) )
     {
-        var_2 = _func_0147( self._id_027F - self._id_013D, 0 );
-        var_3 = _func_0148( var_2, var_1 );
-        self._id_02F2 _id_07F2::_id_3A9D( "super_tac_cover", var_3 );
+        var_2 = max( self.maxhealth - self._id_013D, 0 );
+        var_3 = min( var_2, var_1 );
+        self.owner scripts\mp\supers::_id_3A9D( "super_tac_cover", var_3 );
     }
 
     return var_1;
@@ -573,30 +573,30 @@ _id_ECA6( var_0 )
 
 _id_EC8F( var_0 )
 {
-    var_1 = var_0._id_006E;
-    var_2 = var_0._id_A90B;
+    var_1 = var_0.attacker;
+    var_2 = var_0.objweapon;
     var_3 = var_0._id_9CBF;
-    var_4 = var_0._id_0134;
+    var_4 = var_0.damage;
     var_5 = var_0._id_0317;
 
-    if ( var_2._id_0084 == "thermite_av_mp" )
+    if ( var_2.basename == "thermite_av_mp" )
         return 200.0;
 
-    if ( var_2._id_0084 == "thermite_bolt_radius_mp" )
+    if ( var_2.basename == "thermite_bolt_radius_mp" )
         return 83.3333;
 
-    if ( var_2._id_0084 == "s4_throwing_knife_mp" )
+    if ( var_2.basename == "s4_throwing_knife_mp" )
         return 0;
 
-    if ( var_2._id_0084 == "s4_ar_stango44" && var_3 != "MOD_MELEE" )
+    if ( var_2.basename == "s4_ar_stango44" && var_3 != "MOD_MELEE" )
         return 0;
 
-    if ( var_3 == "MOD_IMPACT" && var_2._id_00DE == "grenade" )
+    if ( var_3 == "MOD_IMPACT" && var_2.classname == "grenade" )
         return var_4;
 
-    if ( var_3 == "MOD_CRUSH" && isdefined( var_0._id_7E78 ) && var_0._id_7E78._id_00DE == "script_vehicle" )
+    if ( var_3 == "MOD_CRUSH" && isdefined( var_0.inflictor ) && var_0.inflictor.classname == "script_vehicle" )
     {
-        if ( isdefined( var_1 ) && !scripts\mp\weapons::_id_5F93( self._id_02F2, var_1 ) )
+        if ( isdefined( var_1 ) && !scripts\mp\weapons::_id_5F93( self.owner, var_1 ) )
             return var_4;
     }
 
@@ -613,14 +613,14 @@ _id_EC8F( var_0 )
 
 _id_ECA7( var_0 )
 {
-    var_1 = var_0._id_006E;
+    var_1 = var_0.attacker;
 
-    if ( istrue( _id_099C::_id_B779( self._id_02F2, var_1 ) ) )
+    if ( istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_1 ) ) )
     {
         var_1 notify( "destroyed_equipment" );
         var_1 thread _id_0A76::_id_6FE6( "destroyed_equipment" );
-        var_1 thread _id_0789::_id_553B( self );
-        self._id_02F2 thread _id_0A64::_id_9120( "dc_destroyed_s" );
+        var_1 thread scripts\mp\battlechatter_mp::_id_553B( self );
+        self.owner thread _id_0A64::_id_9120( "dc_destroyed_s" );
     }
 
     thread _id_EC99( undefined, 1 );
@@ -630,10 +630,10 @@ _id_EC97()
 {
     if ( !isdefined( self._id_ECE5 ) )
     {
-        var_0 = scripts\engine\trace::_id_5ACA( "equip_tac_cover" );
-        scripts\engine\trace::_id_1513( var_0, 0, "equip_tac_cover" );
-        _id_06BB::_id_1562( 0 );
-        _id_0A74::_id_151B( 0 );
+        var_0 = scripts\mp\equipment::_id_5ACA( "equip_tac_cover" );
+        scripts\mp\equipment::_id_1513( var_0, 0, "equip_tac_cover" );
+        scripts\common\utility::_id_1562( 0 );
+        scripts\mp\utility\player::_id_151B( 0 );
         self._id_ECE5 = var_0;
     }
 }
@@ -643,9 +643,9 @@ _id_EC98()
     if ( isdefined( self._id_ECE5 ) )
     {
         var_0 = self._id_ECE5;
-        scripts\engine\trace::_id_1513( var_0, 1, "equip_tac_cover" );
-        _id_06BB::_id_1562( 1 );
-        _id_0A74::_id_151B( 1 );
+        scripts\mp\equipment::_id_1513( var_0, 1, "equip_tac_cover" );
+        scripts\common\utility::_id_1562( 1 );
+        scripts\mp\utility\player::_id_151B( 1 );
         self._id_ECE5 = undefined;
     }
 }
@@ -679,7 +679,7 @@ _id_ECA8( var_0 )
             if ( !isdefined( var_9 ) )
                 continue;
 
-            var_10 = isdefined( var_9._id_02F2 ) && var_9._id_02F2 == var_0;
+            var_10 = isdefined( var_9.owner ) && var_9.owner == var_0;
             var_11 = isdefined( var_9._id_5542 ) && var_9._id_5542 == "equip_tac_cover";
             var_12 = isdefined( var_9._id_5542 ) && var_9._id_5542 == "equip_ammo_box";
 
@@ -698,7 +698,7 @@ _id_ECA8( var_0 )
 
 _id_EC92( var_0 )
 {
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
         return 0;
 
     if ( var_0 _meth_8163() )
@@ -710,10 +710,10 @@ _id_EC92( var_0 )
     if ( isdefined( var_0._id_010F ) && isdefined( var_0._id_010F._id_5542 ) && var_0._id_010F._id_5542 == "equip_tac_cover" )
         return 0;
 
-    if ( var_0._id_00DE == "misc_turret" )
+    if ( var_0.classname == "misc_turret" )
         return 0;
 
-    if ( var_0._id_00DE == "script_vehicle" )
+    if ( var_0.classname == "script_vehicle" )
         return 0;
 
     return 1;
@@ -745,6 +745,6 @@ _id_EC9B( var_0 )
 {
     self endon( "death" );
     var_0 endon( "tac_cover_taken" );
-    var_0 _id_077B::_id_1087E( "joined_team", "disconnect" );
+    var_0 scripts\engine\utility::waittill_any_2( "joined_team", "disconnect" );
     thread _id_EC99( undefined, 0 );
 }

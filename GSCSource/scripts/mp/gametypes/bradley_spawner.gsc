@@ -6,9 +6,9 @@ _id_828F()
     if ( getdvarint( "scr_allow_vehicles", 0 ) <= 0 )
         return;
 
-    var_0 = _id_077B::_id_6D7C( "veh_bromeo_neutral", "targetname" );
-    var_1 = _id_077B::_id_6D7C( "veh_bromeo_allies", "targetname" );
-    var_2 = _id_077B::_id_6D7C( "veh_bromeo_axis", "targetname" );
+    var_0 = scripts\engine\utility::_id_6D7C( "veh_bromeo_neutral", "targetname" );
+    var_1 = scripts\engine\utility::_id_6D7C( "veh_bromeo_allies", "targetname" );
+    var_2 = scripts\engine\utility::_id_6D7C( "veh_bromeo_axis", "targetname" );
     level._id_EE5B = [];
     _id_E38D( var_0 );
     _id_E38D( var_1, "allies" );
@@ -29,11 +29,11 @@ _id_A136()
 
 _id_A137()
 {
-    level._id_EE5B = _id_077B::_id_1BA9( level._id_EE5B );
+    level._id_EE5B = scripts\engine\utility::_id_1BA9( level._id_EE5B );
 
     foreach ( var_1 in level._id_EE5B )
     {
-        var_2 = _id_09BA::_id_10189( var_1 );
+        var_2 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10189( var_1 );
         var_3 = isdefined( var_2 ) && var_2.size > 0;
 
         if ( !isdefined( var_1._id_F237 ) )
@@ -72,12 +72,12 @@ _id_E38D( var_0, var_1 )
 
     foreach ( var_3 in var_0 )
     {
-        if ( !isdefined( var_3._id_0054 ) )
-            var_3._id_0054 = ( 0, 0, 0 );
+        if ( !isdefined( var_3.angles ) )
+            var_3.angles = ( 0, 0, 0 );
 
-        var_4 = _id_077B::_id_F07F( isdefined( var_3._id_CD44 ), var_3._id_CD44, 0 );
-        var_5 = _id_077B::_id_F07F( isdefined( var_3._id_CE78 ), var_3._id_CE78, 0 );
-        level thread _id_E38C( var_3._id_02EA, var_3._id_0054, var_1, var_4, var_5 );
+        var_4 = scripts\engine\utility::ter_op( isdefined( var_3._id_CD44 ), var_3._id_CD44, 0 );
+        var_5 = scripts\engine\utility::ter_op( isdefined( var_3._id_CE78 ), var_3._id_CE78, 0 );
+        level thread _id_E38C( var_3.origin, var_3.angles, var_1, var_4, var_5 );
     }
 }
 
@@ -99,13 +99,13 @@ _id_E38C( var_0, var_1, var_2, var_3, var_4 )
 
 _id_E38B( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_5 = _func_020F();
+    var_5 = spawnstruct();
     _id_09AD::_id_93C2( var_5 );
     var_5._id_31D1 = 0;
-    var_5._id_E322 = _id_077B::_id_F07F( istrue( var_4 ), "airdrop_at_position_unsafe", "place_at_position_unsafe" );
-    var_5._id_02EA = var_0;
-    var_5._id_0054 = var_1;
-    var_5._id_045B = var_2;
+    var_5._id_E322 = scripts\engine\utility::ter_op( istrue( var_4 ), "airdrop_at_position_unsafe", "place_at_position_unsafe" );
+    var_5.origin = var_0;
+    var_5.angles = var_1;
+    var_5.team = var_2;
     var_6 = _id_09AD::_id_9403( var_5 );
 
     if ( var_3 > 0 )
@@ -116,25 +116,25 @@ _id_E38B( var_0, var_1, var_2, var_3, var_4 )
 
 _id_828E()
 {
-    level._id_EE54 = _id_077B::_id_6D7C( "tdm_bradley_allies", "targetname" );
-    level._id_EE57 = _id_077B::_id_6D7C( "tdm_bradley_axis", "targetname" );
-    level._id_EE5A = _id_077B::_id_6D7C( "tdm_bradley_neutral", "targetname" );
-    level._id_EE56 = _id_077B::_id_6D7C( "dom_bradley_allies", "targetname" );
-    level._id_EE59 = _id_077B::_id_6D7C( "dom_bradley_axis", "targetname" );
-    level._id_EE4A = _id_077B::_id_6D7C( "dom_bradley_a", "targetname" );
-    level._id_EE4B = _id_077B::_id_6D7C( "dom_bradley_b", "targetname" );
-    level._id_EE4C = _id_077B::_id_6D7C( "dom_bradley_c", "targetname" );
-    level._id_EE55 = _id_077B::_id_6D7C( "cmd_bradley_allies", "targetname" );
-    level._id_EE58 = _id_077B::_id_6D7C( "cmd_bradley_axis", "targetname" );
-    level._id_EE48 = _id_077B::_id_6D7C( "cmd_bradley_2", "targetname" );
-    level._id_EE49 = _id_077B::_id_6D7C( "cmd_bradley_3", "targetname" );
-    level._id_EE47 = _id_077B::_id_6D7C( "cmd_bradley_1", "targetname" );
+    level._id_EE54 = scripts\engine\utility::_id_6D7C( "tdm_bradley_allies", "targetname" );
+    level._id_EE57 = scripts\engine\utility::_id_6D7C( "tdm_bradley_axis", "targetname" );
+    level._id_EE5A = scripts\engine\utility::_id_6D7C( "tdm_bradley_neutral", "targetname" );
+    level._id_EE56 = scripts\engine\utility::_id_6D7C( "dom_bradley_allies", "targetname" );
+    level._id_EE59 = scripts\engine\utility::_id_6D7C( "dom_bradley_axis", "targetname" );
+    level._id_EE4A = scripts\engine\utility::_id_6D7C( "dom_bradley_a", "targetname" );
+    level._id_EE4B = scripts\engine\utility::_id_6D7C( "dom_bradley_b", "targetname" );
+    level._id_EE4C = scripts\engine\utility::_id_6D7C( "dom_bradley_c", "targetname" );
+    level._id_EE55 = scripts\engine\utility::_id_6D7C( "cmd_bradley_allies", "targetname" );
+    level._id_EE58 = scripts\engine\utility::_id_6D7C( "cmd_bradley_axis", "targetname" );
+    level._id_EE48 = scripts\engine\utility::_id_6D7C( "cmd_bradley_2", "targetname" );
+    level._id_EE49 = scripts\engine\utility::_id_6D7C( "cmd_bradley_3", "targetname" );
+    level._id_EE47 = scripts\engine\utility::_id_6D7C( "cmd_bradley_1", "targetname" );
 
     if ( getdvarint( "scr_bradley_spawner", 0 ) == 0 )
         return;
 
     var_0 = [ "cmd", "dom", "war", "arm" ];
-    var_1 = _id_077B::_id_1B83( var_0, _id_0A69::_id_6A43() );
+    var_1 = scripts\engine\utility::_id_1B83( var_0, scripts\mp\utility\game::getgametype() );
 
     if ( !isdefined( var_1 ) )
         var_1 = var_0.size;
@@ -180,16 +180,16 @@ _id_E382()
     {
         var_0 = ( 0, 0, 0 );
 
-        if ( isdefined( level._id_EE54[0]._id_0054 ) )
-            var_0 = level._id_EE54[0]._id_0054;
+        if ( isdefined( level._id_EE54[0].angles ) )
+            var_0 = level._id_EE54[0].angles;
 
-        thread _id_E26B( level._id_EE54[0]._id_02EA, var_0, "allies" );
+        thread _id_E26B( level._id_EE54[0].origin, var_0, "allies" );
         var_0 = ( 0, 0, 0 );
 
-        if ( isdefined( level._id_EE57[0]._id_0054 ) )
-            var_0 = level._id_EE57[0]._id_0054;
+        if ( isdefined( level._id_EE57[0].angles ) )
+            var_0 = level._id_EE57[0].angles;
 
-        thread _id_E26B( level._id_EE57[0]._id_02EA, var_0, "axis" );
+        thread _id_E26B( level._id_EE57[0].origin, var_0, "axis" );
     }
 }
 
@@ -202,15 +202,15 @@ _id_E381()
         var_2 = ( 0, 0, 0 );
         var_3 = ( 0, 0, 0 );
 
-        if ( isdefined( level._id_EE56[0]._id_0054 ) )
-            var_0 = level._id_EE56[0]._id_0054;
+        if ( isdefined( level._id_EE56[0].angles ) )
+            var_0 = level._id_EE56[0].angles;
 
-        var_1 = level._id_EE56[0]._id_02EA;
+        var_1 = level._id_EE56[0].origin;
 
-        if ( isdefined( level._id_EE59[0]._id_0054 ) )
-            var_2 = level._id_EE59[0]._id_0054;
+        if ( isdefined( level._id_EE59[0].angles ) )
+            var_2 = level._id_EE59[0].angles;
 
-        var_3 = level._id_EE59[0]._id_02EA;
+        var_3 = level._id_EE59[0].origin;
 
         if ( game["switchedsides"] )
         {
@@ -231,16 +231,16 @@ _id_E380()
     {
         var_0 = ( 0, 0, 0 );
 
-        if ( isdefined( level._id_EE55[0]._id_0054 ) )
-            var_0 = level._id_EE55[0]._id_0054;
+        if ( isdefined( level._id_EE55[0].angles ) )
+            var_0 = level._id_EE55[0].angles;
 
-        thread _id_E26B( level._id_EE55[0]._id_02EA, var_0, "allies" );
+        thread _id_E26B( level._id_EE55[0].origin, var_0, "allies" );
         var_0 = ( 0, 0, 0 );
 
-        if ( isdefined( level._id_EE58[0]._id_0054 ) )
-            var_0 = level._id_EE58[0]._id_0054;
+        if ( isdefined( level._id_EE58[0].angles ) )
+            var_0 = level._id_EE58[0].angles;
 
-        thread _id_E26B( level._id_EE58[0]._id_02EA, var_0, "axis" );
+        thread _id_E26B( level._id_EE58[0].origin, var_0, "axis" );
     }
 }
 
@@ -248,26 +248,26 @@ _id_8CCF()
 {
     level endon( "game_ended" );
     wait 12;
-    var_0 = _id_077B::_id_BFC7( level._id_EE5A );
+    var_0 = scripts\engine\utility::random( level._id_EE5A );
     var_1 = ( 0, 0, 0 );
 
-    if ( isdefined( var_0._id_0054 ) )
-        var_1 = var_0._id_0054;
+    if ( isdefined( var_0.angles ) )
+        var_1 = var_0.angles;
 
-    thread _id_E26B( var_0._id_02EA, var_1 );
-    var_2 = _id_0A69::_id_6DC7();
+    thread _id_E26B( var_0.origin, var_1 );
+    var_2 = scripts\mp\utility\game::_id_6DC7();
     var_3 = var_2 / 3;
-    var_4 = _func_0147( var_3, 180 );
-    var_4 = _func_0148( var_4, 240 );
+    var_4 = max( var_3, 180 );
+    var_4 = min( var_4, 240 );
 
     for (;;)
     {
         wait( var_4 );
 
-        if ( _id_09BC::_id_102BA( "light_tank" ).size < 2 )
+        if ( scripts\cp_mp\vehicles\vehicle_tracking::_id_102BA( "light_tank" ).size < 2 )
         {
             var_0 = _id_D064();
-            thread _id_E26B( var_0._id_02EA, var_0._id_0054 );
+            thread _id_E26B( var_0.origin, var_0.angles );
         }
     }
 }
@@ -276,16 +276,16 @@ _id_8CCE()
 {
     level endon( "game_ended" );
     wait 60;
-    var_0 = _id_0A69::_id_6DC7();
+    var_0 = scripts\mp\utility\game::_id_6DC7();
     var_1 = var_0 / 3;
-    var_2 = _func_0147( var_1, 180 );
-    var_2 = _func_0148( var_2, 240 );
+    var_2 = max( var_1, 180 );
+    var_2 = min( var_2, 240 );
 
     for (;;)
     {
         wait( var_2 );
 
-        if ( _id_09BC::_id_102BA( "light_tank" ).size < 2 )
+        if ( scripts\cp_mp\vehicles\vehicle_tracking::_id_102BA( "light_tank" ).size < 2 )
         {
             var_3 = _id_D046();
 
@@ -300,38 +300,38 @@ _id_8CCE()
 _id_E296( var_0 )
 {
     if ( var_0._id_A8CE == "_a" )
-        var_1 = _id_077B::_id_BFC7( level._id_EE4A );
+        var_1 = scripts\engine\utility::random( level._id_EE4A );
     else if ( var_0._id_A8CE == "_b" )
-        var_1 = _id_077B::_id_BFC7( level._id_EE4B );
+        var_1 = scripts\engine\utility::random( level._id_EE4B );
     else
-        var_1 = _id_077B::_id_BFC7( level._id_EE4C );
+        var_1 = scripts\engine\utility::random( level._id_EE4C );
 
     if ( isdefined( var_1 ) )
     {
         var_2 = ( 0, 0, 0 );
 
-        if ( isdefined( var_1._id_0054 ) )
-            var_2 = var_1._id_0054;
+        if ( isdefined( var_1.angles ) )
+            var_2 = var_1.angles;
 
-        thread _id_E26B( var_1._id_02EA, var_2 );
+        thread _id_E26B( var_1.origin, var_2 );
     }
 }
 
 _id_F75C( var_0 )
 {
-    if ( _id_09BC::_id_102BA( "light_tank" ).size < 2 )
+    if ( scripts\cp_mp\vehicles\vehicle_tracking::_id_102BA( "light_tank" ).size < 2 )
     {
         if ( var_0 == 1 )
         {
             if ( level._id_EE47.size != 0 )
             {
                 var_1 = ( 0, 0, 0 );
-                var_2 = _id_077B::_id_BFC7( level._id_EE47 );
+                var_2 = scripts\engine\utility::random( level._id_EE47 );
 
-                if ( isdefined( var_2._id_0054 ) )
-                    var_1 = var_2._id_0054;
+                if ( isdefined( var_2.angles ) )
+                    var_1 = var_2.angles;
 
-                thread _id_E26B( var_2._id_02EA, var_1, "allies" );
+                thread _id_E26B( var_2.origin, var_1, "allies" );
             }
         }
         else if ( var_0 == 2 )
@@ -339,12 +339,12 @@ _id_F75C( var_0 )
             if ( level._id_EE48.size != 0 )
             {
                 var_1 = ( 0, 0, 0 );
-                var_2 = _id_077B::_id_BFC7( level._id_EE48 );
+                var_2 = scripts\engine\utility::random( level._id_EE48 );
 
-                if ( isdefined( var_2._id_0054 ) )
-                    var_1 = var_2._id_0054;
+                if ( isdefined( var_2.angles ) )
+                    var_1 = var_2.angles;
 
-                thread _id_E26B( var_2._id_02EA, var_1, "allies" );
+                thread _id_E26B( var_2.origin, var_1, "allies" );
             }
         }
         else if ( var_0 == 3 )
@@ -352,12 +352,12 @@ _id_F75C( var_0 )
             if ( level._id_EE49.size != 0 )
             {
                 var_1 = ( 0, 0, 0 );
-                var_2 = _id_077B::_id_BFC7( level._id_EE49 );
+                var_2 = scripts\engine\utility::random( level._id_EE49 );
 
-                if ( isdefined( var_2._id_0054 ) )
-                    var_1 = var_2._id_0054;
+                if ( isdefined( var_2.angles ) )
+                    var_1 = var_2.angles;
 
-                thread _id_E26B( var_2._id_02EA, var_1, "allies" );
+                thread _id_E26B( var_2.origin, var_1, "allies" );
             }
         }
     }
@@ -379,7 +379,7 @@ _id_46BE()
 
 _id_D064()
 {
-    var_0 = _id_077B::_id_BFC7( level._id_EE5A );
+    var_0 = scripts\engine\utility::random( level._id_EE5A );
     return var_0;
 }
 
@@ -411,12 +411,12 @@ _id_D046()
 
 _id_E26B( var_0, var_1, var_2 )
 {
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
     _id_09AD::_id_93C2( var_3 );
     var_3._id_31D1 = 0;
     var_3._id_E322 = "airdrop_at_position";
-    var_3._id_02EA = var_0;
-    var_3._id_0054 = var_1;
-    var_3._id_045B = var_2;
+    var_3.origin = var_0;
+    var_3.angles = var_1;
+    var_3.team = var_2;
     var_4 = _id_09AD::_id_939C( var_3 );
 }

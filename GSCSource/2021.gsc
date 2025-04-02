@@ -7,7 +7,7 @@ _id_BD67()
     {
         _id_2CE4( "multiteam" );
 
-        foreach ( var_1 in level._id_B758 )
+        foreach ( var_1 in level.players )
             var_1 _meth_8364( "common", "round", "scoreboardType", "multiteam" );
 
         if ( getdvarint( "#x3896c1f234a99e038" ) != 0 )
@@ -18,27 +18,27 @@ _id_BD67()
             _func_01CC( "alliesDeaths", -1 );
         }
     }
-    else if ( level._id_EF62 )
+    else if ( level.teambased )
     {
         var_3 = _func_00DB( "allies" );
         var_4 = _func_00DB( "axis" );
         var_5 = 0;
         var_6 = 0;
 
-        foreach ( var_1 in level._id_B758 )
+        foreach ( var_1 in level.players )
         {
-            if ( isdefined( var_1._id_0309["team"] ) && var_1._id_0309["team"] == "allies" )
+            if ( isdefined( var_1.pers["team"] ) && var_1.pers["team"] == "allies" )
             {
-                var_5 = var_5 + var_1._id_0309["kills"];
-                var_6 = var_6 + var_1._id_0309["deaths"];
+                var_5 = var_5 + var_1.pers["kills"];
+                var_6 = var_6 + var_1.pers["deaths"];
             }
         }
 
         var_9 = "tie";
 
-        if ( _id_0A69::_id_82B7() )
+        if ( scripts\mp\utility\game::_id_82B7() )
         {
-            if ( _id_0A69::_id_8A88() )
+            if ( scripts\mp\utility\game::_id_8A88() )
             {
                 if ( game["timeToBeatTeam"] == "none" )
                 {
@@ -59,14 +59,14 @@ _id_BD67()
 
                     if ( getdvarint( "#x3896c1f234a99e038" ) != 0 )
                     {
-                        _func_01CC( "alliesTTB", _id_077B::_id_F07F( "allies" == game["timeToBeatTeam"], game["timeToBeat"], game["timeToBeatOld"] ) );
-                        _func_01CC( "axisTTB", _id_077B::_id_F07F( "axis" == game["timeToBeatTeam"], game["timeToBeat"], game["timeToBeatOld"] ) );
+                        _func_01CC( "alliesTTB", scripts\engine\utility::ter_op( "allies" == game["timeToBeatTeam"], game["timeToBeat"], game["timeToBeatOld"] ) );
+                        _func_01CC( "axisTTB", scripts\engine\utility::ter_op( "axis" == game["timeToBeatTeam"], game["timeToBeat"], game["timeToBeatOld"] ) );
                     }
 
                     var_9 = game["timeToBeatTeam"];
                 }
             }
-            else if ( _id_0A69::_id_89FC() )
+            else if ( scripts\mp\utility\game::_id_89FC() )
             {
 
             }
@@ -91,9 +91,9 @@ _id_BD67()
             _id_2CE4( "allies" );
             _id_2CE4( "axis" );
 
-            foreach ( var_1 in level._id_B758 )
+            foreach ( var_1 in level.players )
             {
-                var_11 = var_1._id_0309["team"];
+                var_11 = var_1.pers["team"];
 
                 if ( !isdefined( var_11 ) )
                     continue;
@@ -111,7 +111,7 @@ _id_BD67()
         {
             _id_2CE4( var_9 );
 
-            foreach ( var_1 in level._id_B758 )
+            foreach ( var_1 in level.players )
                 var_1 _meth_8364( "common", "round", "scoreboardType", var_9 );
         }
     }
@@ -119,7 +119,7 @@ _id_BD67()
     {
         _id_2CE4( "neutral" );
 
-        foreach ( var_1 in level._id_B758 )
+        foreach ( var_1 in level.players )
             var_1 _meth_8364( "common", "round", "scoreboardType", "neutral" );
 
         if ( getdvarint( "#x3896c1f234a99e038" ) != 0 )
@@ -131,17 +131,17 @@ _id_BD67()
         }
     }
 
-    foreach ( var_1 in level._id_B758 )
+    foreach ( var_1 in level.players )
     {
-        if ( isdefined( var_1._id_0309["summary"] ) )
+        if ( isdefined( var_1.pers["summary"] ) )
         {
-            var_1 _meth_8364( "common", "round", "totalXp", var_1._id_0309["summary"]["xp"] );
-            var_1 _meth_8364( "common", "round", "scoreXp", var_1._id_0309["summary"]["score"] );
-            var_1 _meth_8364( "common", "round", "challengeXp", var_1._id_0309["summary"]["challenge"] );
-            var_1 _meth_8364( "common", "round", "matchXp", var_1._id_0309["summary"]["match"] );
-            var_1 _meth_8364( "common", "round", "miscXp", var_1._id_0309["summary"]["misc"] );
-            var_1 _meth_8364( "common", "round", "medalXp", var_1._id_0309["summary"]["medal"] );
-            var_1 _meth_8364( "common", "common_entitlement_xp", var_1._id_0309["summary"]["bonusXP"] );
+            var_1 _meth_8364( "common", "round", "totalXp", var_1.pers["summary"]["xp"] );
+            var_1 _meth_8364( "common", "round", "scoreXp", var_1.pers["summary"]["score"] );
+            var_1 _meth_8364( "common", "round", "challengeXp", var_1.pers["summary"]["challenge"] );
+            var_1 _meth_8364( "common", "round", "matchXp", var_1.pers["summary"]["match"] );
+            var_1 _meth_8364( "common", "round", "miscXp", var_1.pers["summary"]["misc"] );
+            var_1 _meth_8364( "common", "round", "medalXp", var_1.pers["summary"]["medal"] );
+            var_1 _meth_8364( "common", "common_entitlement_xp", var_1.pers["summary"]["bonusXP"] );
         }
     }
 }
@@ -155,51 +155,51 @@ _id_D663()
 
     if ( var_0 < 200 )
     {
-        if ( isdefined( self._id_0309["score"] ) )
-            _func_01CC( "players", self._id_397E, "score", self._id_0309["score"] );
+        if ( isdefined( self.pers["score"] ) )
+            _func_01CC( "players", self._id_397E, "score", self.pers["score"] );
 
-        if ( isdefined( self._id_0309["kills"] ) )
+        if ( isdefined( self.pers["kills"] ) )
         {
-            var_1 = self._id_0309["kills"];
+            var_1 = self.pers["kills"];
             _func_01CC( "players", self._id_397E, "kills", var_1 );
         }
 
-        if ( _id_0A69::_id_6A43() == "dm" || _id_0A69::_id_6A43() == "gun" )
+        if ( scripts\mp\utility\game::getgametype() == "dm" || scripts\mp\utility\game::getgametype() == "gun" )
             var_2 = self._id_006A;
-        else if ( isdefined( self._id_0309["assists"] ) )
-            var_2 = self._id_0309["assists"];
+        else if ( isdefined( self.pers["assists"] ) )
+            var_2 = self.pers["assists"];
         else
             var_2 = 0;
 
         _func_01CC( "players", self._id_397E, "assists", var_2 );
 
-        if ( isdefined( self._id_0309["deaths"] ) )
+        if ( isdefined( self.pers["deaths"] ) )
         {
-            var_3 = self._id_0309["deaths"];
+            var_3 = self.pers["deaths"];
             _func_01CC( "players", self._id_397E, "deaths", var_3 );
         }
 
-        if ( isdefined( self._id_0309["team"] ) )
+        if ( isdefined( self.pers["team"] ) )
         {
-            var_4 = self._id_0309["team"];
+            var_4 = self.pers["team"];
             _func_01CC( "players", self._id_397E, "team", var_4 );
 
-            if ( isdefined( game[self._id_0309["team"]] ) )
+            if ( isdefined( game[self.pers["team"]] ) )
             {
-                var_5 = game[self._id_0309["team"]];
+                var_5 = game[self.pers["team"]];
                 _func_01CC( "players", self._id_397E, "faction", var_5 );
             }
         }
 
-        if ( isdefined( self._id_0309["extrascore0"] ) )
+        if ( isdefined( self.pers["extrascore0"] ) )
         {
-            var_6 = self._id_0309["extrascore0"];
+            var_6 = self.pers["extrascore0"];
             _func_01CC( "players", self._id_397E, "extrascore0", var_6 );
         }
 
-        if ( isdefined( self._id_0309["extrascore1"] ) )
+        if ( isdefined( self.pers["extrascore1"] ) )
         {
-            var_7 = self._id_0309["extrascore1"];
+            var_7 = self.pers["extrascore1"];
             _func_01CC( "players", self._id_397E, "extrascore1", var_7 );
         }
 
@@ -209,19 +209,19 @@ _id_D663()
             _func_01CC( "players", self._id_397E, "timeplayed", var_8 );
         }
 
-        if ( isdefined( self._id_0309["rank"] ) && isdefined( self._id_0309["rankxp"] ) )
+        if ( isdefined( self.pers["rank"] ) && isdefined( self.pers["rankxp"] ) )
         {
-            var_9 = _id_07E1::_id_6CB7();
+            var_9 = scripts\mp\rank::_id_6CB7();
             _func_01CC( "players", self._id_397E, "rank", var_9 );
         }
 
-        if ( isdefined( self._id_0309["prestige"] ) )
+        if ( isdefined( self.pers["prestige"] ) )
         {
-            var_10 = _id_07E1::_id_6C6A();
+            var_10 = scripts\mp\rank::_id_6C6A();
             _func_01CC( "players", self._id_397E, "prestige", var_10 );
         }
 
-        if ( _id_0A69::_id_6A43() == "br" )
+        if ( scripts\mp\utility\game::getgametype() == "br" )
         {
             var_11 = scripts\mp\gametypes\br::_id_2EBB( self );
 
@@ -231,10 +231,10 @@ _id_D663()
                 _func_01CC( "players", self._id_397E, var_13, var_11[var_12] );
             }
 
-            if ( _id_0A69::_id_6D80() == "dmz" )
+            if ( scripts\mp\utility\game::_id_6D80() == "dmz" )
             {
-                var_14 = _id_07AE::_id_6DBB();
-                var_15 = var_14[self._id_045B];
+                var_14 = scripts\mp\gamescore::_id_6DBB();
+                var_15 = var_14[self.team];
                 _func_01CC( "players", self._id_397E, "placement", var_15 );
                 var_16 = scripts\mp\gametypes\br_gametype_dmz::_id_ADB6();
                 _func_01CC( "players", self._id_397E, "extrascore4", var_16 );
@@ -308,7 +308,7 @@ _id_2CE4( var_0 )
     }
     else
     {
-        var_10 = _id_0A69::_id_6BC3( var_0 )[0];
+        var_10 = scripts\mp\utility\game::_id_6BC3( var_0 )[0];
         var_1 = 0;
 
         foreach ( var_5 in level._id_B159[var_0] )

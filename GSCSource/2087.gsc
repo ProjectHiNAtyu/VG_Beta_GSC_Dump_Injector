@@ -47,7 +47,7 @@ _id_6C30()
 
 _id_FFDC( var_0 )
 {
-    if ( _func_02DA( var_0 ) == 1 )
+    if ( isvector( var_0 ) == 1 )
     {
         var_1 = 0;
         var_1 = var_1 + var_0[0];
@@ -96,7 +96,7 @@ _id_E386( var_0 )
     if ( isdefined( var_0 ) )
         return var_0;
 
-    return _func_020F();
+    return spawnstruct();
 }
 
 _id_6D16( var_0, var_1 )
@@ -127,8 +127,8 @@ _id_6C39( var_0 )
 {
     if ( isdefined( var_0 ) == 1 )
     {
-        if ( isdefined( var_0._id_02BA ) == 1 )
-            return var_0._id_02BA;
+        if ( isdefined( var_0.name ) == 1 )
+            return var_0.name;
 
         if ( isdefined( var_0._id_B711 ) == 1 )
             return var_0._id_B711;
@@ -139,7 +139,7 @@ _id_6C39( var_0 )
 
 _id_BFEE( var_0 )
 {
-    if ( isalive( var_0 ) == 1 )
+    if ( _func_0106( var_0 ) == 1 )
     {
         if ( var_0.size >= 2 )
         {
@@ -153,7 +153,7 @@ _id_BFEE( var_0 )
                 var_1 = var_3;
             }
 
-            var_4 = _func_01B7( var_1, var_2 );
+            var_4 = randomfloatrange( var_1, var_2 );
             return var_4;
         }
         else if ( var_0.size == 1 )
@@ -171,7 +171,7 @@ _id_C007( var_0, var_1, var_2 )
             return var_0;
         else
         {
-            var_3 = _func_01B7( var_0, var_1 );
+            var_3 = randomfloatrange( var_0, var_1 );
             return var_3;
         }
     }
@@ -187,7 +187,7 @@ _id_C011( var_0, var_1 )
 {
     var_2 = undefined;
 
-    if ( isalive( var_0 ) == 1 )
+    if ( _func_0106( var_0 ) == 1 )
     {
         if ( var_0.size == 0 )
             return undefined;
@@ -201,7 +201,7 @@ _id_C011( var_0, var_1 )
             return float( var_2 );
         }
     }
-    else if ( isalive( var_0 ) == 0 && isdefined( var_1 ) == 1 )
+    else if ( _func_0106( var_0 ) == 0 && isdefined( var_1 ) == 1 )
         var_2 = _id_C007( var_1, var_0 );
     else
         var_2 = var_0;
@@ -223,7 +223,7 @@ _id_1BCB( var_0 )
 {
     if ( !isdefined( var_0 ) )
         return [];
-    else if ( isdefined( var_0 ) == 1 && _func_0451( var_0 ) == 0 && isalive( var_0 ) == 1 )
+    else if ( isdefined( var_0 ) == 1 && _func_0451( var_0 ) == 0 && _func_0106( var_0 ) == 1 )
     {
 
     }
@@ -235,7 +235,7 @@ _id_1BCB( var_0 )
 
 _id_FFC4( var_0, var_1 )
 {
-    var_2 = isalive( var_0 );
+    var_2 = _func_0106( var_0 );
     var_3 = isdefined( var_1 );
 
     if ( _id_DEC8( !var_3, "snd VarrayAdd undefined entity" ) )
@@ -250,7 +250,7 @@ _id_FFC4( var_0, var_1 )
     }
     else if ( var_2 )
     {
-        var_4 = _id_077B::_id_1B78( var_0, var_1 );
+        var_4 = scripts\engine\utility::array_contains( var_0, var_1 );
 
         if ( !var_4 )
             var_0[var_0.size] = var_1;
@@ -261,7 +261,7 @@ _id_FFC4( var_0, var_1 )
 
 _id_FFC5( var_0, var_1 )
 {
-    var_2 = isalive( var_0 );
+    var_2 = _func_0106( var_0 );
     var_3 = isdefined( var_1 );
 
     if ( _id_DEC8( !var_3, "snd VarrayRemove undefined entity" ) )
@@ -271,10 +271,10 @@ _id_FFC5( var_0, var_1 )
         var_0 = undefined;
     else if ( var_2 )
     {
-        var_4 = _id_077B::_id_1B78( var_0, var_1 );
+        var_4 = scripts\engine\utility::array_contains( var_0, var_1 );
 
         if ( var_4 )
-            var_0 = _id_077B::_id_1B96( var_0, var_1 );
+            var_0 = scripts\engine\utility::array_remove( var_0, var_1 );
     }
 
     return var_0;
@@ -282,8 +282,8 @@ _id_FFC5( var_0, var_1 )
 
 _id_EA59( var_0, var_1 )
 {
-    var_0 = _id_077B::_id_FF6A( var_0, "" );
-    var_1 = _id_077B::_id_FF6A( var_1, "" );
+    var_0 = scripts\engine\utility::_id_FF6A( var_0, "" );
+    var_1 = scripts\engine\utility::_id_FF6A( var_1, "" );
     var_2 = "";
     var_2 = var_2 + ( var_1 + var_0 + var_1 );
     return var_2;
@@ -332,8 +332,8 @@ _id_B9FD( var_0 )
     var_1 = undefined;
 
     if ( _func_02DB( var_0 ) == 1 )
-        var_1 = var_0._id_02EA;
-    else if ( _func_02DA( var_0 ) == 1 )
+        var_1 = var_0.origin;
+    else if ( isvector( var_0 ) == 1 )
         var_1 = var_0;
     else
     {
@@ -348,7 +348,7 @@ _id_BFE7( var_0 )
     if ( var_0.size == 1 )
         return var_0[0];
 
-    var_1 = _func_01B9( 1, var_0.size );
+    var_1 = randomintrange( 1, var_0.size );
     var_1 = var_1 - 1;
     var_2 = var_0[var_1];
     return var_2;
@@ -371,14 +371,14 @@ _id_8A4D( var_0 )
 _id_6DA2( var_0 )
 {
     var_1 = getentarray( var_0, "targetname" );
-    var_2 = _id_077B::_id_6D7C( var_0, "targetname" );
+    var_2 = scripts\engine\utility::_id_6D7C( var_0, "targetname" );
     var_3 = [];
     var_4 = _func_00E6( var_0, "targetname" );
 
-    if ( _id_06BB::_id_8A2C() == 1 )
+    if ( scripts\common\utility::_id_8A2C() == 1 )
         var_3 = call [[ level._id_6B7B ]]( var_0, "targetname" );
 
-    var_5 = _id_077B::_id_1B72( var_1, var_2, var_3, var_4 );
+    var_5 = scripts\engine\utility::_id_1B72( var_1, var_2, var_3, var_4 );
     return var_5;
 }
 
@@ -412,7 +412,7 @@ _id_8ADA( var_0, var_1, var_2 )
 _id_1094F()
 {
     while ( _func_0451( self ) == 0 )
-        _id_077B::_id_1087D( "death", "disconnect" );
+        scripts\engine\utility::_id_1087D( "death", "disconnect" );
 }
 
 _id_10951( var_0, var_1 )
@@ -422,7 +422,7 @@ _id_10951( var_0, var_1 )
     var_3 = undefined;
     var_4 = undefined;
 
-    if ( isalive( var_1 ) )
+    if ( _func_0106( var_1 ) )
     {
         var_3 = float( var_1[0] );
         var_4 = float( var_1[1] );
@@ -494,7 +494,7 @@ _id_B7F8( var_0, var_1 )
         waitframe();
         waittillframeend;
 
-        if ( !var_0 useanimtree() )
+        if ( !var_0 usebuttonpressed() )
             break;
     }
 
@@ -537,7 +537,7 @@ _id_F636( var_0, var_1, var_2 )
 
 _id_8983( var_0 )
 {
-    if ( isdefined( var_0 ) && _func_02DB( var_0 ) && _func_0117( var_0 ) )
+    if ( isdefined( var_0 ) && _func_02DB( var_0 ) && isplayer( var_0 ) )
         return 1;
 
     return 0;
@@ -545,7 +545,7 @@ _id_8983( var_0 )
 
 _id_0BDC( var_0 )
 {
-    return level._id_B758;
+    return level.players;
 }
 
 _id_6C44( var_0 )
@@ -557,7 +557,7 @@ _id_6C44( var_0 )
         foreach ( var_3 in var_1 )
         {
             if ( !_id_8983( var_3 ) )
-                var_1 = _id_077B::_id_1B96( var_1, var_3 );
+                var_1 = scripts\engine\utility::array_remove( var_1, var_3 );
         }
 
         return var_1;
@@ -591,7 +591,7 @@ _id_1081B()
     {
         var_0 = _id_6C44();
 
-        if ( isalive( var_0 ) && var_0.size > 0 )
+        if ( _func_0106( var_0 ) && var_0.size > 0 )
             break;
 
         waitframe();
@@ -768,15 +768,15 @@ _id_AC4A( var_0, var_1, var_2, var_3 )
     if ( isdefined( var_1 ) == 0 || var_1 <= 0 )
         return var_0;
 
-    var_2 = _id_077B::_id_FF6A( var_2, 0.0 );
-    var_3 = _id_077B::_id_FF6A( var_3, 0.0 );
+    var_2 = scripts\engine\utility::_id_FF6A( var_2, 0.0 );
+    var_3 = scripts\engine\utility::_id_FF6A( var_3, 0.0 );
     var_2 = var_2 + 180;
     var_3 = var_3 + 270;
     var_4 = var_0[0];
     var_5 = var_0[1];
     var_6 = var_0[2];
-    var_4 = var_4 + var_1 * _func_01FE( var_3 ) * cos( var_2 );
-    var_5 = var_5 + var_1 * _func_01FE( var_3 ) * _func_01FE( var_2 );
+    var_4 = var_4 + var_1 * sin( var_3 ) * cos( var_2 );
+    var_5 = var_5 + var_1 * sin( var_3 ) * sin( var_2 );
     var_6 = var_6 + var_1 * cos( var_3 );
     var_7 = ( var_4, var_5, var_6 );
     return var_7;
@@ -795,7 +795,7 @@ _id_6D97( var_0 )
     }
 
     if ( isdefined( var_3 ) == 1 )
-        var_2 = _func_0243( var_2 );
+        var_2 = tolower( var_2 );
 
     return var_2;
 }
@@ -805,12 +805,12 @@ _id_C006( var_0, var_1, var_2 )
     var_3 = var_0 - var_2;
     var_4 = var_0 + var_2;
     var_5 = var_4 - var_3;
-    var_6 = ( _func_01B6( var_5[0] ), _func_01B6( var_5[1] ), _func_01B6( var_5[2] ) );
+    var_6 = ( randomfloat( var_5[0] ), randomfloat( var_5[1] ), randomfloat( var_5[2] ) );
 
     if ( var_1 != ( 0, 0, 0 ) )
     {
-        var_3 = var_0 - _func_01C2( var_0 - var_3, var_1 );
-        var_6 = _func_01C2( var_6, var_1 );
+        var_3 = var_0 - rotatevector( var_0 - var_3, var_1 );
+        var_6 = rotatevector( var_6, var_1 );
     }
 
     var_7 = var_3 + var_6;
@@ -844,7 +844,7 @@ _id_D6C4()
     var_0 = [ "djalbert", "jgosselin", "mdenis", "ntremblay", "plgrondines", "sarseneault", "sclark", "vleroux", "asanchez", "bdevereaux", "cbello", "csakanai", "dtung", "imika", "jdrelick", "tbader", "carya", "cegert", "cstaples", "cchristensen", "dnatale", "dprior", "drowe", "rorice", "smiller", "sprovine", "tleeamies", "tstasica", "abayless", "rojackson", "gleek-abrown", "abrown", "bkreimeier", "dblondin", "jdenny", "jharley", "jruhala", "jsypult", "jtennies", "mwolf", "ndamato", "rsmsnjmiller", "jmiller", "tischlie", "tschlie", "vnuniyants", "dbrown", "dpetras", "dveca", "dswenson", "elopez", "ewedemeyer", "flabarthe", "kchau", "lhitch", "mcaisley", "mgrimm", "midavies", "rmcsweeney", "tcannan", "bbitonti", "btuey", "cayers", "cdinkel", "hplunkard", "jmccawley", "ksherwood", "lstaples", "rgarigliano", "seckert", "sjimmerson", "wcornell" ];
     var_1 = _id_6C44();
 
-    if ( isalive( var_1 ) )
+    if ( _func_0106( var_1 ) )
     {
         foreach ( var_3 in var_1 )
         {
@@ -854,9 +854,9 @@ _id_D6C4()
             {
                 foreach ( var_6 in var_0 )
                 {
-                    if ( _func_0121( var_4, var_6 ) )
+                    if ( issubstr( var_4, var_6 ) )
                     {
-                        _func_01D0( "#x3a41fcac502333e6b", "1" );
+                        setdvar( "#x3a41fcac502333e6b", "1" );
                         return;
                     }
                 }
@@ -938,7 +938,7 @@ _id_0CF7()
 
                 if ( isdefined( var_6 ) )
                 {
-                    _func_01D0( var_3, var_6 );
+                    setdvar( var_3, var_6 );
                     var_1._id_04A3 = var_6;
                 }
                 else
@@ -970,7 +970,7 @@ _id_0CF5()
 _id_0CF4( var_0, var_1, var_2 )
 {
     _id_DED7( var_0 );
-    level._id_0B2C[var_0] = _func_020F();
+    level._id_0B2C[var_0] = spawnstruct();
     level._id_0B2C[var_0]._id_2EFD = var_2;
     level._id_0B2C[var_0]._id_8CB6 = var_0;
     level._id_0B2C[var_0]._id_04A3 = var_1;
@@ -982,7 +982,7 @@ _id_0CF6( var_0, var_1 )
     var_2 = getdvar( var_0 );
 
     if ( isdefined( var_2 ) == 0 || var_2 == "" )
-        _func_01D1( var_0, var_1 );
+        setdvarifuninitialized( var_0, var_1 );
 }
 
 _id_DED7( var_0 )
@@ -1089,12 +1089,12 @@ _id_0BE3( var_0, var_1, var_2 )
 
         if ( var_2 == "min" )
         {
-            var_4 = _func_0148( var_4, var_3 );
+            var_4 = min( var_4, var_3 );
             continue;
         }
 
         if ( var_2 == "max" )
-            var_4 = _func_0147( var_4, var_3 );
+            var_4 = max( var_4, var_3 );
     }
 
     return var_4;
@@ -1128,7 +1128,7 @@ _id_84CA( var_0 )
 
 _id_7864( var_0 )
 {
-    var_0 = _id_077B::_id_EA4F( var_0 );
+    var_0 = scripts\engine\utility::_id_EA4F( var_0 );
     var_1 = int( 0 );
 
     for ( var_2 = 0; var_2 < var_0.size; var_2++ )
@@ -1184,31 +1184,31 @@ _id_7864( var_0 )
 
 _id_6706( var_0, var_1 )
 {
-    var_1 = _id_077B::_id_FF6A( var_1, 1 );
+    var_1 = scripts\engine\utility::_id_FF6A( var_1, 1 );
     var_2 = [];
-    var_3 = _id_077B::_id_6D7C( var_0, "scriptbundlename" );
-    var_2 = _id_077B::_id_1B72( var_3, var_2 );
+    var_3 = scripts\engine\utility::_id_6D7C( var_0, "scriptbundlename" );
+    var_2 = scripts\engine\utility::_id_1B72( var_3, var_2 );
     var_4 = [];
-    var_2 = _id_077B::_id_1B72( var_4, var_2 );
+    var_2 = scripts\engine\utility::_id_1B72( var_4, var_2 );
     var_5 = [];
-    var_2 = _id_077B::_id_1B72( var_5, var_2 );
+    var_2 = scripts\engine\utility::_id_1B72( var_5, var_2 );
     var_6 = [];
 
-    if ( isalive( var_2 ) && var_2.size > 0 )
+    if ( _func_0106( var_2 ) && var_2.size > 0 )
     {
         foreach ( var_8 in var_2 )
         {
-            if ( isalive( var_8._id_CBA5 ) )
+            if ( _func_0106( var_8._id_CBA5 ) )
             {
-                var_6 = _id_077B::_id_1B72( var_8._id_CBA5, var_6 );
-                var_6 = _id_077B::_id_1BA9( var_6 );
+                var_6 = scripts\engine\utility::_id_1B72( var_8._id_CBA5, var_6 );
+                var_6 = scripts\engine\utility::_id_1BA9( var_6 );
 
                 if ( var_1 )
                 {
                     foreach ( var_10 in var_6 )
                     {
                         if ( _id_8983( var_10 ) )
-                            var_6 = _id_077B::_id_1B96( var_6, var_10 );
+                            var_6 = scripts\engine\utility::array_remove( var_6, var_10 );
                     }
                 }
             }
@@ -1226,20 +1226,20 @@ _id_0BD5( var_0, var_1, var_2 )
 
 _id_0B17( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_3 = _id_077B::_id_FF6A( var_3, 65.0 );
+    var_3 = scripts\engine\utility::_id_FF6A( var_3, 65.0 );
     var_5 = cos( var_3 );
-    var_4 = _id_077B::_id_FF6A( var_4, 262144 );
+    var_4 = scripts\engine\utility::_id_FF6A( var_4, 262144 );
     var_6 = [];
 
     foreach ( var_8 in var_0 )
     {
-        var_9 = distance( var_8._id_02EA, var_1 );
+        var_9 = distance( var_8.origin, var_1 );
 
         if ( var_9 <= var_4 )
         {
-            var_10 = var_8._id_02EA - var_1;
-            var_11 = _func_025A( var_10 );
-            var_12 = _func_0257( var_2, var_11 );
+            var_10 = var_8.origin - var_1;
+            var_11 = vectornormalize( var_10 );
+            var_12 = vectordot( var_2, var_11 );
 
             if ( var_12 >= var_5 )
                 var_6[var_6.size] = var_8;
@@ -1251,19 +1251,19 @@ _id_0B17( var_0, var_1, var_2, var_3, var_4 )
 
 _id_0B16( var_0, var_1, var_2, var_3 )
 {
-    var_3 = _id_077B::_id_FF6A( var_3, 262144 );
+    var_3 = scripts\engine\utility::_id_FF6A( var_3, 262144 );
     var_4 = undefined;
     var_5 = 0.0;
 
     foreach ( var_7 in var_2 )
     {
-        var_8 = distance( var_7._id_02EA, var_0 );
+        var_8 = distance( var_7.origin, var_0 );
 
         if ( var_8 <= var_3 )
         {
-            var_9 = var_7._id_02EA - var_0;
-            var_10 = _func_025A( var_9 );
-            var_11 = _func_0257( var_1, var_10 );
+            var_9 = var_7.origin - var_0;
+            var_10 = vectornormalize( var_9 );
+            var_11 = vectordot( var_1, var_10 );
 
             if ( var_11 > var_5 )
             {

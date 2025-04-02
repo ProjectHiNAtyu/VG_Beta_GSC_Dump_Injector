@@ -3,7 +3,7 @@
 
 _id_10D77()
 {
-    level._id_0BA3["weapon_drop_impact"] = _func_0139( "vfx/iw8_mp/killstreak/vfx_carepkg_landing_dust.vfx" );
+    level._effect["weapon_drop_impact"] = loadfx( "vfx/iw8_mp/killstreak/vfx_carepkg_landing_dust.vfx" );
 }
 
 _id_10D71()
@@ -17,21 +17,21 @@ _id_10D76()
     level endon( "game_ended" );
     self endon( "death_or_disconnect" );
     waitframe();
-    var_0 = _id_099B::_id_4034( "weapondrop", self );
-    var_0._id_47CD = _func_034C( "deploy_weapondrop_mp" );
-    _id_06BB::_id_1527( 0 );
+    var_0 = scripts\cp_mp\utility\killstreak_utility::_id_4034( "weapondrop", self );
+    var_0._id_47CD = makeweapon( "deploy_weapondrop_mp" );
+    scripts\common\utility::_id_1527( 0 );
     var_1 = _id_0990::_id_EA00( var_0, var_0._id_47CD, "grenade_fire" );
-    _id_06BB::_id_1527( 1 );
+    scripts\common\utility::_id_1527( 1 );
 
     if ( istrue( var_1 ) )
     {
         var_0 notify( "killstreak_finished_with_deploy_weapon" );
 
-        if ( _id_099D::_id_8A10( "supers", "superUseFinished" ) )
-            [[ _id_099D::_id_6D05( "supers", "superUseFinished" ) ]]();
+        if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "supers", "superUseFinished" ) )
+            [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "supers", "superUseFinished" ) ]]();
     }
-    else if ( _id_099D::_id_8A10( "supers", "superUseFinished" ) )
-        [[ _id_099D::_id_6D05( "supers", "superUseFinished" ) ]]( 1 );
+    else if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "supers", "superUseFinished" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "supers", "superUseFinished" ) ]]( 1 );
 }
 
 _id_10D7A( var_0 )
@@ -49,14 +49,14 @@ _id_10D74( var_0, var_1 )
 
     if ( isdefined( var_2 ) )
     {
-        var_3 = _func_0205( "script_model", var_2._id_02EA );
-        var_3 setmode( "military_crate_field_upgrade_01" );
-        var_3 setorigin( var_0 );
-        var_3._id_02F2 = var_0;
-        var_3._id_045B = var_0._id_045B;
-        var_3 _meth_820B( var_2, "tag_origin", ( 0, 0, -15 ), ( 0, 0, 0 ) );
+        var_3 = spawn( "script_model", var_2.origin );
+        var_3 setmodel( "military_crate_field_upgrade_01" );
+        var_3 setotherent( var_0 );
+        var_3.owner = var_0;
+        var_3.team = var_0.team;
+        var_3 linkto( var_2, "tag_origin", ( 0, 0, -15 ), ( 0, 0, 0 ) );
         var_3 _meth_86FB( "killstreak" );
-        var_3 _meth_8703( var_0._id_045B );
+        var_3 _meth_8703( var_0.team );
         var_2._id_4780 = var_3;
         var_2 thread _id_10D73( var_3 );
     }
@@ -84,10 +84,10 @@ _id_10D72()
 
     self._id_753C = 1;
     self notify( "deliveryBox_dropped" );
-    self _meth_8415();
+    self unlink();
     _id_3E77();
-    var_0 = self._id_02EA - ( 0, 0, 1000 );
-    _id_099B::_id_8D95( var_0, 100, 1000, 30.0, self._id_02F2, self._id_045B );
+    var_0 = self.origin - ( 0, 0, 1000 );
+    scripts\cp_mp\utility\killstreak_utility::_id_8D95( var_0, 100, 1000, 30.0, self.owner, self.team );
     thread _id_10AB8();
     thread _id_10ABA();
 }
@@ -95,7 +95,7 @@ _id_10D72()
 _id_473F()
 {
     _id_3E76();
-    self _meth_809A();
+    self delete();
 }
 
 _id_3E77()
@@ -105,10 +105,10 @@ _id_3E77()
 
     self._id_B03E = 1;
     self._id_F9A5 = 1;
-    self _meth_8254( ( 0, 0, 0 ), ( 0, 0, 0 ), 1200 );
+    self physicslaunchserver( ( 0, 0, 0 ), ( 0, 0, 0 ), 1200 );
     var_0 = self _meth_846D( 0 );
     _func_02D3( var_0, ( 0, 0, -1 ) );
-    self _meth_84FB();
+    self physics_registerforcollisioncallback();
 }
 
 _id_3E76()
@@ -120,9 +120,9 @@ _id_3E76()
     self._id_B03E = undefined;
     self._id_F9A5 = undefined;
     self _meth_8544();
-    self physics_registerforcollisioncallback();
-    self stoplookat( "mp_care_package_drop_lp" );
-    _id_099B::_id_8D99();
+    self _meth_84FC();
+    self stoploopsound( "mp_care_package_drop_lp" );
+    scripts\cp_mp\utility\killstreak_utility::_id_8D99();
 }
 
 _id_10ABA()
@@ -130,16 +130,16 @@ _id_10ABA()
     self endon( "crate_physics_off" );
     _id_10ABB();
 
-    if ( _id_099D::_id_8A10( "entity", "touchingBadTrigger" ) )
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "entity", "touchingBadTrigger" ) )
     {
-        if ( self [[ _id_099D::_id_6D05( "entity", "touchingBadTrigger" ) ]]() )
+        if ( self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "entity", "touchingBadTrigger" ) ]]() )
         {
             thread _id_473F();
             return;
         }
     }
 
-    self._id_02F2 thread _id_09D5::_id_16DC( self );
+    self.owner thread _id_09D5::_id_16DC( self );
     thread _id_3E76();
 }
 
@@ -163,7 +163,7 @@ _id_10ABB()
 _id_10AB8( var_0 )
 {
     self endon( "crate_physics_off" );
-    self playlocalsound( "mp_care_package_drop_lp" );
+    self playloopsound( "mp_care_package_drop_lp" );
 
     if ( isdefined( var_0 ) )
         wait( var_0 );
@@ -193,7 +193,7 @@ _id_10AB8( var_0 )
 
 _id_B369( var_0, var_1, var_2, var_3 )
 {
-    _func_0196( _id_077B::_id_6A40( "weapon_drop_impact" ), var_0, var_1 );
+    playfx( scripts\engine\utility::getfx( "weapon_drop_impact" ), var_0, var_1 );
 
     if ( var_2 < 150 )
         self playsoundtoteam( "mp_care_package_low_impact", var_3 );
@@ -202,5 +202,5 @@ _id_B369( var_0, var_1, var_2, var_3 )
     else
         self playsoundtoteam( "mp_care_package_high_impact", var_3 );
 
-    self stoplookat( "mp_care_package_drop_lp" );
+    self stoploopsound( "mp_care_package_drop_lp" );
 }

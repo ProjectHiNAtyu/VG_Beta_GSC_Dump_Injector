@@ -50,12 +50,12 @@ _id_23AD()
 
 _id_23B5( var_0, var_1, var_2, var_3 )
 {
-    return visionsetnight( self._id_04CE ) == var_3;
+    return weaponclass( self._id_04CE ) == var_3;
 }
 
 _id_23E9( var_0, var_1, var_2, var_3 )
 {
-    if ( visionsetnight( self._id_04CE ) != "rocketlauncher" )
+    if ( weaponclass( self._id_04CE ) != "rocketlauncher" )
         return 0;
 
     var_4 = _id_23A1();
@@ -293,7 +293,7 @@ _id_23D3( var_0 )
 
 _id_23A5( var_0, var_1, var_2, var_3 )
 {
-    return isdefined( self._id_0B3E._id_03AE ) && isdefined( self._id_02CD ) && self._id_0B3E._id_03AE == self._id_02CD && distancesquared( self._id_02CD._id_02EA, self._id_02EA ) > 16;
+    return isdefined( self._id_0B3E._id_03AE ) && isdefined( self._id_02CD ) && self._id_0B3E._id_03AE == self._id_02CD && distancesquared( self._id_02CD.origin, self.origin ) > 16;
 }
 
 _id_23D8()
@@ -363,7 +363,7 @@ _id_23BC( var_0, var_1, var_2, var_3 )
     if ( !isdefined( self._id_9D22 ) )
         return 1;
 
-    if ( !isdefined( self._id_9D22._id_0457 ) )
+    if ( !isdefined( self._id_9D22.target ) )
         return 1;
 
     return 0;
@@ -631,9 +631,9 @@ _id_23B2( var_0, var_1, var_2, var_3 )
 
 _id_23E1( var_0 )
 {
-    self._id_9D22 = _func_020F();
-    var_0._id_9D22 = _func_020F();
-    self._id_9D22._id_0457 = var_0;
+    self._id_9D22 = spawnstruct();
+    var_0._id_9D22 = spawnstruct();
+    self._id_9D22.target = var_0;
     self._id_9D22._id_AE70 = var_0;
     var_0._id_9D22._id_AE70 = self;
 }
@@ -643,11 +643,11 @@ _id_2389()
     if ( !isdefined( self._id_9D22 ) )
         return;
 
-    if ( isdefined( self._id_9D22._id_0457 ) )
-        self._id_9D22._id_0457._id_9D22 = undefined;
+    if ( isdefined( self._id_9D22.target ) )
+        self._id_9D22.target._id_9D22 = undefined;
 
     if ( isdefined( self._id_9D22._id_F04D ) )
-        self._id_9D22._id_F04D _meth_809A();
+        self._id_9D22._id_F04D delete();
 
     self._id_9D22 = undefined;
 }
@@ -708,7 +708,7 @@ _id_2393()
 
 _id_2383( var_0 )
 {
-    _id_077B::_id_D288( var_0 );
+    scripts\engine\utility::set_movement_speed( var_0 );
 }
 
 _id_23B4()
@@ -807,5 +807,5 @@ _id_23EB( var_0, var_1, var_2 )
         return 0;
 
     var_3 = 50;
-    return _func_01B8( 100 ) <= var_3;
+    return randomint( 100 ) <= var_3;
 }

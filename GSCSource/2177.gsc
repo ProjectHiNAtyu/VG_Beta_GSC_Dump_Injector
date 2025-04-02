@@ -3,7 +3,7 @@
 
 _id_3D59()
 {
-    self._id_03E1._id_3D53 = _func_020F();
+    self._id_03E1._id_3D53 = spawnstruct();
 }
 
 _id_3D5A()
@@ -11,7 +11,7 @@ _id_3D5A()
     if ( isdefined( level._id_03E1 ) && isdefined( level._id_03E1._id_3D53 ) )
         return;
 
-    level._id_03E1._id_3D53 = _func_020F();
+    level._id_03E1._id_3D53 = spawnstruct();
     level._id_03E1._id_3D53._id_C5E6 = 30;
     level _id_088C::_id_D3B7( "saw_corpse", ::_id_3D5D );
     level _id_088C::_id_D3B7( "found_corpse", ::_id_3D58 );
@@ -31,15 +31,15 @@ _id_D18D( var_0 )
     if ( !isdefined( var_0["shadow_dist"] ) )
         var_0["shadow_dist"] = var_0["found_dist"];
 
-    level._id_03E1._id_3D53._id_D95E = spawnstruct( var_0["shadow_dist"] );
-    level._id_03E1._id_3D53._id_DD2F = spawnstruct( var_0["sight_dist"] );
-    level._id_03E1._id_3D53._id_4873 = spawnstruct( var_0["detect_dist"] );
-    level._id_03E1._id_3D53._id_5EF1 = spawnstruct( var_0["found_dist"] );
+    level._id_03E1._id_3D53._id_D95E = _func_0214( var_0["shadow_dist"] );
+    level._id_03E1._id_3D53._id_DD2F = _func_0214( var_0["sight_dist"] );
+    level._id_03E1._id_3D53._id_4873 = _func_0214( var_0["detect_dist"] );
+    level._id_03E1._id_3D53._id_5EF1 = _func_0214( var_0["found_dist"] );
 }
 
 _id_D18C()
 {
-    level._id_03E1._id_7CE9[self getentitynumber()] = self._id_02EA;
+    level._id_03E1._id_7CE9[self getentitynumber()] = self.origin;
 }
 
 _id_D18B()
@@ -76,7 +76,7 @@ _id_3D5F()
     if ( isdefined( self._id_03E1._id_3D5C ) && gettime() < self._id_03E1._id_3D5C )
         return;
 
-    if ( _id_077B::_id_544E( "stealth_hold_position" ) )
+    if ( scripts\engine\utility::_id_544E( "stealth_hold_position" ) )
         return;
 
     if ( self._id_020F )
@@ -102,7 +102,7 @@ _id_3D5F()
     {
         var_5 = var_4 getentitynumber();
 
-        if ( isdefined( level._id_03E1._id_7CE9 ) && isdefined( level._id_03E1._id_7CE9[var_5] ) && distancesquared( level._id_03E1._id_7CE9[var_5], var_4._id_02EA ) < spawnstruct( 100 ) )
+        if ( isdefined( level._id_03E1._id_7CE9 ) && isdefined( level._id_03E1._id_7CE9[var_5] ) && distancesquared( level._id_03E1._id_7CE9[var_5], var_4.origin ) < _func_0214( 100 ) )
         {
             level._id_03E1._id_7CE9[var_5] = undefined;
             var_4._id_5EF0 = 1;
@@ -112,7 +112,7 @@ _id_3D5F()
             continue;
 
         var_6 = var_4 _id_088C::_id_6968();
-        var_7 = distancesquared( self._id_02EA, var_6 );
+        var_7 = distancesquared( self.origin, var_6 );
         var_8 = level._id_03E1._id_3D53._id_5EF1;
         var_9 = level._id_03E1._id_3D53._id_DD2F;
         var_10 = level._id_03E1._id_3D53._id_4873;
@@ -134,7 +134,7 @@ _id_3D5F()
 
         if ( var_7 < var_8 )
         {
-            if ( abs( self._id_02EA[2] - var_6[2] ) < 60 )
+            if ( abs( self.origin[2] - var_6[2] ) < 60 )
             {
                 var_1 = var_4;
                 break;
@@ -147,7 +147,7 @@ _id_3D5F()
                 continue;
 
             var_11 = self._id_03E1._id_3D53._id_5449 _id_088C::_id_6968();
-            var_12 = distancesquared( self._id_02EA, var_11 );
+            var_12 = distancesquared( self.origin, var_11 );
 
             if ( var_12 <= var_7 )
                 continue;
@@ -156,7 +156,7 @@ _id_3D5F()
         if ( var_7 > var_9 )
             continue;
 
-        if ( var_6[2] - self._id_02EA[2] > 128 )
+        if ( var_6[2] - self.origin[2] > 128 )
             continue;
 
         if ( var_7 < var_10 )
@@ -169,9 +169,9 @@ _id_3D5F()
         }
 
         var_13 = anglestoforward( self gettagangles( "tag_eye" ) );
-        var_14 = _func_025A( var_6 + ( 0, 0, 30 ) - self geteye() );
+        var_14 = vectornormalize( var_6 + ( 0, 0, 30 ) - self geteye() );
 
-        if ( _func_0257( var_13, var_14 ) > 0.55 )
+        if ( vectordot( var_13, var_14 ) > 0.55 )
         {
             if ( !isdefined( var_4._id_D019 ) && self _meth_8066( var_4 ) )
             {
@@ -219,7 +219,7 @@ _id_3D5D( var_0 )
 {
     var_1 = var_0._id_0186;
     var_2 = var_1 _id_088C::_id_6968();
-    self._id_03E1._id_3D53._id_02EA = var_2;
+    self._id_03E1._id_3D53.origin = var_2;
     self._id_03E1._id_24B6 = 1;
     thread _id_3D5E( var_1 );
 }
@@ -258,12 +258,12 @@ _id_3D57()
 _id_EBE9()
 {
     if ( !isdefined( self._id_03E1._id_EBE7 ) )
-        self._id_03E1._id_EBE7 = _func_020F();
+        self._id_03E1._id_EBE7 = spawnstruct();
 
     if ( isdefined( self._id_03E1._id_EBE7._id_A4CF ) && gettime() < self._id_03E1._id_EBE7._id_A4CF )
         return;
 
-    if ( _id_077B::_id_544E( "stealth_hold_position" ) )
+    if ( scripts\engine\utility::_id_544E( "stealth_hold_position" ) )
         return;
 
     if ( self._id_020F )
@@ -289,15 +289,15 @@ _id_EBE9()
         if ( isdefined( var_3._id_5EF0 ) )
             continue;
 
-        var_6 = var_3._id_02EA;
-        var_7 = distancesquared( self._id_02EA, var_6 );
+        var_6 = var_3.origin;
+        var_7 = distancesquared( self.origin, var_6 );
         var_8 = level._id_03E1._id_EBE7._id_5EF1;
         var_9 = level._id_03E1._id_EBE7._id_DD2F;
         var_10 = level._id_03E1._id_EBE7._id_4873;
 
         if ( var_7 < var_8 )
         {
-            if ( abs( self._id_02EA[2] - var_6[2] ) < 60 )
+            if ( abs( self.origin[2] - var_6[2] ) < 60 )
             {
                 var_1 = var_3;
                 break;
@@ -309,8 +309,8 @@ _id_EBE9()
             if ( self._id_03E1._id_EBE7._id_5449 == var_3 )
                 continue;
 
-            var_11 = self._id_03E1._id_EBE7._id_5449._id_02EA;
-            var_12 = distancesquared( self._id_02EA, var_11 );
+            var_11 = self._id_03E1._id_EBE7._id_5449.origin;
+            var_12 = distancesquared( self.origin, var_11 );
 
             if ( var_12 <= var_7 )
                 continue;
@@ -319,12 +319,12 @@ _id_EBE9()
         if ( var_7 > var_9 )
             continue;
 
-        if ( var_6[2] - self._id_02EA[2] > 128 )
+        if ( var_6[2] - self.origin[2] > 128 )
             continue;
 
         if ( var_7 < var_10 )
         {
-            if ( !isdefined( var_3._id_D019 ) && self _meth_8066( var_3 ) && _id_077B::_id_30D8( var_3._id_02EA, self, level._id_03E1._id_31D4 ) )
+            if ( !isdefined( var_3._id_D019 ) && self _meth_8066( var_3 ) && scripts\engine\utility::_id_30D8( var_3.origin, self, level._id_03E1._id_31D4 ) )
             {
                 var_2 = var_3;
                 break;
@@ -332,11 +332,11 @@ _id_EBE9()
         }
 
         var_13 = anglestoforward( self gettagangles( "tag_eye" ) );
-        var_14 = _func_025A( var_6 + ( 0, 0, 30 ) - self geteye() );
+        var_14 = vectornormalize( var_6 + ( 0, 0, 30 ) - self geteye() );
 
-        if ( _func_0257( var_13, var_14 ) > 0.55 )
+        if ( vectordot( var_13, var_14 ) > 0.55 )
         {
-            if ( !isdefined( var_3._id_D019 ) && self _meth_8066( var_3 ) && _id_077B::_id_30D8( var_3._id_02EA, self, level._id_03E1._id_31D4 ) )
+            if ( !isdefined( var_3._id_D019 ) && self _meth_8066( var_3 ) && scripts\engine\utility::_id_30D8( var_3.origin, self, level._id_03E1._id_31D4 ) )
             {
                 var_2 = var_3;
                 break;
@@ -353,9 +353,9 @@ _id_EBE9()
             self._id_03E1._id_AF1B = gettime();
 
         if ( isdefined( var_3._id_2FCA ) )
-            var_16 = var_3._id_2FCA[0]._id_02EA;
+            var_16 = var_3._id_2FCA[0].origin;
         else
-            var_16 = var_3._id_02EA;
+            var_16 = var_3.origin;
 
         self _meth_8522( "suspicious_door", var_1, var_16 );
     }
@@ -371,12 +371,12 @@ _id_EBE8( var_0 )
     var_1._id_1339 = self;
 
     if ( isdefined( var_1._id_2FCA ) && isdefined( var_1._id_2FCA[0] ) )
-        var_2 = var_1._id_2FCA[0]._id_02EA;
+        var_2 = var_1._id_2FCA[0].origin;
     else
-        var_2 = var_1._id_02EA;
+        var_2 = var_1.origin;
 
     var_3 = _func_02A6( var_2, self );
-    var_0._id_02EA = var_2 + anglestoforward( ( 0, _func_01B7( 0, 360 ), 0 ) ) * 75;
-    var_0._id_84F8 = _func_02A6( var_0._id_02EA, self );
+    var_0.origin = var_2 + anglestoforward( ( 0, randomfloatrange( 0, 360 ), 0 ) ) * 75;
+    var_0._id_84F8 = _func_02A6( var_0.origin, self );
     _id_0883::_id_2C3E( "investigate", var_0 );
 }

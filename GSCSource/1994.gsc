@@ -6,7 +6,7 @@ _id_9EC7()
     var_0 = getentarray( "minefield", "targetname" );
 
     if ( var_0.size > 0 )
-        level._id_0BA3["mine_explosion"] = _func_0139( "vfx/core/expl/weap/gre/vfx_exp_gre_dirt_cg" );
+        level._effect["mine_explosion"] = loadfx( "vfx/core/expl/weap/gre/vfx_exp_gre_dirt_cg" );
 
     for ( var_1 = 0; var_1 < var_0.size; var_1++ )
         var_0[var_1] thread _id_9EC6();
@@ -20,7 +20,7 @@ _id_9EC6()
     {
         self waittill( "trigger", var_0 );
 
-        if ( _func_0117( var_0 ) )
+        if ( isplayer( var_0 ) )
             var_0 thread _id_9EC5( self );
     }
 }
@@ -32,7 +32,7 @@ _id_9EC5( var_0 )
 
     self._id_9EC4 = 1;
     wait 0.5;
-    wait( _func_01B6( 0.5 ) );
+    wait( randomfloat( 0.5 ) );
 
     if ( isdefined( self ) && self _meth_81EF( var_0 ) )
     {

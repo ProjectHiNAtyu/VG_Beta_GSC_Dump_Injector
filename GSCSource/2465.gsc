@@ -3,7 +3,7 @@
 
 _id_1037A()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     level._id_FFF1._id_AA2E = var_0;
     var_0._id_102F4 = [];
 }
@@ -15,16 +15,16 @@ _id_10388( var_0, var_1 )
 
     if ( isdefined( var_1 ) )
     {
-        if ( isalive( var_1 ) )
+        if ( _func_0106( var_1 ) )
         {
             foreach ( var_5 in var_1 )
             {
-                if ( isdefined( var_5 ) && _func_0117( var_5 ) )
-                    var_5 _meth_82F6( "ui_veh_vehicle", var_3 );
+                if ( isdefined( var_5 ) && isplayer( var_5 ) )
+                    var_5 setclientomnvar( "ui_veh_vehicle", var_3 );
             }
         }
-        else if ( _func_0117( var_1 ) )
-            var_1 _meth_82F6( "ui_veh_vehicle", var_3 );
+        else if ( isplayer( var_1 ) )
+            var_1 setclientomnvar( "ui_veh_vehicle", var_3 );
     }
 }
 
@@ -40,7 +40,7 @@ _id_10381( var_0, var_1, var_2 )
             var_3 = var_4._id_CFB6[var_1];
     }
 
-    var_2 _meth_82F6( "ui_veh_current_seat", var_3 );
+    var_2 setclientomnvar( "ui_veh_current_seat", var_3 );
 }
 
 _id_10384( var_0, var_1, var_2 )
@@ -53,7 +53,7 @@ _id_10384( var_0, var_1, var_2 )
         var_3 = var_4._id_CFB6[var_1];
     }
 
-    var_2 _meth_82F6( "ui_veh_next_seat", var_3 );
+    var_2 setclientomnvar( "ui_veh_next_seat", var_3 );
 }
 
 _id_10386( var_0, var_1, var_2, var_3 )
@@ -102,16 +102,16 @@ _id_10386( var_0, var_1, var_2, var_3 )
 
     if ( isdefined( var_3 ) )
     {
-        if ( isalive( var_3 ) )
+        if ( _func_0106( var_3 ) )
         {
             foreach ( var_9 in var_3 )
             {
-                if ( isdefined( var_9 ) && _func_0117( var_9 ) )
-                    var_9 _meth_82F6( var_6, var_7 );
+                if ( isdefined( var_9 ) && isplayer( var_9 ) )
+                    var_9 setclientomnvar( var_6, var_7 );
             }
         }
-        else if ( _func_0117( var_3 ) )
-            var_3 _meth_82F6( var_6, var_7 );
+        else if ( isplayer( var_3 ) )
+            var_3 setclientomnvar( var_6, var_7 );
     }
 }
 
@@ -127,16 +127,16 @@ _id_10383( var_0, var_1 )
 
     if ( isdefined( var_1 ) )
     {
-        if ( isalive( var_1 ) )
+        if ( _func_0106( var_1 ) )
         {
             foreach ( var_3 in var_1 )
             {
-                if ( isdefined( var_3 ) && _func_0117( var_3 ) )
-                    var_3 _meth_82F6( "ui_veh_health_percent", int( var_0 ) );
+                if ( isdefined( var_3 ) && isplayer( var_3 ) )
+                    var_3 setclientomnvar( "ui_veh_health_percent", int( var_0 ) );
             }
         }
-        else if ( _func_0117( var_1 ) )
-            var_1 _meth_82F6( "ui_veh_health_percent", int( var_0 ) );
+        else if ( isplayer( var_1 ) )
+            var_1 setclientomnvar( "ui_veh_health_percent", int( var_0 ) );
     }
 }
 
@@ -149,16 +149,16 @@ _id_1038C( var_0 )
 {
     if ( isdefined( var_0 ) )
     {
-        if ( isalive( var_0 ) )
+        if ( _func_0106( var_0 ) )
         {
             foreach ( var_2 in var_0 )
             {
-                if ( isdefined( var_2 ) && _func_0117( var_2 ) )
-                    var_2 _meth_82F6( "ui_veh_show_health", 1 );
+                if ( isdefined( var_2 ) && isplayer( var_2 ) )
+                    var_2 setclientomnvar( "ui_veh_show_health", 1 );
             }
         }
-        else if ( _func_0117( var_0 ) )
-            var_0 _meth_82F6( "ui_veh_show_health", 1 );
+        else if ( isplayer( var_0 ) )
+            var_0 setclientomnvar( "ui_veh_show_health", 1 );
     }
 }
 
@@ -166,16 +166,16 @@ _id_10377( var_0 )
 {
     if ( isdefined( var_0 ) )
     {
-        if ( isalive( var_0 ) )
+        if ( _func_0106( var_0 ) )
         {
             foreach ( var_2 in var_0 )
             {
-                if ( isdefined( var_2 ) && _func_0117( var_2 ) )
-                    var_2 _meth_82F6( "ui_veh_show_health", 0 );
+                if ( isdefined( var_2 ) && isplayer( var_2 ) )
+                    var_2 setclientomnvar( "ui_veh_show_health", 0 );
             }
         }
-        else if ( _func_0117( var_0 ) )
-            var_0 _meth_82F6( "ui_veh_show_health", 0 );
+        else if ( isplayer( var_0 ) )
+            var_0 setclientomnvar( "ui_veh_show_health", 0 );
     }
 }
 
@@ -194,16 +194,16 @@ _id_10387( var_0, var_1 )
 
     if ( isdefined( var_1 ) )
     {
-        if ( isalive( var_1 ) )
+        if ( _func_0106( var_1 ) )
         {
             foreach ( var_3 in var_1 )
             {
-                if ( isdefined( var_3 ) && _func_0117( var_3 ) )
-                    var_3 _meth_82F6( "ui_veh_time_percent", int( var_0 ) );
+                if ( isdefined( var_3 ) && isplayer( var_3 ) )
+                    var_3 setclientomnvar( "ui_veh_time_percent", int( var_0 ) );
             }
         }
-        else if ( _func_0117( var_1 ) )
-            var_1 _meth_82F6( "ui_veh_time_percent", int( var_0 ) );
+        else if ( isplayer( var_1 ) )
+            var_1 setclientomnvar( "ui_veh_time_percent", int( var_0 ) );
     }
 }
 
@@ -216,16 +216,16 @@ _id_1038D( var_0 )
 {
     if ( isdefined( var_0 ) )
     {
-        if ( isalive( var_0 ) )
+        if ( _func_0106( var_0 ) )
         {
             foreach ( var_2 in var_0 )
             {
-                if ( isdefined( var_2 ) && _func_0117( var_2 ) )
-                    var_2 _meth_82F6( "ui_veh_show_time", 1 );
+                if ( isdefined( var_2 ) && isplayer( var_2 ) )
+                    var_2 setclientomnvar( "ui_veh_show_time", 1 );
             }
         }
-        else if ( _func_0117( var_0 ) )
-            var_0 _meth_82F6( "ui_veh_show_time", 1 );
+        else if ( isplayer( var_0 ) )
+            var_0 setclientomnvar( "ui_veh_show_time", 1 );
     }
 }
 
@@ -233,16 +233,16 @@ _id_10378( var_0 )
 {
     if ( isdefined( var_0 ) )
     {
-        if ( isalive( var_0 ) )
+        if ( _func_0106( var_0 ) )
         {
             foreach ( var_2 in var_0 )
             {
-                if ( isdefined( var_2 ) && _func_0117( var_2 ) )
-                    var_2 _meth_82F6( "ui_veh_show_time", 0 );
+                if ( isdefined( var_2 ) && isplayer( var_2 ) )
+                    var_2 setclientomnvar( "ui_veh_show_time", 0 );
             }
         }
-        else if ( _func_0117( var_0 ) )
-            var_0 _meth_82F6( "ui_veh_show_time", 0 );
+        else if ( isplayer( var_0 ) )
+            var_0 setclientomnvar( "ui_veh_show_time", 0 );
     }
 }
 
@@ -305,16 +305,16 @@ _id_10380( var_0, var_1, var_2, var_3 )
 
     if ( isdefined( var_3 ) )
     {
-        if ( isalive( var_3 ) )
+        if ( _func_0106( var_3 ) )
         {
             foreach ( var_8 in var_3 )
             {
-                if ( isdefined( var_8 ) && _func_0117( var_8 ) )
-                    var_8 _meth_82F6( var_6, var_2 );
+                if ( isdefined( var_8 ) && isplayer( var_8 ) )
+                    var_8 setclientomnvar( var_6, var_2 );
             }
         }
-        else if ( _func_0117( var_3 ) )
-            var_3 _meth_82F6( var_6, var_2 );
+        else if ( isplayer( var_3 ) )
+            var_3 setclientomnvar( var_6, var_2 );
     }
 }
 
@@ -342,22 +342,22 @@ _id_1038E( var_0, var_1, var_2 )
     {
         var_5 = var_3._id_109F7[var_0];
 
-        if ( isalive( var_1 ) )
+        if ( _func_0106( var_1 ) )
         {
             foreach ( var_7 in var_1 )
             {
-                if ( isdefined( var_7 ) && _func_0117( var_7 ) )
+                if ( isdefined( var_7 ) && isplayer( var_7 ) )
                 {
-                    var_7 setclientomnvar( "ui_veh_warning", var_4, 1 );
+                    var_7 _meth_82F7( "ui_veh_warning", var_4, 1 );
 
                     if ( isdefined( var_5 ) )
                         thread [[ var_5 ]]( var_7, "ui_veh_warning_omnvar_modified" );
                 }
             }
         }
-        else if ( _func_0117( var_1 ) )
+        else if ( isplayer( var_1 ) )
         {
-            var_1 setclientomnvar( "ui_veh_warning", var_4, 1 );
+            var_1 _meth_82F7( "ui_veh_warning", var_4, 1 );
 
             if ( isdefined( var_5 ) )
                 thread [[ var_5 ]]( var_1, "ui_veh_warning_omnvar_modified" );
@@ -374,22 +374,22 @@ _id_10379( var_0, var_1, var_2 )
     {
         var_5 = var_3._id_109EC[var_0];
 
-        if ( isalive( var_1 ) )
+        if ( _func_0106( var_1 ) )
         {
             foreach ( var_7 in var_1 )
             {
-                if ( isdefined( var_7 ) && _func_0117( var_7 ) )
+                if ( isdefined( var_7 ) && isplayer( var_7 ) )
                 {
-                    var_7 setclientomnvar( "ui_veh_warning", var_4, 0 );
+                    var_7 _meth_82F7( "ui_veh_warning", var_4, 0 );
 
                     if ( isdefined( var_5 ) )
                         thread [[ var_5 ]]( var_7, "ui_veh_warning_omnvar_modified" );
                 }
             }
         }
-        else if ( _func_0117( var_1 ) )
+        else if ( isplayer( var_1 ) )
         {
-            var_1 setclientomnvar( "ui_veh_warning", var_4, 0 );
+            var_1 _meth_82F7( "ui_veh_warning", var_4, 0 );
 
             if ( isdefined( var_5 ) )
                 thread [[ var_5 ]]( var_1, "ui_veh_warning_omnvar_modified" );
@@ -406,13 +406,13 @@ _id_1036C( var_0, var_1 )
         if ( isdefined( var_1 ) )
             var_2 = _id_10371( var_1, undefined, 1 );
 
-        if ( isalive( var_0 ) )
+        if ( _func_0106( var_0 ) )
         {
             foreach ( var_4 in var_0 )
             {
-                if ( isdefined( var_4 ) && _func_0117( var_4 ) )
+                if ( isdefined( var_4 ) && isplayer( var_4 ) )
                 {
-                    var_4 _meth_82F6( "ui_veh_warning", 0 );
+                    var_4 setclientomnvar( "ui_veh_warning", 0 );
 
                     if ( isdefined( var_2 ) )
                     {
@@ -425,9 +425,9 @@ _id_1036C( var_0, var_1 )
                 }
             }
         }
-        else if ( _func_0117( var_0 ) )
+        else if ( isplayer( var_0 ) )
         {
-            var_0 _meth_82F6( "ui_veh_warning", 0 );
+            var_0 setclientomnvar( "ui_veh_warning", 0 );
 
             if ( isdefined( var_2 ) )
             {
@@ -469,16 +469,16 @@ _id_10385( var_0, var_1, var_2, var_3 )
         else
             var_2 = floor( var_2 );
 
-        if ( isalive( var_3 ) )
+        if ( _func_0106( var_3 ) )
         {
             foreach ( var_9 in var_3 )
             {
-                if ( isdefined( var_9 ) && _func_0117( var_9 ) )
-                    var_9 _meth_82F6( var_6, var_2 );
+                if ( isdefined( var_9 ) && isplayer( var_9 ) )
+                    var_9 setclientomnvar( var_6, var_2 );
             }
         }
-        else if ( _func_0117( var_3 ) )
-            var_3 _meth_82F6( var_6, var_2 );
+        else if ( isplayer( var_3 ) )
+            var_3 setclientomnvar( var_6, var_2 );
     }
 }
 
@@ -491,23 +491,23 @@ _id_1038A( var_0 )
 {
     if ( isdefined( var_0 ) )
     {
-        if ( isalive( var_0 ) )
+        if ( _func_0106( var_0 ) )
         {
             foreach ( var_2 in var_0 )
             {
-                if ( isdefined( var_2 ) && _func_0117( var_2 ) )
+                if ( isdefined( var_2 ) && isplayer( var_2 ) )
                 {
                     var_2 notify( "vehOmn_modified_controls" );
                     var_2._id_10395 = "show";
-                    var_2 _meth_82F6( "ui_veh_controls", 1 );
+                    var_2 setclientomnvar( "ui_veh_controls", 1 );
                 }
             }
         }
-        else if ( _func_0117( var_0 ) )
+        else if ( isplayer( var_0 ) )
         {
             var_0 notify( "vehOmn_modified_controls" );
             var_0._id_10395 = "show";
-            var_0 _meth_82F6( "ui_veh_controls", 1 );
+            var_0 setclientomnvar( "ui_veh_controls", 1 );
         }
     }
 }
@@ -516,23 +516,23 @@ _id_10375( var_0 )
 {
     if ( isdefined( var_0 ) )
     {
-        if ( isalive( var_0 ) )
+        if ( _func_0106( var_0 ) )
         {
             foreach ( var_2 in var_0 )
             {
-                if ( isdefined( var_2 ) && _func_0117( var_2 ) )
+                if ( isdefined( var_2 ) && isplayer( var_2 ) )
                 {
                     var_2 notify( "vehOmn_modified_controls" );
                     var_2._id_10395 = "hide";
-                    var_2 _meth_82F6( "ui_veh_controls", 0 );
+                    var_2 setclientomnvar( "ui_veh_controls", 0 );
                 }
             }
         }
-        else if ( _func_0117( var_0 ) )
+        else if ( isplayer( var_0 ) )
         {
             var_0 notify( "vehOmn_modified_controls" );
             var_0._id_10395 = "hide";
-            var_0 _meth_82F6( "ui_veh_controls", 0 );
+            var_0 setclientomnvar( "ui_veh_controls", 0 );
         }
     }
 }
@@ -541,15 +541,15 @@ _id_1036E( var_0 )
 {
     if ( isdefined( var_0 ) )
     {
-        if ( isalive( var_0 ) )
+        if ( _func_0106( var_0 ) )
         {
             foreach ( var_2 in var_0 )
             {
-                if ( isdefined( var_2 ) && _func_0117( var_2 ) )
+                if ( isdefined( var_2 ) && isplayer( var_2 ) )
                     thread _id_1036F( var_2 );
             }
         }
-        else if ( _func_0117( var_0 ) )
+        else if ( isplayer( var_0 ) )
             thread _id_1036F( var_0 );
     }
 }
@@ -562,7 +562,7 @@ _id_1036F( var_0 )
     if ( !isdefined( var_0._id_10395 ) || var_0._id_10395 != "hide" && var_0._id_10395 != "fadeOut" )
     {
         var_0._id_10395 = "fadeOut";
-        var_0 _meth_82F6( "ui_veh_controls", 2 );
+        var_0 setclientomnvar( "ui_veh_controls", 2 );
         wait 3;
         thread _id_10375( var_0 );
     }
@@ -572,20 +572,20 @@ _id_1035F( var_0 )
 {
     if ( isdefined( var_0 ) )
     {
-        if ( isalive( var_0 ) )
+        if ( _func_0106( var_0 ) )
         {
             foreach ( var_2 in var_0 )
             {
-                if ( isdefined( var_2 ) && _func_0117( var_2 ) )
+                if ( isdefined( var_2 ) && isplayer( var_2 ) )
                 {
                     var_2._id_10395 = undefined;
-                    var_2 _meth_82F6( "ui_veh_controls", 0 );
+                    var_2 setclientomnvar( "ui_veh_controls", 0 );
                 }
             }
         }
-        else if ( _func_0117( var_0 ) )
+        else if ( isplayer( var_0 ) )
         {
-            var_0 _meth_82F6( "ui_veh_controls", 0 );
+            var_0 setclientomnvar( "ui_veh_controls", 0 );
             var_0._id_10395 = undefined;
         }
     }
@@ -610,7 +610,7 @@ _id_10371( var_0, var_1, var_2 )
     {
         if ( istrue( var_1 ) )
         {
-            var_4 = _func_020F();
+            var_4 = spawnstruct();
             var_3._id_102F4[var_0] = var_4;
             var_4._id_CFB6 = [];
             var_4._id_16F2 = [];
@@ -656,7 +656,7 @@ _id_10363( var_0, var_1, var_2 )
 
 _id_1035C( var_0, var_1 )
 {
-    if ( isalive( var_0 ) )
+    if ( _func_0106( var_0 ) )
     {
         foreach ( var_3 in var_0 )
             _id_1035D( var_3, var_1 );
@@ -667,27 +667,27 @@ _id_1035C( var_0, var_1 )
 
 _id_1035D( var_0, var_1 )
 {
-    if ( isdefined( var_0 ) && _func_0117( var_0 ) )
+    if ( isdefined( var_0 ) && isplayer( var_0 ) )
     {
-        var_0 _meth_82F6( "ui_veh_vehicle", -1 );
-        var_0 _meth_82F6( "ui_veh_current_seat", -1 );
-        var_0 _meth_82F6( "ui_veh_next_seat", -1 );
-        var_0 _meth_82F6( "ui_veh_occupant_0", -1 );
-        var_0 _meth_82F6( "ui_veh_occupant_1", -1 );
-        var_0 _meth_82F6( "ui_veh_occupant_2", -1 );
-        var_0 _meth_82F6( "ui_veh_occupant_3", -1 );
-        var_0 _meth_82F6( "ui_veh_occupant_4", -1 );
-        var_0 _meth_82F6( "ui_veh_occupant_5", -1 );
-        var_0 _meth_82F6( "ui_veh_occupant_6", -1 );
-        var_0 _meth_82F6( "ui_veh_health_percent", 0 );
-        var_0 _meth_82F6( "ui_veh_show_health", 0 );
-        var_0 _meth_82F6( "ui_veh_time_percent", 0 );
-        var_0 _meth_82F6( "ui_veh_show_time", 0 );
-        var_0 _meth_82F6( "ui_veh_ammo_0", -1 );
-        var_0 _meth_82F6( "ui_veh_ammo_1", -1 );
+        var_0 setclientomnvar( "ui_veh_vehicle", -1 );
+        var_0 setclientomnvar( "ui_veh_current_seat", -1 );
+        var_0 setclientomnvar( "ui_veh_next_seat", -1 );
+        var_0 setclientomnvar( "ui_veh_occupant_0", -1 );
+        var_0 setclientomnvar( "ui_veh_occupant_1", -1 );
+        var_0 setclientomnvar( "ui_veh_occupant_2", -1 );
+        var_0 setclientomnvar( "ui_veh_occupant_3", -1 );
+        var_0 setclientomnvar( "ui_veh_occupant_4", -1 );
+        var_0 setclientomnvar( "ui_veh_occupant_5", -1 );
+        var_0 setclientomnvar( "ui_veh_occupant_6", -1 );
+        var_0 setclientomnvar( "ui_veh_health_percent", 0 );
+        var_0 setclientomnvar( "ui_veh_show_health", 0 );
+        var_0 setclientomnvar( "ui_veh_time_percent", 0 );
+        var_0 setclientomnvar( "ui_veh_show_time", 0 );
+        var_0 setclientomnvar( "ui_veh_ammo_0", -1 );
+        var_0 setclientomnvar( "ui_veh_ammo_1", -1 );
         _id_1036C( var_0, var_1 );
-        var_0 _meth_82F6( "ui_veh_degrees_0", 0 );
-        var_0 _meth_82F6( "ui_veh_degrees_1", 0 );
+        var_0 setclientomnvar( "ui_veh_degrees_0", 0 );
+        var_0 setclientomnvar( "ui_veh_degrees_1", 0 );
         _id_1035F( var_0 );
     }
 }
@@ -696,7 +696,7 @@ _id_10391( var_0, var_1, var_2, var_3 )
 {
     _id_10388( var_0._id_1031C, var_3 );
     _id_10381( var_0._id_1031C, var_2, var_3 );
-    var_4 = _id_09BA::_id_10189( var_0 );
+    var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10189( var_0 );
 
     if ( isdefined( var_1 ) )
         _id_10366( var_0._id_1031C, var_1, var_4 );
@@ -716,19 +716,19 @@ _id_10391( var_0, var_1, var_2, var_3 )
     _id_FFF0( var_0, var_3, var_2 );
     var_8 = _id_10371( var_0._id_1031C );
 
-    if ( _id_09A2::_id_88FB( var_0 ) )
+    if ( scripts\cp_mp\utility\weapon_utility::_id_88FB( var_0 ) )
     {
         if ( isdefined( var_8._id_109E7["missileLocking"] ) )
             _id_1038E( "missileLocking", var_3, var_0._id_1031C );
     }
 
-    if ( _id_09A2::_id_7559( var_0 ) )
+    if ( scripts\cp_mp\utility\weapon_utility::_id_7559( var_0 ) )
     {
         if ( isdefined( var_8._id_109E7["missileIncoming"] ) )
             _id_1038E( "missileIncoming", var_3, var_0._id_1031C );
     }
 
-    if ( !_id_09BA::_id_101CF( var_0 ) )
+    if ( !scripts\cp_mp\vehicles\vehicle_occupancy::_id_101CF( var_0 ) )
     {
         if ( isdefined( var_8._id_109E7["movementDisabled"] ) )
             _id_1038E( "movementDisabled", var_3, var_0._id_1031C );
@@ -751,7 +751,7 @@ _id_10392( var_0, var_1, var_2, var_3 )
 
             if ( isdefined( var_0 ) )
             {
-                var_4 = _id_09BA::_id_10189( var_0 );
+                var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10189( var_0 );
                 _id_10366( var_0._id_1031C, var_1, var_4 );
                 _id_1038F( var_0 );
             }
@@ -761,12 +761,12 @@ _id_10392( var_0, var_1, var_2, var_3 )
 
 _id_10390( var_0, var_1 )
 {
-    var_2 = _id_09BA::_id_10189( var_0, 0 );
+    var_2 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10189( var_0, 0 );
 
     if ( !isdefined( var_1 ) )
-        var_3 = int( clamp( var_0._id_01FF / var_0._id_027F * 100, 0, 100 ) );
+        var_3 = int( clamp( var_0.health / var_0.maxhealth * 100, 0, 100 ) );
     else
-        var_3 = int( clamp( ( var_0._id_01FF - var_1._id_0134 ) / var_0._id_027F * 100, 0, 100 ) );
+        var_3 = int( clamp( ( var_0.health - var_1.damage ) / var_0.maxhealth * 100, 0, 100 ) );
 
     _id_1038C( var_2 );
     _id_10383( var_3, var_2 );
@@ -775,10 +775,10 @@ _id_10390( var_0, var_1 )
 _id_10393( var_0, var_1 )
 {
     if ( !isdefined( var_1 ) )
-        var_1 = _func_020F();
+        var_1 = spawnstruct();
 
     var_2 = _id_10371( var_0._id_1031C, undefined, 1 );
-    var_3 = _id_09BA::_id_10189( var_0 );
+    var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10189( var_0 );
 
     if ( isdefined( var_3 ) && isdefined( var_2 ) )
     {
@@ -786,7 +786,7 @@ _id_10393( var_0, var_1 )
         {
             foreach ( var_6, var_5 in var_3 )
             {
-                if ( isdefined( var_5 ) && _func_0117( var_5 ) && var_5 _id_099C::_giveweapon() )
+                if ( isdefined( var_5 ) && isplayer( var_5 ) && var_5 scripts\cp_mp\utility\player_utility::_id_0C14() )
                     _id_FFF0( var_0, var_5, var_6, var_1 );
             }
         }
@@ -796,18 +796,18 @@ _id_10393( var_0, var_1 )
 _id_FFF0( var_0, var_1, var_2, var_3 )
 {
     if ( !isdefined( var_2 ) )
-        var_2 = _id_09BA::_id_101A4( var_0, var_1 );
+        var_2 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A4( var_0, var_1 );
 
     _id_10394( var_0, var_1, var_2, var_3 );
 }
 
 _id_1038F( var_0 )
 {
-    var_1 = _id_09BA::_id_10189( var_0 );
+    var_1 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10189( var_0 );
 
     foreach ( var_5, var_3 in var_1 )
     {
-        var_4 = _id_09BA::_id_101A2( var_0, var_3, var_5 );
+        var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A2( var_0, var_3, var_5 );
         _id_10384( var_0._id_1031C, var_4, var_3 );
     }
 }
@@ -820,28 +820,28 @@ _id_10394( var_0, var_1, var_2, var_3 )
     {
         var_5 = 0;
 
-        if ( _id_09BA::_id_101BA( var_0, var_2 ) )
+        if ( scripts\cp_mp\vehicles\vehicle_occupancy::_id_101BA( var_0, var_2 ) )
             var_5 = 1;
         else
         {
-            var_6 = _id_09BA::_id_100B5( var_0, var_2 );
+            var_6 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_100B5( var_0, var_2 );
 
             if ( isdefined( var_6 ) && var_6 != "none" )
                 var_5 = 1;
         }
 
-        var_7 = _id_09BA::_id_101A0( var_0._id_1031C, var_2 );
+        var_7 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( var_0._id_1031C, var_2 );
 
         if ( var_5 )
         {
-            if ( isdefined( var_0._id_A90B ) )
+            if ( isdefined( var_0.objweapon ) )
             {
-                var_8 = var_4._id_C924[var_2][var_0._id_A90B._id_0084];
+                var_8 = var_4._id_C924[var_2][var_0.objweapon.basename];
 
                 if ( isdefined( var_8 ) )
                 {
                     var_9 = _func_00FF( var_1 getplayerangles() );
-                    var_10 = var_0._id_0054;
+                    var_10 = var_0.angles;
                     var_11 = _func_0047( var_9, var_10 );
                     var_12 = _func_000A( var_11[1] );
                     _id_10385( var_0._id_1031C, var_8, var_12, var_1 );
@@ -876,12 +876,12 @@ _id_10373( var_0, var_1 )
     if ( isdefined( var_1 ) && isdefined( var_1._id_96AF ) )
         return var_1._id_C921;
 
-    var_2 = _id_09B4::_id_100CB( var_0 );
+    var_2 = scripts\cp_mp\vehicles\vehicle::_id_100CB( var_0 );
 
     if ( isdefined( var_2 ) && var_2.size > 0 )
     {
         var_3 = [];
-        var_4 = _func_00FF( var_0._id_0054 );
+        var_4 = _func_00FF( var_0.angles );
 
         foreach ( var_7, var_6 in var_2 )
             var_3[var_7] = _func_0047( var_4, var_6 gettagangles( "tag_flash" ) );

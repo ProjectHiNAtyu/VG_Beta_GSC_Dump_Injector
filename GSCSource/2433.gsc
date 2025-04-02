@@ -5,11 +5,11 @@ _id_1366()
 {
     level._id_3E64._id_0E1C = [];
 
-    if ( _id_099D::_id_8A10( "airdrop_multiple", "init" ) )
-        [[ _id_099D::_id_6D05( "airdrop_multiple", "init" ) ]]();
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "airdrop_multiple", "init" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "airdrop_multiple", "init" ) ]]();
 
     _id_1367();
-    level._id_0BA3["airdrop_m_death"] = _func_0139( "vfx/s4/killstreaks/vfx_airstrike_death_exp_medium_02.vfx" );
+    level._effect["airdrop_m_death"] = loadfx( "vfx/s4/killstreaks/vfx_airstrike_death_exp_medium_02.vfx" );
 }
 
 #using_animtree("script_model");
@@ -54,17 +54,17 @@ _id_1363( var_0, var_1, var_2, var_3, var_4, var_5 )
     {
         if ( isdefined( var_0 ) && isdefined( var_5 ) )
         {
-            if ( _id_099D::_id_8A10( "hud", "showErrorMessage" ) )
-                var_0 [[ _id_099D::_id_6D05( "hud", "showErrorMessage" ) ]]( "KILLSTREAKS/VEHICLE_REFUND_KILLSTREAK" );
+            if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "hud", "showErrorMessage" ) )
+                var_0 [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "hud", "showErrorMessage" ) ]]( "KILLSTREAKS/VEHICLE_REFUND_KILLSTREAK" );
 
-            if ( _id_099D::_id_8A10( "hud", "awardKillstreakFromStruct" ) )
-                var_0 [[ _id_099D::_id_6D05( "killstreak", "awardKillstreakFromStruct" ) ]]( var_5._id_A2A3 );
+            if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "hud", "awardKillstreakFromStruct" ) )
+                var_0 [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "killstreak", "awardKillstreakFromStruct" ) ]]( var_5._id_A2A3 );
         }
     }
     else
     {
         var_6 = [];
-        var_7 = _id_077B::_id_F07F( isdefined( var_0 ), "killstreak", "killstreak_no_owner" );
+        var_7 = scripts\engine\utility::ter_op( isdefined( var_0 ), "killstreak", "killstreak_no_owner" );
         var_8 = 3;
         var_9 = undefined;
 
@@ -82,9 +82,9 @@ _id_1363( var_0, var_1, var_2, var_3, var_4, var_5 )
             var_11 = undefined;
 
             if ( var_6.size > 0 )
-                var_11 = _id_0980::_id_6CA4( var_6, var_0, "airdrop_multiple" );
+                var_11 = scripts\cp_mp\killstreaks\airdrop::getrandomkillstreak( var_6, var_0, "airdrop_multiple" );
             else
-                var_11 = _id_0980::_id_6CA4( undefined, var_0, "airdrop_multiple" );
+                var_11 = scripts\cp_mp\killstreaks\airdrop::getrandomkillstreak( undefined, var_0, "airdrop_multiple" );
 
             var_6[var_6.size] = var_11;
         }
@@ -92,20 +92,20 @@ _id_1363( var_0, var_1, var_2, var_3, var_4, var_5 )
         var_12 = _id_1364( var_2 );
         var_13 = var_3 * ( 0, 1, 0 );
 
-        if ( isdefined( var_5._id_CBC5 ) && _func_02DA( var_5._id_CBC5 ) )
+        if ( isdefined( var_5._id_CBC5 ) && isvector( var_5._id_CBC5 ) )
             var_12 = var_12 + var_5._id_CBC5;
 
-        var_14 = _func_0205( "script_model", var_12 );
-        var_14._id_0054 = var_13;
-        var_14 setmode( "tag_origin" );
-        var_14._id_02F2 = var_0;
-        var_14._id_045B = var_1;
+        var_14 = spawn( "script_model", var_12 );
+        var_14.angles = var_13;
+        var_14 setmodel( "tag_origin" );
+        var_14.owner = var_0;
+        var_14.team = var_1;
         var_14._id_7574 = isdefined( var_0 );
         var_14._id_90BE = -1;
-        var_0 thread _id_0980::_id_136F( var_5 );
+        var_0 thread scripts\cp_mp\killstreaks\airdrop::_id_136F( var_5 );
 
-        if ( _id_099D::_id_8A10( "hud", "teamPlayerCardSplash" ) )
-            thread [[ _id_099D::_id_6D05( "hud", "teamPlayerCardSplash" ) ]]( "used_airdrop_multiple", var_0 );
+        if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "hud", "teamPlayerCardSplash" ) )
+            thread [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "hud", "teamPlayerCardSplash" ) ]]( "used_airdrop_multiple", var_0 );
 
         var_15 = _id_1360( var_14 );
         var_15._id_3E79 = [];
@@ -128,8 +128,8 @@ _id_1363( var_0, var_1, var_2, var_3, var_4, var_5 )
                     break;
             }
 
-            var_17 = _id_0980::_id_6ABF( var_6[var_10], 0 );
-            var_18 = _id_0980::_id_3F96( var_0, var_1, var_7, var_4, var_9, 0, var_17, var_5, var_15, var_16, "care_package_drop_multiple" );
+            var_17 = scripts\cp_mp\killstreaks\airdrop::getkillstreakcratedatabystreakname( var_6[var_10], 0 );
+            var_18 = scripts\cp_mp\killstreaks\airdrop::createcrate( var_0, var_1, var_7, var_4, var_9, 0, var_17, var_5, var_15, var_16, "care_package_drop_multiple" );
 
             if ( !isdefined( var_18 ) )
                 break;
@@ -169,11 +169,11 @@ _id_136A( var_0 )
 
 _id_136C( var_0 )
 {
-    var_1 = _func_025A( anglestoforward( self._id_0054 ) );
+    var_1 = vectornormalize( anglestoforward( self.angles ) );
     var_2 = var_0 - var_1 * 70000 / 2.0;
     var_3 = var_0 + var_1 * 70000 / 2.0;
-    self._id_02EA = var_2;
-    self _meth_823B( var_3, 19.5 );
+    self.origin = var_2;
+    self moveto( var_3, 19.5 );
     var_4 = 100;
     var_5 = 3589.74;
     var_6 = 0.4;
@@ -183,7 +183,7 @@ _id_136C( var_0 )
     foreach ( var_10 in self._id_3E79 )
     {
         if ( isdefined( var_10 ) )
-            var_10._id_02EA = var_7 + var_1 * var_4 * var_8;
+            var_10.origin = var_7 + var_1 * var_4 * var_8;
 
         var_8++;
     }
@@ -194,8 +194,8 @@ _id_136C( var_0 )
     {
         if ( isdefined( var_10 ) )
         {
-            var_10 _meth_83C3();
-            thread _id_0980::_id_4C30( var_10, var_1 );
+            var_10 show();
+            thread scripts\cp_mp\killstreaks\airdrop::_id_4C30( var_10, var_1 );
         }
 
         wait( var_4 / var_5 );
@@ -212,55 +212,55 @@ _id_136B()
     foreach ( var_1 in self._id_3E79 )
     {
         if ( isdefined( var_1 ) )
-            var_1 thread _id_0980::_id_4822();
+            var_1 thread scripts\cp_mp\killstreaks\airdrop::_id_4822();
     }
 
     foreach ( var_4 in self._id_36DE )
     {
         if ( isdefined( var_4 ) )
-            var_4 thread _id_0980::_id_4821();
+            var_4 thread scripts\cp_mp\killstreaks\airdrop::_id_4821();
     }
 
-    self _meth_809A();
+    self delete();
 }
 
 _id_1360( var_0 )
 {
-    var_1 = _func_0205( "script_model", var_0._id_02EA );
-    var_1._id_0054 = var_0._id_0054;
-    var_1._id_02F2 = var_0._id_02F2;
-    var_1._id_045B = var_0._id_045B;
+    var_1 = spawn( "script_model", var_0.origin );
+    var_1.angles = var_0.angles;
+    var_1.owner = var_0.owner;
+    var_1.team = var_0.team;
     var_1._id_CBC3 = var_0;
     var_0._id_0DEF = var_1;
-    var_1 setmode( "plane_skilo_00" );
+    var_1 setmodel( "plane_skilo_00" );
     var_1._id_8725 = 1;
 
-    if ( isdefined( var_1._id_02F2 ) )
+    if ( isdefined( var_1.owner ) )
     {
-        if ( _id_099D::_id_8A10( "killstreak", "addToActiveKillstreakList" ) )
-            var_1 [[ _id_099D::_id_6D05( "killstreak", "addToActiveKillstreakList" ) ]]( "airdrop_multiple", "Killstreak_Air", var_1._id_02F2, 0, 0 );
+        if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "killstreak", "addToActiveKillstreakList" ) )
+            var_1 [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "killstreak", "addToActiveKillstreakList" ) ]]( "airdrop_multiple", "Killstreak_Air", var_1.owner, 0, 0 );
 
-        if ( var_1._id_045B != "neutral" && _id_099D::_id_8A10( "sentient", "registerSentient" ) )
-            var_1 [[ _id_099D::_id_6D05( "sentient", "registerSentient" ) ]]( "Killstreak_Air", var_1._id_02F2 );
+        if ( var_1.team != "neutral" && scripts\cp_mp\utility\script_utility::issharedfuncdefined( "sentient", "registerSentient" ) )
+            var_1 [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "sentient", "registerSentient" ) ]]( "Killstreak_Air", var_1.owner );
     }
 
-    var_1 thread [[ _id_099D::_id_6D05( "airdrop", "monitorDamage" ) ]]( 2000, "hitequip", ::_id_1362, undefined, 1 );
+    var_1 thread [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "airdrop", "monitorDamage" ) ]]( 2000, "hitequip", ::_id_1362, undefined, 1 );
     return var_1;
 }
 
 _id_135C()
 {
-    self _meth_83C3();
-    self playlocalsound( "iw8_bradley_drop_c130" );
+    self show();
+    self playloopsound( "iw8_bradley_drop_c130" );
 
-    if ( _id_099D::_id_8A10( "airdrop_multiple", "monitorDamage" ) )
-        self thread [[ _id_099D::_id_6D05( "airdrop_multiple", "monitorDamage" ) ]]( 1000, "hitequip", ::_id_135E, ::_id_135D, 1 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "airdrop_multiple", "monitorDamage" ) )
+        self thread [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "airdrop_multiple", "monitorDamage" ) ]]( 1000, "hitequip", ::_id_135E, ::_id_135D, 1 );
 }
 
 _id_1362( var_0 )
 {
-    var_1 = anglestoforward( self._id_0054 );
-    _func_0196( level._id_0BA3["airdrop_m_death"], self._id_02EA, var_1 );
+    var_1 = anglestoforward( self.angles );
+    playfx( level._effect["airdrop_m_death"], self.origin, var_1 );
     _id_1361();
 }
 
@@ -274,12 +274,12 @@ _id_1361( var_0 )
     _id_1369( self getentitynumber() );
     self._id_CBC3 = undefined;
     self._id_187C = undefined;
-    self stoplookat();
+    self stoploopsound();
 
     if ( isdefined( self._id_9F0F ) )
     {
-        if ( _id_099D::_id_8A10( "game", "returnObjectiveID" ) )
-            [[ _id_099D::_id_6D05( "game", "returnObjectiveID" ) ]]( self._id_9F0F );
+        if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "game", "returnObjectiveID" ) )
+            [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "game", "returnObjectiveID" ) ]]( self._id_9F0F );
 
         self._id_9F0F = undefined;
     }
@@ -287,37 +287,37 @@ _id_1361( var_0 )
     if ( isdefined( var_0 ) && var_0 > 0 )
         wait( var_0 );
 
-    self _meth_809A();
+    self delete();
 }
 
 _id_135D( var_0 )
 {
     var_1 = undefined;
 
-    if ( _id_099D::_id_8A10( "killstreak", "getModifiedAntiKillstreakDamage" ) )
-        var_1 = self [[ _id_099D::_id_6D05( "killstreak", "getModifiedAntiKillstreakDamage" ) ]]( var_0._id_006E, var_0._id_A90B, var_0._id_9CBF, var_0._id_0134, 1000, 2, 3, 4 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "killstreak", "getModifiedAntiKillstreakDamage" ) )
+        var_1 = self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "killstreak", "getModifiedAntiKillstreakDamage" ) ]]( var_0.attacker, var_0.objweapon, var_0._id_9CBF, var_0.damage, 1000, 2, 3, 4 );
 
     return var_1;
 }
 
 _id_135E( var_0 )
 {
-    if ( _func_0117( var_0._id_006E ) )
+    if ( isplayer( var_0.attacker ) )
     {
         var_1 = 0;
 
-        if ( level._id_EF62 && var_0._id_006E._id_045B == self._id_045B )
+        if ( level.teambased && var_0.attacker.team == self.team )
             var_1 = 1;
-        else if ( var_0._id_006E == self._id_02F2 )
+        else if ( var_0.attacker == self.owner )
             var_1 = 1;
 
         if ( !var_1 )
         {
-            if ( _id_099D::_id_8A10( "hud", "teamPlayerCardSplash" ) )
-                thread [[ _id_099D::_id_6D05( "hud", "teamPlayerCardSplash" ) ]]( "callout_destroyed_ac130", var_0._id_006E );
+            if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "hud", "teamPlayerCardSplash" ) )
+                thread [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "hud", "teamPlayerCardSplash" ) ]]( "callout_destroyed_ac130", var_0.attacker );
 
-            if ( _id_099D::_id_8A10( "player", "giveUnifiedPoints" ) )
-                var_0._id_006E thread [[ _id_099D::_id_6D05( "player", "giveUnifiedPoints" ) ]]( "kill", var_0._id_A90B, 400 );
+            if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "player", "giveUnifiedPoints" ) )
+                var_0.attacker thread [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "player", "giveUnifiedPoints" ) ]]( "kill", var_0.objweapon, 400 );
         }
     }
 
@@ -327,7 +327,7 @@ _id_135E( var_0 )
 _id_1364( var_0 )
 {
     var_0 = var_0 * ( 1, 1, 0 );
-    var_0 = var_0 + ( 0, 0, _id_0980::_id_6CF7() + 200 );
+    var_0 = var_0 + ( 0, 0, scripts\cp_mp\killstreaks\airdrop::_id_6CF7() + 200 );
     var_0 = var_0 + ( 0, 0, level._id_3E64._id_0E1C.size * 300 );
     return var_0;
 }

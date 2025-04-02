@@ -3,37 +3,37 @@
 
 _id_5161()
 {
-    _id_099D::_id_C2A5( "emp", "getPlayerEMPImmune", ::_id_6C2C );
-    _id_099D::_id_C2A5( "emp", "setPlayerEMPImmune", ::_id_D654 );
-    _id_099D::_id_C2A5( "emp", "onPlayerEMPed", ::_id_AB53 );
-    _id_099D::_id_C2A5( "emp", "onVehicleEMPed", ::_id_ABC3 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "emp", "getPlayerEMPImmune", ::_id_6C2C );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "emp", "setPlayerEMPImmune", ::_id_D654 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "emp", "onPlayerEMPed", ::_id_AB53 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "emp", "onVehicleEMPed", ::_id_ABC3 );
 }
 
 _id_6C2C()
 {
-    return scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_empimmune" );
+    return scripts\mp\utility\perk::_hasperk( "specialty_empimmune" );
 }
 
 _id_D654( var_0 )
 {
     if ( var_0 )
-        scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_empimmune" );
+        scripts\mp\utility\perk::_id_6FA5( "specialty_empimmune" );
     else
-        scripts\mp\tac_ops\hostage_utility::_id_C4EF( "specialty_empimmune" );
+        scripts\mp\utility\perk::removeperk( "specialty_empimmune" );
 }
 
 _id_AB53( var_0 )
 {
-    var_1 = var_0._id_006E;
+    var_1 = var_0.attacker;
 
-    if ( istrue( _id_099C::_id_B779( self, var_1 ) ) )
-        var_1 thread _id_0A28::_id_6FCB();
+    if ( istrue( scripts\cp_mp\utility\player_utility::_id_B779( self, var_1 ) ) )
+        var_1 thread scripts\mp\killstreaks\killstreaks::_id_6FCB();
 }
 
 _id_ABC3( var_0 )
 {
-    var_1 = var_0._id_006E;
+    var_1 = var_0.attacker;
 
-    if ( istrue( _id_099C::_id_B779( self._id_02F2, var_1 ) ) )
-        var_1 _id_0A28::_id_6FCC();
+    if ( istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_1 ) ) )
+        var_1 scripts\mp\killstreaks\killstreaks::_id_6FCC();
 }

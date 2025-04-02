@@ -3,7 +3,7 @@
 
 _id_7A11()
 {
-    _id_099D::_id_C2A5( "hoopty_truck", "spawnCallback", ::_id_7A15 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "hoopty_truck", "spawnCallback", ::_id_7A15 );
     _id_7A12();
     _id_7A13();
     scripts\mp\utility\killstreak::_id_10228( "hoopty_truck", _id_09AA::_id_7A04 );
@@ -11,8 +11,8 @@ _id_7A11()
 
 _id_7A13()
 {
-    var_0 = _id_09BB::_id_10274( "hoopty_truck", 1 );
-    var_0._id_0DD8 = _id_09BB::vehicle_spawn;
+    var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10274( "hoopty_truck", 1 );
+    var_0._id_0DD8 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn;
 }
 
 _id_7A12()
@@ -31,7 +31,7 @@ _id_7A15( var_0, var_1 )
 {
     var_2 = _id_09AA::_id_79FD( var_0, var_1 );
 
-    if ( isdefined( var_2 ) && _id_09BB::_id_10270() )
+    if ( isdefined( var_2 ) && scripts\cp_mp\vehicles\vehicle_spawn::_id_10270() )
         var_2._id_AA96 = ::_id_7A14;
 
     return var_2;
@@ -44,9 +44,9 @@ _id_7A14()
 
 _id_7A16()
 {
-    var_0 = _id_09BC::_id_6E22( self );
-    var_1 = _func_020F();
-    _id_09BC::_id_3D43( var_0, var_1 );
-    var_2 = _func_020F();
-    var_3 = _id_09BB::vehicle_spawn_spawnvehicle( "hoopty_truck", var_1, var_2 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_tracking::_id_6E22( self );
+    var_1 = spawnstruct();
+    scripts\cp_mp\vehicles\vehicle_tracking::_id_3D43( var_0, var_1 );
+    var_2 = spawnstruct();
+    var_3 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028E( "hoopty_truck", var_1, var_2 );
 }

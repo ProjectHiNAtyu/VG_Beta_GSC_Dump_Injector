@@ -17,7 +17,7 @@ _id_D7C3( var_0 )
     if ( _id_57A3( var_0 ) )
     {
         var_0 hide();
-        var_0 _meth_824C();
+        var_0 notsolid();
 
         if ( isdefined( var_0._id_03C3 ) && var_0._id_03C3 & 1 )
         {
@@ -31,7 +31,7 @@ _id_D7C3( var_0 )
     if ( _id_57A2( var_0 ) )
     {
         var_0 hide();
-        var_0 _meth_824C();
+        var_0 notsolid();
 
         if ( isdefined( var_0._id_03C3 ) && var_0._id_03C3 & 1 )
             var_0 _meth_8092();
@@ -58,8 +58,8 @@ _id_109B( var_0 )
         {
             var_3 = 1;
 
-            if ( !isdefined( var_2._id_0054 ) )
-                var_2._id_0054 = ( 0, 0, 0 );
+            if ( !isdefined( var_2.angles ) )
+                var_2.angles = ( 0, 0, 0 );
 
             level._id_7F60[level._id_7F60.size] = var_2;
         }
@@ -111,94 +111,94 @@ _id_D85F()
 
     foreach ( var_10 in level._id_7F60 )
     {
-        var_6 = _id_077B::_id_3FA7( var_10._id_CD58, 1 );
-        var_6._id_FF25 = [];
-        var_6._id_FF25["origin"] = var_10._id_02EA;
-        var_6._id_FF25["angles"] = var_10._id_0054;
-        var_6._id_FF25["delay"] = var_10._id_036D;
-        var_6._id_FF25["delay_post"] = var_10._id_CCF2;
-        var_6._id_FF25["firefx"] = var_10._id_CD31;
-        var_6._id_FF25["firefxdelay"] = var_10._id_CD32;
-        var_6._id_FF25["firefxsound"] = var_10._id_CD33;
-        var_6._id_FF25["earthquake"] = var_10._id_036F;
-        var_6._id_FF25["rumble"] = var_10._id_037B;
-        var_6._id_FF25["damage"] = var_10._id_036C;
-        var_6._id_FF25["damage_radius"] = var_10._id_037A;
-        var_6._id_FF25["soundalias"] = var_10._id_CE3E;
-        var_6._id_FF25["repeat"] = var_10._id_CE24;
-        var_6._id_FF25["delay_min"] = var_10._id_CCF0;
-        var_6._id_FF25["delay_max"] = var_10._id_CCEE;
-        var_6._id_FF25["target"] = var_10._id_0457;
-        var_6._id_FF25["ender"] = var_10._id_CD1D;
-        var_6._id_FF25["physics"] = var_10._id_CE11;
-        var_6._id_FF25["type"] = "exploder";
-        var_6._id_FF25["dotraces"] = var_10._id_037C;
-        var_6._id_FF25["envonly"] = var_10._id_0370;
+        var_6 = scripts\engine\utility::_id_3FA7( var_10._id_CD58, 1 );
+        var_6.v = [];
+        var_6.v["origin"] = var_10.origin;
+        var_6.v["angles"] = var_10.angles;
+        var_6.v["delay"] = var_10._id_036D;
+        var_6.v["delay_post"] = var_10._id_CCF2;
+        var_6.v["firefx"] = var_10._id_CD31;
+        var_6.v["firefxdelay"] = var_10._id_CD32;
+        var_6.v["firefxsound"] = var_10._id_CD33;
+        var_6.v["earthquake"] = var_10._id_036F;
+        var_6.v["rumble"] = var_10._id_037B;
+        var_6.v["damage"] = var_10._id_036C;
+        var_6.v["damage_radius"] = var_10._id_037A;
+        var_6.v["soundalias"] = var_10._id_CE3E;
+        var_6.v["repeat"] = var_10._id_CE24;
+        var_6.v["delay_min"] = var_10._id_CCF0;
+        var_6.v["delay_max"] = var_10._id_CCEE;
+        var_6.v["target"] = var_10.target;
+        var_6.v["ender"] = var_10._id_CD1D;
+        var_6.v["physics"] = var_10._id_CE11;
+        var_6.v["type"] = "exploder";
+        var_6.v["dotraces"] = var_10._id_037C;
+        var_6.v["envonly"] = var_10._id_0370;
 
-        if ( !isdefined( var_6._id_FF25["angles"] ) )
-            var_6._id_FF25["angles"] = ( 0, 0, 0 );
+        if ( !isdefined( var_6.v["angles"] ) )
+            var_6.v["angles"] = ( 0, 0, 0 );
 
         var_6 _id_06A5::_id_D209();
 
         if ( !isdefined( var_10._id_CD58 ) )
-            var_6._id_FF25["fxid"] = "No FX";
+            var_6.v["fxid"] = "No FX";
         else
-            var_6._id_FF25["fxid"] = var_10._id_CD58;
+            var_6.v["fxid"] = var_10._id_CD58;
 
-        var_6._id_FF25["exploder"] = var_10._id_0371;
+        var_6.v["exploder"] = var_10._id_0371;
 
-        if ( !isdefined( var_6._id_FF25["delay"] ) )
-            var_6._id_FF25["delay"] = 0;
+        if ( !isdefined( var_6.v["delay"] ) )
+            var_6.v["delay"] = 0;
 
-        if ( isdefined( var_10._id_0457 ) )
+        if ( isdefined( var_10.target ) )
         {
-            var_11 = getentarray( var_6._id_FF25["target"], "targetname" )[0];
+            var_11 = getentarray( var_6.v["target"], "targetname" )[0];
 
             if ( isdefined( var_11 ) )
             {
-                var_12 = var_11._id_02EA;
-                var_6._id_FF25["angles"] = _func_025B( var_12 - var_6._id_FF25["origin"] );
+                var_12 = var_11.origin;
+                var_6.v["angles"] = vectortoangles( var_12 - var_6.v["origin"] );
             }
             else
             {
-                var_11 = _id_077B::_id_678B( var_6._id_FF25["target"] );
+                var_11 = scripts\engine\utility::_id_678B( var_6.v["target"] );
 
                 if ( isdefined( var_11 ) )
                 {
-                    var_12 = var_11._id_02EA;
-                    var_6._id_FF25["angles"] = _func_025B( var_12 - var_6._id_FF25["origin"] );
+                    var_12 = var_11.origin;
+                    var_6.v["angles"] = vectortoangles( var_12 - var_6.v["origin"] );
                 }
             }
         }
 
         if ( _func_02D9( var_10 ) )
         {
-            var_6._id_02AE = var_10;
+            var_6.model = var_10;
 
-            if ( isdefined( var_6._id_02AE._id_CDB4 ) )
-                _func_01A8( var_6._id_02AE._id_CDB4 );
+            if ( isdefined( var_6.model._id_CDB4 ) )
+                precachemodel( var_6.model._id_CDB4 );
         }
-        else if ( var_10._id_00E1 == "script_brushmodel" || isdefined( var_10._id_02AE ) )
+        else if ( var_10._id_00E1 == "script_brushmodel" || isdefined( var_10.model ) )
         {
-            var_6._id_02AE = var_10;
-            var_6._id_02AE._id_4AF2 = var_10._id_CD02;
+            var_6.model = var_10;
+            var_6.model._id_4AF2 = var_10._id_CD02;
         }
 
         if ( isdefined( var_10._id_045A ) && isdefined( var_8[var_10._id_045A] ) )
-            var_6._id_FF25["exploder_type"] = var_10._id_045A;
+            var_6.v["exploder_type"] = var_10._id_045A;
         else
-            var_6._id_FF25["exploder_type"] = "normal";
+            var_6.v["exploder_type"] = "normal";
 
         if ( isdefined( var_10._id_9B85 ) )
         {
-            var_6._id_FF25["masked_exploder"] = var_10._id_02AE;
-            var_6._id_FF25["masked_exploder_spawnflags"] = var_10._id_03C3;
-            var_6._id_FF25["masked_exploder_script_disconnectpaths"] = var_10._id_CD02;
-            var_10 _meth_809A();
+            var_6.v["masked_exploder"] = var_10.model;
+            var_6.v["masked_exploder_spawnflags"] = var_10._id_03C3;
+            var_6.v["masked_exploder_script_disconnectpaths"] = var_10._id_CD02;
+            var_10 delete();
         }
 
         var_6 _id_06A5::_id_BA16();
-        var_13 = var_6._id_FF25["exploder"];
+        var_13 = var_6.v["exploder"];
 
         if ( !isdefined( level._id_57AC[var_13] ) )
             level._id_57AC[var_13] = [];
@@ -212,15 +212,15 @@ _id_D85F()
 
 _id_57A1( var_0, var_1 )
 {
-    if ( !_id_077B::_id_5BEC( var_0 ) )
-        _id_077B::_id_5BF1( var_0 );
+    if ( !scripts\engine\utility::_id_5BEC( var_0 ) )
+        scripts\engine\utility::_id_5BF1( var_0 );
 
-    _id_077B::_id_5C04( var_0 );
+    scripts\engine\utility::_id_5C04( var_0 );
 
     foreach ( var_3 in var_1 )
     {
         foreach ( var_5 in level._id_3FC2[var_3] )
-            var_5 _id_077B::_id_0E8A();
+            var_5 scripts\engine\utility::_id_0E8A();
     }
 }
 
@@ -231,7 +231,7 @@ _id_57A3( var_0 )
 
 _id_57A9( var_0 )
 {
-    return var_0._id_02AE == "fx" && ( !isdefined( var_0._id_045A ) || var_0._id_045A != "exploderchunk" );
+    return var_0.model == "fx" && ( !isdefined( var_0._id_045A ) || var_0._id_045A != "exploderchunk" );
 }
 
 _id_57A2( var_0 )
@@ -248,14 +248,14 @@ _id_DC39( var_0 )
     {
         foreach ( var_3 in var_1 )
         {
-            if ( _func_02D9( var_3._id_02AE ) )
+            if ( _func_02D9( var_3.model ) )
                 continue;
 
-            if ( !_id_57A9( var_3._id_02AE ) && !_id_57A3( var_3._id_02AE ) && !_id_57A2( var_3._id_02AE ) )
-                var_3._id_02AE _meth_83C3();
+            if ( !_id_57A9( var_3.model ) && !_id_57A3( var_3.model ) && !_id_57A2( var_3.model ) )
+                var_3.model show();
 
             if ( isdefined( var_3._id_2C19 ) )
-                var_3._id_02AE _meth_83C3();
+                var_3.model show();
         }
     }
 }
@@ -264,7 +264,7 @@ _id_6476( var_0 )
 {
     var_1 = [];
 
-    if ( level.createcrate )
+    if ( level._id_3FB7 )
         var_1 = _id_63FF( var_0 );
     else if ( isdefined( level._id_3FC2 ) && isdefined( level._id_3FC2[var_0] ) )
         var_1 = level._id_3FC2[var_0];
@@ -298,11 +298,11 @@ _id_E891( var_0, var_1, var_2 )
 
             if ( isdefined( var_6._id_982E ) )
             {
-                var_6._id_982E stoplookat();
-                var_6._id_982E _meth_809A();
+                var_6._id_982E stoploopsound();
+                var_6._id_982E delete();
             }
 
-            var_6._id_981D _meth_809A();
+            var_6._id_981D delete();
             var_3 = 1;
         }
     }
@@ -347,11 +347,11 @@ _id_7892( var_0 )
     {
         foreach ( var_3 in var_1 )
         {
-            if ( _func_02D9( var_3._id_02AE ) )
+            if ( _func_02D9( var_3.model ) )
                 continue;
 
-            if ( isdefined( var_3._id_02AE ) )
-                var_3._id_02AE hide();
+            if ( isdefined( var_3.model ) )
+                var_3.model hide();
         }
     }
 }
@@ -365,11 +365,11 @@ _id_46F1( var_0 )
     {
         foreach ( var_3 in var_1 )
         {
-            if ( _func_02D9( var_3._id_02AE ) )
+            if ( _func_02D9( var_3.model ) )
                 continue;
 
-            if ( isdefined( var_3._id_02AE ) )
-                var_3._id_02AE _meth_809A();
+            if ( isdefined( var_3.model ) )
+                var_3.model delete();
         }
     }
 
@@ -378,26 +378,26 @@ _id_46F1( var_0 )
 
 _id_579D()
 {
-    if ( isdefined( self._id_FF25["delay"] ) )
-        var_0 = self._id_FF25["delay"];
+    if ( isdefined( self.v["delay"] ) )
+        var_0 = self.v["delay"];
     else
         var_0 = 0;
 
-    if ( isdefined( self._id_FF25["damage_radius"] ) )
-        var_1 = self._id_FF25["damage_radius"];
+    if ( isdefined( self.v["damage_radius"] ) )
+        var_1 = self.v["damage_radius"];
     else
         var_1 = 128;
 
-    var_2 = self._id_FF25["damage"];
-    var_3 = self._id_FF25["origin"];
+    var_2 = self.v["damage"];
+    var_3 = self.v["origin"];
 
-    if ( isdefined( self._id_FF25["envonly"] ) )
-        var_4 = self._id_FF25["envonly"];
+    if ( isdefined( self.v["envonly"] ) )
+        var_4 = self.v["envonly"];
     else
         var_4 = 0;
 
-    if ( isdefined( self._id_FF25["dotraces"] ) )
-        var_5 = self._id_FF25["dotraces"];
+    if ( isdefined( self.v["dotraces"] ) )
+        var_5 = self.v["dotraces"];
     else
         var_5 = 1;
 
@@ -407,29 +407,29 @@ _id_579D()
 
 _id_0E8B()
 {
-    if ( isdefined( self._id_FF25["firefx"] ) )
+    if ( isdefined( self.v["firefx"] ) )
         thread _id_5B0F();
 
-    if ( isdefined( self._id_FF25["fxid"] ) && self._id_FF25["fxid"] != "No FX" )
+    if ( isdefined( self.v["fxid"] ) && self.v["fxid"] != "No FX" )
         thread _id_3176();
-    else if ( isdefined( self._id_FF25["soundalias"] ) && self._id_FF25["soundalias"] != "nil" )
+    else if ( isdefined( self.v["soundalias"] ) && self.v["soundalias"] != "nil" )
         thread _id_E04F();
 
-    if ( isdefined( self._id_FF25["loopsound"] ) && self._id_FF25["loopsound"] != "nil" )
+    if ( isdefined( self.v["loopsound"] ) && self.v["loopsound"] != "nil" )
         thread _id_50E9();
 
-    if ( isdefined( self._id_FF25["damage"] ) )
+    if ( isdefined( self.v["damage"] ) )
         thread _id_579D();
 
-    if ( isdefined( self._id_FF25["earthquake"] ) )
+    if ( isdefined( self.v["earthquake"] ) )
         thread _id_579F();
 
-    if ( isdefined( self._id_FF25["rumble"] ) )
+    if ( isdefined( self.v["rumble"] ) )
         thread _id_57A7();
 
-    if ( self._id_FF25["exploder_type"] == "exploder" )
+    if ( self.v["exploder_type"] == "exploder" )
         thread _id_2C18();
-    else if ( self._id_FF25["exploder_type"] == "exploderchunk" || self._id_FF25["exploder_type"] == "exploderchunk visible" )
+    else if ( self.v["exploder_type"] == "exploderchunk" || self.v["exploder_type"] == "exploderchunk visible" )
         thread _id_2C1A();
     else
         thread _id_2C17();
@@ -437,103 +437,103 @@ _id_0E8B()
 
 _id_2C17()
 {
-    var_0 = self._id_FF25["exploder"];
+    var_0 = self.v["exploder"];
 
-    if ( isdefined( self._id_FF25["delay"] ) )
-        wait( self._id_FF25["delay"] );
+    if ( isdefined( self.v["delay"] ) )
+        wait( self.v["delay"] );
     else
         waitframe();
 
-    if ( !isdefined( self._id_02AE ) )
+    if ( !isdefined( self.model ) )
         return;
 
-    if ( _func_02D9( self._id_02AE ) )
+    if ( _func_02D9( self.model ) )
         return;
 
-    if ( _id_06BB::_id_8A2C() && isdefined( self._id_02AE._id_00DE ) )
+    if ( scripts\common\utility::_id_8A2C() && isdefined( self.model.classname ) )
     {
-        if ( self._id_02AE._id_03C3 & 1 )
-            self._id_02AE call [[ level._id_5FF7["connectPaths"] ]]();
+        if ( self.model._id_03C3 & 1 )
+            self.model call [[ level._id_5FF7["connectPaths"] ]]();
     }
 
-    if ( level.createcrate )
+    if ( level._id_3FB7 )
     {
         if ( isdefined( self._id_5797 ) )
             return;
 
         self._id_5797 = 1;
-        self._id_02AE hide();
-        self._id_02AE _meth_824C();
+        self.model hide();
+        self.model notsolid();
         wait 3;
         self._id_5797 = undefined;
-        self._id_02AE _meth_83C3();
-        self._id_02AE _meth_83CE();
+        self.model show();
+        self.model solid();
         return;
     }
 
-    if ( !isdefined( self._id_FF25["fxid"] ) || self._id_FF25["fxid"] == "No FX" )
-        self._id_FF25["exploder"] = undefined;
+    if ( !isdefined( self.v["fxid"] ) || self.v["fxid"] == "No FX" )
+        self.v["exploder"] = undefined;
 
     waittillframeend;
-    self._id_02AE _meth_809A();
+    self.model delete();
 }
 
 _id_2C1A()
 {
-    if ( isdefined( self._id_FF25["delay"] ) )
-        wait( self._id_FF25["delay"] );
+    if ( isdefined( self.v["delay"] ) )
+        wait( self.v["delay"] );
 
     var_0 = undefined;
 
-    if ( isdefined( self._id_FF25["target"] ) )
-        var_0 = _id_077B::_id_678B( self._id_FF25["target"] );
+    if ( isdefined( self.v["target"] ) )
+        var_0 = scripts\engine\utility::_id_678B( self.v["target"] );
 
     if ( !isdefined( var_0 ) )
     {
-        self._id_02AE _meth_809A();
+        self.model delete();
         return;
     }
 
-    self._id_02AE _meth_83C3();
+    self.model show();
 
-    if ( isdefined( self._id_FF25["delay_post"] ) )
-        wait( self._id_FF25["delay_post"] );
+    if ( isdefined( self.v["delay_post"] ) )
+        wait( self.v["delay_post"] );
 
-    var_1 = self._id_FF25["origin"];
-    var_2 = self._id_FF25["angles"];
-    var_3 = var_0._id_02EA;
-    var_4 = isdefined( self._id_FF25["physics"] );
+    var_1 = self.v["origin"];
+    var_2 = self.v["angles"];
+    var_3 = var_0.origin;
+    var_4 = isdefined( self.v["physics"] );
 
     if ( var_4 )
     {
         var_5 = undefined;
 
-        if ( isdefined( var_0._id_0457 ) )
-            var_5 = var_0 _id_077B::_id_678B();
+        if ( isdefined( var_0.target ) )
+            var_5 = var_0 scripts\engine\utility::_id_678B();
 
         if ( isdefined( var_5 ) )
         {
-            var_6 = var_0._id_02EA;
-            var_7 = _func_025A( var_5._id_02EA - var_0._id_02EA );
+            var_6 = var_0.origin;
+            var_7 = vectornormalize( var_5.origin - var_0.origin );
         }
         else
         {
-            var_6 = self._id_02AE._id_02EA;
-            var_7 = _func_025A( var_3 - self._id_02AE._id_02EA );
+            var_6 = self.model.origin;
+            var_7 = vectornormalize( var_3 - self.model.origin );
         }
 
-        var_7 = var_7 * self._id_FF25["physics"];
-        self._id_02AE _meth_8254( var_6, var_7 );
+        var_7 = var_7 * self.v["physics"];
+        self.model physicslaunchserver( var_6, var_7 );
         return;
     }
     else
     {
-        var_7 = var_3 - self._id_02AE._id_02EA;
-        self._id_02AE _meth_82A7( var_7, 12 );
-        self._id_02AE _meth_8237( var_7, 12 );
+        var_7 = var_3 - self.model.origin;
+        self.model _meth_82A7( var_7, 12 );
+        self.model _meth_8237( var_7, 12 );
     }
 
-    if ( level.createcrate )
+    if ( level._id_3FB7 )
     {
         if ( isdefined( self._id_5797 ) )
             return;
@@ -541,52 +541,52 @@ _id_2C1A()
         self._id_5797 = 1;
         wait 3;
         self._id_5797 = undefined;
-        self._id_FF25["origin"] = var_1;
-        self._id_FF25["angles"] = var_2;
-        self._id_02AE hide();
+        self.v["origin"] = var_1;
+        self.v["angles"] = var_2;
+        self.model hide();
         return;
     }
 
-    self._id_FF25["exploder"] = undefined;
+    self.v["exploder"] = undefined;
     wait 6;
-    self._id_02AE _meth_809A();
+    self.model delete();
 }
 
 _id_2C18()
 {
-    if ( isdefined( self._id_FF25["delay"] ) )
-        wait( self._id_FF25["delay"] );
+    if ( isdefined( self.v["delay"] ) )
+        wait( self.v["delay"] );
 
     var_0 = 0;
     var_1 = undefined;
 
-    if ( !isdefined( self._id_02AE._id_CDB4 ) )
+    if ( !isdefined( self.model._id_CDB4 ) )
     {
-        self._id_02AE _meth_83C3();
-        self._id_02AE _meth_83CE();
+        self.model show();
+        self.model solid();
     }
     else
     {
         var_0 = 1;
-        var_1 = _func_0205( "script_model", self._id_02AE._id_02EA );
-        var_1._id_0054 = self._id_02AE._id_0054;
-        var_1 setmode( self._id_02AE._id_CDB4 );
+        var_1 = spawn( "script_model", self.model.origin );
+        var_1.angles = self.model.angles;
+        var_1 setmodel( self.model._id_CDB4 );
 
-        if ( isdefined( self._id_02AE._id_0372 ) )
-            var_1._id_0372 = self._id_02AE._id_0372;
+        if ( isdefined( self.model._id_0372 ) )
+            var_1._id_0372 = self.model._id_0372;
     }
 
     self._id_2C19 = 1;
 
-    if ( !var_0 && _id_06BB::_id_8A2C() && self._id_02AE._id_03C3 & 1 )
+    if ( !var_0 && scripts\common\utility::_id_8A2C() && self.model._id_03C3 & 1 )
     {
-        if ( !isdefined( self._id_02AE._id_4AF2 ) )
-            self._id_02AE call [[ level._id_5FF7["connectPaths"] ]]();
+        if ( !isdefined( self.model._id_4AF2 ) )
+            self.model call [[ level._id_5FF7["connectPaths"] ]]();
         else
-            self._id_02AE call [[ level._id_5FF7["disconnectPaths"] ]]();
+            self.model call [[ level._id_5FF7["disconnectPaths"] ]]();
     }
 
-    if ( level.createcrate )
+    if ( level._id_3FB7 )
     {
         if ( isdefined( self._id_5797 ) )
             return;
@@ -597,53 +597,53 @@ _id_2C18()
 
         if ( !var_0 )
         {
-            self._id_02AE hide();
-            self._id_02AE _meth_824C();
+            self.model hide();
+            self.model notsolid();
         }
         else
-            var_1 _meth_809A();
+            var_1 delete();
     }
 }
 
 _id_57A7()
 {
-    if ( !_id_06BB::_id_8A2C() )
+    if ( !scripts\common\utility::_id_8A2C() )
         return;
 
     _id_579E();
-    level._id_030F _meth_8278( self._id_FF25["rumble"] );
+    level.player playrumbleonentity( self.v["rumble"] );
 }
 
 _id_579E()
 {
-    if ( !isdefined( self._id_FF25["delay"] ) )
-        self._id_FF25["delay"] = 0;
+    if ( !isdefined( self.v["delay"] ) )
+        self.v["delay"] = 0;
 
-    var_0 = self._id_FF25["delay"];
-    var_1 = self._id_FF25["delay"] + 0.001;
+    var_0 = self.v["delay"];
+    var_1 = self.v["delay"] + 0.001;
 
-    if ( isdefined( self._id_FF25["delay_min"] ) )
-        var_0 = self._id_FF25["delay_min"];
+    if ( isdefined( self.v["delay_min"] ) )
+        var_0 = self.v["delay_min"];
 
-    if ( isdefined( self._id_FF25["delay_max"] ) )
-        var_1 = self._id_FF25["delay_max"];
+    if ( isdefined( self.v["delay_max"] ) )
+        var_1 = self.v["delay_max"];
 
     if ( var_0 > 0 )
-        wait( _func_01B7( var_0, var_1 ) );
+        wait( randomfloatrange( var_0, var_1 ) );
 }
 
 _id_50E9()
 {
     if ( isdefined( self._id_982E ) )
     {
-        self._id_982E stoplookat();
-        self._id_982E _meth_809A();
+        self._id_982E stoploopsound();
+        self._id_982E delete();
     }
 
-    var_0 = self._id_FF25["origin"];
-    var_1 = self._id_FF25["loopsound"];
+    var_0 = self.v["origin"];
+    var_1 = self.v["loopsound"];
     _id_579E();
-    self._id_982E = _id_077B::_id_B26C( var_1, var_0 );
+    self._id_982E = scripts\engine\utility::_id_B26C( var_1, var_0 );
 }
 
 _id_E04F()
@@ -653,61 +653,61 @@ _id_E04F()
 
 _id_50EA()
 {
-    var_0 = self._id_FF25["origin"];
-    var_1 = self._id_FF25["soundalias"];
+    var_0 = self.v["origin"];
+    var_1 = self.v["soundalias"];
     _id_579E();
-    _id_077B::_id_B2C7( var_1, var_0 );
+    scripts\engine\utility::_id_B2C7( var_1, var_0 );
 }
 
 _id_579F()
 {
     _id_579E();
-    _id_077B::_id_4BD3( self._id_FF25["earthquake"], self._id_FF25["origin"] );
+    scripts\engine\utility::_id_4BD3( self.v["earthquake"], self.v["origin"] );
 }
 
 _id_57A6()
 {
-    if ( !isdefined( self._id_FF25["soundalias"] ) || self._id_FF25["soundalias"] == "nil" )
+    if ( !isdefined( self.v["soundalias"] ) || self.v["soundalias"] == "nil" )
         return;
 
-    _id_077B::_id_B2C7( self._id_FF25["soundalias"], self._id_FF25["origin"] );
+    scripts\engine\utility::_id_B2C7( self.v["soundalias"], self.v["origin"] );
 }
 
 _id_5B0F()
 {
-    var_0 = self._id_FF25["forward"];
-    var_1 = self._id_FF25["up"];
+    var_0 = self.v["forward"];
+    var_1 = self.v["up"];
     var_2 = undefined;
-    var_3 = self._id_FF25["firefxsound"];
-    var_4 = self._id_FF25["origin"];
-    var_5 = self._id_FF25["firefx"];
-    var_6 = self._id_FF25["ender"];
+    var_3 = self.v["firefxsound"];
+    var_4 = self.v["origin"];
+    var_5 = self.v["firefx"];
+    var_6 = self.v["ender"];
 
     if ( !isdefined( var_6 ) )
         var_6 = "createfx_effectStopper";
 
     var_7 = 0.5;
 
-    if ( isdefined( self._id_FF25["firefxdelay"] ) )
-        var_7 = self._id_FF25["firefxdelay"];
+    if ( isdefined( self.v["firefxdelay"] ) )
+        var_7 = self.v["firefxdelay"];
 
     _id_579E();
 
     if ( isdefined( var_3 ) )
-        _id_077B::_id_9809( var_3, var_4, 1, var_6 );
+        scripts\engine\utility::_id_9809( var_3, var_4, 1, var_6 );
 
-    _func_0196( level._id_0BA3[var_5], self._id_FF25["origin"], var_0, var_1 );
+    playfx( level._effect[var_5], self.v["origin"], var_0, var_1 );
 }
 
 _id_3176()
 {
-    if ( isdefined( self._id_FF25["repeat"] ) )
+    if ( isdefined( self.v["repeat"] ) )
     {
         thread _id_57A6();
 
-        for ( var_0 = 0; var_0 < self._id_FF25["repeat"]; var_0++ )
+        for ( var_0 = 0; var_0 < self.v["repeat"]; var_0++ )
         {
-            _func_0196( level._id_0BA3[self._id_FF25["fxid"]], self._id_FF25["origin"], self._id_FF25["forward"], self._id_FF25["up"] );
+            playfx( level._effect[self.v["fxid"]], self.v["origin"], self.v["forward"], self.v["up"] );
             _id_579E();
         }
 
@@ -717,10 +717,10 @@ _id_3176()
     _id_579E();
 
     if ( isdefined( self._id_981D ) )
-        self._id_981D _meth_809A();
+        self._id_981D delete();
 
-    self._id_981D = _func_0207( _id_077B::_id_6A40( self._id_FF25["fxid"] ), self._id_FF25["origin"], self._id_FF25["forward"], self._id_FF25["up"] );
-    _func_024B( self._id_981D );
+    self._id_981D = spawnfx( scripts\engine\utility::getfx( self.v["fxid"] ), self.v["origin"], self.v["forward"], self.v["up"] );
+    triggerfx( self._id_981D );
     _id_57A6();
 }
 
@@ -735,7 +735,7 @@ _id_0E84( var_0, var_1, var_2 )
     {
         foreach ( var_6 in var_4 )
         {
-            var_6 _id_077B::_id_0E8A();
+            var_6 scripts\engine\utility::_id_0E8A();
             var_3 = 1;
         }
     }
@@ -779,13 +779,13 @@ _id_86EB( var_0 )
 
 _id_DBC7()
 {
-    if ( _id_06BB::_id_8A2C() && !_func_03AC() )
+    if ( scripts\common\utility::_id_8A2C() && !_func_03AC() )
         return 1;
 
-    if ( !isdefined( level.createcrate ) )
-        _id_077B::_id_D192();
+    if ( !isdefined( level._id_3FB7 ) )
+        scripts\engine\utility::_id_D192();
 
-    if ( level.createcrate )
+    if ( level._id_3FB7 )
         return 1;
     else
         return getdvar( "#x3594fe352a88773ae" ) != "1";

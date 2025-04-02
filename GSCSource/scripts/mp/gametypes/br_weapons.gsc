@@ -3,7 +3,7 @@
 
 _id_4031( var_0, var_1, var_2 )
 {
-    var_3 = _id_077A::_id_C042( var_0, ( var_0[0], var_0[1], var_0[2] - 60 ) );
+    var_3 = scripts\engine\trace::ray_trace( var_0, ( var_0[0], var_0[1], var_0[2] - 60 ) );
     var_4 = var_0;
 
     if ( var_3["fraction"] < 1.0 )
@@ -25,7 +25,7 @@ _id_4031( var_0, var_1, var_2 )
 _id_4032( var_0, var_1 )
 {
     var_2 = var_0;
-    var_3 = _id_077A::_id_C042( var_0, ( var_0[0], var_0[1], var_0[2] - 60 ) );
+    var_3 = scripts\engine\trace::ray_trace( var_0, ( var_0[0], var_0[1], var_0[2] - 60 ) );
 
     if ( var_3["fraction"] < 1.0 )
         var_2 = var_3["position"] + ( 0, 0, 2 );
@@ -40,13 +40,13 @@ _id_EA62()
 
     foreach ( var_3 in self._id_018A )
     {
-        var_4 = _id_0A7F::_id_6E6C( var_3._id_0084 );
+        var_4 = scripts\mp\utility\weapon::getweaponrootname( var_3.basename );
 
         if ( var_4 != "s4_me_fists" && var_4 != "iw8_knifestab" )
         {
-            if ( _func_036D( var_3 ) && var_3.horzalign == "primary" )
+            if ( isweapon( var_3 ) && var_3._id_0226 == "primary" )
             {
-                var_5 = _id_0A7F::_id_6E6C( self._id_0121 );
+                var_5 = scripts\mp\utility\weapon::getweaponrootname( self._id_0121 );
 
                 if ( var_4 == var_5 )
                     var_0 = var_3;
@@ -57,21 +57,21 @@ _id_EA62()
     }
 
     if ( isdefined( var_0 ) )
-        var_7 = _id_0A7F::_id_6E6C( var_0._id_0084 );
+        var_7 = scripts\mp\utility\weapon::getweaponrootname( var_0.basename );
 
     if ( isdefined( var_1 ) )
-        var_8 = _id_0A7F::_id_6E6C( var_1._id_0084 );
+        var_8 = scripts\mp\utility\weapon::getweaponrootname( var_1.basename );
 
     if ( isdefined( var_0 ) || isdefined( var_1 ) )
     {
         if ( isdefined( var_0 ) )
-            _id_099A::_id_0D6A( var_0 );
+            scripts\cp_mp\utility\inventory_utility::_takeweapon( var_0 );
 
         if ( isdefined( var_1 ) )
-            _id_099A::_id_0D6A( var_1 );
+            scripts\cp_mp\utility\inventory_utility::_takeweapon( var_1 );
 
-        _id_099A::_id_0BEB( "s4_me_fists_mp" );
-        _id_099A::_id_0D67( "s4_me_fists_mp" );
+        scripts\cp_mp\utility\inventory_utility::_giveweapon( "s4_me_fists_mp" );
+        scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate( "s4_me_fists_mp" );
     }
 }
 
@@ -82,13 +82,13 @@ _id_B68B( var_0 )
 
     foreach ( var_4 in self._id_018A )
     {
-        var_5 = _id_0A7F::_id_6E6C( var_4._id_0084 );
+        var_5 = scripts\mp\utility\weapon::getweaponrootname( var_4.basename );
 
         if ( var_5 != "s4_me_fists" && var_5 != "iw8_knifestab" )
         {
-            if ( _func_036D( var_4 ) && var_4.horzalign == "primary" )
+            if ( isweapon( var_4 ) && var_4._id_0226 == "primary" )
             {
-                var_6 = _id_0A7F::_id_6E6C( self._id_0121 );
+                var_6 = scripts\mp\utility\weapon::getweaponrootname( self._id_0121 );
 
                 if ( var_5 == var_6 )
                 {
@@ -107,10 +107,10 @@ _id_B68B( var_0 )
     var_11 = "";
 
     if ( isdefined( var_1 ) )
-        var_10 = _id_0A7F::_id_6E6C( var_1._id_0084 );
+        var_10 = scripts\mp\utility\weapon::getweaponrootname( var_1.basename );
 
     if ( isdefined( var_2 ) )
-        var_11 = _id_0A7F::_id_6E6C( var_2._id_0084 );
+        var_11 = scripts\mp\utility\weapon::getweaponrootname( var_2.basename );
 
     if ( var_0 == var_10 )
     {
@@ -128,17 +128,17 @@ _id_B68B( var_0 )
     if ( isdefined( var_8 ) )
     {
         var_13 = self getweaponammoclip( var_8 );
-        [var_15, var_16, var_17] = scripts\mp\gametypes\br_pickups::_id_6AAE( 0, self._id_02EA, self._id_0054, self );
+        [var_15, var_16, var_17] = scripts\mp\gametypes\br_pickups::_id_6AAE( 0, self.origin, self.angles, self );
         var_18 = _id_3F9F( var_8, var_15, var_16, 0 );
         var_18._id_010E = var_13;
-        _id_099A::_id_0D6A( var_8 );
+        scripts\cp_mp\utility\inventory_utility::_takeweapon( var_8 );
 
         if ( isdefined( var_9 ) )
-            _id_099A::_id_0D67( var_9 );
+            scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate( var_9 );
         else
         {
-            _id_099A::_id_0BEB( "s4_me_fists_mp" );
-            _id_099A::_id_0D67( "s4_me_fists_mp" );
+            scripts\cp_mp\utility\inventory_utility::_giveweapon( "s4_me_fists_mp" );
+            scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate( "s4_me_fists_mp" );
         }
 
         _id_29E6( self );
@@ -147,7 +147,7 @@ _id_B68B( var_0 )
 
 _id_3F9F( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    if ( var_0._id_0084 == "iw8_me_riotshield_mp" )
+    if ( var_0.basename == "iw8_me_riotshield_mp" )
         var_2 = ( var_2[0] - 90, var_2[1], var_2[2] );
 
     return _id_10DD5( var_0, var_1, var_2, var_3, var_4, var_5 );
@@ -158,13 +158,13 @@ _id_10DD5( var_0, var_1, var_2, var_3, var_4, var_5 )
     if ( var_1 == ( 0, 0, 0 ) )
         return;
 
-    var_6 = _func_034D( var_0 );
+    var_6 = getcompleteweaponname( var_0 );
     return scripts\mp\gametypes\br_pickups::_id_E333( var_6, var_1, var_2, 0, var_4, var_5, var_0 );
 }
 
 _id_EDD9( var_0 )
 {
-    var_1 = self._id_0327.size;
+    var_1 = self.primaryweapons.size;
 
     if ( !isdefined( var_0._id_04CE ) )
     {
@@ -174,20 +174,20 @@ _id_EDD9( var_0 )
         if ( isdefined( var_0._id_425E ) )
         {
             var_4 = var_0._id_425E;
-            var_3 = _func_0378( var_4 );
+            var_3 = makeweaponfromstring( var_4 );
         }
         else if ( !isdefined( var_0._id_3B14 ) )
         {
             var_3 = scripts\mp\gametypes\br_pickups::_id_6A3E( var_0, self );
-            var_4 = _func_034D( var_3 );
+            var_4 = getcompleteweaponname( var_3 );
         }
         else
         {
-            var_3 = scripts\cp_mp\hostmigration::_id_2CEB( var_0._id_9671, var_2, "none", "none", -1 );
+            var_3 = scripts\mp\class::buildweapon( var_0._id_9671, var_2, "none", "none", -1 );
             var_4 = var_0._id_9671;
         }
 
-        var_5 = _id_0A7F::_id_6E6C( var_4 );
+        var_5 = scripts\mp\utility\weapon::getweaponrootname( var_4 );
         var_6 = var_4;
     }
     else
@@ -197,23 +197,23 @@ _id_EDD9( var_0 )
         if ( isdefined( var_0._id_9671 ) )
             var_6 = var_0._id_9671;
         else
-            var_6 = _func_00D6( var_3._id_00DE, 7, var_3._id_00DE.size );
+            var_6 = _func_00D6( var_3.classname, 7, var_3.classname.size );
 
-        var_5 = _id_0A7F::_id_6E6C( var_6 );
+        var_5 = scripts\mp\utility\weapon::getweaponrootname( var_6 );
     }
 
     var_7 = 0;
     var_8 = undefined;
 
-    foreach ( var_10 in self._id_0327 )
+    foreach ( var_10 in self.primaryweapons )
     {
-        if ( _func_036F( var_10 ) )
+        if ( isnullweapon( var_10 ) )
         {
             var_1--;
             continue;
         }
 
-        if ( _func_036E( var_10, var_3 ) && !_id_0A69::_id_8743() )
+        if ( issameweapon( var_10, var_3 ) && !scripts\mp\utility\game::_id_8743() )
         {
             var_7 = 1;
             var_8 = var_10;
@@ -225,10 +225,10 @@ _id_EDD9( var_0 )
         if ( !self hasweapon( "s4_me_fists_mp" ) )
             var_7 = 1;
         else
-            self takeallweapons( "s4_me_fists_mp" );
+            self takeweapon( "s4_me_fists_mp" );
     }
 
-    if ( _id_0A69::_id_8743() )
+    if ( scripts\mp\utility\game::_id_8743() )
     {
         var_12 = scripts\mp\gametypes\arena_evo_tourney_weapon_util::_id_1A75( var_3 );
 
@@ -241,11 +241,11 @@ _id_EDD9( var_0 )
         if ( !isdefined( var_8 ) )
             var_8 = self._id_8FAB;
 
-        if ( var_8._id_0084 != "none" )
+        if ( var_8.basename != "none" )
         {
             var_13 = self getweaponammoclip( var_8 );
 
-            if ( !scripts\mp\hud_message::_id_89EF( var_8 ) )
+            if ( !_id_07E2::_id_89EF( var_8 ) )
             {
                 var_14 = self getweaponammostock( var_8 );
                 var_15 = _id_29E1( var_8 );
@@ -254,18 +254,18 @@ _id_EDD9( var_0 )
                     self._id_29D3[var_15] = var_14;
             }
 
-            var_16 = var_0._id_02EA - self._id_02EA;
-            var_17 = vectordot( var_16 );
-            var_18 = _id_3F9F( var_8, var_0._id_02EA, ( 0, var_17, 0 ), 0 );
+            var_16 = var_0.origin - self.origin;
+            var_17 = _func_025C( var_16 );
+            var_18 = _id_3F9F( var_8, var_0.origin, ( 0, var_17, 0 ), 0 );
 
             if ( isdefined( var_18 ) )
             {
                 var_18._id_010E = var_13;
                 var_19 = 1;
-                scripts\mp\gametypes\br_analytics::_id_2AD6( self, var_8._id_0084, var_19, var_13 );
+                scripts\mp\gametypes\br_analytics::_id_2AD6( self, var_8.basename, var_19, var_13 );
             }
 
-            _id_099A::_id_0D6A( var_8 );
+            scripts\cp_mp\utility\inventory_utility::_takeweapon( var_8 );
         }
     }
 
@@ -278,14 +278,14 @@ _id_EDD9( var_0 )
 
         if ( isdefined( var_20 ) )
         {
-            var_21 = visionsetthermal( var_3 );
+            var_21 = weaponclipsize( var_3 );
             _id_29D5( self, var_20, var_21 );
         }
     }
     else
     {
         var_22 = var_0._id_010E;
-        var_21 = visionsetthermal( var_3 );
+        var_21 = weaponclipsize( var_3 );
 
         if ( istrue( level._id_2AA8 ) )
             var_22 = var_21;
@@ -298,7 +298,7 @@ _id_EDD9( var_0 )
             var_22 = var_21;
         }
 
-        self _meth_83B5( var_6, var_22 );
+        self setweaponammoclip( var_6, var_22 );
 
         if ( var_23 > 0 )
         {
@@ -310,21 +310,21 @@ _id_EDD9( var_0 )
     }
 
     _id_29E6( self );
-    self earthquakeforplayer( var_6 );
-    _id_099A::_id_0D67( var_6 );
+    self _meth_84A0( var_6 );
+    scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate( var_6 );
     scripts\mp\weapons::_id_5BDC( self, var_6 );
     scripts\mp\weapons::_id_FC9F( var_3 );
 
     if ( isdefined( var_0._id_04CE ) && _func_02DB( var_0._id_04CE ) )
-        var_0._id_04CE _meth_809A();
+        var_0._id_04CE delete();
 
     var_24 = undefined;
 
     foreach ( var_26 in self._id_018A )
     {
-        if ( _func_036D( var_26 ) && var_26.horzalign == "primary" )
+        if ( isweapon( var_26 ) && var_26._id_0226 == "primary" )
         {
-            var_4 = _func_034D( var_26 );
+            var_4 = getcompleteweaponname( var_26 );
 
             if ( var_4 == var_6 )
             {
@@ -343,9 +343,9 @@ _id_EDA4( var_0 )
 
     if ( var_0._id_CF15 == "Ammo_Crate" )
     {
-        var_2 = self getcurrentweapon()._id_0084;
-        var_3 = _id_0A7F::_id_6E6C( var_2 );
-        var_4 = visionsetthermal( var_2 );
+        var_2 = self getcurrentweapon().basename;
+        var_3 = scripts\mp\utility\weapon::getweaponrootname( var_2 );
+        var_4 = weaponclipsize( var_2 );
         var_5 = _id_29E1( var_2 );
 
         if ( isdefined( var_5 ) )
@@ -367,9 +367,9 @@ _id_EDA4( var_0 )
 
 _id_2A22( var_0, var_1, var_2 )
 {
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
     var_3._id_9671 = var_0;
-    var_3._id_CF15 = _id_0A7F::_id_6E6C( var_0 );
+    var_3._id_CF15 = scripts\mp\utility\weapon::getweaponrootname( var_0 );
     var_3._id_3B14 = var_2;
     var_3._id_010E = 0;
     var_1 _id_EDD9( var_3 );
@@ -377,7 +377,7 @@ _id_2A22( var_0, var_1, var_2 )
 
 _id_2A25( var_0 )
 {
-    var_1 = visionsetthermal( var_0 );
+    var_1 = weaponclipsize( var_0 );
     return int( var_1 );
 }
 
@@ -385,16 +385,16 @@ _id_2A21( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
     if ( var_0 hasweapon( var_1 ) )
     {
-        var_0 _id_07B9::_id_DC9F( "MP/BR_ALREADY_HOLDING_WEAPON" );
+        var_0 scripts\mp\hud_message::_id_DC9F( "MP/BR_ALREADY_HOLDING_WEAPON" );
         return 0;
     }
 
     var_6 = var_1 _meth_8622( "maxammo", 1 );
-    var_7 = _func_020F();
+    var_7 = spawnstruct();
     var_7._id_04CE = var_1;
     var_7._id_9671 = var_2;
     var_7._id_CF15 = var_3;
-    var_7._id_02EA = var_0._id_02EA;
+    var_7.origin = var_0.origin;
     var_7._id_010E = _id_2A25( var_1 );
 
     if ( var_6 )
@@ -402,25 +402,25 @@ _id_2A21( var_0, var_1, var_2, var_3, var_4, var_5 )
 
     if ( isdefined( var_4 ) && isdefined( var_5 ) )
     {
-        var_8 = visionsetthermal( var_1 );
+        var_8 = weaponclipsize( var_1 );
         var_9 = int( _func_0037( var_8 * var_4 ) );
-        var_7._id_010E = int( _func_0148( var_9, var_5 ) );
+        var_7._id_010E = int( min( var_9, var_5 ) );
     }
 
     if ( getdvarint( "scr_br_request_streaming_weapons", 0 ) > 0 )
-        var_0 _meth_8518( [ var_7._id_9671 ] );
+        var_0 loadweaponsforplayer( [ var_7._id_9671 ] );
 
     var_0 _id_EDD9( var_7 );
 
     if ( var_1._id_01FC )
     {
-        var_10 = var_1 _meth_8625();
+        var_10 = var_1 getaltweapon();
 
-        if ( var_10._id_022A && _id_0A7F::_id_1D7D( var_10._id_0490 ) == "ubshtgn" )
+        if ( var_10._id_022A && scripts\mp\utility\weapon::_id_1D7D( var_10._id_0490 ) == "ubshtgn" )
         {
-            var_11 = visionsetthermal( var_10 );
+            var_11 = weaponclipsize( var_10 );
             var_12 = int( var_11 );
-            var_0 _meth_83B5( var_10, var_12 );
+            var_0 setweaponammoclip( var_10, var_12 );
         }
     }
 
@@ -465,10 +465,10 @@ _id_29DC()
 
             foreach ( var_2 in var_0 )
             {
-                var_3 = visionsetthermal( var_2 );
+                var_3 = weaponclipsize( var_2 );
 
                 if ( isdefined( var_3 ) )
-                    self _meth_83B5( var_2, var_3 );
+                    self setweaponammoclip( var_2, var_3 );
             }
         }
 
@@ -517,7 +517,7 @@ _id_29DD()
         if ( isdefined( var_4 ) )
         {
             var_5 = var_0 getweaponammoclip( var_3, "right" );
-            var_6 = visionsetthermal( var_3 );
+            var_6 = weaponclipsize( var_3 );
 
             if ( var_5 < var_6 )
                 return 0;
@@ -551,8 +551,8 @@ _id_29DE()
         if ( isdefined( var_5 ) )
         {
             var_1[var_5] = "dummy_value";
-            var_6 = visionsetthermal( var_4 );
-            var_0 _meth_83B5( var_4, var_6 );
+            var_6 = weaponclipsize( var_4 );
+            var_0 setweaponammoclip( var_4, var_6 );
         }
     }
 
@@ -627,7 +627,7 @@ _id_29DA()
 
     for (;;)
     {
-        _id_077B::waittill_any_3( "ammo_update", "pickedupweapon", "weapon_switch_done", "weapon_change", "weapon_change_complete" );
+        scripts\engine\utility::waittill_any_3( "ammo_update", "pickedupweapon", "weapon_switch_done", "weapon_change", "weapon_change_complete" );
         _id_29DB( "brloot_ammo_919" );
         _id_29DB( "brloot_ammo_12g" );
         _id_29DB( "brloot_ammo_762" );
@@ -639,7 +639,7 @@ _id_29DA()
 _id_29DB( var_0, var_1 )
 {
     if ( isdefined( level._id_29D8[var_0] ) )
-        self _meth_82F6( level._id_29D8[var_0], self._id_29D3[var_0] );
+        self setclientomnvar( level._id_29D8[var_0], self._id_29D3[var_0] );
 }
 
 _id_29E6( var_0 )
@@ -656,7 +656,7 @@ _id_29E6( var_0 )
         if ( isdefined( var_4 ) )
         {
             var_5 = scripts\mp\gametypes\br::_id_64F7( var_0._id_29D3[var_4] );
-            var_0 setweaponammoclip( var_3, var_5 );
+            var_0 setweaponammostock( var_3, var_5 );
         }
     }
 
@@ -677,7 +677,7 @@ _id_29E4( var_0, var_1 )
         if ( isdefined( var_5 ) && var_1 == var_5 )
         {
             var_6 = scripts\mp\gametypes\br::_id_64F7( var_0._id_29D3[var_1] );
-            var_0 setweaponammoclip( var_4, var_6 );
+            var_0 setweaponammostock( var_4, var_6 );
         }
     }
 
@@ -690,15 +690,15 @@ _id_29E1( var_0 )
     var_2 = [ "selectsemi", "selectsemi_falpha" ];
     var_3 = [ "ubshtgn", "ubshtgn02", "ubshtgn_mike4" ];
 
-    if ( var_0._id_022A && isdefined( var_0._id_0490 ) && !_id_077B::_id_1B78( var_2, var_0._id_0490 ) )
+    if ( var_0._id_022A && isdefined( var_0._id_0490 ) && !scripts\engine\utility::array_contains( var_2, var_0._id_0490 ) )
     {
-        if ( _id_077B::_id_1B78( var_3, var_0._id_0490 ) )
+        if ( scripts\engine\utility::array_contains( var_3, var_0._id_0490 ) )
             return undefined;
         else
             var_1 = "weapon_projectile";
     }
     else
-        var_1 = _id_0A7F::_id_6E59( var_0 );
+        var_1 = scripts\mp\utility\weapon::_id_6E59( var_0 );
 
     switch ( var_1 )
     {
@@ -790,13 +790,13 @@ _id_8AC9( var_0 )
     if ( !isdefined( var_0 ) )
         return 0;
 
-    if ( !_func_036D( var_0 ) )
+    if ( !isweapon( var_0 ) )
         return 0;
 
-    if ( _func_036F( var_0 ) )
+    if ( isnullweapon( var_0 ) )
         return 0;
 
-    if ( scripts\mp\weapons::_id_8844( var_0 ) || _id_0A7F::_id_886E( var_0 ) )
+    if ( scripts\mp\weapons::_id_8844( var_0 ) || scripts\mp\utility\weapon::_id_886E( var_0 ) )
         return 0;
 
     return 1;

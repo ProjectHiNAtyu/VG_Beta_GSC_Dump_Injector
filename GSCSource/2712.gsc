@@ -9,28 +9,28 @@ _id_10228( var_0, var_1 )
 
 _id_10227( var_0 )
 {
-    _id_07D3::_id_C24B( var_0, "vehicle" );
+    scripts\mp\outofbounds::_id_C24B( var_0, "vehicle" );
 }
 
 _id_1021F( var_0 )
 {
-    _id_07D3::_id_47E0( var_0 );
+    scripts\mp\outofbounds::_id_47E0( var_0 );
 }
 
 _id_1021E( var_0, var_1 )
 {
-    _id_07D3::_id_3940( var_0, var_1 );
+    scripts\mp\outofbounds::_id_3940( var_0, var_1 );
 }
 
 _id_10225()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     var_0._id_AD00 = [];
     level._id_FFF1._id_ABD0 = var_0;
-    _id_07D3::_id_C284( "vehicle", ::_id_10220 );
-    _id_07D3::_id_C285( "vehicle", ::_id_10222 );
-    _id_07D3::_id_C286( "vehicle", ::_id_10226 );
-    _id_07D3::_id_C283( "vehicle", ::_id_1021D );
+    scripts\mp\outofbounds::_id_C284( "vehicle", ::_id_10220 );
+    scripts\mp\outofbounds::_id_C285( "vehicle", ::_id_10222 );
+    scripts\mp\outofbounds::_id_C286( "vehicle", ::_id_10226 );
+    scripts\mp\outofbounds::_id_C283( "vehicle", ::_id_1021D );
 }
 
 _id_10224()
@@ -40,7 +40,7 @@ _id_10224()
 
 _id_10220( var_0, var_1, var_2 )
 {
-    var_3 = _id_09BA::_id_10189( self );
+    var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10189( self );
 
     foreach ( var_5 in var_3 )
         _id_10221( var_5, undefined, undefined, var_2 );
@@ -50,16 +50,16 @@ _id_10221( var_0, var_1, var_2, var_3 )
 {
     var_4 = 1;
 
-    if ( _id_0999::_id_88E4() && level._id_60D1 == "arm" && isdefined( var_3 ) && var_3 == "restricted" )
+    if ( scripts\cp_mp\utility\game_utility::_id_88E4() && level.gametype == "arm" && isdefined( var_3 ) && var_3 == "restricted" )
         var_4 = 2;
 
-    var_0 _meth_82F6( "ui_out_of_bounds_type", var_4 );
-    var_0 _meth_82F6( "ui_out_of_bounds_countdown", self._id_ABD3 );
+    var_0 setclientomnvar( "ui_out_of_bounds_type", var_4 );
+    var_0 setclientomnvar( "ui_out_of_bounds_countdown", self._id_ABD3 );
 }
 
 _id_10222( var_0, var_1, var_2 )
 {
-    var_3 = _id_09BA::_id_10189( self );
+    var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10189( self );
 
     foreach ( var_5 in var_3 )
         _id_10223( var_5 );
@@ -67,8 +67,8 @@ _id_10222( var_0, var_1, var_2 )
 
 _id_10223( var_0, var_1, var_2, var_3 )
 {
-    var_0 _meth_82F6( "ui_out_of_bounds_type", 0 );
-    var_0 _meth_82F6( "ui_out_of_bounds_countdown", 0 );
+    var_0 setclientomnvar( "ui_out_of_bounds_type", 0 );
+    var_0 setclientomnvar( "ui_out_of_bounds_countdown", 0 );
 }
 
 _id_10226( var_0, var_1 )
@@ -80,8 +80,8 @@ _id_10226( var_0, var_1 )
 
 _id_1021D()
 {
-    var_0 = _id_09BA::_id_10189( self );
+    var_0 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10189( self );
 
     foreach ( var_2 in var_0 )
-        var_2 _meth_82F6( "ui_out_of_bounds_countdown", 0 );
+        var_2 setclientomnvar( "ui_out_of_bounds_countdown", 0 );
 }

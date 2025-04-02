@@ -52,8 +52,8 @@ _id_13A1( var_0, var_1, var_2, var_3, var_4, var_5 )
         var_6 = "kstreak_bomber_flyby";
 
     var_7 = var_1 + var_2 * var_3;
-    var_8 = _id_077B::_id_E1E6( var_1 );
-    var_8 _meth_823B( var_7, var_4 );
+    var_8 = scripts\engine\utility::_id_E1E6( var_1 );
+    var_8 moveto( var_7, var_4 );
     var_9 = _id_081E::_id_DF05( var_6, var_8 );
     thread airstrike_plane_explode_watcher( var_0, var_8, var_4 );
     thread airstrike_death_sfx_org_watcher( var_8, var_4 );
@@ -66,28 +66,28 @@ airstrike_plane_explode_watcher( var_0, var_1, var_2, var_3 )
     var_0 waittill( "aud_plane_destruct_sequence" );
     _id_081E::_id_DF05( "explo_plane_death_spin_long", var_1 );
     wait 1.85;
-    _id_081E::_id_DF05( "explo_plane_close_main", var_1._id_02EA );
-    _id_081E::_id_DF05( "explo_plane_distant", var_1._id_02EA );
+    _id_081E::_id_DF05( "explo_plane_close_main", var_1.origin );
+    _id_081E::_id_DF05( "explo_plane_distant", var_1.origin );
 }
 
 airstrike_death_sfx_org_watcher( var_0, var_1 )
 {
     wait( var_1 + 2 );
-    var_0 _meth_809A();
+    var_0 delete();
 }
 
 _id_E9F6( var_0, var_1 )
 {
     var_2 = 0;
     var_3 = 0.08;
-    _id_081E::_id_DF05( "kstreak_strafing_run_first_shot_dist", var_0._id_02EA );
+    _id_081E::_id_DF05( "kstreak_strafing_run_first_shot_dist", var_0.origin );
     wait( var_3 );
 
     while ( var_2 <= var_1 )
     {
         if ( isdefined( var_0 ) )
         {
-            _id_081E::_id_DF05( "kstreak_strafing_run_shot_dist", var_0._id_02EA );
+            _id_081E::_id_DF05( "kstreak_strafing_run_shot_dist", var_0.origin );
             wait( var_3 );
         }
 
@@ -164,7 +164,7 @@ carepackage_impact_large( var_0 )
 
 carepackage_open( var_0, var_1 )
 {
-    foreach ( var_3 in level._id_B758 )
+    foreach ( var_3 in level.players )
     {
         if ( isdefined( var_3 ) )
         {
@@ -198,7 +198,7 @@ _id_A15A( var_0 )
 
 _id_7001( var_0, var_1 )
 {
-    foreach ( var_3 in level._id_B758 )
+    foreach ( var_3 in level.players )
     {
         if ( isdefined( var_3 ) )
         {
@@ -238,7 +238,7 @@ v2_explosion( var_0 )
     _id_081E::_id_DF05( "kstreak_v2_explosion" );
     wait 1.8;
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
         if ( isdefined( var_2 ) )
             thread v2_shockwave( var_2, var_0 );
@@ -260,7 +260,7 @@ flamenaut_mask_on( var_0 )
 
 dog_whistle( var_0 )
 {
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
         if ( isdefined( var_2 ) )
         {
@@ -288,7 +288,7 @@ field_mic_explode( var_0 )
 
 goliath_explosion( var_0, var_1 )
 {
-    foreach ( var_3 in level._id_B758 )
+    foreach ( var_3 in level.players )
     {
         if ( isdefined( var_3 ) )
         {
@@ -305,8 +305,8 @@ goliath_explosion( var_0, var_1 )
 
 _id_362D()
 {
-    _id_077B::_id_5BF1( "aud_chopper_gunner_us_loudspeaker_active" );
-    _id_077B::_id_5BF1( "aud_chopper_gunner_vc_loudspeaker_active" );
+    scripts\engine\utility::_id_5BF1( "aud_chopper_gunner_us_loudspeaker_active" );
+    scripts\engine\utility::_id_5BF1( "aud_chopper_gunner_vc_loudspeaker_active" );
     thread _id_362E();
 }
 
@@ -330,7 +330,7 @@ _id_3628( var_0, var_1 )
     var_1 _meth_867D( "mp_killstreak_chopper_gunner_owner" );
     thread _id_3630( var_0, var_1 );
 
-    if ( var_0._id_045B == "allies" )
+    if ( var_0.team == "allies" )
     {
         var_3 = _id_081E::_id_DF05( [ 0.5, "kstreak_chopper_gun_plr_us_music", 0 ], var_1 );
         _id_081E::_id_DF21( var_3, var_0, "death" );
@@ -347,17 +347,17 @@ _id_3628( var_0, var_1 )
     _id_081E::_id_DF21( var_4, var_0, "death" );
     _id_081E::_id_DF21( var_4, var_0, "crashing" );
 
-    if ( !_id_077B::_id_5BE0( "aud_chopper_gunner_us_loudspeaker_active" ) )
+    if ( !scripts\engine\utility::_id_5BE0( "aud_chopper_gunner_us_loudspeaker_active" ) )
     {
-        _id_077B::_id_5BFB( "aud_chopper_gunner_us_loudspeaker_active" );
+        scripts\engine\utility::_id_5BFB( "aud_chopper_gunner_us_loudspeaker_active" );
         thread _id_1E4D( var_0 );
         var_5 = _id_081E::_id_DF05( "kstreak_chopper_gun_npc_us_loudspeaker", var_0 );
         _id_081E::_id_DF21( var_5, var_0, "death" );
         _id_081E::_id_DF21( var_5, var_0, "crashing" );
     }
-    else if ( !_id_077B::_id_5BE0( "aud_chopper_gunner_vc_loudspeaker_active" ) )
+    else if ( !scripts\engine\utility::_id_5BE0( "aud_chopper_gunner_vc_loudspeaker_active" ) )
     {
-        _id_077B::_id_5BFB( "aud_chopper_gunner_vc_loudspeaker_active" );
+        scripts\engine\utility::_id_5BFB( "aud_chopper_gunner_vc_loudspeaker_active" );
         thread _id_1E4E( var_0 );
         var_5 = _id_081E::_id_DF05( "kstreak_chopper_gun_npc_vc_loudspeaker", var_0 );
         _id_081E::_id_DF21( var_5, var_0, "death" );
@@ -369,7 +369,7 @@ _id_3628( var_0, var_1 )
 
 _id_3630( var_0, var_1 )
 {
-    var_2 = var_0 _id_077B::_id_10893( "death", "crashing", "leaving" );
+    var_2 = var_0 scripts\engine\utility::waittill_any_return( "death", "crashing", "leaving" );
 
     if ( var_2 == "leaving" )
     {
@@ -385,14 +385,14 @@ _id_3630( var_0, var_1 )
 
 _id_1E4D( var_0 )
 {
-    var_0 _id_077B::_id_1087D( "death", "crashing", "leaving" );
-    _id_077B::_id_5BE4( "aud_chopper_gunner_us_loudspeaker_active" );
+    var_0 scripts\engine\utility::_id_1087D( "death", "crashing", "leaving" );
+    scripts\engine\utility::_id_5BE4( "aud_chopper_gunner_us_loudspeaker_active" );
 }
 
 _id_1E4E( var_0 )
 {
-    var_0 _id_077B::_id_1087D( "death", "crashing", "leaving" );
-    _id_077B::_id_5BE4( "aud_chopper_gunner_vc_loudspeaker_active" );
+    var_0 scripts\engine\utility::_id_1087D( "death", "crashing", "leaving" );
+    scripts\engine\utility::_id_5BE4( "aud_chopper_gunner_vc_loudspeaker_active" );
 }
 
 _id_362F( var_0 )
@@ -417,12 +417,12 @@ _id_1E53( var_0 )
 _id_1E51( var_0 )
 {
     _id_081E::_id_DF05( "kstreak_napalm_strike_explo_main", var_0 );
-    wait( _func_01B7( 0.05, 1.5 ) );
+    wait( randomfloatrange( 0.05, 1.5 ) );
     _id_081E::_id_DF05( "kstreak_napalm_strike_explo_flame", var_0 );
 }
 
 _id_1E52( var_0, var_1 )
 {
-    var_2 = var_0._id_02EA;
+    var_2 = var_0.origin;
     wait( var_1 );
 }

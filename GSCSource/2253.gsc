@@ -7,7 +7,7 @@ _id_43D0()
         return;
 
     var_0 = self._id_0B3E._id_9189;
-    var_0 _meth_809A();
+    var_0 delete();
     self._id_0B3E._id_9189 = undefined;
     scripts\anim\shared::_id_5EB6( self._id_0326, "primary" );
 }
@@ -31,7 +31,7 @@ _id_B370( var_0, var_1, var_2 )
     if ( isdefined( self._id_5D31 ) )
         self thread [[ self._id_5D31 ]]();
 
-    _id_C509( self._id_02EA );
+    _id_C509( self.origin );
     anim._id_A767--;
     anim._id_A766--;
     _id_43D0();
@@ -44,7 +44,7 @@ _id_B370( var_0, var_1, var_2 )
     }
     else if ( isdefined( self._id_BF40 ) || self._id_01BB )
     {
-        if ( _func_0102( self ) )
+        if ( isagent( self ) )
         {
             if ( istrue( self._id_24D2 ) )
                 _id_486E();
@@ -66,7 +66,7 @@ _id_B370( var_0, var_1, var_2 )
             return;
     }
 
-    var_3 = _id_06BB::_id_10A0B();
+    var_3 = scripts\common\utility::_id_10A0B();
 
     if ( _id_DB69( var_3 ) )
         _id_77F2();
@@ -114,13 +114,13 @@ _id_B370( var_0, var_1, var_2 )
         scripts\anim\shared::_id_4FE9();
         _id_4CAA();
 
-        if ( _func_0102( self ) )
+        if ( isagent( self ) )
             self._id_A533 = 1;
         else
         {
             self hide();
 
-            if ( !_func_0102( self ) )
+            if ( !isagent( self ) )
                 wait 0.1;
         }
 
@@ -128,8 +128,8 @@ _id_B370( var_0, var_1, var_2 )
         {
             _id_43BD();
 
-            if ( !_func_0102( self ) )
-                self _meth_809A();
+            if ( !isagent( self ) )
+                self delete();
         }
 
         return;
@@ -220,10 +220,10 @@ _id_B370( var_0, var_1, var_2 )
                 _id_486E();
 
             scripts\anim\shared::_id_4FE9();
-            self _meth_83E4();
+            self startragdoll();
         }
 
-        if ( !_func_0102( self ) )
+        if ( !isagent( self ) )
         {
             wait 0.05;
             self _meth_8018( "gravity" );
@@ -249,12 +249,12 @@ _id_B370( var_0, var_1, var_2 )
         }
     }
 
-    if ( !_func_0102( self ) && !isdefined( self._id_DDA3 ) )
+    if ( !isagent( self ) && !isdefined( self._id_DDA3 ) )
         thread _id_B372();
 
     self endon( "terminate_death_thread" );
 
-    if ( !_func_0102( self ) )
+    if ( !isagent( self ) )
     {
         if ( isdefined( self._id_DDA3 ) )
             wait 0.05;
@@ -278,7 +278,7 @@ _id_B370( var_0, var_1, var_2 )
     scripts\anim\shared::_id_4FE9();
     self notify( "endPlayDeathAnim" );
 
-    if ( !_func_0102( self ) )
+    if ( !isagent( self ) )
     {
         if ( isdefined( self._id_BF40 ) || self._id_01BB )
         {
@@ -314,7 +314,7 @@ _id_43D5( var_0 )
 
 _id_7408( var_0 )
 {
-    if ( isagent( self ) && !_func_036F( self._id_013E ) && _func_0121( self._id_013E._id_0084, "molotov" ) )
+    if ( _func_0103( self ) && !isnullweapon( self._id_013E ) && issubstr( self._id_013E.basename, "molotov" ) )
     {
         self._id_2D6A = 1;
         thread _id_7407();
@@ -324,24 +324,24 @@ _id_7408( var_0 )
     if ( !isdefined( self._id_2D6A ) || !self._id_2D6A )
         return;
 
-    if ( isagent( self ) )
+    if ( _func_0103( self ) )
         return;
 
     if ( self._id_0492 != "dog" && ( !isdefined( var_0 ) || !_func_0011( var_0, "model_swap" ) ) )
     {
         if ( isdefined( self._id_75F6 ) )
         {
-            self destroy( self._id_75F6 );
+            self detach( self._id_75F6 );
             self._id_75F6 = undefined;
         }
 
         if ( isdefined( self._id_75AA ) )
         {
-            self destroy( self._id_75AA );
+            self detach( self._id_75AA );
             self._id_75AA = undefined;
         }
 
-        self setmode( "burntbody_male" );
+        self setmodel( "burntbody_male" );
 
         if ( !isdefined( var_0 ) || !_func_0011( var_0, "burn_vfx_death_start" ) )
             thread _id_7407();
@@ -352,17 +352,17 @@ _id_7406()
 {
     if ( isdefined( self._id_75F6 ) )
     {
-        self destroy( self._id_75F6 );
+        self detach( self._id_75F6 );
         self._id_75F6 = undefined;
     }
 
     if ( isdefined( self._id_75AA ) )
     {
-        self destroy( self._id_75AA );
+        self detach( self._id_75AA );
         self._id_75AA = undefined;
     }
 
-    self setmode( "burntbody_male" );
+    self setmodel( "burntbody_male" );
 }
 
 _id_7407()
@@ -377,7 +377,7 @@ _id_7407()
 
         if ( isdefined( var_1 ) )
         {
-            self _meth_8373( "burn_to_death_by_molotov", "active" );
+            self setscriptablepartstate( "burn_to_death_by_molotov", "active" );
             var_0 = 0;
         }
     }
@@ -391,7 +391,7 @@ _id_7407()
             if ( !isdefined( self ) )
                 return;
 
-            _func_0197( level._id_6082[var_4._id_2D71], self, var_4._id_0400 );
+            playfxontag( level._id_6082[var_4._id_2D71], self, var_4._id_0400 );
             wait 0.05;
         }
     }
@@ -415,7 +415,7 @@ _id_6917()
 
 _id_3F7D( var_0, var_1, var_2 )
 {
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
     var_3._id_0400 = var_0;
     var_3._id_2D71 = var_1;
     return var_3;
@@ -434,7 +434,7 @@ _id_2E53( var_0, var_1 )
     if ( var_2 == "vo_" )
     {
         var_3 = _func_00D6( var_1, 3 );
-        var_0 playsound( var_3 );
+        var_0 _meth_827C( var_3 );
         return;
     }
 
@@ -445,24 +445,24 @@ _id_2E53( var_0, var_1 )
 
     if ( !isdefined( var_0._id_43EC ) )
     {
-        var_0._id_43EC = _func_0205( "script_origin", var_0._id_02EA );
-        var_0._id_43EC _meth_820B( var_0, "" );
+        var_0._id_43EC = spawn( "script_origin", var_0.origin );
+        var_0._id_43EC linkto( var_0, "" );
     }
 
     var_4 = var_0._id_43EC;
     var_4 notify( "stop_C8DeathSound" );
     var_4 endon( "stop_C8DeathSound" );
-    var_4 _meth_827B( var_3 );
+    var_4 playsound( var_3 );
     var_5 = _func_0140( var_3 );
     wait( var_5 * 0.001 + 0.1 );
-    var_4 _meth_809A();
+    var_4 delete();
 }
 
 _id_B818( var_0, var_1, var_2 )
 {
-    if ( ( _id_06BB::_id_87D2( _func_034C( "iw7_knife_upgrade1" ) ) || _id_06BB::_id_10A0C() || _id_06BB::_id_87D2( _func_034C( "iw7_sonic" ) ) ) && isdefined( self._id_006E ) )
+    if ( ( scripts\common\utility::_id_87D2( makeweapon( "iw7_knife_upgrade1" ) ) || scripts\common\utility::_id_10A0C() || scripts\common\utility::_id_87D2( makeweapon( "iw7_sonic" ) ) ) && isdefined( self.attacker ) )
     {
-        var_3 = vectordot( self._id_006E._id_02EA - self._id_02EA );
+        var_3 = _func_025C( self.attacker.origin - self.origin );
 
         if ( self._id_013F > 135 || self._id_013F <= -135 )
             self _meth_8250( "face angle", var_3 );
@@ -479,14 +479,14 @@ _id_B818( var_0, var_1, var_2 )
 
 _id_B352( var_0, var_1, var_2 )
 {
-    anim._id_A47D = gettime() + _func_01B9( 25000, 35000 );
-    self _meth_8250( "face angle", self._id_0B3E._id_20E1._id_0054[1] );
+    anim._id_A47D = gettime() + randomintrange( 25000, 35000 );
+    self _meth_8250( "face angle", self._id_0B3E._id_20E1.angles[1] );
     _id_B370( var_0, var_1, var_2 );
 }
 
 _id_B371( var_0, var_1, var_2 )
 {
-    var_3 = _func_0102( self );
+    var_3 = isagent( self );
 
     if ( !var_3 )
     {
@@ -514,7 +514,7 @@ _id_B371( var_0, var_1, var_2 )
 
     if ( !var_3 )
     {
-        self _meth_83E4();
+        self startragdoll();
         wait 0.1;
     }
 
@@ -539,7 +539,7 @@ _id_43BD()
     _id_0694::_id_2389();
     self notify( "terminate_ai_threads" );
 
-    if ( _func_0102( self ) )
+    if ( isagent( self ) )
         return;
 
     var_0 = 3;
@@ -568,7 +568,7 @@ _id_DB9C( var_0, var_1, var_2, var_3 )
     if ( self._id_0492 == "juggernaut" )
         return 0;
 
-    if ( _id_06BB::_id_10A0B() )
+    if ( scripts\common\utility::_id_10A0B() )
         return 1;
 
     return 0;
@@ -576,12 +576,12 @@ _id_DB9C( var_0, var_1, var_2, var_3 )
 
 _id_DBA7( var_0, var_1, var_2, var_3 )
 {
-    if ( isdefined( self._id_0138 ) && isai( self._id_006E ) )
+    if ( isdefined( self._id_0138 ) && isalive( self.attacker ) )
     {
-        if ( !_func_0117( self._id_006E ) )
+        if ( !isplayer( self.attacker ) )
             return 0;
 
-        if ( _id_06BB::_id_69A5( self._id_0138 ) != "melee" )
+        if ( scripts\common\utility::_id_69A5( self._id_0138 ) != "melee" )
             return 0;
 
         return 1;
@@ -595,7 +595,7 @@ _id_DB97( var_0, var_1, var_2, var_3 )
     if ( self._id_0120 == "prone" )
         return 0;
 
-    if ( !isdefined( self._id_2D6A ) && _id_06BB::_id_10A0B() )
+    if ( !isdefined( self._id_2D6A ) && scripts\common\utility::_id_10A0B() )
         return 0;
 
     if ( gettime() < anim._id_A47D && !istrue( self._id_5E5B ) )
@@ -611,12 +611,12 @@ _id_DB97( var_0, var_1, var_2, var_3 )
     if ( !isdefined( var_4 ) || !isdefined( var_4._id_CCAF ) )
         return 0;
 
-    if ( abs( _func_000B( var_4._id_0054[1] - self._id_0054[1] ) ) > 30 )
+    if ( abs( _func_000B( var_4.angles[1] - self.angles[1] ) ) > 30 )
         return 0;
 
     if ( isdefined( self._id_CCCA ) )
     {
-        if ( _func_01B6( 1 ) > self._id_CCCA )
+        if ( randomfloat( 1 ) > self._id_CCCA )
             return 0;
     }
 
@@ -643,7 +643,7 @@ _id_DBB4( var_0, var_1, var_2, var_3 )
 {
     var_4 = self._id_013E;
 
-    if ( !isdefined( var_4 ) || _func_036F( var_4 ) )
+    if ( !isdefined( var_4 ) || isnullweapon( var_4 ) )
         return 0;
 
     if ( self._id_0168 )
@@ -661,19 +661,19 @@ _id_DBB4( var_0, var_1, var_2, var_3 )
     if ( self._id_013D > 500 )
         return 1;
 
-    if ( self._id_0DB6._id_A222 == "run" && !_id_8757( self._id_006E, 275 ) )
+    if ( self._id_0DB6._id_A222 == "run" && !_id_8757( self.attacker, 275 ) )
     {
-        if ( _func_01B8( 100 ) < 65 )
+        if ( randomint( 100 ) < 65 )
             return 0;
     }
 
-    if ( scripts\anim\utility_common::issharedfuncdefined( var_4 ) && self._id_027F < self._id_013D )
+    if ( scripts\anim\utility_common::_id_8A2A( var_4 ) && self.maxhealth < self._id_013D )
         return 1;
 
-    if ( scripts\anim\utility_common::_id_8A14( var_4 ) && _id_8757( self._id_006E, 512 ) )
+    if ( scripts\anim\utility_common::_id_8A14( var_4 ) && _id_8757( self.attacker, 512 ) )
         return 1;
 
-    if ( var_4._id_0084 == "iw7_devastator" && _id_06BB::_id_8AEB( var_4 ) )
+    if ( var_4.basename == "iw7_devastator" && scripts\common\utility::_id_8AEB( var_4 ) )
         return 1;
 
     return 0;
@@ -684,7 +684,7 @@ _id_E8DB()
     self _meth_83F6( "voice_bchatter_1_3d" );
     self _meth_83F6( "voice_air_3d" );
     _id_08C8::_id_4A78( 0 );
-    self stoplookat();
+    self stoploopsound();
 }
 
 _id_2E51()
@@ -710,13 +710,13 @@ _id_2E51()
         if ( var_2 == "normal" )
             continue;
 
-        if ( _func_0121( var_2, "_both" ) )
+        if ( issubstr( var_2, "_both" ) )
             var_2 = "dmg_both";
 
-        self _meth_8373( var_3, var_2 + "_stopfx" );
+        self setscriptablepartstate( var_3, var_2 + "_stopfx" );
     }
 
-    self _meth_8373( "torso_overload_fx", "normal" );
+    self setscriptablepartstate( "torso_overload_fx", "normal" );
 }
 
 _id_2E52()
@@ -734,16 +734,16 @@ _id_2E52()
 
     foreach ( var_2, var_1 in self._id_0B3E._id_CF17 )
     {
-        if ( _func_0121( var_2, "dmg_fx" ) )
-            self _meth_8373( var_2, "stopfx" );
+        if ( issubstr( var_2, "dmg_fx" ) )
+            self setscriptablepartstate( var_2, "stopfx" );
     }
 
-    self _meth_8373( "torso_overload_fx", "normal" );
+    self setscriptablepartstate( "torso_overload_fx", "normal" );
 }
 
 _id_35E1( var_0, var_1, var_2 )
 {
-    var_3 = _func_0130( self._id_04B7 );
+    var_3 = length( self._id_04B7 );
     var_4 = _id_08C8::_id_68DB();
     var_5 = _func_03A1( var_4, var_3 );
     var_6 = [];
@@ -752,15 +752,15 @@ _id_35E1( var_0, var_1, var_2 )
     if ( var_6.size == 0 )
         return _id_0009::_id_1C55( var_1, "default" );
 
-    return var_6[_func_01B8( var_6.size )];
+    return var_6[randomint( var_6.size )];
 }
 
 _id_35BA( var_0, var_1, var_2 )
 {
-    if ( _id_077B::_id_42ED( "head", "neck" ) )
+    if ( scripts\engine\utility::_id_42ED( "head", "neck" ) )
         return _id_0009::_id_1C55( var_1, "head" );
 
-    if ( _id_077B::_id_42ED( "torso_upper", "torso_lower", "left_arm_upper", "right_arm_upper", "neck" ) )
+    if ( scripts\engine\utility::_id_42ED( "torso_upper", "torso_lower", "left_arm_upper", "right_arm_upper", "neck" ) )
         return _id_0009::_id_1C55( var_1, "torso" );
 
     return _id_0009::_id_1C55( var_1, "default" );
@@ -775,7 +775,7 @@ _id_35B4( var_0, var_1, var_2 )
         case "cover_exposed":
             return _id_0009::_id_1C55( var_1, "exposed" );
         case "cover_crouch":
-            if ( _id_077B::_id_42ED( "head", "neck" ) && ( self._id_013F > 135 || self._id_013F <= -45 ) )
+            if ( scripts\engine\utility::_id_42ED( "head", "neck" ) && ( self._id_013F > 135 || self._id_013F <= -45 ) )
                 return _id_0009::_id_1C55( var_1, "crouch_head" );
 
             if ( self._id_013F > -45 && self._id_013F <= 45 )
@@ -787,7 +787,7 @@ _id_35B4( var_0, var_1, var_2 )
                 return _id_0009::_id_1C55( var_1, "right_stand" );
             else
             {
-                if ( _id_077B::_id_42ED( "head", "neck" ) )
+                if ( scripts\engine\utility::_id_42ED( "head", "neck" ) )
                     return _id_0009::_id_1C55( var_1, "right_crouch_head" );
 
                 return _id_0009::_id_1C55( var_1, "right_crouch_default" );
@@ -807,29 +807,29 @@ _id_360C( var_0, var_1, var_2 )
     if ( scripts\anim\utility_common::_id_8ABB() )
         return _id_360E( var_0, var_1, var_2 );
 
-    if ( isdefined( self._id_006E ) && self _meth_83C2( self._id_006E ) )
+    if ( isdefined( self.attacker ) && self _meth_83C2( self.attacker ) )
         return _id_360D( var_0, var_1, var_2 );
 
     var_3 = [];
 
-    if ( _id_077B::_id_42ED( "torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_lower", "right_leg_lower" ) )
+    if ( scripts\engine\utility::_id_42ED( "torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_lower", "right_leg_lower" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "lower_body" );
-    else if ( _id_077B::_id_42ED( "head", "helmet" ) )
+    else if ( scripts\engine\utility::_id_42ED( "head", "helmet" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "head" );
-    else if ( _id_077B::_id_42ED( "neck" ) )
+    else if ( scripts\engine\utility::_id_42ED( "neck" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "neck" );
-    else if ( _id_077B::_id_42ED( "torso_upper", "left_arm_upper" ) )
+    else if ( scripts\engine\utility::_id_42ED( "torso_upper", "left_arm_upper" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "left_shoulder" );
 
-    if ( _id_077B::_id_42ED( "torso_upper" ) )
+    if ( scripts\engine\utility::_id_42ED( "torso_upper" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "torso_upper" );
 
     if ( self._id_013F > 135 || self._id_013F <= -135 )
     {
-        if ( _id_077B::_id_42ED( "neck", "head", "helmet" ) )
+        if ( scripts\engine\utility::_id_42ED( "neck", "head", "helmet" ) )
             var_3[var_3.size] = _id_0009::_id_1C55( var_1, "torso_2" );
 
-        if ( _id_077B::_id_42ED( "torso_upper" ) )
+        if ( scripts\engine\utility::_id_42ED( "torso_upper" ) )
             var_3[var_3.size] = _id_0009::_id_1C55( var_1, "torso_2" );
     }
     else if ( self._id_013F > -45 && self._id_013F <= 45 )
@@ -837,13 +837,13 @@ _id_360C( var_0, var_1, var_2 )
 
     var_4 = var_3.size > 0;
 
-    if ( !var_4 || _func_01B8( 100 ) < 15 )
+    if ( !var_4 || randomint( 100 ) < 15 )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "default" );
 
-    if ( _func_01B8( 100 ) < 10 && _id_5B83() )
+    if ( randomint( 100 ) < 10 && _id_5B83() )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "default_firing" );
 
-    return var_3[_func_01B8( var_3.size )];
+    return var_3[randomint( var_3.size )];
 }
 
 _id_35D5( var_0, var_1, var_2 )
@@ -851,7 +851,7 @@ _id_35D5( var_0, var_1, var_2 )
     var_3 = 0;
     var_4 = self._id_013E;
 
-    if ( !_func_036F( var_4 ) && _func_0121( var_4._id_0084, "molotov" ) )
+    if ( !isnullweapon( var_4 ) && issubstr( var_4.basename, "molotov" ) )
     {
         if ( _id_0009::_id_1C4A( var_1, "molotov_f" ) )
             var_3 = 1;
@@ -895,10 +895,10 @@ _id_35D5( var_0, var_1, var_2 )
         var_11 = self _meth_8215( var_10 );
         var_12 = 0;
 
-        if ( _id_077B::_id_0F4F() )
-            var_12 = _func_02A2( self._id_02EA, var_11, 0 );
+        if ( scripts\engine\utility::_id_0F4F() )
+            var_12 = _func_02A2( self.origin, var_11, 0 );
         else
-            var_12 = self _meth_822B( self._id_02EA, var_11, 0, 1 );
+            var_12 = self _meth_822B( self.origin, var_11, 0, 1 );
 
         if ( !var_12 )
         {
@@ -923,16 +923,16 @@ _id_360E( var_0, var_1, var_2 )
     if ( abs( self._id_013F ) < 110 )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "pistol_2" );
 
-    if ( _id_077B::_id_42ED( "torso_upper", "torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower" ) )
+    if ( scripts\engine\utility::_id_42ED( "torso_upper", "torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "pistol_torso_upper" );
 
-    if ( !_id_077B::_id_42ED( "head", "neck", "helmet", "left_foot", "right_foot", "left_hand", "right_hand", "gun" ) && _func_01B8( 2 ) == 0 )
+    if ( !scripts\engine\utility::_id_42ED( "head", "neck", "helmet", "left_foot", "right_foot", "left_hand", "right_hand", "gun" ) && randomint( 2 ) == 0 )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "pistol_upper_body" );
 
-    if ( var_3.size == 0 || _id_077B::_id_42ED( "torso_lower", "torso_upper", "neck", "head", "helmet", "right_arm_upper", "left_arm_upper" ) )
+    if ( var_3.size == 0 || scripts\engine\utility::_id_42ED( "torso_lower", "torso_upper", "neck", "head", "helmet", "right_arm_upper", "left_arm_upper" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "pistol_default" );
 
-    return var_3[_func_01B8( var_3.size )];
+    return var_3[randomint( var_3.size )];
 }
 
 _id_360D( var_0, var_1, var_2 )
@@ -972,10 +972,10 @@ _id_B1EC( var_0, var_1 )
     var_5 = anglestoup( var_3 );
     var_6 = anglestoright( var_3 );
     var_2 = var_2 + var_4 * -8.5 + var_5 * 5 + var_6 * 0;
-    var_7 = _id_077A::_id_0B4C( var_2 + ( 0, 0, 30 ), var_2 - ( 0, 0, 100 ), 0, undefined );
+    var_7 = scripts\engine\trace::_bullet_trace( var_2 + ( 0, 0, 30 ), var_2 - ( 0, 0, 100 ), 0, undefined );
 
     if ( var_7["normal"][2] > 0.9 )
-        _func_0196( level._id_0BA3["deathfx_bloodpool_generic"], var_2 );
+        playfx( level._effect["deathfx_bloodpool_generic"], var_2 );
 }
 
 _id_1081F( var_0 )
@@ -985,7 +985,7 @@ _id_1081F( var_0 )
     if ( !isdefined( self ) )
         return;
 
-    if ( _func_0102( self ) )
+    if ( isagent( self ) )
         return;
 
     if ( isdefined( self ) )
@@ -995,12 +995,12 @@ _id_1081F( var_0 )
         self [[ self._id_5D95 ]]();
 
     if ( isdefined( self ) && !isdefined( self._id_A5A7 ) )
-        self _meth_83E4();
+        self startragdoll();
 }
 
 _id_E717()
 {
-    if ( _func_0102( self ) )
+    if ( isagent( self ) )
         return;
 
     if ( isdefined( self ) )
@@ -1010,7 +1010,7 @@ _id_E717()
         self [[ self._id_5D95 ]]();
 
     if ( isdefined( self ) && !isdefined( self._id_A5A7 ) )
-        self _meth_83E4();
+        self startragdoll();
 }
 
 _id_4CD7()
@@ -1025,18 +1025,18 @@ _id_4CD7()
         return;
 
     var_0 = 10;
-    var_1 = _id_06BB::_id_69A5( self._id_0138 );
+    var_1 = scripts\common\utility::_id_69A5( self._id_0138 );
 
-    if ( isdefined( self._id_006E ) && self._id_006E == level._id_030F && var_1 == "melee" )
+    if ( isdefined( self.attacker ) && self.attacker == level.player && var_1 == "melee" )
         var_0 = 5;
 
     var_2 = self._id_013D;
 
     if ( var_1 == "bullet" || isdefined( self._id_0138 ) && self._id_0138 == "MOD_FIRE" )
-        var_2 = _func_0148( var_2, 300 );
+        var_2 = min( var_2, 300 );
 
     var_3 = var_0 * var_2;
-    var_4 = _func_0147( 0.3, self._id_0136[2] );
+    var_4 = max( 0.3, self._id_0136[2] );
     var_5 = ( self._id_0136[0], self._id_0136[1], var_4 );
 
     if ( isdefined( self._id_BF3B ) )
@@ -1057,11 +1057,11 @@ _id_4CD7()
 
     if ( isdefined( self._id_4C1B ) && self._id_4C1B == 1 )
     {
-        var_5 = _func_025A( ( self._id_0136[0], self._id_0136[1], self._id_0136[2] ) );
+        var_5 = vectornormalize( ( self._id_0136[0], self._id_0136[1], self._id_0136[2] ) );
         var_5 = var_5 * 1500;
     }
 
-    self startragdoll( var_6, var_5 );
+    self _meth_83E5( var_6, var_5 );
     wait 0.05;
 }
 
@@ -1070,7 +1070,7 @@ _id_DB6A( var_0 )
     if ( !istrue( self._id_DB68 ) )
         return 0;
 
-    if ( isdefined( self._id_0251 ) && isdefined( self._id_0251._id_045B ) && isdefined( self._id_045B ) && self._id_0251._id_045B == self._id_045B )
+    if ( isdefined( self._id_0251 ) && isdefined( self._id_0251.team ) && isdefined( self.team ) && self._id_0251.team == self.team )
         return 0;
 
     if ( isdefined( self._id_77F5 ) && !var_0 )
@@ -1085,7 +1085,7 @@ _id_DB6A( var_0 )
     if ( isdefined( self._id_0137 ) && self._id_0137 == "helmet" )
         return 1;
 
-    if ( var_0 && _func_01B8( 2 ) == 0 )
+    if ( var_0 && randomint( 2 ) == 0 )
         return 1;
 
     return 0;
@@ -1099,13 +1099,13 @@ _id_DB69( var_0 )
     if ( self._id_0492 != "soldier" && self._id_0492 != "juggernaut" )
         return 0;
 
-    if ( self._id_0138 == "MOD_MELEE" && _func_01B8( 3 ) < 2 )
+    if ( self._id_0138 == "MOD_MELEE" && randomint( 3 ) < 2 )
         return 0;
 
     if ( isdefined( self._id_0137 ) && ( self._id_0137 == "helmet" || self._id_0137 == "head" ) )
         return 1;
 
-    if ( var_0 && _func_01B8( 3 ) == 0 )
+    if ( var_0 && randomint( 3 ) == 0 )
         return 1;
 
     return 0;
@@ -1127,7 +1127,7 @@ _id_77F2()
     if ( isdefined( self._id_77F3 ) )
     {
         var_1 = anglestoforward( self gettagangles( "j_head" ) );
-        _func_0196( self._id_77F3, var_0, var_1 );
+        playfx( self._id_77F3, var_0, var_1 );
     }
 
     _func_019E( "bullet_small_flesh_helmet_npc", var_0 );
@@ -1142,24 +1142,24 @@ _id_77F2()
     }
 
     var_3 = _func_00BF( self._id_75AA, 0 );
-    var_4 = _func_0205( "script_model", self._id_02EA + ( 0, 0, 64 ) );
-    var_4 setmode( self._id_75AA );
-    var_4._id_02EA = self gettagorigin( var_3 );
-    var_4._id_0054 = self gettagangles( var_3 );
+    var_4 = spawn( "script_model", self.origin + ( 0, 0, 64 ) );
+    var_4 setmodel( self._id_75AA );
+    var_4.origin = self gettagorigin( var_3 );
+    var_4.angles = self gettagangles( var_3 );
     waitframe();
 
     if ( isdefined( self._id_0136 ) && self._id_0136 != ( 0, 0, 0 ) )
         var_4 thread _id_77F1( self._id_0136 );
     else
-        var_4 thread _id_77F1( ( _func_01B7( -0.25, 0.25 ), _func_01B7( -0.25, 0.25 ), _func_01B7( -1, 1 ) ) );
+        var_4 thread _id_77F1( ( randomfloatrange( -0.25, 0.25 ), randomfloatrange( -0.25, 0.25 ), randomfloatrange( -1, 1 ) ) );
 
-    self destroy( self._id_75AA, "" );
+    self detach( self._id_75AA, "" );
     self._id_75AA = undefined;
     self _meth_81AB( "j_helmet" );
 
-    if ( isai( self ) && _id_DBB6() )
+    if ( isalive( self ) && _id_DBB6() )
     {
-        _func_0197( level._id_6082["helmet_break_suffocate"], self, "j_head" );
+        playfxontag( level._id_6082["helmet_break_suffocate"], self, "j_head" );
 
         if ( self._id_1C90 != "zero_gravity_space" && self._id_1C90 != "zero_gravity" )
             self._id_43B9 = 1;
@@ -1171,12 +1171,12 @@ _id_77F2()
 _id_77F1( var_0 )
 {
     var_1 = var_0;
-    var_1 = var_1 * _func_01B7( 2000, 4000 );
+    var_1 = var_1 * randomfloatrange( 2000, 4000 );
     var_2 = var_1[0];
     var_3 = var_1[1];
-    var_4 = _func_01B7( 1500, 3000 );
-    var_5 = self._id_02EA + ( _func_01B7( -1, 1 ), _func_01B7( -1, 1 ), _func_01B7( -1, 1 ) ) * 5;
-    self painvisionon( var_5, ( var_2, var_3, var_4 ) );
+    var_4 = randomfloatrange( 1500, 3000 );
+    var_5 = self.origin + ( randomfloatrange( -1, 1 ), randomfloatrange( -1, 1 ), randomfloatrange( -1, 1 ) ) * 5;
+    self hashed_0x8253( var_5, ( var_2, var_3, var_4 ) );
     wait 60;
 
     for (;;)
@@ -1184,20 +1184,20 @@ _id_77F1( var_0 )
         if ( !isdefined( self ) )
             return;
 
-        if ( distancesquared( self._id_02EA, level._id_030F._id_02EA ) > 262144 )
+        if ( distancesquared( self.origin, level.player.origin ) > 262144 )
             break;
 
         wait 30;
     }
 
-    self _meth_809A();
+    self delete();
 }
 
 _id_6D82()
 {
     var_0 = undefined;
 
-    if ( _func_01B8( 11 ) >= 1 )
+    if ( randomint( 11 ) >= 1 )
         return var_0;
 
     return var_0;
@@ -1224,10 +1224,10 @@ _id_DB67( var_0 )
 
     var_1 = self._id_013E;
 
-    if ( _func_036F( var_1 ) )
+    if ( isnullweapon( var_1 ) )
         return 0;
 
-    if ( self._id_0138 == "MOD_PROJECTILE" && var_1._id_00DE == "turret" && istrue( level._id_4A9B ) )
+    if ( self._id_0138 == "MOD_PROJECTILE" && var_1.classname == "turret" && istrue( level._id_4A9B ) )
         return 0;
 
     return 0;
@@ -1240,8 +1240,8 @@ _id_75F8()
 
     var_0 = self gettagorigin( "j_head" );
     var_1 = anglestoforward( self gettagangles( "j_head" ) );
-    _func_0197( level._id_6082["human_gib_head"], self, "j_head" );
-    self destroy( self._id_75F6, "" );
+    playfxontag( level._id_6082["human_gib_head"], self, "j_head" );
+    self detach( self._id_75F6, "" );
     self._id_75F6 = undefined;
 }
 
@@ -1252,10 +1252,10 @@ _id_4072( var_0, var_1 )
 
 _id_9D6F( var_0, var_1 )
 {
-    var_2 = _func_0257( var_1, var_0 );
+    var_2 = vectordot( var_1, var_0 );
     var_3 = cos( 60 );
 
-    if ( spawnstruct( var_2 ) < spawnstruct( var_3 ) )
+    if ( _func_0214( var_2 ) < _func_0214( var_3 ) )
     {
         if ( _id_4072( var_0, var_1 ) > 0 )
             return 1;
@@ -1270,31 +1270,31 @@ _id_9D6F( var_0, var_1 )
 
 _id_AC5D( var_0 )
 {
-    var_1 = _func_034C( "iw7_knife_upgrade1" );
-    var_2 = _func_034C( "iw7_sonic" );
+    var_1 = makeweapon( "iw7_knife_upgrade1" );
+    var_2 = makeweapon( "iw7_sonic" );
 
-    if ( _id_06BB::_id_87D2( var_1 ) || _id_06BB::_id_87D2( var_2 ) )
+    if ( scripts\common\utility::_id_87D2( var_1 ) || scripts\common\utility::_id_87D2( var_2 ) )
         return;
 
-    if ( var_0 || self._id_0138 == "MOD_MELEE" && isdefined( self._id_006E ) && !_id_06BB::_id_10A0C() && !_id_06BB::_id_87D2( var_2 ) )
+    if ( var_0 || self._id_0138 == "MOD_MELEE" && isdefined( self.attacker ) && !scripts\common\utility::_id_10A0C() && !scripts\common\utility::_id_87D2( var_2 ) )
     {
-        if ( _id_077B::_id_0F4F() )
+        if ( scripts\engine\utility::_id_0F4F() )
         {
-            var_3 = self._id_006E._id_02EA - self._id_02EA;
-            var_4 = _func_0305( var_3, self._id_0054 );
+            var_3 = self.attacker.origin - self.origin;
+            var_4 = _func_0305( var_3, self.angles );
             self _meth_8250( "face angle 3d", var_4 );
         }
         else
         {
             var_5 = self._id_0136;
-            var_6 = anglestoforward( self._id_0054 );
-            var_7 = _func_025A( ( var_5[0], var_5[1], 0 ) );
-            var_8 = _func_025A( ( var_6[0], var_6[1], 0 ) );
+            var_6 = anglestoforward( self.angles );
+            var_7 = vectornormalize( ( var_5[0], var_5[1], 0 ) );
+            var_8 = vectornormalize( ( var_6[0], var_6[1], 0 ) );
             var_9 = _id_9D6F( var_8, var_7 );
             var_10 = var_9 * 90;
             var_11 = ( -1 * var_7[0], -1 * var_7[1], 0 );
-            var_12 = _func_01C2( var_11, ( 0, var_10, 0 ) );
-            var_13 = vectordot( var_12 );
+            var_12 = rotatevector( var_11, ( 0, var_10, 0 ) );
+            var_13 = _func_025C( var_12 );
             var_14 = anglestoforward( ( 0, var_13, 0 ) );
             self _meth_8250( "face angle", var_13 );
         }
@@ -1316,7 +1316,7 @@ _id_B373( var_0 )
         var_1 = "death";
     else
     {
-        if ( isdefined( self._id_013E ) && !_func_036F( self._id_013E ) )
+        if ( isdefined( self._id_013E ) && !isnullweapon( self._id_013E ) )
             var_2 = _func_00E7( self._id_013E );
 
         if ( var_0 )
@@ -1341,14 +1341,14 @@ _id_B373( var_0 )
 
 _id_DBD1()
 {
-    if ( _id_077B::_id_42ED( "head", "helmet" ) )
+    if ( scripts\engine\utility::_id_42ED( "head", "helmet" ) )
     {
-        if ( isdefined( self._id_013E ) && !_func_036F( self._id_013E ) )
+        if ( isdefined( self._id_013E ) && !isnullweapon( self._id_013E ) )
         {
-            if ( self._id_013E._id_00DE == "spread" )
+            if ( self._id_013E.classname == "spread" )
                 return 0;
 
-            if ( _func_0121( self._id_013E._id_0084, "molotov" ) )
+            if ( issubstr( self._id_013E.basename, "molotov" ) )
                 return 0;
         }
 
@@ -1381,7 +1381,7 @@ _id_8757( var_0, var_1 )
     if ( !isdefined( var_0 ) )
         return 0;
 
-    if ( distance( self._id_02EA, var_0._id_02EA ) > var_1 )
+    if ( distance( self.origin, var_0.origin ) > var_1 )
         return 0;
 
     return 1;
@@ -1419,10 +1419,10 @@ _id_DB61()
 
     if ( isdefined( self._id_0138 ) && _func_010E( self._id_0138 ) )
     {
-        if ( isdefined( self._id_0251 ) && ( _id_077B::_id_85A4( self._id_0251._id_1C90, "suicidebomber" ) || _id_077B::_id_85A4( self._id_0251._id_1C90, "suicidebomber_cp" ) ) )
+        if ( isdefined( self._id_0251 ) && ( scripts\engine\utility::is_equal( self._id_0251._id_1C90, "suicidebomber" ) || scripts\engine\utility::is_equal( self._id_0251._id_1C90, "suicidebomber_cp" ) ) )
             return 1;
 
-        if ( isdefined( self._id_013E ) && _id_077B::_id_85A4( self._id_013E._id_0084, "suicide_vest" ) )
+        if ( isdefined( self._id_013E ) && scripts\engine\utility::is_equal( self._id_013E.basename, "suicide_vest" ) )
             return 1;
     }
 
@@ -1434,19 +1434,19 @@ _id_4CAB( var_0 )
     var_1 = var_0 gettagorigin( "j_spine4" );
 
     if ( isdefined( var_0._id_0136 ) && var_0._id_0136 != ( 0, 0, 0 ) )
-        _func_0196( level._id_6082["human_gib_fullbody"], var_1, var_0._id_0136 );
+        playfx( level._id_6082["human_gib_fullbody"], var_1, var_0._id_0136 );
     else
-        _func_0196( level._id_6082["human_gib_fullbody"], var_1, ( 1, 0, 0 ) );
+        playfx( level._id_6082["human_gib_fullbody"], var_1, ( 1, 0, 0 ) );
 
-    if ( _func_0102( var_0 ) )
-        var_0 _meth_827B( "gib_fullbody" );
+    if ( isagent( var_0 ) )
+        var_0 playsound( "gib_fullbody" );
     else
     {
-        var_2 = _func_0205( "script_origin", var_1 );
-        var_2 _meth_827B( "gib_fullbody", "sounddone" );
+        var_2 = spawn( "script_origin", var_1 );
+        var_2 playsound( "gib_fullbody", "sounddone" );
         var_2 waittill( "sounddone" );
         wait 0.1;
-        var_2 _meth_809A();
+        var_2 delete();
     }
 }
 
@@ -1467,7 +1467,7 @@ _id_DBAA( var_0, var_1, var_2, var_3 )
         if ( var_4._id_048F == "shield" )
             return 1;
 
-        var_5 = var_4._id_0084;
+        var_5 = var_4.basename;
 
         if ( var_5 == "iw7_mauler_c8hack" || var_5 == "iw7_c6hack_melee" || var_5 == "iw7_c6worker_fists" )
             return 1;
@@ -1483,12 +1483,12 @@ _id_4E51( var_0, var_1, var_2, var_3 )
 {
     _id_E8DB();
     scripts\anim\shared::_id_4FE9();
-    var_4 = _func_025A( self._id_02EA - level._id_030F._id_02EA + ( 0, 0, 30 ) );
+    var_4 = vectornormalize( self.origin - level.player.origin + ( 0, 0, 30 ) );
     var_5 = self._id_013E;
-    var_6 = var_5._id_0084;
+    var_6 = var_5.basename;
 
     if ( var_6 == "iw7_c6hack_melee" || var_6 == "iw7_c6worker_fists" )
-        var_4 = _func_025A( self._id_02EA - level._id_030F._id_02EA + ( 0, 0, 30 ) + anglestoright( level._id_030F._id_0054 ) * 50 );
+        var_4 = vectornormalize( self.origin - level.player.origin + ( 0, 0, 30 ) + anglestoright( level.player.angles ) * 50 );
 
     self _meth_82E7( _id_0009::_id_1C45(), 0 );
 
@@ -1498,41 +1498,41 @@ _id_4E51( var_0, var_1, var_2, var_3 )
     if ( !isdefined( self ) )
         return;
 
-    self startragdoll( "torso_upper", var_4 * 2400 );
+    self _meth_83E5( "torso_upper", var_4 * 2400 );
 
     if ( isdefined( self._id_0492 ) && self._id_0492 == "c6" )
-        self _meth_827B( "shield_death_c6_1" );
+        self playsound( "shield_death_c6_1" );
 
-    level._id_030F playloopsound( "damage_heavy" );
-    earthquake( 0.5, 1, level._id_030F._id_02EA, 100 );
-    level._id_030F _id_077B::_id_4684( 0.25, ::_meth_83F3, "damage_heavy" );
+    level.player _meth_8277( "damage_heavy" );
+    earthquake( 0.5, 1, level.player.origin, 100 );
+    level.player scripts\engine\utility::_id_4684( 0.25, ::_meth_83F3, "damage_heavy" );
     wait 1;
     _id_43BD();
 }
 
 _id_6BEA()
 {
-    if ( _id_077B::_id_42ED( "head", "helmet", "neck" ) )
+    if ( scripts\engine\utility::_id_42ED( "head", "helmet", "neck" ) )
     {
         var_0 = "head";
         return var_0;
     }
-    else if ( _id_077B::_id_42ED( "right_arm_upper", "right_arm_lower", "right_hand" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_arm_upper", "right_arm_lower", "right_hand" ) )
     {
         var_0 = "midbody";
         return var_0;
     }
-    else if ( _id_077B::_id_42ED( "left_arm_upper", "left_arm_lower", "left_hand" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_arm_upper", "left_arm_lower", "left_hand" ) )
     {
         var_0 = "midbody";
         return var_0;
     }
-    else if ( _id_077B::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot" ) )
     {
         var_0 = "lowerbody_l";
         return var_0;
     }
-    else if ( _id_077B::_id_42ED( "right_leg_upper", "right_leg_lower", "right_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_leg_upper", "right_leg_lower", "right_foot" ) )
     {
         var_0 = "lowerbody_r";
         return var_0;
@@ -1546,7 +1546,7 @@ _id_6BEA()
 
 _id_6BE9()
 {
-    if ( _id_077B::_id_42ED( "head", "helmet", "neck" ) )
+    if ( scripts\engine\utility::_id_42ED( "head", "helmet", "neck" ) )
     {
         var_0 = "head";
         return var_0;
@@ -1567,7 +1567,7 @@ getweapondeathanimdamagetype()
     if ( var_2 != "md" && var_2 != "lg" && var_2 != "xl" )
         var_2 = "md";
 
-    if ( var_2 == "xl" && _func_01B8( 10 ) > 2 )
+    if ( var_2 == "xl" && randomint( 10 ) > 2 )
         var_2 = "lg";
 
     var_0 = var_0 + var_2;
@@ -1589,9 +1589,9 @@ _id_35C3( var_0, var_1, var_2 )
         var_3 = getweapondeathanimdamagetype();
     }
 
-    var_5 = anglestoforward( self._id_0054 );
-    var_6 = _func_025A( ( self._id_0136[0], self._id_0136[1], 0 ) );
-    var_7 = _func_025A( ( var_5[0], var_5[1], 0 ) );
+    var_5 = anglestoforward( self.angles );
+    var_6 = vectornormalize( ( self._id_0136[0], self._id_0136[1], 0 ) );
+    var_7 = vectornormalize( ( var_5[0], var_5[1], 0 ) );
     var_8 = _id_9D6F( var_7, var_6 );
     var_9 = undefined;
 
@@ -1614,9 +1614,9 @@ _id_35C3( var_0, var_1, var_2 )
 
 choosesimpledirectionaldeathanim( var_0, var_1, var_2 )
 {
-    var_3 = anglestoforward( self._id_0054 );
-    var_4 = _func_025A( ( self._id_0136[0], self._id_0136[1], 0 ) );
-    var_5 = _func_025A( ( var_3[0], var_3[1], 0 ) );
+    var_3 = anglestoforward( self.angles );
+    var_4 = vectornormalize( ( self._id_0136[0], self._id_0136[1], 0 ) );
+    var_5 = vectornormalize( ( var_3[0], var_3[1], 0 ) );
     var_6 = _id_9D6F( var_5, var_4 );
     var_7 = undefined;
 
@@ -1637,9 +1637,9 @@ _id_35C2( var_0, var_1, var_2 )
 {
     var_3 = _id_6BE9();
     var_4 = getweapondeathanimdamagetype();
-    var_5 = anglestoforward( self._id_0054 );
-    var_6 = _func_025A( ( self._id_0136[0], self._id_0136[1], 0 ) );
-    var_7 = _func_025A( ( var_5[0], var_5[1], 0 ) );
+    var_5 = anglestoforward( self.angles );
+    var_6 = vectornormalize( ( self._id_0136[0], self._id_0136[1], 0 ) );
+    var_7 = vectornormalize( ( var_5[0], var_5[1], 0 ) );
     var_8 = _id_9D6F( var_7, var_6 );
     var_9 = undefined;
 
@@ -1675,7 +1675,7 @@ _id_35C4( var_0, var_1, var_2 )
 
 _id_DB57( var_0, var_1 )
 {
-    if ( _id_06BB::_id_87BA() )
+    if ( scripts\common\utility::_id_87BA() )
         return 0;
 
     if ( !isdefined( self._id_04CE ) || !scripts\anim\weaponlist::_id_FF04() || istrue( self._id_0151 ) )
@@ -1695,16 +1695,16 @@ _id_DB57( var_0, var_1 )
     else
         var_2 = 0.15;
 
-    return _func_01B6( 1 ) < var_2;
+    return randomfloat( 1 ) < var_2;
 }
 
 _id_35C6( var_0, var_1, var_2 )
 {
     var_3 = "lowerbody";
     var_4 = "_lg";
-    var_5 = anglestoforward( self._id_0054 );
-    var_6 = _func_025A( ( self._id_0136[0], self._id_0136[1], 0 ) );
-    var_7 = _func_025A( ( var_5[0], var_5[1], 0 ) );
+    var_5 = anglestoforward( self.angles );
+    var_6 = vectornormalize( ( self._id_0136[0], self._id_0136[1], 0 ) );
+    var_7 = vectornormalize( ( var_5[0], var_5[1], 0 ) );
     var_8 = _id_9D6F( var_7, var_6 );
     var_9 = undefined;
 

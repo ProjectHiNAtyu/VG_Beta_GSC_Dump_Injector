@@ -7,14 +7,14 @@ _id_AB46()
     {
         level waittill( "connected", var_0 );
 
-        if ( !isdefined( var_0._id_0309["startedMapSelect"] ) )
-            var_0._id_0309["startedMapSelect"] = 0;
+        if ( !isdefined( var_0.pers["startedMapSelect"] ) )
+            var_0.pers["startedMapSelect"] = 0;
     }
 }
 
 _id_3146( var_0, var_1 )
 {
-    if ( !_id_099B::_id_8DAE( var_0._id_EA0F ) )
+    if ( !scripts\cp_mp\utility\killstreak_utility::_id_8DAE( var_0._id_EA0F ) )
     {
         if ( isdefined( level._id_8DC9 ) && level._id_8DC9 > 0 )
         {
@@ -22,8 +22,8 @@ _id_3146( var_0, var_1 )
             {
                 var_2 = level._id_8DC9 - ( level._id_70F9 - level._id_7E95 );
 
-                if ( _id_099D::_id_8A10( "hud", "showErrorMessage" ) )
-                    self [[ _id_099D::_id_6D05( "hud", "showErrorMessage" ) ]]( "KILLSTREAKS/UNAVAILABLE_FOR_N", var_2 );
+                if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "hud", "showErrorMessage" ) )
+                    self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "hud", "showErrorMessage" ) ]]( "KILLSTREAKS/UNAVAILABLE_FOR_N", var_2 );
 
                 return 0;
             }
@@ -36,8 +36,8 @@ _id_3146( var_0, var_1 )
 
         if ( isdefined( var_3 ) )
         {
-            if ( _id_099D::_id_8A10( "hud", "showErrorMessage" ) )
-                self [[ _id_099D::_id_6D05( "hud", "showErrorMessage" ) ]]( var_3 );
+            if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "hud", "showErrorMessage" ) )
+                self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "hud", "showErrorMessage" ) ]]( var_3 );
 
             return 0;
         }
@@ -49,7 +49,7 @@ _id_3146( var_0, var_1 )
 _id_AA9E( var_0 )
 {
     var_0._id_87DE = 1;
-    var_0._id_02F2._id_87DE = 1;
+    var_0.owner._id_87DE = 1;
 
     switch ( var_0._id_EA0F )
     {
@@ -59,7 +59,7 @@ _id_AA9E( var_0 )
             break;
     }
 
-    var_0._id_02F2 _id_06BB::_id_1507( 0 );
+    var_0.owner scripts\common\utility::_id_1507( 0 );
 }
 
 monitor_binoculars( var_0 )
@@ -72,15 +72,15 @@ monitor_binoculars( var_0 )
 
     for (;;)
     {
-        if ( _func_0121( _func_034D( self getcurrentweapon() ), "binoculars" ) )
+        if ( issubstr( getcompleteweaponname( self getcurrentweapon() ), "binoculars" ) )
         {
-            if ( self player_recoilscaleon() >= 0.3 )
+            if ( self playerads() >= 0.3 )
             {
                 if ( !self _meth_876B( "ui_binoculars" ) )
-                    self _meth_82F6( "ui_binoculars", 1 );
+                    self setclientomnvar( "ui_binoculars", 1 );
             }
             else if ( self _meth_876B( "ui_binoculars" ) )
-                self _meth_82F6( "ui_binoculars", 0 );
+                self setclientomnvar( "ui_binoculars", 0 );
         }
 
         wait 0.1;
@@ -92,7 +92,7 @@ clear_binoculars_on_death()
     level endon( "game_ended" );
     self endon( "deploy_fired" );
     self waittill( "death_or_disconnect" );
-    self _meth_82F6( "ui_binoculars", 0 );
+    self setclientomnvar( "ui_binoculars", 0 );
 }
 
 clear_binoculars_on_match_end()
@@ -100,23 +100,23 @@ clear_binoculars_on_match_end()
     self endon( "death_or_disconnect" );
     self endon( "deploy_fired" );
     level waittill( "game_ended" );
-    self _meth_82F6( "ui_binoculars", 0 );
+    self setclientomnvar( "ui_binoculars", 0 );
 }
 
 _id_AA9D( var_0, var_1 )
 {
     var_0._id_87DE = 0;
-    var_0._id_02F2._id_87DE = 0;
+    var_0.owner._id_87DE = 0;
 
     switch ( var_0._id_EA0F )
     {
         case "precision_airstrike":
         case "toma_strike":
-            self _meth_82F6( "ui_binoculars", 0 );
+            self setclientomnvar( "ui_binoculars", 0 );
             break;
     }
 
-    var_0._id_02F2 _id_06BB::_id_1507( 1 );
+    var_0.owner scripts\common\utility::_id_1507( 1 );
 }
 
 _id_E9FD()
@@ -147,7 +147,7 @@ _id_10AF7( var_0, var_1 )
     self endon( "death" );
     var_0 endon( "gesture_deploy_ended" );
     self waittill( "cancel_all_killstreak_deployments" );
-    self takeallweapons( var_1 );
+    self takeweapon( var_1 );
 }
 
 _id_EA01( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
@@ -156,7 +156,7 @@ _id_EA01( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
         return 0;
 
     _id_AA9E( var_0 );
-    var_7 = _id_077B::_id_F07F( istrue( var_2 ), ::_id_1097C, undefined );
+    var_7 = scripts\engine\utility::ter_op( istrue( var_2 ), ::_id_1097C, undefined );
     var_8 = _id_EC34( var_1, var_0, var_7, var_3, var_4, var_5, var_6 );
 
     if ( !istrue( var_8 ) )
@@ -187,9 +187,9 @@ _id_EA00( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
         return 0;
     }
 
-    _id_06BB::allow_equipment( 0 );
+    scripts\common\utility::allow_equipment( 0 );
     var_9 = _id_10AC6( var_0, var_2, var_1, var_5 );
-    _id_06BB::allow_equipment( 1 );
+    scripts\common\utility::allow_equipment( 1 );
     _id_AA9D( var_0, var_9 );
     return istrue( var_9 );
 }
@@ -203,7 +203,7 @@ _id_EA02( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     if ( isdefined( var_5 ) )
         var_7 = var_5;
 
-    var_8 = _func_034C( var_7 );
+    var_8 = makeweapon( var_7 );
     var_9 = 1.6;
 
     if ( var_7 == "ks_remote_nuke_mp" )
@@ -214,21 +214,21 @@ _id_EA02( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
     _id_AA9E( var_0 );
     thread _id_EA04( var_0 );
-    _id_099B::_id_E727( var_0._id_EA0F, 0.75 );
-    _id_06BB::_id_1531( 0 );
-    _id_06BB::_id_1526( 0 );
-    _id_06BB::_id_1562( 0 );
-    _id_06BB::_id_152C( 0 );
-    _id_06BB::allow_equipment( 0 );
+    scripts\cp_mp\utility\killstreak_utility::_id_E727( var_0._id_EA0F, 0.75 );
+    scripts\common\utility::_id_1531( 0 );
+    scripts\common\utility::_id_1526( 0 );
+    scripts\common\utility::_id_1562( 0 );
+    scripts\common\utility::_id_152C( 0 );
+    scripts\common\utility::allow_equipment( 0 );
     var_10 = _id_EC34( var_8, var_0, ::_id_1097C, var_1, var_2, var_3, var_4 );
 
-    if ( isdefined( self ) && _id_099C::_giveweapon() )
+    if ( isdefined( self ) && scripts\cp_mp\utility\player_utility::_id_0C14() )
     {
-        _id_06BB::_id_1531( 1 );
-        _id_06BB::_id_1526( 1 );
-        _id_06BB::_id_1562( 1 );
-        _id_06BB::_id_152C( 1 );
-        _id_06BB::allow_equipment( 1 );
+        scripts\common\utility::_id_1531( 1 );
+        scripts\common\utility::_id_1526( 1 );
+        scripts\common\utility::_id_1562( 1 );
+        scripts\common\utility::_id_152C( 1 );
+        scripts\common\utility::allow_equipment( 1 );
     }
 
     if ( !istrue( var_10 ) )
@@ -236,7 +236,7 @@ _id_EA02( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
         _id_AA9D( var_0, 0 );
 
         if ( isdefined( self ) )
-            _id_099B::_id_E93E( 0, 1 );
+            scripts\cp_mp\utility\killstreak_utility::_id_E93E( 0, 1 );
 
         return 0;
     }
@@ -250,10 +250,10 @@ _id_EA04( var_0 )
 {
     self endon( "death_or_disconnect" );
     level endon( "game_ended" );
-    _id_076B::_id_7A8B( 0.5 );
+    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause( 0.5 );
 
-    if ( _id_099D::_id_8A10( "sound", "playKillstreakDeployDialog" ) )
-        [[ _id_099D::_id_6D05( "sound", "playKillstreakDeployDialog" ) ]]( self, var_0._id_EA0F );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "sound", "playKillstreakDeployDialog" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "sound", "playKillstreakDeployDialog" ) ]]( self, var_0._id_EA0F );
 }
 
 _id_E9FF( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
@@ -266,7 +266,7 @@ _id_E9FF( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     if ( isdefined( var_1 ) )
         var_7 = var_1;
 
-    var_0._id_47CD = _func_034C( var_7 );
+    var_0._id_47CD = makeweapon( var_7 );
     var_8 = var_0._id_47CD;
 
     if ( !_id_3146( var_0, var_8 ) )
@@ -295,29 +295,29 @@ _id_EC34( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     if ( self hasweapon( var_0 ) )
         return 0;
 
-    if ( _func_034D( self getcurrentweapon() ) == "iw8_lm_dblmg_mp" )
+    if ( getcompleteweaponname( self getcurrentweapon() ) == "iw8_lm_dblmg_mp" )
     {
         self notify( "switched_from_minigun" );
 
-        while ( _func_034D( self getcurrentweapon() ) == "iw8_lm_dblmg_mp" )
+        while ( getcompleteweaponname( self getcurrentweapon() ) == "iw8_lm_dblmg_mp" )
             waitframe();
     }
 
     if ( !isdefined( var_7 ) )
         var_7 = 1;
 
-    _id_099A::_id_0BEB( var_0, 0, 0, var_7 );
+    scripts\cp_mp\utility\inventory_utility::_giveweapon( var_0, 0, 0, var_7 );
     var_8 = _id_2FB7( var_1, var_3 );
 
     if ( !istrue( var_8 ) )
     {
-        _id_099A::_id_0D6A( var_0 );
+        scripts\cp_mp\utility\inventory_utility::_takeweapon( var_0 );
         return 0;
     }
 
     thread _id_10AF8( var_1, var_0 );
     thread _id_10B25( var_1, var_0 );
-    var_9 = _id_099A::_id_4D21( var_0 );
+    var_9 = scripts\cp_mp\utility\inventory_utility::_id_4D21( var_0 );
     var_1 notify( "deploy_weapon_switch_ended" );
 
     if ( isdefined( var_4 ) )
@@ -328,7 +328,7 @@ _id_EC34( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     if ( !var_9 )
         var_2 = undefined;
 
-    if ( !_id_099C::_giveweapon() )
+    if ( !scripts\cp_mp\utility\player_utility::_id_0C14() )
         return 0;
 
     thread _id_3859( var_9, var_1, var_0, var_2, var_5, var_6 );
@@ -356,8 +356,8 @@ _id_10AF8( var_0, var_1 )
     var_0 endon( "deploy_weapon_switch_ended" );
     self waittill( "cancel_all_killstreak_deployments" );
 
-    if ( _id_099A::_id_8A6D( var_1 ) )
-        _id_099A::_id_0DE3( var_1 );
+    if ( scripts\cp_mp\utility\inventory_utility::_id_8A6D( var_1 ) )
+        scripts\cp_mp\utility\inventory_utility::_id_0DE3( var_1 );
 }
 
 _id_10B25( var_0, var_1 )
@@ -368,12 +368,12 @@ _id_10B25( var_0, var_1 )
     var_0 endon( "deploy_weapon_switch_ended" );
     self waittill( "melee_swipe_start" );
 
-    if ( _id_099A::_id_8A6D( var_1 ) )
-        _id_099A::_id_0DE3( var_1 );
+    if ( scripts\cp_mp\utility\inventory_utility::_id_8A6D( var_1 ) )
+        scripts\cp_mp\utility\inventory_utility::_id_0DE3( var_1 );
     else
     {
-        _id_099A::_id_0D6A( var_1 );
-        thread _id_099A::_id_4D21( self._id_8FAB );
+        scripts\cp_mp\utility\inventory_utility::_takeweapon( var_1 );
+        thread scripts\cp_mp\utility\inventory_utility::_id_4D21( self._id_8FAB );
     }
 }
 
@@ -438,15 +438,15 @@ _id_10AC4( var_0, var_1, var_2 )
     if ( !isdefined( var_2 ) )
         var_2 = 1;
 
-    _id_099C::_id_D8C9( var_0._id_EA0F );
+    scripts\cp_mp\utility\player_utility::_id_D8C9( var_0._id_EA0F );
 
-    if ( _id_099D::_id_8A10( "game", "objectiveUnPinPlayer" ) && isdefined( self._id_B0D2 ) )
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "game", "objectiveUnPinPlayer" ) && isdefined( self._id_B0D2 ) )
     {
-        [[ _id_099D::_id_6D05( "game", "objectiveUnPinPlayer" ) ]]( self._id_B0D2, self );
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "game", "objectiveUnPinPlayer" ) ]]( self._id_B0D2, self );
         self._id_C35E = 1;
     }
 
-    _id_099C::_id_0BC4( 1 );
+    scripts\cp_mp\utility\player_utility::_id_0BC4( 1 );
     thread _id_F942();
 
     if ( istrue( var_2 ) )
@@ -454,11 +454,11 @@ _id_10AC4( var_0, var_1, var_2 )
 
     thread _id_10C2F( var_0 );
     thread _id_10C2E();
-    var_3 = _id_077B::_id_108A7( var_1, "death", "weapon_change", "cancel_all_killstreak_deployments" );
+    var_3 = scripts\engine\utility::_id_108A7( var_1, "death", "weapon_change", "cancel_all_killstreak_deployments" );
     self notify( "ks_freeze_end" );
-    _id_099C::_id_0BC4( 0 );
+    scripts\cp_mp\utility\player_utility::_id_0BC4( 0 );
 
-    if ( !isdefined( var_3 ) || var_3 != "timeout" || !self _meth_81D7() || self isonground() )
+    if ( !isdefined( var_3 ) || var_3 != "timeout" || !self isonground() || self isonladder() )
     {
         var_0 notify( "killstreak_finished_with_deploy_weapon" );
         self notify( "cancel_remote_sequence" );
@@ -474,22 +474,22 @@ _id_F942()
     self endon( "disconnect" );
     self endon( "ks_freeze_end" );
     level waittill( "round_switch" );
-    _id_099C::_id_0BC4( 0 );
+    scripts\cp_mp\utility\player_utility::_id_0BC4( 0 );
 }
 
 _id_E73B( var_0 )
 {
     self endon( "disconnect" );
-    var_1 = _id_077B::_id_108A5( var_0, "cancel_remote_sequence" );
+    var_1 = scripts\engine\utility::_id_108A5( var_0, "cancel_remote_sequence" );
 
     if ( !isdefined( var_1 ) || var_1 == "cancel_remote_sequence" )
         return;
 
-    if ( _id_099C::_giveweapon() )
+    if ( scripts\cp_mp\utility\player_utility::_id_0C14() )
     {
-        level thread _id_0999::_id_58A7( self, 1, 0.3 );
-        var_1 = _id_077B::_id_108A5( 0.7, "death" );
-        level thread _id_0999::_id_58A7( self, 0, 0.3 );
+        level thread scripts\cp_mp\utility\game_utility::_id_58A7( self, 1, 0.3 );
+        var_1 = scripts\engine\utility::_id_108A5( 0.7, "death" );
+        level thread scripts\cp_mp\utility\game_utility::_id_58A7( self, 0, 0.3 );
     }
 }
 
@@ -498,8 +498,8 @@ _id_10C2F( var_0 )
     level endon( "game_ended" );
     self endon( "disconnect" );
     var_0 waittill( "killstreak_finished_with_deploy_weapon" );
-    _id_099B::_id_E93E( 0.325 );
-    _id_099C::_id_396C();
+    scripts\cp_mp\utility\killstreak_utility::_id_E93E( 0.325 );
+    scripts\cp_mp\utility\player_utility::_id_396C();
 }
 
 _id_10C2E()
@@ -511,7 +511,7 @@ _id_10C2E()
 
     for (;;)
     {
-        if ( !self _meth_81D7() )
+        if ( !self isonground() )
         {
             _id_E9FD();
             break;
@@ -526,7 +526,7 @@ _id_1097C( var_0 )
     level endon( "game_ended" );
     self endon( "disconnect" );
     self endon( "death" );
-    _id_077B::_id_10886( var_0, "killstreak_finished_with_deploy_weapon", self, "cancel_all_killstreak_deployments", self, "weapon_change" );
+    scripts\engine\utility::_id_10886( var_0, "killstreak_finished_with_deploy_weapon", self, "cancel_all_killstreak_deployments", self, "weapon_change" );
 }
 
 _id_3859( var_0, var_1, var_2, var_3, var_4, var_5 )
@@ -540,36 +540,36 @@ _id_3859( var_0, var_1, var_2, var_3, var_4, var_5 )
 
     if ( self hasweapon( var_2 ) )
     {
-        var_6 = _id_099B::_id_89E0( var_2._id_0084 );
-        var_7 = _id_099B::_id_8904( var_1._id_EA0F );
-        _id_06BB::_id_152C( 0 );
-        _id_06BB::allow_equipment( 0 );
+        var_6 = scripts\cp_mp\utility\killstreak_utility::_id_89E0( var_2.basename );
+        var_7 = scripts\cp_mp\utility\killstreak_utility::_id_8904( var_1._id_EA0F );
+        scripts\common\utility::_id_152C( 0 );
+        scripts\common\utility::allow_equipment( 0 );
 
         if ( var_6 )
         {
-            _id_06BB::_id_152B( 0 );
-            _id_06BB::_id_1531( 0 );
-            _id_099C::_id_0BC5( 1 );
+            scripts\common\utility::_id_152B( 0 );
+            scripts\common\utility::_id_1531( 0 );
+            scripts\cp_mp\utility\player_utility::_id_0BC5( 1 );
         }
         else if ( istrue( var_7 ) )
-            _id_06BB::_id_152B( 0 );
+            scripts\common\utility::_id_152B( 0 );
 
         if ( isdefined( var_4 ) )
             self [[ var_4 ]]( var_1, var_0, var_2 );
         else
             getrankforxp( var_2 );
 
-        _id_06BB::_id_152C( 1 );
-        _id_06BB::allow_equipment( 1 );
+        scripts\common\utility::_id_152C( 1 );
+        scripts\common\utility::allow_equipment( 1 );
 
         if ( var_6 )
         {
-            _id_06BB::_id_152B( 1 );
-            _id_06BB::_id_1531( 1 );
-            _id_099C::_id_0BC5( 0 );
+            scripts\common\utility::_id_152B( 1 );
+            scripts\common\utility::_id_1531( 1 );
+            scripts\cp_mp\utility\player_utility::_id_0BC5( 0 );
         }
         else if ( istrue( var_7 ) )
-            _id_06BB::_id_152B( 1 );
+            scripts\common\utility::_id_152B( 1 );
     }
 
     if ( isdefined( var_5 ) )
@@ -578,11 +578,11 @@ _id_3859( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 getrankforxp( var_0 )
 {
-    _id_099A::_id_6CD8( var_0 );
+    scripts\cp_mp\utility\inventory_utility::_id_6CD8( var_0 );
     var_1 = self getcurrentweapon();
 
-    if ( var_1._id_0084 == "none" )
-        _id_099A::_id_5EB7();
+    if ( var_1.basename == "none" )
+        scripts\cp_mp\utility\inventory_utility::_id_5EB7();
 }
 
 _id_3147( var_0, var_1 )
@@ -590,22 +590,22 @@ _id_3147( var_0, var_1 )
     if ( self hasweapon( var_1 ) )
         return "KILLSTREAKS/CANNOT_BE_USED";
 
-    if ( self isonground() )
+    if ( self isonladder() )
         return "KILLSTREAKS/CANNOT_BE_USED";
 
     if ( self _meth_81CD() )
         return "KILLSTREAKS/CANNOT_BE_USED";
 
-    if ( !_id_06BB::_id_870A() )
+    if ( !scripts\common\utility::_id_870A() )
         return "KILLSTREAKS/CANNOT_BE_USED";
 
     if ( istrue( self._id_161E ) )
         return "KILLSTREAKS/CANNOT_BE_USED";
 
-    if ( ( _id_099B::_id_89EE( var_0._id_EA0F ) || _id_099B::_id_8904( var_0._id_EA0F ) ) && !self _meth_81D7() )
+    if ( ( scripts\cp_mp\utility\killstreak_utility::_id_89EE( var_0._id_EA0F ) || scripts\cp_mp\utility\killstreak_utility::_id_8904( var_0._id_EA0F ) ) && !self isonground() )
         return "KILLSTREAKS/CANNOT_BE_USED";
 
-    if ( _id_099C::_id_8AB5() )
+    if ( scripts\cp_mp\utility\player_utility::_id_8AB5() )
         return "KILLSTREAKS/CANNOT_BE_USED";
 
     return;
@@ -623,7 +623,7 @@ _id_EA03( var_0 )
         return 0;
     }
 
-    var_1 = _func_020F();
+    var_1 = spawnstruct();
     var_1 childthread _id_EA06( self, var_0 );
     var_1 childthread _id_EA05( self, var_0 );
     var_1 waittill( "race_start" );

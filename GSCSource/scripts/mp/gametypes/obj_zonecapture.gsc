@@ -19,7 +19,7 @@ _id_D88B( var_0, var_1, var_2, var_3 )
     var_4 = _id_07AD::_id_404C( "neutral", var_4, var_1, ( 0, 0, 0 ), var_5, var_3 );
     var_4 _id_07AD::_id_4AB0();
 
-    if ( _id_0A69::_id_6A43() == "koth" || _id_0A69::_id_6A43() == "patrol" )
+    if ( scripts\mp\utility\game::getgametype() == "koth" || scripts\mp\utility\game::getgametype() == "patrol" )
     {
         for ( var_6 = 0; var_6 < var_4._id_1042E.size; var_6++ )
             var_4._id_1042E[var_6] hide();
@@ -30,7 +30,7 @@ _id_D88B( var_0, var_1, var_2, var_3 )
     var_4 _id_07AD::_id_3144( 1 );
     var_4._id_37CF = level._id_110DE * 1000;
 
-    if ( _id_0A69::_id_6A43() != "patrol" )
+    if ( scripts\mp\utility\game::getgametype() != "patrol" )
         var_4 _id_07AD::_id_B0D4();
 
     if ( isdefined( var_0._id_A8CE ) )
@@ -45,32 +45,32 @@ _id_D88B( var_0, var_1, var_2, var_3 )
 
     var_4._id_7C71 = "hardpoint";
 
-    if ( isdefined( var_4._id_047A._id_0457 ) && _id_0A69::_id_6A43() == "koth" )
-        var_4 thread _id_1CEC( var_4._id_047A._id_0457, var_4._id_047A._id_CD8C );
-    else if ( isdefined( var_4._id_047A._id_0457 ) && _id_0A69::_id_6A43() == "patrol" )
-        var_4 thread _id_1CF9( var_4._id_047A._id_0457, var_4._id_047A._id_CD8C );
+    if ( isdefined( var_4._id_047A.target ) && scripts\mp\utility\game::getgametype() == "koth" )
+        var_4 thread _id_1CEC( var_4._id_047A.target, var_4._id_047A._id_CD8C );
+    else if ( isdefined( var_4._id_047A.target ) && scripts\mp\utility\game::getgametype() == "patrol" )
+        var_4 thread _id_1CF9( var_4._id_047A.target, var_4._id_047A._id_CD8C );
 
     return var_4;
 }
 
 _id_BA4D( var_0 )
 {
-    if ( level._id_9AA7 == "mp_parkour" )
+    if ( level.mapname == "mp_parkour" )
     {
         if ( var_0._id_CD8C == "1" )
-            var_0._id_02EA = var_0._id_02EA + ( 0, 0, 135 );
+            var_0.origin = var_0.origin + ( 0, 0, 135 );
     }
 
-    if ( level._id_9AA7 == "mp_fallen" )
+    if ( level.mapname == "mp_fallen" )
     {
         if ( var_0._id_CD8C == "3" )
-            var_0._id_02EA = var_0._id_02EA - ( 0, 0, 50 );
+            var_0.origin = var_0.origin - ( 0, 0, 50 );
     }
 
-    if ( level._id_9AA7 == "mp_junk" )
+    if ( level.mapname == "mp_junk" )
     {
         if ( var_0._id_CD8C == "4" )
-            var_0._id_02EA = var_0._id_02EA - ( 0, 7, 0 );
+            var_0.origin = var_0.origin - ( 0, 7, 0 );
     }
 
     return var_0;
@@ -132,7 +132,7 @@ _id_1CF9( var_0, var_1 )
 
 _id_FC28( var_0 )
 {
-    if ( _id_0A69::_id_6A43() != "koth" && _id_0A69::_id_6A43() != "patrol" )
+    if ( scripts\mp\utility\game::getgametype() != "koth" && scripts\mp\utility\game::getgametype() != "patrol" )
         return;
 
     self notify( "updateChevrons" );
@@ -144,7 +144,7 @@ _id_FC28( var_0 )
     foreach ( var_2 in self._id_354D )
     {
         for ( var_3 = 0; var_3 < var_2._id_A763; var_3++ )
-            var_2 _meth_8373( "chevron_" + var_3, var_0 );
+            var_2 setscriptablepartstate( "chevron_" + var_3, var_0 );
     }
 }
 
@@ -177,13 +177,13 @@ _id_0EDC()
     var_2[var_2.size] = _id_07EE::_id_110C( var_0 - ( 0, 0, 2048 ), var_1, 4096, "axis", undefined, undefined, undefined, undefined, undefined, 1 );
     self._id_4329 = var_2;
 
-    if ( _id_0A69::_id_6A43() == "koth" || _id_0A69::_id_6A43() == "grnd" )
+    if ( scripts\mp\utility\game::getgametype() == "koth" || scripts\mp\utility\game::getgametype() == "grnd" )
     {
         self._id_7D1A = 1;
         self._id_1637 = 1;
         level thread scripts\mp\gametypes\koth::_id_1F9C();
     }
-    else if ( _id_0A69::_id_6A43() == "patrol" )
+    else if ( scripts\mp\utility\game::getgametype() == "patrol" )
     {
         self._id_7D1A = 1;
         self._id_1637 = 1;
@@ -192,7 +192,7 @@ _id_0EDC()
     else
     {
         self._id_E869 = ::_id_110DA;
-        _id_07D0::_id_FB94( self._id_A8F5, self._id_1042E[0]._id_02EA + ( 0, 0, 70 ) );
+        _id_07D0::_id_FB94( self._id_A8F5, self._id_1042E[0].origin + ( 0, 0, 70 ) );
         level thread scripts\mp\gametypes\hq::_id_1F9C();
     }
 }
@@ -218,19 +218,19 @@ _id_4371()
 
     self._id_4329 = undefined;
 
-    foreach ( var_4 in level._id_B758 )
+    foreach ( var_4 in level.players )
         _id_07D0::_id_A8BC( self._id_A8F5, var_4 );
 
-    self._id_047A _id_077B::_id_F5DD();
+    self._id_047A scripts\engine\utility::_id_F5DD();
     thread _id_1086D();
     _id_07AD::_id_C2F2( 1, 0 );
 
-    if ( _id_0A69::_id_6A43() == "hq" )
+    if ( scripts\mp\utility\game::getgametype() == "hq" )
     {
-        self._id_1042E[0] _meth_827B( "mp_hq_deactivate_sfx" );
+        self._id_1042E[0] playsound( "mp_hq_deactivate_sfx" );
         thread _id_07CF::_id_75FA( self._id_8F96 );
         self._id_1042E[0] _meth_82CA( "iw8_mp_military_hq_crate_close" );
-        level._id_110CD._id_1042E[0] stoplookat();
+        level._id_110CD._id_1042E[0] stoploopsound();
     }
 
     level._id_CBFB = 0;
@@ -246,20 +246,20 @@ _id_110EA()
         thread _id_7AF9( level._id_110E4 );
 
     level thread _id_743C( var_0 );
-    _id_07B7::_id_1084D( level._id_110E4 );
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( level._id_110E4 );
 }
 
 _id_7AF9( var_0 )
 {
     level endon( "game_ended" );
 
-    if ( _id_0A69::_id_6A43() == "hq" )
+    if ( scripts\mp\utility\game::getgametype() == "hq" )
         level endon( "zone_destroyed" );
 
     if ( int( var_0 ) > 12 )
     {
         var_1 = var_0 - 12;
-        _id_07B7::_id_1084D( var_1 );
+        scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( var_1 );
 
         foreach ( var_3 in level._id_EF86 )
             level _id_0A64::_id_E772( "hp_move_soon", var_3 );
@@ -273,14 +273,14 @@ _id_743C( var_0 )
     level endon( "disconnect" );
     level endon( "zone_captured" );
     level waittill( "host_migration_begin" );
-    _func_01E4( "ui_objective_timer_stopped", 1 );
-    var_1 = _id_07B7::_id_10956();
-    _func_01E4( "ui_objective_timer_stopped", 0 );
+    setomnvar( "ui_objective_timer_stopped", 1 );
+    var_1 = scripts\mp\hostmigration::_id_10956();
+    setomnvar( "ui_objective_timer_stopped", 0 );
 
     if ( var_1 > 0 )
-        _func_01E4( "ui_hardpoint_timer", level._id_110E2 + var_1 );
+        setomnvar( "ui_hardpoint_timer", level._id_110E2 + var_1 );
     else
-        _func_01E4( "ui_hardpoint_timer", level._id_110E2 );
+        setomnvar( "ui_hardpoint_timer", level._id_110E2 );
 }
 
 _id_96E1( var_0, var_1 )
@@ -310,7 +310,7 @@ _id_96E1( var_0, var_1 )
         var_8 = var_5 / var_4;
         _id_07D0::_id_A8B1( self._id_BF0B, 1 );
         _id_07D0::_id_A8A1( self._id_BF0B, var_8 );
-        var_5 = _func_0147( var_5 - var_3, 1 );
+        var_5 = max( var_5 - var_3, 1 );
         waitframe();
     }
 
@@ -334,7 +334,7 @@ _id_F400()
 
     for (;;)
     {
-        foreach ( var_1 in level._id_B758 )
+        foreach ( var_1 in level.players )
         {
             if ( var_1 _meth_81EF( level._id_110CD._id_047A ) )
             {
@@ -351,9 +351,9 @@ _id_F400()
 
 _id_3865()
 {
-    level _id_077B::_id_1087E( "game_ended", "zone_moved" );
+    level scripts\engine\utility::waittill_any_2( "game_ended", "zone_moved" );
 
-    foreach ( var_1 in level._id_B758 )
+    foreach ( var_1 in level.players )
         var_1 _meth_80CB( 0 );
 }
 
@@ -361,7 +361,7 @@ _id_110D6( var_0 )
 {
     _id_07D0::_id_A8A1( self._id_A8F5, 0 );
     _id_07D0::_id_A8B1( self._id_A8F5, 0 );
-    var_1 = var_0._id_045B;
+    var_1 = var_0.team;
     var_2 = gettime();
     var_3 = [];
     var_4 = getarraykeys( self._id_F393[var_1] );
@@ -371,10 +371,10 @@ _id_110D6( var_0 )
 
     if ( level._id_FE81 && !level._id_FE7F && self._id_AD9B != "neutral" )
     {
-        _func_01E4( "ui_hq_ownerteam", 0 );
+        setomnvar( "ui_hq_ownerteam", 0 );
         level notify( "zone_destroyed" );
 
-        foreach ( var_7 in level._id_B758 )
+        foreach ( var_7 in level.players )
             _id_07D0::_id_A8BC( self._id_A8F5, var_7 );
 
         level._id_110CD thread _id_1086D();
@@ -386,12 +386,12 @@ _id_110D6( var_0 )
 
             foreach ( var_11 in var_9 )
             {
-                var_7 = self._id_1D06[var_1][var_11]._id_030F;
+                var_7 = self._id_1D06[var_1][var_11].player;
 
-                if ( isdefined( var_7._id_02F2 ) )
-                    var_7 = var_7._id_02F2;
+                if ( isdefined( var_7.owner ) )
+                    var_7 = var_7.owner;
 
-                if ( !_func_0117( var_7 ) )
+                if ( !isplayer( var_7 ) )
                     continue;
 
                 var_7 _id_0793::_id_AA6E();
@@ -400,22 +400,22 @@ _id_110D6( var_0 )
 
         level thread scripts\mp\gametypes\hq::_id_6EB4( var_3, var_2, var_1, undefined, var_0 );
 
-        if ( _id_0A69::_id_6A43() == "hq" )
+        if ( scripts\mp\utility\game::getgametype() == "hq" )
         {
-            level _id_0A64::_id_E772( "hp_captured_friendly", var_0._id_045B );
+            level _id_0A64::_id_E772( "hp_captured_friendly", var_0.team );
             level _id_0A64::_id_E772( "hp_owned_lost", self._id_AD9B );
             return;
         }
 
-        level _id_0A64::_id_E772( "hp_captured_friendly", var_0._id_045B );
+        level _id_0A64::_id_E772( "hp_captured_friendly", var_0.team );
         level _id_0A64::_id_E772( "hp_captured_enemy", self._id_AD9B );
         return;
     }
     else
     {
-        if ( _id_0A69::_id_6A43() == "hq" )
+        if ( scripts\mp\utility\game::getgametype() == "hq" )
         {
-            var_13 = _id_0A7C::_id_6DAC( var_1, "players" );
+            var_13 = scripts\mp\utility\teams::_id_6DAC( var_1, "players" );
 
             foreach ( var_7 in var_13 )
             {
@@ -425,19 +425,19 @@ _id_110D6( var_0 )
         }
 
         var_16 = _id_07AD::_id_6BE3();
-        var_17 = _id_0A69::_id_6BC3( var_1 )[0];
+        var_17 = scripts\mp\utility\game::_id_6BC3( var_1 )[0];
         _id_07AD::_id_D62D( var_1 );
 
         if ( level._id_FE81 && !level._id_FE7F )
         {
-            _func_01E4( "ui_hq_ownerteam", scripts\mp\gametypes\hq::_id_6A8B( self._id_AD9B ) );
-            _func_01E4( "ui_hq_num_alive", _id_0A7C::_id_6DAC( self._id_AD9B, "aliveCount" ) );
+            setomnvar( "ui_hq_ownerteam", scripts\mp\gametypes\hq::_id_6A8B( self._id_AD9B ) );
+            setomnvar( "ui_hq_num_alive", scripts\mp\utility\teams::_id_6DAC( self._id_AD9B, "aliveCount" ) );
         }
 
-        if ( _id_0A69::_id_6A43() == "hq" && !level._id_FE7F )
+        if ( scripts\mp\utility\game::getgametype() == "hq" && !level._id_FE7F )
         {
-            var_18 = _id_07AE::_id_0BE6( var_1 );
-            var_19 = _id_07AE::_id_0BE6( var_17 );
+            var_18 = scripts\mp\gamescore::_id_0BE6( var_1 );
+            var_19 = scripts\mp\gamescore::_id_0BE6( var_17 );
 
             if ( var_18 > var_19 )
                 level._id_CBFB = 1;
@@ -445,14 +445,14 @@ _id_110D6( var_0 )
             _id_117B( var_1 );
         }
         else if ( level._id_AF5C )
-            level _id_07AC::_id_AF63();
+            level scripts\mp\gamelogic::pausetimer();
 
         level._id_FED2 = 0;
         var_20 = 0;
         level._id_110CD _id_07AD::_id_D60F( level._id_7C30, level._id_7C27 );
         level scripts\mp\gametypes\koth::_id_FD22( var_1, 0 );
 
-        if ( _id_0A69::_id_6A43() == "hq" && !level._id_FE7F )
+        if ( scripts\mp\utility\game::getgametype() == "hq" && !level._id_FE7F )
         {
             thread _id_0A77::_id_BCFE( var_1, var_17, undefined, undefined, "mp_dom_flag_captured", undefined, var_0 );
             thread _id_07CF::_id_75F9();
@@ -460,7 +460,7 @@ _id_110D6( var_0 )
 
         if ( !isdefined( level._id_8F8B ) || level._id_8F8B != var_1 )
         {
-            if ( _id_0A69::_id_6A43() == "hq" && !level._id_FE7F )
+            if ( scripts\mp\utility\game::getgametype() == "hq" && !level._id_FE7F )
             {
                 if ( isdefined( level._id_8E24 && level._id_8E24 == 0 ) )
                     level._id_46AF = 4;
@@ -469,7 +469,7 @@ _id_110D6( var_0 )
 
                 level thread _id_468B( var_1, var_17 );
             }
-            else if ( _id_0A69::_id_6A43() == "patrol" )
+            else if ( scripts\mp\utility\game::getgametype() == "patrol" )
             {
                 level _id_0A64::_id_E772( "hp_captured_friendly", var_1, "patrol", undefined, undefined, undefined, 1 );
                 level _id_0A64::_id_E772( "hp_captured_enemy", var_17, "patrol", undefined, undefined, undefined, 1 );
@@ -480,25 +480,25 @@ _id_110D6( var_0 )
                 level _id_0A64::_id_E772( "hp_captured_enemy", var_17 );
             }
 
-            if ( _id_0A69::_id_6A43() == "koth" || _id_0A69::_id_6A43() == "grnd" )
+            if ( scripts\mp\utility\game::getgametype() == "koth" || scripts\mp\utility\game::getgametype() == "grnd" )
                 level thread scripts\mp\gametypes\koth::_id_6EB4( var_3, var_2, var_1, level._id_8F8B, var_0 );
             else
                 level thread scripts\mp\gametypes\hq::_id_6EB4( var_3, var_2, var_1, level._id_8F8B, var_0 );
         }
 
-        foreach ( var_22 in level._id_B758 )
+        foreach ( var_22 in level.players )
             _id_DC8A( var_1, var_22 );
 
         level._id_110CD thread _id_FC28( var_1 );
 
-        if ( _id_0A69::_id_6A43() == "hq" )
+        if ( scripts\mp\utility\game::getgametype() == "hq" )
         {
-            level._id_110CD._id_1042E[0] stoplookat();
+            level._id_110CD._id_1042E[0] stoploopsound();
             level._id_110CD._id_1042E[0] _meth_82CA( "iw8_mp_military_hq_crate_open_idle" );
 
             if ( !level._id_FE7F )
             {
-                var_24 = _id_0A7C::_id_6DAC( var_1, "players" );
+                var_24 = scripts\mp\utility\teams::_id_6DAC( var_1, "players" );
 
                 foreach ( var_7 in var_24 )
                     var_7 thread scripts\mp\gametypes\hq::_id_DCDB();
@@ -521,7 +521,7 @@ _id_1086D()
 
 _id_110D7( var_0 )
 {
-    if ( _id_0A69::_id_6A43() == "hq" && !level._id_FE7F )
+    if ( scripts\mp\utility\game::getgametype() == "hq" && !level._id_FE7F )
     {
         var_1 = _id_07AD::_id_6BE3();
 
@@ -531,9 +531,9 @@ _id_110D7( var_0 )
         if ( !istrue( var_0._id_F90B ) || !istrue( self._id_E578 ) )
         {
             if ( var_1 == "neutral" )
-                var_0 _meth_82F6( "ui_objective_state", 1 );
+                var_0 setclientomnvar( "ui_objective_state", 1 );
             else
-                var_0 _meth_82F6( "ui_objective_state", 2 );
+                var_0 setclientomnvar( "ui_objective_state", 2 );
 
             var_0._id_F90B = 1;
         }
@@ -552,7 +552,7 @@ _id_110D7( var_0 )
 
     if ( level._id_110DE > 0 )
     {
-        self._id_BC44 = _id_0A69::_id_6BC3( var_0._id_045B )[0];
+        self._id_BC44 = scripts\mp\utility\game::_id_6BC3( var_0.team )[0];
         _id_07AD::_id_D60F( level._id_7C54, level._id_7C6C );
     }
 }
@@ -566,13 +566,13 @@ _id_110D9( var_0, var_1, var_2, var_3 )
     else if ( var_4 != "neutral" && self._id_37D2 != var_4 )
         _id_117B( var_4, 1 );
     else if ( level._id_AF5C )
-        level _id_07AC::_id_AF63();
+        level scripts\mp\gamelogic::pausetimer();
 
-    if ( ( _id_0A69::_id_6A43() == "hq" || _id_0A69::_id_6A43() == "arm" ) && var_1 < 1.0 && !level._id_FE7F && !level._id_609B )
+    if ( ( scripts\mp\utility\game::getgametype() == "hq" || scripts\mp\utility\game::getgametype() == "arm" ) && var_1 < 1.0 && !level._id_FE7F && !level._id_609B )
         _id_B35D( var_1, var_0 );
 
     var_4 = _id_07AD::_id_6BE3();
-    var_5 = _id_0A69::_id_6BC3( var_0 )[0];
+    var_5 = scripts\mp\utility\game::_id_6BC3( var_0 )[0];
 
     if ( var_1 > 0.05 && var_2 && !self._id_4959 )
     {
@@ -581,7 +581,7 @@ _id_110D9( var_0, var_1, var_2, var_3 )
             _id_0A64::_id_E772( "hp_capturing_friendly", var_0 );
             _id_0A64::_id_E772( "hp_capturing_enemy", var_5 );
         }
-        else if ( _id_0A69::_id_6A43() == "hq" )
+        else if ( scripts\mp\utility\game::getgametype() == "hq" )
         {
             _id_0A64::_id_E772( "hp_disabling_friendly", var_4 );
             _id_0A64::_id_E772( "hp_disabling_enemy", var_0 );
@@ -614,7 +614,7 @@ _id_B35D( var_0, var_1 )
         var_2 = "";
         var_0 = int( floor( var_0 * 10 ) );
         var_2 = "mp_dom_capturing_tick_0" + var_0;
-        self._id_1042E[0] playsoundtoplayer( var_2, var_1 );
+        self._id_1042E[0] _meth_827F( var_2, var_1 );
     }
 }
 
@@ -624,23 +624,23 @@ _id_110D8( var_0, var_1, var_2 )
 
     if ( !var_2 )
     {
-        if ( _id_0A69::_id_6A43() == "hq" )
+        if ( scripts\mp\utility\game::getgametype() == "hq" )
         {
             if ( level._id_FE7F )
             {
                 if ( level._id_AF5C )
-                    level _id_07AC::_id_C725();
+                    level scripts\mp\gamelogic::resumetimer();
             }
             else if ( var_3 != "neutral" )
                 _id_117B( var_3 );
         }
         else if ( level._id_AF5C )
-            level _id_07AC::_id_C725();
+            level scripts\mp\gamelogic::resumetimer();
     }
 
-    if ( _func_0117( var_1 ) )
+    if ( isplayer( var_1 ) )
     {
-        var_1 _meth_82F6( "ui_objective_state", 0 );
+        var_1 setclientomnvar( "ui_objective_state", 0 );
         var_1._id_F90B = undefined;
     }
 
@@ -650,7 +650,7 @@ _id_110D8( var_0, var_1, var_2 )
 
         if ( istrue( level._id_FE80 ) )
         {
-            foreach ( var_1 in level._id_B758 )
+            foreach ( var_1 in level.players )
                 level._id_110CD _id_DD00( var_1 );
         }
     }
@@ -658,7 +658,7 @@ _id_110D8( var_0, var_1, var_2 )
     {
         level._id_110CD _id_07AD::_id_D60F( level._id_7C30, level._id_7C27 );
 
-        foreach ( var_1 in level._id_B758 )
+        foreach ( var_1 in level.players )
             level._id_110CD _id_DC8A( var_3, var_1 );
     }
 }
@@ -676,7 +676,7 @@ _id_110D4()
         level._id_7AFA = "neutral";
 
         if ( level._id_AF5C )
-            level _id_07AC::_id_C725();
+            level scripts\mp\gamelogic::resumetimer();
 
         var_0 = 1;
 
@@ -705,7 +705,7 @@ _id_110D0()
     level thread scripts\mp\gametypes\koth::_id_1F9D();
 
     if ( level._id_AF5C )
-        level _id_07AC::_id_C725();
+        level scripts\mp\gamelogic::resumetimer();
 
     var_0 = level._id_110CD _id_07AD::_id_6BE3();
     level._id_110CD _id_07AD::_id_D60F( level._id_7C2D );
@@ -722,13 +722,13 @@ _id_110D0()
 
             for ( var_5 = 0; var_5 < var_4.size; var_5++ )
             {
-                var_6 = var_3[var_4[var_5]]._id_030F;
-                var_6 _meth_82F6( "ui_objective_state", 3 );
+                var_6 = var_3[var_4[var_5]].player;
+                var_6 setclientomnvar( "ui_objective_state", 3 );
             }
         }
     }
 
-    foreach ( var_6 in level._id_B758 )
+    foreach ( var_6 in level.players )
         level._id_110CD _id_DC8A( var_0, var_6 );
 
     if ( var_0 == "neutral" )
@@ -738,7 +738,7 @@ _id_110D0()
 
     foreach ( var_12 in level._id_EF86 )
     {
-        if ( _id_0A69::_id_6A43() == "patrol" )
+        if ( scripts\mp\utility\game::getgametype() == "patrol" )
         {
             _id_0A64::_id_E772( "hp_contested", var_12, "patrol", undefined, undefined, undefined, 1 );
             continue;
@@ -747,7 +747,7 @@ _id_110D0()
         _id_0A64::_id_E772( "hp_contested", var_12 );
     }
 
-    level._id_110CD thread _id_06BB::_id_F737( level._id_9B9C, "hill_contested", level._id_110CD._id_047A._id_02EA );
+    level._id_110CD thread scripts\common\utility::_id_F737( level._id_9B9C, "hill_contested", level._id_110CD._id_047A.origin );
     self._id_4959 = 1;
 }
 
@@ -756,7 +756,7 @@ _id_110D3( var_0 )
     level notify( "stop_contested_stats_thread" );
 
     if ( level._id_AF5C )
-        level _id_07AC::_id_AF63();
+        level scripts\mp\gamelogic::pausetimer();
 
     var_1 = level._id_110CD _id_07AD::_id_6BE3();
 
@@ -766,33 +766,33 @@ _id_110D3( var_0 )
 
         if ( istrue( level._id_FE80 ) )
         {
-            foreach ( var_3 in level._id_B758 )
+            foreach ( var_3 in level.players )
                 level._id_110CD _id_DD00( var_3 );
         }
 
-        level._id_110CD thread _id_06BB::_id_F737( level._id_9B9C, "hill_empty", level._id_110CD._id_047A._id_02EA );
+        level._id_110CD thread scripts\common\utility::_id_F737( level._id_9B9C, "hill_empty", level._id_110CD._id_047A.origin );
     }
     else
     {
-        if ( _id_0A69::_id_6A43() == "koth" )
+        if ( scripts\mp\utility\game::getgametype() == "koth" )
         {
 
         }
-        else if ( _id_0A69::_id_6A43() == "grnd" )
+        else if ( scripts\mp\utility\game::getgametype() == "grnd" )
         {
             _id_0A79::_id_B8DE( "mp_dropzone_captured_positive", var_1 );
-            _id_0A79::_id_B8DE( "mp_dropzone_captured_negative", _id_0A69::_id_6BC3( var_1 )[0] );
+            _id_0A79::_id_B8DE( "mp_dropzone_captured_negative", scripts\mp\utility\game::_id_6BC3( var_1 )[0] );
         }
 
         level._id_110CD _id_07AD::_id_D60F( level._id_7C30, level._id_7C27 );
 
-        foreach ( var_3 in level._id_B758 )
+        foreach ( var_3 in level.players )
             level._id_110CD _id_DC8A( var_1, var_3 );
 
-        level._id_110CD thread _id_06BB::_id_F737( level._id_9B9C, "hill_uncontested", level._id_110CD._id_047A._id_02EA );
+        level._id_110CD thread scripts\common\utility::_id_F737( level._id_9B9C, "hill_uncontested", level._id_110CD._id_047A.origin );
     }
 
-    var_7 = _id_077B::_id_F07F( var_1 == "neutral", "idle", var_1 );
+    var_7 = scripts\engine\utility::ter_op( var_1 == "neutral", "idle", var_1 );
     level._id_110CD thread _id_FC28( var_7 );
     level scripts\mp\gametypes\koth::_id_FD22( var_1, 0 );
     level._id_110CD.iscontested = 0;
@@ -806,7 +806,7 @@ _id_110DA( var_0 )
 
 _id_110DB( var_0 )
 {
-    var_0 thread _id_07E1::_id_CBF3( "defend" );
+    var_0 thread scripts\mp\rank::_id_CBF3( "defend" );
     var_0 thread _id_0788::_id_6F9C( "mode_x_defend" );
     _id_07AD::_id_D60F( level._id_7C35, level._id_7C27 );
 }
@@ -828,20 +828,20 @@ _id_117B( var_0, var_1 )
     if ( !level._id_AF5C )
         return;
 
-    var_2 = _id_07AE::_id_0BE6( var_0 );
-    var_3 = _id_07AE::_id_0BE6( _id_0A69::_id_6BC3( var_0 )[0] );
+    var_2 = scripts\mp\gamescore::_id_0BE6( var_0 );
+    var_3 = scripts\mp\gamescore::_id_0BE6( scripts\mp\utility\game::_id_6BC3( var_0 )[0] );
 
     if ( istrue( var_1 ) )
     {
         if ( var_3 > var_2 )
-            level _id_07AC::_id_C725();
+            level scripts\mp\gamelogic::resumetimer();
         else
-            level _id_07AC::_id_AF63();
+            level scripts\mp\gamelogic::pausetimer();
     }
     else if ( var_2 > var_3 )
-        level _id_07AC::_id_C725();
+        level scripts\mp\gamelogic::resumetimer();
     else
-        level _id_07AC::_id_AF63();
+        level scripts\mp\gamelogic::pausetimer();
 }
 
 _id_D4E3( var_0 )
@@ -854,14 +854,14 @@ _id_B83A()
 {
     if ( istrue( level._id_FE80 ) )
     {
-        foreach ( var_1 in level._id_B758 )
+        foreach ( var_1 in level.players )
             _id_DD00( var_1 );
     }
 }
 
 _id_DC8A( var_0, var_1 )
 {
-    var_2 = var_1._id_045B;
+    var_2 = var_1.team;
     var_3 = var_1 _meth_81D2();
 
     if ( var_3 )
@@ -885,47 +885,47 @@ _id_DC8A( var_0, var_1 )
 
 _id_DD00( var_0 )
 {
-    level._id_110CD._id_5F84 _meth_847B( var_0 );
-    level._id_110CD._id_53EC _meth_847B( var_0 );
-    level._id_110CD._id_3BC9 _meth_847B( var_0 );
-    level._id_110CD._id_A41F _meth_83CA( var_0 );
+    level._id_110CD._id_5F84 hidefromplayer( var_0 );
+    level._id_110CD._id_53EC hidefromplayer( var_0 );
+    level._id_110CD._id_3BC9 hidefromplayer( var_0 );
+    level._id_110CD._id_A41F showtoplayer( var_0 );
 }
 
 _id_DCFF( var_0 )
 {
-    level._id_110CD._id_5F84 _meth_83CA( var_0 );
-    level._id_110CD._id_53EC _meth_847B( var_0 );
-    level._id_110CD._id_3BC9 _meth_847B( var_0 );
-    level._id_110CD._id_A41F _meth_847B( var_0 );
+    level._id_110CD._id_5F84 showtoplayer( var_0 );
+    level._id_110CD._id_53EC hidefromplayer( var_0 );
+    level._id_110CD._id_3BC9 hidefromplayer( var_0 );
+    level._id_110CD._id_A41F hidefromplayer( var_0 );
 }
 
 _id_DCFE( var_0 )
 {
-    level._id_110CD._id_5F84 _meth_847B( var_0 );
-    level._id_110CD._id_53EC _meth_83CA( var_0 );
-    level._id_110CD._id_3BC9 _meth_847B( var_0 );
-    level._id_110CD._id_A41F _meth_847B( var_0 );
+    level._id_110CD._id_5F84 hidefromplayer( var_0 );
+    level._id_110CD._id_53EC showtoplayer( var_0 );
+    level._id_110CD._id_3BC9 hidefromplayer( var_0 );
+    level._id_110CD._id_A41F hidefromplayer( var_0 );
 }
 
 _id_DCFD( var_0 )
 {
-    level._id_110CD._id_5F84 _meth_847B( var_0 );
-    level._id_110CD._id_53EC _meth_847B( var_0 );
-    level._id_110CD._id_3BC9 _meth_83CA( var_0 );
-    level._id_110CD._id_A41F _meth_847B( var_0 );
+    level._id_110CD._id_5F84 hidefromplayer( var_0 );
+    level._id_110CD._id_53EC hidefromplayer( var_0 );
+    level._id_110CD._id_3BC9 showtoplayer( var_0 );
+    level._id_110CD._id_A41F hidefromplayer( var_0 );
 }
 
 _id_78F6( var_0 )
 {
-    self._id_5F84 _meth_847B( var_0 );
-    self._id_53EC _meth_847B( var_0 );
-    self._id_A41F _meth_847B( var_0 );
-    self._id_3BC9 _meth_847B( var_0 );
+    self._id_5F84 hidefromplayer( var_0 );
+    self._id_53EC hidefromplayer( var_0 );
+    self._id_A41F hidefromplayer( var_0 );
+    self._id_3BC9 hidefromplayer( var_0 );
 }
 
 _id_AB56( var_0 )
 {
-    if ( var_0._id_045B != "spectator" && level._id_110CD._id_AD9B != "neutral" )
+    if ( var_0.team != "spectator" && level._id_110CD._id_AD9B != "neutral" )
         level._id_110CD _id_DC8A( level._id_110CD._id_AD9B, var_0 );
 }
 
@@ -934,7 +934,7 @@ _id_C475( var_0, var_1 )
     var_2 = [];
     var_3 = [];
 
-    switch ( level._id_9AA7 )
+    switch ( level.mapname )
     {
         case "mp_m_speed":
             var_3["1"] = [ ( -564, 1848, 24 ) ];
@@ -958,7 +958,7 @@ _id_C475( var_0, var_1 )
         {
             foreach ( var_7 in var_3[var_1] )
             {
-                if ( distance( var_5._id_02EA, var_7 ) < 10 )
+                if ( distance( var_5.origin, var_7 ) < 10 )
                 {
                     var_2[var_2.size] = var_5;
                     break;
@@ -967,7 +967,7 @@ _id_C475( var_0, var_1 )
         }
     }
 
-    var_0 = _id_077B::_id_1B97( var_0, var_2 );
+    var_0 = scripts\engine\utility::_id_1B97( var_0, var_2 );
     return var_0;
 }
 
@@ -976,7 +976,7 @@ _id_BA50( var_0, var_1 )
     var_2 = [];
     var_3 = [];
 
-    switch ( level._id_9AA7 )
+    switch ( level.mapname )
     {
         case "mp_m_speed":
             var_2["1"] = [];
@@ -1057,13 +1057,13 @@ _id_BA50( var_0, var_1 )
         }
     }
 
-    var_0 = _id_077B::_id_1B72( var_0, var_3 );
+    var_0 = scripts\engine\utility::_id_1B72( var_0, var_3 );
     return var_0;
 }
 
 _id_404E( var_0, var_1, var_2 )
 {
-    var_0._id_02EA = var_1;
-    var_0._id_0054 = var_2;
+    var_0.origin = var_1;
+    var_0.angles = var_2;
     return var_0;
 }

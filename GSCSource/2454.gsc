@@ -116,13 +116,13 @@ _id_3911()
 
 _id_ADB7( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12 )
 {
-    var_13 = _func_020F();
-    var_13._id_006E = var_0;
+    var_13 = spawnstruct();
+    var_13.attacker = var_0;
     var_13._id_103C0 = var_1;
-    var_13._id_0134 = var_2;
-    var_13._id_A90B = var_3;
+    var_13.damage = var_2;
+    var_13.objweapon = var_3;
     var_13._id_9CBF = var_4;
-    var_13._id_7E78 = var_5;
+    var_13.inflictor = var_5;
     var_13._id_0317 = var_6;
     var_13._id_49A9 = var_7;
     var_13._id_02AF = var_8;
@@ -132,8 +132,8 @@ _id_ADB7( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_13._id_42E3 = var_11;
     var_13._id_5698 = var_12;
 
-    if ( isdefined( var_13._id_006E ) )
-        var_13._id_006E._id_1D03 = 0;
+    if ( isdefined( var_13.attacker ) )
+        var_13.attacker._id_1D03 = 0;
 
     return var_13;
 }
@@ -145,7 +145,7 @@ _id_8A50( var_0, var_1 )
 
     if ( isdefined( self._id_EA8A ) )
     {
-        if ( isdefined( var_0._id_7E78 ) && var_0._id_7E78 == self._id_EA8A )
+        if ( isdefined( var_0.inflictor ) && var_0.inflictor == self._id_EA8A )
         {
             if ( istrue( var_1 ) )
                 return 1;
@@ -165,7 +165,7 @@ _id_8A51( var_0 )
     if ( !_id_8A50( var_0, 0 ) )
         return 0;
 
-    switch ( var_0._id_A90B._id_0084 )
+    switch ( var_0.objweapon.basename )
     {
         case "s4_thermite_mp":
         case "s4_molotov_mp":

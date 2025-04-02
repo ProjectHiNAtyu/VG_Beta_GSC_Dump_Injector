@@ -43,10 +43,10 @@ _id_CA3B( var_0, var_1, var_2 )
     else
         var_4 = 40;
 
-    var_5 = _id_07AD::_id_4004( var_0._id_02EA, "neutral", ( 0, 0, var_4 ), undefined, "any" );
+    var_5 = _id_07AD::_id_4004( var_0.origin, "neutral", ( 0, 0, var_4 ), undefined, "any" );
     _id_9B86( var_5, var_1 );
-    var_5._id_02EA = var_0._id_02EA;
-    var_5._id_0054 = var_0._id_0054;
+    var_5.origin = var_0.origin;
+    var_5.angles = var_0.angles;
     thread _id_4C32( undefined, var_0, 16 );
     var_5._id_7C58 = "_incoming";
     var_5._id_96F3 = 0;
@@ -57,7 +57,7 @@ _id_CA3B( var_0, var_1, var_2 )
 
     if ( !istrue( var_0._id_88B8 ) )
     {
-        var_3 = _id_0980::_id_4FEC( var_1._id_045B, var_2, var_0._id_02EA, ( 0, _func_01B8( 360 ), 0 ), undefined );
+        var_3 = scripts\cp_mp\killstreaks\airdrop::_id_4FEC( var_1.team, var_2, var_0.origin, ( 0, randomint( 360 ), 0 ), undefined );
         var_3._id_DDB1 = 1;
         var_3._id_A430 = 0;
         var_3._id_10811 = 1;
@@ -66,21 +66,21 @@ _id_CA3B( var_0, var_1, var_2 )
         var_3._id_8746 = 1;
         var_3 waittill( "crate_dropped" );
         var_5._id_FE8E = var_3;
-        var_5._id_02EA = var_3._id_02EA;
+        var_5.origin = var_3.origin;
     }
     else
     {
-        var_5._id_FE8E = _func_0205( "script_model", var_5._id_02EA );
+        var_5._id_FE8E = spawn( "script_model", var_5.origin );
         var_5._id_FE8E._id_4AE5 = 1;
         var_5._id_FE8E._id_3E7E = "arm_no_owner";
-        var_6 = _id_0980::_id_6AE1( var_5._id_FE8E._id_3E7E );
+        var_6 = scripts\cp_mp\killstreaks\airdrop::_id_6AE1( var_5._id_FE8E._id_3E7E );
         var_5._id_FE8E._id_9F0C = var_6._id_9F0C;
         var_5._id_FE8E._id_320E = var_6._id_320E;
         var_5._id_FE8E._id_C581 = var_6._id_C581;
         var_5._id_FE8E._id_EB9C = var_6._id_EB9C;
         var_5._id_FE8E._id_87FB = 1;
         var_5._id_FE8E._id_8746 = 1;
-        var_5._id_FE8E._id_432F = _id_0980::_id_68B1( var_2 );
+        var_5._id_FE8E._id_432F = scripts\cp_mp\killstreaks\airdrop::_id_68B1( var_2 );
         _id_07D0::_id_FB90( var_5._id_A8F5, var_5._id_FE8E );
         _id_07D0::_id_FB9A( var_5._id_A8F5, 40 );
     }
@@ -103,8 +103,8 @@ _id_CA3B( var_0, var_1, var_2 )
     }
     else
     {
-        var_5._id_FE8E _id_0980::_id_99CD();
-        var_6 = _id_0980::_id_6AE1( var_5._id_FE8E._id_3E7E );
+        var_5._id_FE8E scripts\cp_mp\killstreaks\airdrop::_id_99CD();
+        var_6 = scripts\cp_mp\killstreaks\airdrop::_id_6AE1( var_5._id_FE8E._id_3E7E );
         _id_07D0::_id_FB9A( var_5._id_A8F5, 40 );
     }
 
@@ -126,28 +126,28 @@ _id_CA3B( var_0, var_1, var_2 )
 
 _id_5008( var_0, var_1, var_2 )
 {
-    var_3 = _id_0980::_id_4FEC( var_2, var_0, var_1._id_02EA, ( 0, _func_01B8( 360 ), 0 ), undefined );
+    var_3 = scripts\cp_mp\killstreaks\airdrop::_id_4FEC( var_2, var_0, var_1.origin, ( 0, randomint( 360 ), 0 ), undefined );
     return var_3;
 }
 
 _id_4C32( var_0, var_1, var_2 )
 {
-    var_3 = var_1._id_02EA + ( 0, 0, 2000 );
-    var_4 = _id_06BB::_id_71B7( var_3, ( 0, 0, 1 ) );
-    var_1._id_103BC = _func_0205( "script_model", var_4 );
-    var_1._id_103BC setmode( "tag_origin" );
-    var_1._id_103BC._id_0054 = ( 0, 0, 0 );
-    var_1._id_103BC playlocalsound( "smoke_carepackage_smoke_lp" );
+    var_3 = var_1.origin + ( 0, 0, 2000 );
+    var_4 = scripts\common\utility::_id_71B7( var_3, ( 0, 0, 1 ) );
+    var_1._id_103BC = spawn( "script_model", var_4 );
+    var_1._id_103BC setmodel( "tag_origin" );
+    var_1._id_103BC.angles = ( 0, 0, 0 );
+    var_1._id_103BC playloopsound( "smoke_carepackage_smoke_lp" );
     wait 1;
-    _func_0197( _id_077B::_id_6A40( "vfx_smk_signal_gr" ), var_1._id_103BC, "tag_origin" );
+    playfxontag( scripts\engine\utility::getfx( "vfx_smk_signal_gr" ), var_1._id_103BC, "tag_origin" );
 
     if ( isdefined( var_0 ) )
-        var_0 _id_077B::_id_108A5( var_2, "crate_dropped" );
+        var_0 scripts\engine\utility::_id_108A5( var_2, "crate_dropped" );
     else
         wait( var_2 );
 
-    _func_0218( _id_077B::_id_6A40( "vfx_smk_signal_gr" ), var_1._id_103BC, "tag_origin" );
-    var_1._id_103BC _meth_809A();
+    stopfxontag( scripts\engine\utility::getfx( "vfx_smk_signal_gr" ), var_1._id_103BC, "tag_origin" );
+    var_1._id_103BC delete();
 }
 
 _id_6ABB( var_0 )
@@ -155,7 +155,7 @@ _id_6ABB( var_0 )
     if ( !isdefined( level._id_8DCF ) )
         _id_BD64();
 
-    level._id_8DCF[var_0] = _id_077B::_id_1B94( level._id_8DCF[var_0] );
+    level._id_8DCF[var_0] = scripts\engine\utility::_id_1B94( level._id_8DCF[var_0] );
     return level._id_8DCF[var_0][0];
 }
 
@@ -228,30 +228,30 @@ _id_2A23()
         var_9 = 0;
     }
 
-    var_10 = _func_01B9( 1, var_0 );
+    var_10 = randomintrange( 1, var_0 );
 
     if ( var_10 <= var_6 )
     {
         level._id_F1E3[0]++;
-        var_11 = _id_077B::_id_1B94( level._id_8DCF[0] );
+        var_11 = scripts\engine\utility::_id_1B94( level._id_8DCF[0] );
         return var_11[0];
     }
     else if ( var_10 <= var_7 )
     {
         level._id_F1E3[1]++;
-        var_11 = _id_077B::_id_1B94( level._id_8DCF[1] );
+        var_11 = scripts\engine\utility::_id_1B94( level._id_8DCF[1] );
         return var_11[0];
     }
     else if ( var_10 <= var_8 )
     {
         level._id_F1E3[2]++;
-        var_11 = _id_077B::_id_1B94( level._id_8DCF[2] );
+        var_11 = scripts\engine\utility::_id_1B94( level._id_8DCF[2] );
         return var_11[0];
     }
     else
     {
         level._id_F1E3[3]++;
-        var_11 = _id_077B::_id_1B94( level._id_8DCF[3] );
+        var_11 = scripts\engine\utility::_id_1B94( level._id_8DCF[3] );
         return var_11[0];
     }
 }
@@ -273,7 +273,7 @@ _id_2A24( var_0 )
 _id_5054( var_0 )
 {
     level endon( "game_ended" );
-    var_1 = _id_0980::_id_5009( undefined, undefined, "battle_royale", var_0, ( 0, _func_01B6( 360 ), 0 ), 3000, 3000, var_0, _id_0980::_id_690B( "weapon" ) );
+    var_1 = scripts\cp_mp\killstreaks\airdrop::_id_5009( undefined, undefined, "battle_royale", var_0, ( 0, randomfloat( 360 ), 0 ), 3000, 3000, var_0, scripts\cp_mp\killstreaks\airdrop::_id_690B( "weapon" ) );
 
     if ( !isdefined( var_1 ) )
         return undefined;
@@ -285,11 +285,11 @@ _id_5054( var_0 )
 
 _id_816B()
 {
-    _id_0980::_id_8258();
+    scripts\cp_mp\killstreaks\airdrop::_id_8258();
     level._id_10CD7["icon_waypoint_marker"] = "DROP_BAG";
-    level._id_4FEF = _func_020F();
-    level._id_4FEF._id_39E7 = _id_077B::_id_6D7C( "dropBagCluterNode", "script_noteworthy" );
-    var_0 = _id_077B::_id_6D7C( "dropBagLocation", "script_noteworthy" );
+    level._id_4FEF = spawnstruct();
+    level._id_4FEF._id_39E7 = scripts\engine\utility::_id_6D7C( "dropBagCluterNode", "script_noteworthy" );
+    var_0 = scripts\engine\utility::_id_6D7C( "dropBagLocation", "script_noteworthy" );
 
     foreach ( var_2 in var_0 )
     {
@@ -297,7 +297,7 @@ _id_816B()
 
         foreach ( var_4 in level._id_4FEF._id_39E7 )
         {
-            if ( var_2._id_0457 == var_4._id_045A )
+            if ( var_2.target == var_4._id_045A )
             {
                 if ( !isdefined( var_4._id_501C ) )
                     var_4._id_501C = [];
@@ -342,10 +342,10 @@ _id_BB69( var_0 )
                     var_8 = 1;
                     var_1[var_1.size] = var_11;
 
-                    if ( istrue( var_0 ) && isdefined( level._id_2A92[var_11._id_045B]._id_71B5 ) )
-                        var_2[var_2.size] = level._id_2A92[var_11._id_045B]._id_71B5;
+                    if ( istrue( var_0 ) && isdefined( level._id_2A92[var_11.team]._id_71B5 ) )
+                        var_2[var_2.size] = level._id_2A92[var_11.team]._id_71B5;
                     else
-                        var_2[var_2.size] = var_11._id_02EA;
+                        var_2[var_2.size] = var_11.origin;
 
                     break;
                 }
@@ -358,18 +358,18 @@ _id_BB69( var_0 )
                     var_11 = var_9;
                     var_1[var_1.size] = var_11;
 
-                    if ( istrue( var_0 ) && isdefined( level._id_2A92[var_11._id_045B]._id_71B5 ) )
-                        var_2[var_2.size] = level._id_2A92[var_11._id_045B]._id_71B5;
+                    if ( istrue( var_0 ) && isdefined( level._id_2A92[var_11.team]._id_71B5 ) )
+                        var_2[var_2.size] = level._id_2A92[var_11.team]._id_71B5;
                     else
-                        var_2[var_2.size] = var_11._id_02EA;
+                        var_2[var_2.size] = var_11.origin;
                 }
                 else if ( level._id_EF67[var_7]["aliveCount"] > 0 )
                 {
                     var_11 = level._id_EF67[var_7]["alivePlayers"][0];
                     var_1[var_1.size] = var_11;
-                    var_13 = _func_01B6( 360.0 );
-                    var_14 = _func_01B6( var_4 );
-                    var_15 = var_3 + ( cos( var_13 ) * var_14, _func_01FE( var_13 ) * var_14, 0.0 );
+                    var_13 = randomfloat( 360.0 );
+                    var_14 = randomfloat( var_4 );
+                    var_15 = var_3 + ( cos( var_13 ) * var_14, sin( var_13 ) * var_14, 0.0 );
                     var_2[var_2.size] = var_15;
                 }
             }
@@ -383,8 +383,8 @@ _id_BB69( var_0 )
 
     var_18 = getdvarfloat( "scr_dropbag_mindist", 3000 );
     var_19 = getdvarfloat( "scr_dropbag_maxdist", 7000 );
-    var_20 = _func_020F();
-    var_20._id_02EA = ( 0, 0, 0 );
+    var_20 = spawnstruct();
+    var_20.origin = ( 0, 0, 0 );
     var_21 = [ var_20 ];
 
     if ( isdefined( level._id_2A4D ) )
@@ -400,12 +400,12 @@ _id_BB69( var_0 )
             {
                 var_23 = var_21[var_22]._id_02CD;
                 var_24 = level._id_4FEF._id_39E7[var_23];
-                var_25 = var_21[var_22].health;
-                var_11._id_BB67 = var_24._id_501C[var_25]._id_02EA;
+                var_25 = var_21[var_22]._id_0219;
+                var_11._id_BB67 = var_24._id_501C[var_25].origin;
                 continue;
             }
 
-            var_11._id_BB67 = var_21[var_22]._id_02EA;
+            var_11._id_BB67 = var_21[var_22].origin;
         }
 
         level._id_BB68 = 1;
@@ -436,21 +436,21 @@ _id_9A02()
 
         if ( !isdefined( var_2 ) )
         {
-            level._id_2A6F._id_3E79 = _id_077B::_id_1BA9( level._id_2A6F._id_3E79 );
+            level._id_2A6F._id_3E79 = scripts\engine\utility::_id_1BA9( level._id_2A6F._id_3E79 );
             waitframe();
             continue;
         }
 
-        if ( isdefined( var_2._id_045B ) )
+        if ( isdefined( var_2.team ) )
         {
             var_3 = 0;
 
             if ( isdefined( var_2._id_A78A ) )
                 var_3 = var_2._id_A78A;
 
-            if ( var_3 >= level._id_EF67[var_2._id_045B]["teamCount"] )
+            if ( var_3 >= level._id_EF67[var_2.team]["teamCount"] )
             {
-                var_2 thread _id_0980::_id_4822();
+                var_2 thread scripts\cp_mp\killstreaks\airdrop::_id_4822();
                 waitframe();
                 continue;
             }
@@ -461,12 +461,12 @@ _id_9A02()
         if ( var_4 > 0.0 )
         {
             var_5 = scripts\mp\gametypes\br_circle::_id_69A6();
-            var_6 = distance2dsquared( var_2._id_02EA, var_5 );
-            var_7 = _func_0147( 0, var_4 + var_1 );
+            var_6 = distance2dsquared( var_2.origin, var_5 );
+            var_7 = max( 0, var_4 + var_1 );
 
             if ( var_6 > var_7 * var_7 )
             {
-                var_2 thread _id_0980::_id_4822();
+                var_2 thread scripts\cp_mp\killstreaks\airdrop::_id_4822();
                 waitframe();
                 continue;
             }
@@ -482,7 +482,7 @@ _id_384B( var_0, var_1 )
 
     foreach ( var_4 in level._id_2A6F._id_3E79 )
     {
-        if ( !isdefined( var_4 ) || var_4._id_045B != var_0 )
+        if ( !isdefined( var_4 ) || var_4.team != var_0 )
             continue;
 
         var_2[var_2.size] = var_4;
@@ -496,32 +496,32 @@ _id_384B( var_0, var_1 )
     for ( var_7 = var_6 - 1; var_7 >= 0; var_7-- )
     {
         var_8 = var_2[var_7];
-        var_8 thread _id_0980::_id_4822();
+        var_8 thread scripts\cp_mp\killstreaks\airdrop::_id_4822();
     }
 }
 
 _id_E298( var_0 )
 {
-    _id_384B( self._id_045B, 1 );
-    var_1 = _id_0980::_id_4FFC( self._id_045B, var_0 + ( 0, 0, 4096 ), var_0 + ( 0, 0, 512 ) );
+    _id_384B( self.team, 1 );
+    var_1 = scripts\cp_mp\killstreaks\airdrop::_id_4FFC( self.team, var_0 + ( 0, 0, 4096 ), var_0 + ( 0, 0, 512 ) );
     var_1 endon( "death" );
     _id_5229( var_1 );
     _id_35CE( var_1 );
     var_2 = [];
 
-    foreach ( var_4 in level._id_EF67[self._id_045B]["alivePlayers"] )
+    foreach ( var_4 in level._id_EF67[self.team]["alivePlayers"] )
     {
         if ( isdefined( var_4 ) && !var_4 scripts\mp\gametypes\br_public::_id_8976() )
         {
             var_2[var_2.size] = var_4;
-            var_4 thread _id_07B9::_id_DCE0( "br_airdrop_incoming" );
+            var_4 thread scripts\mp\hud_message::showsplash( "br_airdrop_incoming" );
         }
     }
 
     if ( !scripts\mp\gametypes\br_public::_id_8A9F() )
-        scripts\mp\gametypes\br_public::_id_2BB8( "dropbag_incoming", self._id_045B, 1 );
+        scripts\mp\gametypes\br_public::_id_2BB8( "dropbag_incoming", self.team, 1 );
 
-    if ( _id_0A69::_id_6A43() == "br" )
+    if ( scripts\mp\utility\game::getgametype() == "br" )
         scripts\mp\gametypes\br_analytics::_id_2AC6( self, var_0, var_1 );
 }
 
@@ -541,7 +541,7 @@ _id_E29B( var_0 )
 
             if ( distance2dsquared( var_4, var_3 ) > var_5 * var_5 )
             {
-                var_6 = _func_025A( var_3 - var_4 );
+                var_6 = vectornormalize( var_3 - var_4 );
                 var_7 = var_4 + var_6 * var_5 * 0.95;
 
                 if ( _func_03D7() )
@@ -550,7 +550,7 @@ _id_E29B( var_0 )
                     var_3 = var_7;
             }
 
-            if ( _id_07D3::_id_899E( var_3 ) )
+            if ( scripts\mp\outofbounds::_id_899E( var_3 ) )
             {
                 var_4 = scripts\mp\gametypes\br_circle::_id_6CE3();
                 var_7 = scripts\mp\gametypes\br_c130::_id_DEAC( var_4, var_3 );
@@ -581,7 +581,7 @@ _id_E29A()
 
     if ( isdefined( var_0 ) )
     {
-        thread _id_E298( var_0._id_02EA );
+        thread _id_E298( var_0.origin );
         level thread _id_9A02();
     }
 }
@@ -596,7 +596,7 @@ _id_5AED( var_0 )
 
     foreach ( var_7 in level._id_4FEF._id_39E7 )
     {
-        var_8 = distance2dsquared( var_0._id_02EA, var_7._id_02EA );
+        var_8 = distance2dsquared( var_0.origin, var_7.origin );
 
         if ( var_8 >= var_4 && var_8 <= var_5 )
             var_1[var_1.size] = var_7;
@@ -605,12 +605,12 @@ _id_5AED( var_0 )
     if ( var_1.size == 0 )
         return undefined;
 
-    var_1 = _id_077B::_id_1B94( var_1 );
+    var_1 = scripts\engine\utility::_id_1B94( var_1 );
     var_10 = 0;
 
     foreach ( var_7 in var_1 )
     {
-        var_12 = _id_077B::_id_1B94( var_7._id_501C );
+        var_12 = scripts\engine\utility::_id_1B94( var_7._id_501C );
 
         foreach ( var_14 in var_12 )
         {
@@ -627,14 +627,14 @@ _id_5AED( var_0 )
 
 _id_5229( var_0 )
 {
-    var_0 setorigin( self );
-    var_0 _meth_8373( "objective", "active" );
+    var_0 setotherent( self );
+    var_0 setscriptablepartstate( "objective", "active" );
 }
 
 _id_35CE( var_0 )
 {
-    var_0 setorigin( self );
-    var_0 _meth_8373( "model", "choose" );
+    var_0 setotherent( self );
+    var_0 setscriptablepartstate( "model", "choose" );
 }
 
 _id_468D( var_0 )
@@ -658,7 +658,7 @@ _id_15A5()
 {
     foreach ( var_1 in level._id_2A6F._id_3E79 )
     {
-        if ( !isdefined( var_1 ) || var_1._id_045B != self._id_045B )
+        if ( !isdefined( var_1 ) || var_1.team != self.team )
             continue;
 
         var_2 = isdefined( var_1._id_B77D ) && isdefined( var_1._id_B77D[self getentitynumber()] );
@@ -673,7 +673,7 @@ _id_15A5()
                     var_1._id_B7D6[var_3] = undefined;
             }
 
-            var_1._id_B7D6 = _id_077B::_id_1BA9( var_1._id_B7D6 );
+            var_1._id_B7D6 = scripts\engine\utility::_id_1BA9( var_1._id_B7D6 );
             var_1._id_A78A--;
         }
     }
@@ -686,16 +686,16 @@ _id_AB61()
 
 _id_F0D9()
 {
-    _id_CA41( level._id_B758[0], level._id_B758[0], undefined, 3 );
+    _id_CA41( level.players[0], level.players[0], undefined, 3 );
 }
 
 _id_5AC5( var_0 )
 {
-    var_1 = var_0 _id_077B::_id_1BAE( level._id_4FEF._id_39E7, ::_id_E031 );
+    var_1 = var_0 scripts\engine\utility::_id_1BAE( level._id_4FEF._id_39E7, ::_id_E031 );
 
     foreach ( var_3 in var_1 )
     {
-        var_4 = _id_077B::_id_1B94( var_3._id_501C );
+        var_4 = scripts\engine\utility::_id_1B94( var_3._id_501C );
 
         foreach ( var_6 in var_4 )
         {
@@ -712,45 +712,45 @@ _id_5AC5( var_0 )
 
 _id_E031( var_0, var_1 )
 {
-    return distancesquared( var_0._id_02EA, self._id_02EA ) < distancesquared( var_1._id_02EA, self._id_02EA );
+    return distancesquared( var_0.origin, self.origin ) < distancesquared( var_1.origin, self.origin );
 }
 
 _id_2EBF( var_0, var_1, var_2 )
 {
-    var_3 = var_0._id_02EA;
+    var_3 = var_0.origin;
     var_4 = undefined;
     var_5 = undefined;
-    var_6 = _func_01B8( 2 );
-    var_7 = _id_077B::_id_F07F( var_6, -1.0, 1.0 );
+    var_6 = randomint( 2 );
+    var_7 = scripts\engine\utility::ter_op( var_6, -1.0, 1.0 );
 
     if ( var_7 > 0 )
     {
-        var_4 = _func_01B7( var_3[0] + var_1 * var_7, var_3[0] + var_2 * var_7 );
+        var_4 = randomfloatrange( var_3[0] + var_1 * var_7, var_3[0] + var_2 * var_7 );
 
         if ( var_4 >= level._id_2A4D._id_2A52[0][0] )
             var_4 = level._id_2A4D._id_2A52[0][0] - 250;
     }
     else
     {
-        var_4 = _func_01B7( var_3[0] + var_2 * var_7, var_3[0] + var_1 * var_7 );
+        var_4 = randomfloatrange( var_3[0] + var_2 * var_7, var_3[0] + var_1 * var_7 );
 
         if ( var_4 <= level._id_2A4D._id_2A52[1][0] )
             var_4 = level._id_2A4D._id_2A52[1][0] + 250;
     }
 
-    var_6 = _func_01B8( 2 );
-    var_7 = _id_077B::_id_F07F( var_6, -1.0, 1.0 );
+    var_6 = randomint( 2 );
+    var_7 = scripts\engine\utility::ter_op( var_6, -1.0, 1.0 );
 
     if ( var_7 > 0 )
     {
-        var_5 = _func_01B7( var_3[1] + var_1 * var_7, var_3[1] + var_2 * var_7 );
+        var_5 = randomfloatrange( var_3[1] + var_1 * var_7, var_3[1] + var_2 * var_7 );
 
         if ( var_5 >= level._id_2A4D._id_2A52[0][1] )
             var_5 = level._id_2A4D._id_2A52[0][1] - 250;
     }
     else
     {
-        var_5 = _func_01B7( var_3[1] + var_2 * var_7, var_3[1] + var_1 * var_7 );
+        var_5 = randomfloatrange( var_3[1] + var_2 * var_7, var_3[1] + var_1 * var_7 );
 
         if ( var_5 <= level._id_2A4D._id_2A52[1][1] )
             var_5 = level._id_2A4D._id_2A52[1][1] + 250;
@@ -762,14 +762,14 @@ _id_2EBF( var_0, var_1, var_2 )
 
         if ( isdefined( var_8 ) )
         {
-            var_9 = _func_020F();
-            var_9._id_02EA = var_8;
+            var_9 = spawnstruct();
+            var_9.origin = var_8;
             return var_9;
         }
     }
 
-    var_9 = _func_020F();
-    var_9._id_02EA = ( var_4, var_5, var_3[2] );
+    var_9 = spawnstruct();
+    var_9.origin = ( var_4, var_5, var_3[2] );
     return var_9;
 }
 
@@ -783,6 +783,6 @@ _id_9B86( var_0, var_1 )
     var_0._id_10414 = 1;
     _func_0186( var_0._id_A8F5 );
 
-    foreach ( var_3 in level._id_E48B[var_1._id_045B][var_1._id_E493]._id_B758 )
+    foreach ( var_3 in level._id_E48B[var_1.team][var_1._id_E493].players )
         _func_0180( var_0._id_A8F5, var_3 );
 }

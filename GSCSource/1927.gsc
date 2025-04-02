@@ -4,7 +4,7 @@
 _id_7EDB()
 {
     if ( !isdefined( level._id_1E56 ) )
-        level._id_1E56 = _func_020F();
+        level._id_1E56 = spawnstruct();
 
     _id_807A();
     level._id_AB48 = ::_id_AB48;

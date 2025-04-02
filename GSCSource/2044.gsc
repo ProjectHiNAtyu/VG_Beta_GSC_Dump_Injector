@@ -22,7 +22,7 @@ _id_FF5B( var_0, var_1, var_2 )
     }
 
     if ( getdvarint( "scr_validate_record", 0 ) == 1 )
-        scripts\cp_mp\hostmigration::_id_C143();
+        scripts\mp\class::_id_C143();
 }
 
 _id_8AC4( var_0, var_1 )
@@ -30,7 +30,7 @@ _id_8AC4( var_0, var_1 )
     var_2 = getdvarint( "scr_checkValidAttachmentUnlock", 0 ) == 1;
 
     if ( var_2 )
-        return _id_0A7F::_id_1D74( var_0, var_1 );
+        return scripts\mp\utility\weapon::_id_1D74( var_0, var_1 );
 
     return 1;
 }
@@ -50,7 +50,7 @@ _id_8AFD( var_0, var_1 )
 
             for ( var_4 = 1; var_4 < var_3; var_4++ )
             {
-                var_5 = _func_021E( "mp/attachmentmap.csv", 0, var_4 );
+                var_5 = tablelookupbyrow( "mp/attachmentmap.csv", 0, var_4 );
                 level._id_1D69[var_5] = var_4;
             }
         }
@@ -60,19 +60,19 @@ _id_8AFD( var_0, var_1 )
         if ( !isdefined( var_6 ) )
             return 0;
 
-        var_7 = stopfxontag( "mp/attachmentmap.csv", 0, var_0, var_6 );
+        var_7 = _func_021D( "mp/attachmentmap.csv", 0, var_0, var_6 );
 
         if ( var_7 == "" )
         {
-            var_8 = stopfxontag( "mp/statstable.csv", 4, var_0, 1 );
-            var_7 = stopfxontag( "mp/attachmentmap.csv", 0, var_8, var_6 );
+            var_8 = _func_021D( "mp/statstable.csv", 4, var_0, 1 );
+            var_7 = _func_021D( "mp/attachmentmap.csv", 0, var_8, var_6 );
         }
 
         if ( var_7 == "" )
             var_7 = var_1;
 
         if ( var_7 != "" )
-            var_2 = int( stopfxontag( "mp/attachmenttable.csv", 4, var_7, 31 ) );
+            var_2 = int( _func_021D( "mp/attachmenttable.csv", 4, var_7, 31 ) );
     }
 
     return var_2 == 1;
@@ -80,7 +80,7 @@ _id_8AFD( var_0, var_1 )
 
 _id_FF49( var_0 )
 {
-    var_1 = _id_0A7F::_id_10DB2( var_0._id_966C );
+    var_1 = scripts\mp\utility\weapon::_id_10DB2( var_0._id_966C );
     var_2 = 0;
 
     if ( !isdefined( var_1 ) )
@@ -90,7 +90,7 @@ _id_FF49( var_0 )
     else if ( _id_8AF7( var_0._id_966C ) )
         var_2 = 1;
 
-    if ( !_id_0A7F::_id_8780( var_0._id_966C ) )
+    if ( !scripts\mp\utility\weapon::_id_8780( var_0._id_966C ) )
         var_2 = 1;
 
     var_3 = 0;
@@ -140,7 +140,7 @@ _id_FF49( var_0 )
         }
     }
 
-    var_1 = _id_0A7F::_id_10DB2( var_0._id_967B );
+    var_1 = scripts\mp\utility\weapon::_id_10DB2( var_0._id_967B );
     var_2 = 0;
 
     if ( !isdefined( var_1 ) )
@@ -151,9 +151,9 @@ _id_FF49( var_0 )
         var_2 = 1;
 
     var_8 = "specialty_munitions_2";
-    var_9 = !_func_0412( var_8 ) && _id_077B::_id_1B78( var_0._id_9668, var_8 );
+    var_9 = !_func_0412( var_8 ) && scripts\engine\utility::array_contains( var_0._id_9668, var_8 );
 
-    if ( _id_0A7F::_id_8780( var_0._id_967B ) && !var_9 )
+    if ( scripts\mp\utility\weapon::_id_8780( var_0._id_967B ) && !var_9 )
         var_2 = 1;
 
     if ( _func_0410( var_0._id_967B ) )
@@ -267,7 +267,7 @@ _id_FF49( var_0 )
 
             var_22 = var_14;
 
-            while ( _func_0412( var_22 ) || _id_077B::_id_1B78( var_0._id_9668, var_22 ) || _id_077B::_id_1B78( var_20, var_22 ) )
+            while ( _func_0412( var_22 ) || scripts\engine\utility::array_contains( var_0._id_9668, var_22 ) || scripts\engine\utility::array_contains( var_20, var_22 ) )
             {
                 var_22 = var_11[var_19];
                 var_19++;
@@ -332,7 +332,7 @@ _id_FF49( var_0 )
     if ( _func_0414( "specialist_perk_1" ) || _func_0414( "specialist_perk_2" ) || _func_0414( "specialist_perk_3" ) )
         var_0._id_968C = 0;
 
-    if ( !scripts\engine\trace::isenemy( var_0._id_9653 ) || !scripts\engine\trace::_id_881F( var_0._id_9653 ) )
+    if ( !scripts\mp\equipment::isenemy( var_0._id_9653 ) || !scripts\mp\equipment::_id_881F( var_0._id_9653 ) )
         var_0._id_9653 = "equip_frag";
     else if ( _func_0413( var_0._id_9653 ) )
     {
@@ -340,7 +340,7 @@ _id_FF49( var_0 )
         var_3 = 1;
     }
 
-    if ( !scripts\engine\trace::_id_881E( var_0._id_9654 ) || !scripts\engine\trace::_id_881F( var_0._id_9654 ) )
+    if ( !scripts\mp\equipment::_id_881E( var_0._id_9654 ) || !scripts\mp\equipment::_id_881F( var_0._id_9654 ) )
         var_0._id_9654 = "equip_flash";
     else if ( _func_0413( var_0._id_9654 ) )
     {
@@ -350,16 +350,16 @@ _id_FF49( var_0 )
 
     if ( getdvarint( "#x332891c04dc12402a", 1 ) != 1 )
     {
-        if ( scripts\engine\trace::_id_8822( var_0._id_9653 ) )
+        if ( scripts\mp\equipment::_id_8822( var_0._id_9653 ) )
             var_0._id_9653 = "none";
 
-        if ( scripts\engine\trace::_id_8822( var_0._id_9654 ) )
+        if ( scripts\mp\equipment::_id_8822( var_0._id_9654 ) )
             var_0._id_9654 = "none";
     }
 
-    var_29 = visionsetnight( var_0._id_966C + "_mp" );
+    var_29 = weaponclass( var_0._id_966C + "_mp" );
 
-    if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_van_demolition_mg" ) && visionsetnight( var_0._id_966C + "_mp" ) == "mg" )
+    if ( scripts\mp\utility\perk::_hasperk( "specialty_van_demolition_mg" ) && weaponclass( var_0._id_966C + "_mp" ) == "mg" )
     {
         switch ( var_0._id_9653 )
         {
@@ -479,10 +479,10 @@ _id_FF49( var_0 )
 
 _id_FF59( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 {
-    var_8 = _id_0A7F::_id_6E6C( var_1 );
-    var_9 = _id_0A7F::_id_8782( var_1 );
-    var_10 = _id_077B::_id_F07F( var_7, "secondary", "primary" );
-    var_11 = _id_077B::_id_F07F( var_7, 4, 1 );
+    var_8 = scripts\mp\utility\weapon::getweaponrootname( var_1 );
+    var_9 = scripts\mp\utility\weapon::_id_8782( var_1 );
+    var_10 = scripts\engine\utility::ter_op( var_7, "secondary", "primary" );
+    var_11 = scripts\engine\utility::ter_op( var_7, 4, 1 );
 
     if ( isdefined( var_1 ) && var_1 != "none" && var_1 != "s4_me_fists" )
     {
@@ -502,7 +502,7 @@ _id_FF59( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
             var_0._id_84E0[var_11] = 1;
         }
 
-        var_12 = _id_0A7F::_id_10DB2( var_8 );
+        var_12 = scripts\mp\utility\weapon::_id_10DB2( var_8 );
 
         if ( !isdefined( var_12 ) )
         {
@@ -511,7 +511,7 @@ _id_FF59( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
         }
         else
         {
-            var_13 = stopfxontag( "mp/statstable.csv", 0, var_12, 41 );
+            var_13 = _func_021D( "mp/statstable.csv", 0, var_12, 41 );
 
             if ( int( var_13 ) < 0 )
             {
@@ -577,12 +577,12 @@ _id_FF59( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 
 _id_FF42( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_5 = _id_0A7F::_id_10D97( var_2 );
+    var_5 = scripts\mp\utility\weapon::_id_10D97( var_2 );
     var_6 = _func_00D6( var_5, 7 ) + "Attach";
-    var_7 = _id_077B::_id_F07F( var_4 == "primary", 2, 5 );
+    var_7 = scripts\engine\utility::ter_op( var_4 == "primary", 2, 5 );
     var_8 = 0;
     var_9 = 0;
-    var_10 = _id_077B::_id_F07F( var_4 == "primary", 2, 2 );
+    var_10 = scripts\engine\utility::ter_op( var_4 == "primary", 2, 2 );
 
     foreach ( var_17, var_12 in var_1 )
     {
@@ -590,11 +590,11 @@ _id_FF42( var_0, var_1, var_2, var_3, var_4 )
 
         if ( isdefined( var_12 ) && var_12 != "none" )
         {
-            var_14 = _id_0A7F::_id_68C6( var_12 );
+            var_14 = scripts\mp\utility\weapon::_id_68C6( var_12 );
 
             if ( isdefined( var_14 ) && var_14 != "" )
             {
-                var_15 = _id_0A7F::_id_1D81( var_12, var_2 );
+                var_15 = scripts\mp\utility\weapon::_id_1D81( var_12, var_2 );
 
                 if ( isdefined( var_15 ) )
                 {
@@ -611,7 +611,7 @@ _id_FF42( var_0, var_1, var_2, var_3, var_4 )
                 var_0._id_84E0[var_7][var_0._id_84E0[var_7].size] = var_17;
             }
 
-            if ( !_id_0A7F::_id_1D73( var_3, var_12 ) )
+            if ( !scripts\mp\utility\weapon::_id_1D73( var_3, var_12 ) )
             {
                 _id_FF5B( "nonSelectableAttachment", var_4, var_12 );
                 var_0._id_84E0[var_7][var_0._id_84E0[var_7].size] = var_17;
@@ -640,19 +640,19 @@ _id_FF42( var_0, var_1, var_2, var_3, var_4 )
     if ( var_9 > 5 )
     {
         _id_FF5B( "tooManyAttachments", var_4, var_9 );
-        var_0._id_84E0[_id_077B::_id_F07F( var_4 == "primary", 3, 6 )] = 1;
+        var_0._id_84E0[scripts\engine\utility::ter_op( var_4 == "primary", 3, 6 )] = 1;
     }
 
     if ( var_8 > 1 )
     {
         _id_FF5B( "tooManyOpticAttachments", var_4, var_8 );
-        var_0._id_84E0[_id_077B::_id_F07F( var_4 == "primary", 3, 6 )] = 1;
+        var_0._id_84E0[scripts\engine\utility::ter_op( var_4 == "primary", 3, 6 )] = 1;
     }
 }
 
 _id_FF52( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _id_077B::_id_F07F( var_2 == "primary", 7, 8 );
+    var_4 = scripts\engine\utility::ter_op( var_2 == "primary", 7, 8 );
 
     if ( isdefined( var_1 ) && var_1 != "none" )
     {
@@ -687,7 +687,7 @@ _id_FF52( var_0, var_1, var_2, var_3 )
     if ( istrue( var_3 ) )
     {
         var_0._id_B9A7 = var_0._id_B9A7 + 2;
-        var_6 = _id_077B::_id_F07F( var_2 == "primary", "extra_lethal", "extra_tactical" );
+        var_6 = scripts\engine\utility::ter_op( var_2 == "primary", "extra_lethal", "extra_tactical" );
         var_0._id_10E1C[var_6] = 1;
     }
 }
@@ -767,7 +767,7 @@ _id_FF56( var_0, var_1, var_2, var_3 )
         if ( var_6 == "none" )
             continue;
 
-        var_7 = _id_0A28::_id_6ACB( var_6 );
+        var_7 = scripts\mp\killstreaks\killstreaks::_id_6ACB( var_6 );
 
         if ( !isdefined( var_7 ) )
         {
@@ -846,7 +846,7 @@ _id_FF5A( var_0 )
 
 _id_5BD4( var_0 )
 {
-    var_1 = scripts\cp_mp\hostmigration::_id_9613();
+    var_1 = scripts\mp\class::_id_9613();
     var_1._id_9648 = "archetype_assault";
     var_1._id_966C = "s4_ar_stango44";
     return var_1;
@@ -862,7 +862,7 @@ _id_5BDF( var_0, var_1 )
         var_0._id_9672 = 0;
         var_0._id_9677 = -1;
 
-        for ( var_2 = 0; var_2 < scripts\cp_mp\hostmigration::_id_6B2A(); var_2++ )
+        for ( var_2 = 0; var_2 < scripts\mp\class::_id_6B2A(); var_2++ )
             var_0._id_966E[var_2] = "none";
     }
     else
@@ -873,7 +873,7 @@ _id_5BDF( var_0, var_1 )
         var_0._id_9681 = 0;
         var_0._id_9685 = -1;
 
-        for ( var_2 = 0; var_2 < scripts\cp_mp\hostmigration::_id_6B2C(); var_2++ )
+        for ( var_2 = 0; var_2 < scripts\mp\class::_id_6B2C(); var_2++ )
             var_0._id_967D[var_2] = "none";
     }
 }
@@ -902,7 +902,7 @@ _id_5BD7( var_0, var_1 )
 
 _id_5BD5( var_0, var_1 )
 {
-    var_0._id_9668 = _id_077B::_id_1B96( var_0._id_9668, var_1 );
+    var_0._id_9668 = scripts\engine\utility::array_remove( var_0._id_9668, var_1 );
 }
 
 _id_5BD3( var_0 )
@@ -944,7 +944,7 @@ _id_5BD2( var_0, var_1 )
         _id_5BDF( var_0, "primary" );
     else if ( isdefined( var_1[3] ) )
     {
-        for ( var_2 = 0; var_2 < scripts\cp_mp\hostmigration::_id_6B2A(); var_2++ )
+        for ( var_2 = 0; var_2 < scripts\mp\class::_id_6B2A(); var_2++ )
             _id_5BCB( var_0, "primary", var_2 );
     }
     else
@@ -957,7 +957,7 @@ _id_5BD2( var_0, var_1 )
         _id_5BDF( var_0, "secondary" );
     else if ( isdefined( var_1[6] ) )
     {
-        for ( var_2 = 0; var_2 < scripts\cp_mp\hostmigration::_id_6B2C(); var_2++ )
+        for ( var_2 = 0; var_2 < scripts\mp\class::_id_6B2C(); var_2++ )
             _id_5BCB( var_0, "secondary", var_2 );
     }
     else
@@ -988,12 +988,12 @@ _id_5BD2( var_0, var_1 )
 
 _id_9804( var_0 )
 {
-    var_1 = stopfxontag( "mp/menuPowers.csv", 3, var_0, 2 );
+    var_1 = _func_021D( "mp/menuPowers.csv", 3, var_0, 2 );
 
     if ( !isdefined( var_1 ) || var_1 != "1" && var_1 != "2" )
         return undefined;
 
-    return _id_077B::_id_F07F( var_1 == "1", "primary", "secondary" );
+    return scripts\engine\utility::ter_op( var_1 == "1", "primary", "secondary" );
 }
 
 _id_10DE6( var_0 )
@@ -1016,7 +1016,7 @@ _id_8AF7( var_0 )
 
 _id_8AF6( var_0, var_1 )
 {
-    if ( _id_0A69::_id_873A() )
+    if ( scripts\mp\utility\game::_id_873A() )
         return 1;
 
     if ( !isdefined( var_1 ) || var_1 <= 0 )
@@ -1028,7 +1028,7 @@ _id_8AF6( var_0, var_1 )
 
 _id_8755( var_0, var_1, var_2 )
 {
-    if ( _id_0A69::_id_873A() )
+    if ( scripts\mp\utility\game::_id_873A() )
         return 1;
 
     if ( !isdefined( var_2 ) || var_2 == 0 || var_1 == "none" )

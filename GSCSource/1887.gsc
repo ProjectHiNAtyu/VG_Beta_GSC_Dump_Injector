@@ -5,7 +5,7 @@
 
 _id_1804( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_5 = _func_020F();
+    var_5 = spawnstruct();
     var_5._id_0186 = var_0;
     var_5._id_1887 = var_1;
     var_5._id_83FF = 0;
@@ -31,7 +31,7 @@ _id_1804( var_0, var_1, var_2, var_3, var_4 )
     {
         var_5._id_864B = 0;
         var_5._id_0186._id_1887 = var_5._id_1887;
-        var_5._id_0186 _meth_841D( #animtree );
+        var_5._id_0186 useanimtree( #animtree );
     }
 
     return var_5;
@@ -173,27 +173,27 @@ _id_0B08( var_0, var_1, var_2, var_3, var_4 )
             if ( istrue( var_4 ) )
             {
                 var_7 = "viewhands_base_iw8";
-                var_6._id_B591 = _func_0205( "script_model", var_6._id_0186._id_02EA );
-                var_6._id_B591 setmode( var_7 );
+                var_6._id_B591 = spawn( "script_model", var_6._id_0186.origin );
+                var_6._id_B591 setmodel( var_7 );
                 var_6._id_B591._id_1887 = var_6._id_1887;
-                var_6._id_B591 _meth_841D( #animtree );
+                var_6._id_B591 useanimtree( #animtree );
                 var_6._id_B591 hide();
             }
             else
             {
-                var_6._id_B591 = _func_0205( "script_arms", var_6._id_0186._id_02EA, 0, 0, var_6._id_0186 );
+                var_6._id_B591 = spawn( "script_arms", var_6._id_0186.origin, 0, 0, var_6._id_0186 );
                 var_6._id_B591._id_1887 = var_6._id_1887;
-                var_6._id_B591 _meth_841D( #animtree );
+                var_6._id_B591 useanimtree( #animtree );
                 var_6._id_B591 hide();
                 var_6._id_B591._id_0186 = var_6._id_0186;
             }
 
             _id_069D::_id_179A( var_6._id_B591, var_1, var_2 );
-            var_6._id_0186 _meth_8382( _id_62DB( var_6 ) );
-            var_6._id_0186 playerlinktoabsolute( var_6._id_B591, "tag_player", var_3 );
+            var_6._id_0186 setstance( _id_62DB( var_6 ) );
+            var_6._id_0186 playerlinktoblend( var_6._id_B591, "tag_player", var_3 );
 
             if ( var_6._id_4A51 )
-                var_6._id_0186 _id_06BB::_id_1565( 0 );
+                var_6._id_0186 scripts\common\utility::_id_1565( 0 );
         }
     }
 }
@@ -220,7 +220,7 @@ _id_0B0A( var_0, var_1, var_2 )
                 continue;
 
             if ( var_5._id_864B )
-                var_5._id_0186 playerlinktoblend( var_5._id_B591, "tag_player", 1, 0, 0, 0, 0, 0, 1, 1 );
+                var_5._id_0186 playerlinktodelta( var_5._id_B591, "tag_player", 1, 0, 0, 0, 0, 0, 1, 1 );
         }
 
         wait( var_3 );
@@ -246,7 +246,7 @@ _id_0B0A( var_0, var_1, var_2 )
                 continue;
 
             if ( var_5._id_864B )
-                var_5._id_0186 playerlinktoblend( var_5._id_B591, "tag_player", 1, 0, 0, 0, 0, 0, 1, 1 );
+                var_5._id_0186 playerlinktodelta( var_5._id_B591, "tag_player", 1, 0, 0, 0, 0, 0, 1, 1 );
         }
     }
 }
@@ -296,7 +296,7 @@ _id_0B0C( var_0, var_1, var_2, var_3 )
             }
 
             if ( var_5._id_B597 )
-                var_5._id_B591 showpart( var_5._id_0186 );
+                var_5._id_B591 _meth_83C9( var_5._id_0186 );
 
             if ( var_2 )
                 thread _id_069D::_id_17CB( var_5._id_B591, var_1, "stop_scene", var_3 );
@@ -326,11 +326,11 @@ _id_0B09( var_0 )
         if ( var_2._id_864B )
         {
             if ( var_2._id_4A51 )
-                var_2._id_0186 _id_06BB::_id_1565( 1 );
+                var_2._id_0186 scripts\common\utility::_id_1565( 1 );
 
-            var_2._id_0186 _meth_8415();
-            var_2._id_0186 _meth_835E( var_2._id_0186._id_02EA + ( 0, 0, 1 ) );
-            var_2._id_B591 _meth_809A();
+            var_2._id_0186 unlink();
+            var_2._id_0186 setorigin( var_2._id_0186.origin + ( 0, 0, 1 ) );
+            var_2._id_B591 delete();
             var_2._id_B591 = undefined;
         }
     }
@@ -381,7 +381,7 @@ _id_0B0D( var_0, var_1, var_2 )
 
             foreach ( var_5 in var_0 )
             {
-                if ( var_5._id_5325 || var_5._id_5E81 || !isdefined( var_5._id_0186 ) || var_5._id_864B && !isai( var_5._id_0186 ) || var_5._id_864B && isdefined( var_5._id_0186._id_59C0 ) )
+                if ( var_5._id_5325 || var_5._id_5E81 || !isdefined( var_5._id_0186 ) || var_5._id_864B && !isalive( var_5._id_0186 ) || var_5._id_864B && isdefined( var_5._id_0186._id_59C0 ) )
                 {
                     if ( !var_5._id_8403 )
                     {
@@ -401,7 +401,7 @@ _id_0B0D( var_0, var_1, var_2 )
         {
             var_9 = 0;
 
-            if ( !isdefined( var_5._id_0186 ) || var_5._id_864B && !isai( var_5._id_0186 ) || var_5._id_864B && isdefined( var_5._id_0186._id_59C0 ) )
+            if ( !isdefined( var_5._id_0186 ) || var_5._id_864B && !isalive( var_5._id_0186 ) || var_5._id_864B && isdefined( var_5._id_0186._id_59C0 ) )
                 var_9 = 1;
 
             if ( !var_9 && !var_5._id_5325 && !var_5._id_5E81 && !var_5._id_83FF )
@@ -421,20 +421,20 @@ _id_0B0D( var_0, var_1, var_2 )
                 {
                     if ( var_5._id_4A51 )
                     {
-                        if ( !var_5._id_0186 _id_06B0::_id_85F2( "weapon" ) )
-                            var_5._id_0186 _id_06BB::_id_1565( 1 );
+                        if ( !var_5._id_0186 scripts\common\input_allow::_id_85F2( "weapon" ) )
+                            var_5._id_0186 scripts\common\utility::_id_1565( 1 );
                     }
 
                     var_5._id_0186 _meth_8653();
-                    var_5._id_0186 _meth_8415();
-                    var_5._id_0186 _meth_835E( var_5._id_0186._id_02EA + ( 0, 0, 1 ) );
+                    var_5._id_0186 unlink();
+                    var_5._id_0186 setorigin( var_5._id_0186.origin + ( 0, 0, 1 ) );
                 }
 
                 if ( var_2 || var_5._id_5E81 || var_9 )
                 {
                     if ( _func_02DB( var_5._id_B591 ) )
                     {
-                        var_5._id_B591 _meth_809A();
+                        var_5._id_B591 delete();
                         var_5._id_B591 = undefined;
                     }
                 }

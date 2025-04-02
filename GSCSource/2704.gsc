@@ -3,15 +3,15 @@
 
 _id_EFF7()
 {
-    _id_099D::_id_C2A5( "technical", "spawnCallback", ::_id_EFFB );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "technical", "spawnCallback", ::_id_EFFB );
     _id_EFF8();
     scripts\mp\utility\killstreak::_id_10228( "technical", _id_09B2::_id_EFE3 );
 }
 
 _id_EFF9()
 {
-    var_0 = _id_09BB::_id_10274( "technical", 1 );
-    var_0._id_0DD8 = _id_09BB::vehicle_spawn;
+    var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10274( "technical", 1 );
+    var_0._id_0DD8 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn;
 }
 
 _id_EFF8()
@@ -30,7 +30,7 @@ _id_EFFB( var_0, var_1 )
 {
     var_2 = _id_09B2::_id_EFD6( var_0, var_1 );
 
-    if ( isdefined( var_2 ) && _id_09BB::_id_10270() )
+    if ( isdefined( var_2 ) && scripts\cp_mp\vehicles\vehicle_spawn::_id_10270() )
         var_2._id_AA96 = ::_id_EFFA;
 
     return var_2;
@@ -43,21 +43,21 @@ _id_EFFA()
 
 _id_EFFC()
 {
-    var_0 = _id_09BC::_id_6E22( self );
-    var_1 = _func_020F();
-    _id_09BC::_id_3D43( var_0, var_1 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_tracking::_id_6E22( self );
+    var_1 = spawnstruct();
+    scripts\cp_mp\vehicles\vehicle_tracking::_id_3D43( var_0, var_1 );
     var_1._id_C17B = var_0._id_C17B;
     var_1._id_BFB7 = var_0._id_BFB7;
-    var_2 = _func_020F();
-    var_3 = _id_09BB::vehicle_spawn_spawnvehicle( "technical", var_1, var_2 );
+    var_2 = spawnstruct();
+    var_3 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028E( "technical", var_1, var_2 );
 
     if ( isdefined( var_3 ) )
     {
         if ( isdefined( var_1._id_C17B ) && istrue( level._id_FEAD ) && level._id_FEAD != 2 )
         {
             var_3._id_C17B = var_1._id_C17B;
-            var_3._id_027F = int( _func_0147( var_3._id_027F, var_1._id_BFB7 ) );
-            var_3._id_01FF = var_3._id_027F;
+            var_3.maxhealth = int( max( var_3.maxhealth, var_1._id_BFB7 ) );
+            var_3.health = var_3.maxhealth;
             _id_07DF::_id_BFB9( var_3 );
         }
     }

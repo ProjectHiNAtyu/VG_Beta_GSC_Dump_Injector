@@ -125,37 +125,37 @@ _id_6B07()
 
 _id_6FB2( var_0, var_1, var_2 )
 {
-    if ( istrue( level._id_7D18 ) && !_func_0121( var_0, "assist" ) )
+    if ( istrue( level._id_7D18 ) && !issubstr( var_0, "assist" ) )
     {
-        var_3 = _id_0A69::_id_6A43() == "br" && !_id_07A8::_id_609F( "prematch_done" );
+        var_3 = scripts\mp\utility\game::getgametype() == "br" && !_id_07A8::_id_609F( "prematch_done" );
 
         if ( !var_3 )
             return;
     }
 
-    if ( !level._id_EF62 )
+    if ( !level.teambased )
     {
-        foreach ( var_5 in level._id_B758 )
+        foreach ( var_5 in level.players )
         {
-            if ( _id_0A69::_id_8A1D() )
+            if ( scripts\mp\utility\game::_id_8A1D() )
             {
                 if ( var_5 != self )
                     continue;
 
-                if ( level._id_C93B > 1 && var_5._id_0309["score"] >= level._id_C93B )
+                if ( level._id_C93B > 1 && var_5.pers["score"] >= level._id_C93B )
                     return;
             }
-            else if ( level._id_C93B > 1 && var_5._id_0309["score"] >= level._id_C93B )
+            else if ( level._id_C93B > 1 && var_5.pers["score"] >= level._id_C93B )
                 return;
         }
     }
 
     var_5 = self;
 
-    if ( isdefined( self._id_02F2 ) && !_func_0107( self ) )
-        var_5 = self._id_02F2;
+    if ( isdefined( self.owner ) && !isbot( self ) )
+        var_5 = self.owner;
 
-    if ( !_func_0117( var_5 ) )
+    if ( !isplayer( var_5 ) )
         return;
 
     var_7 = var_1;
@@ -166,34 +166,34 @@ _id_6FB2( var_0, var_1, var_2 )
     if ( var_1 == 0 )
         return;
 
-    var_5._id_0309["score"] = int( _func_0147( var_5._id_0309["score"] + var_1, 0 ) );
+    var_5.pers["score"] = int( max( var_5.pers["score"] + var_1, 0 ) );
     var_5 _id_07DB::_id_1141( int( var_7 ), "matchStats", "score" );
 
-    if ( var_5._id_0309["score"] >= 65000 )
-        var_5._id_0309["score"] = 65000;
+    if ( var_5.pers["score"] >= 65000 )
+        var_5.pers["score"] = 65000;
 
-    var_5._id_0369 = var_5._id_0309["score"];
+    var_5._id_0369 = var_5.pers["score"];
     var_8 = var_5._id_0369;
-    var_5 scripts\mp\gamelogic::_id_E76D( "round", "score", var_8 );
-    var_5 _id_07AC::_id_3514();
-    var_5 thread _id_07AC::_id_3532();
+    var_5 _id_07D5::_id_E76D( "round", "score", var_8 );
+    var_5 scripts\mp\gamelogic::_id_3514();
+    var_5 thread scripts\mp\gamelogic::_id_3532();
     var_5 _id_0A78::_id_2C79( "earned_score_buffered", var_1 );
-    _id_0780::_id_9769( var_1, gettime(), _id_07E1::_id_6CED( var_0, "eventID" ) );
-    var_5 _id_06BB::_id_F737( level._id_9BA2, var_0 );
+    _id_0780::_id_9769( var_1, gettime(), scripts\mp\rank::_id_6CED( var_0, "eventID" ) );
+    var_5 scripts\common\utility::_id_F737( level._id_9BA2, var_0 );
     var_5 _id_076F::_id_10D9( var_0, int( var_7 ) );
 }
 
 _id_0CC5( var_0, var_1 )
 {
-    if ( var_1 == var_0._id_0309["score"] )
+    if ( var_1 == var_0.pers["score"] )
         return;
 
     if ( var_1 < 0 )
         return;
 
-    var_0._id_0309["score"] = var_1;
-    var_0._id_0369 = var_0._id_0309["score"];
-    var_0 thread _id_07AC::_id_3532();
+    var_0.pers["score"] = var_1;
+    var_0._id_0369 = var_0.pers["score"];
+    var_0 thread scripts\mp\gamelogic::_id_3532();
 }
 
 _id_0BDD( var_0 )
@@ -201,7 +201,7 @@ _id_0BDD( var_0 )
     if ( !isdefined( var_0 ) )
         var_0 = self;
 
-    return var_0._id_0309["score"];
+    return var_0.pers["score"];
 }
 
 _id_34D9()
@@ -220,7 +220,7 @@ _id_34D9()
 
 _id_6FE4( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    if ( _id_0A69::_id_31D0() )
+    if ( scripts\mp\utility\game::_id_31D0() )
         var_2 = 1;
 
     if ( !isdefined( var_2 ) )
@@ -274,7 +274,7 @@ _id_6FE4( var_0, var_1, var_2, var_3, var_4, var_5 )
 
         var_12 = var_10 / var_11 * 100;
 
-        if ( !_id_0A69::_id_89F1() && isdefined( level._id_A580 ) && !level._id_A580 )
+        if ( !scripts\mp\utility\game::_id_89F1() && isdefined( level._id_A580 ) && !level._id_A580 )
         {
             if ( var_12 > level._id_CC03 )
             {
@@ -287,7 +287,7 @@ _id_6FE4( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_B8BD( var_0, var_1, var_2 )
 {
-    if ( !level._id_E427 && var_0 != "none" && var_0 != var_2 && gettime() - level._id_9025 > 5000 && _id_0A69::_id_6CEF() != 1 )
+    if ( !level._id_E427 && var_0 != "none" && var_0 != var_2 && gettime() - level._id_9025 > 5000 && scripts\mp\utility\game::_id_6CEF() != 1 )
     {
         if ( isdefined( level._id_46AF ) )
             level thread _id_B860( var_1 );
@@ -369,14 +369,14 @@ _id_0CC9( var_0, var_1, var_2 )
     _id_FD59( var_0 );
 
     if ( !istrue( level._id_4D81 ) )
-        thread _id_07AC::_id_C930( var_0, var_2 );
+        thread scripts\mp\gamelogic::_id_C930( var_0, var_2 );
 }
 
 _id_FD59( var_0 )
 {
     var_1 = 0;
 
-    if ( !_id_0A69::_id_89F1() || !_id_0A69::_id_893D() || _id_0A69::_id_891B() )
+    if ( !scripts\mp\utility\game::_id_89F1() || !scripts\mp\utility\game::_id_893D() || scripts\mp\utility\game::_id_891B() )
         var_1 = _id_0BE6( var_0 );
     else
         var_1 = game["roundsWon"][var_0];
@@ -395,7 +395,7 @@ _id_FD69( var_0 )
             game["totalScore"][var_2] = 0;
     }
 
-    var_4 = _id_0A69::_id_6E7C();
+    var_4 = scripts\mp\utility\game::_id_6E7C();
 
     switch ( var_4 )
     {
@@ -403,9 +403,9 @@ _id_FD69( var_0 )
             game["teamScores"][var_0] = game["roundsWon"][var_0];
             break;
         case "teamScores":
-            if ( _id_0A69::_id_82B7() )
+            if ( scripts\mp\utility\game::_id_82B7() )
                 game["teamScores"][var_0] = game["preOvertimeScore"][var_0] + game["overtimeScore"][var_0] + game["teamScores"][var_0];
-            else if ( _id_0A69::_id_C632() )
+            else if ( scripts\mp\utility\game::_id_C632() )
             {
                 game["totalScore"][var_0] = game["totalScore"][var_0] + game["teamScores"][var_0];
                 game["teamScores"][var_0] = game["totalScore"][var_0];
@@ -444,21 +444,21 @@ _id_FCE1()
     foreach ( var_1 in level._id_EF86 )
         game["overtimeScore"][var_1] = game["overtimeScore"][var_1] + ( game["teamScores"][var_1] - game["preOvertimeScore"][var_1] );
 
-    if ( !_id_0A69::_id_8AFA() )
+    if ( !scripts\mp\utility\game::_id_8AFA() )
     {
         game["teamScores"][game["attackers"]] = 0;
         _func_01F3( game["attackers"], 0 );
         game["teamScores"][game["defenders"]] = 0;
         _func_01F3( game["defenders"], 0 );
 
-        if ( _id_0A69::_id_8A89() && game["timeToBeatTeam"] == game["attackers"] )
+        if ( scripts\mp\utility\game::_id_8A89() && game["timeToBeatTeam"] == game["attackers"] )
         {
             game["teamScores"][game["attackers"]] = game["timeToBeatScore"];
             _id_FD59( game["attackers"] );
             game["overtimeScore"][game["attackers"]] = game["overtimeScore"][game["attackers"]] - game["timeToBeatScore"];
         }
 
-        if ( _id_0A69::_id_8A89() && game["timeToBeatTeam"] == game["defenders"] )
+        if ( scripts\mp\utility\game::_id_8A89() && game["timeToBeatTeam"] == game["defenders"] )
         {
             game["teamScores"][game["defenders"]] = game["timeToBeatScore"];
             _id_FD59( game["defenders"] );
@@ -495,7 +495,7 @@ _id_C482()
 
     level._id_B159["all"][var_1 - 1] = undefined;
 
-    if ( level._id_EF62 )
+    if ( level.teambased )
         _id_FD56();
 }
 
@@ -503,12 +503,12 @@ _id_FCF0()
 {
     var_0 = [];
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
         if ( isdefined( var_2._id_3B5E ) )
             continue;
 
-        if ( var_2._id_0309["team"] == "spectator" || var_2._id_0309["team"] == "follower" || var_2._id_0309["team"] == "none" )
+        if ( var_2.pers["team"] == "spectator" || var_2.pers["team"] == "follower" || var_2.pers["team"] == "none" )
             continue;
 
         var_0[var_0.size] = var_2;
@@ -527,7 +527,7 @@ _id_FCF0()
 
     level._id_B159["all"] = var_0;
 
-    if ( level._id_EF62 )
+    if ( level.teambased )
         _id_FD56();
 }
 
@@ -548,7 +548,7 @@ _id_68FF( var_0, var_1 )
     if ( var_1._id_0146 < var_0._id_0146 )
         return var_1;
 
-    if ( _id_077B::_id_3A02() )
+    if ( scripts\engine\utility::cointoss() )
         return var_0;
     else
         return var_1;
@@ -561,7 +561,7 @@ _id_FD56()
 
     foreach ( var_3 in var_0 )
     {
-        var_4 = var_3._id_0309["team"];
+        var_4 = var_3.pers["team"];
 
         if ( !isdefined( var_1[var_4] ) )
             var_1[var_4] = [];
@@ -594,7 +594,7 @@ _id_BD51( var_0, var_1, var_2 )
     self endon( "disconnect" );
     var_0 endon( "disconnect" );
 
-    if ( isdefined( var_1 ) && var_1._id_0084 == "white_phosphorus_proj_mp" )
+    if ( isdefined( var_1 ) && var_1.basename == "white_phosphorus_proj_mp" )
         return;
 
     if ( !isdefined( var_2 ) )
@@ -615,28 +615,28 @@ _id_BD51( var_0, var_1, var_2 )
 
     wait 0.05;
     _id_0A78::_id_1096A();
-    var_6 = self._id_0309["team"];
+    var_6 = self.pers["team"];
 
-    if ( !_id_0A7C::_id_885E( var_6 ) )
+    if ( !scripts\mp\utility\teams::_id_885E( var_6 ) )
         return;
 
-    if ( var_6 == var_0._id_0309["team"] && level._id_EF62 )
+    if ( var_6 == var_0.pers["team"] && level.teambased )
         return;
 
     var_7 = undefined;
     var_8 = "assist";
 
-    if ( !level._id_EF62 )
+    if ( !level.teambased )
         var_8 = "assist_ffa";
 
-    var_9 = _id_07E1::_id_6CEE( var_8 );
+    var_9 = scripts\mp\rank::_id_6CEE( var_8 );
 
-    if ( !level._id_EF62 )
+    if ( !level.teambased )
     {
         var_7 = var_9 + var_9 * var_2;
         thread _id_0A76::_id_6FE6( "assist_ffa", var_1, var_7 );
     }
-    else if ( isdefined( var_5 ) && _id_077B::_id_1B79( var_5, _id_0A74::_id_6E04() ) )
+    else if ( isdefined( var_5 ) && scripts\engine\utility::_id_1B79( var_5, scripts\mp\utility\player::_id_6E04() ) )
         thread _id_0A76::_id_6FD9( "assist_ping", var_1, undefined );
     else
     {
@@ -644,16 +644,16 @@ _id_BD51( var_0, var_1, var_2 )
         thread _id_0A76::_id_6FE6( "assist", var_1, var_7 );
     }
 
-    if ( level._id_EF62 )
+    if ( level.teambased )
     {
-        var_10 = _id_06BB::_id_B7AC( self._id_02EA, 300 );
+        var_10 = scripts\common\utility::_id_B7AC( self.origin, 300 );
 
         foreach ( var_12 in var_10 )
         {
-            if ( self._id_045B != var_12._id_045B || self == var_12 )
+            if ( self.team != var_12.team || self == var_12 )
                 continue;
 
-            if ( !_id_0A74::_id_89D3( var_12 ) )
+            if ( !scripts\mp\utility\player::isreallyalive( var_12 ) )
                 continue;
 
             self._id_9FE8["buddy_kill"] = 1;
@@ -661,11 +661,11 @@ _id_BD51( var_0, var_1, var_2 )
         }
     }
 
-    if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_hardline" ) && isdefined( self._id_74AA ) )
+    if ( scripts\mp\utility\perk::_hasperk( "specialty_hardline" ) && isdefined( self._id_74AA ) )
     {
         if ( self._id_74AA["assists"] == 1 )
         {
-            if ( !_id_0A7F::_id_88DC( var_1 ) && !_id_0A7F::_id_8A63( var_1 ) )
+            if ( !scripts\mp\utility\weapon::_id_88DC( var_1 ) && !scripts\mp\utility\weapon::_id_8A63( var_1 ) )
                 thread _id_0A76::_id_6FD9( "assist_hardline", var_1, 1 );
         }
 
@@ -674,11 +674,11 @@ _id_BD51( var_0, var_1, var_2 )
 
     _id_07DB::_id_1141( 1, "combatStats", "assists" );
 
-    if ( self._id_0309["assists"] < 998 )
+    if ( self.pers["assists"] < 998 )
     {
         _id_0A7B::_id_7D93( "assists", 1 );
         self._id_006A = _id_0A7B::_id_6C0A( "assists" );
-        scripts\mp\gamelogic::_id_E76D( "round", "assists", self._id_006A );
+        _id_07D5::_id_E76D( "round", "assists", self._id_006A );
     }
 
     _id_0A78::_id_2C79( "assist_buffered", self._id_9FE8 );
@@ -700,20 +700,20 @@ _id_BD71( var_0 )
     wait 0.05;
     _id_0A78::_id_1096A();
 
-    if ( !_id_0A7C::_id_885E( self._id_0309["team"] ) )
+    if ( !scripts\mp\utility\teams::_id_885E( self.pers["team"] ) )
         return;
 
-    if ( self._id_0309["team"] == var_0._id_0309["team"] )
+    if ( self.pers["team"] == var_0.pers["team"] )
         return;
 
     thread _id_0A76::_id_6FE6( "shield_assist" );
     _id_07DB::_id_1141( 1, "combatStats", "assists" );
 
-    if ( self._id_0309["assists"] < 998 )
+    if ( self.pers["assists"] < 998 )
     {
         _id_0A7B::_id_7D93( "assists", 1 );
         self._id_006A = _id_0A7B::_id_6C0A( "assists" );
-        scripts\mp\gamelogic::_id_E76D( "round", "assists", self._id_006A );
+        _id_07D5::_id_E76D( "round", "assists", self._id_006A );
     }
 
     thread _id_0793::_id_AB5B( var_0 );
@@ -728,7 +728,7 @@ _id_8127()
 
 _id_F3F7( var_0, var_1, var_2 )
 {
-    if ( _id_0A69::_id_CA3E() )
+    if ( scripts\mp\utility\game::_id_CA3E() )
         return;
 
     if ( !isdefined( var_1._id_4406[var_2] ) )
@@ -742,7 +742,7 @@ _id_F3F7( var_0, var_1, var_2 )
 
 _id_FB29( var_0, var_1, var_2 )
 {
-    if ( _id_0A69::_id_CA3E() )
+    if ( scripts\mp\utility\game::_id_CA3E() )
         return;
 
     if ( isdefined( var_0 ) )
@@ -776,7 +776,7 @@ _id_FB29( var_0, var_1, var_2 )
 
 _id_F3F8( var_0, var_1, var_2, var_3 )
 {
-    if ( _id_0A69::_id_CA3E() )
+    if ( scripts\mp\utility\game::_id_CA3E() )
         return;
 
     var_1 endon( "initAssistTrackers" );
@@ -790,7 +790,7 @@ _id_F3F8( var_0, var_1, var_2, var_3 )
 
 _id_87D9( var_0, var_1 )
 {
-    if ( _id_0A69::_id_CA3E() )
+    if ( scripts\mp\utility\game::_id_CA3E() )
         return 0;
 
     if ( isdefined( var_0._id_4406[var_1] ) )
@@ -812,7 +812,7 @@ _id_87D9( var_0, var_1 )
 
 _id_87DA( var_0, var_1, var_2 )
 {
-    if ( _id_0A69::_id_CA3E() )
+    if ( scripts\mp\utility\game::_id_CA3E() )
         return 0;
 
     if ( !isdefined( var_1._id_4406[var_2] ) )
@@ -829,12 +829,12 @@ _id_87DA( var_0, var_1, var_2 )
 
 _id_69AE( var_0, var_1 )
 {
-    if ( _id_0A69::_id_CA3E() )
+    if ( scripts\mp\utility\game::_id_CA3E() )
         return undefined;
 
     var_2 = [];
 
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
     {
         if ( isdefined( var_0._id_4406[var_1] ) )
         {
@@ -856,7 +856,7 @@ _id_69AE( var_0, var_1 )
 
 _id_F3F0( var_0, var_1, var_2 )
 {
-    if ( _id_0A69::_id_CA3E() )
+    if ( scripts\mp\utility\game::_id_CA3E() )
         return;
 
     if ( var_0 != var_1 )
@@ -873,7 +873,7 @@ _id_F3F0( var_0, var_1, var_2 )
 
 _id_FB28( var_0, var_1, var_2 )
 {
-    if ( _id_0A69::_id_CA3E() )
+    if ( scripts\mp\utility\game::_id_CA3E() )
         return;
 
     if ( isdefined( var_1 ) )
@@ -889,7 +889,7 @@ _id_FB28( var_0, var_1, var_2 )
 
 _id_F3F1( var_0, var_1, var_2, var_3 )
 {
-    if ( _id_0A69::_id_CA3E() )
+    if ( scripts\mp\utility\game::_id_CA3E() )
         return;
 
     var_1 endon( "initAssistTrackers" );
@@ -903,7 +903,7 @@ _id_F3F1( var_0, var_1, var_2, var_3 )
 
 _id_1F9B( var_0, var_1 )
 {
-    if ( _id_0A69::_id_CA3E() )
+    if ( scripts\mp\utility\game::_id_CA3E() )
         return;
 
     var_2 = [];
@@ -917,7 +917,7 @@ _id_1F9B( var_0, var_1 )
 
             var_7 = level._id_B77B[var_9];
 
-            if ( isdefined( var_7 ) && var_7._id_045B != "spectator" && var_7._id_045B != "follower" && var_7 _id_0A74::_id_8803( var_1 ) )
+            if ( isdefined( var_7 ) && var_7.team != "spectator" && var_7.team != "follower" && var_7 scripts\mp\utility\player::_id_8803( var_1 ) )
             {
                 var_8 = var_7._id_723F;
 
@@ -936,7 +936,7 @@ _id_1F9B( var_0, var_1 )
 
             var_7 = level._id_B77B[var_9];
 
-            if ( isdefined( var_7 ) && var_7._id_045B != "spectator" && var_7._id_045B != "follower" && var_7 _id_0A74::_id_8803( var_1 ) )
+            if ( isdefined( var_7 ) && var_7.team != "spectator" && var_7.team != "follower" && var_7 scripts\mp\utility\player::_id_8803( var_1 ) )
             {
                 var_8 = var_7._id_723F;
 

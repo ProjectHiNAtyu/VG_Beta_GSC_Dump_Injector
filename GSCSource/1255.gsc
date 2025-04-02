@@ -174,7 +174,7 @@ _id_38AC( var_0 )
     self._id_56B2[var_0] = anim._id_4590;
 }
 
-_id_3A02()
+cointoss()
 {
     return _func_008E( 100 ) >= 50;
 }
@@ -269,7 +269,7 @@ _id_1095B( var_0, var_1, var_2 )
     self notify( var_2 );
 }
 
-_id_10893( var_0, var_1, var_2, var_3, var_4, var_5 )
+waittill_any_return( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
     if ( ( !isdefined( var_0 ) || var_0 != "death" ) && ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_3 ) || var_3 != "death" ) && ( !isdefined( var_4 ) || var_4 != "death" ) && ( !isdefined( var_5 ) || var_5 != "death" ) )
         self endon( "death" );
@@ -451,7 +451,7 @@ _id_10877( var_0 )
     while ( var_0.size )
     {
         var_1 = _id_10890( var_0 );
-        var_0 = _id_1B96( var_0, var_1 );
+        var_0 = array_remove( var_0, var_1 );
     }
 }
 
@@ -750,7 +750,7 @@ _id_F5DF( var_0, var_1 )
 _id_F5E0()
 {
     if ( isdefined( self._id_C0A3 ) )
-        self._id_02EA = self._id_C0A3;
+        self.origin = self._id_C0A3;
 
     self._id_F5DD = undefined;
 }
@@ -769,10 +769,10 @@ _id_F5DD( var_0, var_1 )
 _id_F5DE()
 {
     if ( !isdefined( self._id_C0A3 ) )
-        self._id_C0A3 = self._id_02EA;
+        self._id_C0A3 = self.origin;
 
-    if ( self._id_02EA == self._id_C0A3 )
-        self._id_02EA = self._id_02EA + ( 0, 0, -10000 );
+    if ( self.origin == self._id_C0A3 )
+        self.origin = self.origin + ( 0, 0, -10000 );
 
     self._id_F5DD = 1;
     self notify( "trigger_off" );
@@ -975,13 +975,13 @@ _id_80B0()
             level._id_EA6D["targetname"][var_1._id_045A][var_2] = var_1;
         }
 
-        if ( isdefined( var_1._id_0457 ) )
+        if ( isdefined( var_1.target ) )
         {
-            if ( !isdefined( level._id_EA6D["target"][var_1._id_0457] ) )
-                level._id_EA6D["target"][var_1._id_0457] = [];
+            if ( !isdefined( level._id_EA6D["target"][var_1.target] ) )
+                level._id_EA6D["target"][var_1.target] = [];
 
-            var_2 = level._id_EA6D["target"][var_1._id_0457].size;
-            level._id_EA6D["target"][var_1._id_0457][var_2] = var_1;
+            var_2 = level._id_EA6D["target"][var_1.target].size;
+            level._id_EA6D["target"][var_1.target][var_2] = var_1;
         }
 
         if ( isdefined( var_1._id_0375 ) )
@@ -1058,7 +1058,7 @@ _id_4773( var_0 )
             level._id_EA6D["script_noteworthy"][var_1] = undefined;
     }
 
-    var_1 = var_0._id_0457;
+    var_1 = var_0.target;
 
     if ( isdefined( var_1 ) && isdefined( level._id_EA6D["target"] ) && isdefined( level._id_EA6D["target"][var_1] ) )
     {
@@ -1119,8 +1119,8 @@ _id_4775( var_0, var_1 )
     if ( !isdefined( var_0 ) || !_func_002E( var_0 ) || var_0.size == 0 )
         return;
 
-    var_1 = _id_F07F( isdefined( var_1 ), var_1, 0 );
-    var_1 = _id_F07F( var_1 > 0, var_1, 0 );
+    var_1 = ter_op( isdefined( var_1 ), var_1, 0 );
+    var_1 = ter_op( var_1 > 0, var_1, 0 );
 
     if ( var_1 > 0 )
     {
@@ -1281,7 +1281,7 @@ _id_4685( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
         self call [[ var_0 ]]();
 }
 
-_id_EA55( var_0, var_1 )
+string_starts_with( var_0, var_1 )
 {
     if ( var_0.size < var_1.size )
         return 0;
@@ -1294,7 +1294,7 @@ _id_EA55( var_0, var_1 )
     return 0;
 }
 
-_id_1B63( var_0, var_1 )
+array_add( var_0, var_1 )
 {
     var_0[var_0.size] = var_1;
     return var_0;
@@ -1313,7 +1313,7 @@ _id_1B65( var_0, var_1 )
     return var_0;
 }
 
-array_add( var_0, var_1, var_2 )
+_id_1B8B( var_0, var_1, var_2 )
 {
     if ( var_2 == var_0.size )
     {
@@ -1460,7 +1460,7 @@ _id_1B75( var_0, var_1 )
     {
         var_4 = var_6[var_7];
 
-        if ( _id_1B78( var_2, var_4 ) )
+        if ( array_contains( var_2, var_4 ) )
             continue;
 
         var_2[var_2.size] = var_4;
@@ -1504,7 +1504,7 @@ _id_1B8C( var_0, var_1 )
     {
         var_4 = var_3[var_5];
 
-        if ( _id_1B78( var_1, var_4 ) )
+        if ( array_contains( var_1, var_4 ) )
             var_2[var_2.size] = var_4;
     }
 
@@ -1542,9 +1542,9 @@ _id_1B95( var_0 )
             var_7 = var_6[var_8];
 
             if ( var_5 == var_3 )
-                var_1[_id_F07F( _func_0034( var_8 ), var_8, var_1.size )] = var_7;
+                var_1[ter_op( _func_0034( var_8 ), var_8, var_1.size )] = var_7;
             else
-                var_4[_id_F07F( _func_0034( var_8 ), var_8, var_4.size )] = var_7;
+                var_4[ter_op( _func_0034( var_8 ), var_8, var_4.size )] = var_7;
 
             var_5++;
         }
@@ -1565,7 +1565,7 @@ _id_1BAA( var_0 )
     return var_1;
 }
 
-_id_1B78( var_0, var_1 )
+array_contains( var_0, var_1 )
 {
     if ( var_0.size <= 0 )
         return 0;
@@ -1617,7 +1617,7 @@ _id_1B83( var_0, var_1 )
     return undefined;
 }
 
-_id_1B96( var_0, var_1 )
+array_remove( var_0, var_1 )
 {
     var_2 = [];
     var_3 = var_0;
@@ -1642,7 +1642,7 @@ _id_1B97( var_0, var_1 )
     for ( var_4 = _func_0022( var_2 ); isdefined( var_4 ); var_4 = _func_0024( var_2, var_4 ) )
     {
         var_3 = var_2[var_4];
-        var_0 = _id_1B96( var_0, var_3 );
+        var_0 = array_remove( var_0, var_3 );
     }
 
     __asm_var_clear( 2 )
@@ -1650,7 +1650,7 @@ _id_1B97( var_0, var_1 )
     return var_0;
 }
 
-_id_1B9C( var_0, var_1, var_2 )
+array_remove_index( var_0, var_1, var_2 )
 {
     var_3 = [];
     var_4 = var_0;
@@ -1912,7 +1912,7 @@ _id_1B7F( var_0, var_1 )
     return var_0;
 }
 
-_id_BFC7( var_0 )
+random( var_0 )
 {
     var_1 = [];
     var_2 = var_0;
@@ -2448,14 +2448,14 @@ _id_5CBB( var_0, var_1 )
     return var_2;
 }
 
-_id_6A40( var_0 )
+getfx( var_0 )
 {
-    return level._id_0BA3[var_0];
+    return level._effect[var_0];
 }
 
 _id_606C( var_0 )
 {
-    return isdefined( level._id_0BA3[var_0] );
+    return isdefined( level._effect[var_0] );
 }
 
 _id_108F3( var_0, var_1 )
@@ -2533,7 +2533,7 @@ _id_6543()
     return _func_0049( self._id_0373, " " );
 }
 
-_id_F07F( var_0, var_1, var_2 )
+ter_op( var_0, var_1, var_2 )
 {
     if ( var_0 )
         return var_1;
@@ -2848,7 +2848,7 @@ _id_877A( var_0 )
     return 0;
 }
 
-_id_85A4( var_0, var_1 )
+is_equal( var_0, var_1 )
 {
     if ( isdefined( var_0 ) && isdefined( var_1 ) && var_0 == var_1 )
         return 1;
@@ -2950,7 +2950,7 @@ _id_5C0D( var_0, var_1 )
         if ( _id_5BE0( var_1 ) )
             return var_1;
 
-        var_2 = level _id_10893( var_0, var_1 );
+        var_2 = level waittill_any_return( var_0, var_1 );
         return var_2;
     }
 }
@@ -3050,7 +3050,7 @@ _id_5C09( var_0, var_1, var_2, var_3, var_4 )
                 return var_5[var_7];
         }
 
-        var_6 = level _id_10893( var_0, var_1, var_2, var_3, var_4 );
+        var_6 = level waittill_any_return( var_0, var_1, var_2, var_3, var_4 );
         return var_6;
     }
 }
@@ -3319,7 +3319,7 @@ _id_1B80( var_0, var_1 )
         var_4 = var_3[var_5];
 
         if ( var_4 _id_544E( var_1 ) )
-            var_0 = _id_1B96( var_0, var_4 );
+            var_0 = array_remove( var_0, var_4 );
     }
 
     __asm_var_clear( 2 )

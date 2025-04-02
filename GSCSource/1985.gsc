@@ -47,16 +47,16 @@ _id_D5D5( var_0, var_1, var_2, var_3 )
 
     var_0._id_9440 = var_1;
 
-    if ( _func_0117( var_0 ) && var_4 <= var_1 && var_1 > 0 && var_3 == 1 )
+    if ( isplayer( var_0 ) && var_4 <= var_1 && var_1 > 0 && var_3 == 1 )
         thread _id_943D( var_0 );
 
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
         _id_943F( var_0 );
 }
 
-_id_021D()
+init()
 {
-    level._id_0BA3["lightArmor_persistent"] = _func_0139( "vfx/core/mp/core/vfx_uplink_carrier.vfx" );
+    level._effect["lightArmor_persistent"] = loadfx( "vfx/core/mp/core/vfx_uplink_carrier.vfx" );
 }
 
 _id_943C( var_0, var_1, var_2 )
@@ -71,7 +71,7 @@ _id_943C( var_0, var_1, var_2 )
     _id_943F( var_0 );
     thread _id_943B( var_0 );
 
-    if ( _func_0117( var_0 ) && var_2 == 1 )
+    if ( isplayer( var_0 ) && var_2 == 1 )
         thread _id_943D( var_0 );
 }
 
@@ -81,7 +81,7 @@ _id_943E( var_0 )
     var_0._id_9440 = undefined;
     _id_943F( var_0 );
 
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
     {
 
     }
@@ -106,7 +106,7 @@ _id_943A( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
 
     if ( !var_11 )
     {
-        if ( _id_077B::_id_877A( var_4 ) && var_4 == "MOD_HEAD_SHOT" )
+        if ( scripts\engine\utility::_id_877A( var_4 ) && var_4 == "MOD_HEAD_SHOT" )
             var_11 = 1;
     }
 
@@ -121,16 +121,16 @@ _id_943A( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
 
     if ( !var_11 )
     {
-        if ( _id_0A7F::_id_8A5C( var_5 ) )
+        if ( scripts\mp\utility\weapon::_id_8A5C( var_5 ) )
             var_11 = 1;
     }
 
     if ( !var_11 )
     {
         if ( isdefined( var_6 ) && isdefined( var_7 ) )
-            _func_0196( level._id_0BA3["steel_bib_bullet_impact"], var_6, ( 0, 0, 0 ) - var_7 );
+            playfx( level._effect["steel_bib_bullet_impact"], var_6, ( 0, 0, 0 ) - var_7 );
 
-        var_12 = _func_0148( var_2 + var_3, var_0._id_9440 );
+        var_12 = min( var_2 + var_3, var_0._id_9440 );
         var_13 = var_13 - ( var_2 + var_3 );
 
         if ( !var_10 )
@@ -180,14 +180,14 @@ _id_943B( var_0 )
 
 _id_943F( var_0 )
 {
-    if ( !_func_0117( var_0 ) )
+    if ( !isplayer( var_0 ) )
         return;
 
     if ( !isdefined( var_0._id_9440 ) || !isdefined( var_0._id_9442 ) )
         return;
 
     var_1 = var_0._id_9440 / var_0._id_9442;
-    var_0 _meth_82F6( "ui_light_armor_health", var_1 );
+    var_0 setclientomnvar( "ui_light_armor_health", var_1 );
 }
 
 _id_943D( var_0 )

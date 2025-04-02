@@ -127,24 +127,24 @@ _id_CD54( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_C00B( var_0 )
 {
-    return ( _func_01B6( var_0 ) - var_0 * 0.5, _func_01B6( var_0 ) - var_0 * 0.5, _func_01B6( var_0 ) - var_0 * 0.5 );
+    return ( randomfloat( var_0 ) - var_0 * 0.5, randomfloat( var_0 ) - var_0 * 0.5, randomfloat( var_0 ) - var_0 * 0.5 );
 }
 
 _id_C00C( var_0, var_1 )
 {
-    var_2 = _func_01B7( var_0, var_1 );
+    var_2 = randomfloatrange( var_0, var_1 );
 
-    if ( _func_01B8( 2 ) == 0 )
+    if ( randomint( 2 ) == 0 )
         var_2 = var_2 * -1;
 
-    var_3 = _func_01B7( var_0, var_1 );
+    var_3 = randomfloatrange( var_0, var_1 );
 
-    if ( _func_01B8( 2 ) == 0 )
+    if ( randomint( 2 ) == 0 )
         var_3 = var_3 * -1;
 
-    var_4 = _func_01B7( var_0, var_1 );
+    var_4 = randomfloatrange( var_0, var_1 );
 
-    if ( _func_01B8( 2 ) == 0 )
+    if ( randomint( 2 ) == 0 )
         var_4 = var_4 * -1;
 
     return ( var_2, var_3, var_4 );
@@ -160,11 +160,11 @@ _id_DD3C( var_0 )
 
 _id_C005()
 {
-    var_0 = _func_01B6( 180 );
-    var_1 = _func_01B6( 360 );
+    var_0 = randomfloat( 180 );
+    var_1 = randomfloat( 360 );
     var_2 = cos( var_1 ) * cos( var_0 );
-    var_3 = cos( var_1 ) * _func_01FE( var_0 );
-    var_4 = _func_01FE( var_1 );
+    var_3 = cos( var_1 ) * sin( var_0 );
+    var_4 = sin( var_1 );
     return ( var_2, var_3, var_4 );
 }
 
@@ -191,14 +191,14 @@ _id_38AC( var_0 )
     self._id_56B2[var_0] = anim._id_4590;
 }
 
-_id_3A02()
+cointoss()
 {
-    return _func_01B8( 100 ) >= 50;
+    return randomint( 100 ) >= 50;
 }
 
 _id_356B( var_0, var_1 )
 {
-    var_2 = _func_01B8( var_1[var_1.size - 1] + 1 );
+    var_2 = randomint( var_1[var_1.size - 1] + 1 );
 
     for ( var_3 = 0; var_3 < var_1.size; var_3++ )
     {
@@ -237,7 +237,7 @@ _id_10926( var_0, var_1 )
 _id_108E8( var_0, var_1, var_2, var_3, var_4 )
 {
     self endon( "death" );
-    var_5 = _func_020F();
+    var_5 = spawnstruct();
     var_5._id_F13B = 0;
 
     if ( isdefined( var_0 ) )
@@ -282,7 +282,7 @@ _id_108E8( var_0, var_1, var_2, var_3, var_4 )
 _id_10873( var_0, var_1 )
 {
     self endon( "death" );
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
     var_2._id_F13B = 0;
 
     if ( isdefined( var_0 ) )
@@ -318,7 +318,7 @@ _id_10894( var_0, var_1, var_2, var_3 )
     if ( !isdefined( var_0 ) || var_0 != "death" )
         self endon( "death" );
 
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10925( var_0, var_4 );
@@ -328,12 +328,12 @@ _id_10894( var_0, var_1, var_2, var_3 )
     return var_5;
 }
 
-waittill_any_return( var_0, var_1, var_2 )
+_id_10895( var_0, var_1, var_2 )
 {
     if ( ( !isdefined( var_0 ) || var_0 != "death" ) && ( !isdefined( var_1 ) || var_1 != "death" ) )
         self endon( "death" );
 
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10925( var_0, var_3 );
@@ -351,7 +351,7 @@ _id_10896( var_0, var_1, var_2, var_3 )
     if ( ( !isdefined( var_0 ) || var_0 != "death" ) && ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) )
         self endon( "death" );
 
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10925( var_0, var_4 );
@@ -372,7 +372,7 @@ _id_10897( var_0, var_1, var_2, var_3, var_4 )
     if ( ( !isdefined( var_0 ) || var_0 != "death" ) && ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_3 ) || var_3 != "death" ) )
         self endon( "death" );
 
-    var_5 = _func_020F();
+    var_5 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10925( var_0, var_5 );
@@ -396,7 +396,7 @@ _id_10898( var_0, var_1, var_2, var_3, var_4, var_5 )
     if ( ( !isdefined( var_0 ) || var_0 != "death" ) && ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_3 ) || var_3 != "death" ) && ( !isdefined( var_4 ) || var_4 != "death" ) )
         self endon( "death" );
 
-    var_6 = _func_020F();
+    var_6 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10925( var_0, var_6 );
@@ -423,7 +423,7 @@ _id_10899( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     if ( ( !isdefined( var_0 ) || var_0 != "death" ) && ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_3 ) || var_3 != "death" ) && ( !isdefined( var_4 ) || var_4 != "death" ) && ( !isdefined( var_5 ) || var_5 != "death" ) )
         self endon( "death" );
 
-    var_7 = _func_020F();
+    var_7 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10925( var_0, var_7 );
@@ -453,7 +453,7 @@ _id_1089A( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     if ( ( !isdefined( var_0 ) || var_0 != "death" ) && ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_3 ) || var_3 != "death" ) && ( !isdefined( var_4 ) || var_4 != "death" ) && ( !isdefined( var_5 ) || var_5 != "death" ) && ( !isdefined( var_6 ) || var_6 != "death" ) )
         self endon( "death" );
 
-    var_8 = _func_020F();
+    var_8 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10925( var_0, var_8 );
@@ -481,12 +481,12 @@ _id_1089A( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     return var_9;
 }
 
-_id_10893( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
+waittill_any_return( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 {
     if ( ( !isdefined( var_0 ) || var_0 != "death" ) && ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_3 ) || var_3 != "death" ) && ( !isdefined( var_4 ) || var_4 != "death" ) && ( !isdefined( var_5 ) || var_5 != "death" ) && ( !isdefined( var_6 ) || var_6 != "death" ) && ( !isdefined( var_7 ) || var_7 != "death" ) )
         self endon( "death" );
 
-    var_8 = _func_020F();
+    var_8 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10925( var_0, var_8 );
@@ -522,7 +522,7 @@ _id_10959( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     if ( ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_3 ) || var_3 != "death" ) && ( !isdefined( var_4 ) || var_4 != "death" ) && ( !isdefined( var_5 ) || var_5 != "death" ) && ( !isdefined( var_6 ) || var_6 != "death" ) )
         self endon( "death" );
 
-    var_7 = _func_020F();
+    var_7 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_1095C( var_0, var_1, var_7 );
@@ -549,7 +549,7 @@ _id_10959( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
 _id_1089C( var_0, var_1 )
 {
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10926( var_0, var_2 );
@@ -561,7 +561,7 @@ _id_1089C( var_0, var_1 )
 
 _id_1089D( var_0, var_1, var_2 )
 {
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10926( var_0, var_3 );
@@ -576,7 +576,7 @@ _id_1089D( var_0, var_1, var_2 )
 
 _id_1089E( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10926( var_0, var_4 );
@@ -594,7 +594,7 @@ _id_1089E( var_0, var_1, var_2, var_3 )
 
 _id_1089F( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_5 = _func_020F();
+    var_5 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10926( var_0, var_5 );
@@ -615,7 +615,7 @@ _id_1089F( var_0, var_1, var_2, var_3, var_4 )
 
 _id_108A0( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    var_6 = _func_020F();
+    var_6 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10926( var_0, var_6 );
@@ -639,7 +639,7 @@ _id_108A0( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_108A1( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 {
-    var_7 = _func_020F();
+    var_7 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10926( var_0, var_7 );
@@ -666,7 +666,7 @@ _id_108A1( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
 _id_1089B( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    var_6 = _func_020F();
+    var_6 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10926( var_0, var_6 );
@@ -693,7 +693,7 @@ _id_1089B( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_10890( var_0 )
 {
-    var_1 = _func_020F();
+    var_1 = spawnstruct();
     var_2 = 0;
 
     foreach ( var_4 in var_0 )
@@ -714,7 +714,7 @@ _id_10890( var_0 )
 
 _id_10891( var_0 )
 {
-    var_1 = _func_020F();
+    var_1 = spawnstruct();
 
     foreach ( var_3 in var_0 )
         childthread _id_10926( var_3, var_1 );
@@ -726,7 +726,7 @@ _id_10891( var_0 )
 
 _id_1088E( var_0, var_1 )
 {
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
     var_3 = 0;
 
     foreach ( var_5 in var_0 )
@@ -748,7 +748,7 @@ _id_1088E( var_0, var_1 )
 
 _id_1088F( var_0, var_1 )
 {
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
 
     foreach ( var_4 in var_0 )
         childthread _id_10926( var_4, var_2 );
@@ -764,14 +764,14 @@ _id_10877( var_0 )
     while ( var_0.size )
     {
         var_1 = _id_10890( var_0 );
-        var_0 = _id_1B96( var_0, var_1 );
+        var_0 = array_remove( var_0, var_1 );
     }
 }
 
 _id_108EA( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
 {
     self endon( "death" );
-    var_9 = _func_020F();
+    var_9 = spawnstruct();
     var_9._id_F13B = 0;
 
     if ( isdefined( var_1 ) )
@@ -830,7 +830,7 @@ _id_108A5( var_0, var_1, var_2 )
     if ( !isdefined( var_1 ) || var_1 != "death" )
         self endon( "death" );
 
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_10925( var_1, var_3 );
@@ -846,7 +846,7 @@ _id_108A6( var_0, var_1, var_2, var_3 )
     if ( ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) )
         self endon( "death" );
 
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_10925( var_1, var_4 );
@@ -865,7 +865,7 @@ _id_108A7( var_0, var_1, var_2, var_3, var_4 )
     if ( ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_3 ) || var_3 != "death" ) )
         self endon( "death" );
 
-    var_5 = _func_020F();
+    var_5 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_10925( var_1, var_5 );
@@ -887,7 +887,7 @@ _id_108A8( var_0, var_1, var_2, var_3, var_4, var_5 )
     if ( ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_3 ) || var_3 != "death" ) && ( !isdefined( var_4 ) || var_4 != "death" ) )
         self endon( "death" );
 
-    var_6 = _func_020F();
+    var_6 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_10925( var_1, var_6 );
@@ -912,7 +912,7 @@ _id_108A9( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     if ( ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_3 ) || var_3 != "death" ) && ( !isdefined( var_4 ) || var_4 != "death" ) && ( !isdefined( var_5 ) || var_5 != "death" ) )
         self endon( "death" );
 
-    var_7 = _func_020F();
+    var_7 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_10925( var_1, var_7 );
@@ -940,7 +940,7 @@ _id_108AA( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     if ( ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_3 ) || var_3 != "death" ) && ( !isdefined( var_4 ) || var_4 != "death" ) && ( !isdefined( var_5 ) || var_5 != "death" ) && ( !isdefined( var_6 ) || var_6 != "death" ) )
         self endon( "death" );
 
-    var_8 = _func_020F();
+    var_8 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_10925( var_1, var_8 );
@@ -971,7 +971,7 @@ _id_108A4( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     if ( ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_3 ) || var_3 != "death" ) && ( !isdefined( var_4 ) || var_4 != "death" ) && ( !isdefined( var_5 ) || var_5 != "death" ) && ( !isdefined( var_6 ) || var_6 != "death" ) )
         self endon( "death" );
 
-    var_7 = _func_020F();
+    var_7 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_10925( var_1, var_7 );
@@ -1006,7 +1006,7 @@ _id_0D6C( var_0 )
 
 _id_108AC( var_0, var_1, var_2 )
 {
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_10926( var_1, var_3 );
@@ -1019,7 +1019,7 @@ _id_108AC( var_0, var_1, var_2 )
 
 _id_108AD( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_10926( var_1, var_4 );
@@ -1035,7 +1035,7 @@ _id_108AD( var_0, var_1, var_2, var_3 )
 
 _id_108AE( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_5 = _func_020F();
+    var_5 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_10926( var_1, var_5 );
@@ -1054,7 +1054,7 @@ _id_108AE( var_0, var_1, var_2, var_3, var_4 )
 
 _id_108AF( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    var_6 = _func_020F();
+    var_6 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_10926( var_1, var_6 );
@@ -1076,7 +1076,7 @@ _id_108AF( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_108B0( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 {
-    var_7 = _func_020F();
+    var_7 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_10926( var_1, var_7 );
@@ -1101,7 +1101,7 @@ _id_108B0( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
 _id_108AB( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    var_6 = _func_020F();
+    var_6 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_10926( var_1, var_6 );
@@ -1124,7 +1124,7 @@ _id_108AB( var_0, var_1, var_2, var_3, var_4, var_5 )
     return var_7;
 }
 
-_id_1087E( var_0, var_1, var_2 )
+waittill_any_2( var_0, var_1, var_2 )
 {
     if ( isdefined( var_1 ) )
         self endon( var_1 );
@@ -1143,7 +1143,7 @@ _id_1087F( var_0, var_1, var_2, var_3 )
     self waittill( var_0 );
 }
 
-waittill_any_2( var_0, var_1, var_2, var_3, var_4 )
+_id_10880( var_0, var_1, var_2, var_3, var_4 )
 {
     if ( isdefined( var_1 ) )
         self endon( var_1 );
@@ -1303,7 +1303,7 @@ _id_10886( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9,
 _id_1088A( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13 )
 {
     self endon( "death" );
-    var_14 = _func_020F();
+    var_14 = spawnstruct();
     var_0 childthread _id_10925( var_1, var_14 );
 
     if ( isdefined( var_2 ) && isdefined( var_3 ) )
@@ -1360,7 +1360,7 @@ _id_10887( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 
 _id_10888( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 {
-    var_8 = _func_020F();
+    var_8 = spawnstruct();
 
     foreach ( var_10 in var_0 )
     {
@@ -1395,7 +1395,7 @@ _id_108A2( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     if ( ( !isdefined( var_0 ) || var_0 != "death" ) && ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_3 ) || var_3 != "death" ) && ( !isdefined( var_4 ) || var_4 != "death" ) && ( !isdefined( var_5 ) || var_5 != "death" ) && ( !isdefined( var_6 ) || var_6 != "death" ) && ( !isdefined( var_7 ) || var_7 != "death" ) )
         self endon( "death" );
 
-    var_8 = _func_020F();
+    var_8 = spawnstruct();
 
     if ( isdefined( var_0 ) )
         childthread _id_10927( var_0, var_8 );
@@ -1431,7 +1431,7 @@ _id_108A3( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
     if ( ( !isdefined( var_1 ) || var_1 != "death" ) && ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_3 ) || var_3 != "death" ) && ( !isdefined( var_4 ) || var_4 != "death" ) && ( !isdefined( var_5 ) || var_5 != "death" ) && ( !isdefined( var_6 ) || var_6 != "death" ) && ( !isdefined( var_7 ) || var_7 != "death" ) && ( !isdefined( var_8 ) || var_8 != "death" ) )
         self endon( "death" );
 
-    var_9 = _func_020F();
+    var_9 = spawnstruct();
 
     if ( isdefined( var_1 ) )
         childthread _id_10927( var_1, var_9 );
@@ -1467,7 +1467,7 @@ _id_108A3( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
 
 _id_1088B( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15 )
 {
-    var_18 = _func_020F();
+    var_18 = spawnstruct();
 
     if ( isdefined( var_0 ) && isdefined( var_1 ) )
         var_0 childthread _id_10927( var_1, var_18 );
@@ -1500,7 +1500,7 @@ _id_1088B( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9,
 
 _id_1088C( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16 )
 {
-    var_19 = _func_020F();
+    var_19 = spawnstruct();
 
     if ( ( !isdefined( var_2 ) || var_2 != "death" ) && ( !isdefined( var_4 ) || var_4 != "death" ) && ( !isdefined( var_6 ) || var_6 != "death" ) && ( !isdefined( var_8 ) || var_8 != "death" ) && ( !isdefined( var_10 ) || var_10 != "death" ) && ( !isdefined( var_12 ) || var_12 != "death" ) && ( !isdefined( var_14 ) || var_14 != "death" ) && ( !isdefined( var_16 ) || var_16 != "death" ) )
         self endon( "death" );
@@ -1608,7 +1608,7 @@ _id_036D()
     }
     else if ( isdefined( self._id_CCF0 ) && isdefined( self._id_CCEE ) )
     {
-        wait( _func_01B7( self._id_CCF0, self._id_CCEE ) );
+        wait( randomfloatrange( self._id_CCF0, self._id_CCEE ) );
         return 1;
     }
 
@@ -1628,7 +1628,7 @@ _id_CEAA()
     }
     else if ( isdefined( self._id_CEB2 ) && isdefined( self._id_CEB1 ) )
     {
-        wait( _func_01B7( self._id_CEB2, self._id_CEB1 ) );
+        wait( randomfloatrange( self._id_CEB2, self._id_CEB1 ) );
 
         if ( isdefined( self._id_CEB0 ) )
         {
@@ -1821,7 +1821,7 @@ _id_FBDD()
 
 _id_3EF5( var_0 )
 {
-    var_1 = _func_021A( var_0, " " );
+    var_1 = strtok( var_0, " " );
 
     for ( var_2 = 0; var_2 < var_1.size; var_2++ )
     {
@@ -1942,13 +1942,13 @@ _id_80B0()
             level._id_EA6D["targetname"][var_1._id_045A][var_2] = var_1;
         }
 
-        if ( isdefined( var_1._id_0457 ) )
+        if ( isdefined( var_1.target ) )
         {
-            if ( !isdefined( level._id_EA6D["target"][var_1._id_0457] ) )
-                level._id_EA6D["target"][var_1._id_0457] = [];
+            if ( !isdefined( level._id_EA6D["target"][var_1.target] ) )
+                level._id_EA6D["target"][var_1.target] = [];
 
-            var_2 = level._id_EA6D["target"][var_1._id_0457].size;
-            level._id_EA6D["target"][var_1._id_0457][var_2] = var_1;
+            var_2 = level._id_EA6D["target"][var_1.target].size;
+            level._id_EA6D["target"][var_1.target][var_2] = var_1;
         }
 
         if ( isdefined( var_1._id_0375 ) )
@@ -1999,13 +1999,13 @@ _id_1114( var_0 )
         level._id_EA6D["targetname"][var_0._id_045A][var_1] = var_0;
     }
 
-    if ( isdefined( var_0._id_0457 ) )
+    if ( isdefined( var_0.target ) )
     {
-        if ( !isdefined( level._id_EA6D["target"][var_0._id_0457] ) )
-            level._id_EA6D["target"][var_0._id_0457] = [];
+        if ( !isdefined( level._id_EA6D["target"][var_0.target] ) )
+            level._id_EA6D["target"][var_0.target] = [];
 
-        var_1 = level._id_EA6D["target"][var_0._id_0457].size;
-        level._id_EA6D["target"][var_0._id_0457][var_1] = var_0;
+        var_1 = level._id_EA6D["target"][var_0.target].size;
+        level._id_EA6D["target"][var_0.target][var_1] = var_0;
     }
 
     if ( isdefined( var_0._id_0375 ) )
@@ -2066,7 +2066,7 @@ _id_4773( var_0 )
             level._id_EA6D["script_noteworthy"][var_1] = undefined;
     }
 
-    var_1 = var_0._id_0457;
+    var_1 = var_0.target;
 
     if ( isdefined( var_1 ) && isdefined( level._id_EA6D["target"] ) && isdefined( level._id_EA6D["target"][var_1] ) )
     {
@@ -2106,11 +2106,11 @@ _id_4773( var_0 )
 
 _id_4775( var_0, var_1 )
 {
-    if ( !isdefined( var_0 ) || !isalive( var_0 ) || var_0.size == 0 )
+    if ( !isdefined( var_0 ) || !_func_0106( var_0 ) || var_0.size == 0 )
         return;
 
-    var_1 = _id_F07F( isdefined( var_1 ), var_1, 0 );
-    var_1 = _id_F07F( var_1 > 0, var_1, 0 );
+    var_1 = ter_op( isdefined( var_1 ), var_1, 0 );
+    var_1 = ter_op( var_1 > 0, var_1, 0 );
 
     if ( var_1 > 0 )
     {
@@ -2221,10 +2221,10 @@ _id_F122( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
     if ( isdefined( var_5 ) && isdefined( var_6 ) )
     {
-        if ( !isalive( var_5 ) )
+        if ( !_func_0106( var_5 ) )
             var_5 = [ var_5 ];
 
-        if ( !isalive( var_6 ) )
+        if ( !_func_0106( var_6 ) )
             var_6 = [ var_6 ];
 
         foreach ( var_8 in var_5 )
@@ -2271,7 +2271,7 @@ _id_4686( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
 
 _id_4685( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13 )
 {
-    if ( _id_06BB::_id_8A2C() )
+    if ( scripts\common\utility::_id_8A2C() )
     {
         self endon( "death" );
         self endon( "stop_delay_call" );
@@ -2307,7 +2307,7 @@ _id_4685( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
         self call [[ var_0 ]]();
 }
 
-_id_EA55( var_0, var_1 )
+string_starts_with( var_0, var_1 )
 {
     if ( var_0.size < var_1.size )
         return 0;
@@ -2361,7 +2361,7 @@ _id_4ED6( var_0, var_1, var_2, var_3, var_4, var_5 )
     {
         var_10 = var_7 * var_9;
         var_11 = cos( var_10 ) * var_1;
-        var_12 = _func_01FE( var_10 ) * var_1;
+        var_12 = sin( var_10 ) * var_1;
         var_13 = var_0[0] + var_11;
         var_14 = var_0[1] + var_12;
         var_15 = var_0[2];
@@ -2382,7 +2382,7 @@ _id_4ED6( var_0, var_1, var_2, var_3, var_4, var_5 )
     }
 }
 
-_id_1B63( var_0, var_1 )
+array_add( var_0, var_1 )
 {
     var_0[var_0.size] = var_1;
     return var_0;
@@ -2406,11 +2406,11 @@ _id_1B7C( var_0 )
     foreach ( var_2 in var_0 )
     {
         if ( isdefined( var_2 ) )
-            var_2 _meth_809A();
+            var_2 delete();
     }
 }
 
-array_add( var_0, var_1, var_2 )
+_id_1B8B( var_0, var_1, var_2 )
 {
     if ( var_2 == var_0.size )
     {
@@ -2495,7 +2495,7 @@ _id_1B75( var_0, var_1 )
 
     foreach ( var_4 in var_1 )
     {
-        if ( _id_1B78( var_2, var_4 ) )
+        if ( array_contains( var_2, var_4 ) )
             continue;
 
         var_2[var_2.size] = var_4;
@@ -2534,7 +2534,7 @@ _id_1B8C( var_0, var_1 )
 
     foreach ( var_4 in var_0 )
     {
-        if ( _id_1B78( var_1, var_4 ) )
+        if ( array_contains( var_1, var_4 ) )
             var_2[var_2.size] = var_4;
     }
 
@@ -2547,7 +2547,7 @@ _id_1B7E( var_0, var_1 )
 
     foreach ( var_4 in var_0 )
     {
-        if ( !_id_1B78( var_1, var_4 ) )
+        if ( !array_contains( var_1, var_4 ) )
             var_2[var_2.size] = var_4;
     }
 
@@ -2568,7 +2568,7 @@ _id_1B94( var_0 )
 {
     for ( var_1 = 0; var_1 < var_0.size - 1; var_1++ )
     {
-        var_2 = _func_01B9( var_1, var_0.size );
+        var_2 = randomintrange( var_1, var_0.size );
         var_3 = var_0[var_1];
         var_0[var_1] = var_0[var_2];
         var_0[var_2] = var_3;
@@ -2583,16 +2583,16 @@ _id_1B95( var_0 )
 
     for ( var_2 = var_0; var_2.size > 0; var_2 = var_4 )
     {
-        var_3 = _func_01B9( 0, var_2.size );
+        var_3 = randomintrange( 0, var_2.size );
         var_4 = [];
         var_5 = 0;
 
         foreach ( var_8, var_7 in var_2 )
         {
             if ( var_5 == var_3 )
-                var_1[_id_F07F( _func_0120( var_8 ), var_8, var_1.size )] = var_7;
+                var_1[ter_op( _func_0120( var_8 ), var_8, var_1.size )] = var_7;
             else
-                var_4[_id_F07F( _func_0120( var_8 ), var_8, var_4.size )] = var_7;
+                var_4[ter_op( _func_0120( var_8 ), var_8, var_4.size )] = var_7;
 
             var_5++;
         }
@@ -2630,7 +2630,7 @@ _id_1BAC( var_0, var_1, var_2 )
     return var_3;
 }
 
-_id_1B78( var_0, var_1 )
+array_contains( var_0, var_1 )
 {
     if ( var_0.size <= 0 )
         return 0;
@@ -2666,7 +2666,7 @@ _id_1B83( var_0, var_1 )
     return undefined;
 }
 
-_id_1B96( var_0, var_1 )
+array_remove( var_0, var_1 )
 {
     var_2 = [];
 
@@ -2682,12 +2682,12 @@ _id_1B96( var_0, var_1 )
 _id_1B97( var_0, var_1 )
 {
     foreach ( var_3 in var_1 )
-        var_0 = _id_1B96( var_0, var_3 );
+        var_0 = array_remove( var_0, var_3 );
 
     return var_0;
 }
 
-_id_1B9C( var_0, var_1, var_2 )
+array_remove_index( var_0, var_1, var_2 )
 {
     var_3 = [];
 
@@ -2734,7 +2734,7 @@ _id_1BA2( var_0 )
 
     foreach ( var_3 in var_0 )
     {
-        if ( !isai( var_3 ) )
+        if ( !isalive( var_3 ) )
             continue;
 
         var_1[var_1.size] = var_3;
@@ -2749,7 +2749,7 @@ _id_1BA8( var_0 )
 
     foreach ( var_3 in var_0 )
     {
-        if ( !_func_0117( var_3 ) )
+        if ( !isplayer( var_3 ) )
             continue;
 
         var_1[var_1.size] = var_3;
@@ -2818,7 +2818,7 @@ _id_1B85( var_0 )
     return var_1;
 }
 
-array_contains( var_0, var_1 )
+_id_1BA0( var_0, var_1 )
 {
     var_2 = [];
     var_3 = 0;
@@ -2935,7 +2935,7 @@ _id_1B7F( var_0, var_1 )
     return var_0;
 }
 
-_id_BFC7( var_0 )
+random( var_0 )
 {
     var_1 = [];
 
@@ -2945,7 +2945,7 @@ _id_BFC7( var_0 )
     if ( !var_1.size )
         return undefined;
 
-    return var_1[_func_01B8( var_1.size )];
+    return var_1[randomint( var_1.size )];
 }
 
 _id_BFE4( var_0 )
@@ -2958,7 +2958,7 @@ _id_BFE4( var_0 )
     if ( !var_1.size )
         return undefined;
 
-    var_5 = _func_01B8( var_1.size * var_1.size );
+    var_5 = randomint( var_1.size * var_1.size );
     return var_1[var_1.size - 1 - int( _func_0213( var_5 ) )];
 }
 
@@ -3268,7 +3268,7 @@ _id_5CBB( var_0, var_1 )
     if ( !isdefined( var_1 ) )
         var_1 = ( 0, 0, 1 );
 
-    var_2 = _func_025A( var_0 - _func_0257( var_1, var_0 ) * var_1 );
+    var_2 = vectornormalize( var_0 - vectordot( var_1, var_0 ) * var_1 );
     return var_2;
 }
 
@@ -3276,7 +3276,7 @@ _id_4ECF( var_0, var_1, var_2, var_3 )
 {
     level endon( "newpath" );
     var_4 = [];
-    var_5 = _func_025B( var_0 - var_1 );
+    var_5 = vectortoangles( var_0 - var_1 );
     var_6 = anglestoright( var_5 );
     var_7 = anglestoforward( var_5 );
     var_8 = anglestoup( var_5 );
@@ -3302,7 +3302,7 @@ _id_4ECD( var_0, var_1, var_2 )
 {
     level endon( "newpath" );
     var_3 = [];
-    var_4 = _func_025B( var_0 - var_1 );
+    var_4 = vectortoangles( var_0 - var_1 );
     var_5 = anglestoright( var_4 );
     var_6 = anglestoforward( var_4 );
     var_7 = distance( var_0, var_1 );
@@ -3328,7 +3328,7 @@ _id_4ED3( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     var_8 = var_4;
     var_9 = var_4;
 
-    if ( isalive( var_4 ) )
+    if ( _func_0106( var_4 ) )
     {
         var_9 = var_4[0];
         var_8 = var_4[1];
@@ -3363,7 +3363,7 @@ _id_4ED3( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 _id_4ED5( var_0, var_1, var_2 )
 {
     var_3 = self _meth_8486();
-    _id_4ED3( self _meth_8169(), var_3["radius"], var_3["half_height"] * 2, self._id_0054, var_0, var_1, var_2 );
+    _id_4ED3( self _meth_8169(), var_3["radius"], var_3["half_height"] * 2, self.angles, var_0, var_1, var_2 );
 }
 
 _id_4F03( var_0, var_1, var_2 )
@@ -3414,12 +3414,12 @@ _id_4EEB( var_0, var_1, var_2 )
 {
     waittillframeend;
 
-    if ( isdefined( self._id_0054 ) )
-        var_3 = self._id_0054;
+    if ( isdefined( self.angles ) )
+        var_3 = self.angles;
     else
         var_3 = ( 0, 0, 0 );
 
-    _id_4ECA( var_3, self._id_02EA, var_0, var_1, var_2 );
+    _id_4ECA( var_3, self.origin, var_0, var_1, var_2 );
 }
 
 _id_4F0A( var_0, var_1, var_2, var_3 )
@@ -3501,11 +3501,11 @@ _id_4ECC( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     if ( !isdefined( var_2 ) )
         var_2 = 100;
 
-    if ( !isdefined( var_1 ) && isdefined( self._id_0054 ) )
-        var_1 = self._id_0054;
+    if ( !isdefined( var_1 ) && isdefined( self.angles ) )
+        var_1 = self.angles;
 
-    if ( !isdefined( var_0 ) && isdefined( self._id_02EA ) )
-        var_0 = self._id_02EA;
+    if ( !isdefined( var_0 ) && isdefined( self.origin ) )
+        var_0 = self.origin;
 
     var_8 = 16;
     var_9 = 360 / var_8;
@@ -3518,7 +3518,7 @@ _id_4ECC( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 
     for ( var_13[var_13.size] = var_0; var_12 > var_11; var_13[var_13.size - 2] = var_0 + anglestoforward( _func_0047( var_1, ( 0, var_12, 0 ) ) ) * var_2 )
     {
-        var_12 = _func_0147( var_11, var_12 - var_9 );
+        var_12 = max( var_11, var_12 - var_9 );
         var_13[var_13.size] = var_13[var_13.size - 1];
     }
 
@@ -3535,7 +3535,7 @@ _id_4ED7( var_0, var_1, var_2, var_3, var_4, var_5 )
     {
         var_10 = var_7 * var_9;
         var_11 = cos( var_10 ) * var_1;
-        var_12 = _func_01FE( var_10 ) * var_1;
+        var_12 = sin( var_10 ) * var_1;
         var_13 = var_0[0] + var_11;
         var_14 = var_0[1] + var_12;
         var_15 = var_0[2];
@@ -3573,7 +3573,7 @@ _id_4ED8( var_0, var_1, var_2, var_3, var_4 )
         var_11 = _func_0256( var_10, var_9 );
         var_12 = var_6 * var_8;
         var_13 = cos( var_12 ) * var_1;
-        var_14 = _func_01FE( var_12 ) * var_1;
+        var_14 = sin( var_12 ) * var_1;
         var_7[var_7.size] = var_0 + var_10 * var_13 + var_11 * var_14;
     }
 
@@ -3590,15 +3590,15 @@ _id_4EDF( var_0, var_1, var_2, var_3, var_4, var_5 )
 
     var_6 = 1;
     var_7 = 0;
-    var_1 = _func_025A( var_1 );
+    var_1 = vectornormalize( var_1 );
 
     if ( var_1 == ( 0, 0, 1 ) )
         var_8 = ( 1, 0, 0 );
 
-    var_8 = _func_025A( _func_0256( var_1, ( 0, 0, 1 ) ) );
+    var_8 = vectornormalize( _func_0256( var_1, ( 0, 0, 1 ) ) );
     var_9 = _func_0256( var_1, var_8 );
     var_10 = var_1 * var_3 * cos( var_2 );
-    var_11 = var_3 * _func_01FE( var_2 );
+    var_11 = var_3 * sin( var_2 );
     var_12 = ( 0, 0, 0 );
     var_13 = int( 20 * var_5 );
     var_14 = 16;
@@ -3606,7 +3606,7 @@ _id_4EDF( var_0, var_1, var_2, var_3, var_4, var_5 )
     for ( var_15 = 0; var_15 <= var_14; var_15++ )
     {
         var_16 = var_15 / var_14 * 360;
-        var_17 = var_0 + var_10 + var_11 * ( var_8 * cos( var_16 ) + var_9 * _func_01FE( var_16 ) );
+        var_17 = var_0 + var_10 + var_11 * ( var_8 * cos( var_16 ) + var_9 * sin( var_16 ) );
 
         if ( var_15 > 0 )
         {
@@ -3617,14 +3617,14 @@ _id_4EDF( var_0, var_1, var_2, var_3, var_4, var_5 )
     }
 }
 
-_id_6A40( var_0 )
+getfx( var_0 )
 {
-    return level._id_0BA3[var_0];
+    return level._effect[var_0];
 }
 
 _id_606C( var_0 )
 {
-    return isdefined( level._id_0BA3[var_0] );
+    return isdefined( level._effect[var_0] );
 }
 
 _id_B7F5()
@@ -3632,22 +3632,22 @@ _id_B7F5()
 
 }
 
-_id_E20C( var_0, var_1 )
+spawn_tag_origin( var_0, var_1 )
 {
-    if ( !isdefined( var_1 ) && isdefined( self._id_0054 ) )
-        var_1 = self._id_0054;
+    if ( !isdefined( var_1 ) && isdefined( self.angles ) )
+        var_1 = self.angles;
 
-    if ( !isdefined( var_0 ) && isdefined( self._id_02EA ) )
-        var_0 = self._id_02EA;
+    if ( !isdefined( var_0 ) && isdefined( self.origin ) )
+        var_0 = self.origin;
     else if ( !isdefined( var_0 ) )
         var_0 = ( 0, 0, 0 );
 
-    var_2 = _func_0205( "script_model", var_0 );
-    var_2 setmode( "tag_origin" );
+    var_2 = spawn( "script_model", var_0 );
+    var_2 setmodel( "tag_origin" );
     var_2 hide();
 
     if ( isdefined( var_1 ) )
-        var_2._id_0054 = var_1;
+        var_2.angles = var_1;
 
     return var_2;
 }
@@ -3660,7 +3660,7 @@ _id_108F3( var_0, var_1 )
 
 _id_108F5( var_0, var_1 )
 {
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
     thread _id_108F6( var_2, var_0 );
     thread _id_10932( var_2, var_1 );
     var_2 waittill( "waittill_proc", var_3 );
@@ -3697,7 +3697,7 @@ _id_108F2( var_0, var_1 )
 
 _id_1BBF( var_0, var_1, var_2 )
 {
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
 
     if ( istrue( var_2 ) )
     {
@@ -3717,7 +3717,7 @@ _id_1BBF( var_0, var_1, var_2 )
 _id_1BC2( var_0, var_1, var_2 )
 {
     var_0 endon( "array_wait_success" );
-    var_1 _id_1087E( var_2, "death" );
+    var_1 waittill_any_2( var_2, "death" );
     var_0 notify( "array_wait_proc" );
 }
 
@@ -3730,7 +3730,7 @@ _id_1BC3( var_0, var_1 )
 
 _id_1B67( var_0, var_1 )
 {
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
 
     foreach ( var_4 in var_0 )
         thread _id_1B6A( var_2, var_4, var_1 );
@@ -3741,7 +3741,7 @@ _id_1B67( var_0, var_1 )
 
 _id_1B6D( var_0, var_1, var_2 )
 {
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
     thread _id_1B6E( var_3, var_2 );
 
     foreach ( var_5 in var_0 )
@@ -3766,7 +3766,7 @@ _id_1B6E( var_0, var_1 )
 
 _id_1B6B( var_0, var_1 )
 {
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
 
     foreach ( var_4 in var_0 )
         thread _id_1B6C( var_2, var_4, var_1 );
@@ -3777,7 +3777,7 @@ _id_1B6B( var_0, var_1 )
 
 _id_1B6C( var_0, var_1, var_2 )
 {
-    var_3 = var_1 waittill_any_return( var_2, "death" );
+    var_3 = var_1 _id_10895( var_2, "death" );
     var_0 notify( "array_wait_proc", var_1 );
 }
 
@@ -3849,14 +3849,14 @@ _id_0E8A()
 _id_678B( var_0 )
 {
     if ( !isdefined( var_0 ) )
-        var_0 = self._id_0457;
+        var_0 = self.target;
 
     var_1 = getent( var_0, "targetname" );
 
     if ( isdefined( var_1 ) )
         return var_1;
 
-    if ( _id_06BB::_id_8A2C() )
+    if ( scripts\common\utility::_id_8A2C() )
     {
         var_1 = call [[ level._id_6B80 ]]( var_0, "targetname" );
 
@@ -3882,7 +3882,7 @@ _id_678B( var_0 )
 
 _id_6543()
 {
-    return _func_021A( self._id_0373, " " );
+    return strtok( self._id_0373, " " );
 }
 
 _id_6537()
@@ -3942,49 +3942,49 @@ _id_4BD3( var_0, var_1 )
 
 _id_B26C( var_0, var_1 )
 {
-    var_2 = _func_0205( "script_origin", ( 0, 0, 0 ) );
+    var_2 = spawn( "script_origin", ( 0, 0, 0 ) );
 
     if ( !isdefined( var_1 ) )
-        var_1 = self._id_02EA;
+        var_1 = self.origin;
 
-    var_2._id_02EA = var_1;
-    var_2 playlocalsound( var_0 );
+    var_2.origin = var_1;
+    var_2 playloopsound( var_0 );
 
     if ( !_func_0200( var_0 ) )
-        var_2 _meth_809A();
+        var_2 delete();
 
     return var_2;
 }
 
 _id_B2C9( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_5 = _func_0205( "script_origin", ( 0, 0, 1 ) );
+    var_5 = spawn( "script_origin", ( 0, 0, 1 ) );
 
     if ( !isdefined( var_1 ) )
-        var_1 = self._id_02EA;
+        var_1 = self.origin;
 
-    var_5._id_02EA = var_1;
-    var_5._id_0054 = var_2;
+    var_5.origin = var_1;
+    var_5.angles = var_2;
 
     if ( isdefined( var_4 ) )
-        var_5 _meth_820B( var_4 );
+        var_5 linkto( var_4 );
 
-    if ( _id_06BB::_id_8A2C() )
+    if ( scripts\common\utility::_id_8A2C() )
     {
-        var_5 _meth_827B( var_0, "sounddone" );
+        var_5 playsound( var_0, "sounddone" );
 
         if ( !_func_0200( var_0 ) )
         {
-            var_5 _meth_809A();
+            var_5 delete();
             return;
         }
 
         var_5 waittill( "sounddone" );
     }
     else
-        var_5 _meth_827B( var_0 );
+        var_5 playsound( var_0 );
 
-    var_5 _meth_809A();
+    var_5 delete();
 }
 
 _id_B2C7( var_0, var_1, var_2, var_3 )
@@ -4002,18 +4002,18 @@ _id_980C( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     if ( istrue( var_3 ) )
     {
         if ( !isdefined( level._id_5B8F ) || level._id_5B8F == 1 )
-            spawn( var_0, var_1, var_2 );
+            _func_020A( var_0, var_1, var_2 );
     }
     else
     {
         var_7 = 0;
 
-        if ( level.createcrate && isdefined( var_5._id_982E ) )
+        if ( level._id_3FB7 && isdefined( var_5._id_982E ) )
             var_8 = var_5._id_982E;
         else
         {
             var_7 = 1;
-            var_8 = _func_0205( "script_origin", ( 0, 0, 0 ) );
+            var_8 = spawn( "script_origin", ( 0, 0, 0 ) );
         }
 
         if ( isdefined( var_4 ) )
@@ -4022,15 +4022,15 @@ _id_980C( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
             self endon( var_4 );
         }
 
-        var_8._id_02EA = var_1;
-        var_8._id_0054 = var_2;
-        var_8 playlocalsound( var_0 );
+        var_8.origin = var_1;
+        var_8.angles = var_2;
+        var_8 playloopsound( var_0 );
 
         if ( !_func_0200( var_0 ) && var_7 )
-            var_8 _meth_809A();
+            var_8 delete();
         else
         {
-            if ( level.createcrate )
+            if ( level._id_3FB7 )
             {
                 var_5._id_982E = var_8;
                 return;
@@ -4048,8 +4048,8 @@ _id_980A( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_980B( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 {
-    self._id_02EA = var_1;
-    self._id_0054 = var_2;
+    self.origin = var_1;
+    self.angles = var_2;
 
     if ( isdefined( var_3 ) )
         self endon( var_3 );
@@ -4068,9 +4068,9 @@ _id_980B( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
     for (;;)
     {
-        wait( _func_01B7( var_5, var_6 ) );
+        wait( randomfloatrange( var_5, var_6 ) );
         _id_96CA( "createfx_looper" );
-        thread _id_B2C9( var_0, self._id_02EA, self._id_0054, undefined );
+        thread _id_B2C9( var_0, self.origin, self.angles, undefined );
         _id_F97E( "createfx_looper" );
     }
 }
@@ -4079,61 +4079,61 @@ _id_9813( var_0, var_1 )
 {
     var_1 endon( "death" );
     self waittill( var_0 );
-    var_1 _meth_809A();
+    var_1 delete();
 }
 
 _id_3FEC( var_0 )
 {
     var_1 = _id_06A5::_id_3FA3( "loopfx", var_0 );
-    var_1._id_FF25["delay"] = _id_06A5::_id_6B00();
+    var_1.v["delay"] = _id_06A5::_id_6B00();
     return var_1;
 }
 
 _id_4005( var_0 )
 {
     var_1 = _id_06A5::_id_3FA3( "oneshotfx", var_0 );
-    var_1._id_FF25["delay"] = _id_06A5::_id_6BAE();
+    var_1.v["delay"] = _id_06A5::_id_6BAE();
     return var_1;
 }
 
 _id_3FA7( var_0, var_1 )
 {
     var_2 = _id_06A5::_id_3FA3( "exploder", var_0, var_1 );
-    var_2._id_FF25["delay"] = _id_06A5::_id_6A03();
-    var_2._id_FF25["exploder_type"] = "normal";
+    var_2.v["delay"] = _id_06A5::_id_6A03();
+    var_2.v["exploder_type"] = "normal";
     return var_2;
 }
 
 _id_B265( var_0, var_1 )
 {
-    var_2 = _func_0205( "script_origin", ( 0, 0, 0 ) );
+    var_2 = spawn( "script_origin", ( 0, 0, 0 ) );
     var_2 endon( "death" );
     thread _id_470D( var_2 );
 
     if ( isdefined( var_1 ) )
     {
-        var_2._id_02EA = self._id_02EA + var_1;
-        var_2._id_0054 = self._id_0054;
-        var_2 _meth_820B( self );
+        var_2.origin = self.origin + var_1;
+        var_2.angles = self.angles;
+        var_2 linkto( self );
     }
     else
     {
-        var_2._id_02EA = self._id_02EA;
-        var_2._id_0054 = self._id_0054;
-        var_2 _meth_820B( self );
+        var_2.origin = self.origin;
+        var_2.angles = self.angles;
+        var_2 linkto( self );
     }
 
-    var_2 playlocalsound( var_0 );
+    var_2 playloopsound( var_0 );
 
     if ( !_func_0200( var_0 ) )
     {
-        var_2 _meth_809A();
+        var_2 delete();
         return;
     }
 
     self waittill( "stop sound" + var_0 );
-    var_2 stoplookat( var_0 );
-    var_2 _meth_809A();
+    var_2 stoploopsound( var_0 );
+    var_2 delete();
 }
 
 _id_E8B2( var_0 )
@@ -4147,19 +4147,19 @@ _id_470D( var_0 )
     self waittill( "death" );
 
     if ( isdefined( var_0 ) )
-        var_0 _meth_809A();
+        var_0 delete();
 }
 
 _id_4718()
 {
     self waittill( "sounddone" );
-    self _meth_809A();
+    self delete();
 }
 
 _id_4715( var_0 )
 {
     self waittill( var_0 );
-    self _meth_809A();
+    self delete();
 }
 
 _id_5578( var_0 )
@@ -4202,7 +4202,7 @@ _id_6474( var_0 )
     return _id_06AB::_id_6475( var_0 );
 }
 
-_id_F07F( var_0, var_1, var_2 )
+ter_op( var_0, var_1, var_2 )
 {
     if ( var_0 )
         return var_1;
@@ -4218,7 +4218,7 @@ _id_3F13( var_0, var_1 )
     if ( !isdefined( level._id_96CA ) )
         level._id_96CA = [];
 
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
     var_2._id_9BF7 = var_1;
     var_2._id_010E = 0;
     level._id_96CA[var_0] = var_2;
@@ -4253,9 +4253,9 @@ _id_F987( var_0 )
     wait 0.05;
 }
 
-_id_864F()
+is_player_gamepad_enabled()
 {
-    var_0 = self _meth_8427();
+    var_0 = self usinggamepad();
 
     if ( isdefined( var_0 ) )
         return var_0;
@@ -4267,7 +4267,7 @@ _id_864F()
 
 _id_4B6B( var_0, var_1 )
 {
-    return length( var_0 - var_1 );
+    return _func_0132( var_0 - var_1 );
 }
 
 _id_634B( var_0, var_1, var_2, var_3, var_4, var_5 )
@@ -4316,7 +4316,7 @@ _id_634A( var_0, var_1, var_2, var_3, var_4, var_5 )
         if ( var_11 )
             continue;
 
-        var_15 = distancesquared( var_0, var_10._id_02EA );
+        var_15 = distancesquared( var_0, var_10.origin );
 
         if ( isdefined( var_6 ) && var_15 > var_6 )
             continue;
@@ -4364,12 +4364,12 @@ _id_4FE0( var_0, var_1, var_2, var_3, var_4 )
         var_2 = -12000;
 
     if ( !isdefined( var_4 ) )
-        var_4 = _id_077A::_id_3F4E( 1 );
+        var_4 = scripts\engine\trace::_id_3F4E( 1 );
 
     if ( isdefined( var_3 ) )
-        return _id_077A::_id_C042( var_0 + var_1 * var_3, var_0 + var_2 * var_3, undefined, var_4 )["position"];
+        return scripts\engine\trace::ray_trace( var_0 + var_1 * var_3, var_0 + var_2 * var_3, undefined, var_4 )["position"];
     else
-        return _id_077A::_id_C042( var_0 + ( 0, 0, var_1 ), var_0 + ( 0, 0, var_2 ), undefined, var_4 )["position"];
+        return scripts\engine\trace::ray_trace( var_0 + ( 0, 0, var_1 ), var_0 + ( 0, 0, var_2 ), undefined, var_4 )["position"];
 }
 
 _id_B420( var_0, var_1, var_2, var_3, var_4 )
@@ -4380,19 +4380,19 @@ _id_B420( var_0, var_1, var_2, var_3, var_4 )
     if ( !isdefined( var_3 ) )
         var_3 = -12000;
 
-    var_5 = _id_077A::_id_3F4E( 1 );
+    var_5 = scripts\engine\trace::_id_3F4E( 1 );
 
     if ( isdefined( var_4 ) )
-        return _id_077A::_id_E406( var_0 + var_2 * var_4, var_0 + var_3 * var_4, var_1, undefined, var_5 )["position"];
+        return scripts\engine\trace::_id_E406( var_0 + var_2 * var_4, var_0 + var_3 * var_4, var_1, undefined, var_5 )["position"];
     else
-        return _id_077A::_id_E406( var_0 + ( 0, 0, var_2 ), var_0 + ( 0, 0, var_3 ), var_1, undefined, var_5 )["position"];
+        return scripts\engine\trace::_id_E406( var_0 + ( 0, 0, var_2 ), var_0 + ( 0, 0, var_3 ), var_1, undefined, var_5 )["position"];
 }
 
 _id_10E74( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _func_025A( var_2 - var_0 );
+    var_4 = vectornormalize( var_2 - var_0 );
     var_5 = anglestoforward( var_1 );
-    var_6 = _func_0257( var_5, var_4 );
+    var_6 = vectordot( var_5, var_4 );
     return var_6 >= var_3;
 }
 
@@ -4409,7 +4409,7 @@ _id_694A( var_0, var_1, var_2 )
 
     var_3 = _func_01FF( var_1, var_0 )[0];
 
-    if ( isdefined( var_2 ) && distancesquared( var_0, var_3._id_02EA ) > spawnstruct( var_2 ) )
+    if ( isdefined( var_2 ) && distancesquared( var_0, var_3.origin ) > _func_0214( var_2 ) )
         return undefined;
 
     return var_3;
@@ -4417,8 +4417,8 @@ _id_694A( var_0, var_1, var_2 )
 
 _id_9F50( var_0, var_1, var_2 )
 {
-    var_2 = _id_F07F( isdefined( var_2 ), var_2, ( 0, 0, 0 ) );
-    self _meth_8232( var_0, var_2 );
+    var_2 = ter_op( isdefined( var_2 ), var_2, ( 0, 0, 0 ) );
+    self missile_settargetent( var_0, var_2 );
 
     switch ( var_1 )
     {
@@ -4433,10 +4433,10 @@ _id_9F50( var_0, var_1, var_2 )
 
 _id_0FB3( var_0, var_1 )
 {
-    if ( !isdefined( level._id_0BA3 ) )
-        level._id_0BA3 = [];
+    if ( !isdefined( level._effect ) )
+        level._effect = [];
 
-    level._id_0BA3[var_0] = _func_0139( var_1 );
+    level._effect[var_0] = loadfx( var_1 );
 }
 
 _id_3EF9( var_0, var_1 )
@@ -4507,7 +4507,7 @@ _id_46C4( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
 {
     self endon( "stop_delay_thread" );
 
-    if ( _func_02DB( self ) && _func_0117( self ) )
+    if ( _func_02DB( self ) && isplayer( self ) )
         self endon( "death_or_disconnect" );
     else
         self endon( "death" );
@@ -4718,13 +4718,13 @@ _id_68ED( var_0 )
 
     if ( isdefined( self._id_017D ) )
     {
-        var_3 = self._id_017D._id_02EA;
+        var_3 = self._id_017D.origin;
 
         if ( _func_011C( self._id_017D ) && self _meth_8204( self._id_017D ) > 0 )
             var_3 = self _meth_8203( self._id_017D );
 
-        var_4 = _func_025B( var_3 - var_0._id_02EA );
-        var_2 = _func_000B( var_4[1] - var_0._id_0054[1] );
+        var_4 = vectortoangles( var_3 - var_0.origin );
+        var_2 = _func_000B( var_4[1] - var_0.angles[1] );
     }
 
     foreach ( var_6 in var_1 )
@@ -4807,7 +4807,7 @@ _id_892A( var_0 )
 _id_6877( var_0 )
 {
     var_1 = _id_6E83( var_0 );
-    var_2 = distance( self._id_02EA, var_0 );
+    var_2 = distance( self.origin, var_0 );
 
     if ( var_2 > 3 )
     {
@@ -4823,25 +4823,25 @@ _id_6E83( var_0 )
 {
     if ( _id_0F4F() )
     {
-        var_1 = anglestoforward( self._id_0054 );
-        var_2 = _func_01C1( var_1, var_0 - self._id_02EA, self._id_0054[2] * -1 );
-        var_0 = var_2 + self._id_02EA;
+        var_1 = anglestoforward( self.angles );
+        var_2 = _func_01C1( var_1, var_0 - self.origin, self.angles[2] * -1 );
+        var_0 = var_2 + self.origin;
     }
 
-    var_3 = _id_6E7E( var_0 ) - self._id_0054[1];
+    var_3 = _id_6E7E( var_0 ) - self.angles[1];
     var_3 = _func_000B( var_3 );
     return var_3;
 }
 
 _id_6E7E( var_0 )
 {
-    return vectordot( var_0 - self._id_02EA );
+    return _func_025C( var_0 - self.origin );
 }
 
 _id_6878( var_0 )
 {
     var_1 = _id_6E84( var_0 );
-    var_2 = distance( self._id_02EA, var_0 );
+    var_2 = distance( self.origin, var_0 );
 
     if ( var_2 > 3 )
     {
@@ -4855,9 +4855,9 @@ _id_6878( var_0 )
 
 _id_6E84( var_0 )
 {
-    var_1 = var_0 - self._id_02EA;
-    var_2 = _func_01C3( var_1, self._id_0054 );
-    var_3 = vectordot( var_2 );
+    var_1 = var_0 - self.origin;
+    var_2 = _func_01C3( var_1, self.angles );
+    var_3 = _func_025C( var_2 );
     var_4 = _func_000B( var_3 );
     return var_4;
 }
@@ -4865,7 +4865,7 @@ _id_6E84( var_0 )
 _id_6875( var_0 )
 {
     var_1 = getparent( var_0 );
-    var_2 = distance( self._id_02EA, var_0 );
+    var_2 = distance( self.origin, var_0 );
 
     if ( var_2 > 3 )
     {
@@ -4879,8 +4879,8 @@ _id_6875( var_0 )
 
 getparent( var_0 )
 {
-    var_1 = var_0 - self._id_02EA;
-    var_2 = _func_01C3( var_1, self._id_0054 );
+    var_1 = var_0 - self.origin;
+    var_2 = _func_01C3( var_1, self.angles );
     var_3 = _func_02FF( var_2 );
     var_4 = _func_000B( var_3 );
     return var_4;
@@ -4920,12 +4920,12 @@ _id_6C63( var_0, var_1, var_2 )
 
     var_3 = ( 0, 0, 0 );
 
-    if ( _func_0117( var_1 ) )
+    if ( isplayer( var_1 ) )
         var_3 = var_1 getvelocity();
-    else if ( _func_0104( var_1 ) )
+    else if ( isai( var_1 ) )
         var_3 = var_1._id_04B7;
 
-    var_4 = var_1._id_02EA + var_3 * var_0;
+    var_4 = var_1.origin + var_3 * var_0;
     return _id_6877( var_4 );
 }
 
@@ -4941,12 +4941,12 @@ _id_6C64( var_0, var_1, var_2 )
 
     var_3 = ( 0, 0, 0 );
 
-    if ( _func_0117( var_1 ) )
+    if ( isplayer( var_1 ) )
         var_3 = var_1 getvelocity();
-    else if ( _func_0104( var_1 ) )
+    else if ( isai( var_1 ) )
         var_3 = var_1._id_04B7;
 
-    var_4 = var_1._id_02EA + var_3 * var_0;
+    var_4 = var_1.origin + var_3 * var_0;
     return _id_6878( var_4 );
 }
 
@@ -4962,16 +4962,16 @@ _id_6C62( var_0, var_1, var_2 )
 
     var_3 = ( 0, 0, 0 );
 
-    if ( _func_0117( var_1 ) )
+    if ( isplayer( var_1 ) )
         var_3 = var_1 getvelocity();
-    else if ( _func_0104( var_1 ) )
+    else if ( isai( var_1 ) )
         var_3 = var_1._id_04B7;
 
-    var_4 = var_1._id_02EA + var_3 * var_0;
+    var_4 = var_1.origin + var_3 * var_0;
     return _id_6875( var_4 );
 }
 
-_id_85A4( var_0, var_1 )
+is_equal( var_0, var_1 )
 {
     if ( isdefined( var_0 ) && isdefined( var_1 ) && var_0 == var_1 )
         return 1;
@@ -4986,8 +4986,8 @@ _id_B4FE()
 
 _id_D192()
 {
-    if ( !isdefined( level.createcrate ) )
-        level.createcrate = getdvar( "#x3fe36ca33ae6a645e" ) != "";
+    if ( !isdefined( level._id_3FB7 ) )
+        level._id_3FB7 = getdvar( "#x3fe36ca33ae6a645e" ) != "";
 }
 
 _id_5BFC( var_0, var_1, var_2 )
@@ -5055,7 +5055,7 @@ _id_5C0D( var_0, var_1 )
         if ( _id_5BE0( var_1 ) )
             return var_1;
 
-        var_2 = level waittill_any_return( var_0, var_1 );
+        var_2 = level _id_10895( var_0, var_1 );
         return var_2;
     }
 }
@@ -5479,7 +5479,7 @@ _id_5BF3( var_0, var_1 )
 
 _id_83BA( var_0, var_1 )
 {
-    if ( isalive( var_0 ) )
+    if ( _func_0106( var_0 ) )
         _id_5C06( var_0 );
     else
         _id_5C04( var_0 );
@@ -5511,14 +5511,14 @@ _id_A5C5( var_0, var_1, var_2, var_3, var_4, var_5 )
 _id_678A( var_0 )
 {
     if ( !isdefined( var_0 ) )
-        var_0 = self._id_0457;
+        var_0 = self.target;
 
     var_1 = getentarray( var_0, "targetname" );
 
     if ( var_1.size > 0 )
         return var_1;
 
-    if ( _id_06BB::_id_8A2C() )
+    if ( scripts\common\utility::_id_8A2C() )
     {
         var_1 = call [[ level._id_6B7B ]]( var_0, "targetname" );
 
@@ -5544,18 +5544,18 @@ _id_AF57()
 
 _id_E1E6( var_0, var_1 )
 {
-    if ( !isdefined( var_1 ) && isdefined( self._id_0054 ) )
-        var_1 = self._id_0054;
+    if ( !isdefined( var_1 ) && isdefined( self.angles ) )
+        var_1 = self.angles;
 
-    if ( !isdefined( var_0 ) && isdefined( self._id_02EA ) )
-        var_0 = self._id_02EA;
+    if ( !isdefined( var_0 ) && isdefined( self.origin ) )
+        var_0 = self.origin;
     else if ( !isdefined( var_0 ) )
         var_0 = ( 0, 0, 0 );
 
-    var_2 = _func_0205( "script_origin", var_0 );
+    var_2 = spawn( "script_origin", var_0 );
 
     if ( isdefined( var_1 ) )
-        var_2._id_0054 = var_1;
+        var_2.angles = var_1;
 
     return var_2;
 }
@@ -5567,7 +5567,7 @@ _id_65D3( var_0 )
     if ( var_1.size > 0 )
         return var_1;
 
-    if ( _id_06BB::_id_8A2C() )
+    if ( scripts\common\utility::_id_8A2C() )
     {
         var_1 = call [[ level._id_6B7B ]]( var_0, "script_noteworthy" );
 
@@ -5632,7 +5632,7 @@ _id_751A( var_0 )
 
 _id_108E2( var_0, var_1, var_2 )
 {
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
     var_3 endon( "complete" );
     var_3 _id_46C3( var_2, ::_id_D0A1, "complete" );
     self waittillmatch( var_0, var_1 );
@@ -5640,7 +5640,7 @@ _id_108E2( var_0, var_1, var_2 )
 
 _id_108E3( var_0, var_1, var_2 )
 {
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
     var_3 endon( "complete" );
     var_3 _id_46C3( var_2, ::_id_D0A1, "complete" );
     self waittill( var_0, var_1 );
@@ -5683,7 +5683,7 @@ _id_0F8F( var_0, var_1, var_2 )
     if ( level._id_490E.size == 5 )
     {
         var_3 = level._id_490E[0];
-        level._id_490E = _id_1B9C( level._id_490E, 0 );
+        level._id_490E = array_remove_index( level._id_490E, 0 );
         _id_FB59();
         var_3 thread _id_480F();
     }
@@ -5734,29 +5734,29 @@ _id_0F8F( var_0, var_1, var_2 )
     if ( isdefined( level._id_4942 ) )
         var_5 = level._id_4942;
 
-    var_6 = _func_0153();
-    var_6._id_5102 = "font";
-    var_6._id_01B5 = "default";
-    var_6._id_01B6 = var_5;
-    var_6._id_04DE = 0;
-    var_6._id_04E1 = 0;
-    var_6._id_04DB = 0;
-    var_6._id_0201 = int( level._id_5E0F * var_5 );
-    var_6._id_10FD2 = 0;
-    var_6._id_10FF0 = 0;
+    var_6 = newhudelem();
+    var_6.elemtype = "font";
+    var_6.font = "default";
+    var_6.fontscale = var_5;
+    var_6.x = 0;
+    var_6.y = 0;
+    var_6.width = 0;
+    var_6.height = int( level.fontheight * var_5 );
+    var_6.xoffset = 0;
+    var_6.yoffset = 0;
     var_7 = level._id_490E.size;
     level._id_490E[var_7] = var_6;
     var_6._id_01C0 = 1;
-    var_6._id_03BD = 20;
-    var_6._id_04DE = 40;
-    var_6._id_04E1 = 260 + var_7 * ( 12 * var_5 );
+    var_6.sort = 20;
+    var_6.x = 40;
+    var_6.y = 260 + var_7 * ( 12 * var_5 );
     var_6._id_024D = "" + var_4 + var_0 + ": ^7" + var_1;
-    var_6._id_0047 = 0;
+    var_6.alpha = 0;
     var_6 fadeovertime( 0.2 );
-    var_6._id_0047 = 1;
+    var_6.alpha = 1;
     var_6 endon( "death" );
     wait 8;
-    level._id_490E = _id_1B96( level._id_490E, var_6 );
+    level._id_490E = array_remove( level._id_490E, var_6 );
     _id_FB59();
     var_6 thread _id_480F();
 }
@@ -5770,11 +5770,11 @@ _id_480F()
 
     self endon( "death" );
     self fadeovertime( 0.2 );
-    self movegravity( 0.2 );
-    self._id_04E1 = self._id_04E1 - 12 * var_0;
-    self._id_0047 = 0;
+    self moveovertime( 0.2 );
+    self.y = self.y - 12 * var_0;
+    self.alpha = 0;
     wait 0.2;
-    self delete();
+    self destroy();
 }
 
 _id_FB59()
@@ -5788,8 +5788,8 @@ _id_FB59()
 
     foreach ( var_3, var_2 in level._id_490E )
     {
-        var_2 movegravity( 0.2 );
-        var_2._id_04E1 = 260 + var_3 * 12 * var_0;
+        var_2 moveovertime( 0.2 );
+        var_2.y = 260 + var_3 * 12 * var_0;
     }
 }
 
@@ -5830,11 +5830,11 @@ _id_39CA( var_0, var_1, var_2, var_3 )
     var_4 = var_1 - var_0;
     var_5 = var_3 - var_2;
     var_6 = var_0 - var_2;
-    var_7 = _func_0257( var_4, var_4 );
-    var_8 = _func_0257( var_4, var_5 );
-    var_9 = _func_0257( var_5, var_5 );
-    var_10 = _func_0257( var_4, var_6 );
-    var_11 = _func_0257( var_5, var_6 );
+    var_7 = vectordot( var_4, var_4 );
+    var_8 = vectordot( var_4, var_5 );
+    var_9 = vectordot( var_5, var_5 );
+    var_10 = vectordot( var_4, var_6 );
+    var_11 = vectordot( var_5, var_6 );
     var_12 = var_7 * var_9 - var_8 * var_8;
     var_13 = var_12;
     var_14 = var_12;
@@ -5912,10 +5912,10 @@ _id_39CA( var_0, var_1, var_2, var_3 )
 
 _id_857F()
 {
-    return _func_011C( self ) && !isai( self );
+    return _func_011C( self ) && !isalive( self );
 }
 
-_id_759F( var_0, var_1 )
+hastag( var_0, var_1 )
 {
     if ( !isdefined( var_0 ) || var_0 == "" )
         return 0;
@@ -5934,9 +5934,9 @@ _id_759F( var_0, var_1 )
     {
         for ( var_4 = 0; var_4 < var_3; var_4++ )
         {
-            var_5 = _func_0243( _func_00BF( var_0, var_4 ) );
+            var_5 = tolower( _func_00BF( var_0, var_4 ) );
 
-            if ( var_5 == _func_0243( var_1 ) )
+            if ( var_5 == tolower( var_1 ) )
             {
                 level._id_750A[var_2] = 1;
                 return 1;
@@ -5984,7 +5984,7 @@ _id_B8DD( var_0, var_1 )
     [[ level._id_5D92 ]]( var_0, var_1 );
 }
 
-_id_D288( var_0 )
+set_movement_speed( var_0 )
 {
     self._id_0B3E._id_C565 = var_0;
     self _meth_85E0( var_0 );
@@ -6036,19 +6036,19 @@ _id_A1AA( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
     var_7 = _func_0077( var_0, var_3, var_4 );
     var_8 = _func_00B0( var_0, var_3, var_4 );
-    var_8 = _func_01C2( var_8, ( 0, var_2[1] - var_7, 0 ) );
+    var_8 = rotatevector( var_8, ( 0, var_2[1] - var_7, 0 ) );
     var_9 = var_1 - var_8;
     var_10 = var_2[1] - var_7;
     var_11 = ( var_2[0], var_10, var_2[2] );
     var_12 = 1.0;
-    var_13 = _func_0130( var_1 - self._id_02EA );
+    var_13 = length( var_1 - self.origin );
 
     if ( var_6 && var_13 > 0 )
     {
-        var_12 = _func_0130( var_8 ) / var_13;
+        var_12 = length( var_8 ) / var_13;
         var_12 = clamp( var_12, 0.5, 2.0 );
 
-        if ( _func_0104( self ) )
+        if ( isai( self ) )
             self _meth_85F3( var_0, var_12 );
         else
             self _meth_82E7( var_0, var_12 );
@@ -6070,7 +6070,7 @@ _id_A1AA( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 _id_10889( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14 )
 {
     self endon( "death" );
-    var_15 = _func_020F();
+    var_15 = spawnstruct();
     var_1 childthread _id_10925( var_2, var_15 );
 
     if ( isdefined( var_3 ) && isdefined( var_4 ) )
@@ -6142,7 +6142,7 @@ _id_6965()
 
 _id_30D8( var_0, var_1, var_2, var_3 )
 {
-    if ( _func_02DB( self ) || _func_0104( self ) )
+    if ( _func_02DB( self ) || isai( self ) )
         var_4 = [ self, var_1 ];
     else
         var_4 = [ var_1 ];
@@ -6150,13 +6150,13 @@ _id_30D8( var_0, var_1, var_2, var_3 )
     if ( isdefined( var_2 ) )
         var_4 = _id_1B72( var_4, var_2 );
 
-    if ( _id_077A::_id_C047( var_0, var_1._id_02EA, var_4, var_3 ) )
+    if ( scripts\engine\trace::ray_trace_passed( var_0, var_1.origin, var_4, var_3 ) )
         return 1;
 
-    if ( _id_077A::_id_C047( var_0, var_1 gettagorigin( "j_spine4" ), var_4, var_3 ) )
+    if ( scripts\engine\trace::ray_trace_passed( var_0, var_1 gettagorigin( "j_spine4" ), var_4, var_3 ) )
         return 1;
 
-    if ( _id_077A::_id_C047( var_0, var_1 geteye(), var_4, var_3 ) )
+    if ( scripts\engine\trace::ray_trace_passed( var_0, var_1 geteye(), var_4, var_3 ) )
         return 1;
 
     return 0;
@@ -6171,10 +6171,10 @@ _id_1BA4( var_0, var_1 )
 
     foreach ( var_4 in var_0 )
     {
-        if ( !isai( var_4 ) )
+        if ( !isalive( var_4 ) )
             continue;
 
-        if ( _func_0104( var_4 ) && var_1 && var_4._id_0168 )
+        if ( isai( var_4 ) && var_1 && var_4._id_0168 )
             continue;
 
         var_2[var_2.size] = var_4;
@@ -6195,10 +6195,10 @@ _id_1BA6( var_0, var_1 )
         if ( !isdefined( var_4 ) )
             continue;
 
-        if ( !isai( var_4 ) )
+        if ( !isalive( var_4 ) )
             continue;
 
-        if ( _func_0104( var_4 ) && var_1 && var_4._id_0168 )
+        if ( isai( var_4 ) && var_1 && var_4._id_0168 )
             continue;
 
         var_2[var_2.size] = var_4;
@@ -6244,12 +6244,12 @@ _id_5456( var_0 )
 
 _id_1B80( var_0, var_1 )
 {
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
 
     foreach ( var_4 in var_0 )
     {
         if ( var_4 _id_544E( var_1 ) )
-            var_0 = _id_1B96( var_0, var_4 );
+            var_0 = array_remove( var_0, var_4 );
     }
 
     _id_1BBA( var_0, ::_id_1B81, var_2, var_1 );
@@ -6473,7 +6473,7 @@ _id_653D()
 
 _id_89A0( var_0, var_1, var_2 )
 {
-    if ( spawnstruct( var_0[0] - var_1[0] ) + spawnstruct( var_0[1] - var_1[1] ) <= spawnstruct( var_2 ) )
+    if ( _func_0214( var_0[0] - var_1[0] ) + _func_0214( var_0[1] - var_1[1] ) <= _func_0214( var_2 ) )
         return 1;
 
     return 0;
@@ -6499,7 +6499,7 @@ _id_891C()
     var_0 = 1;
     var_1 = 0;
 
-    if ( _id_864F() )
+    if ( is_player_gamepad_enabled() )
         var_1 = _id_C56A( "mountButtonConfig" );
     else
         var_1 = _id_C56A( "mountButtonConfigKBM" );
@@ -6518,7 +6518,7 @@ _id_6AA8( var_0 )
 _id_EA5D( var_0 )
 {
     var_1 = ( 0, 0, 0 );
-    var_2 = _func_021A( var_0, " " );
+    var_2 = strtok( var_0, " " );
 
     if ( var_2.size == 3 )
         var_1 = ( float( var_2[0] ), float( var_2[1] ), float( var_2[2] ) );
@@ -6530,13 +6530,13 @@ _id_5A93( var_0, var_1, var_2, var_3 )
 {
     var_4 = "";
 
-    if ( !_func_0121( var_0, var_2 ) )
+    if ( !issubstr( var_0, var_2 ) )
         return var_0;
 
-    if ( !_func_0121( var_0, var_1 ) )
+    if ( !issubstr( var_0, var_1 ) )
         return var_0;
 
-    var_5 = _func_021A( var_0, var_1 );
+    var_5 = strtok( var_0, var_1 );
 
     if ( var_5.size == 1 )
         return var_0;
@@ -6561,7 +6561,7 @@ _id_634D( var_0 )
         return [];
 
     var_1 = [];
-    var_2 = _func_021A( var_0, ",", 1 );
+    var_2 = strtok( var_0, ",", 1 );
     var_1 = var_2;
 
     if ( var_2.size > 0 )
@@ -6609,7 +6609,7 @@ _id_86BC( var_0 )
         var_0 = "-0." + _id_EA4F( var_0 );
     }
 
-    if ( _func_0121( var_0, "." ) )
+    if ( issubstr( var_0, "." ) )
     {
         while ( _func_010B( var_0, "0" ) )
             var_0 = _func_043A( var_0, "0" );
@@ -6661,8 +6661,8 @@ _id_BCDC( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_5077( var_0, var_1 )
 {
-    var_0 = _func_0243( var_0 );
-    _func_01D1( var_0, var_1 );
+    var_0 = tolower( var_0 );
+    setdvarifuninitialized( var_0, var_1 );
 }
 
 _id_DD58( var_0, var_1, var_2 )
@@ -6914,7 +6914,7 @@ _id_BD04( var_0, var_1 )
         return var_0;
 
     var_1 = _id_FF6A( var_1, 0 );
-    var_1 = int( _func_0148( var_1, 6 ) );
+    var_1 = int( min( var_1, 6 ) );
     var_2 = int( var_0 + 0.0001 );
     var_3 = _func_0431( var_0 - var_2, 0.0001 );
 

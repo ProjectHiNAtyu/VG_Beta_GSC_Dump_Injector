@@ -83,13 +83,13 @@ _id_6578()
 
 _id_E134( var_0 )
 {
-    if ( !isai( var_0 ) )
+    if ( !isalive( var_0 ) )
         return 1;
 
-    if ( _id_06BB::_id_8A2C() && !isdefined( var_0._id_5AF8 ) )
-        var_0 _id_077B::_id_108C3( "finished spawning", "death" );
+    if ( scripts\common\utility::_id_8A2C() && !isdefined( var_0._id_5AF8 ) )
+        var_0 scripts\engine\utility::_id_108C3( "finished spawning", "death" );
 
-    if ( isai( var_0 ) )
+    if ( isalive( var_0 ) )
         return 0;
 
     return 1;
@@ -97,8 +97,8 @@ _id_E134( var_0 )
 
 _id_7284()
 {
-    if ( _func_0104( self ) )
-        _id_077B::_id_CD54( "anim_placeweaponon", self._id_04CE, "none" );
+    if ( isai( self ) )
+        scripts\engine\utility::_id_CD54( "anim_placeweaponon", self._id_04CE, "none" );
     else if ( isdefined( self._id_58ED ) )
         _id_7285();
     else
@@ -110,7 +110,7 @@ _id_7285()
     if ( isdefined( self._id_58ED ) )
     {
         for ( var_0 = self._id_58ED.size - 1; var_0 >= 0; var_0-- )
-            self destroy( self._id_58ED[var_0] );
+            self detach( self._id_58ED[var_0] );
 
         self._id_58ED = undefined;
     }
@@ -120,28 +120,28 @@ _id_7275( var_0 )
 {
     foreach ( var_2 in var_0 )
     {
-        if ( _func_0121( var_2, "toprail" ) || _func_0121( var_2, "railcust" ) )
+        if ( issubstr( var_2, "toprail" ) || issubstr( var_2, "railcust" ) )
         {
             if ( var_0.size > 1 )
             {
-                var_0 = _id_077B::_id_1B96( var_0, var_2 );
-                var_0 = _id_077B::array_add( var_0, var_2, 1 );
+                var_0 = scripts\engine\utility::array_remove( var_0, var_2 );
+                var_0 = scripts\engine\utility::_id_1B8B( var_0, var_2, 1 );
             }
         }
     }
 
     foreach ( var_2 in var_0 )
-        self _meth_801E( var_2 );
+        self attach( var_2 );
 
     self._id_58ED = var_0;
 }
 
 _id_7283()
 {
-    if ( _func_0104( self ) )
-        _id_077B::_id_CD54( "anim_placeweaponon", self._id_04CE, "right" );
+    if ( isai( self ) )
+        scripts\engine\utility::_id_CD54( "anim_placeweaponon", self._id_04CE, "right" );
     else
-        _id_077B::_id_CD54( "fa_reattach_gun" );
+        scripts\engine\utility::_id_CD54( "fa_reattach_gun" );
 }
 
 _id_D22F( var_0, var_1 )
@@ -177,8 +177,8 @@ _id_B981( var_0 )
     if ( !isdefined( level._id_3E15 ) )
         level._id_3E15 = [];
 
-    if ( isalive( var_0 ) )
-        level._id_3E15 = _id_077B::_id_1B75( level._id_3E15, var_0 );
+    if ( _func_0106( var_0 ) )
+        level._id_3E15 = scripts\engine\utility::_id_1B75( level._id_3E15, var_0 );
     else
         level._id_3E15[level._id_3E15.size] = var_0;
 }
@@ -196,7 +196,7 @@ _id_FE19( var_0, var_1, var_2 )
         var_1 = "tag_gunner";
 
     if ( self _meth_81CB() )
-        self _meth_8415();
+        self unlink();
 
     if ( _id_0694::_id_23A6() )
         self _meth_83EB();
@@ -214,7 +214,7 @@ _id_FE19( var_0, var_1, var_2 )
 
         if ( isdefined( var_0._id_729F ) )
         {
-            var_6 = _func_01C2( var_0._id_729F, var_5 );
+            var_6 = rotatevector( var_0._id_729F, var_5 );
             self _meth_80F9( var_4 + var_6, var_5, 10000 );
         }
         else
@@ -225,17 +225,17 @@ _id_FE19( var_0, var_1, var_2 )
 
         if ( istrue( var_2 ) )
         {
-            self _meth_820B( var_0, var_1 );
+            self linkto( var_0, var_1 );
             return;
         }
 
-        self _meth_820B( var_0 );
+        self linkto( var_0 );
         return;
     }
     else
     {
-        self _meth_80F9( var_0._id_02EA, var_0._id_0054, 10000 );
-        self _meth_820B( var_0 );
+        self _meth_80F9( var_0.origin, var_0.angles, 10000 );
+        self linkto( var_0 );
     }
 }
 
@@ -247,7 +247,7 @@ _id_E8E9( var_0 )
         var_0 = 1;
 
     if ( var_0 )
-        self _meth_8415();
+        self unlink();
 
     self._id_0B3E._id_C566 = undefined;
     self._id_0B3E._id_C567 = undefined;
@@ -263,9 +263,9 @@ _id_67D5( var_0 )
     else if ( self tagexists( "tag_turret_pitch" ) )
         var_2 = self gettagorigin( "tag_turret_pitch" );
     else
-        var_2 = self._id_02EA;
+        var_2 = self.origin;
 
-    var_3 = anglestoforward( ( 0, self._id_0054[1], 0 ) );
+    var_3 = anglestoforward( ( 0, self.angles[1], 0 ) );
     var_4 = var_2 - var_3 * 20;
     var_5 = var_4 - ( 0, 0, 100 );
     var_6 = _func_0193( var_4, var_5, self );
@@ -290,7 +290,7 @@ _id_E8B6()
 {
     self notify( "stop_magic_bullet_shield" );
 
-    if ( _func_0104( self ) )
+    if ( isai( self ) )
     {
         if ( isdefined( self._id_A9F7 ) )
         {
@@ -321,16 +321,16 @@ _id_9914()
 
 _id_9916( var_0 )
 {
-    if ( _func_0104( self ) )
+    if ( isai( self ) )
     {
 
     }
     else
-        self._id_01FF = 100000;
+        self.health = 100000;
 
     self endon( "internal_stop_magic_bullet_shield" );
 
-    if ( _func_0104( self ) )
+    if ( isai( self ) )
     {
         self._id_A9F7 = self._id_006F;
         self._id_006F = 0.1;
@@ -378,14 +378,14 @@ _id_5A95( var_0 )
 
     if ( isdefined( var_4 ) )
     {
-        var_5 = var_4._id_0054;
-        var_6 = var_4._id_02EA;
+        var_5 = var_4.angles;
+        var_6 = var_4.origin;
 
-        if ( !_func_0121( var_4._id_048F, "Prone" ) )
+        if ( !issubstr( var_4._id_048F, "Prone" ) )
         {
-            if ( _func_0121( var_4._id_048F, "Left" ) )
+            if ( issubstr( var_4._id_048F, "Left" ) )
                 var_5 = var_5 + ( 0, 90, 0 );
-            else if ( _func_0121( var_4._id_048F, "Right" ) || _func_0121( var_4._id_048F, "Cover Crouch" ) || _func_0121( var_4._id_048F, "Conceal" ) || _func_0121( var_4._id_048F, "Cover Stand" ) )
+            else if ( issubstr( var_4._id_048F, "Right" ) || issubstr( var_4._id_048F, "Cover Crouch" ) || issubstr( var_4._id_048F, "Conceal" ) || issubstr( var_4._id_048F, "Cover Stand" ) )
                 var_5 = var_5 - ( 0, 90, 0 );
         }
 
@@ -447,7 +447,7 @@ _id_12F2()
 
 _id_129A( var_0, var_1 )
 {
-    if ( !isdefined( var_0 ) || !isai( var_0 ) )
+    if ( !isdefined( var_0 ) || !isalive( var_0 ) )
         return;
 
     var_2 = var_0 _id_12F4( var_1 );
@@ -461,7 +461,7 @@ _id_129A( var_0, var_1 )
 
 _id_122A( var_0 )
 {
-    if ( !isdefined( var_0 ) || !isai( var_0 ) )
+    if ( !isdefined( var_0 ) || !isalive( var_0 ) )
         return;
 
     var_1 = var_0 _id_12F1();

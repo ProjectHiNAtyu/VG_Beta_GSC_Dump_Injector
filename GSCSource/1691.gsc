@@ -3,8 +3,8 @@
 
 _id_D5EF( var_0 )
 {
-    if ( !_id_06BB::_id_8A2C() )
-        self setmode( var_0[_func_01B8( var_0.size )] );
+    if ( !scripts\common\utility::_id_8A2C() )
+        self setmodel( var_0[randomint( var_0.size )] );
     else
     {
         if ( !isdefined( level._id_33D6 ) )
@@ -13,11 +13,11 @@ _id_D5EF( var_0 )
         var_1 = _id_652C( var_0 );
 
         if ( !isdefined( var_1 ) )
-            var_1 = var_0[_func_01B8( var_0.size )];
+            var_1 = var_0[randomint( var_0.size )];
 
         level._id_33D6["last_used"] = var_1;
         level._id_33D6[var_1]++;
-        self setmode( var_1 );
+        self setmodel( var_1 );
     }
 }
 
@@ -46,14 +46,14 @@ _id_652C( var_0 )
         var_1[var_1.size] = var_3;
     }
 
-    var_5 = _id_BFC7( var_1 );
+    var_5 = random( var_1 );
     return var_0[var_5];
 }
 
 _id_BB5D( var_0 )
 {
     for ( var_1 = 0; var_1 < var_0.size; var_1++ )
-        _func_01A8( var_0[var_1] );
+        precachemodel( var_0[var_1] );
 }
 
 _id_1D63( var_0, var_1 )
@@ -62,7 +62,7 @@ _id_1D63( var_0, var_1 )
         level._id_33D4 = [];
 
     if ( !isdefined( level._id_33D4[var_0] ) )
-        level._id_33D4[var_0] = _func_01B8( var_1.size );
+        level._id_33D4[var_0] = randomint( var_1.size );
 
     var_2 = ( level._id_33D4[var_0] + 1 ) % var_1.size;
 
@@ -70,7 +70,7 @@ _id_1D63( var_0, var_1 )
         var_2 = self._id_CCCC % var_1.size;
 
     level._id_33D4[var_0] = var_2;
-    self _meth_801E( var_1[var_2], "", 1 );
+    self attach( var_1[var_2], "", 1 );
     self._id_75F6 = var_1[var_2];
 }
 
@@ -80,17 +80,17 @@ _id_1D62( var_0, var_1 )
         level._id_33D3 = [];
 
     if ( !isdefined( level._id_33D3[var_0] ) )
-        level._id_33D3[var_0] = _func_01B8( var_1.size );
+        level._id_33D3[var_0] = randomint( var_1.size );
 
     var_2 = ( level._id_33D3[var_0] + 1 ) % var_1.size;
     level._id_33D3[var_0] = var_2;
-    self _meth_801E( var_1[var_2] );
+    self attach( var_1[var_2] );
     self._id_75AA = var_1[var_2];
 }
 
 _id_A432()
 {
-    self detach();
+    self _meth_809D();
     var_0 = self._id_17B1;
 
     if ( !isdefined( var_0 ) )
@@ -104,11 +104,11 @@ _id_CB24()
 {
     var_0["gunHand"] = self._id_17B1;
     var_0["gunInHand"] = self._id_17B2;
-    var_0["model"] = self._id_02AE;
+    var_0["model"] = self.model;
     var_0["hatModel"] = self._id_75AA;
 
-    if ( isdefined( self._id_02BA ) )
-        var_0["name"] = self._id_02BA;
+    if ( isdefined( self.name ) )
+        var_0["name"] = self.name;
     else
     {
 
@@ -127,14 +127,14 @@ _id_CB24()
 
 _id_9591( var_0 )
 {
-    self detach();
+    self _meth_809D();
     self._id_17B1 = var_0["gunHand"];
     self._id_17B2 = var_0["gunInHand"];
-    self setmode( var_0["model"] );
+    self setmodel( var_0["model"] );
     self._id_75AA = var_0["hatModel"];
 
     if ( isdefined( var_0["name"] ) )
-        self._id_02BA = var_0["name"];
+        self.name = var_0["name"];
     else
     {
 
@@ -144,7 +144,7 @@ _id_9591( var_0 )
     var_2 = var_1.size;
 
     for ( var_3 = 0; var_3 < var_2; var_3++ )
-        self _meth_801E( var_1[var_3]["model"], var_1[var_3]["tag"] );
+        self attach( var_1[var_3]["model"], var_1[var_3]["tag"] );
 }
 
 _id_031A( var_0 )
@@ -158,12 +158,12 @@ _id_031A( var_0 )
 
     }
 
-    _func_01A8( var_0["model"] );
+    precachemodel( var_0["model"] );
     var_1 = var_0["attach"];
     var_2 = var_1.size;
 
     for ( var_3 = 0; var_3 < var_2; var_3++ )
-        _func_01A8( var_1[var_3]["model"] );
+        precachemodel( var_1[var_3]["model"] );
 }
 
 _id_66B7( var_0, var_1, var_2, var_3 )
@@ -171,21 +171,21 @@ _id_66B7( var_0, var_1, var_2, var_3 )
     var_4 = undefined;
 
     if ( isdefined( var_3 ) )
-        var_5 = _func_021A( var_3, "_" );
+        var_5 = strtok( var_3, "_" );
     else
-        var_5 = _func_021A( self._id_00DE, "_" );
+        var_5 = strtok( self.classname, "_" );
 
-    if ( !_id_06BB::_id_8A2C() )
+    if ( !scripts\common\utility::_id_8A2C() )
     {
-        if ( isdefined( self._id_0309["modelIndex"] ) && self._id_0309["modelIndex"] < var_0 )
-            return self._id_0309["modelIndex"];
+        if ( isdefined( self.pers["modelIndex"] ) && self.pers["modelIndex"] < var_0 )
+            return self.pers["modelIndex"];
 
-        var_4 = _func_01B8( var_0 );
-        self._id_0309["modelIndex"] = var_4;
+        var_4 = randomint( var_0 );
+        self.pers["modelIndex"] = var_4;
         return var_4;
     }
     else if ( var_5.size <= 2 )
-        return _func_01B8( var_0 );
+        return randomint( var_0 );
 
     var_6 = "auto";
 
@@ -208,7 +208,7 @@ _id_66B7( var_0, var_1, var_2, var_3 )
         var_4 = _id_652B( var_2, var_6 );
 
         if ( !isdefined( var_4 ) )
-            var_4 = _func_01B8( var_2.size );
+            var_4 = randomint( var_2.size );
     }
 
     if ( !isdefined( level._id_33D5[var_6][var_2[var_4]] ) )
@@ -243,7 +243,7 @@ _id_652B( var_0, var_1 )
         var_2[var_2.size] = var_4;
     }
 
-    return _id_BFC7( var_2 );
+    return random( var_2 );
 }
 
 _id_81B2( var_0, var_1, var_2 )
@@ -254,17 +254,17 @@ _id_81B2( var_0, var_1, var_2 )
 
 _id_66C7( var_0 )
 {
-    return _func_01B8( var_0 );
+    return randomint( var_0 );
 }
 
-_id_BFC7( var_0 )
+random( var_0 )
 {
-    return var_0[_func_01B8( var_0.size )];
+    return var_0[randomint( var_0.size )];
 }
 
 _id_66CB( var_0 )
 {
-    var_1 = _func_01B6( 1 );
+    var_1 = randomfloat( 1 );
 
     for ( var_2 = 0; var_2 < var_0.size; var_2++ )
     {

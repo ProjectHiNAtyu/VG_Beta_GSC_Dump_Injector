@@ -8,7 +8,7 @@ _id_8A2C()
         var_0 = getdvar( "#x32ea5e908954bfea7" );
         var_1 = "";
 
-        for ( var_2 = 0; var_2 < _func_0148( var_0.size, 3 ); var_2++ )
+        for ( var_2 = 0; var_2 < min( var_0.size, 3 ); var_2++ )
             var_1 = var_1 + var_0[var_2];
 
         level._id_8A2C = var_1 != "mp_" && var_1 != "cp_";
@@ -19,7 +19,7 @@ _id_8A2C()
 
 _id_87BA()
 {
-    return _id_077B::_id_EA55( getdvar( "#x32ea5e908954bfea7" ), "cp_" );
+    return scripts\engine\utility::string_starts_with( getdvar( "#x32ea5e908954bfea7" ), "cp_" );
 }
 
 _id_99BF( var_0, var_1, var_2, var_3 )
@@ -36,7 +36,7 @@ _id_99BF( var_0, var_1, var_2, var_3 )
         var_4 = [[ level._id_5D49 ]]( var_0, var_1 );
 
     if ( _func_02DB( self ) && !isdefined( var_3 ) )
-        self setmode( getweaponmodel( var_4 ) );
+        self setmodel( getweaponmodel( var_4 ) );
 
     var_5 = getweaponattachmentworldmodels( var_4 );
 
@@ -44,7 +44,7 @@ _id_99BF( var_0, var_1, var_2, var_3 )
     {
         if ( istrue( var_2 ) )
         {
-            var_8 = _func_021A( var_7, "_" );
+            var_8 = strtok( var_7, "_" );
 
             foreach ( var_11, var_10 in var_8 )
             {
@@ -66,11 +66,11 @@ _id_99BF( var_0, var_1, var_2, var_3 )
 
         if ( istrue( var_3 ) )
         {
-            _func_01A8( var_7 );
+            precachemodel( var_7 );
             continue;
         }
 
-        self _meth_801E( var_7 );
+        self attach( var_7 );
     }
 
     if ( !istrue( var_3 ) )
@@ -94,25 +94,25 @@ _id_99BF( var_0, var_1, var_2, var_3 )
 
         foreach ( var_7 in var_5 )
         {
-            if ( _func_0121( var_7, "reflex" ) )
+            if ( issubstr( var_7, "reflex" ) )
             {
                 self hidepart( "tag_sight_on" );
                 continue;
             }
 
-            if ( _func_0121( var_7, "holo" ) )
+            if ( issubstr( var_7, "holo" ) )
             {
                 self hidepart( "tag_sight_on" );
                 continue;
             }
 
-            if ( _func_0121( var_7, "acog" ) )
+            if ( issubstr( var_7, "acog" ) )
             {
                 self hidepart( "tag_sight_on" );
                 continue;
             }
 
-            if ( _func_0121( var_7, "snprscope" ) )
+            if ( issubstr( var_7, "snprscope" ) )
                 self hidepart( "tag_sight_on" );
         }
     }
@@ -124,7 +124,7 @@ _id_99BE( var_0, var_1, var_2, var_3, var_4 )
     {
         var_5 = 0;
 
-        if ( _func_02DB( self ) || _func_0104( self ) )
+        if ( _func_02DB( self ) || isai( self ) )
             var_5 = 1;
     }
 
@@ -142,9 +142,9 @@ _id_99BE( var_0, var_1, var_2, var_3, var_4 )
     if ( !istrue( var_4 ) )
     {
         if ( isdefined( var_2 ) )
-            self _meth_801E( getweaponmodel( var_0 ), var_2 );
+            self attach( getweaponmodel( var_0 ), var_2 );
         else
-            self _meth_801E( getweaponmodel( var_0 ) );
+            self attach( getweaponmodel( var_0 ) );
     }
 
     self._id_1D5D[0] = var_0;
@@ -154,7 +154,7 @@ _id_99BE( var_0, var_1, var_2, var_3, var_4 )
     {
         if ( istrue( var_3 ) )
         {
-            var_10 = _func_021A( var_9, "_" );
+            var_10 = strtok( var_9, "_" );
 
             foreach ( var_13, var_12 in var_10 )
             {
@@ -176,12 +176,12 @@ _id_99BE( var_0, var_1, var_2, var_3, var_4 )
 
         if ( istrue( var_4 ) )
         {
-            _func_01A8( var_9 );
+            precachemodel( var_9 );
             continue;
         }
 
-        self _meth_801E( var_9 );
-        self._id_1D5D = _id_077B::_id_1B63( self._id_1D5D, var_9 );
+        self attach( var_9 );
+        self._id_1D5D = scripts\engine\utility::array_add( self._id_1D5D, var_9 );
     }
 
     if ( !istrue( var_4 ) )
@@ -205,19 +205,19 @@ _id_99BE( var_0, var_1, var_2, var_3, var_4 )
 
         foreach ( var_9 in var_7 )
         {
-            if ( _func_0121( var_9, "reflex" ) )
+            if ( issubstr( var_9, "reflex" ) )
             {
                 self hidepart( "tag_sight_on" );
                 continue;
             }
 
-            if ( _func_0121( var_9, "holo" ) )
+            if ( issubstr( var_9, "holo" ) )
             {
                 self hidepart( "tag_sight_on" );
                 continue;
             }
 
-            if ( _func_0121( var_9, "acog" ) )
+            if ( issubstr( var_9, "acog" ) )
                 self hidepart( "tag_sight_on" );
         }
     }
@@ -235,10 +235,10 @@ _id_66B4( var_0, var_1 )
     if ( isdefined( var_1 ) && var_1.size > 0 )
     {
         if ( var_0.size < 1 )
-            return var_1[_func_01B8( var_1.size )];
+            return var_1[randomint( var_1.size )];
 
-        if ( _func_01B8( 4 ) )
-            return var_1[_func_01B8( var_1.size )];
+        if ( randomint( 4 ) )
+            return var_1[randomint( var_1.size )];
     }
 
     var_2 = [];
@@ -248,10 +248,10 @@ _id_66B4( var_0, var_1 )
 
     foreach ( var_5, var_4 in var_0 )
     {
-        if ( _func_0113( var_0[var_5][0] ) )
+        if ( isint( var_0[var_5][0] ) )
         {
-            if ( _func_01B8( 100 ) < var_0[var_5][0] )
-                var_2 = _id_077B::_id_1B63( var_2, var_4[_func_01B8( var_4.size - 1 ) + 1] );
+            if ( randomint( 100 ) < var_0[var_5][0] )
+                var_2 = scripts\engine\utility::array_add( var_2, var_4[randomint( var_4.size - 1 ) + 1] );
 
             continue;
         }
@@ -264,22 +264,22 @@ _id_66B4( var_0, var_1 )
 
     foreach ( var_5, var_9 in var_2 )
     {
-        if ( _func_0121( var_9, "grip" ) )
+        if ( issubstr( var_9, "grip" ) )
         {
             var_7 = var_5;
             continue;
         }
 
-        if ( _func_0121( var_9, "ub_" ) )
+        if ( issubstr( var_9, "ub_" ) )
             var_6 = var_5;
     }
 
     if ( isdefined( var_6 ) && isdefined( var_7 ) )
     {
-        if ( _func_01B8( 3 ) == 0 )
-            var_2 = _id_077B::_id_1B9C( var_2, var_6 );
+        if ( randomint( 3 ) == 0 )
+            var_2 = scripts\engine\utility::array_remove_index( var_2, var_6 );
         else
-            var_2 = _id_077B::_id_1B9C( var_2, var_7 );
+            var_2 = scripts\engine\utility::array_remove_index( var_2, var_7 );
     }
 
     return var_2;
@@ -292,7 +292,7 @@ _id_683C( var_0, var_1 )
 
     foreach ( var_7, var_5 in var_0 )
     {
-        var_6 = _id_077B::_id_1B83( var_3, var_5 );
+        var_6 = scripts\engine\utility::_id_1B83( var_3, var_5 );
 
         if ( isdefined( var_6 ) )
         {
@@ -336,7 +336,7 @@ _id_683C( var_0, var_1 )
         }
     }
 
-    var_18 = _func_01B8( 100 );
+    var_18 = randomint( 100 );
 
     foreach ( var_7, var_10 in var_2 )
     {
@@ -405,14 +405,14 @@ _id_3752( var_0 )
 _id_83B7( var_0, var_1 )
 {
     var_2 = 2500;
-    var_3 = _id_077B::_id_F07F( isdefined( self._id_97E0 ), self._id_97E0, 75 );
+    var_3 = scripts\engine\utility::ter_op( isdefined( self._id_97E0 ), self._id_97E0, 75 );
 
     while ( var_0 + var_1 > gettime() )
     {
         var_4 = self _meth_84A5( var_3 );
         var_4 = var_4 + ( 0, 0, 60 );
 
-        if ( distancesquared( self._id_02EA, var_4 ) < var_2 )
+        if ( distancesquared( self.origin, var_4 ) < var_2 )
             break;
 
         self _meth_8343( var_4 );
@@ -449,7 +449,7 @@ _id_8AEB( var_0 )
 
     foreach ( var_3 in var_1 )
     {
-        if ( _func_0121( var_3, "epic" ) )
+        if ( issubstr( var_3, "epic" ) )
             return 1;
     }
 
@@ -463,10 +463,10 @@ _id_87D2( var_0 )
     if ( !isdefined( var_1 ) )
         return 0;
 
-    if ( _func_036F( var_1 ) )
+    if ( isnullweapon( var_1 ) )
         return 0;
 
-    if ( var_1._id_0084 != getweaponbasename( var_0 ) )
+    if ( var_1.basename != getweaponbasename( var_0 ) )
         return 0;
 
     return 1;
@@ -477,15 +477,15 @@ _id_9D73()
     var_0 = [ "mars_killstreak", "iw7_jackal_support_designator" ];
     var_1 = self getcurrentweapon();
 
-    if ( _id_077B::_id_1B78( var_0, var_1._id_0084 ) )
+    if ( scripts\engine\utility::array_contains( var_0, var_1.basename ) )
         return 1;
 
     if ( self israisingweapon() )
         return 1;
 
-    if ( self isswitchingweapon() )
+    if ( self _meth_81EB() )
     {
-        if ( _id_077B::_id_1B78( var_0, var_1._id_0084 ) )
+        if ( scripts\engine\utility::array_contains( var_0, var_1.basename ) )
             return 1;
     }
 
@@ -512,13 +512,13 @@ _id_10A0B()
         if ( _func_010E( self._id_0138 ) )
             return 1;
 
-        if ( isdefined( self._id_013E ) && _func_0121( self._id_013E._id_0084, "molotov" ) )
+        if ( isdefined( self._id_013E ) && issubstr( self._id_013E.basename, "molotov" ) )
             return 1;
 
         if ( _id_10A0C() )
             return 1;
 
-        if ( self._id_0138 == "MOD_MELEE" && isdefined( self._id_006E ) && isdefined( self._id_006E._id_0492 ) && self._id_006E._id_0492 == "c8" )
+        if ( self._id_0138 == "MOD_MELEE" && isdefined( self.attacker ) && isdefined( self.attacker._id_0492 ) && self.attacker._id_0492 == "c8" )
             return 1;
     }
 
@@ -526,10 +526,10 @@ _id_10A0B()
     {
         var_0 = anim._id_8F8E * anim._id_8F8E * 1.2 * 1.2;
 
-        if ( distancesquared( self._id_02EA, anim._id_8F8C ) < var_0 )
+        if ( distancesquared( self.origin, anim._id_8F8C ) < var_0 )
         {
             var_1 = var_0 * 0.5 * 0.5;
-            self._id_9CAF = distancesquared( self._id_02EA, anim._id_8F8D ) < var_1;
+            self._id_9CAF = distancesquared( self.origin, anim._id_8F8D ) < var_1;
             return 1;
         }
     }
@@ -542,7 +542,7 @@ _id_69A5( var_0 )
     if ( !isdefined( var_0 ) )
         return "unknown";
 
-    var_0 = _func_0243( var_0 );
+    var_0 = tolower( var_0 );
 
     switch ( var_0 )
     {
@@ -576,10 +576,10 @@ _id_89B5( var_0 )
 {
     if ( isdefined( var_0._id_7589 ) && var_0._id_7589 )
     {
-        var_1 = self._id_02EA - var_0._id_02EA;
-        var_2 = _func_025A( ( var_1[0], var_1[1], 0 ) );
-        var_3 = anglestoforward( var_0._id_0054 );
-        var_4 = _func_0257( var_3, var_1 );
+        var_1 = self.origin - var_0.origin;
+        var_2 = vectornormalize( ( var_1[0], var_1[1], 0 ) );
+        var_3 = anglestoforward( var_0.angles );
+        var_4 = vectordot( var_3, var_1 );
 
         if ( var_0._id_758A )
         {
@@ -601,14 +601,14 @@ _id_89B4( var_0 )
     var_4 = 0;
     var_5 = 0;
     var_6 = 0;
-    var_7 = anglestoforward( self._id_0054 );
-    var_8 = _func_025A( var_0._id_02EA - self._id_02EA );
-    var_9 = _func_0257( var_8, var_7 );
+    var_7 = anglestoforward( self.angles );
+    var_8 = vectornormalize( var_0.origin - self.origin );
+    var_9 = vectordot( var_8, var_7 );
 
     if ( var_9 > 0.5 )
         var_4 = 1;
 
-    if ( var_2._id_0084 == "iw6_axe_mp" || var_2._id_0084 == "iw7_axe_zm" )
+    if ( var_2.basename == "iw6_axe_mp" || var_2.basename == "iw7_axe_zm" )
     {
         var_6 = self getcurrentweaponclipammo();
         var_5 = 1;
@@ -616,9 +616,9 @@ _id_89B4( var_0 )
 
     if ( var_5 && var_3 && var_4 && var_6 > 0 )
     {
-        self _meth_83B5( var_2, var_6 - 1 );
-        self _meth_827B( "crate_impact" );
-        earthquake( 0.75, 0.5, self._id_02EA, 100 );
+        self setweaponammoclip( var_2, var_6 - 1 );
+        self playsound( "crate_impact" );
+        earthquake( 0.75, 0.5, self.origin, 100 );
         var_1 = 1;
     }
 
@@ -789,19 +789,19 @@ _id_4786( var_0 )
         switch ( var_0 )
         {
             case "cqb":
-                _id_077B::_id_D288( 120 * self._id_03C8 );
+                scripts\engine\utility::set_movement_speed( 120 * self._id_03C8 );
                 var_0 = "combat";
                 break;
             case "combat":
                 _id_38C9();
                 break;
             case "sprint":
-                _id_077B::_id_D288( 225 * self._id_03C8 );
+                scripts\engine\utility::set_movement_speed( 225 * self._id_03C8 );
                 var_0 = "combat";
                 break;
             case "alert":
             case "patrol":
-                _id_077B::_id_D288( 56 );
+                scripts\engine\utility::set_movement_speed( 56 );
                 break;
         }
     }
@@ -839,33 +839,33 @@ _id_38A3()
 
 _id_8AEE( var_0 )
 {
-    var_1 = _func_034D( var_0 );
-    return isdefined( self._id_04D5[var_1] );
+    var_1 = getcompleteweaponname( var_0 );
+    return isdefined( self.weaponinfo[var_1] );
 }
 
 _id_82A0( var_0 )
 {
-    var_1 = _func_034D( var_0 );
-    self._id_04D5[var_1] = _func_020F();
-    self._id_04D5[var_1]._id_0318 = "none";
-    self._id_04D5[var_1]._id_7531 = 1;
-    scripts\anim\weaponlist::_id_D8BD( var_0._id_00DE );
+    var_1 = getcompleteweaponname( var_0 );
+    self.weaponinfo[var_1] = spawnstruct();
+    self.weaponinfo[var_1]._id_0318 = "none";
+    self.weaponinfo[var_1]._id_7531 = 1;
+    scripts\anim\weaponlist::_id_D8BD( var_0.classname );
 
     if ( _id_8A2C() )
     {
         var_2 = _func_00EE( var_0 );
 
-        if ( isdefined( var_2 ) && var_2 != "" && ( _func_0121( var_2, "drum" ) || _func_0121( var_2, "mag" ) ) )
+        if ( isdefined( var_2 ) && var_2 != "" && ( issubstr( var_2, "drum" ) || issubstr( var_2, "mag" ) ) )
         {
-            self._id_04D5[var_1]._id_FE30 = 1;
+            self.weaponinfo[var_1]._id_FE30 = 1;
             return;
         }
 
-        self._id_04D5[var_1]._id_FE30 = 0;
+        self.weaponinfo[var_1]._id_FE30 = 0;
         return;
     }
     else
-        self._id_04D5[var_1]._id_FE30 = 0;
+        self.weaponinfo[var_1]._id_FE30 = 0;
 }
 
 _id_1521()
@@ -913,18 +913,18 @@ _id_1521()
 
 _id_14F6( var_0, var_1, var_2 )
 {
-    level._id_151A[_func_0243( var_0 )] = var_1;
-    level.allow_funcs_getters[_func_0243( var_0 )] = var_2;
+    level._id_151A[tolower( var_0 )] = var_1;
+    level.allow_funcs_getters[tolower( var_0 )] = var_2;
 }
 
 _id_154C( var_0, var_1 )
 {
-    level._id_1555[_func_0243( var_0 )] = var_1;
+    level._id_1555[tolower( var_0 )] = var_1;
 }
 
 _id_1554( var_0, var_1, var_2 )
 {
-    var_0 = _func_0243( var_0 );
+    var_0 = tolower( var_0 );
     _id_14FB( level._id_1555[var_0], var_1, var_2 );
 }
 
@@ -932,7 +932,7 @@ _id_14FB( var_0, var_1, var_2 )
 {
     foreach ( var_4 in var_0 )
     {
-        var_4 = _func_0243( var_4 );
+        var_4 = tolower( var_4 );
         self thread [[ level._id_151A[var_4] ]]( var_1, var_2 );
     }
 }
@@ -967,47 +967,47 @@ allow_array_is_allowed( var_0 )
 
 _allow_get_internal( var_0 )
 {
-    var_0 = _func_0243( var_0 );
+    var_0 = tolower( var_0 );
     var_1 = level.allow_funcs_getters[var_0];
 
     if ( isdefined( var_1 ) )
         return [[ var_1 ]]();
 
-    return _id_06B0::_id_85F2( var_0 );
+    return scripts\common\input_allow::_id_85F2( var_0 );
 }
 
 _id_156C( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "weaponSwitchClip", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "weaponSwitchClip", var_0, var_1 );
     self _meth_8598( !istrue( var_2 ) );
 }
 
 _id_870B()
 {
-    return _id_06B0::_id_85F2( "weaponSwitchClip" );
+    return scripts\common\input_allow::_id_85F2( "weaponSwitchClip" );
 }
 
 _id_1562( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "usability", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "usability", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
     {
         if ( var_2 )
             self enableusability();
         else
-            self _meth_80AF();
+            self disableusability();
     }
 }
 
 _id_86DF()
 {
-    return _id_06B0::_id_85F2( "usability" );
+    return scripts\common\input_allow::_id_85F2( "usability" );
 }
 
 _id_1565( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "weapon", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "weapon", var_0, var_1 );
 
     if ( isdefined( var_2 ) && var_2 )
     {
@@ -1021,58 +1021,58 @@ _id_1565( var_0, var_1 )
         if ( isdefined( level._id_1567 ) )
             self [[ level._id_1567 ]]( 0 );
 
-        self disableweaponpickup();
+        self disableweapons();
     }
 }
 
 _id_8702()
 {
-    return _id_06B0::_id_85F2( "weapon" );
+    return scripts\common\input_allow::_id_85F2( "weapon" );
 }
 
 _id_156B( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "weaponSwitch", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "weaponSwitch", var_0, var_1 );
 
     if ( isdefined( var_2 ) && var_2 )
         self enableweaponswitch();
     else if ( isdefined( var_2 ) && !var_2 )
-        self disableweapons();
+        self disableweaponswitch();
 }
 
 _id_870A()
 {
-    return _id_06B0::_id_85F2( "weaponSwitch" );
+    return scripts\common\input_allow::_id_85F2( "weaponSwitch" );
 }
 
 _id_1552( var_0, var_1 )
 {
-    _id_06B0::_id_1522( "scriptWeaponSwitch", var_0, var_1 );
+    scripts\common\input_allow::allow_input_internal( "scriptWeaponSwitch", var_0, var_1 );
 }
 
 _id_8692()
 {
-    return _id_06B0::_id_85F2( "scriptWeaponSwitch" );
+    return scripts\common\input_allow::_id_85F2( "scriptWeaponSwitch" );
 }
 
 _id_1569( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "weaponPickup", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "weaponPickup", var_0, var_1 );
 
     if ( isdefined( var_2 ) && var_2 )
         self enableweaponpickup();
     else if ( isdefined( var_2 ) && !var_2 )
-        self disableusability();
+        self disableweaponpickup();
 }
 
 _id_8707()
 {
-    return _id_06B0::_id_85F2( "weaponPickup" );
+    return scripts\common\input_allow::_id_85F2( "weaponPickup" );
 }
 
 allow_equipment( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "offhandWeaps", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "offhandWeaps", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
     {
@@ -1085,7 +1085,7 @@ allow_equipment( var_0, var_1 )
         }
         else
         {
-            self _meth_80AB();
+            self disableoffhandweapons();
 
             if ( !isdefined( level._id_8920 ) || level._id_8920 == 0 )
                 _id_1538( 0, "allow_offhand_weapons" );
@@ -1095,41 +1095,41 @@ allow_equipment( var_0, var_1 )
 
 _id_8636()
 {
-    return _id_06B0::_id_85F2( "offhandWeaps" );
+    return scripts\common\input_allow::_id_85F2( "offhandWeaps" );
 }
 
 _id_1536( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "offhandPrimaryWeaps", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "offhandPrimaryWeaps", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
     {
         if ( var_2 )
-            self enablemissilehint();
+            self enableoffhandprimaryweapons();
         else
-            self _meth_85A5();
+            self disableoffhandprimaryweapons();
     }
 }
 
 _id_8633()
 {
-    return _id_06B0::_id_85F2( "offhandPrimaryWeaps" );
+    return scripts\common\input_allow::_id_85F2( "offhandPrimaryWeaps" );
 }
 
 _id_1537( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "offhandSecondaryWeaps", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "offhandSecondaryWeaps", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
     {
         if ( var_2 )
         {
-            self disableoffhandsecondaryweapons();
+            self enableoffhandsecondaryweapons();
             _id_1538( 1, "allow_offhand_secondary_weapons" );
         }
         else
         {
-            self _meth_8488();
+            self disableoffhandsecondaryweapons();
             _id_1538( 0, "allow_offhand_secondary_weapons" );
         }
     }
@@ -1137,12 +1137,12 @@ _id_1537( var_0, var_1 )
 
 _id_8634()
 {
-    return _id_06B0::_id_85F2( "offhandSecondaryWeaps" );
+    return scripts\common\input_allow::_id_85F2( "offhandSecondaryWeaps" );
 }
 
 _id_1538( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "offhandShieldWeaps", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "offhandShieldWeaps", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
         self _meth_8508( var_2 );
@@ -1150,98 +1150,98 @@ _id_1538( var_0, var_1 )
 
 _id_8635()
 {
-    return _id_06B0::_id_85F2( "offhandShieldWeaps" );
+    return scripts\common\input_allow::_id_85F2( "offhandShieldWeaps" );
 }
 
 _id_1548( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "prone", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "prone", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
-        self allowmelee( var_2 );
+        self allowprone( var_2 );
 }
 
 _id_8671()
 {
-    return _id_06B0::_id_85F2( "prone" );
+    return scripts\common\input_allow::_id_85F2( "prone" );
 }
 
 _id_1508( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "crouch", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "crouch", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
-        self _meth_800B( var_2 );
+        self allowcrouch( var_2 );
 }
 
 _id_8574()
 {
-    return _id_06B0::_id_85F2( "crouch" );
+    return scripts\common\input_allow::_id_85F2( "crouch" );
 }
 
 _id_155A( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "stand", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "stand", var_0, var_1 );
+
+    if ( isdefined( var_2 ) )
+        self allowstand( var_2 );
+}
+
+_id_86B6()
+{
+    return scripts\common\input_allow::_id_85F2( "stand" );
+}
+
+_id_1559( var_0, var_1 )
+{
+    var_2 = scripts\common\input_allow::allow_input_internal( "sprint", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
         self allowsprint( var_2 );
 }
 
-_id_86B6()
-{
-    return _id_06B0::_id_85F2( "stand" );
-}
-
-_id_1559( var_0, var_1 )
-{
-    var_2 = _id_06B0::_id_1522( "sprint", var_0, var_1 );
-
-    if ( isdefined( var_2 ) )
-        self _meth_8013( var_2 );
-}
-
 _id_1525( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "jog", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "jog", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
-        _func_01EA( "#x32df02c36d269f8f9", var_2 );
+        setsaveddvar( "#x32df02c36d269f8f9", var_2 );
 }
 
 _id_86B5()
 {
-    return _id_06B0::_id_85F2( "sprint" );
+    return scripts\common\input_allow::_id_85F2( "sprint" );
 }
 
 _id_152B( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "mantle", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "mantle", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
-        self allowmountside( var_2 );
+        self allowmantle( var_2 );
 }
 
 _id_8614()
 {
-    return _id_06B0::_id_85F2( "mantle" );
+    return scripts\common\input_allow::_id_85F2( "mantle" );
 }
 
 _id_1516( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "fire", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "fire", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
-        self _meth_800D( var_2 );
+        self allowfire( var_2 );
 }
 
 _id_85B4()
 {
-    return _id_06B0::_id_85F2( "fire" );
+    return scripts\common\input_allow::_id_85F2( "fire" );
 }
 
 _id_14F7( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "ads", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "ads", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
         self allowads( var_2 );
@@ -1249,40 +1249,40 @@ _id_14F7( var_0, var_1 )
 
 _id_852A()
 {
-    return _id_06B0::_id_85F2( "ads" );
+    return scripts\common\input_allow::_id_85F2( "ads" );
 }
 
 _id_1526( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "jump", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "jump", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
-        self allowfire( var_2 );
+        self allowjump( var_2 );
 }
 
 _id_85FC()
 {
-    return _id_06B0::_id_85F2( "jump" );
+    return scripts\common\input_allow::_id_85F2( "jump" );
 }
 
 _id_1564( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "wallrun", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "wallrun", var_0, var_1 );
 
     if ( isdefined( var_2 ) && var_2 )
-        self allowmovement( 1 );
+        self allowwallrun( 1 );
     else if ( isdefined( var_2 ) && !var_2 )
-        self allowmovement( 0 );
+        self allowwallrun( 0 );
 }
 
 _id_86FF()
 {
-    return _id_06B0::_id_85F2( "wallrun" );
+    return scripts\common\input_allow::_id_85F2( "wallrun" );
 }
 
 _id_150C( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "doubleJump", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "doubleJump", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
     {
@@ -1292,27 +1292,27 @@ _id_150C( var_0, var_1 )
             self _meth_8485( 0, self._id_4E82 );
             self._id_4E81 = undefined;
             self._id_4E82 = undefined;
-            self _meth_8476( 1 );
+            self allowdoublejump( 1 );
         }
         else
         {
-            self._id_4E81 = self hidefromplayer( 0 );
+            self._id_4E81 = self _meth_847C( 0 );
             self._id_4E82 = self _meth_8484( 0 );
             self _meth_847D( 0, 0 );
             self _meth_8485( 0, 0 );
-            self _meth_8476( 0 );
+            self allowdoublejump( 0 );
         }
     }
 }
 
 _id_8593()
 {
-    return _id_06B0::_id_85F2( "doubleJump" );
+    return scripts\common\input_allow::_id_85F2( "doubleJump" );
 }
 
 _id_1539( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "offhand_throwback", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "offhand_throwback", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
     {
@@ -1325,17 +1325,17 @@ _id_1539( var_0, var_1 )
 
 is_offhand_throwback_allowed()
 {
-    return _id_06B0::_id_85F2( "offhand_throwback" );
+    return scripts\common\input_allow::_id_85F2( "offhand_throwback" );
 }
 
 _id_152C( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "melee", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "melee", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
     {
-        if ( _func_0117( self ) )
-            self allowlean( var_2 );
+        if ( isplayer( self ) )
+            self allowmelee( var_2 );
         else if ( isdefined( var_2 ) && var_2 == 0 )
             self._id_4D87 = 1;
         else
@@ -1345,12 +1345,12 @@ _id_152C( var_0, var_1 )
 
 _id_8617()
 {
-    return _id_06B0::_id_85F2( "melee" );
+    return scripts\common\input_allow::_id_85F2( "melee" );
 }
 
 _id_152D( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "melee_victim", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "melee_victim", var_0, var_1 );
 
     if ( isdefined( var_2 ) && var_2 == 0 )
         self._id_4D87 = 1;
@@ -1360,25 +1360,25 @@ _id_152D( var_0, var_1 )
 
 is_melee_victim_allowed()
 {
-    return _id_06B0::_id_85F2( "melee_victim" );
+    return scripts\common\input_allow::_id_85F2( "melee_victim" );
 }
 
 _id_1557( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "slide", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "slide", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
-        self allowwallrun( var_2 );
+        self allowslide( var_2 );
 }
 
 _id_86A1()
 {
-    return _id_06B0::_id_85F2( "slide" );
+    return scripts\common\input_allow::_id_85F2( "slide" );
 }
 
 _id_1514( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "execution_attack", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "execution_attack", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
     {
@@ -1391,7 +1391,7 @@ _id_1514( var_0, var_1 )
 
 _id_1515( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "execution_victim", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "execution_victim", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
     {
@@ -1404,37 +1404,37 @@ _id_1515( var_0, var_1 )
 
 _id_309F()
 {
-    return _id_06B0::_id_85F2( "execution_attack" );
+    return scripts\common\input_allow::_id_85F2( "execution_attack" );
 }
 
 _id_3092()
 {
-    return _id_06B0::_id_85F2( "execution_victim" );
+    return scripts\common\input_allow::_id_85F2( "execution_victim" );
 }
 
 _id_1527( var_0, var_1 )
 {
-    _id_06B0::_id_1522( "killstreaks", var_0, var_1 );
+    scripts\common\input_allow::allow_input_internal( "killstreaks", var_0, var_1 );
 }
 
 _id_1506( var_0, var_1 )
 {
-    _id_06B0::_id_1522( "cp_munitions", var_0, var_1 );
+    scripts\common\input_allow::allow_input_internal( "cp_munitions", var_0, var_1 );
 }
 
 is_cp_munitions_allowed()
 {
-    return _id_06B0::_id_85F2( "cp_munitions" );
+    return scripts\common\input_allow::_id_85F2( "cp_munitions" );
 }
 
 _id_8601()
 {
-    return _id_06B0::_id_85F2( "killstreaks" );
+    return scripts\common\input_allow::_id_85F2( "killstreaks" );
 }
 
 _id_155F( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "supers", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "supers", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
     {
@@ -1447,12 +1447,12 @@ _id_155F( var_0, var_1 )
 
 _id_86C1()
 {
-    return _id_06B0::_id_85F2( "supers" );
+    return scripts\common\input_allow::_id_85F2( "supers" );
 }
 
 _id_1556( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "shellshock", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "shellshock", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
     {
@@ -1468,13 +1468,13 @@ _id_1556( var_0, var_1 )
 
 _id_869C()
 {
-    return _id_06B0::_id_85F2( "shellshock" );
+    return scripts\common\input_allow::_id_85F2( "shellshock" );
 }
 
 _id_6442()
 {
     if ( !isdefined( self._id_4E81 ) )
-        return self hidefromplayer( 0 );
+        return self _meth_847C( 0 );
 
     return self._id_4E81;
 }
@@ -1505,55 +1505,55 @@ _id_D1DB( var_0 )
 
 _id_1529( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "lean", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "lean", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
-        self allowjump( var_2 );
+        self allowlean( var_2 );
 }
 
 _id_8606()
 {
-    return _id_06B0::_id_85F2( "lean" );
+    return scripts\common\input_allow::_id_85F2( "lean" );
 }
 
 _id_1530( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "mount_top", var_0, var_1 );
-
-    if ( isdefined( var_2 ) )
-        self allowreload( var_2 );
-}
-
-_id_861E()
-{
-    return _id_06B0::_id_85F2( "mount_top" );
-}
-
-_id_152F( var_0, var_1 )
-{
-    var_2 = _id_06B0::_id_1522( "mount_side", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "mount_top", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
         self allowmounttop( var_2 );
 }
 
+_id_861E()
+{
+    return scripts\common\input_allow::_id_85F2( "mount_top" );
+}
+
+_id_152F( var_0, var_1 )
+{
+    var_2 = scripts\common\input_allow::allow_input_internal( "mount_side", var_0, var_1 );
+
+    if ( isdefined( var_2 ) )
+        self allowmountside( var_2 );
+}
+
 _id_861D()
 {
-    return _id_06B0::_id_85F2( "mount_side" );
+    return scripts\common\input_allow::_id_85F2( "mount_side" );
 }
 
 _id_1504( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "cinematic_motion", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "cinematic_motion", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
     {
         if ( var_2 )
         {
-            if ( isdefined( level._id_030F._id_36F8 ) )
-                level._id_030F _meth_8636( level._id_030F._id_36F8 );
+            if ( isdefined( level.player._id_36F8 ) )
+                level.player _meth_8636( level.player._id_36F8 );
             else
-                level._id_030F _meth_8637();
+                level.player _meth_8637();
         }
         else
             self _meth_8636( "disabled" );
@@ -1562,7 +1562,7 @@ _id_1504( var_0, var_1 )
 
 _id_8556()
 {
-    return _id_06B0::_id_85F2( "cinematic_motion" );
+    return scripts\common\input_allow::_id_85F2( "cinematic_motion" );
 }
 
 _id_1509( var_0, var_1 )
@@ -1572,7 +1572,7 @@ _id_1509( var_0, var_1 )
 
     }
 
-    var_2 = _id_06B0::_id_1522( "death", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "death", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
     {
@@ -1587,61 +1587,61 @@ _id_1509( var_0, var_1 )
 
 _id_8580()
 {
-    return _id_06B0::_id_85F2( "death" );
+    return scripts\common\input_allow::_id_85F2( "death" );
 }
 
 _id_154D( var_0, var_1, var_2 )
 {
-    var_3 = _id_06B0::_id_1522( "reload", var_0, var_1 );
+    var_3 = scripts\common\input_allow::allow_input_internal( "reload", var_0, var_1 );
 
     if ( isdefined( var_3 ) )
     {
         if ( var_3 )
-            self _meth_84B0( 1 );
+            self allowreload( 1 );
         else
         {
-            self _meth_84B0( 0 );
+            self allowreload( 0 );
 
             if ( !isdefined( var_2 ) || !var_2 )
-                self _meth_8568();
+                self cancelreload();
         }
     }
 }
 
 _id_8682()
 {
-    return _id_06B0::_id_85F2( "reload" );
+    return scripts\common\input_allow::_id_85F2( "reload" );
 }
 
 _id_14FD( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "autoreload", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "autoreload", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
     {
         if ( var_2 )
             self enableautoreload();
         else
-            self _meth_80A2();
+            self disableautoreload();
     }
 }
 
 _id_8548()
 {
-    return _id_06B0::_id_85F2( "autoreload" );
+    return scripts\common\input_allow::_id_85F2( "autoreload" );
 }
 
 _id_1531( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "movement", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "movement", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
-        self allowdoublejump( var_2 );
+        self allowmovement( var_2 );
 }
 
 is_movement_allowed()
 {
-    return _id_06B0::_id_85F2( "movement" );
+    return scripts\common\input_allow::_id_85F2( "movement" );
 }
 
 _id_14FA( var_0, var_1 )
@@ -1649,7 +1649,7 @@ _id_14FA( var_0, var_1 )
     if ( !_id_B64C() )
         return;
 
-    var_2 = _id_06B0::_id_1522( "armor", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "armor", var_0, var_1 );
 
     if ( isdefined( self._id_1AFE ) && isdefined( self._id_1AFE._id_F2E2 ) )
         self [[ self._id_1AFE._id_F2E2 ]]();
@@ -1660,72 +1660,72 @@ _id_8543()
     if ( !_id_B64C() )
         return 0;
 
-    return _id_06B0::_id_85F2( "armor" );
+    return scripts\common\input_allow::_id_85F2( "armor" );
 }
 
 _id_1535( var_0, var_1, var_2 )
 {
     var_3 = 2;
-    var_4 = _id_06B0::_id_1522( "NVG", var_0, var_1, var_2 );
+    var_4 = scripts\common\input_allow::allow_input_internal( "NVG", var_0, var_1, var_2 );
 
     if ( isdefined( var_4 ) )
     {
         if ( var_4 )
         {
-            if ( !_func_0104( self ) )
-                self _meth_82D0( var_3, "nightvision" );
+            if ( !isai( self ) )
+                self setactionslot( var_3, "nightvision" );
         }
-        else if ( !_func_0104( self ) )
-            self _meth_82D0( var_3, "" );
+        else if ( !isai( self ) )
+            self setactionslot( var_3, "" );
     }
 }
 
 _id_862C()
 {
-    return _id_06B0::_id_85F2( "NVG" );
+    return scripts\common\input_allow::_id_85F2( "NVG" );
 }
 
 _id_1507( var_0, var_1 )
 {
-    _id_06B0::_id_1522( "crateUse", var_0, var_1 );
+    scripts\common\input_allow::allow_input_internal( "crateUse", var_0, var_1 );
 }
 
 _id_8570()
 {
-    return _id_06B0::_id_85F2( "crateUse" );
+    return scripts\common\input_allow::_id_85F2( "crateUse" );
 }
 
 _id_1563( var_0, var_1 )
 {
-    var_2 = _id_06B0::_id_1522( "vehicle_use", var_0, var_1 );
+    var_2 = scripts\common\input_allow::allow_input_internal( "vehicle_use", var_0, var_1 );
 
     if ( isdefined( var_2 ) )
-        vectornormalize( self, var_0 );
+        _func_025F( self, var_0 );
 }
 
 _id_86F6()
 {
-    return _id_06B0::_id_85F2( "vehicle_use" );
+    return scripts\common\input_allow::_id_85F2( "vehicle_use" );
 }
 
 _id_1505( var_0, var_1 )
 {
-    _id_06B0::_id_1522( "cough_gesture", var_0, var_1 );
+    scripts\common\input_allow::allow_input_internal( "cough_gesture", var_0, var_1 );
 }
 
 _id_856C()
 {
-    return _id_06B0::_id_85F2( "cough_gesture" );
+    return scripts\common\input_allow::_id_85F2( "cough_gesture" );
 }
 
 _id_1528( var_0, var_1 )
 {
-    _id_06B0::_id_1522( "ladder_placement", var_0, var_1 );
+    scripts\common\input_allow::allow_input_internal( "ladder_placement", var_0, var_1 );
 }
 
 _id_8602()
 {
-    return _id_06B0::_id_85F2( "ladder_placement" );
+    return scripts\common\input_allow::_id_85F2( "ladder_placement" );
 }
 
 _id_B64C()
@@ -1740,12 +1740,12 @@ _id_B6C3()
 
 _id_E232()
 {
-    return _id_06BD::_id_10263( self );
+    return scripts\common\vehicle::_id_10263( self );
 }
 
 _id_71B7( var_0, var_1 )
 {
-    return _id_077B::_id_4FE0( var_0, 0, -100000, var_1 );
+    return scripts\engine\utility::_id_4FE0( var_0, 0, -100000, var_1 );
 }
 
 _id_10091()
@@ -1770,7 +1770,7 @@ _id_1012F( var_0 )
 
 _id_100A0( var_0, var_1 )
 {
-    _id_06BD::_id_1022A( var_0, var_1 );
+    scripts\common\vehicle::_id_1022A( var_0, var_1 );
 }
 
 _id_6E23( var_0, var_1 )
@@ -1801,18 +1801,18 @@ _id_8AF8()
 
 _id_B7B4( var_0, var_1 )
 {
-    var_2 = _func_02C4( [ "physicscontents_characterproxy" ] );
+    var_2 = physics_createcontents( [ "physicscontents_characterproxy" ] );
     var_3 = ( var_1, var_1, var_1 );
     var_4 = var_0 - var_3;
     var_5 = var_0 + var_3;
     var_6 = isbotmatchmakingenabled( var_4, var_5, var_2, [] );
-    var_6 = _id_077B::_id_1BA8( var_6 );
+    var_6 = scripts\engine\utility::_id_1BA8( var_6 );
     return var_6;
 }
 
 _id_B7A3( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _func_02C4( [ "physicscontents_characterproxy" ] );
+    var_4 = physics_createcontents( [ "physicscontents_characterproxy" ] );
     var_5 = 1000;
 
     if ( isdefined( var_3 ) )
@@ -1826,13 +1826,13 @@ _id_B7A3( var_0, var_1, var_2, var_3 )
         var_2 = [];
 
     var_9 = isbotmatchmakingenabled( var_7, var_8, var_4, var_2 );
-    var_9 = _id_077B::_id_1BA8( var_9 );
+    var_9 = scripts\engine\utility::_id_1BA8( var_9 );
     var_10 = [];
     var_11 = var_1 * var_1;
 
     foreach ( var_13 in var_9 )
     {
-        var_15 = distance2dsquared( var_13._id_02EA, var_0 );
+        var_15 = distance2dsquared( var_13.origin, var_0 );
 
         if ( var_15 < var_11 )
             var_10[var_10.size] = var_13;
@@ -1849,7 +1849,7 @@ _id_B7AC( var_0, var_1 )
 
     foreach ( var_6 in var_2 )
     {
-        var_7 = distancesquared( var_6._id_02EA, var_0 );
+        var_7 = distancesquared( var_6.origin, var_0 );
 
         if ( var_7 < var_4 )
             var_3[var_3.size] = var_6;
@@ -1899,36 +1899,36 @@ _id_E28A()
     var_4 = 4;
     var_5 = 5;
     var_6 = "sp/hideCorpseTable.csv";
-    var_7 = _func_0243( getdvar( "#x32ea5e908954bfea7" ) );
-    var_8 = strtok( var_6 );
+    var_7 = tolower( getdvar( "#x32ea5e908954bfea7" ) );
+    var_8 = tablelookupgetnumrows( var_6 );
 
     for ( var_9 = 0; var_9 < var_8; var_9++ )
     {
-        if ( var_7 == _func_0243( _func_021E( var_6, var_9, var_1 ) ) )
+        if ( var_7 == tolower( tablelookupbyrow( var_6, var_9, var_1 ) ) )
         {
-            var_10 = _func_021E( var_6, var_9, var_2 );
-            var_11 = _func_021A( _func_021E( var_6, var_9, var_3 ), "_" );
-            var_12 = _func_021A( _func_021E( var_6, var_9, var_4 ), "_" );
-            var_13 = int( _func_021E( var_6, var_9, var_5 ) );
-            var_14 = _func_0205( "script_model", ( float( var_11[0] ), float( var_11[1] ), float( var_11[2] ) ) );
-            var_14 setmode( var_10 );
-            var_14._id_0054 = ( float( var_12[0] ), float( var_12[1] ), float( var_12[2] ) );
+            var_10 = tablelookupbyrow( var_6, var_9, var_2 );
+            var_11 = strtok( tablelookupbyrow( var_6, var_9, var_3 ), "_" );
+            var_12 = strtok( tablelookupbyrow( var_6, var_9, var_4 ), "_" );
+            var_13 = int( tablelookupbyrow( var_6, var_9, var_5 ) );
+            var_14 = spawn( "script_model", ( float( var_11[0] ), float( var_11[1] ), float( var_11[2] ) ) );
+            var_14 setmodel( var_10 );
+            var_14.angles = ( float( var_12[0] ), float( var_12[1] ), float( var_12[2] ) );
 
             if ( var_13 > 0 )
-                var_14 _meth_83CE();
+                var_14 solid();
             else
-                var_14 _meth_824C();
+                var_14 notsolid();
         }
     }
 }
 
 _id_8703( var_0 )
 {
-    var_1 = strtok( "sp/weapon_tuning.csv" );
+    var_1 = tablelookupgetnumrows( "sp/weapon_tuning.csv" );
 
     for ( var_2 = 0; var_2 < var_1; var_2++ )
     {
-        var_3 = _func_021E( "sp/weapon_tuning.csv", var_2, 1 );
+        var_3 = tablelookupbyrow( "sp/weapon_tuning.csv", var_2, 1 );
 
         if ( isdefined( var_3 ) && var_3 == var_0 )
             return 1;
@@ -1939,14 +1939,14 @@ _id_8703( var_0 )
 
 _id_6838( var_0, var_1 )
 {
-    var_2 = strtok( "sp/weapon_tuning.csv" );
+    var_2 = tablelookupgetnumrows( "sp/weapon_tuning.csv" );
 
     for ( var_3 = 0; var_3 < var_2; var_3++ )
     {
-        var_4 = _func_021E( "sp/weapon_tuning.csv", var_3, 1 );
+        var_4 = tablelookupbyrow( "sp/weapon_tuning.csv", var_3, 1 );
 
         if ( isdefined( var_4 ) && var_4 == var_0 )
-            return float( _func_021E( "sp/weapon_tuning.csv", var_3, var_1 ) );
+            return float( tablelookupbyrow( "sp/weapon_tuning.csv", var_3, var_1 ) );
     }
 
     return -1;
@@ -1956,12 +1956,12 @@ _id_1282()
 {
     level notify( "ai_lod_control_watcher" );
     level endon( "ai_lod_control_watcher" );
-    _func_01D1( "#x3ec99526b2d863a88", 0 );
-    _func_01D1( "#x3cb8809db658b5cc8", "high" );
-    _func_01D1( "#x38c1f114fc2d1e3a9", 0 );
-    _func_01D1( "#x35f9c683839ebdb40", 0 );
-    _func_01D1( "#x37f2bf726f84c21a4", 1.0 );
-    _func_01D1( "#x35a5bbc8358a3ffae", 0 );
+    setdvarifuninitialized( "#x3ec99526b2d863a88", 0 );
+    setdvarifuninitialized( "#x3cb8809db658b5cc8", "high" );
+    setdvarifuninitialized( "#x38c1f114fc2d1e3a9", 0 );
+    setdvarifuninitialized( "#x35f9c683839ebdb40", 0 );
+    setdvarifuninitialized( "#x37f2bf726f84c21a4", 1.0 );
+    setdvarifuninitialized( "#x35a5bbc8358a3ffae", 0 );
     waitframe();
     var_0 = 0.5;
     var_1 = int( var_0 * 20 );
@@ -2003,13 +2003,13 @@ _id_1282()
 
         var_10 = getdvarint( "#x38c1f114fc2d1e3a9", 0 );
         var_11 = getdvarint( "#x35f9c683839ebdb40", 0 );
-        var_2 = _func_01FF( var_2, level._id_030F._id_02EA, undefined, 1 );
-        var_3 = _func_01FF( var_3, level._id_030F._id_02EA, undefined, 1 );
+        var_2 = _func_01FF( var_2, level.player.origin, undefined, 1 );
+        var_3 = _func_01FF( var_3, level.player.origin, undefined, 1 );
         var_12 = 0;
 
         foreach ( var_6 in var_2 )
         {
-            if ( !var_6 _meth_81C6() && isai( var_6 ) && var_12 < var_11 )
+            if ( !var_6 _meth_81C6() && isalive( var_6 ) && var_12 < var_11 )
             {
                 var_12++;
                 var_6 _id_D23B( var_1 );
@@ -2019,12 +2019,12 @@ _id_1282()
             var_6 _id_D275( var_1 );
         }
 
-        var_15 = _func_0147( var_10 - var_11, var_10 - var_12 );
+        var_15 = max( var_10 - var_11, var_10 - var_12 );
         var_16 = 0;
 
         foreach ( var_6 in var_3 )
         {
-            if ( !var_6 _meth_81C6() && isai( var_6 ) && var_16 < var_15 )
+            if ( !var_6 _meth_81C6() && isalive( var_6 ) && var_16 < var_15 )
             {
                 var_16++;
                 var_6 _id_D23B( var_1 );
@@ -2146,7 +2146,7 @@ _id_4A39()
 
 _id_520B()
 {
-    self._id_02C3 = spawnstruct( 512 );
+    self._id_02C3 = _func_0214( 512 );
 }
 
 _id_49C1()
@@ -2173,7 +2173,7 @@ _id_51F9()
 {
     _id_D361();
     _id_49C1();
-    _id_077B::_id_4A11();
+    scripts\engine\utility::_id_4A11();
     _id_4A39();
     self._id_A9FB = self._id_0140;
     _id_49D1();
@@ -2193,7 +2193,7 @@ _id_4A1C()
 {
     _id_C5D2();
     _id_51C0();
-    _id_077B::_id_51F2();
+    scripts\engine\utility::_id_51F2();
     _id_520B();
 
     if ( isdefined( self._id_A9FB ) )
@@ -2227,7 +2227,7 @@ _id_DD4C( var_0, var_1, var_2, var_3, var_4 )
     var_7 = 0;
     var_8 = 0;
 
-    if ( isdefined( level._id_DE51 ) && isalive( level._id_DE51 ) )
+    if ( isdefined( level._id_DE51 ) && _func_0106( level._id_DE51 ) )
     {
         while ( isdefined( level._id_DE51[var_8] ) )
             var_8++;
@@ -2249,9 +2249,9 @@ _id_DD4C( var_0, var_1, var_2, var_3, var_4 )
         {
             if ( !istrue( var_11._id_CF6C ) )
             {
-                var_11._id_DD4D = _func_020F();
+                var_11._id_DD4D = spawnstruct();
                 var_11._id_DD4D._id_9339 = var_8;
-                var_11._id_DD4D._id_02EA = var_0;
+                var_11._id_DD4D.origin = var_0;
                 var_9++;
             }
         }
@@ -2271,7 +2271,7 @@ _id_EA53( var_0, var_1, var_2 )
         return "undefined";
     }
 
-    if ( _func_0120( var_0 ) || _func_0113( var_0 ) )
+    if ( _func_0120( var_0 ) || isint( var_0 ) )
         return var_0;
 
     if ( _func_010F( var_0 ) )
@@ -2282,7 +2282,7 @@ _id_EA53( var_0, var_1, var_2 )
         return _func_0431( var_0, var_1 );
     }
 
-    if ( _func_02DA( var_0 ) )
+    if ( isvector( var_0 ) )
     {
         if ( !isdefined( var_1 ) )
             return ( int( var_0[0] ), int( var_0[1] ), int( var_0[2] ) );
@@ -2290,7 +2290,7 @@ _id_EA53( var_0, var_1, var_2 )
         return ( _func_0431( var_0[0], var_1 ), _func_0431( var_0[1], var_1 ), _func_0431( var_0[2], var_1 ) );
     }
 
-    if ( isalive( var_0 ) )
+    if ( _func_0106( var_0 ) )
     {
         var_3 = "[";
         var_4 = "";

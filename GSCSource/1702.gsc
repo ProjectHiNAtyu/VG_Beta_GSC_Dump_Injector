@@ -311,20 +311,20 @@ _id_9DAA()
     var_5 = undefined;
 
     if ( _id_9D9F( "create_loopfx" ) )
-        var_5 = _id_077B::_id_3FEC( var_1 );
+        var_5 = scripts\engine\utility::_id_3FEC( var_1 );
 
     if ( _id_9D9F( "create_oneshot" ) )
-        var_5 = _id_077B::_id_4005( var_1 );
+        var_5 = scripts\engine\utility::_id_4005( var_1 );
 
     _id_5AEE( var_5 );
 }
 
 _id_5AEE( var_0 )
 {
-    var_0._id_FF25["angles"] = _func_025B( var_0._id_FF25["origin"] + ( 0, 0, 100 ) - var_0._id_FF25["origin"] );
+    var_0.v["angles"] = vectortoangles( var_0.v["origin"] + ( 0, 0, 100 ) - var_0.v["origin"] );
 
-    if ( isdefined( level._id_0BA3 ) && isdefined( level._id_0BA3[var_0._id_FF25["fxid"]] ) && _func_02D8( level._id_0BA3[var_0._id_FF25["fxid"]] ) )
-        var_0._id_FF25["angles"] = ( 0, 0, 0 );
+    if ( isdefined( level._effect ) && isdefined( level._effect[var_0.v["fxid"]] ) && _func_02D8( level._effect[var_0.v["fxid"]] ) )
+        var_0.v["angles"] = ( 0, 0, 0 );
 
     var_0 _id_06A5::_id_BA16();
     _id_06A5::_id_38AA();
@@ -352,7 +352,7 @@ _id_9DA2()
     {
         var_4 = level._id_0B7E._id_AC45[var_3];
 
-        if ( !isdefined( var_2._id_FF25[var_4["name"]] ) )
+        if ( !isdefined( var_2.v[var_4["name"]] ) )
             continue;
 
         var_0++;
@@ -390,7 +390,7 @@ _id_BBAD( var_0, var_1 )
     }
 
     level._id_3FBA = 1;
-    level._id_0B7E._id_7B49[var_1 + 3][0]._id_00FF = ( 1, 1, 0 );
+    level._id_0B7E._id_7B49[var_1 + 3][0].color = ( 1, 1, 0 );
 
     if ( isdefined( var_0["input_func"] ) )
         thread [[ var_0["input_func"] ]]( var_1 + 3 );
@@ -398,7 +398,7 @@ _id_BBAD( var_0, var_1 )
         _id_06A5::_id_3FB2( "To change " + var_0["description"] + " on selected entities, type /fx newvalue" );
 
     _id_D2A4( var_0["name"] );
-    _func_01D0( "fx", "nil" );
+    setdvar( "fx", "nil" );
 }
 
 _id_9DAB()
@@ -437,8 +437,8 @@ _id_1999( var_0, var_1 )
     {
         var_3 = level._id_0B7E._id_D04A[var_2];
 
-        if ( _id_9B79( var_0["mask"], var_3._id_FF25["type"] ) )
-            var_3._id_FF25[var_0["name"]] = var_1;
+        if ( _id_9B79( var_0["mask"], var_3.v["type"] ) )
+            var_3.v[var_0["name"]] = var_1;
     }
 
     level._id_8F00 = undefined;
@@ -498,24 +498,24 @@ _id_82C2( var_0 )
     {
         waitframe();
 
-        if ( level._id_030F _meth_805D( "escape" ) || level._id_030F _meth_805D( "x" ) )
+        if ( level.player _meth_805D( "escape" ) || level.player _meth_805D( "x" ) )
             break;
 
         var_1 = 0;
 
-        if ( level._id_030F _meth_805D( "-" ) )
+        if ( level.player _meth_805D( "-" ) )
             var_1 = -10;
-        else if ( level._id_030F _meth_805D( "=" ) )
+        else if ( level.player _meth_805D( "=" ) )
             var_1 = 10;
 
         if ( var_1 != 0 )
         {
             foreach ( var_3 in level._id_0B7E._id_D04A )
             {
-                if ( isdefined( var_3._id_FF25["reactive_radius"] ) )
+                if ( isdefined( var_3.v["reactive_radius"] ) )
                 {
-                    var_3._id_FF25["reactive_radius"] = var_3._id_FF25["reactive_radius"] + var_1;
-                    var_3._id_FF25["reactive_radius"] = clamp( var_3._id_FF25["reactive_radius"], 10, 1000 );
+                    var_3.v["reactive_radius"] = var_3.v["reactive_radius"] + var_1;
+                    var_3.v["reactive_radius"] = clamp( var_3.v["reactive_radius"], 10, 1000 );
                 }
             }
         }
@@ -529,10 +529,10 @@ _id_82C2( var_0 )
 _id_4B3A( var_0 )
 {
     _id_06A5::_id_38B1();
-    _id_06A5::_id_D210( "Name: " + var_0._id_FF25["fxid"] );
-    _id_06A5::_id_D210( "Type: " + var_0._id_FF25["type"] );
-    _id_06A5::_id_D210( "Origin: " + var_0._id_FF25["origin"] );
-    _id_06A5::_id_D210( "Angles: " + var_0._id_FF25["angles"] );
+    _id_06A5::_id_D210( "Name: " + var_0.v["fxid"] );
+    _id_06A5::_id_D210( "Type: " + var_0.v["type"] );
+    _id_06A5::_id_D210( "Origin: " + var_0.v["origin"] );
+    _id_06A5::_id_D210( "Angles: " + var_0.v["angles"] );
     var_1 = 0;
     var_2 = 0;
     var_3 = 0;
@@ -544,10 +544,10 @@ _id_4B3A( var_0 )
     {
         var_5 = level._id_0B7E._id_AC45[var_4];
 
-        if ( isdefined( var_0._id_FF25[var_5["name"]] ) )
+        if ( isdefined( var_0.v[var_5["name"]] ) )
             continue;
 
-        if ( !_id_9B79( var_5["mask"], var_0._id_FF25["type"] ) )
+        if ( !_id_9B79( var_5["mask"], var_0.v["type"] ) )
             continue;
 
         var_1++;
@@ -589,8 +589,8 @@ _id_0FD7( var_0 )
     {
         var_3 = level._id_0B7E._id_D04A[var_2];
 
-        if ( _id_9B79( var_0["mask"], var_3._id_FF25["type"] ) )
-            var_3._id_FF25[var_0["name"]] = var_0["default"];
+        if ( _id_9B79( var_0["mask"], var_3.v["type"] ) )
+            var_3.v[var_0["name"]] = var_0["default"];
     }
 }
 
@@ -607,10 +607,10 @@ _id_4B3B( var_0 )
         return;
 
     _id_06A5::_id_38B1();
-    _id_06A5::_id_D210( "Name: " + var_0._id_FF25["fxid"] );
-    _id_06A5::_id_D210( "Type: " + var_0._id_FF25["type"] );
-    _id_06A5::_id_D210( "Origin: " + var_0._id_FF25["origin"] );
-    _id_06A5::_id_D210( "Angles: " + var_0._id_FF25["angles"] );
+    _id_06A5::_id_D210( "Name: " + var_0.v["fxid"] );
+    _id_06A5::_id_D210( "Type: " + var_0.v["type"] );
+    _id_06A5::_id_D210( "Origin: " + var_0.v["origin"] );
+    _id_06A5::_id_D210( "Angles: " + var_0.v["angles"] );
 
     if ( _id_54D0() )
     {
@@ -622,7 +622,7 @@ _id_4B3B( var_0 )
         {
             var_5 = level._id_0B7E._id_AC45[var_4];
 
-            if ( !isdefined( var_0._id_FF25[var_5["name"]] ) )
+            if ( !isdefined( var_0.v[var_5["name"]] ) )
                 continue;
 
             var_1++;
@@ -631,7 +631,7 @@ _id_4B3B( var_0 )
                 continue;
 
             var_2++;
-            _id_06A5::_id_D210( var_2 + ". " + var_5["description"] + ": " + var_0._id_FF25[var_5["name"]] );
+            _id_06A5::_id_D210( var_2 + ". " + var_5["description"] + ": " + var_0.v[var_5["name"]] );
 
             if ( var_2 > level._id_50E8 )
             {
@@ -655,11 +655,11 @@ _id_4B3B( var_0 )
         {
             var_5 = level._id_0B7E._id_AC45[var_4];
 
-            if ( !isdefined( var_0._id_FF25[var_5["name"]] ) )
+            if ( !isdefined( var_0.v[var_5["name"]] ) )
                 continue;
 
             var_1++;
-            _id_06A5::_id_D210( var_5["description"] + ": " + var_0._id_FF25[var_5["name"]] );
+            _id_06A5::_id_D210( var_5["description"] + ": " + var_0.v[var_5["name"]] );
 
             if ( var_1 > level._id_0B7E._id_7B47 )
                 break;
@@ -750,7 +750,7 @@ _id_D028()
 
     foreach ( var_3, var_7 in level._id_3FC1 )
     {
-        if ( _func_0121( var_7._id_FF25["fxid"], var_1 ) )
+        if ( issubstr( var_7.v["fxid"], var_1 ) )
             var_5[var_5.size] = var_3;
     }
 

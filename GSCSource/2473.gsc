@@ -3,7 +3,7 @@
 
 _id_79E2()
 {
-    var_0 = _id_09B4::_id_100BF( "hoopty", 1 );
+    var_0 = scripts\cp_mp\vehicles\vehicle::_id_100BF( "hoopty", 1 );
     var_0._id_4820 = ::_id_79E0;
     _id_79E7();
     _id_79E5();
@@ -11,8 +11,8 @@ _id_79E2()
     _id_79E3();
     _id_79E4();
 
-    if ( _id_099D::_id_8A10( "hoopty", "init" ) )
-        [[ _id_099D::_id_6D05( "hoopty", "init" ) ]]();
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "hoopty", "init" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "hoopty", "init" ) ]]();
 
     _id_79E9();
     _id_79E6();
@@ -20,17 +20,17 @@ _id_79E2()
 
 _id_79E6()
 {
-    if ( _id_099D::_id_8A10( "hoopty", "initLate" ) )
-        [[ _id_099D::_id_6D05( "hoopty", "initLate" ) ]]();
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "hoopty", "initLate" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "hoopty", "initLate" ) ]]();
 }
 
 _id_79E7()
 {
-    var_0 = _id_09BA::_id_101A1( "hoopty", 1 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A1( "hoopty", 1 );
     var_0._id_54B6 = ::_id_79DC;
-    var_0._id_5770 = _id_09BA::_id_10183;
+    var_0._id_5770 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10183;
     var_0._id_575B = ::_id_79DE;
-    var_0._id_C718 = _id_09BA::_id_1018F();
+    var_0._id_C718 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1018F();
     var_0._id_575C["front"] = 95;
     var_0._id_575C["back"] = 115;
     var_0._id_575C["left"] = 38;
@@ -51,51 +51,51 @@ _id_79E7()
     var_0._id_5758[var_1] = "back";
     var_2 = [ "driver", "front_right_rear", "back_right_rear", "back_left_rear", "front_left_rear" ];
     var_3 = "driver";
-    var_4 = _id_09BA::_id_101A0( "hoopty", var_3, 1 );
-    var_4._id_CFB8 = _id_09BA::_id_10188( var_3, var_2 );
+    var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( "hoopty", var_3, 1 );
+    var_4._id_CFB8 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10188( var_3, var_2 );
     var_4._id_5760 = [ var_3, "back_left_rear", "back_left", "front_right", "front" ];
     var_0._id_5768[var_3] = ( 17, 19, 54 );
     var_0._id_5758[var_3] = "left";
-    var_4._id_C718 = _id_09BA::_id_10192();
+    var_4._id_C718 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10192();
     var_4._id_42EE = 0.5;
     var_4._id_18CA = "tag_seat_0";
-    var_4._id_5775 = _id_09BA::_id_1015D( var_4._id_18CA );
+    var_4._id_5775 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015D( var_4._id_18CA );
     var_4._id_E351 = 10;
     var_3 = "front_left_rear";
-    var_4 = _id_09BA::_id_101A0( "hoopty", var_3, 1 );
-    var_4._id_CFB8 = _id_09BA::_id_10188( var_3, var_2 );
+    var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( "hoopty", var_3, 1 );
+    var_4._id_CFB8 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10188( var_3, var_2 );
     var_4._id_5760 = [ var_3, "back_left_rear", "back_left", "front_right_rear", "front" ];
     var_0._id_5768[var_3] = ( -42, 19, 54 );
     var_0._id_5758[var_3] = "left";
     var_4._id_18CA = "tag_seat_2";
-    var_4._id_5775 = _id_09BA::_id_1015D( var_4._id_18CA );
+    var_4._id_5775 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015D( var_4._id_18CA );
     var_4._id_AAB3 = "ping_vehicle_driver";
     var_3 = "front_right_rear";
-    var_4 = _id_09BA::_id_101A0( "hoopty", var_3, 1 );
-    var_4._id_CFB8 = _id_09BA::_id_10188( var_3, var_2 );
+    var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( "hoopty", var_3, 1 );
+    var_4._id_CFB8 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10188( var_3, var_2 );
     var_4._id_5760 = [ var_3, "back_right_rear", "back_right", "front_left_rear", "front" ];
     var_0._id_5768[var_3] = ( -84, -19, 54 );
     var_0._id_5758[var_3] = "right";
     var_4._id_18CA = "tag_seat_4";
-    var_4._id_5775 = _id_09BA::_id_1015D( var_4._id_18CA );
+    var_4._id_5775 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015D( var_4._id_18CA );
     var_4._id_AAB3 = "ping_vehicle_rider";
     var_3 = "back_left_rear";
-    var_4 = _id_09BA::_id_101A0( "hoopty", var_3, 1 );
-    var_4._id_CFB8 = _id_09BA::_id_10188( var_3, var_2 );
+    var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( "hoopty", var_3, 1 );
+    var_4._id_CFB8 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10188( var_3, var_2 );
     var_4._id_5760 = [ var_3, "driver", "back_left", "back_right_rear", "front" ];
     var_0._id_5768[var_3] = ( -84, 19, 54 );
     var_0._id_5758[var_3] = "left";
     var_4._id_18CA = "tag_seat_3";
-    var_4._id_5775 = _id_09BA::_id_1015D( var_4._id_18CA );
+    var_4._id_5775 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015D( var_4._id_18CA );
     var_4._id_AAB3 = "ping_vehicle_rider";
     var_3 = "back_right_rear";
-    var_4 = _id_09BA::_id_101A0( "hoopty", var_3, 1 );
-    var_4._id_CFB8 = _id_09BA::_id_10188( var_3, var_2 );
+    var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( "hoopty", var_3, 1 );
+    var_4._id_CFB8 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10188( var_3, var_2 );
     var_4._id_5760 = [ var_3, "front_right", "back_right", "back_left_rear", "front" ];
     var_0._id_5768[var_3] = ( -84, -19, 54 );
     var_0._id_5758[var_3] = "right";
     var_4._id_18CA = "tag_seat_5";
-    var_4._id_5775 = _id_09BA::_id_1015D( var_4._id_18CA );
+    var_4._id_5775 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015D( var_4._id_18CA );
     var_4._id_AAB3 = "ping_vehicle_rider";
 }
 
@@ -125,7 +125,7 @@ _id_79E3()
 {
     _id_09B6::_id_10067( "hoopty", 1000 );
     var_0 = _id_09B6::_id_1003F( "hoopty" );
-    var_0._id_37D9 = "medium_light";
+    var_0.class = "medium_light";
     _id_09B6::_id_1002A( "hoopty" );
     _id_09B6::_id_10071( "hoopty", 6 );
     _id_09B6::_id_1006C( "hoopty", ::_id_79DA );
@@ -134,30 +134,30 @@ _id_79E3()
 
 _id_79E4()
 {
-    level._id_0BA3["hoopty_explode"] = _func_0139( "vfx/iw8/veh/scriptables/vfx_veh_explosion_sedan.vfx" );
+    level._effect["hoopty_explode"] = loadfx( "vfx/iw8/veh/scriptables/vfx_veh_explosion_sedan.vfx" );
 }
 
 _id_79D9( var_0, var_1 )
 {
-    if ( !isdefined( var_0._id_0054 ) )
-        var_0._id_0054 = ( 0, 0, 0 );
+    if ( !isdefined( var_0.angles ) )
+        var_0.angles = ( 0, 0, 0 );
 
     var_0._id_02AF = "veh8_mil_lnd_pindia_1seat_red_physics_mp";
     var_0._id_045A = "hoopty";
     var_0.type = "pindia_physics_mp";
-    var_2 = _id_09BC::_id_0D58( var_0, var_1 );
+    var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_id_0D58( var_0, var_1 );
 
     if ( !isdefined( var_2 ) )
         return undefined;
 
-    _id_09B4::_id_10024( var_2, "hoopty", var_0 );
-    var_2._id_A90B = _func_034C( "hoopty_mp" );
+    scripts\cp_mp\vehicles\vehicle::_id_10024( var_2, "hoopty", var_0 );
+    var_2.objweapon = makeweapon( "hoopty_mp" );
     _id_09B5::_id_10016( var_2 );
-    _id_09B4::vehicle_create( var_2, var_0 );
-    thread _id_09B4::_id_102E0( var_2, undefined, _id_09B4::_id_100A8 );
+    scripts\cp_mp\vehicles\vehicle::vehicle_create( var_2, var_0 );
+    thread scripts\cp_mp\vehicles\vehicle::_id_102E0( var_2, undefined, scripts\cp_mp\vehicles\vehicle::_id_100A8 );
 
-    if ( _id_099D::_id_8A10( "hoopty", "create" ) )
-        [[ _id_099D::_id_6D05( "hoopty", "create" ) ]]( var_2 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "hoopty", "create" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "hoopty", "create" ) ]]( var_2 );
 
     return var_2;
 }
@@ -166,39 +166,39 @@ _id_79E0( var_0, var_1 )
 {
     if ( !isdefined( var_0 ) )
     {
-        var_0 = _func_020F();
-        var_0._id_7E78 = self;
-        var_0._id_A90B = "hoopty_mp";
+        var_0 = spawnstruct();
+        var_0.inflictor = self;
+        var_0.objweapon = "hoopty_mp";
         var_0._id_9CBF = "MOD_EXPLOSIVE";
     }
 
     _id_09B6::_id_1005E( var_0 );
-    _id_09BA::_id_101C3( self, var_0 );
+    scripts\cp_mp\vehicles\vehicle_occupancy::_id_101C3( self, var_0 );
     _id_09B6::_id_1002E( undefined, undefined, 1 );
     thread _id_79DB();
 
     if ( !istrue( level._id_EBC0 ) )
     {
         var_2 = self gettagorigin( "tag_origin" );
-        var_3 = _id_077B::_id_F07F( isdefined( var_0._id_006E ), var_0._id_006E, self );
-        self _meth_8287( var_2, 256, 140, 70, var_3, "MOD_EXPLOSIVE", "hoopty_mp" );
-        _func_0196( _id_077B::_id_6A40( "hoopty_explode" ), var_2, anglestoforward( self._id_0054 ), anglestoup( self._id_0054 ) );
-        _func_019D( var_2, "car_explode" );
+        var_3 = scripts\engine\utility::ter_op( isdefined( var_0.attacker ), var_0.attacker, self );
+        self radiusdamage( var_2, 256, 140, 70, var_3, "MOD_EXPLOSIVE", "hoopty_mp" );
+        playfx( scripts\engine\utility::getfx( "hoopty_explode" ), var_2, anglestoforward( self.angles ), anglestoup( self.angles ) );
+        playsoundatpos( var_2, "car_explode" );
         earthquake( 0.4, 800, var_2, 0.7 );
-        playfxontag( "grenade_rumble", var_2 );
+        playrumbleonposition( "grenade_rumble", var_2 );
         _func_0190( var_2, 500, 200, 1 );
     }
 }
 
 _id_79DB()
 {
-    _id_09B4::_id_1008D( self );
+    scripts\cp_mp\vehicles\vehicle::_id_1008D( self );
 
-    if ( _id_099D::_id_8A10( "hoopty", "delete" ) )
-        [[ _id_099D::_id_6D05( "hoopty", "delete" ) ]]( self );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "hoopty", "delete" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "hoopty", "delete" ) ]]( self );
 
     waitframe();
-    _id_09B4::_id_1008E( self );
+    scripts\cp_mp\vehicles\vehicle::_id_1008E( self );
 }
 
 _id_79DA( var_0 )
@@ -217,12 +217,12 @@ _id_79DD( var_0, var_1, var_2, var_3, var_4 )
 {
     if ( var_1 == "driver" )
     {
-        var_0 setorigin( var_3 );
-        var_0 _meth_8312( var_3 );
+        var_0 setotherent( var_3 );
+        var_0 setentityowner( var_3 );
         var_3 _meth_8093( var_0 );
     }
 
-    var_3 thread _id_09BA::_id_1015C( var_0, var_1, var_2 );
+    var_3 thread scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015C( var_0, var_1, var_2 );
     _id_09A1::_id_10391( var_0, var_2, var_1, var_3 );
 }
 
@@ -236,8 +236,8 @@ _id_79DF( var_0, var_1, var_2, var_3, var_4 )
 {
     if ( var_1 == "driver" )
     {
-        var_0 setorigin( undefined );
-        var_0 _meth_8312( undefined );
+        var_0 setotherent( undefined );
+        var_0 setentityowner( undefined );
 
         if ( !istrue( var_4._id_B682 ) )
             var_3 _meth_8094();
@@ -245,15 +245,15 @@ _id_79DF( var_0, var_1, var_2, var_3, var_4 )
 
     if ( !istrue( var_4._id_B682 ) )
     {
-        var_3 _id_09BA::_id_10200();
-        var_5 = _id_09BA::_id_101D0( var_3, var_2, var_4 );
+        var_3 scripts\cp_mp\vehicles\vehicle_occupancy::_id_10200();
+        var_5 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101D0( var_3, var_2, var_4 );
 
         if ( !var_5 )
         {
-            if ( _id_099D::_id_8A10( "vehicle_occupancy", "handleSuicideFromVehicles" ) )
-                [[ _id_099D::_id_6D05( "vehicle_occupancy", "handleSuicideFromVehicles" ) ]]( var_3 );
+            if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_occupancy", "handleSuicideFromVehicles" ) )
+                [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_occupancy", "handleSuicideFromVehicles" ) ]]( var_3 );
             else
-                var_3 _meth_83FD();
+                var_3 suicide();
         }
     }
 
@@ -262,11 +262,11 @@ _id_79DF( var_0, var_1, var_2, var_3, var_4 )
 
 _id_79E9()
 {
-    var_0 = _id_09BB::_id_10274( "hoopty", 1 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10274( "hoopty", 1 );
     var_0._id_9C64 = 30;
     var_0._id_BD19 = 50;
     var_0._id_6D3F = ::_id_79E1;
-    var_0._id_E271 = _id_099D::_id_6D05( "hoopty", "spawnCallback" );
+    var_0._id_E271 = scripts\cp_mp\utility\script_utility::getsharedfunc( "hoopty", "spawnCallback" );
     var_0._id_38FF = 118;
     var_0._id_38FB = 70;
     var_0._id_38FD = 118;
@@ -274,14 +274,14 @@ _id_79E9()
 
 _id_79E1()
 {
-    var_0 = _id_077B::_id_6D7C( "hoopty_spawn", "targetname" );
+    var_0 = scripts\engine\utility::_id_6D7C( "hoopty_spawn", "targetname" );
 
     if ( var_0.size > 0 )
     {
-        var_0 = _id_09BB::_id_10288( var_0, 1 );
+        var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10288( var_0, 1 );
 
         if ( var_0.size > 1 )
-            var_0 = _id_077B::_id_1B94( var_0 );
+            var_0 = scripts\engine\utility::_id_1B94( var_0 );
     }
 
     return var_0;

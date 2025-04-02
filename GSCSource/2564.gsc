@@ -4,9 +4,9 @@
 _id_81C4()
 {
     _id_81CE();
-    level._id_0BA3["plane_death"] = _func_0139( "vfx/explosion/vehicle_warbird_explosion_midair" );
-    level._id_0BA3["airstrike_death_allies"] = _func_0139( "vfx/explosion/vehicle_warbird_explosion_midair" );
-    level._id_0BA3["airstrike_death_axis"] = _func_0139( "vfx/explosion/vehicle_warbird_explosion_midair" );
+    level._effect["plane_death"] = loadfx( "vfx/explosion/vehicle_warbird_explosion_midair" );
+    level._effect["airstrike_death_allies"] = loadfx( "vfx/explosion/vehicle_warbird_explosion_midair" );
+    level._effect["airstrike_death_axis"] = loadfx( "vfx/explosion/vehicle_warbird_explosion_midair" );
     level._id_CC14 = [];
 }
 
@@ -44,19 +44,19 @@ _id_B177( var_0, var_1, var_2, var_3, var_4 )
     var_5 = 0;
 
     if ( isdefined( var_2 ) )
-        var_5 = var_2 scripts\mp\hud_util::_id_0BF6( "specialty_improvedstreaks" );
+        var_5 = var_2 _id_07E3::_hasperk( "specialty_improvedstreaks" );
 
     var_6 = _id_6A2D( var_0 ) / 2;
-    var_7 = var_1._id_503D + -1 * anglestoforward( var_1._id_0054 ) * 2000;
-    var_1._id_2600 = _func_0205( "script_model", ( 0, 0, 0 ) );
-    var_1._id_2600 setmode( "tag_origin" );
-    var_1._id_2600 _meth_820B( var_1, "TAG_BOMB_L", ( 0, 0, 0 ), ( 0, 0, 0 ) );
-    var_1._id_2601 = _func_0205( "script_model", ( 0, 0, 0 ) );
-    var_1._id_2601 setmode( "tag_origin" );
-    var_1._id_2601 _meth_820B( var_1, "TAG_BOMB_R", ( 0, 0, 0 ), ( 0, 0, 0 ) );
+    var_7 = var_1._id_503D + -1 * anglestoforward( var_1.angles ) * 2000;
+    var_1._id_2600 = spawn( "script_model", ( 0, 0, 0 ) );
+    var_1._id_2600 setmodel( "tag_origin" );
+    var_1._id_2600 linkto( var_1, "TAG_BOMB_L", ( 0, 0, 0 ), ( 0, 0, 0 ) );
+    var_1._id_2601 = spawn( "script_model", ( 0, 0, 0 ) );
+    var_1._id_2601 setmodel( "tag_origin" );
+    var_1._id_2601 linkto( var_1, "TAG_BOMB_R", ( 0, 0, 0 ), ( 0, 0, 0 ) );
     var_8 = 1;
 
-    if ( scripts\mp\hud_util::_id_89BD() && isdefined( var_4 ) && !level._id_BF4C )
+    if ( _id_07E3::_id_89BD() && isdefined( var_4 ) && !level._id_BF4C )
         var_8 = 0;
 
     if ( var_8 )
@@ -74,21 +74,21 @@ _id_B177( var_0, var_1, var_2, var_3, var_4 )
     while ( var_11 <= var_10 )
     {
         var_14 = _id_6906( var_0 );
-        var_15 = ( 0, _func_01B8( 360 ), 0 );
+        var_15 = ( 0, randomint( 360 ), 0 );
         var_16 = anglestoforward( var_15 ) * var_14;
-        var_17 = var_1._id_02EA + anglestoforward( var_1._id_0054 ) * 2000;
+        var_17 = var_1.origin + anglestoforward( var_1.angles ) * 2000;
         var_17 = ( var_17[0], var_17[1], var_7[2] );
         var_17 = var_17 + var_16;
 
         if ( var_9 )
-            var_18 = var_1._id_2600._id_02EA;
+            var_18 = var_1._id_2600.origin;
         else
-            var_18 = var_1._id_2601._id_02EA;
+            var_18 = var_1._id_2601.origin;
 
         var_9 = !var_9;
-        var_19 = scripts\mp\hud_util::_id_9934( _id_6908( var_0, var_2 ), var_18, var_17, 3.0, var_18[2], var_2 );
-        var_19._id_02F2 = var_1._id_02F2;
-        var_19._id_045B = var_1._id_045B;
+        var_19 = _id_07E3::_id_9934( _id_6908( var_0, var_2 ), var_18, var_17, 3.0, var_18[2], var_2 );
+        var_19.owner = var_1.owner;
+        var_19.team = var_1.team;
 
         if ( var_0 == "firebomb" )
         {
@@ -96,7 +96,7 @@ _id_B177( var_0, var_1, var_2, var_3, var_4 )
 
             if ( var_12 == 3 )
             {
-                var_19 thread scripts\mp\hud_util::_id_8E29();
+                var_19 thread _id_07E3::_id_8E29();
                 var_12 = 1;
             }
             else if ( var_12 < 3 )
@@ -104,7 +104,7 @@ _id_B177( var_0, var_1, var_2, var_3, var_4 )
 
             if ( var_13 == 1 && var_10 - var_11 < 1 )
             {
-                var_19 thread scripts\mp\hud_util::_id_8E2A();
+                var_19 thread _id_07E3::_id_8E2A();
                 var_13 = 0;
             }
         }
@@ -112,7 +112,7 @@ _id_B177( var_0, var_1, var_2, var_3, var_4 )
         {
             if ( var_12 == 3 )
             {
-                var_19 thread scripts\mp\hud_util::_id_8E29();
+                var_19 thread _id_07E3::_id_8E29();
                 var_12 = 1;
             }
             else if ( var_12 < 3 )
@@ -120,13 +120,13 @@ _id_B177( var_0, var_1, var_2, var_3, var_4 )
 
             if ( var_13 == 1 && var_10 - var_11 < 1 )
             {
-                var_19 thread scripts\mp\hud_util::_id_8E2A();
+                var_19 thread _id_07E3::_id_8E2A();
                 var_13 = 0;
             }
         }
 
-        if ( isdefined( var_1._id_8D49 ) )
-            var_19 scripts\mp\hud_util::_id_D478( var_1._id_8D49 );
+        if ( isdefined( var_1.killcament ) )
+            var_19 _id_07E3::_id_D478( var_1.killcament );
 
         var_11 = var_11 + 0.1;
         wait 0.1;
@@ -144,21 +144,21 @@ _id_6908( var_0, var_1 )
             var_2 = 0;
 
             if ( isdefined( var_1 ) )
-                var_2 = var_1 scripts\mp\hud_util::_id_0BF6( "specialty_improvedstreaks" );
+                var_2 = var_1 _id_07E3::_hasperk( "specialty_improvedstreaks" );
 
             if ( var_2 )
             {
-                if ( isdefined( var_1 ) && isdefined( var_1._id_045B ) && var_1._id_045B == "axis" )
+                if ( isdefined( var_1 ) && isdefined( var_1.team ) && var_1.team == "axis" )
                     return "firebomb_bomb_axis_grenadier_mp";
                 else
                     return "firebomb_bomb_grenadier_mp";
             }
-            else if ( isdefined( var_1 ) && isdefined( var_1._id_045B ) && var_1._id_045B == "axis" )
+            else if ( isdefined( var_1 ) && isdefined( var_1.team ) && var_1.team == "axis" )
                 return "firebomb_bomb_axis_mp";
             else
                 return "firebomb_bomb_mp";
         case "s2_airstrike":
-            if ( isdefined( var_1 ) && isdefined( var_1._id_045B ) && var_1._id_045B == "axis" )
+            if ( isdefined( var_1 ) && isdefined( var_1.team ) && var_1.team == "axis" )
             {
                 return "s4_airstrike_bomb_mp";
                 return;
@@ -191,14 +191,14 @@ _id_E71D( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
         if ( isdefined( var_4 ) )
             var_5 = var_4;
         else
-            var_5 = self._id_0309["team"];
+            var_5 = self.pers["team"];
     }
 
     for ( var_7 = 0; var_7 < var_1.size; var_7++ )
     {
         var_8 = var_1[var_7];
         var_9 = var_2[var_7];
-        var_10 = scripts\mp\hud_util::_id_2D15( level._id_9A95 + ( 0, 0, 10000 ), level._id_9A95, 0, undefined );
+        var_10 = _id_07E3::_id_2D15( level._id_9A95 + ( 0, 0, 10000 ), level._id_9A95, 0, undefined );
         var_8 = ( var_8[0], var_8[1], var_10["position"][2] );
 
         if ( isdefined( var_4 ) )
@@ -213,8 +213,8 @@ _id_E71D( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
 _id_F2D7( var_0, var_1 )
 {
-    var_2 = _id_077B::_id_F07F( isdefined( var_1 ) && var_1, 1, 0 );
-    var_0 _meth_82F6( "ui_airspace_crowded_no_control", var_2 );
+    var_2 = scripts\engine\utility::ter_op( isdefined( var_1 ) && var_1, 1, 0 );
+    var_0 setclientomnvar( "ui_airspace_crowded_no_control", var_2 );
     level._id_13B5 = var_1;
 }
 
@@ -222,12 +222,12 @@ _id_13BD()
 {
     self endon( "disconnect" );
     level endon( "game_ended" );
-    self _meth_82F6( "ui_airspace_crowded_air_superiority", 1 );
+    self setclientomnvar( "ui_airspace_crowded_air_superiority", 1 );
 
     while ( isdefined( level._id_1395 ) || isdefined( level._id_3292 ) )
         waitframe();
 
-    self _meth_82F6( "ui_airspace_crowded_air_superiority", 0 );
+    self setclientomnvar( "ui_airspace_crowded_air_superiority", 0 );
 }
 
 _id_248C( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
@@ -248,7 +248,7 @@ _id_248C( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
         if ( isdefined( var_6 ) )
             _id_0A03::_id_3FD9( var_8, var_2, var_5, var_6 );
         else
-            _id_0A03::_id_3FD9( var_8, var_2, var_5, var_3._id_045B );
+            _id_0A03::_id_3FD9( var_8, var_2, var_5, var_3.team );
     }
 
     _id_2FAA( var_0, var_3, var_8, var_2, var_5, var_6, var_4, var_7 );
@@ -306,47 +306,47 @@ _id_E365( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
     var_11 = _id_6C1B( var_5, var_1, var_10 );
     var_12 = _id_6C14( var_5, var_1, var_10 );
     var_13 = _id_6C10( var_5, var_1, var_10 );
-    var_14 = _func_0205( "script_model", var_3 );
-    var_14._id_0054 = var_4;
+    var_14 = spawn( "script_model", var_3 );
+    var_14.angles = var_4;
 
     if ( isdefined( var_12 ) )
     {
-        var_14 setmode( var_12 );
+        var_14 setmodel( var_12 );
         var_14 thread _id_5896( var_11, 1 );
     }
     else
-        var_14 setmode( var_11 );
+        var_14 setmodel( var_11 );
 
     if ( isdefined( var_13 ) )
         var_14 _id_B8A5( var_5, var_13 );
 
-    if ( scripts\mp\hud_util::_id_89BD() && isdefined( var_7 ) )
+    if ( _id_07E3::_id_89BD() && isdefined( var_7 ) )
     {
         var_14._id_560C = [];
-        var_15 = anglestoforward( var_14._id_0054 + ( 0, 135, 0 ) );
+        var_15 = anglestoforward( var_14.angles + ( 0, 135, 0 ) );
         var_16 = var_3 + var_15 * 1200;
-        var_17 = _func_0205( "script_model", var_16 );
-        var_17._id_0054 = var_4;
-        var_17 setmode( var_11 );
-        var_17._id_045B = var_7;
+        var_17 = spawn( "script_model", var_16 );
+        var_17.angles = var_4;
+        var_17 setmodel( var_11 );
+        var_17.team = var_7;
         var_17 _id_B8A5( var_5, var_13 );
         var_14._id_560C[var_14._id_560C.size] = var_17;
-        var_15 = anglestoforward( var_14._id_0054 + ( 0, -135, 0 ) );
+        var_15 = anglestoforward( var_14.angles + ( 0, -135, 0 ) );
         var_16 = var_3 + var_15 * 1200;
-        var_17 = _func_0205( "script_model", var_16 );
-        var_17._id_0054 = var_4;
-        var_17 setmode( var_11 );
-        var_17._id_045B = var_7;
+        var_17 = spawn( "script_model", var_16 );
+        var_17.angles = var_4;
+        var_17 setmodel( var_11 );
+        var_17.team = var_7;
         var_17 _id_B8A5( var_5, var_13 );
         var_14._id_560C[var_14._id_560C.size] = var_17;
     }
 
     var_18 = 1;
 
-    if ( scripts\mp\hud_util::_id_8B04() )
+    if ( _id_07E3::_id_8B04() )
         var_18 = 0;
 
-    if ( scripts\mp\hud_util::_id_89BD() && isdefined( level._id_BF4E._id_CC0D ) && scripts\mp\hud_util::_id_86D6( level._id_BF4E._id_CC0D._id_78EE ) )
+    if ( _id_07E3::_id_89BD() && isdefined( level._id_BF4E._id_CC0D ) && _id_07E3::_id_86D6( level._id_BF4E._id_CC0D._id_78EE ) )
         var_18 = 0;
 
     var_18 = 0;
@@ -355,37 +355,37 @@ _id_E365( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
     {
         var_19 = 1;
         var_20 = 0;
-        var_14._id_9F0C = scripts\mp\hud_util::_id_E286( "script_model", var_3 );
-        var_14._id_9F0C setmode( "tag_origin" );
+        var_14._id_9F0C = _id_07E3::_id_E286( "script_model", var_3 );
+        var_14._id_9F0C setmodel( "tag_origin" );
         var_21 = var_1;
 
         if ( isdefined( var_7 ) )
             var_21 = var_7;
 
-        var_14._id_9F0C scripts\mp\hud_util::_id_D59F( var_21, _id_6C19( var_5 ), 20, 20, var_20, var_19, _id_6C1A( var_5 ) );
-        var_14._id_9F0C scripts\mp\hud_util::_id_9502( var_14, "tag_origin", ( 0, 0, 0 ), ( 0, 0, 0 ) );
+        var_14._id_9F0C _id_07E3::_id_D59F( var_21, _id_6C19( var_5 ), 20, 20, var_20, var_19, _id_6C1A( var_5 ) );
+        var_14._id_9F0C _id_07E3::_id_9502( var_14, "tag_origin", ( 0, 0, 0 ), ( 0, 0, 0 ) );
     }
 
     var_14.type = var_5;
     _id_10E4( var_14 );
-    level thread scripts\mp\hud_util::_id_FBF1();
-    var_14 _meth_82F0( 1 );
+    level thread _id_07E3::_id_FBF1();
     var_14 setcandamage( 1 );
-    var_14 thread scripts\mp\hud_util::_id_D535( _id_6C18( var_5 ), undefined, ::_id_AB84, ::_id_AB83, 1 );
+    var_14 _meth_82F1( 1 );
+    var_14 thread _id_07E3::_id_D535( _id_6C18( var_5 ), undefined, ::_id_AB84, ::_id_AB83, 1 );
     var_14 thread _id_7415();
     var_14._id_AF67 = 0;
     var_14 _id_B8BE( var_5 );
     var_14._id_9355 = var_0;
 
     if ( isdefined( var_7 ) )
-        var_14._id_045B = var_7;
+        var_14.team = var_7;
     else if ( isdefined( var_1 ) )
     {
-        var_14._id_02F2 = var_1;
-        var_14._id_045B = var_1._id_045B;
+        var_14.owner = var_1;
+        var_14.team = var_1.team;
     }
     else
-        var_14._id_045B = "allies";
+        var_14.team = "allies";
 
     var_14._id_503D = var_2;
     var_14._id_90EB = gettime();
@@ -394,7 +394,7 @@ _id_E365( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
     if ( isdefined( var_14._id_560C ) )
     {
         foreach ( var_17 in var_14._id_560C )
-            var_17 thread _id_B174( var_5, var_17._id_02EA, var_4 );
+            var_17 thread _id_B174( var_5, var_17.origin, var_4 );
     }
 
     thread _id_B178( var_5, var_14, var_1, var_4, var_7, var_8, var_9 );
@@ -407,9 +407,9 @@ _id_E365( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
 _id_5896( var_0, var_1 )
 {
     self endon( "death" );
-    scripts\mp\hud_util::_id_D6B3( 0, 1, var_1 );
+    _id_07E3::_id_D6B3( 0, 1, var_1 );
     wait( var_1 );
-    self setmode( var_0 );
+    self setmodel( var_0 );
 }
 
 _id_B8A5( var_0, var_1 )
@@ -436,23 +436,23 @@ _id_B8BE( var_0 )
     switch ( var_0 )
     {
         case "fighter_strike":
-            scripts\mp\hud_util::_id_DEEF( "ks_fighterstrike_flyby" );
+            _id_07E3::_id_DEEF( "ks_fighterstrike_flyby" );
             break;
         case "firebomb":
         case "s2_airstrike":
-            scripts\mp\hud_util::_id_DEEF( "ks_bombing_run_flyby" );
+            _id_07E3::_id_DEEF( "ks_bombing_run_flyby" );
             break;
         case "carepackage":
-            scripts\mp\hud_util::_id_DEEF( "ks_carepackage_flyby" );
+            _id_07E3::_id_DEEF( "ks_carepackage_flyby" );
             break;
         case "emergency_carepackage":
-            scripts\mp\hud_util::_id_DEEF( "ks_emergency_carepackage" );
+            _id_07E3::_id_DEEF( "ks_emergency_carepackage" );
             break;
         case "zm_carepackage":
         case "paratrooper_insert":
         case "raid_carepackage":
         case "paratroopers":
-            scripts\mp\hud_util::_id_DEEF( "ks_carepackage_flyby" );
+            _id_07E3::_id_DEEF( "ks_carepackage_flyby" );
             break;
     }
 }
@@ -491,7 +491,7 @@ _id_6C1B( var_0, var_1, var_2 )
     if ( isdefined( var_2 ) )
         var_3 = var_2;
     else if ( isdefined( var_1 ) )
-        var_3 = var_1._id_045B;
+        var_3 = var_1.team;
     else
         var_3 = "allies";
 
@@ -534,7 +534,7 @@ _id_6C14( var_0, var_1, var_2 )
     if ( isdefined( var_2 ) )
         var_3 = var_2;
     else if ( isdefined( var_1 ) )
-        var_3 = var_1._id_045B;
+        var_3 = var_1.team;
     else
         var_3 = "allies";
 
@@ -572,7 +572,7 @@ _id_6C10( var_0, var_1, var_2 )
     if ( isdefined( var_2 ) )
         var_3 = var_2;
     else if ( isdefined( var_1 ) )
-        var_3 = var_1._id_045B;
+        var_3 = var_1.team;
     else
         var_3 = "allies";
 
@@ -670,8 +670,8 @@ _id_DCC2( var_0, var_1, var_2, var_3, var_4 )
     if ( isdefined( var_1 ) )
     {
         var_9 = var_2 * 2;
-        var_1 scripts\mp\hud_util::_id_D59F( var_8, var_3, var_9, var_9, var_7, var_6 );
-        var_1 scripts\mp\hud_util::_id_D54A( 100, var_5 );
+        var_1 _id_07E3::_id_D59F( var_8, var_3, var_9, var_9, var_7, var_6 );
+        var_1 _id_07E3::_id_D54A( 100, var_5 );
     }
 }
 
@@ -682,7 +682,7 @@ _id_6A91()
 
 _id_AB83( var_0, var_1, var_2, var_3 )
 {
-    if ( isdefined( var_0 ) && isdefined( self._id_02F2 ) && var_0 == self._id_02F2 )
+    if ( isdefined( var_0 ) && isdefined( self.owner ) && var_0 == self.owner )
         return -1;
 
     var_4 = var_3;
@@ -705,10 +705,10 @@ _id_AB83( var_0, var_1, var_2, var_3 )
             case "MOD_PISTOL_BULLET":
             case "MOD_RIFLE_BULLET":
             default:
-                if ( _func_0121( var_1, "fmj" ) )
+                if ( issubstr( var_1, "fmj" ) )
                     var_4 = var_4 * 2.0;
 
-                if ( isdefined( var_0 ) && var_0 scripts\mp\hud_util::_id_0BF6( "specialty_superbulletpenetration" ) )
+                if ( isdefined( var_0 ) && var_0 _id_07E3::_hasperk( "specialty_superbulletpenetration" ) )
                     var_4 = var_4 * 2.0;
 
                 if ( _id_8950( var_1 ) )
@@ -719,14 +719,14 @@ _id_AB83( var_0, var_1, var_2, var_3 )
         }
     }
 
-    return scripts\mp\hud_util::_id_9FF4( var_0, var_1, var_2, var_4 );
+    return _id_07E3::_id_9FF4( var_0, var_1, var_2, var_4 );
 }
 
 _id_8950( var_0 )
 {
     foreach ( var_2 in level._id_CC14 )
     {
-        if ( _func_0121( var_0, var_2 ) )
+        if ( issubstr( var_0, var_2 ) )
             return 1;
     }
 
@@ -748,12 +748,12 @@ _id_743E()
 
 _id_E4E9( var_0, var_1 )
 {
-    var_2 = _func_025A( var_0._id_02EA - var_1._id_02EA );
+    var_2 = vectornormalize( var_0.origin - var_1.origin );
     var_3 = 15;
     var_4 = anglestoforward( var_1 getplayerangles() );
 
-    if ( _func_0257( var_2, var_4 ) >= cos( var_3 ) )
-        scripts\mp\hud_util::_id_D6DE( 1 );
+    if ( vectordot( var_2, var_4 ) >= cos( var_3 ) )
+        _id_07E3::_id_D6DE( 1 );
 }
 
 _id_90E0( var_0, var_1 )
@@ -764,12 +764,12 @@ _id_90E0( var_0, var_1 )
 
     for (;;)
     {
-        var_3 = self._id_02EA;
+        var_3 = self.origin;
 
         if ( self.type == "fighter_strike" )
             var_3 = self gettagorigin( "TAG_BLOOD" );
 
-        var_4 = distancesquared( var_0._id_02EA, var_3 );
+        var_4 = distancesquared( var_0.origin, var_3 );
 
         if ( var_4 < var_2 )
             thread _id_90DF( var_0, var_1 );
@@ -780,15 +780,15 @@ _id_90E0( var_0, var_1 )
 
 _id_90DF( var_0, var_1 )
 {
-    self _meth_80B7( 2200, self._id_02EA, var_1, var_0, "MOD_PROJECTILE", var_0._id_04D6 );
-    var_0 _meth_809F();
+    self dodamage( 2200, self.origin, var_1, var_0, "MOD_PROJECTILE", var_0._id_04D6 );
+    var_0 detonate();
 }
 
 _id_3FF1()
 {
     self._id_1E03 = 1000;
     self._id_1E02 = 1000;
-    self._id_1E06 = max( self, self._id_1E03, self._id_1E02 );
+    self._id_1E06 = _func_0149( self, self._id_1E03, self._id_1E02 );
 }
 
 _id_4839()
@@ -828,26 +828,26 @@ _id_4765( var_0 )
     _id_C4F4( self );
 
     if ( isdefined( self._id_9F0C ) )
-        self._id_9F0C _meth_809A();
+        self._id_9F0C delete();
 
     if ( isdefined( self._id_9F0D ) )
-        self._id_9F0D _meth_809A();
+        self._id_9F0D delete();
 
     if ( isdefined( self ) )
     {
         if ( isdefined( self._id_2600 ) )
-            self._id_2600 _meth_809A();
+            self._id_2600 delete();
 
         if ( isdefined( self._id_2601 ) )
-            self._id_2601 _meth_809A();
+            self._id_2601 delete();
 
         if ( isdefined( self._id_560C ) )
         {
             foreach ( var_2 in self._id_560C )
-                var_2 _meth_809A();
+                var_2 delete();
         }
 
-        self _meth_809A();
+        self delete();
     }
 }
 
@@ -859,7 +859,7 @@ _id_AB84( var_0, var_1, var_2, var_3 )
     if ( self.type == "carepackage" || self.type == "emergency_carepackage" || self.type == "raid_carepackage" || self.type == "zm_carepackage" )
         var_4 = "cpkg_destroyed";
 
-    scripts\mp\hud_util::_id_AB05( var_0, var_1, var_2, var_3, _id_6C11( self.type ), var_4, _id_6C13( self.type ), 1 );
+    _id_07E3::_id_AB05( var_0, var_1, var_2, var_3, _id_6C11( self.type ), var_4, _id_6C13( self.type ), 1 );
 }
 
 _id_3E4A()
@@ -887,13 +887,13 @@ _id_7415( var_0 )
 {
     level endon( "game_ended" );
     self endon( "delete" );
-    _id_077B::_id_108C3( "death", "crashing" );
+    scripts\engine\utility::_id_108C3( "death", "crashing" );
 
     if ( isdefined( self ) )
     {
-        var_1 = anglestoforward( self._id_0054 );
-        _func_0196( _id_6C12( self.type, self._id_045B ), self._id_02EA, var_1 );
-        scripts\mp\hud_util::_id_40D2( "ks_plane_destruct_explode", undefined, self._id_02EA );
+        var_1 = anglestoforward( self.angles );
+        playfx( _id_6C12( self.type, self.team ), self.origin, var_1 );
+        _id_07E3::_id_40D2( "ks_plane_destruct_explode", undefined, self.origin );
 
         if ( self.type == "s2_airstrike" )
             level notify( "aud_carpet_bomb_killed" );
@@ -948,30 +948,30 @@ _id_6C12( var_0, var_1 )
     {
         case "firebomb":
             if ( var_1 == "allies" )
-                return _id_077B::_id_6A40( "plane_death" );
+                return scripts\engine\utility::getfx( "plane_death" );
             else
-                return _id_077B::_id_6A40( "plane_death" );
+                return scripts\engine\utility::getfx( "plane_death" );
         case "s2_airstrike":
             if ( isdefined( var_1 ) && var_1 == "allies" )
-                return _id_077B::_id_6A40( "airstrike_death_allies" );
+                return scripts\engine\utility::getfx( "airstrike_death_allies" );
             else
-                return _id_077B::_id_6A40( "airstrike_death_axis" );
+                return scripts\engine\utility::getfx( "airstrike_death_axis" );
         case "zm_carepackage":
         case "paratrooper_insert":
         case "carepackage":
         case "raid_carepackage":
         case "paratroopers":
             if ( isdefined( var_1 ) && var_1 == "allies" )
-                return _id_077B::_id_6A40( "plane_death" );
+                return scripts\engine\utility::getfx( "plane_death" );
             else
-                return _id_077B::_id_6A40( "plane_death" );
+                return scripts\engine\utility::getfx( "plane_death" );
         case "emergency_carepackage":
             if ( isdefined( var_1 ) && var_1 == "allies" )
-                return _id_077B::_id_6A40( "plane_death" );
+                return scripts\engine\utility::getfx( "plane_death" );
             else
-                return _id_077B::_id_6A40( "plane_death" );
+                return scripts\engine\utility::getfx( "plane_death" );
         default:
-            return _id_077B::_id_6A40( "plane_death" );
+            return scripts\engine\utility::getfx( "plane_death" );
     }
 }
 
@@ -1018,15 +1018,15 @@ _id_1859( var_0, var_1, var_2, var_3 )
     self._id_E771 = "flying_in";
 
     if ( 1 && isdefined( self._id_9F0C ) )
-        self._id_9F0C scripts\mp\hud_util::_id_D54A( 4000, 1 );
+        self._id_9F0C _id_07E3::_id_D54A( 4000, 1 );
 
     if ( 1 && isdefined( self._id_9F0D ) )
-        self._id_9F0D scripts\mp\hud_util::_id_D54A( 4000, 1 );
+        self._id_9F0D _id_07E3::_id_D54A( 4000, 1 );
 
     if ( isdefined( var_3 ) && var_3 )
     {
         var_10 = var_1 + anglestoforward( var_2 ) * var_8;
-        self _meth_823B( var_10, var_9 );
+        self moveto( var_10, var_9 );
     }
 
     var_11 = 4;
@@ -1040,10 +1040,10 @@ _id_1859( var_0, var_1, var_2, var_3 )
     self._id_E771 = "flying_out";
 
     if ( 1 && isdefined( self._id_9F0C ) )
-        self._id_9F0C scripts\mp\hud_util::_id_D54A( 4000, 0 );
+        self._id_9F0C _id_07E3::_id_D54A( 4000, 0 );
 
     if ( 1 && isdefined( self._id_9F0D ) )
-        self._id_9F0D scripts\mp\hud_util::_id_D54A( 4000, 0 );
+        self._id_9F0D _id_07E3::_id_D54A( 4000, 0 );
 
     var_12 = 7;
 
@@ -1053,15 +1053,15 @@ _id_1859( var_0, var_1, var_2, var_3 )
     wait( var_12 );
     var_13 = undefined;
 
-    if ( !isdefined( self._id_02F2 ) )
-        var_13 = self._id_045B;
+    if ( !isdefined( self.owner ) )
+        var_13 = self.team;
 
-    var_14 = _id_6C14( var_0, self._id_02F2, var_13 );
+    var_14 = _id_6C14( var_0, self.owner, var_13 );
 
     if ( isdefined( var_14 ) )
     {
-        self setmode( var_14 );
-        scripts\mp\hud_util::_id_D6B3( 1, 0, 1 );
+        self setmodel( var_14 );
+        _id_07E3::_id_D6B3( 1, 0, 1 );
     }
 
     wait 1;
@@ -1086,29 +1086,29 @@ _id_B17D()
 {
     self endon( "airstrike_complete" );
     waitframe();
-    _func_0197( _id_077B::_id_6A40( "airstrike_engine" ), self, "tag_engine_right" );
-    _func_0197( _id_077B::_id_6A40( "airstrike_engine" ), self, "tag_engine_left" );
-    _func_0197( _id_077B::_id_6A40( "airstrike_wingtip" ), self, "tag_right_wingtip" );
-    _func_0197( _id_077B::_id_6A40( "airstrike_wingtip" ), self, "tag_left_wingtip" );
+    playfxontag( scripts\engine\utility::getfx( "airstrike_engine" ), self, "tag_engine_right" );
+    playfxontag( scripts\engine\utility::getfx( "airstrike_engine" ), self, "tag_engine_left" );
+    playfxontag( scripts\engine\utility::getfx( "airstrike_wingtip" ), self, "tag_right_wingtip" );
+    playfxontag( scripts\engine\utility::getfx( "airstrike_wingtip" ), self, "tag_left_wingtip" );
 }
 
 _id_400D( var_0, var_1 )
 {
-    var_2 = _func_0205( "script_model", ( 0, 0, 0 ) );
-    var_2 setscriptablepartstate( "airstrike" );
-    var_2 scripts\mp\hud_util::_id_D4D4();
+    var_2 = spawn( "script_model", ( 0, 0, 0 ) );
+    var_2 _meth_8374( "airstrike" );
+    var_2 _id_07E3::_id_D4D4();
     var_3 = 4 + _id_6A2E( var_1 ) + 8;
     var_2 thread _id_4751( var_3 );
     var_4 = anglestoaxis( ( 35, -45, 0 ) )["forward"];
-    var_2 _meth_820B( var_0, "tag_origin", var_4 * -1 * 1000, ( 35, -45, 0 ) );
-    var_0._id_8D49 = var_2;
+    var_2 linkto( var_0, "tag_origin", var_4 * -1 * 1000, ( 35, -45, 0 ) );
+    var_0.killcament = var_2;
 }
 
 _id_4751( var_0 )
 {
     self endon( "death" );
     wait( var_0 );
-    self _meth_809A();
+    self delete();
 }
 
 _id_687C()
@@ -1116,19 +1116,19 @@ _id_687C()
     if ( isdefined( level._id_138E ) )
         return level._id_138E;
 
-    var_0 = _id_077B::_id_69E3( "warbird_anchor", "targetname" );
+    var_0 = scripts\engine\utility::_id_69E3( "warbird_anchor", "targetname" );
 
     if ( !isdefined( var_0 ) )
     {
-        var_0 = _func_020F();
-        var_0._id_02EA = ( 0, 0, 0 );
+        var_0 = spawnstruct();
+        var_0.origin = ( 0, 0, 0 );
         var_0._id_045A = "warbird_anchor";
     }
 
     if ( !isdefined( var_0._id_0375 ) )
         var_0._id_0375 = 3500;
 
-    level._id_138E = var_0._id_02EA[2] + 3000;
+    level._id_138E = var_0.origin[2] + 3000;
     return level._id_138E;
 }
 
@@ -1141,16 +1141,16 @@ _id_6C16( var_0 )
 
     var_2 = 0;
 
-    if ( _id_0999::_id_6B0E() == "mp_gibraltar_02" )
+    if ( scripts\cp_mp\utility\game_utility::_id_6B0E() == "mp_gibraltar_02" )
         var_2 = 1000;
 
-    if ( _id_0999::_id_6B0E() == "mp_wolfslair" || _id_0999::_id_6B0E() == "mp_wolfslair_free" || _id_0999::_id_6B0E() == "mp_wolfslair2" )
+    if ( scripts\cp_mp\utility\game_utility::_id_6B0E() == "mp_wolfslair" || scripts\cp_mp\utility\game_utility::_id_6B0E() == "mp_wolfslair_free" || scripts\cp_mp\utility\game_utility::_id_6B0E() == "mp_wolfslair2" )
         var_2 = 1000;
 
-    if ( _id_0999::_id_6B0E() == "mp_sandbox_01" )
+    if ( scripts\cp_mp\utility\game_utility::_id_6B0E() == "mp_sandbox_01" )
         var_2 = -1500;
 
-    if ( _id_0999::_id_6B0E() == "mp_airship" && ( var_0 == "carepackage" || var_0 == "emergency_carepackage" ) )
+    if ( scripts\cp_mp\utility\game_utility::_id_6B0E() == "mp_airship" && ( var_0 == "carepackage" || var_0 == "emergency_carepackage" ) )
         var_2 = 1000;
 
     var_3 = _id_687C();
@@ -1222,13 +1222,13 @@ _id_5041( var_0, var_1 )
 {
     var_2 = var_0;
     var_3 = var_2 + ( 0, 0, -1000000.0 );
-    var_4 = scripts\mp\hud_util::_id_2D15( var_2, var_3, 0, var_1 );
+    var_4 = _id_07E3::_id_2D15( var_2, var_3, 0, var_1 );
 
     for ( var_5 = var_4["entity"]; isdefined( var_5 ) && isdefined( var_5.type ); var_5 = var_4["entity"] )
     {
         waitframe();
         var_2 = var_4["position"];
-        var_4 = scripts\mp\hud_util::_id_2D15( var_2, var_3, 0, var_5 );
+        var_4 = _id_07E3::_id_2D15( var_2, var_3, 0, var_5 );
     }
 
     return var_4["position"];
@@ -1243,8 +1243,8 @@ _id_503E( var_0, var_1 )
     else
         var_3 = -1;
 
-    var_4 = _id_077B::_id_5CBA( var_0._id_02EA );
-    var_5 = var_4 + anglestoforward( _id_077B::_id_5CB9( var_0._id_0054 ) ) * ( var_3 * 100000 );
+    var_4 = scripts\engine\utility::_id_5CBA( var_0.origin );
+    var_5 = var_4 + anglestoforward( scripts\engine\utility::_id_5CB9( var_0.angles ) ) * ( var_3 * 100000 );
     var_6 = _func_019F( var_4, var_5, var_1 );
     var_7 = distance( var_4, var_6 );
     return var_7;
@@ -1262,8 +1262,8 @@ _id_503F( var_0, var_1, var_2 )
     else
         var_4 = -1;
 
-    var_5 = _id_077B::_id_5CBA( var_0._id_02EA );
-    var_6 = var_5 + anglestoforward( _id_077B::_id_5CB9( var_0._id_0054 ) ) * ( var_4 * 100000 );
+    var_5 = scripts\engine\utility::_id_5CBA( var_0.origin );
+    var_6 = var_5 + anglestoforward( scripts\engine\utility::_id_5CB9( var_0.angles ) ) * ( var_4 * 100000 );
     var_7 = _func_019F( var_5, var_6, var_1 );
     var_8 = distance( var_5, var_7 );
 
@@ -1275,9 +1275,9 @@ _id_503F( var_0, var_1, var_2 )
 
 _id_5040( var_0, var_1 )
 {
-    var_2 = anglestoforward( _id_077B::_id_5CB9( var_0._id_0054 ) );
-    var_3 = _func_025A( _id_077B::_id_5CBA( var_1 ) - var_0._id_02EA );
-    var_4 = _func_0257( var_2, var_3 );
+    var_2 = anglestoforward( scripts\engine\utility::_id_5CB9( var_0.angles ) );
+    var_3 = vectornormalize( scripts\engine\utility::_id_5CBA( var_1 ) - var_0.origin );
+    var_4 = vectordot( var_2, var_3 );
 
     if ( var_4 > 0 )
         return 1;
@@ -1301,18 +1301,18 @@ _id_1083A( var_0, var_1, var_2 )
 
 _id_F791( var_0, var_1 )
 {
-    if ( _id_0A69::_id_8722() )
+    if ( scripts\mp\utility\game::_id_8722() )
         return 0;
 
     if ( isdefined( level._id_1395 ) || isdefined( level._id_3292 ) )
     {
-        _id_07B9::_id_DCBD( "KILLSTREAKS/AIR_SPACE_TOO_CROWDED" );
+        scripts\mp\hud_message::_id_DCBD( "KILLSTREAKS/AIR_SPACE_TOO_CROWDED" );
         return 0;
     }
 
     level._id_1395 = 1;
     thread _id_13BD();
-    scripts\mp\hud_util::_id_978D( var_1, level._id_9A95 );
+    _id_07E3::_id_978D( var_1, level._id_9A95 );
 
     switch ( var_1 )
     {
@@ -1326,12 +1326,12 @@ _id_F791( var_0, var_1 )
 
 _id_F79E( var_0, var_1 )
 {
-    if ( _id_0A69::_id_8722() )
+    if ( scripts\mp\utility\game::_id_8722() )
         return 0;
 
     if ( isdefined( level._id_1395 ) || isdefined( level._id_3292 ) )
     {
-        _id_07B9::_id_DCBD( "KILLSTREAKS/AIR_SPACE_TOO_CROWDED" );
+        scripts\mp\hud_message::_id_DCBD( "KILLSTREAKS/AIR_SPACE_TOO_CROWDED" );
         return 0;
     }
 
@@ -1356,15 +1356,15 @@ _id_D068( var_0, var_1 )
         var_2 = var_2 * 1.5;
 
     var_3 = 1;
-    self _meth_82F6( "ui_map_location_num_planes", 1 );
-    self _meth_82F6( "ui_map_location_height", _id_6C16( var_1 ) );
-    scripts\mp\hud_util::_id_0B3D( var_1, "map_artillery_selector", var_3, var_2, 0.5 );
+    self setclientomnvar( "ui_map_location_num_planes", 1 );
+    self setclientomnvar( "ui_map_location_height", _id_6C16( var_1 ) );
+    _id_07E3::_id_0B3D( var_1, "map_artillery_selector", var_3, var_2, 0.5 );
     thread _id_107EF();
     var_4 = undefined;
     var_5 = undefined;
     var_6 = 0;
 
-    while ( !var_6 && !_id_0A69::_id_8722( 0 ) )
+    while ( !var_6 && !scripts\mp\utility\game::_id_8722( 0 ) )
     {
         self waittill( "confirm_location", var_7, var_8 );
 
@@ -1375,9 +1375,9 @@ _id_D068( var_0, var_1 )
         {
             var_4 = var_7;
             var_5 = var_8;
-            self _meth_82F6( "ui_map_location_use_carepackages", 0 );
-            self _meth_82F6( "ui_map_location_num_planes", 0 );
-            self _meth_82F6( "ui_map_location_height", 0 );
+            self setclientomnvar( "ui_map_location_use_carepackages", 0 );
+            self setclientomnvar( "ui_map_location_num_planes", 0 );
+            self setclientomnvar( "ui_map_location_height", 0 );
             break;
         }
         else
@@ -1386,21 +1386,21 @@ _id_D068( var_0, var_1 )
 
     self _meth_82ED( 0, 0.3 );
     self notify( "location_selection_complete" );
-    scripts\mp\hud_util::_id_DEEF( "ks_bombing_run_location_selected" );
-    self _meth_82F6( "ui_map_location_blocked", 0 );
+    _id_07E3::_id_DEEF( "ks_bombing_run_location_selected" );
+    self setclientomnvar( "ui_map_location_blocked", 0 );
 
-    if ( _id_0A69::_id_8722() )
+    if ( scripts\mp\utility\game::_id_8722() )
         return 0;
 
     if ( isdefined( level._id_1395 ) || isdefined( level._id_3292 ) )
     {
-        _id_07B9::_id_DCBD( "KILLSTREAKS/AIR_SPACE_TOO_CROWDED" );
+        scripts\mp\hud_message::_id_DCBD( "KILLSTREAKS/AIR_SPACE_TOO_CROWDED" );
         return 0;
     }
 
     level._id_1395 = 1;
     thread _id_13BD();
-    scripts\mp\hud_util::_id_978D( var_1, var_4 );
+    _id_07E3::_id_978D( var_1, var_4 );
     thread _id_E71D( var_0, [ var_4 ], [ var_5 ], var_1 );
     return 1;
 }
@@ -1412,9 +1412,9 @@ _id_DC88()
     self endon( "stop_location_selection" );
     self notify( "airstrikeShowBlockedHUD" );
     self endon( "airstrikeShowBlockedHUD" );
-    self _meth_82F6( "ui_map_location_blocked", 1 );
+    self setclientomnvar( "ui_map_location_blocked", 1 );
     wait 1.5;
-    self _meth_82F6( "ui_map_location_blocked", 0 );
+    self setclientomnvar( "ui_map_location_blocked", 0 );
 }
 
 _id_107EF()
@@ -1423,10 +1423,10 @@ _id_107EF()
     self endon( "disconnect" );
     self waittill( "stop_location_selection" );
     self _meth_82ED( 0, 0.3 );
-    self _meth_82F6( "ui_map_location_blocked", 0 );
+    self setclientomnvar( "ui_map_location_blocked", 0 );
 
-    if ( _id_07B7::_id_10956() > 0 )
-        self _meth_83FF( scripts\mp\hud_util::_id_6ADA() );
+    if ( scripts\mp\hostmigration::_id_10956() > 0 )
+        self _meth_83FF( _id_07E3::_id_6ADA() );
 
     level._id_1395 = undefined;
 }
@@ -1435,12 +1435,12 @@ _id_FF46( var_0, var_1, var_2, var_3 )
 {
     var_4 = _id_6C16( var_3 );
     var_5 = 1;
-    return scripts\mp\hud_util::_id_2639( var_0, var_4, var_1, var_5 );
+    return _id_07E3::_id_2639( var_0, var_4, var_1, var_5 );
 }
 
 _id_6B0D()
 {
-    switch ( _id_0999::_id_6B0E() )
+    switch ( scripts\cp_mp\utility\game_utility::_id_6B0E() )
     {
         case "mp_battleship_2":
             return 90;
@@ -1507,5 +1507,5 @@ _id_10E4( var_0 )
 
 _id_C4F4( var_0 )
 {
-    level._id_B17F = _id_077B::_id_1B96( level._id_B17F, var_0 );
+    level._id_B17F = scripts\engine\utility::array_remove( level._id_B17F, var_0 );
 }

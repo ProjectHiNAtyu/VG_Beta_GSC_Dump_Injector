@@ -3,66 +3,66 @@
 
 _id_16AD()
 {
-    if ( visionsetnight( level._id_030F getcurrentweapon() ) == "rifle" )
+    if ( weaponclass( level.player getcurrentweapon() ) == "rifle" )
     {
-        _id_081E::_id_DF05( "weap_putaway_large_plr", level._id_030F );
+        _id_081E::_id_DF05( "weap_putaway_large_plr", level.player );
         wait 0.5;
-        _id_081E::_id_DF05( "weap_ammo_pickup", level._id_030F );
+        _id_081E::_id_DF05( "weap_ammo_pickup", level.player );
         wait 1;
-        _id_081E::_id_DF05( "weap_raise_large_plr", level._id_030F );
+        _id_081E::_id_DF05( "weap_raise_large_plr", level.player );
     }
 
-    if ( visionsetnight( level._id_030F getcurrentweapon() ) == "smg" )
+    if ( weaponclass( level.player getcurrentweapon() ) == "smg" )
     {
-        _id_081E::_id_DF05( "weap_putaway_medium_plr", level._id_030F );
+        _id_081E::_id_DF05( "weap_putaway_medium_plr", level.player );
         wait 0.5;
-        _id_081E::_id_DF05( "weap_ammo_pickup", level._id_030F );
+        _id_081E::_id_DF05( "weap_ammo_pickup", level.player );
         wait 1;
-        _id_081E::_id_DF05( "weap_raise_medium_plr", level._id_030F );
+        _id_081E::_id_DF05( "weap_raise_medium_plr", level.player );
     }
 
-    if ( visionsetnight( level._id_030F getcurrentweapon() ) == "spread" )
+    if ( weaponclass( level.player getcurrentweapon() ) == "spread" )
     {
-        _id_081E::_id_DF05( "weap_putaway_medium_plr", level._id_030F );
+        _id_081E::_id_DF05( "weap_putaway_medium_plr", level.player );
         wait 0.5;
-        _id_081E::_id_DF05( "weap_ammo_pickup", level._id_030F );
+        _id_081E::_id_DF05( "weap_ammo_pickup", level.player );
         wait 1;
-        _id_081E::_id_DF05( "weap_raise_medium_plr", level._id_030F );
+        _id_081E::_id_DF05( "weap_raise_medium_plr", level.player );
     }
 
-    if ( visionsetnight( level._id_030F getcurrentweapon() ) == "pistol" )
+    if ( weaponclass( level.player getcurrentweapon() ) == "pistol" )
     {
-        _id_081E::_id_DF05( "weap_putaway_small_plr", level._id_030F );
+        _id_081E::_id_DF05( "weap_putaway_small_plr", level.player );
         wait 0.5;
-        _id_081E::_id_DF05( "weap_ammo_pickup", level._id_030F );
+        _id_081E::_id_DF05( "weap_ammo_pickup", level.player );
         wait 1;
-        _id_081E::_id_DF05( "weap_raise_small_plr", level._id_030F );
+        _id_081E::_id_DF05( "weap_raise_small_plr", level.player );
     }
 
-    if ( visionsetnight( level._id_030F getcurrentweapon() ) == "sniper" )
+    if ( weaponclass( level.player getcurrentweapon() ) == "sniper" )
     {
-        _id_081E::_id_DF05( "weap_putaway_large_plr", level._id_030F );
+        _id_081E::_id_DF05( "weap_putaway_large_plr", level.player );
         wait 0.5;
-        _id_081E::_id_DF05( "weap_ammo_pickup", level._id_030F );
+        _id_081E::_id_DF05( "weap_ammo_pickup", level.player );
         wait 1;
-        _id_081E::_id_DF05( "weap_raise_large_plr", level._id_030F );
+        _id_081E::_id_DF05( "weap_raise_large_plr", level.player );
     }
 
-    if ( visionsetnight( level._id_030F getcurrentweapon() ) == "rocketlauncher" )
+    if ( weaponclass( level.player getcurrentweapon() ) == "rocketlauncher" )
     {
-        _id_081E::_id_DF05( "weap_putaway_launcher_plr", level._id_030F );
+        _id_081E::_id_DF05( "weap_putaway_launcher_plr", level.player );
         wait 0.5;
-        _id_081E::_id_DF05( "weap_ammo_pickup", level._id_030F );
+        _id_081E::_id_DF05( "weap_ammo_pickup", level.player );
         wait 1;
-        _id_081E::_id_DF05( "weap_raise_launcher_plr", level._id_030F );
+        _id_081E::_id_DF05( "weap_raise_launcher_plr", level.player );
     }
 
-    if ( visionsetnight( level._id_030F getcurrentweapon() ) == "mg" )
+    if ( weaponclass( level.player getcurrentweapon() ) == "mg" )
     {
-        _id_081E::_id_DF05( "weap_putaway_launcher_plr", level._id_030F );
+        _id_081E::_id_DF05( "weap_putaway_launcher_plr", level.player );
         wait 0.5;
-        _id_081E::_id_DF05( "weap_ammo_pickup", level._id_030F );
+        _id_081E::_id_DF05( "weap_ammo_pickup", level.player );
         wait 1;
-        _id_081E::_id_DF05( "weap_raise_launcher_plr", level._id_030F );
+        _id_081E::_id_DF05( "weap_raise_launcher_plr", level.player );
     }
 }

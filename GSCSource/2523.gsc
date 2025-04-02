@@ -10,14 +10,14 @@ _id_2E3E( var_0 )
 {
     self endon( "disconnect" );
     var_0 endon( "death" );
-    _id_0A77::_id_BD07( "c4 spawn", var_0._id_02F2 );
+    _id_0A77::_id_BD07( "c4 spawn", var_0.owner );
     var_0._id_F1D0 = gettime();
     var_0 _id_0765::_id_C2A7( 1, ::_id_EC0F );
-    _id_2E1C( var_0._id_02F2, var_0 );
+    _id_2E1C( var_0.owner, var_0 );
     thread _id_2E41();
     thread _id_2E40();
 
-    if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_rugged_eqp" ) )
+    if ( scripts\mp\utility\perk::_hasperk( "specialty_rugged_eqp" ) )
         var_0._id_758C = 1;
 
     var_0 thread scripts\mp\weapons::_id_9EBB();
@@ -25,15 +25,15 @@ _id_2E3E( var_0 )
     var_0 thread _id_2E28();
     thread scripts\mp\weapons::_id_A0F3( self, var_0 );
     var_0 waittill( "missile_stuck" );
-    var_0 setorigin( self );
-    var_0 setneargoalnotifydist( 1 );
+    var_0 setotherent( self );
+    var_0 _meth_8357( 1 );
     scripts\mp\weapons::_id_AABC( var_0, "equip_c4", ::_id_2E24 );
     thread scripts\mp\weapons::_id_A0F2( self, var_0 );
     var_0 thread scripts\mp\weapons::_id_99D8( "tag_use", 1 );
-    var_0 _id_07E9::_id_C2A4( "Lethal_Static", var_0._id_02F2, 1 );
+    var_0 _id_07E9::_id_C2A4( "Lethal_Static", var_0.owner, 1 );
     var_0 _id_0764::_id_D151( ::_id_2E2C );
     var_0 thread _id_0A40::_id_CA27();
-    var_0 _meth_8373( "effects", "plant", 0 );
+    var_0 setscriptablepartstate( "effects", "plant", 0 );
     thread scripts\mp\weapons::_id_ACC5( var_0 );
     var_0 _meth_85B7();
     var_0 _meth_85B8();
@@ -49,19 +49,19 @@ _id_2E3C()
     if ( isdefined( self._id_4325 ) )
         _id_07EE::_id_C511( self._id_4325 );
 
-    var_0 = ( self._id_02EA[0], self._id_02EA[1], self._id_02EA[2] - 50.0 );
-    self._id_4325 = _id_07EE::_id_110C( var_0, _id_07EE::_id_69B5(), 100, self._id_02F2._id_045B, undefined, self._id_02F2, 0, self, 1 );
+    var_0 = ( self.origin[0], self.origin[1], self.origin[2] - 50.0 );
+    self._id_4325 = _id_07EE::_id_110C( var_0, _id_07EE::_id_69B5(), 100, self.owner.team, undefined, self.owner, 0, self, 1 );
 }
 
 _id_2E29( var_0 )
 {
     self endon( "death" );
-    self._id_02F2 endon( "disconnect" );
+    self.owner endon( "disconnect" );
 
     if ( isdefined( var_0 ) )
         var_0 endon( "disconnect" );
     else
-        var_0 = self._id_02F2;
+        var_0 = self.owner;
 
     wait 0.1;
     thread _id_2E2E( var_0 );
@@ -69,17 +69,17 @@ _id_2E29( var_0 )
 
 _id_2E2E( var_0 )
 {
-    _id_0A77::_id_BD07( "c4 triggered", self._id_02F2 );
-    level notify( "explosion_extinguish", self._id_02EA, 256, self._id_02F2, self );
+    _id_0A77::_id_BD07( "c4 triggered", self.owner );
+    level notify( "explosion_extinguish", self.origin, 256, self.owner, self );
     var_1 = undefined;
     var_2 = undefined;
-    var_3 = self._id_02EA;
-    var_4 = _id_077A::_id_3EC3( 0, 1, 1, 0, 1, 1, 0, 0, 0 );
-    var_5 = _func_0257( ( 0, 0, 1 ), anglestoup( self._id_0054 ) );
+    var_3 = self.origin;
+    var_4 = scripts\engine\trace::_id_3EC3( 0, 1, 1, 0, 1, 1, 0, 0, 0 );
+    var_5 = vectordot( ( 0, 0, 1 ), anglestoup( self.angles ) );
 
     if ( abs( var_5 ) <= 0.81915 )
     {
-        var_6 = var_3 - anglestoup( self._id_0054 ) * 5;
+        var_6 = var_3 - anglestoup( self.angles ) * 5;
         var_7 = _func_02BC( var_3, var_6, var_4, self, 0, "physicsquery_closest", 1 );
 
         if ( isdefined( var_7 ) && var_7.size > 0 )
@@ -90,7 +90,7 @@ _id_2E2E( var_0 )
     }
     else if ( var_5 <= -0.96592 )
     {
-        var_6 = var_3 - anglestoup( self._id_0054 ) * 5;
+        var_6 = var_3 - anglestoup( self.angles ) * 5;
         var_7 = _func_02BC( var_3, var_6, var_4, self, 0, "physicsquery_closest", 1 );
 
         if ( isdefined( var_7 ) && var_7.size > 0 )
@@ -119,9 +119,9 @@ _id_2E2E( var_0 )
     }
 
     thread _id_2E24( var_1 );
-    self _meth_8312( var_0 );
+    self setentityowner( var_0 );
     self _meth_85AC();
-    self _meth_8373( "effects", var_2, 0 );
+    self setscriptablepartstate( "effects", var_2, 0 );
 }
 
 _id_EC0F()
@@ -132,14 +132,14 @@ _id_EC0F()
 _id_2E26( var_0 )
 {
     thread _id_2E24( 5 );
-    self _meth_8373( "effects", "destroy", 0 );
+    self setscriptablepartstate( "effects", "destroy", 0 );
 }
 
 _id_2E24( var_0 )
 {
     self notify( "death" );
     level._id_9ECB[self getentitynumber()] = undefined;
-    self _meth_82F0( 0 );
+    self setcandamage( 0 );
     scripts\mp\weapons::_id_99D5();
     _id_0765::_id_47E6();
     _id_0766::_id_D586( self._id_75D8 );
@@ -152,7 +152,7 @@ _id_2E24( var_0 )
         self._id_4325 = undefined;
     }
 
-    var_1 = self._id_02F2;
+    var_1 = self.owner;
 
     if ( isdefined( var_1 ) )
     {
@@ -166,7 +166,7 @@ _id_2E24( var_0 )
     if ( isdefined( var_0 ) )
         wait( var_0 );
 
-    self _meth_809A();
+    self delete();
 }
 
 _id_2E39()
@@ -178,7 +178,7 @@ _id_2E39()
     if ( isdefined( var_0 ) )
     {
         var_0 waittill( "death" );
-        self _meth_8373( "effects", "neutral", 0 );
+        self setscriptablepartstate( "effects", "neutral", 0 );
     }
 }
 
@@ -186,7 +186,7 @@ _id_2E2F()
 {
     self endon( "death" );
     level endon( "game_ended" );
-    var_0 = self._id_02F2;
+    var_0 = self.owner;
     self waittill( "detonateExplosive", var_1 );
 
     if ( isdefined( var_1 ) )
@@ -197,13 +197,13 @@ _id_2E2F()
 
 _id_2E2C( var_0 )
 {
-    var_1 = var_0._id_006E;
-    var_2 = var_0._id_A90B;
+    var_1 = var_0.attacker;
+    var_2 = var_0.objweapon;
 
-    if ( istrue( _id_099C::_id_B779( self._id_02F2, var_1 ) ) )
+    if ( istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_1 ) ) )
     {
         var_1 notify( "destroyed_equipment" );
-        var_1 _id_0A28::_id_6FCD( self );
+        var_1 scripts\mp\killstreaks\killstreaks::_id_6FCD( self );
     }
 
     var_3 = "";
@@ -211,7 +211,7 @@ _id_2E2C( var_0 )
     if ( istrue( self._id_758C ) )
         var_3 = "hitequip";
 
-    if ( _func_0117( var_1 ) )
+    if ( isplayer( var_1 ) )
         var_1 _id_079B::_id_FC44( var_3 );
 
     thread _id_2E26();
@@ -220,16 +220,16 @@ _id_2E2C( var_0 )
 _id_2E28()
 {
     self endon( "death" );
-    level _id_077B::_id_1087E( "game_ended", "bro_shot_start" );
+    level scripts\engine\utility::waittill_any_2( "game_ended", "bro_shot_start" );
     thread _id_2E26();
 }
 
 _id_2E3F()
 {
-    if ( !_id_0A74::_id_89D3( self ) )
+    if ( !scripts\mp\utility\player::isreallyalive( self ) )
         return 0;
 
-    if ( _id_0A74::_id_8AB5() )
+    if ( scripts\mp\utility\player::_id_8AB5() )
         return 0;
 
     if ( !isdefined( self._id_2E4C ) || self._id_2E4C.size <= 0 )
@@ -255,7 +255,7 @@ _id_2E41()
     {
         self waittill( "detonate" );
 
-        if ( self _meth_8570()._id_0084 == "s4_c4_mp" || self _meth_8570()._id_0084 == "s4_eq_gesture_detonate_mp" )
+        if ( self getheldoffhand().basename == "s4_c4_mp" || self getheldoffhand().basename == "s4_eq_gesture_detonate_mp" )
             thread _id_2E2A();
     }
 }
@@ -268,7 +268,7 @@ _id_2E40()
     self notify( "watchForAltDetonation" );
     self endon( "watchForAltDetonation" );
 
-    while ( self useanimtree() )
+    while ( self usebuttonpressed() )
         waitframe();
 
     var_0 = 0;
@@ -276,11 +276,11 @@ _id_2E40()
 
     for (;;)
     {
-        if ( self useanimtree() )
+        if ( self usebuttonpressed() )
         {
             var_0 = 0;
 
-            while ( self useanimtree() )
+            while ( self usebuttonpressed() )
             {
                 var_0 = var_0 + var_1;
                 wait( var_1 );
@@ -291,7 +291,7 @@ _id_2E40()
 
             var_0 = 0;
 
-            while ( !self useanimtree() && var_0 < 0.25 )
+            while ( !self usebuttonpressed() && var_0 < 0.25 )
             {
                 var_0 = var_0 + var_1;
                 wait( var_1 );
@@ -314,7 +314,7 @@ _id_2E40()
 
 _id_2E1D()
 {
-    var_0 = _func_034C( "s4_eq_gesture_detonate_mp" );
+    var_0 = makeweapon( "s4_eq_gesture_detonate_mp" );
     self _meth_8529( var_0 );
     thread _id_2E1E();
 }
@@ -324,11 +324,11 @@ _id_2E1E()
     self endon( "death_or_disconnect" );
     self notify( "c4_animDetonateCleanup()" );
     self endon( "c4_animDetonateCleanup()" );
-    var_0 = _func_034C( "s4_eq_gesture_detonate_mp" );
+    var_0 = makeweapon( "s4_eq_gesture_detonate_mp" );
     wait 1;
 
     if ( self hasweapon( var_0 ) )
-        self takeallweapons( var_0 );
+        self takeweapon( var_0 );
 }
 
 _id_2E2A()
@@ -354,7 +354,7 @@ _id_2E33( var_0 )
 
 _id_2E38()
 {
-    if ( scripts\engine\trace::_id_753F( "equip_c4" ) )
+    if ( scripts\mp\equipment::_id_753F( "equip_c4" ) )
         thread _id_2E40();
 }
 

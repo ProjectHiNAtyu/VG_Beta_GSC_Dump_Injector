@@ -98,7 +98,7 @@ ease_origin( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
 {
     var_9 = undefined;
     var_10 = ::_set_origin;
-    var_11 = self._id_02EA;
+    var_11 = self.origin;
 
     if ( istrue( var_5 ) )
         var_10 = ::_add_origin;
@@ -132,7 +132,7 @@ ease_angles( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
             var_0 = var_0[var_4];
 
         if ( !var_5 )
-            var_0 = _func_0004( var_0 - self._id_0054[var_4] );
+            var_0 = _func_0004( var_0 - self.angles[var_4] );
 
         var_12 = undefined;
 
@@ -159,7 +159,7 @@ ease_angles( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
         var_4 = -1;
 
         if ( !var_5 )
-            var_0 = _func_0004( var_0 - self._id_0054 );
+            var_0 = _func_0004( var_0 - self.angles );
     }
 
     thread ease_callback( var_10, var_0, var_1, ::_add_angles, var_2, var_3, var_11, var_9, var_6, var_7, var_8, var_4 );
@@ -229,7 +229,7 @@ ease_callback( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     var_19.ease_finished = 0;
     var_20 = var_19.cur_value;
 
-    for ( var_21 = 0.0; var_21 < var_2; var_21 = var_21 + isai( var_5 ) )
+    for ( var_21 = 0.0; var_21 < var_2; var_21 = var_21 + isalive( var_5 ) )
     {
         var_19.pct = _func_003C( 1.0, var_21 / var_2 );
         var_20 = var_19.cur_value;
@@ -349,7 +349,7 @@ ease_callback_dynamic_target( var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
     var_20.ease_finished = 0;
     var_21 = var_20.cur_value;
 
-    for ( var_22 = 0.0; var_22 < var_3; var_22 = var_22 + isai( var_6 ) )
+    for ( var_22 = 0.0; var_22 < var_3; var_22 = var_22 + isalive( var_6 ) )
     {
         var_20.target_value = self [[ var_2 ]]( var_1, var_20, var_12, var_13 );
         var_20.pct = _func_003C( 1.0, var_22 / var_3 );
@@ -417,16 +417,16 @@ _set_origin( var_0, var_1, var_2 )
     switch ( var_1 )
     {
         case 0:
-            self._id_02EA = ( var_0.cur_value, self._id_02EA[1], self._id_02EA[2] );
+            self.origin = ( var_0.cur_value, self.origin[1], self.origin[2] );
             break;
         case 1:
-            self._id_02EA = ( self._id_02EA[0], var_0.cur_value, self._id_02EA[2] );
+            self.origin = ( self.origin[0], var_0.cur_value, self.origin[2] );
             break;
         case 2:
-            self._id_02EA = ( self._id_02EA[0], self._id_02EA[1], var_0.cur_value );
+            self.origin = ( self.origin[0], self.origin[1], var_0.cur_value );
             break;
         default:
-            self._id_02EA = var_0.cur_value;
+            self.origin = var_0.cur_value;
             break;
     }
 }
@@ -436,16 +436,16 @@ _add_origin( var_0, var_1, var_2 )
     switch ( var_1 )
     {
         case 0:
-            self._id_02EA = self._id_02EA + ( var_0.delta, 0, 0 );
+            self.origin = self.origin + ( var_0.delta, 0, 0 );
             break;
         case 1:
-            self._id_02EA = self._id_02EA + ( 0, var_0.delta, 0 );
+            self.origin = self.origin + ( 0, var_0.delta, 0 );
             break;
         case 2:
-            self._id_02EA = self._id_02EA + ( 0, 0, var_0.delta );
+            self.origin = self.origin + ( 0, 0, var_0.delta );
             break;
         default:
-            self._id_02EA = self._id_02EA + var_0.delta;
+            self.origin = self.origin + var_0.delta;
             break;
     }
 }
@@ -455,19 +455,19 @@ _add_angles( var_0, var_1, var_2 )
     switch ( var_1 )
     {
         case 0:
-            self._id_0054 = self._id_0054 + ( var_0.delta, 0, 0 );
+            self.angles = self.angles + ( var_0.delta, 0, 0 );
             break;
         case 1:
-            self._id_0054 = self._id_0054 + ( 0, var_0.delta, 0 );
+            self.angles = self.angles + ( 0, var_0.delta, 0 );
             break;
         case 2:
-            self._id_0054 = self._id_0054 + ( 0, 0, var_0.delta );
+            self.angles = self.angles + ( 0, 0, var_0.delta );
             break;
         default:
-            self._id_0054 = self._id_0054 + var_0.delta;
+            self.angles = self.angles + var_0.delta;
             break;
     }
 
     if ( var_0.ease_finished )
-        self._id_0054 = _func_0004( self._id_0054 );
+        self.angles = _func_0004( self.angles );
 }

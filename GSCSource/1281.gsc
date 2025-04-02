@@ -11,7 +11,7 @@ _id_24E2()
     if ( isdefined( level._id_0B4A["dog_agent"] ) )
         return;
 
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     var_0._id_0E61 = [];
     var_0._id_0E61[0] = _id_08BB::_id_FC54;
     var_0._id_0E61[1] = _id_0690::_id_7CDF;
@@ -42,5 +42,5 @@ _id_24E2()
 _id_C233()
 {
     _id_24E2();
-    anglestoleft( "dog_agent" );
+    _func_0306( "dog_agent" );
 }

@@ -17,12 +17,12 @@ _id_1009B( var_0, var_1, var_2 )
     if ( !isdefined( var_2 ) )
         return;
 
-    _func_03BA( "dlog_event_vehicle_spawn", [ "vehicle_spawn_id", var_3._id_7C71, "pos_x", var_0._id_02EA[0], "pos_y", var_0._id_02EA[1], "pos_z", var_0._id_02EA[2], "matchtime_ms", _id_0999::_id_6DCD(), "spawn_type", var_1, "vehicle_type", var_2 ] );
+    _func_03BA( "dlog_event_vehicle_spawn", [ "vehicle_spawn_id", var_3._id_7C71, "pos_x", var_0.origin[0], "pos_y", var_0.origin[1], "pos_z", var_0.origin[2], "matchtime_ms", scripts\cp_mp\utility\game_utility::_id_6DCD(), "spawn_type", var_1, "vehicle_type", var_2 ] );
 }
 
 _id_10096( var_0, var_1, var_2, var_3 )
 {
-    if ( !_func_0117( var_1 ) )
+    if ( !isplayer( var_1 ) )
         return;
 
     var_4 = _id_10097( var_0 );
@@ -36,12 +36,12 @@ _id_10096( var_0, var_1, var_2, var_3 )
     if ( !isdefined( var_3 ) )
         return;
 
-    var_1 _meth_870C( "dlog_event_player_vehicle_exit", [ "vehicle_spawn_id", var_4._id_7C71, "exit_pos_x", var_0._id_02EA[0], "exit_pos_y", var_0._id_02EA[1], "exit_pos_z", var_0._id_02EA[2], "exit_seat_id", var_2, "exit_matchtime_ms", _id_0999::_id_6DCD(), "exit_type", var_3 ] );
+    var_1 _meth_870C( "dlog_event_player_vehicle_exit", [ "vehicle_spawn_id", var_4._id_7C71, "exit_pos_x", var_0.origin[0], "exit_pos_y", var_0.origin[1], "exit_pos_z", var_0.origin[2], "exit_seat_id", var_2, "exit_matchtime_ms", scripts\cp_mp\utility\game_utility::_id_6DCD(), "exit_type", var_3 ] );
 }
 
 _id_10095( var_0, var_1, var_2, var_3 )
 {
-    if ( !_func_0117( var_1 ) )
+    if ( !isplayer( var_1 ) )
         return;
 
     var_4 = _id_10097( var_0 );
@@ -55,12 +55,12 @@ _id_10095( var_0, var_1, var_2, var_3 )
     if ( !isdefined( var_3 ) )
         return;
 
-    var_1 _meth_870C( "dlog_event_player_vehicle_enter", [ "vehicle_spawn_id", var_4._id_7C71, "enter_pos_x", var_0._id_02EA[0], "enter_pos_y", var_0._id_02EA[1], "enter_pos_z", var_0._id_02EA[2], "enter_seat_id", var_2, "enter_matchtime_ms", _id_0999::_id_6DCD(), "enter_type", var_3 ] );
+    var_1 _meth_870C( "dlog_event_player_vehicle_enter", [ "vehicle_spawn_id", var_4._id_7C71, "enter_pos_x", var_0.origin[0], "enter_pos_y", var_0.origin[1], "enter_pos_z", var_0.origin[2], "enter_seat_id", var_2, "enter_matchtime_ms", scripts\cp_mp\utility\game_utility::_id_6DCD(), "enter_type", var_3 ] );
 }
 
 _id_1009A()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     var_0._id_F94D = 0;
     level._id_FFF1._id_4BA6 = var_0;
 }
@@ -77,7 +77,7 @@ _id_10097( var_0, var_1 )
 
     if ( !isdefined( var_3 ) && istrue( var_1 ) )
     {
-        var_3 = _func_020F();
+        var_3 = spawnstruct();
         var_0._id_4BA6 = var_3;
         var_3._id_7C71 = var_2._id_F94D;
         var_2._id_F94D++;

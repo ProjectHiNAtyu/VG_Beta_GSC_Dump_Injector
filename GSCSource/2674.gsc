@@ -3,17 +3,17 @@
 
 _id_ACBC( var_0, var_1, var_2 )
 {
-    var_3 = level._id_B758;
+    var_3 = level.players;
     var_4 = _id_07D2::_id_ACE5( var_2 );
     return _id_07D2::_id_ACC0( var_0, var_3, var_1, var_4, "ALL" );
 }
 
 _id_ACBF( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_5 = _id_0A7C::_id_6DAC( var_1, "players" );
+    var_5 = scripts\mp\utility\teams::_id_6DAC( var_1, "players" );
 
-    if ( isdefined( var_4 ) && isdefined( var_4._id_045B ) && var_4._id_045B == var_1 )
-        var_5 = _id_077B::_id_1B96( var_5, var_4 );
+    if ( isdefined( var_4 ) && isdefined( var_4.team ) && var_4.team == var_1 )
+        var_5 = scripts\engine\utility::array_remove( var_5, var_4 );
 
     var_6 = _id_07D2::_id_ACE5( var_3 );
     return _id_07D2::_id_ACC0( var_0, var_5, var_2, var_6, "TEAM", var_1 );
@@ -21,22 +21,22 @@ _id_ACBF( var_0, var_1, var_2, var_3, var_4 )
 
 _id_ACBE( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_5 = level._id_E48B[self._id_045B][self._id_E493]._id_B758;
+    var_5 = level._id_E48B[self.team][self._id_E493].players;
     var_6 = _id_07D2::_id_ACE5( var_4 );
     return _id_07D2::_id_ACC0( var_0, var_5, var_3, var_6, "SQUAD", var_1, var_2 );
 }
 
-_id_ACBD( var_0, var_1, var_2, var_3 )
+outlineenableforplayer( var_0, var_1, var_2, var_3 )
 {
     var_4 = _id_07D2::_id_ACE5( var_3 );
 
-    if ( _func_0102( var_1 ) )
+    if ( isagent( var_1 ) )
         return _id_07D2::_id_ACC9();
 
     return _id_07D2::_id_ACC0( var_0, [ var_1 ], var_2, var_4, "ENTITY" );
 }
 
-_id_ACB7( var_0, var_1 )
+outlinedisable( var_0, var_1 )
 {
     _id_07D2::_id_ACB8( var_0, var_1 );
 }
@@ -54,7 +54,7 @@ _id_8234()
 
 _id_10E1( var_0, var_1 )
 {
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
     var_2._id_0318 = var_0;
     var_2._id_0333 = var_1;
     var_3 = level._id_ACDC;
@@ -75,7 +75,7 @@ _id_ACDA( var_0, var_1 )
         if ( !isdefined( var_3 ) || !isdefined( var_3._id_0318 ) || !isdefined( var_3._id_0333 ) )
             continue;
 
-        if ( _id_0777::_id_D024( var_0, var_1, var_3._id_0318, var_3._id_0333 ) )
+        if ( scripts\engine\math::_id_D024( var_0, var_1, var_3._id_0318, var_3._id_0333 ) )
             return 1;
     }
 
@@ -84,7 +84,7 @@ _id_ACDA( var_0, var_1 )
 
 _id_0C04()
 {
-    if ( !_id_099C::_giveweapon() )
+    if ( !scripts\cp_mp\utility\player_utility::_id_0C14() )
         return;
 
     self _meth_81B4();
@@ -95,17 +95,17 @@ _id_0C05( var_0, var_1 )
     if ( !isdefined( var_1 ) )
         var_1 = 0;
 
-    if ( !_func_0117( self ) )
+    if ( !isplayer( self ) )
     {
 
     }
 
-    if ( !var_1 && !_id_099C::_giveweapon() )
+    if ( !var_1 && !scripts\cp_mp\utility\player_utility::_id_0C14() )
     {
 
     }
 
-    if ( var_1 && !_id_099C::_giveweapon() )
+    if ( var_1 && !scripts\cp_mp\utility\player_utility::_id_0C14() )
     {
         thread _id_7B74( var_0 );
         return;
@@ -122,10 +122,10 @@ _id_7B74( var_0 )
     if ( !isdefined( self ) )
         return;
 
-    if ( !_id_099C::_giveweapon() )
+    if ( !scripts\cp_mp\utility\player_utility::_id_0C14() )
         return;
 
-    if ( !_func_0117( self ) )
+    if ( !isplayer( self ) )
         return;
 
     self _meth_81B3( var_0 );

@@ -3,13 +3,13 @@
 
 _id_D6B6( var_0 )
 {
-    self makeunusable();
+    self makeuseable();
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
         if ( var_2 != var_0 )
         {
-            self disableoffhandweapons( var_2 );
+            self disableplayeruse( var_2 );
             continue;
         }
 
@@ -19,13 +19,13 @@ _id_D6B6( var_0 )
 
 _id_D45E()
 {
-    foreach ( var_1 in level._id_B758 )
-        self disableoffhandweapons( var_1 );
+    foreach ( var_1 in level.players )
+        self disableplayeruse( var_1 );
 }
 
 _id_99F8( var_0 )
 {
-    self makeunusable();
+    self makeuseable();
     thread _id_0D86( var_0 );
 }
 
@@ -35,15 +35,15 @@ _id_0D86( var_0 )
 
     for (;;)
     {
-        foreach ( var_2 in level._id_B758 )
+        foreach ( var_2 in level.players )
         {
-            if ( var_2._id_045B == var_0 )
+            if ( var_2.team == var_0 )
             {
                 self _meth_80E0( var_2 );
                 continue;
             }
 
-            self disableoffhandweapons( var_2 );
+            self disableplayeruse( var_2 );
         }
 
         level waittill( "joined_team" );
@@ -52,43 +52,43 @@ _id_0D86( var_0 )
 
 _id_99D0( var_0, var_1 )
 {
-    self makeunusable();
+    self makeuseable();
     thread _id_0D7F( var_0, var_1 );
 }
 
 _id_0D7F( var_0, var_1 )
 {
     self endon( "death" );
-    var_2 = var_0._id_045B;
+    var_2 = var_0.team;
 
     for (;;)
     {
-        if ( level._id_EF62 )
+        if ( level.teambased )
         {
-            foreach ( var_4 in level._id_B758 )
+            foreach ( var_4 in level.players )
             {
                 if ( istrue( var_1 ) )
                 {
-                    if ( var_4._id_045B != var_2 || var_4 == var_0 )
+                    if ( var_4.team != var_2 || var_4 == var_0 )
                         self _meth_80E0( var_4 );
                     else
-                        self disableoffhandweapons( var_4 );
+                        self disableplayeruse( var_4 );
 
                     continue;
                 }
 
-                if ( var_4._id_045B != var_2 )
+                if ( var_4.team != var_2 )
                 {
                     self _meth_80E0( var_4 );
                     continue;
                 }
 
-                self disableoffhandweapons( var_4 );
+                self disableplayeruse( var_4 );
             }
         }
         else
         {
-            foreach ( var_4 in level._id_B758 )
+            foreach ( var_4 in level.players )
             {
                 if ( istrue( var_1 ) )
                 {
@@ -102,7 +102,7 @@ _id_0D7F( var_0, var_1 )
                     continue;
                 }
 
-                self disableoffhandweapons( var_4 );
+                self disableplayeruse( var_4 );
             }
         }
 
@@ -124,7 +124,7 @@ _id_A6B0( var_0 )
         level waittill( "player_spawned", var_1 );
 
         if ( isdefined( var_1 ) && var_1 != var_0 )
-            self disableoffhandweapons( var_1 );
+            self disableplayeruse( var_1 );
     }
 }
 
@@ -140,6 +140,6 @@ _id_A6AF( var_0, var_1 )
     for (;;)
     {
         var_1 waittill( "ownerChanged" );
-        self disableoffhandweapons( var_0 );
+        self disableplayeruse( var_0 );
     }
 }

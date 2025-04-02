@@ -34,11 +34,11 @@ _id_D8B4( var_0 )
 {
     foreach ( var_2 in var_0 )
     {
-        if ( isdefined( var_2._id_0375 ) && _id_077B::_id_EA55( var_2._id_0375, "vfx_" ) )
+        if ( isdefined( var_2._id_0375 ) && scripts\engine\utility::string_starts_with( var_2._id_0375, "vfx_" ) )
         {
-            var_3 = var_2 _id_077B::_id_E20C();
-            var_3 _meth_83C3();
-            var_3 _meth_820B( var_2 );
+            var_3 = var_2 scripts\engine\utility::spawn_tag_origin();
+            var_3 show();
+            var_3 linkto( var_2 );
             waitframe();
 
             if ( !_id_8AC3( "setupVFXObjs(): obj", var_2 ) )
@@ -47,7 +47,7 @@ _id_D8B4( var_0 )
             if ( !_id_8AC3( "setupVFXObjs(): model", var_3 ) )
                 continue;
 
-            thread _id_46A9( _id_077B::_id_6A40( var_2._id_0375 ), var_3, "tag_origin" );
+            thread _id_46A9( scripts\engine\utility::getfx( var_2._id_0375 ), var_3, "tag_origin" );
         }
     }
 }
@@ -59,17 +59,17 @@ _id_46A9( var_0, var_1, var_2 )
     if ( !_id_8AC3( "delayFXCall()", var_1 ) )
         return;
 
-    _func_0197( var_0, var_1, var_2 );
+    playfxontag( var_0, var_1, var_2 );
 }
 
 _id_D8A4( var_0 )
 {
     foreach ( var_2 in var_0 )
     {
-        if ( isdefined( var_2._id_0375 ) && _id_077B::_id_EA55( var_2._id_0375, "sfx_" ) )
+        if ( isdefined( var_2._id_0375 ) && scripts\engine\utility::string_starts_with( var_2._id_0375, "sfx_" ) )
         {
-            var_2 setmode( "tag_origin" );
-            var_2 thread _id_077B::_id_B265( "mp_quarry_lg_crane_loop" );
+            var_2 setmodel( "tag_origin" );
+            var_2 thread scripts\engine\utility::_id_B265( "mp_quarry_lg_crane_loop" );
         }
     }
 }
@@ -78,7 +78,7 @@ _id_4482()
 {
     for (;;)
     {
-        _id_0A63::_id_4F28( self._id_02EA, 32, 0.1, ( 0, 0, 255 ) );
+        _id_0A63::_id_4F28( self.origin, 32, 0.1, ( 0, 0, 255 ) );
         wait 0.1;
     }
 }
@@ -90,8 +90,8 @@ _id_61F2( var_0 )
 
     foreach ( var_4 in var_0 )
     {
-        if ( isdefined( var_4._id_0375 ) && _func_0121( var_4._id_0375, "group" ) )
-            var_1 = _id_077B::_id_1B63( var_1, var_4 );
+        if ( isdefined( var_4._id_0375 ) && issubstr( var_4._id_0375, "group" ) )
+            var_1 = scripts\engine\utility::array_add( var_1, var_4 );
     }
 
     foreach ( var_7 in var_1 )
@@ -102,7 +102,7 @@ _id_61F2( var_0 )
             continue;
         }
 
-        var_2[var_7._id_0375] = _id_077B::_id_1B63( var_2[var_7._id_0375], var_7 );
+        var_2[var_7._id_0375] = scripts\engine\utility::array_add( var_2[var_7._id_0375], var_7 );
     }
 
     foreach ( var_10 in var_2 )
@@ -132,17 +132,17 @@ _id_18C2( var_0, var_1 )
             if ( var_3 == var_0 )
                 continue;
 
-            var_3 _meth_820B( var_0 );
+            var_3 linkto( var_0 );
         }
     }
 }
 
 _id_18C7( var_0 )
 {
-    if ( _func_0121( var_0, "pingpong" ) )
+    if ( issubstr( var_0, "pingpong" ) )
         thread _id_18C9();
 
-    if ( _func_0121( var_0, "once" ) )
+    if ( issubstr( var_0, "once" ) )
         thread _id_18C8();
 }
 
@@ -164,20 +164,20 @@ _id_18C9()
 
     if ( isdefined( self._id_CCA2 ) )
     {
-        if ( _func_0121( self._id_CCA2, "start" ) )
+        if ( issubstr( self._id_CCA2, "start" ) )
             var_3 = "mp_quarry_lg_crane_start";
 
-        if ( _func_0121( self._id_CCA2, "stop" ) )
+        if ( issubstr( self._id_CCA2, "stop" ) )
             var_4 = "mp_quarry_lg_crane_stop";
 
-        if ( _func_0121( self._id_CCA2, "loop" ) )
+        if ( issubstr( self._id_CCA2, "loop" ) )
             var_5 = "mp_quarry_lg_crane_loop";
     }
 
     for (;;)
     {
-        var_6 = self._id_02EA;
-        self _meth_823B( self._id_02EA + var_0, var_1[0], var_1[1], var_1[2] );
+        var_6 = self.origin;
+        self moveto( self.origin + var_0, var_1[0], var_1[1], var_1[2] );
 
         if ( isdefined( var_4 ) )
             thread _id_18C3( var_1[0], var_4 );
@@ -188,9 +188,9 @@ _id_18C9()
             return;
 
         if ( isdefined( var_3 ) )
-            _func_019D( self._id_02EA, var_3 );
+            playsoundatpos( self.origin, var_3 );
 
-        self _meth_823B( var_6, var_1[0], var_1[1], var_1[2] );
+        self moveto( var_6, var_1[0], var_1[1], var_1[2] );
 
         if ( isdefined( var_4 ) )
             thread _id_18C3( var_1[0], var_4 );
@@ -201,7 +201,7 @@ _id_18C9()
             return;
 
         if ( isdefined( var_3 ) )
-            _func_019D( self._id_02EA, var_3 );
+            playsoundatpos( self.origin, var_3 );
     }
 }
 
@@ -212,7 +212,7 @@ _id_18C3( var_0, var_1 )
     if ( !_id_8AC3( "animSuite_playThreadedSound()", self ) )
         return;
 
-    _func_019D( self._id_02EA, var_1 );
+    playsoundatpos( self.origin, var_1 );
 }
 
 _id_18C8()
@@ -225,7 +225,7 @@ _id_18C8()
         var_0 = self._id_CE83;
 
     if ( isdefined( self._id_CE84 ) )
-        var_1 = _func_0130( self._id_CE84 );
+        var_1 = length( self._id_CE84 );
 
     for (;;)
     {
@@ -239,10 +239,10 @@ _id_18C8()
 
 _id_18C4( var_0 )
 {
-    if ( _func_0121( var_0, "pingpong" ) )
+    if ( issubstr( var_0, "pingpong" ) )
         thread _id_18C6();
 
-    if ( _func_0121( var_0, "continuous" ) )
+    if ( issubstr( var_0, "continuous" ) )
         thread _id_18C5();
 }
 
@@ -275,7 +275,7 @@ _id_18C6()
             return;
 
         if ( isdefined( var_3 ) )
-            _func_019D( self._id_02EA, var_3 );
+            playsoundatpos( self.origin, var_3 );
 
         self _meth_82A0( var_0 * -1, var_1[0], var_1[1], var_1[2] );
 
@@ -288,7 +288,7 @@ _id_18C6()
             return;
 
         if ( isdefined( var_3 ) )
-            _func_019D( self._id_02EA, var_3 );
+            playsoundatpos( self.origin, var_3 );
     }
 }
 

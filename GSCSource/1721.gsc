@@ -62,16 +62,16 @@ get_death_modifiers()
     var_0 = [];
     var_1 = undefined;
 
-    if ( _id_099D::_id_8A10( "killstreak", "teamHasUAV" ) )
-        var_1 = [[ _id_099D::_id_6D05( "killstreak", "teamHasUAV" ) ]]( self._id_045B );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "killstreak", "teamHasUAV" ) )
+        var_1 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "killstreak", "teamHasUAV" ) ]]( self.team );
 
     var_2 = undefined;
     var_3 = undefined;
 
-    if ( _id_099D::_id_8A10( "perk", "hasPerk" ) )
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "perk", "hasPerk" ) )
     {
-        var_2 = self [[ _id_099D::_id_6D05( "perk", "hasPerk" ) ]]( "specialty_quieter" );
-        var_3 = self [[ _id_099D::_id_6D05( "perk", "hasPerk" ) ]]( "specialty_bulletdamage" );
+        var_2 = self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "perk", "hasPerk" ) ]]( "specialty_quieter" );
+        var_3 = self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "perk", "hasPerk" ) ]]( "specialty_bulletdamage" );
     }
 
     if ( istrue( var_1 ) )
@@ -86,13 +86,13 @@ get_death_modifiers()
     var_4 = gettime();
     var_5 = undefined;
 
-    if ( _id_099D::_id_8A10( "killstreak", "enemyHasCUAV" ) )
-        var_5 = [[ _id_099D::_id_6D05( "killstreak", "enemyHasCUAV" ) ]]( self._id_045B );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "killstreak", "enemyHasCUAV" ) )
+        var_5 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "killstreak", "enemyHasCUAV" ) ]]( self.team );
 
     var_6 = undefined;
 
-    if ( _id_099D::_id_8A10( "killstreak", "helper_drone_isTargetMarked" ) )
-        var_6 = self [[ _id_099D::_id_6D05( "killstreak", "helper_drone_isTargetMarked" ) ]]();
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "killstreak", "helper_drone_isTargetMarked" ) )
+        var_6 = self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "killstreak", "helper_drone_isTargetMarked" ) ]]();
 
     var_7 = istrue( self._id_5C76 );
     var_8 = istrue( self._id_3B38 );
@@ -178,7 +178,7 @@ get_death_modifiers()
         if ( istrue( self._id_9FE8["assistedsuicide"] ) )
             var_0[var_0.size] = "ASSISTED_SUICIDE";
 
-        if ( isdefined( var_15 ) && _id_099D::_id_8A10( "killstreak", "isKillstreakWeapon" ) && istrue( [[ _id_099D::_id_6D05( "killstreak", "isKillstreakWeapon" ) ]]( var_15 ) ) )
+        if ( isdefined( var_15 ) && scripts\cp_mp\utility\script_utility::issharedfuncdefined( "killstreak", "isKillstreakWeapon" ) && istrue( [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "killstreak", "isKillstreakWeapon" ) ]]( var_15 ) ) )
             var_0[var_0.size] = "KILLSTREAK";
     }
 
@@ -212,9 +212,9 @@ is_valid_client( var_0 )
 
     if ( !isdefined( var_0 ) )
         return 0;
-    else if ( _func_0102( var_0 ) )
+    else if ( isagent( var_0 ) )
         return 0;
-    else if ( !_func_0117( var_0 ) )
+    else if ( !isplayer( var_0 ) )
         return 0;
 
     return 1;

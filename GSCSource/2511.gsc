@@ -6,15 +6,15 @@ _id_27FC( var_0, var_1, var_2, var_3 )
     self endon( "bot_sentry_exited" );
     self endon( "death_or_disconnect" );
     level endon( "game_ended" );
-    wait( _func_01B9( 3, 5 ) );
+    wait( randomintrange( 3, 5 ) );
 
     while ( isdefined( self._id_D0DA ) && gettime() < self._id_D0DA )
         wait 1;
 
-    if ( isdefined( self._id_017D ) && self._id_017D._id_01FF > 0 && self _meth_8027( self._id_017D ) )
+    if ( isdefined( self._id_017D ) && self._id_017D.health > 0 && self _meth_8027( self._id_017D ) )
         return 1;
 
-    var_4 = self._id_02EA;
+    var_4 = self.origin;
 
     if ( var_3 != "hide_nonlethal" )
     {
@@ -39,7 +39,7 @@ _id_2890( var_0, var_1, var_2, var_3 )
     if ( isdefined( var_4 ) )
     {
         _id_09D0::_id_26C9( "sentry_placement" );
-        var_5 = _func_020F();
+        var_5 = spawnstruct();
         var_5._id_A84D = var_4;
         var_5._id_CD67 = var_4._id_10FE4;
         var_5._id_CD65 = 10;
@@ -48,7 +48,7 @@ _id_2890( var_0, var_1, var_2, var_3 )
         var_5._id_DA69 = ::_id_289A;
         var_5._id_0E5D = ::_id_288F;
         self._id_B16E = var_0._id_EA0F;
-        _id_09D0::_id_283C( "sentry_placement", var_4._id_02CD._id_02EA, 0, var_5 );
+        _id_09D0::_id_283C( "sentry_placement", var_4._id_02CD.origin, 0, var_5 );
     }
 }
 
@@ -57,7 +57,7 @@ _id_289A( var_0 )
     self endon( "death_or_disconnect" );
     level endon( "game_ended" );
 
-    if ( isdefined( self._id_017D ) && self._id_017D._id_01FF > 0 && self _meth_8027( self._id_017D ) )
+    if ( isdefined( self._id_017D ) && self._id_017D.health > 0 && self _meth_8027( self._id_017D ) )
         return 1;
 
     self._id_D0DA = gettime() + 1000;
@@ -73,7 +73,7 @@ _id_2892()
 
     for (;;)
     {
-        if ( isdefined( self._id_017D ) && self._id_017D._id_01FF > 0 && self _meth_8027( self._id_017D ) )
+        if ( isdefined( self._id_017D ) && self._id_017D.health > 0 && self _meth_8027( self._id_017D ) )
             thread _id_2891();
 
         wait 0.05;
@@ -96,11 +96,11 @@ _id_2899( var_0 )
 
     while ( isdefined( var_0._id_A84D ) && isdefined( var_0._id_A84D._id_04CE ) )
     {
-        if ( distance2d( self._id_02EA, var_0._id_A84D._id_02CD._id_02EA ) < 400 )
+        if ( distance2d( self.origin, var_0._id_A84D._id_02CD.origin ) < 400 )
         {
             thread _id_09D1::_id_2775( "stand", 5.0 );
             thread _id_2892();
-            scripts\cp_mp\utility\weapon_utility::_id_28CA( var_0._id_A84D._id_8D9B, var_0._id_A84D._id_8DCA, var_0._id_A84D._id_04CE );
+            _id_09CB::_id_28CA( var_0._id_A84D._id_8D9B, var_0._id_A84D._id_8DCA, var_0._id_A84D._id_04CE );
             return;
         }
 
@@ -116,9 +116,9 @@ _id_2895( var_0 )
         return var_1;
 
     if ( isdefined( self._id_A53A ) )
-        return self._id_A53A._id_02EA;
+        return self._id_A53A.origin;
 
-    var_2 = _func_00B4( self._id_02EA, 1000, 0, 512 );
+    var_2 = _func_00B4( self.origin, 1000, 0, 512 );
     var_3 = 5;
 
     if ( var_0 != "turret" )
@@ -135,7 +135,7 @@ _id_2895( var_0 )
         var_4 = self _meth_8048( var_2, var_3, "node_traffic" );
 
     if ( isdefined( var_4 ) )
-        return var_4._id_02EA;
+        return var_4.origin;
 }
 
 _id_2894( var_0, var_1, var_2, var_3 )
@@ -163,11 +163,11 @@ _id_2894( var_0, var_1, var_2, var_3 )
 
     if ( isdefined( var_7 ) )
     {
-        var_4 = _func_020F();
+        var_4 = spawnstruct();
         var_4._id_02CD = var_7;
 
-        if ( var_1 != var_7._id_02EA && var_2 != "hide_nonlethal" )
-            var_4._id_10FE4 = vectordot( var_1 - var_7._id_02EA );
+        if ( var_1 != var_7.origin && var_2 != "hide_nonlethal" )
+            var_4._id_10FE4 = _func_025C( var_1 - var_7.origin );
         else
             var_4._id_10FE4 = undefined;
 
@@ -204,7 +204,7 @@ _id_288F( var_0 )
         {
             var_4 = 0.75;
             var_5 = gettime();
-            var_6 = self._id_0054[1];
+            var_6 = self.angles[1];
 
             if ( isdefined( var_0._id_A84D._id_10FE4 ) )
                 var_6 = var_0._id_A84D._id_10FE4;
@@ -217,14 +217,14 @@ _id_288F( var_0 )
 
             foreach ( var_10 in var_7 )
             {
-                var_11 = physicsexplosionsphere( var_0._id_A84D._id_02CD._id_02EA, var_0._id_A84D._id_02CD._id_02EA + anglestoforward( ( 0, var_10 + 180, 0 ) ) * 100 );
-                var_12 = distance2d( var_11, var_0._id_A84D._id_02CD._id_02EA );
+                var_11 = physicsexplosionsphere( var_0._id_A84D._id_02CD.origin, var_0._id_A84D._id_02CD.origin + anglestoforward( ( 0, var_10 + 180, 0 ) ) * 100 );
+                var_12 = distance2d( var_11, var_0._id_A84D._id_02CD.origin );
 
                 if ( var_12 < var_8 )
                 {
                     var_8 = var_12;
                     self _meth_8059( var_10, var_4 );
-                    self _meth_8044( var_0._id_A84D._id_02CD._id_02EA, var_4, "script_forced" );
+                    self _meth_8044( var_0._id_A84D._id_02CD.origin, var_4, "script_forced" );
                 }
             }
 

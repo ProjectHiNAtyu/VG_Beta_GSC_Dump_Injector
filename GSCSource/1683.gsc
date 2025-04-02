@@ -18,16 +18,16 @@ _id_FD84( var_0 )
 
 _id_82A1()
 {
-    self._id_10DC7 = [];
+    self.weapons = [];
 
-    if ( !_func_036F( self._id_0326 ) )
-        self._id_10DC7[self._id_10DC7.size] = self._id_0326;
+    if ( !isnullweapon( self._id_0326 ) )
+        self.weapons[self.weapons.size] = self._id_0326;
 
-    if ( !_func_036F( self._id_038F ) )
-        self._id_10DC7[self._id_10DC7.size] = self._id_038F;
+    if ( !isnullweapon( self._id_038F ) )
+        self.weapons[self.weapons.size] = self._id_038F;
 
-    if ( !_func_036F( self._id_03AF ) )
-        self._id_10DC7[self._id_10DC7.size] = self._id_03AF;
+    if ( !isnullweapon( self._id_03AF ) )
+        self.weapons[self.weapons.size] = self._id_03AF;
 }
 
 _id_35B0()
@@ -41,9 +41,9 @@ _id_35B0()
     var_0 = 0;
     var_1 = undefined;
 
-    foreach ( var_3 in self._id_10DC7 )
+    foreach ( var_3 in self.weapons )
     {
-        var_4 = visionsetnight( var_3 );
+        var_4 = weaponclass( var_3 );
         var_5 = _id_565F( var_4, var_3 );
 
         if ( var_5 > var_0 )
@@ -73,10 +73,10 @@ _id_6D0C()
 
 _id_10E80()
 {
-    if ( isdefined( self._id_017D ) && isdefined( self._id_03AF ) && !_func_036F( self._id_03AF ) && !istrue( self._id_0157 ) )
+    if ( isdefined( self._id_017D ) && isdefined( self._id_03AF ) && !isnullweapon( self._id_03AF ) && !istrue( self._id_0157 ) )
     {
         var_0 = _id_6D0C();
-        var_1 = distancesquared( self._id_02EA, self._id_017D._id_02EA );
+        var_1 = distancesquared( self.origin, self._id_017D.origin );
         return var_1 < var_0 * var_0;
     }
 
@@ -87,7 +87,7 @@ _id_565F( var_0, var_1 )
 {
     if ( var_0 == "pistol" )
     {
-        if ( visionsetnight( self._id_04CE ) == "rocketlauncher" && self._id_0355 <= 0 )
+        if ( weaponclass( self._id_04CE ) == "rocketlauncher" && self._id_0355 <= 0 )
             return 1000;
 
         if ( _id_31C6( undefined ) != anim._id_EAC8 )
@@ -106,7 +106,7 @@ _id_565F( var_0, var_1 )
 
         if ( var_3 )
         {
-            var_5 = distancesquared( self._id_02EA, self._id_017D._id_02EA );
+            var_5 = distancesquared( self.origin, self._id_017D.origin );
 
             if ( var_4 )
                 return 1000;
@@ -145,7 +145,7 @@ _id_8A27( var_0 )
 
 _id_FF1B( var_0 )
 {
-    if ( self._id_04CE == self._id_03AF && !_func_036F( self._id_04CE ) )
+    if ( self._id_04CE == self._id_03AF && !isnullweapon( self._id_04CE ) )
         return anim._id_EAC8;
 
     return anim._id_58C3;
@@ -173,7 +173,7 @@ _id_31C6( var_0 )
     if ( istrue( self._id_0157 ) )
         return anim._id_58C3;
 
-    if ( _id_0694::_id_23BD() && isdefined( self._id_0303 ) && length( self._id_04B7 ) > 1 )
+    if ( _id_0694::_id_23BD() && isdefined( self._id_0303 ) && _func_0132( self._id_04B7 ) > 1 )
         return anim._id_58C3;
 
     if ( isdefined( self._id_9D22 ) )
@@ -186,7 +186,7 @@ _id_34C7( var_0 )
 {
     var_1 = _id_0694::_id_2394();
 
-    if ( isdefined( var_1 ) && distance( self._id_02EA, var_1._id_02EA ) < 16 )
+    if ( isdefined( var_1 ) && distance( self.origin, var_1.origin ) < 16 )
         return anim._id_58C3;
 
     return anim._id_EAC8;

@@ -6,22 +6,22 @@ _id_911F( var_0, var_1, var_2, var_3, var_4, var_5 )
     if ( !isdefined( game["dialog"][var_0] ) )
         return;
 
-    if ( level._id_EF62 && !isdefined( var_1 ) )
+    if ( level.teambased && !isdefined( var_1 ) )
         return;
 
-    var_6 = level._id_B758;
+    var_6 = level.players;
 
     if ( isdefined( var_1 ) )
     {
-        if ( _id_099D::_id_8A10( "game", "getTeamData" ) )
-            var_6 = [[ _id_099D::_id_6D05( "game", "getTeamData" ) ]]( var_1, "players" );
+        if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "game", "getTeamData" ) )
+            var_6 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "game", "getTeamData" ) ]]( var_1, "players" );
     }
 
     for ( var_7 = 0; var_7 < var_6.size; var_7++ )
     {
         var_8 = var_6[var_7];
 
-        if ( isdefined( var_3 ) && _id_077B::_id_1B78( var_3, var_8 ) )
+        if ( isdefined( var_3 ) && scripts\engine\utility::array_contains( var_3, var_8 ) )
             continue;
 
         if ( var_8 _meth_81E1() && !var_8 _meth_81E2() )
@@ -114,19 +114,19 @@ _id_9121( var_0, var_1, var_2, var_3, var_4 )
         self._id_B6F2["dialog"] = var_0;
     }
 
-    var_5 = self._id_0309["team"];
+    var_5 = self.pers["team"];
 
-    if ( level._id_60D1 == "br" )
+    if ( level.gametype == "br" )
         var_5 = scripts\mp\gametypes\br_public::_id_2B95( self );
 
-    if ( isdefined( var_5 ) && _id_0A7C::_id_885E( var_5 ) )
+    if ( isdefined( var_5 ) && scripts\mp\utility\teams::_id_885E( var_5 ) )
     {
         var_6 = self getplayerdata( "common", "mp_announcer_type" );
         var_7 = "mp_glob_";
 
         if ( var_6 > 0 )
         {
-            var_8 = _func_021E( "mp/announcervoicedata.csv", var_6, 3 );
+            var_8 = tablelookupbyrow( "mp/announcervoicedata.csv", var_6, 3 );
             var_9 = var_7 + var_8 + "_" + game["dialog"][var_0];
         }
         else
@@ -138,10 +138,10 @@ _id_9121( var_0, var_1, var_2, var_3, var_4 )
                 var_9 = var_7 + "gene_" + "bchr_" + game["dialog"][var_0];
         }
 
-        if ( _id_0A69::_id_6A43() == "arena_evo" && _func_0121( var_0, "timesup" ) )
+        if ( scripts\mp\utility\game::getgametype() == "arena_evo" && issubstr( var_0, "timesup" ) )
             return;
 
-        if ( _id_0A69::_id_86E7() )
+        if ( scripts\mp\utility\game::_id_86E7() )
         {
             var_11 = "mp";
             var_12 = "glob";
@@ -149,19 +149,19 @@ _id_9121( var_0, var_1, var_2, var_3, var_4 )
             var_13 = "ald1";
             var_14 = game["dialog"][var_0];
 
-            if ( !_id_5680( var_14 ) || _func_0121( var_14, var_13 ) )
+            if ( !_id_5680( var_14 ) || issubstr( var_14, var_13 ) )
                 var_9 = game["dialog"][var_0];
             else
                 var_9 = var_11 + "_" + var_12 + "_" + var_10 + "_" + var_13 + "_" + var_14;
         }
 
-        if ( _func_0121( game["dialog"][var_0], "mp_glob" ) )
+        if ( issubstr( game["dialog"][var_0], "mp_glob" ) )
             var_9 = game["dialog"][var_0];
 
-        var_9 = _func_0243( var_9 );
+        var_9 = tolower( var_9 );
         var_15 = _func_0140( var_9 ) / 1000.0;
 
-        if ( _id_0A69::_id_6A43() == "arena_evo" && !isdefined( var_1 ) )
+        if ( scripts\mp\utility\game::getgametype() == "arena_evo" && !isdefined( var_1 ) )
             var_1 = "chvo";
 
         self _meth_8286( var_9, var_0, var_15, var_1, var_2, var_3 );
@@ -177,7 +177,7 @@ _id_6CE8( var_0 )
 
     if ( var_0 == "gametype" || var_0 == "status" )
     {
-        switch ( level._id_60D1 )
+        switch ( level.gametype )
         {
             case "dom":
                 var_1 = "domi";
@@ -208,7 +208,7 @@ _id_6705( var_0 )
     if ( isdefined( level._id_48EB[var_0] ) )
         return level._id_48EB[var_0];
 
-    switch ( level._id_60D1 )
+    switch ( level.gametype )
     {
         case "dom":
             var_1 = "domi";
@@ -237,7 +237,7 @@ _id_8284()
 
 _id_B85E( var_0 )
 {
-    var_1 = self._id_045B;
+    var_1 = self.team;
     var_2 = [ self ];
 
     if ( getdvarint( "scr_dialog_killstreaks_use_play_all", 1 ) )
@@ -245,10 +245,10 @@ _id_B85E( var_0 )
 
     var_3 = var_1;
 
-    if ( level._id_60D1 == "br" )
+    if ( level.gametype == "br" )
         var_3 = scripts\mp\gametypes\br_public::_id_2B95( self );
 
-    if ( level._id_EF62 )
+    if ( level.teambased )
     {
         if ( isdefined( level._id_8DAC[var_0] ) )
         {
@@ -267,7 +267,7 @@ _id_B85E( var_0 )
     if ( isdefined( var_4 ) )
         var_2[var_2.size] = var_4;
 
-    if ( level._id_EF62 )
+    if ( level.teambased )
     {
         var_5 = _id_318C( var_0, 1 );
         var_6 = _id_318C( var_0 );
@@ -305,7 +305,7 @@ _id_B85B( var_0, var_1, var_2, var_3 )
 
     var_4 = game["dialog"][var_0];
 
-    if ( _func_0121( var_4, "op_" + var_0 ) || var_4 == "op_" + var_0 )
+    if ( issubstr( var_4, "op_" + var_0 ) || var_4 == "op_" + var_0 )
         _id_0998::_id_AC2B( var_0, var_1, var_2, var_3 );
     else
         _id_9120( var_0, var_1, var_2, var_3 );
@@ -313,7 +313,7 @@ _id_B85B( var_0, var_1, var_2, var_3 )
 
 _id_68DF( var_0 )
 {
-    var_1 = _func_021A( var_0, "_" );
+    var_1 = strtok( var_0, "_" );
     var_2 = undefined;
 
     foreach ( var_6, var_4 in var_1 )
@@ -341,7 +341,7 @@ _id_318C( var_0, var_1 )
 {
     var_2 = 1;
 
-    if ( level._id_60D1 == "br" )
+    if ( level.gametype == "br" )
     {
         if ( istrue( var_1 ) )
         {
@@ -369,7 +369,7 @@ _id_318C( var_0, var_1 )
             }
         }
     }
-    else if ( level._id_60D1 == "arm" )
+    else if ( level.gametype == "arm" )
     {
         switch ( var_0 )
         {
@@ -400,13 +400,13 @@ _id_DD68( var_0, var_1, var_2, var_3, var_4 )
 
     var_5 = gettime();
 
-    if ( !isdefined( self._id_902F ) || var_5 < self._id_902F + 30000 || var_5 < level._id_908C[self._id_045B][var_0] + 5000 )
+    if ( !isdefined( self._id_902F ) || var_5 < self._id_902F + 30000 || var_5 < level._id_908C[self.team][var_0] + 5000 )
         return;
 
     if ( isdefined( var_4 ) )
         var_6 = var_4;
     else
-        var_6 = _id_0A7C::_id_6DC1( self._id_045B );
+        var_6 = scripts\mp\utility\teams::_id_6DC1( self.team );
 
     self._id_902F = var_5;
     var_7 = "dx_mpa_" + var_6 + "tl_" + game["dialog"][var_0];

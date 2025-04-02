@@ -15,18 +15,18 @@ _id_2484( var_0, var_1, var_2, var_3, var_4 )
 
         if ( !isdefined( var_5 ) )
         {
-            var_5 = _func_020F();
+            var_5 = spawnstruct();
 
             if ( isdefined( var_4._id_96B8 ) )
                 var_5._id_96B8 = var_4._id_96B8;
             else
-                var_5._id_96B8 = var_4._id_047A._id_02EA;
+                var_5._id_96B8 = var_4._id_047A.origin;
 
-            var_5._id_0054 = ( 0, 0, 0 );
+            var_5.angles = ( 0, 0, 0 );
             var_5._id_EA4F = "equip_deploy_succeeded";
-            var_5._id_04C5 = _func_0205( "script_model", var_5._id_96B8 );
-            var_5._id_04C5 setmode( "ks_marker_mp" );
-            var_5._id_04C5 setorigin( self );
+            var_5._id_04C5 = spawn( "script_model", var_5._id_96B8 );
+            var_5._id_04C5 setmodel( "ks_marker_mp" );
+            var_5._id_04C5 setotherent( self );
         }
 
         if ( !isdefined( var_5._id_96B8 ) )
@@ -37,11 +37,11 @@ _id_2484( var_0, var_1, var_2, var_3, var_4 )
         else if ( isdefined( level._id_8B2D ) || level._id_8B3A.size >= var_6 )
         {
             if ( isdefined( var_5._id_04C5 ) )
-                var_5._id_04C5 _meth_809A();
+                var_5._id_04C5 delete();
 
-            _id_07B9::_id_DCBD( "KILLSTREAKS/AIR_SPACE_TOO_CROWDED" );
+            scripts\mp\hud_message::_id_DCBD( "KILLSTREAKS/AIR_SPACE_TOO_CROWDED" );
 
-            if ( isdefined( var_3._id_A90B ) && var_3._id_A90B._id_0084 != "none" )
+            if ( isdefined( var_3.objweapon ) && var_3.objweapon.basename != "none" )
                 self notify( "killstreak_finished_with_weapon_" + var_3._id_04D6 );
 
             self notify( "cancel_jackal" );
@@ -51,10 +51,10 @@ _id_2484( var_0, var_1, var_2, var_3, var_4 )
 
     self notify( "called_in_jackal" );
     level._id_8B2D = 1;
-    var_7 = _id_099B::_id_6ABC();
+    var_7 = scripts\cp_mp\utility\killstreak_utility::_id_6ABC();
 
     if ( isdefined( var_7 ) )
-        var_8 = var_7._id_02EA[2] + 500;
+        var_8 = var_7.origin[2] + 500;
     else
         var_8 = 1300;
 
@@ -66,8 +66,8 @@ _id_2484( var_0, var_1, var_2, var_3, var_4 )
     var_10 = _id_E313( var_0, self, var_1, var_9, var_3, var_4 );
     var_10._id_ED12 = var_4;
     var_11 = var_9;
-    var_12 = var_9 + anglestoright( self._id_0054 ) * 2000;
-    var_13 = var_9 - anglestoright( self._id_0054 ) * 2000;
+    var_12 = var_9 + anglestoright( self.angles ) * 2000;
+    var_13 = var_9 - anglestoright( self.angles ) * 2000;
     var_14 = [ var_11, var_12, var_13 ];
 
     foreach ( var_16 in var_14 )
@@ -86,7 +86,7 @@ _id_2484( var_0, var_1, var_2, var_3, var_4 )
 
 _id_E313( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    var_6 = _func_025B( var_3 - var_2 );
+    var_6 = vectortoangles( var_3 - var_2 );
     var_7 = 4;
     var_8 = 50;
     var_9 = 175;
@@ -116,64 +116,64 @@ _id_E313( var_0, var_1, var_2, var_3, var_4, var_5 )
     var_20._id_42C8 = ::_id_2F1A;
     var_20._id_03C7 = var_8;
     var_20._id_0E1F = var_9;
-    var_20._id_01FF = var_10;
-    var_20._id_027F = var_20._id_01FF;
-    var_20._id_045B = var_1._id_045B;
-    var_20._id_02F2 = var_1;
-    var_20 _meth_82F0( 1 );
+    var_20.health = var_10;
+    var_20.maxhealth = var_20.health;
+    var_20.team = var_1.team;
+    var_20.owner = var_1;
+    var_20 setcandamage( 1 );
     var_20._id_45FD = var_3;
     var_20._id_9355 = var_0;
     var_20._id_8B2C = 1;
-    var_20._id_EA0B = var_4;
+    var_20.streakinfo = var_4;
     var_20._id_EA0F = var_4._id_EA0F;
     var_20._id_5668 = 0;
     var_20._id_0102 = var_19;
     var_20._id_41D8 = var_18;
-    var_20._id_EA0B = var_4;
+    var_20.streakinfo = var_4;
     var_20._id_5C6A = var_7;
     var_20._id_F88A = var_14;
     var_20._id_F89A = var_12;
     var_20._id_3179 = var_15;
     var_20._id_3177 = var_17;
     var_20 _id_0A6F::_id_112C( var_4._id_EA0F, "Killstreak_Air", var_1, 0, 1, 100 );
-    var_20 _meth_834A( 0, 90 );
-    var_20 _meth_8436( var_20._id_03C7, var_20._id_0E1F );
-    var_20 sethintstring( 50, 100, 50 );
+    var_20 setmaxpitchroll( 0, 90 );
+    var_20 vehicle_setspeed( var_20._id_03C7, var_20._id_0E1F );
+    var_20 _meth_832C( 50, 100, 50 );
     var_20 _meth_8395( 0.05 );
-    var_20 _meth_83BA( 45, 25, 25, 0.5 );
-    var_20 setorigin( var_1 );
-    var_21 = anglestoforward( var_20._id_0054 );
+    var_20 setyawspeed( 45, 25, 25, 0.5 );
+    var_20 setotherent( var_1 );
+    var_21 = anglestoforward( var_20.angles );
 
     if ( !isdefined( var_5 ) )
     {
         var_20._id_F81C = _func_0210( "misc_turret", var_20 gettagorigin( "tag_origin" ), var_12 );
-        var_20._id_F81C setmode( var_13 );
-        var_20._id_F81C._id_02F2 = var_1;
-        var_20._id_F81C._id_045B = var_1._id_045B;
-        var_20._id_F81C._id_0054 = var_20._id_0054;
+        var_20._id_F81C setmodel( var_13 );
+        var_20._id_F81C.owner = var_1;
+        var_20._id_F81C.team = var_1.team;
+        var_20._id_F81C.angles = var_20.angles;
         var_20._id_F81C._id_048F = "Machine_Gun";
-        var_20._id_F81C._id_EA0B = var_4;
-        var_20._id_F81C _meth_820B( var_20, "tag_origin", ( 200, 0, 55 ), ( 0, 0, 0 ) );
+        var_20._id_F81C.streakinfo = var_4;
+        var_20._id_F81C linkto( var_20, "tag_origin", ( 200, 0, 55 ), ( 0, 0, 0 ) );
         var_20._id_F81C _meth_839C( 0 );
         var_20._id_F81C _meth_834F( "manual_target" );
         var_20._id_F81C _meth_8376( var_1 );
         var_20._id_3175 = _func_0210( "misc_turret", var_20 gettagorigin( "tag_origin" ), var_15 );
-        var_20._id_3175 setmode( var_16 );
-        var_20._id_3175._id_02F2 = var_1;
-        var_20._id_3175._id_045B = var_1._id_045B;
-        var_20._id_3175._id_0054 = var_20._id_0054;
+        var_20._id_3175 setmodel( var_16 );
+        var_20._id_3175.owner = var_1;
+        var_20._id_3175.team = var_1.team;
+        var_20._id_3175.angles = var_20.angles;
         var_20._id_3175._id_048F = "Cannon";
-        var_20._id_3175._id_EA0B = var_4;
-        var_20._id_3175 _meth_820B( var_20, "tag_origin", ( -100, 0, 55 ), ( 0, 0, 0 ) );
+        var_20._id_3175.streakinfo = var_4;
+        var_20._id_3175 linkto( var_20, "tag_origin", ( -100, 0, 55 ), ( 0, 0, 0 ) );
         var_20._id_3175 _meth_839C( 0 );
         var_20._id_3175 _meth_834F( "manual_target" );
         var_20._id_3175 _meth_8376( var_1 );
     }
 
-    var_20._id_FE8E = _func_0205( "script_model", var_20 gettagorigin( "tag_origin" ) );
-    var_20._id_FE8E _meth_820B( var_20, "tag_origin" );
+    var_20._id_FE8E = spawn( "script_model", var_20 gettagorigin( "tag_origin" ) );
+    var_20._id_FE8E linkto( var_20, "tag_origin" );
     level._id_8B3A[level._id_8B3A.size] = var_20;
-    level._id_8B3A = _id_077B::_id_1BA9( level._id_8B3A );
+    level._id_8B3A = scripts\engine\utility::_id_1BA9( level._id_8B3A );
     level._id_8B2D = undefined;
 
     if ( isdefined( var_5 ) )
@@ -187,12 +187,12 @@ _id_E313( var_0, var_1, var_2, var_3, var_4, var_5 )
     {
         var_20._id_F81C._id_100A7 = var_20;
         var_20._id_3175._id_100A7 = var_20;
-        var_20._id_F81C._id_100A7._id_8D49 = _func_0205( "script_model", var_20 gettagorigin( "tag_origin" ) );
-        var_20._id_F81C._id_100A7._id_8D49 _meth_820B( var_20, "tag_origin" );
-        var_20._id_3175._id_100A7._id_8D49 = var_20._id_F81C._id_100A7._id_8D49;
+        var_20._id_F81C._id_100A7.killcament = spawn( "script_model", var_20 gettagorigin( "tag_origin" ) );
+        var_20._id_F81C._id_100A7.killcament linkto( var_20, "tag_origin" );
+        var_20._id_3175._id_100A7.killcament = var_20._id_F81C._id_100A7.killcament;
     }
 
-    var_22 = anglestoforward( var_20._id_0054 );
+    var_22 = anglestoforward( var_20.angles );
     return var_20;
 }
 
@@ -200,11 +200,11 @@ _id_6B98( var_0 )
 {
     var_1 = 0;
 
-    if ( level._id_EF62 )
+    if ( level.teambased )
     {
         foreach ( var_3 in level._id_8B3A )
         {
-            if ( var_3._id_045B != var_0._id_045B )
+            if ( var_3.team != var_0.team )
                 continue;
 
             var_1++;
@@ -214,7 +214,7 @@ _id_6B98( var_0 )
     {
         foreach ( var_3 in level._id_8B3A )
         {
-            if ( var_3._id_02F2 != var_0 )
+            if ( var_3.owner != var_0 )
                 continue;
 
             var_1++;
@@ -227,20 +227,20 @@ _id_6B98( var_0 )
 _id_4649()
 {
     self endon( "death" );
-    _id_07B7::_id_1084D( 6 );
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( 6 );
 }
 
 _id_46AD( var_0, var_1 )
 {
     self endon( "death" );
-    _id_07B7::_id_1084D( var_0 );
-    self playlocalsound( var_1 );
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( var_0 );
+    self playloopsound( var_1 );
 }
 
 _id_45FE( var_0, var_1 )
 {
     var_0 endon( "death" );
-    var_0 _meth_83A3( var_0._id_AEC9, 1 );
+    var_0 setvehgoalpos( var_0._id_AEC9, 1 );
     var_0 thread _id_39D4( var_0._id_AEC9 );
     var_0 thread _id_A11A();
 
@@ -255,7 +255,7 @@ _id_45FE( var_0, var_1 )
         var_0 thread _id_10B63();
         var_0 thread _id_5439();
         var_0._id_03C7 = 250;
-        var_0 _meth_8436( 50, 15 );
+        var_0 vehicle_setspeed( 50, 15 );
         var_0 _id_8B39( var_1._id_96B8 );
         var_0 waittill( "extract_hostages" );
         var_0 thread _id_8B37( 50, 15 );
@@ -266,11 +266,11 @@ _id_45FE( var_0, var_1 )
         var_0 thread _id_10B63();
         var_0 thread _id_5439();
         var_0 thread _id_543A();
-        var_0 _meth_8436( 50, 15 );
+        var_0 vehicle_setspeed( 50, 15 );
         var_0 _id_8B39( var_1._id_96B8 );
         var_0 thread _id_500B( var_0._id_500B, var_1 );
         var_0 thread _id_10B8D();
-        var_0 _id_077B::_id_108A5( 10, "all_crates_gone" );
+        var_0 scripts\engine\utility::_id_108A5( 10, "all_crates_gone" );
         var_0._id_0102 = "follow_player";
     }
     else
@@ -279,12 +279,12 @@ _id_45FE( var_0, var_1 )
         var_0 thread _id_10B63();
         var_0 thread _id_5439();
         var_0 thread _id_543A();
-        var_0 _meth_8436( int( var_0._id_03C7 / 14 ), int( var_0._id_0E1F / 16 ) );
+        var_0 vehicle_setspeed( int( var_0._id_03C7 / 14 ), int( var_0._id_0E1F / 16 ) );
     }
 
     if ( !isdefined( var_0._id_9908 ) )
     {
-        var_0._id_FE8E _id_0A6F::_id_D5C5( var_0._id_02F2, var_0._id_41D8, 360, 360, 30000, 30000, 2 );
+        var_0._id_FE8E _id_0A6F::_id_D5C5( var_0.owner, var_0._id_41D8, 360, 360, 30000, 30000, 2 );
         var_0 thread _id_AF33();
         var_0 thread _id_10BAD( _id_6BC2( var_0._id_0102 ), var_0._id_41D8 );
     }
@@ -341,7 +341,7 @@ _id_543A()
             }
 
             _id_0E57( var_1 );
-            _id_07B7::_id_1084D( var_0 );
+            scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( var_0 );
         }
     }
 }
@@ -353,9 +353,9 @@ _id_5E0E()
     self endon( "guard_location" );
     self endon( "priority_target" );
     self endon( "jackal_crashing" );
-    self._id_02F2 endon( "disconnect" );
+    self.owner endon( "disconnect" );
     self notify( "following_player" );
-    self _meth_8436( 50, 15 );
+    self vehicle_setspeed( 50, 15 );
 
     for (;;)
     {
@@ -363,27 +363,27 @@ _id_5E0E()
 
         if ( istrue( self._id_5668 ) )
         {
-            var_1 = self._id_02F2._id_02EA[0];
-            var_2 = self._id_02F2._id_02EA[1];
-            var_3 = var_1 + _func_01B9( -500, 500 );
-            var_4 = var_2 + _func_01B9( -500, 500 );
+            var_1 = self.owner.origin[0];
+            var_2 = self.owner.origin[1];
+            var_3 = var_1 + randomintrange( -500, 500 );
+            var_4 = var_2 + randomintrange( -500, 500 );
             var_5 = _id_6969( var_3, var_4, 350 );
             var_0 = ( var_3, var_4, var_5 );
         }
         else
         {
-            var_1 = self._id_02F2._id_02EA[0];
-            var_2 = self._id_02F2._id_02EA[1];
+            var_1 = self.owner.origin[0];
+            var_2 = self.owner.origin[1];
             var_5 = _id_6969( var_1, var_2, 20 );
             var_0 = ( var_1, var_2, var_5 );
         }
 
-        self setlookat( self._id_02F2 );
-        self _meth_83A3( var_0, 1 );
+        self setlookat( self.owner );
+        self setvehgoalpos( var_0, 1 );
         self._id_8F69 = "following_player";
-        _id_077B::_id_1087E( "goal", "begin_evasive_maneuvers" );
+        scripts\engine\utility::waittill_any_2( "goal", "begin_evasive_maneuvers" );
         self _meth_807D();
-        _id_07B7::_id_1084D( 0.1 );
+        scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( 0.1 );
     }
 }
 
@@ -393,8 +393,8 @@ _id_7239( var_0 )
     self endon( "leaving" );
     self endon( "follow_player" );
     self endon( "jackal_crashing" );
-    self._id_02F2 endon( "disconnect" );
-    self _meth_8436( int( self._id_03C7 / 14 ), int( self._id_0E1F / 16 ) );
+    self.owner endon( "disconnect" );
+    self vehicle_setspeed( int( self._id_03C7 / 14 ), int( self._id_0E1F / 16 ) );
     var_1 = undefined;
 
     if ( isdefined( var_0 ) )
@@ -406,25 +406,25 @@ _id_7239( var_0 )
     }
     else if ( istrue( self._id_5668 ) )
     {
-        var_2 = self._id_02F2._id_02EA[0];
-        var_3 = self._id_02F2._id_02EA[1];
-        var_5 = var_2 + _func_01B9( -500, 500 );
-        var_6 = var_3 + _func_01B9( -500, 500 );
+        var_2 = self.owner.origin[0];
+        var_3 = self.owner.origin[1];
+        var_5 = var_2 + randomintrange( -500, 500 );
+        var_6 = var_3 + randomintrange( -500, 500 );
         var_4 = _id_6969( var_5, var_6, 350 );
         var_1 = ( var_5, var_6, var_4 );
     }
     else
     {
-        var_2 = self._id_02F2._id_02EA[0];
-        var_3 = self._id_02F2._id_02EA[1];
+        var_2 = self.owner.origin[0];
+        var_3 = self.owner.origin[1];
         var_4 = _id_6969( var_2, var_3, 20 );
         var_1 = ( var_2, var_3, var_4 );
     }
 
-    self setlookat( self._id_02F2 );
-    self _meth_83A3( var_1, 1 );
+    self setlookat( self.owner );
+    self setvehgoalpos( var_1, 1 );
     self._id_8F69 = "following_player";
-    _id_077B::_id_1087E( "goal", "begin_evasive_maneuvers" );
+    scripts\engine\utility::waittill_any_2( "goal", "begin_evasive_maneuvers" );
     self _meth_807D();
 }
 
@@ -435,16 +435,16 @@ _id_AF33()
     self endon( "guard_location" );
     self endon( "priority_target" );
     self endon( "jackal_crashing" );
-    self._id_02F2 endon( "disconnect" );
-    self _meth_8436( int( self._id_03C7 / 14 ), int( self._id_0E1F / 16 ) );
+    self.owner endon( "disconnect" );
+    self vehicle_setspeed( int( self._id_03C7 / 14 ), int( self._id_0E1F / 16 ) );
 
     for (;;)
     {
         var_0 = undefined;
 
-        if ( isdefined( self._id_AF3D ) && isai( self._id_AF3D ) && _func_0117( self._id_AF3D ) && !self._id_AF3D scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_blindeye" ) )
+        if ( isdefined( self._id_AF3D ) && isalive( self._id_AF3D ) && isplayer( self._id_AF3D ) && !self._id_AF3D scripts\mp\utility\perk::_hasperk( "specialty_blindeye" ) )
         {
-            if ( !_id_8B2E( self._id_AF3D ) || distance2dsquared( self._id_02EA, self._id_AF3D._id_02EA ) > 4194304 )
+            if ( !_id_8B2E( self._id_AF3D ) || distance2dsquared( self.origin, self._id_AF3D.origin ) > 4194304 )
                 _id_8B38( self._id_AF3D );
         }
         else
@@ -463,11 +463,11 @@ _id_AF33()
                 var_2 = _id_8B35();
 
                 if ( isdefined( var_2 ) )
-                    _id_8B39( var_2._id_02EA );
+                    _id_8B39( var_2.origin );
             }
         }
 
-        _id_07B7::_id_1084D( 0.1 );
+        scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( 0.1 );
     }
 }
 
@@ -482,7 +482,7 @@ _id_8B35()
             if ( isdefined( var_2._id_01CD ) && !var_2._id_01CD )
                 continue;
 
-            if ( !_id_8B2F( self, var_2._id_02EA ) )
+            if ( !_id_8B2F( self, var_2.origin ) )
                 continue;
 
             var_2._id_01CD = 0;
@@ -515,9 +515,9 @@ _id_8B35()
 _id_8B2F( var_0, var_1 )
 {
     var_2 = 0;
-    var_3 = _id_077A::_id_3EC3( 0, 1, 1, 1, 1, 1, 0 );
+    var_3 = scripts\engine\trace::_id_3EC3( 0, 1, 1, 1, 1, 1, 0 );
 
-    if ( _id_077A::_id_C047( var_0._id_02EA, var_1, var_0, var_3 ) )
+    if ( scripts\engine\trace::ray_trace_passed( var_0.origin, var_1, var_0, var_3 ) )
         var_2 = 1;
 
     return var_2;
@@ -526,12 +526,12 @@ _id_8B2F( var_0, var_1 )
 _id_8B2E( var_0 )
 {
     var_1 = 0;
-    var_2 = _id_077A::_id_3EC3( 0, 1, 0, 1, 1, 0 );
+    var_2 = scripts\engine\trace::_id_3EC3( 0, 1, 0, 1, 1, 0 );
     var_3 = [ var_0 gettagorigin( "j_head" ), var_0 gettagorigin( "j_mainroot" ), var_0 gettagorigin( "tag_origin" ) ];
 
     for ( var_4 = 0; var_4 < var_3.size; var_4++ )
     {
-        if ( !_id_077A::_id_C047( self._id_02EA, var_3[var_4], self, var_2 ) )
+        if ( !scripts\engine\trace::ray_trace_passed( self.origin, var_3[var_4], self, var_2 ) )
             continue;
 
         var_1 = 1;
@@ -553,23 +553,23 @@ _id_8B38( var_0 )
 
     if ( istrue( self._id_5668 ) )
     {
-        var_2 = var_0._id_02EA[0];
-        var_3 = var_0._id_02EA[1];
-        var_4 = var_2 + _func_01B9( -500, 500 );
-        var_5 = var_3 + _func_01B9( -500, 500 );
+        var_2 = var_0.origin[0];
+        var_3 = var_0.origin[1];
+        var_4 = var_2 + randomintrange( -500, 500 );
+        var_5 = var_3 + randomintrange( -500, 500 );
         var_6 = _id_6969( var_4, var_5, 350 );
         var_1 = ( var_4, var_5, var_6 );
     }
     else
     {
-        var_2 = var_0._id_02EA[0];
-        var_3 = var_0._id_02EA[1];
+        var_2 = var_0.origin[0];
+        var_3 = var_0.origin[1];
         var_6 = _id_6969( var_2, var_3, 20 );
         var_1 = ( var_2, var_3, var_6 );
     }
 
-    var_7 = _id_077A::_id_3EC3( 0, 1, 1, 1, 1, 1, 0 );
-    var_8 = _id_077A::_id_C042( self._id_02EA, var_1, level._id_33D8, var_7 );
+    var_7 = scripts\engine\trace::_id_3EC3( 0, 1, 1, 1, 1, 1, 0 );
+    var_8 = scripts\engine\trace::ray_trace( self.origin, var_1, level.characters, var_7 );
 
     if ( var_8["hittype"] != "hittype_none" )
     {
@@ -577,9 +577,9 @@ _id_8B38( var_0 )
         var_1 = ( var_8["position"][0], var_8["position"][1], var_9 );
     }
 
-    self _meth_83A3( var_1 + ( 0, 0, 500 ), 2 );
+    self setvehgoalpos( var_1 + ( 0, 0, 500 ), 2 );
     self._id_8F69 = "patrol";
-    _id_077B::_id_1087E( "goal", "begin_evasive_maneuvers" );
+    scripts\engine\utility::waittill_any_2( "goal", "begin_evasive_maneuvers" );
     self _meth_807D();
 }
 
@@ -587,18 +587,18 @@ _id_8B34()
 {
     var_0 = [];
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
-        if ( var_2._id_0213 || isdefined( var_2._id_02F2 ) && var_2._id_02F2._id_0213 )
+        if ( var_2._id_0213 || isdefined( var_2.owner ) && var_2.owner._id_0213 )
             continue;
 
-        if ( !isai( var_2 ) )
+        if ( !isalive( var_2 ) )
             continue;
 
-        if ( isdefined( level._id_EF62 ) && isdefined( var_2._id_045B ) && self._id_045B == var_2._id_045B )
+        if ( isdefined( level.teambased ) && isdefined( var_2.team ) && self.team == var_2.team )
             continue;
 
-        if ( var_2 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_blindeye" ) )
+        if ( var_2 scripts\mp\utility\perk::_hasperk( "specialty_blindeye" ) )
             continue;
 
         if ( var_2 _id_88C2() )
@@ -611,7 +611,7 @@ _id_8B34()
     var_4 = undefined;
 
     if ( var_0.size > 0 )
-        var_4 = _func_01FF( var_0, self._id_02EA );
+        var_4 = _func_01FF( var_0, self.origin );
 
     if ( isdefined( var_4 ) && var_4.size > 0 )
         return var_4[0];
@@ -622,9 +622,9 @@ _id_8B34()
 _id_88C2()
 {
     var_0 = 0;
-    var_1 = _id_077A::_id_3EC3( 0, 1, 0, 1, 1, 0 );
+    var_1 = scripts\engine\trace::_id_3EC3( 0, 1, 0, 1, 1, 0 );
 
-    if ( !_id_077A::_id_C047( self._id_02EA, self._id_02EA + ( 0, 0, 10000 ), self, var_1 ) )
+    if ( !scripts\engine\trace::ray_trace_passed( self.origin, self.origin + ( 0, 0, 10000 ), self, var_1 ) )
         var_0 = 1;
 
     return var_0;
@@ -635,8 +635,8 @@ _id_10BC9()
     self endon( "death" );
     self endon( "leaving" );
     self endon( "jackal_crashing" );
-    self._id_02F2 endon( "disconnect" );
-    var_0 = self._id_AF3D _id_077B::_id_108A5( 5, "death_or_disconnect" );
+    self.owner endon( "disconnect" );
+    var_0 = self._id_AF3D scripts\engine\utility::_id_108A5( 5, "death_or_disconnect" );
     self._id_AF3D = undefined;
 }
 
@@ -648,8 +648,8 @@ _id_8B39( var_0 )
     {
         var_2 = var_0[0];
         var_3 = var_0[1];
-        var_4 = var_2 + _func_01B9( -500, 500 );
-        var_5 = var_3 + _func_01B9( -500, 500 );
+        var_4 = var_2 + randomintrange( -500, 500 );
+        var_5 = var_3 + randomintrange( -500, 500 );
         var_6 = _id_6969( var_4, var_5, 350 );
         var_1 = ( var_4, var_5, var_6 );
     }
@@ -667,20 +667,20 @@ _id_8B39( var_0 )
     }
 
     self _meth_807D();
-    self _meth_83A3( var_1 + ( 0, 0, 500 ), 10 );
-    _id_077B::_id_1087E( "goal", "begin_evasive_maneuvers" );
+    self setvehgoalpos( var_1 + ( 0, 0, 500 ), 10 );
+    scripts\engine\utility::waittill_any_2( "goal", "begin_evasive_maneuvers" );
 }
 
 _id_8B37( var_0, var_1 )
 {
     self endon( "death" );
-    self _meth_834A( 0, 0 );
+    self setmaxpitchroll( 0, 0 );
     self notify( "leaving" );
     self _meth_807D();
     self._id_F81C _meth_8376( undefined );
 
     if ( isdefined( self._id_F896 ) && isdefined( self._id_EEEE ) )
-        _id_0A72::_id_ACB7( self._id_EEEE, self._id_F896 );
+        scripts\mp\utility\outline::outlinedisable( self._id_EEEE, self._id_F896 );
 
     var_2 = int( self._id_03C7 / 14 );
     var_3 = int( self._id_0E1F / 16 );
@@ -691,20 +691,20 @@ _id_8B37( var_0, var_1 )
     if ( isdefined( var_1 ) )
         var_3 = var_1;
 
-    self _meth_8436( var_2, var_3 );
-    var_4 = self._id_02EA + anglestoforward( ( 0, _func_01B8( 360 ), 0 ) ) * 500;
+    self vehicle_setspeed( var_2, var_3 );
+    var_4 = self.origin + anglestoforward( ( 0, randomint( 360 ), 0 ) ) * 500;
     var_4 = var_4 + ( 0, 0, 1000 );
-    self _meth_83A3( var_4, 1 );
+    self setvehgoalpos( var_4, 1 );
 
     if ( isdefined( self._id_FE8E ) )
-        self._id_FE8E _meth_809A();
+        self._id_FE8E delete();
 
     self waittill( "goal" );
     var_5 = _id_6BFD();
-    self _meth_8436( 250, 75 );
-    self _meth_83A3( var_5, 1 );
+    self vehicle_setspeed( 250, 75 );
+    self setvehgoalpos( var_5, 1 );
     self waittill( "goal" );
-    self stoplookat();
+    self stoploopsound();
     level._id_8B3A[level._id_8B3A.size - 1] = undefined;
     self notify( "jackal_gone" );
     thread _id_8B31();
@@ -712,21 +712,21 @@ _id_8B37( var_0, var_1 )
 
 _id_8B31()
 {
-    _id_0A77::_id_BD07( "killstreak ended - jackal", self._id_02F2 );
+    _id_0A77::_id_BD07( "killstreak ended - jackal", self.owner );
 
     if ( isdefined( self._id_F81C ) )
-        self._id_F81C _meth_809A();
+        self._id_F81C delete();
 
     if ( isdefined( self._id_3175 ) )
-        self._id_3175 _meth_809A();
+        self._id_3175 delete();
 
     if ( isdefined( self._id_FE8E ) )
-        self._id_FE8E _meth_809A();
+        self._id_FE8E delete();
 
     foreach ( var_1 in level._id_3247 )
         var_1._id_01CD = undefined;
 
-    self _meth_809A();
+    self delete();
 }
 
 _id_8B3B()
@@ -734,10 +734,10 @@ _id_8B3B()
     self endon( "death" );
     level endon( "game_ended" );
     var_0 = 9999;
-    _id_07B7::_id_1084D( var_0 );
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( var_0 );
 
-    if ( isdefined( self._id_02F2 ) )
-        self._id_02F2 _id_0A64::_id_B85B( "jackal_end", undefined, undefined, self._id_02F2._id_02EA );
+    if ( isdefined( self.owner ) )
+        self.owner _id_0A64::_id_B85B( "jackal_end", undefined, undefined, self.owner.origin );
 
     thread _id_8B37();
 }
@@ -759,9 +759,9 @@ _id_C000()
     self endon( "leaving" );
     self._id_8F69 = "randomMovement";
     var_0 = self._id_45FD;
-    var_1 = _id_6CA6( self._id_02EA );
-    self _meth_83A3( var_1, 1 );
-    thread _id_0A63::_id_4F23( self._id_02EA, var_1, 5, ( 1, 0, 1 ) );
+    var_1 = _id_6CA6( self.origin );
+    self setvehgoalpos( var_1, 1 );
+    thread _id_0A63::_id_4F23( self.origin, var_1, 5, ( 1, 0, 1 ) );
     self waittill( "goal" );
 }
 
@@ -769,23 +769,23 @@ _id_6CA6( var_0 )
 {
     self _meth_807D();
 
-    if ( distance2dsquared( self._id_02EA, self._id_02F2._id_02EA ) > 4194304 )
+    if ( distance2dsquared( self.origin, self.owner.origin ) > 4194304 )
     {
-        var_1 = self._id_02F2._id_02EA[0];
-        var_2 = self._id_02F2._id_02EA[1];
+        var_1 = self.owner.origin[0];
+        var_2 = self.owner.origin[1];
         var_3 = _id_6969( var_1, var_2, 20 );
         var_4 = ( var_1, var_2, var_3 );
-        self setlookat( self._id_02F2 );
+        self setlookat( self.owner );
         return var_4;
     }
     else
     {
-        var_5 = self._id_0054[1];
+        var_5 = self.angles[1];
         var_6 = int( var_5 - 60 );
         var_7 = int( var_5 + 60 );
-        var_8 = _func_01B9( var_6, var_7 );
+        var_8 = randomintrange( var_6, var_7 );
         var_9 = ( 0, var_8, 0 );
-        var_10 = self._id_02EA + anglestoforward( var_9 ) * _func_01B9( 400, 800 );
+        var_10 = self.origin + anglestoforward( var_9 ) * randomintrange( 400, 800 );
         var_11 = var_10[0];
         var_12 = var_10[1];
         var_13 = _id_6969( var_11, var_12, 20 );
@@ -794,8 +794,8 @@ _id_6CA6( var_0 )
         if ( var_14 != 0 )
             return var_14;
 
-        var_11 = _func_01B7( var_0[0] - 1200, var_0[0] + 1200 );
-        var_12 = _func_01B7( var_0[1] - 1200, var_0[1] + 1200 );
+        var_11 = randomfloatrange( var_0[0] - 1200, var_0[0] + 1200 );
+        var_12 = randomfloatrange( var_0[1] - 1200, var_0[1] + 1200 );
         var_15 = ( var_11, var_12, var_13 );
         return var_15;
     }
@@ -812,13 +812,13 @@ _id_6B59( var_0, var_1 )
 
     var_2 = [];
 
-    foreach ( var_4 in level._id_B758 )
+    foreach ( var_4 in level.players )
     {
         if ( var_4 == self )
             continue;
 
-        if ( !level._id_EF62 || var_4._id_045B != self._id_045B )
-            var_2[var_2.size] = var_4._id_02EA;
+        if ( !level.teambased || var_4.team != self.team )
+            var_2[var_2.size] = var_4.origin;
     }
 
     if ( var_2.size > 0 )
@@ -831,8 +831,8 @@ _id_6B59( var_0, var_1 )
     {
         var_9 = level._id_9A95;
         var_10 = level._id_9AB0 / 4;
-        var_7 = _func_01B7( var_9[0] - var_10, var_9[0] + var_10 );
-        var_8 = _func_01B7( var_9[1] - var_10, var_9[1] + var_10 );
+        var_7 = randomfloatrange( var_9[0] - var_10, var_9[0] + var_10 );
+        var_8 = randomfloatrange( var_9[1] - var_10, var_9[1] + var_10 );
     }
 
     var_11 = _id_6969( var_7, var_8, 20 );
@@ -841,8 +841,8 @@ _id_6B59( var_0, var_1 )
     if ( var_12 != 0 )
         return var_12;
 
-    var_7 = _func_01B7( var_0[0] - 1200, var_0[0] + 1200 );
-    var_8 = _func_01B7( var_0[1] - 1200, var_0[1] + 1200 );
+    var_7 = randomfloatrange( var_0[0] - 1200, var_0[0] + 1200 );
+    var_8 = randomfloatrange( var_0[1] - 1200, var_0[1] + 1200 );
     var_11 = _id_6969( var_7, var_8, 20 );
     var_13 = ( var_7, var_8, var_11 );
     return var_13;
@@ -852,10 +852,10 @@ _id_6BFF( var_0 )
 {
     var_1 = 100;
     var_2 = 15000;
-    var_3 = _func_01B6( 360 );
+    var_3 = randomfloat( 360 );
     var_4 = ( 0, var_3, 0 );
     var_5 = var_0 + anglestoforward( var_4 ) * ( -1 * var_2 );
-    var_5 = var_5 + ( ( _func_01B6( 2 ) - 1 ) * var_1, ( _func_01B6( 2 ) - 1 ) * var_1, 0 );
+    var_5 = var_5 + ( ( randomfloat( 2 ) - 1 ) * var_1, ( randomfloat( 2 ) - 1 ) * var_1, 0 );
     return var_5;
 }
 
@@ -863,9 +863,9 @@ _id_6BFD()
 {
     var_0 = 150;
     var_1 = 15000;
-    var_2 = self._id_0054[1];
+    var_2 = self.angles[1];
     var_3 = ( 0, var_2, 0 );
-    var_4 = self._id_02EA + anglestoforward( var_3 ) * var_1;
+    var_4 = self.origin + anglestoforward( var_3 ) * var_1;
     return var_4;
 }
 
@@ -876,25 +876,25 @@ _id_5B65( var_0 )
     self endon( "death" );
     self endon( "target_timeout" );
 
-    if ( istrue( var_0 ) && _id_0A74::_id_89D3( self._id_02F2 ) && ( !isdefined( self._id_8FBF ) || self._id_8FBF + 10000 <= gettime() ) )
+    if ( istrue( var_0 ) && scripts\mp\utility\player::isreallyalive( self.owner ) && ( !isdefined( self._id_8FBF ) || self._id_8FBF + 10000 <= gettime() ) )
     {
-        self._id_02F2 _id_0998::_id_AC2B( "jackal_fire" );
+        self.owner _id_0998::_id_AC2B( "jackal_fire" );
         self._id_8FBF = gettime();
     }
 
-    var_1 = _id_0A72::_id_ACBD( self._id_F896, self._id_02F2, "outline_depth_orange", "killstreak_personal" );
+    var_1 = scripts\mp\utility\outline::outlineenableforplayer( self._id_F896, self.owner, "outline_depth_orange", "killstreak_personal" );
     self._id_EEEE = var_1;
     var_2 = 3;
     thread _id_10B21( self._id_F81C, self._id_F896, "target_timeout", var_2 );
     self._id_F81C waittill( "turret_on_target" );
-    level thread _id_0789::_id_CB63( self._id_F896, "plr_killstreak_target" );
+    level thread scripts\mp\battlechatter_mp::_id_CB63( self._id_F896, "plr_killstreak_target" );
     self._id_F81C notify( "start_firing" );
     var_3 = weaponburstcount( self._id_F89A );
 
-    while ( isdefined( self._id_F896 ) && _id_0A74::_id_89D3( self._id_F896 ) && isdefined( self._id_F81C _meth_8184( 1 ) ) && self._id_F81C _meth_8184( 1 ) == self._id_F896 )
+    while ( isdefined( self._id_F896 ) && scripts\mp\utility\player::isreallyalive( self._id_F896 ) && isdefined( self._id_F81C _meth_8184( 1 ) ) && self._id_F81C _meth_8184( 1 ) == self._id_F896 )
     {
         self._id_F81C _meth_83C0();
-        _id_07B7::_id_1084D( var_3 );
+        scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( var_3 );
     }
 }
 
@@ -907,11 +907,11 @@ _id_5B63( var_0 )
     var_1 = 3;
     thread _id_10B21( self._id_3175, self._id_3178, "target_cannon_timeout", var_1 );
     self._id_3175 waittill( "turret_on_target" );
-    level thread _id_0789::_id_CB63( self._id_3178, "plr_killstreak_target" );
+    level thread scripts\mp\battlechatter_mp::_id_CB63( self._id_3178, "plr_killstreak_target" );
     self._id_3175 notify( "start_firing" );
     var_2 = weaponburstcount( self._id_3179 );
 
-    if ( isdefined( self._id_3178 ) && _id_0A74::_id_89D3( self._id_3178 ) && isdefined( self._id_3175 _meth_8184( 1 ) ) && self._id_3175 _meth_8184( 1 ) == self._id_3178 )
+    if ( isdefined( self._id_3178 ) && scripts\mp\utility\player::isreallyalive( self._id_3178 ) && isdefined( self._id_3175 _meth_8184( 1 ) ) && self._id_3175 _meth_8184( 1 ) == self._id_3178 )
     {
         self._id_3175 thread _id_10BAB();
         self._id_3175 _meth_83C0();
@@ -922,7 +922,7 @@ _id_10BAB()
 {
     self endon( "death" );
     self waittill( "missile_fire", var_0 );
-    var_0._id_EA0B = self._id_EA0B;
+    var_0.streakinfo = self.streakinfo;
 }
 
 _id_D5EC()
@@ -933,7 +933,7 @@ _id_D5EC()
     self endon( "target_cannon_timeout" );
     self._id_3175 waittill( "missile_fire", var_0 );
     var_0._id_100A7 = self;
-    var_0._id_100A7._id_8D49 = self._id_3175._id_100A7._id_8D49;
+    var_0._id_100A7.killcament = self._id_3175._id_100A7.killcament;
 }
 
 _id_10B21( var_0, var_1, var_2, var_3 )
@@ -942,7 +942,7 @@ _id_10B21( var_0, var_1, var_2, var_3 )
     self endon( "leaving" );
     var_0 endon( "stop_firing" );
     var_4 = self._id_EEEE;
-    var_5 = var_1 _id_077B::_id_108A5( var_3, "death_or_disconnect" );
+    var_5 = var_1 scripts\engine\utility::_id_108A5( var_3, "death_or_disconnect" );
 
     if ( var_5 == "timeout" )
         self notify( var_2 );
@@ -950,7 +950,7 @@ _id_10B21( var_0, var_1, var_2, var_3 )
     if ( var_0._id_048F == "Machine_Gun" )
     {
         if ( isdefined( var_4 ) && isdefined( var_1 ) )
-            _id_0A72::_id_ACB7( var_4, var_1 );
+            scripts\mp\utility\outline::outlinedisable( var_4, var_1 );
 
         self _meth_807D();
     }
@@ -967,13 +967,13 @@ _id_89D0( var_0 )
     if ( !isdefined( var_0 ) )
         var_0 = 10;
 
-    var_1 = anglestoforward( self._id_0054 );
-    var_2 = self._id_F896._id_02EA - self._id_02EA;
+    var_1 = anglestoforward( self.angles );
+    var_2 = self._id_F896.origin - self.origin;
     var_1 = var_1 * ( 1, 1, 0 );
     var_2 = var_2 * ( 1, 1, 0 );
-    var_2 = _func_025A( var_2 );
-    var_1 = _func_025A( var_1 );
-    var_3 = _func_0257( var_2, var_1 );
+    var_2 = vectornormalize( var_2 );
+    var_1 = vectornormalize( var_1 );
+    var_3 = vectordot( var_2, var_1 );
     var_4 = cos( var_0 );
 
     if ( var_3 >= var_4 )
@@ -989,7 +989,7 @@ _id_0E58( var_0 )
     self notify( "priority_target" );
 
     if ( isdefined( self._id_ACB4 ) && isdefined( self._id_F896 ) )
-        _id_0A72::_id_ACB7( self._id_ACB4, self._id_F896 );
+        scripts\mp\utility\outline::outlinedisable( self._id_ACB4, self._id_F896 );
 
     if ( var_0.size == 1 )
         self._id_F896 = var_0[0];
@@ -1024,7 +1024,7 @@ _id_8B36()
     self endon( "death" );
     self endon( "leaving" );
     var_0 = [];
-    var_1 = level._id_B758;
+    var_1 = level.players;
 
     for ( var_2 = 0; var_2 < var_1.size; var_2++ )
     {
@@ -1048,34 +1048,34 @@ _id_8A74( var_0 )
 {
     self endon( "death" );
 
-    if ( !isai( var_0 ) || var_0._id_0392 != "playing" )
+    if ( !isalive( var_0 ) || var_0.sessionstate != "playing" )
         return 0;
 
-    if ( isdefined( self._id_02F2 ) && var_0 == self._id_02F2 )
+    if ( isdefined( self.owner ) && var_0 == self.owner )
         return 0;
 
-    if ( !isdefined( var_0._id_0309["team"] ) )
+    if ( !isdefined( var_0.pers["team"] ) )
         return 0;
 
-    if ( level._id_EF62 && var_0._id_0309["team"] == self._id_045B )
+    if ( level.teambased && var_0.pers["team"] == self.team )
         return 0;
 
-    if ( var_0._id_0309["team"] == "spectator" )
+    if ( var_0.pers["team"] == "spectator" )
         return 0;
 
     if ( isdefined( var_0._id_E390 ) && ( gettime() - var_0._id_E390 ) / 1000 <= 5 )
         return 0;
 
-    if ( var_0 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_blindeye" ) )
+    if ( var_0 scripts\mp\utility\perk::_hasperk( "specialty_blindeye" ) )
         return 0;
 
-    if ( distance2dsquared( self._id_02EA, var_0._id_02EA ) > 4194304 )
+    if ( distance2dsquared( self.origin, var_0.origin ) > 4194304 )
         return 0;
 
     var_1 = ( 0, 0, 35 );
-    var_2 = var_0._id_02EA + _func_01C2( var_1, var_0 _meth_8540() );
+    var_2 = var_0.origin + rotatevector( var_1, var_0 _meth_8540() );
     var_3 = [ self ];
-    var_4 = _id_077A::_id_C042( self._id_02EA, var_2, var_3, undefined, 1 );
+    var_4 = scripts\engine\trace::ray_trace( self.origin, var_2, var_3, undefined, 1 );
 
     if ( !isdefined( var_4["entity"] ) )
         return 0;
@@ -1094,20 +1094,20 @@ _id_68FD( var_0 )
         if ( isdefined( self._id_F896 ) && self._id_F896 == var_4 )
             continue;
 
-        var_5 = abs( _func_025B( var_4._id_02EA - self._id_02EA )[1] );
+        var_5 = abs( vectortoangles( var_4.origin - self.origin )[1] );
         var_6 = abs( self gettagangles( "tag_origin" )[1] );
         var_5 = abs( var_5 - var_6 );
         var_7 = var_4 _meth_8194();
 
         foreach ( var_9 in var_7 )
         {
-            var_10 = var_9._id_0084;
+            var_10 = var_9.basename;
 
-            if ( _func_0121( var_10, "chargeshot" ) || _func_0121( var_10, "lockon" ) )
+            if ( issubstr( var_10, "chargeshot" ) || issubstr( var_10, "lockon" ) )
                 var_5 = var_5 - 40;
         }
 
-        if ( distance( self._id_02EA, var_4._id_02EA ) > 4000 )
+        if ( distance( self.origin, var_4.origin ) > 4000 )
             var_5 = var_5 + 40;
 
         if ( !isdefined( var_1 ) )
@@ -1134,9 +1134,9 @@ _id_7419()
     for (;;)
     {
         self waittill( "damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13 );
-        var_9 = _id_0A7F::_id_9AB4( var_9, var_13 );
+        var_9 = scripts\mp\utility\weapon::_id_9AB4( var_9, var_13 );
 
-        if ( ( var_9._id_0084 == "aamissile_projectile_mp" || var_9._id_0084 == "s4_v2_mp" ) && var_4 == "MOD_EXPLOSIVE" && var_0 >= self._id_01FF )
+        if ( ( var_9.basename == "aamissile_projectile_mp" || var_9.basename == "s4_v2_mp" ) && var_4 == "MOD_EXPLOSIVE" && var_0 >= self.health )
             _id_2F1A( var_1, var_1, 9001, 0, var_4, var_9, var_3, var_2, var_3, 0, 0, var_7 );
     }
 }
@@ -1145,28 +1145,28 @@ _id_2F1A( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
 {
     if ( isdefined( var_1 ) )
     {
-        if ( isdefined( var_1._id_02F2 ) )
-            var_1 = var_1._id_02F2;
+        if ( isdefined( var_1.owner ) )
+            var_1 = var_1.owner;
     }
 
-    if ( ( var_1 == self || isdefined( var_1._id_0309 ) && var_1._id_0309["team"] == self._id_045B && !level._id_5F86 && level._id_EF62 ) && var_1 != self._id_02F2 )
+    if ( ( var_1 == self || isdefined( var_1.pers ) && var_1.pers["team"] == self.team && !level._id_5F86 && level.teambased ) && var_1 != self.owner )
         return;
 
-    if ( self._id_01FF <= 0 )
+    if ( self.health <= 0 )
         return;
 
-    var_2 = _id_0A6F::_id_6B47( var_1, var_5, var_4, var_2, self._id_027F, 3, 4, 5 );
-    _id_0A28::_id_8DBD( var_1, var_5, self, var_4, var_2 );
+    var_2 = _id_0A6F::_id_6B47( var_1, var_5, var_4, var_2, self.maxhealth, 3, 4, 5 );
+    scripts\mp\killstreaks\killstreaks::_id_8DBD( var_1, var_5, self, var_4, var_2 );
     var_1 _id_079B::_id_FC44( "" );
-    _id_079A::_id_9740( self, var_2, var_1, var_7, var_6, var_4, var_10, undefined, var_11, var_3, _func_034D( var_5 ) );
+    _id_079A::_id_9740( self, var_2, var_1, var_7, var_6, var_4, var_10, undefined, var_11, var_3, getcompleteweaponname( var_5 ) );
 
-    if ( self._id_01FF <= var_2 )
+    if ( self.health <= var_2 )
     {
-        if ( _func_0117( var_1 ) && ( !isdefined( self._id_02F2 ) || var_1 != self._id_02F2 ) )
+        if ( isplayer( var_1 ) && ( !isdefined( self.owner ) || var_1 != self.owner ) )
             _id_079A::_id_AB05( "jackal", var_1, var_5, var_4, var_2, "destroyed_jackal", "jackal_destroyed", "callout_destroyed_harrier" );
     }
 
-    if ( self._id_01FF - var_2 <= 900 && ( !isdefined( self._id_DE54 ) || !self._id_DE54 ) )
+    if ( self.health - var_2 <= 900 && ( !isdefined( self._id_DE54 ) || !self._id_DE54 ) )
         self._id_DE54 = 1;
 
     self _meth_842B( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11 );
@@ -1177,44 +1177,44 @@ _id_6969( var_0, var_1, var_2 )
     var_3 = 600;
     var_4 = _id_F3C8( var_0, var_1 );
     var_5 = var_4 + var_3;
-    var_5 = var_5 + _func_01B8( var_2 );
+    var_5 = var_5 + randomint( var_2 );
     return var_5;
 }
 
 _id_B36F()
 {
     self endon( "death" );
-    _func_0218( level._id_74B1, self, "tag_engine_left" );
-    _func_0197( level._id_74B2, self, "tag_engine_left" );
-    _func_0218( level._id_74B1, self, "tag_engine_right" );
-    _func_0197( level._id_74B2, self, "tag_engine_right" );
-    _id_07B7::_id_1084D( 0.15 );
-    _func_0218( level._id_74B1, self, "tag_engine_left2" );
-    _func_0197( level._id_74B2, self, "tag_engine_left2" );
-    _func_0218( level._id_74B1, self, "tag_engine_right2" );
-    _func_0197( level._id_74B2, self, "tag_engine_right2" );
-    _func_0197( level._id_3627["damage"]["heavy_smoke"], self, "tag_engine_left" );
+    stopfxontag( level._id_74B1, self, "tag_engine_left" );
+    playfxontag( level._id_74B2, self, "tag_engine_left" );
+    stopfxontag( level._id_74B1, self, "tag_engine_right" );
+    playfxontag( level._id_74B2, self, "tag_engine_right" );
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( 0.15 );
+    stopfxontag( level._id_74B1, self, "tag_engine_left2" );
+    playfxontag( level._id_74B2, self, "tag_engine_left2" );
+    stopfxontag( level._id_74B1, self, "tag_engine_right2" );
+    playfxontag( level._id_74B2, self, "tag_engine_right2" );
+    playfxontag( level._id_3627["damage"]["heavy_smoke"], self, "tag_engine_left" );
 }
 
 _id_8B32()
 {
     self endon( "jackal_gone" );
-    var_0 = self._id_02F2;
+    var_0 = self.owner;
     self waittill( "death" );
 
     if ( isdefined( self._id_F896 ) && isdefined( self._id_EEEE ) )
-        _id_0A72::_id_ACB7( self._id_EEEE, self._id_F896 );
+        scripts\mp\utility\outline::outlinedisable( self._id_EEEE, self._id_F896 );
 
     if ( !isdefined( self ) )
         return;
 
-    self._id_02F2 _id_0A70::_id_3934( _id_6BC2( self._id_0102 ) );
+    self.owner _id_0A70::_id_3934( _id_6BC2( self._id_0102 ) );
 
     if ( !isdefined( self._id_8EC9 ) )
     {
-        self _meth_8436( 25, 5 );
+        self vehicle_setspeed( 25, 5 );
         thread _id_8B30( 75 );
-        _id_07B7::_id_1084D( 2.7 );
+        scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( 2.7 );
     }
 
     if ( isdefined( self._id_9908 ) )
@@ -1225,12 +1225,12 @@ _id_8B32()
 
 _id_8B33()
 {
-    self _meth_827B( "dropship_explode_mp" );
+    self playsound( "dropship_explode_mp" );
     level._id_8B3A[level._id_8B3A.size - 1] = undefined;
     self notify( "explode" );
 
     if ( isdefined( self._id_9908 ) )
-        _func_0197( _id_077B::_id_6A40( "jackal_explosion" ), self, "tag_origin" );
+        playfxontag( scripts\engine\utility::getfx( "jackal_explosion" ), self, "tag_origin" );
 
     wait 0.35;
     thread _id_8B31();
@@ -1241,10 +1241,10 @@ _id_8B30( var_0 )
     self endon( "explode" );
     self _meth_807D();
     self notify( "jackal_crashing" );
-    self _meth_83A3( self._id_02EA + ( 0, 0, 100 ), 1 );
-    _id_07B7::_id_1084D( 1.5 );
-    self _meth_83BA( var_0, var_0, var_0 );
-    self _meth_8389( self._id_0054[1] + var_0 * 2.5 );
+    self setvehgoalpos( self.origin + ( 0, 0, 100 ), 1 );
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( 1.5 );
+    self setyawspeed( var_0, var_0, var_0 );
+    self _meth_8389( self.angles[1] + var_0 * 2.5 );
 }
 
 _id_F3C9( var_0, var_1, var_2 )
@@ -1253,7 +1253,7 @@ _id_F3C9( var_0, var_1, var_2 )
     self endon( "acquiringTarget" );
     self endon( "leaving" );
     self endon( "randMove" );
-    var_3 = _id_077A::_id_E406( self._id_02EA, ( var_0, var_1, var_2 ), 256, self, undefined, 1 );
+    var_3 = scripts\engine\trace::_id_E406( self.origin, ( var_0, var_1, var_2 ), 256, self, undefined, 1 );
 
     if ( var_3["surfacetype"] != "surftype_none" )
         return 0;
@@ -1268,7 +1268,7 @@ _id_F3C8( var_0, var_1 )
     self endon( "acquiringTarget" );
     self endon( "leaving" );
     var_2 = -99999;
-    var_3 = self._id_02EA[2] + 2000;
+    var_3 = self.origin[2] + 2000;
     var_4 = level._id_1F74;
     var_5 = [ self ];
 
@@ -1278,7 +1278,7 @@ _id_F3C8( var_0, var_1 )
             var_5[var_5.size] = var_7;
     }
 
-    var_9 = _id_077A::_id_E406( ( var_0, var_1, var_3 ), ( var_0, var_1, var_2 ), 256, var_5, undefined, 1 );
+    var_9 = scripts\engine\trace::_id_E406( ( var_0, var_1, var_3 ), ( var_0, var_1, var_2 ), 256, var_5, undefined, 1 );
 
     if ( var_9["position"][2] < var_4 )
         var_10 = var_4;
@@ -1295,9 +1295,9 @@ _id_39D4( var_0 )
 
     for (;;)
     {
-        if ( distance2d( self._id_02EA, var_0 ) < 768 )
+        if ( distance2d( self.origin, var_0 ) < 768 )
         {
-            self _meth_834A( 10, 25 );
+            self setmaxpitchroll( 10, 25 );
             break;
         }
 
@@ -1310,19 +1310,19 @@ _id_A11A()
     self endon( "death" );
     self endon( "leaving" );
 
-    if ( !isdefined( self._id_02F2 ) || self._id_02F2._id_045B != self._id_045B )
+    if ( !isdefined( self.owner ) || self.owner.team != self.team )
     {
         thread _id_8B33();
         return;
     }
 
-    self._id_02F2 _id_077B::_id_1087E( "joined_team", "disconnect" );
+    self.owner scripts\engine\utility::waittill_any_2( "joined_team", "disconnect" );
     _id_8B33();
 }
 
 _id_10BAD( var_0, var_1 )
 {
-    self._id_02F2 endon( "disconnect" );
+    self.owner endon( "disconnect" );
     self endon( "death" );
     self endon( "leaving" );
     level endon( "game_ended" );
@@ -1332,21 +1332,21 @@ _id_10BAD( var_0, var_1 )
     {
         self._id_FE8E waittill( "trigger", var_3 );
 
-        if ( var_3 != self._id_02F2 )
+        if ( var_3 != self.owner )
             continue;
 
-        if ( self._id_02F2 _id_0A74::_id_8AB5() )
+        if ( self.owner scripts\mp\utility\player::_id_8AB5() )
             continue;
 
-        if ( !self._id_02F2 _id_06BB::_id_86DF() )
+        if ( !self.owner scripts\common\utility::_id_86DF() )
             continue;
 
-        if ( _id_0A67::_id_8A90( self._id_02F2 ) )
+        if ( _id_0A67::_id_8A90( self.owner ) )
             continue;
 
         var_4 = 0;
 
-        while ( self._id_02F2 useanimtree() )
+        while ( self.owner usebuttonpressed() )
         {
             var_4 = var_4 + var_2;
 
@@ -1356,15 +1356,15 @@ _id_10BAD( var_0, var_1 )
 
                 if ( var_5 == "guard_location" )
                 {
-                    var_6 = self._id_02F2._id_02EA[0];
-                    var_7 = self._id_02F2._id_02EA[1];
-                    var_8 = self._id_02EA[2];
+                    var_6 = self.owner.origin[0];
+                    var_7 = self.owner.origin[1];
+                    var_8 = self.origin[2];
                     var_9 = ( var_6, var_7, var_8 );
-                    var_10 = _id_077A::_id_3EC3( 0, 1, 1, 1, 1, 1, 0 );
+                    var_10 = scripts\engine\trace::_id_3EC3( 0, 1, 1, 1, 1, 1, 0 );
 
-                    if ( !_id_077A::_id_C047( self._id_02EA, var_9, self, var_10 ) )
+                    if ( !scripts\engine\trace::ray_trace_passed( self.origin, var_9, self, var_10 ) )
                     {
-                        self._id_02F2 _id_07B9::_id_DC9F( "KILLSTREAKS/CANNOT_BE_CALLED" );
+                        self.owner scripts\mp\hud_message::_id_DC9F( "KILLSTREAKS/CANNOT_BE_CALLED" );
                         break;
                     }
                 }
@@ -1376,7 +1376,7 @@ _id_10BAD( var_0, var_1 )
                 {
                     var_0 = "follow_player";
                     var_1 = &"KILLSTREAKS_HINTS_JACKAL_FOLLOW";
-                    self._id_02F2 _id_0998::_id_AC2B( "jackal_guard" );
+                    self.owner _id_0998::_id_AC2B( "jackal_guard" );
                     thread _id_503A();
                     thread _id_7239();
                 }
@@ -1388,10 +1388,10 @@ _id_10BAD( var_0, var_1 )
                     thread _id_503A();
                 }
 
-                self._id_FE8E _meth_8225();
-                _id_07B7::_id_1084D( 1 );
+                self._id_FE8E makeunusable();
+                scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( 1 );
                 self._id_41D8 = var_1;
-                self._id_FE8E _id_0A6F::_id_D5C5( self._id_02F2, self._id_41D8, 360, 360, 30000, 30000, 2 );
+                self._id_FE8E _id_0A6F::_id_D5C5( self.owner, self._id_41D8, 360, 360, 30000, 30000, 2 );
                 break;
             }
 
@@ -1404,7 +1404,7 @@ _id_10BAD( var_0, var_1 )
 
 _id_503A()
 {
-    _id_07B7::_id_1084D( 0.3 );
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( 0.3 );
     self _meth_827D( "dropship_killstreak_thrust_change" );
 }
 
@@ -1424,7 +1424,7 @@ _id_9832( var_0, var_1 )
 
     for (;;)
     {
-        _func_024B( var_0 );
+        triggerfx( var_0 );
         wait 0.05;
 
         if ( !isdefined( var_1 ) || !isdefined( var_0 ) )
@@ -1432,7 +1432,7 @@ _id_9832( var_0, var_1 )
     }
 
     if ( isdefined( var_0 ) )
-        var_0 _meth_809A();
+        var_0 delete();
 }
 
 _id_1DCB( var_0, var_1 )
@@ -1442,12 +1442,12 @@ _id_1DCB( var_0, var_1 )
     var_4 = 6000;
     var_5 = ( 0, 0, var_4 );
     var_6 = 3000;
-    var_7 = anglestoforward( self._id_0054 );
-    var_8 = self._id_02EA;
+    var_7 = anglestoforward( self.angles );
+    var_8 = self.origin;
     var_9 = var_8 + var_5 + var_7 * var_6 * -1;
     var_10 = [ self ];
     var_11 = 0;
-    var_12 = _id_077A::_id_C042( var_0 + ( 0, 0, var_4 ), var_0 );
+    var_12 = scripts\engine\trace::ray_trace( var_0 + ( 0, 0, var_4 ), var_0 );
 
     if ( var_12["fraction"] > 0.99 )
     {
@@ -1457,7 +1457,7 @@ _id_1DCB( var_0, var_1 )
 
     if ( !var_11 )
     {
-        var_12 = _id_077A::_id_C042( var_0 + ( 300, 0, var_4 ), var_0 );
+        var_12 = scripts\engine\trace::ray_trace( var_0 + ( 300, 0, var_4 ), var_0 );
 
         if ( var_12["fraction"] > 0.99 )
         {
@@ -1468,7 +1468,7 @@ _id_1DCB( var_0, var_1 )
 
     if ( !var_11 )
     {
-        var_12 = _id_077A::_id_C042( var_0 + ( 0, 300, var_4 ), var_0 );
+        var_12 = scripts\engine\trace::ray_trace( var_0 + ( 0, 300, var_4 ), var_0 );
 
         if ( var_12["fraction"] > 0.99 )
         {
@@ -1479,7 +1479,7 @@ _id_1DCB( var_0, var_1 )
 
     if ( !var_11 )
     {
-        var_12 = _id_077A::_id_C042( var_0 + ( 0, -300, var_4 ), var_0 );
+        var_12 = scripts\engine\trace::ray_trace( var_0 + ( 0, -300, var_4 ), var_0 );
 
         if ( var_12["fraction"] > 0.99 )
         {
@@ -1490,7 +1490,7 @@ _id_1DCB( var_0, var_1 )
 
     if ( !var_11 )
     {
-        var_12 = _id_077A::_id_C042( var_0 + ( 300, 300, var_4 ), var_0 );
+        var_12 = scripts\engine\trace::ray_trace( var_0 + ( 300, 300, var_4 ), var_0 );
 
         if ( var_12["fraction"] > 0.99 )
         {
@@ -1501,7 +1501,7 @@ _id_1DCB( var_0, var_1 )
 
     if ( !var_11 )
     {
-        var_12 = _id_077A::_id_C042( var_0 + ( -300, 0, var_4 ), var_0 );
+        var_12 = scripts\engine\trace::ray_trace( var_0 + ( -300, 0, var_4 ), var_0 );
 
         if ( var_12["fraction"] > 0.99 )
         {
@@ -1512,7 +1512,7 @@ _id_1DCB( var_0, var_1 )
 
     if ( !var_11 )
     {
-        var_12 = _id_077A::_id_C042( var_0 + ( -300, -300, var_4 ), var_0 );
+        var_12 = scripts\engine\trace::ray_trace( var_0 + ( -300, -300, var_4 ), var_0 );
 
         if ( var_12["fraction"] > 0.99 )
         {
@@ -1523,7 +1523,7 @@ _id_1DCB( var_0, var_1 )
 
     if ( !var_11 )
     {
-        var_12 = _id_077A::_id_C042( var_0 + ( 300, -300, var_4 ), var_0 );
+        var_12 = scripts\engine\trace::ray_trace( var_0 + ( 300, -300, var_4 ), var_0 );
 
         if ( var_12["fraction"] > 0.99 )
         {
@@ -1539,7 +1539,7 @@ _id_1DCB( var_0, var_1 )
             var_4 = var_4 / 2;
             var_5 = ( 0, 0, var_4 );
             var_9 = var_8 + var_5 + var_7 * var_6 * -1;
-            var_14 = _id_077A::_id_C042( var_0, var_9, var_10 );
+            var_14 = scripts\engine\trace::ray_trace( var_0, var_9, var_10 );
 
             if ( var_14["fraction"] > 0.99 )
             {
@@ -1558,7 +1558,7 @@ _id_1DCB( var_0, var_1 )
             var_4 = var_4 * 2.5;
             var_5 = ( 0, 0, var_4 );
             var_9 = var_8 + var_5 + var_7 * var_6 * -1;
-            var_14 = _id_077A::_id_C042( var_0, var_9, var_10 );
+            var_14 = scripts\engine\trace::ray_trace( var_0, var_9, var_10 );
 
             if ( var_14["fraction"] > 0.99 )
             {
@@ -1576,10 +1576,10 @@ _id_B867()
     if ( isdefined( self._id_B851 ) && self._id_B851 )
         return;
 
-    _id_077B::_id_B26C( "javelin_clu_lock", self._id_02EA );
+    scripts\engine\utility::_id_B26C( "javelin_clu_lock", self.origin );
     self._id_B851 = 1;
-    _id_07B7::_id_1084D( 0.75 );
-    self stoplookat( "javelin_clu_lock" );
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( 0.75 );
+    self stoploopsound( "javelin_clu_lock" );
     self._id_B851 = 0;
 }
 
@@ -1588,9 +1588,9 @@ _id_B866()
     if ( isdefined( self._id_B851 ) && self._id_B851 )
         return;
 
-    self _meth_8275( "javelin_clu_aquiring_lock" );
+    self playlocalsound( "javelin_clu_aquiring_lock" );
     self._id_B851 = 1;
-    _id_07B7::_id_1084D( 0.75 );
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( 0.75 );
     self _meth_83EE( "javelin_clu_aquiring_lock" );
     self._id_B851 = 0;
 }
@@ -1601,7 +1601,7 @@ _id_2482()
     self notify( "begin_evasive_maneuvers" );
     self endon( "begin_evasive_maneuvers" );
     self._id_5668 = 1;
-    var_0 = _id_077B::_id_108A5( 3.0, "death" );
+    var_0 = scripts\engine\utility::_id_108A5( 3.0, "death" );
 
     if ( var_0 == "timeout" )
         self._id_5668 = 0;
@@ -1619,18 +1619,18 @@ _id_10B74()
 
         if ( istrue( self._id_5668 ) )
         {
-            var_1 = self._id_02F2._id_02EA[0];
-            var_2 = self._id_02F2._id_02EA[1];
-            var_3 = var_1 + _func_01B9( -500, 500 );
-            var_4 = var_2 + _func_01B9( -500, 500 );
+            var_1 = self.owner.origin[0];
+            var_2 = self.owner.origin[1];
+            var_3 = var_1 + randomintrange( -500, 500 );
+            var_4 = var_2 + randomintrange( -500, 500 );
             var_5 = _id_6969( var_3, var_4, 350 );
             var_0 = ( var_3, var_4, var_5 );
         }
 
         if ( isdefined( var_0 ) )
-            self _meth_83A3( var_0, 1 );
+            self setvehgoalpos( var_0, 1 );
 
-        _id_07B7::_id_1084D( 0.1 );
+        scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( 0.1 );
     }
 }
 
@@ -1649,7 +1649,7 @@ _id_500B( var_0, var_1 )
 
 _id_10AF9( var_0, var_1 )
 {
-    _id_077B::_id_1087E( "captured", "death" );
+    scripts\engine\utility::waittill_any_2( "captured", "death" );
     var_0 notify( "crate_captured_" + var_1 );
 }
 
@@ -1661,7 +1661,7 @@ _id_10B8D()
 
     for (;;)
     {
-        _id_077B::_id_1087F( "crate_captured_0", "crate_captured_1", "crate_captured_2" );
+        scripts\engine\utility::_id_1087F( "crate_captured_0", "crate_captured_1", "crate_captured_2" );
         var_0++;
 
         if ( var_0 == self._id_500B.size )
@@ -1679,7 +1679,7 @@ _id_2485( var_0, var_1, var_2, var_3, var_4, var_5 )
 
     var_6 = undefined;
     self notify( "called_in_jackal" );
-    var_7 = _id_099B::_id_6ABC();
+    var_7 = scripts\cp_mp\utility\killstreak_utility::_id_6ABC();
     var_2 = var_2 * ( 1, 1, 0 );
     var_8 = 1000;
     var_9 = var_2 + ( 0, 0, var_8 );
@@ -1692,7 +1692,7 @@ _id_2485( var_0, var_1, var_2, var_3, var_4, var_5 )
 _id_45FF( var_0, var_1 )
 {
     var_0 endon( "death" );
-    var_0 _meth_83A3( var_0._id_AEC9, 1 );
+    var_0 setvehgoalpos( var_0._id_AEC9, 1 );
     var_0 _meth_827D( "dropship_killstreak_thrust_change" );
     var_0 thread _id_39D4( var_0._id_AEC9 );
     var_0 thread _id_A11A();
@@ -1700,7 +1700,7 @@ _id_45FF( var_0, var_1 )
     var_0 thread _id_10B63();
     var_0 thread _id_5439();
     var_0 thread _id_543A();
-    var_0 _meth_8436( int( var_0._id_03C7 / 14 ), int( var_0._id_0E1F / 16 ) );
+    var_0 vehicle_setspeed( int( var_0._id_03C7 / 14 ), int( var_0._id_0E1F / 16 ) );
 }
 
 _id_723A( var_0, var_1, var_2 )
@@ -1710,10 +1710,10 @@ _id_723A( var_0, var_1, var_2 )
     self endon( "follow_player" );
     self endon( "jackal_crashing" );
 
-    if ( isdefined( self._id_02F2 ) )
-        self._id_02F2 endon( "disconnect" );
+    if ( isdefined( self.owner ) )
+        self.owner endon( "disconnect" );
 
-    self _meth_8436( int( self._id_03C7 / 14 ), int( self._id_0E1F / 16 ) );
+    self vehicle_setspeed( int( self._id_03C7 / 14 ), int( self._id_0E1F / 16 ) );
 
     if ( isdefined( var_1 ) )
         self setlookat( var_1 );
@@ -1726,8 +1726,8 @@ _id_723A( var_0, var_1, var_2 )
 
         if ( istrue( self._id_5668 ) )
         {
-            var_6 = var_4 + _func_01B9( -500, 500 );
-            var_7 = var_5 + _func_01B9( -500, 500 );
+            var_6 = var_4 + randomintrange( -500, 500 );
+            var_7 = var_5 + randomintrange( -500, 500 );
             var_8 = _id_696A( var_6, var_7, 350, var_2 );
             var_3 = ( var_6, var_7, var_8 );
         }
@@ -1737,9 +1737,9 @@ _id_723A( var_0, var_1, var_2 )
             var_3 = ( var_4, var_5, var_8 );
         }
 
-        self _meth_83A3( var_3, 1 );
+        self setvehgoalpos( var_3, 1 );
         self._id_8F69 = "following_player";
-        _id_077B::_id_1087E( "goal", "begin_evasive_maneuvers" );
+        scripts\engine\utility::waittill_any_2( "goal", "begin_evasive_maneuvers" );
         self _meth_807D();
     }
 }
@@ -1753,6 +1753,6 @@ _id_696A( var_0, var_1, var_2, var_3 )
 
     var_5 = _id_F3C8( var_0, var_1 );
     var_6 = var_5 + var_4;
-    var_6 = var_6 + _func_01B8( var_2 );
+    var_6 = var_6 + randomint( var_2 );
     return var_6;
 }

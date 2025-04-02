@@ -12,7 +12,7 @@ _id_EED1()
     {
         var_0 = self getcurrentweapon();
 
-        if ( var_0._id_0084 == "iw8_la_kgolf_mp" && _id_EECB() )
+        if ( var_0.basename == "iw8_la_kgolf_mp" && _id_EECB() )
         {
             self._id_EEB2._id_E93F = 0;
             thread _id_EECD();
@@ -26,7 +26,7 @@ _id_EED1()
 
 _id_EEBE()
 {
-    self._id_EEB2 = _func_020F();
+    self._id_EEB2 = spawnstruct();
     self._id_EEB2._id_E75B = [];
     self._id_EEB2._id_E75B["off"] = [];
     self._id_EEB2._id_E75B["off"]["enter"] = ::_id_EEC0;
@@ -44,7 +44,7 @@ _id_EEBE()
 _id_EEC7()
 {
     self._id_EEB2._id_118F = undefined;
-    self._id_EEB2._id_0457 = undefined;
+    self._id_EEB2.target = undefined;
     self._id_EEB2._id_96F0 = undefined;
     self._id_EEB2._id_1031A = undefined;
     self._id_EEB2._id_8721 = 0;
@@ -52,7 +52,7 @@ _id_EEC7()
     if ( isdefined( self._id_EEB2._id_912D ) )
     {
         self._id_EEB2._id_912D _id_0765::_id_47E6();
-        self._id_EEB2._id_912D _meth_809A();
+        self._id_EEB2._id_912D delete();
     }
 
     self._id_EEB2._id_912D = undefined;
@@ -71,7 +71,7 @@ _id_EEC0( var_0 )
 
 _id_EEC2()
 {
-    if ( self player_recoilscaleon() >= 0.6 )
+    if ( self playerads() >= 0.6 )
         _id_EEC6( "scanning" );
 }
 
@@ -97,7 +97,7 @@ _id_EECA()
 
     if ( isdefined( var_0 ) )
     {
-        self._id_EEB2._id_0457 = var_0;
+        self._id_EEB2.target = var_0;
         _id_EEC6( "hold" );
     }
 }
@@ -106,28 +106,28 @@ _id_EEBB( var_0 )
 {
     self._id_EEB2._id_96F0 = gettime();
     self._id_EEB2._id_9896 = 0;
-    self._id_EEB2._id_912D = _id_077B::_id_E20C();
+    self._id_EEB2._id_912D = scripts\engine\utility::spawn_tag_origin();
     self._id_EEB2._id_912D _id_0765::_id_C2A8( 1 );
-    self._id_EEB2._id_912D _meth_83C3();
+    self._id_EEB2._id_912D show();
     _id_EECE();
 }
 
 _id_EEBD()
 {
-    if ( !_id_EEB5( self._id_EEB2._id_0457 ) )
+    if ( !_id_EEB5( self._id_EEB2.target ) )
     {
         _id_EEC6( "scanning" );
         return;
     }
     else
     {
-        var_0 = _id_EEB8( self._id_EEB2._id_0457 );
+        var_0 = _id_EEB8( self._id_EEB2.target );
 
         if ( isdefined( var_0 ) )
-            self._id_EEB2._id_912D _meth_823B( var_0, 0.05 );
+            self._id_EEB2._id_912D moveto( var_0, 0.05 );
     }
 
-    var_1 = self _meth_845D( self._id_EEB2._id_912D._id_02EA, 55, 40 );
+    var_1 = self _meth_845D( self._id_EEB2._id_912D.origin, 55, 40 );
 
     if ( var_1 && !self._id_EEB2._id_8721 )
     {
@@ -148,7 +148,7 @@ _id_EEBC()
     if ( isdefined( self._id_EEB2._id_912D ) )
     {
         self._id_EEB2._id_912D _id_0765::_id_47E6();
-        self._id_EEB2._id_912D _meth_809A();
+        self._id_EEB2._id_912D delete();
     }
 
     self._id_EEB2._id_912D = undefined;
@@ -160,7 +160,7 @@ _id_EEC5()
 {
     if ( self._id_EEB2._id_E744 != "off" )
     {
-        if ( self player_recoilscaleon() < 0.6 )
+        if ( self playerads() < 0.6 )
             _id_EEC6( "off" );
     }
 }
@@ -180,12 +180,12 @@ _id_EEB8( var_0 )
 {
     var_1 = ( 0, 0, 0 );
 
-    if ( var_0._id_00DE == "script_vehicle" )
+    if ( var_0.classname == "script_vehicle" )
         var_1 = var_0 _meth_8430();
     else if ( _id_0A67::_id_886F( var_0 ) || _id_0A67::_id_8AA2( var_0 ) )
         var_1 = var_0._id_04B7;
 
-    var_2 = var_0._id_02EA + _id_EEBA( var_0 );
+    var_2 = var_0.origin + _id_EEBA( var_0 );
     var_3 = self geteye();
     var_4 = 4000;
     var_5 = _func_02F4( var_3, ( 0, 0, 0 ), var_4, var_2, var_1 );
@@ -223,7 +223,7 @@ _id_EEB5( var_0 )
     if ( !isdefined( var_0 ) )
         return 0;
 
-    var_1 = self _meth_845D( var_0._id_02EA, 55, 240 );
+    var_1 = self _meth_845D( var_0.origin, 55, 240 );
 
     if ( !var_1 )
         return 0;
@@ -241,7 +241,7 @@ _id_EEBF( var_0, var_1 )
 
     for (;;)
     {
-        self _meth_8275( var_0 );
+        self playlocalsound( var_0 );
         wait( var_1 );
     }
 }
@@ -315,7 +315,7 @@ _id_EECD()
 _id_EEB6()
 {
     self endon( "targetLead_stop" );
-    _id_077B::_id_1087E( "death_or_disconnect", "faux_spawn" );
+    scripts\engine\utility::waittill_any_2( "death_or_disconnect", "faux_spawn" );
     _id_EEC4();
 }
 
@@ -329,7 +329,7 @@ _id_EEC8()
 
         foreach ( var_3 in var_0 )
         {
-            var_4 = self _meth_845D( var_3._id_02EA, 55, 240 );
+            var_4 = self _meth_845D( var_3.origin, 55, 240 );
 
             if ( var_4 )
                 var_1[var_1.size] = var_3;
@@ -337,7 +337,7 @@ _id_EEC8()
 
         if ( var_1.size != 0 )
         {
-            var_6 = _func_01FF( var_1, self._id_02EA );
+            var_6 = _func_01FF( var_1, self.origin );
 
             if ( _id_EED0( var_6[0] ) )
                 return var_6[0];
@@ -397,8 +397,8 @@ _id_EEB3()
     self endon( "stop_airburst_think" );
     self waittill( "missile_fire", var_0 );
 
-    if ( isdefined( self._id_EEB2._id_0457 ) )
-        var_0 thread _id_EEB4( self._id_EEB2._id_0457, self );
+    if ( isdefined( self._id_EEB2.target ) )
+        var_0 thread _id_EEB4( self._id_EEB2.target, self );
 }
 
 _id_EEB4( var_0, var_1 )
@@ -413,12 +413,12 @@ _id_EEB4( var_0, var_1 )
             return;
         }
 
-        var_2 = distance( var_1._id_02EA, var_0._id_02EA );
-        var_3 = distance( var_1._id_02EA, self._id_02EA );
+        var_2 = distance( var_1.origin, var_0.origin );
+        var_3 = distance( var_1.origin, self.origin );
 
         if ( var_3 > var_2 )
         {
-            self _meth_809F();
+            self detonate();
             iprintlnbold( "explode" );
         }
 
@@ -428,14 +428,14 @@ _id_EEB4( var_0, var_1 )
 
 _id_EECE()
 {
-    _func_0363( self._id_EEB2._id_EED3, self._id_EEB2._id_0457 );
-    _func_0365( self._id_EEB2._id_EED3, self._id_EEB2._id_0457, 1 );
+    _func_0363( self._id_EEB2._id_EED3, self._id_EEB2.target );
+    _func_0365( self._id_EEB2._id_EED3, self._id_EEB2.target, 1 );
     _func_0363( self._id_EEB2._id_EED3, self._id_EEB2._id_912D );
     _func_0365( self._id_EEB2._id_EED3, self._id_EEB2._id_912D, 0 );
 }
 
 _id_EECF()
 {
-    _func_0364( self._id_EEB2._id_EED3, self._id_EEB2._id_0457 );
+    _func_0364( self._id_EEB2._id_EED3, self._id_EEB2.target );
     _func_0364( self._id_EEB2._id_EED3, self._id_EEB2._id_912D );
 }

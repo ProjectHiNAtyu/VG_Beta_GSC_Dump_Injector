@@ -13,7 +13,7 @@ _id_8176()
     level._id_5A83 = undefined;
     level._id_C137 = 1;
 
-    if ( _id_0A69::_id_6A43() == "br" )
+    if ( scripts\mp\utility\game::getgametype() == "br" )
     {
         level._id_5A84 = 1;
         return;
@@ -59,7 +59,7 @@ _id_BB8D()
             return;
         }
 
-        var_0 = var_1._id_006E;
+        var_0 = var_1.attacker;
     }
     else
     {
@@ -79,7 +79,7 @@ _id_BB8D()
         var_0 = var_3._id_E3DE;
     }
 
-    if ( !isdefined( var_0 ) || !_func_0117( var_0 ) )
+    if ( !isdefined( var_0 ) || !isplayer( var_0 ) )
     {
         _id_07A8::_id_933E( "final_killcam_preloaded" );
         return;
@@ -87,7 +87,7 @@ _id_BB8D()
 
     var_4 = var_0 geteye();
 
-    foreach ( var_6 in level._id_B758 )
+    foreach ( var_6 in level.players )
     {
         var_6 _meth_8214( var_0 );
         var_6 _meth_8281( var_4, 1 );
@@ -104,13 +104,13 @@ _id_4E47()
     if ( isdefined( level._id_DDAB ) || istrue( level._id_A71E ) )
         return;
 
-    if ( ( _id_0A69::_id_6A43() == "sd" || _id_0A69::_id_6A43() == "control" ) && !_id_0A69::_id_10A14() && getdvarint( "potg_sd_disableBetweenRounds", 1 ) )
+    if ( ( scripts\mp\utility\game::getgametype() == "sd" || scripts\mp\utility\game::getgametype() == "control" ) && !scripts\mp\utility\game::_id_10A14() && getdvarint( "potg_sd_disableBetweenRounds", 1 ) )
         return;
 
     level._id_DCB7 = 1;
     level._id_9C67 = 0.0;
 
-    foreach ( var_1 in level._id_B758 )
+    foreach ( var_1 in level.players )
     {
         var_2 = _id_07DC::_id_6A18();
 
@@ -121,23 +121,23 @@ _id_4E47()
         }
 
         var_1 _id_07BE::_id_C627();
-        var_1 _id_0A74::_id_C6FB( 0 );
-        var_1 _meth_82F6( "ui_total_fade", 0 );
-        var_1 _meth_82F6( "post_game_state", 4 );
+        var_1 scripts\mp\utility\player::_id_C6FB( 0 );
+        var_1 setclientomnvar( "ui_total_fade", 0 );
+        var_1 setclientomnvar( "post_game_state", 4 );
         var_1 _id_07BE::_id_D89A( var_2._id_E3DE, 0 );
     }
 
     if ( _id_07FF::_id_86C2() && getdvarint( "potg_showcase_enabled", 1 ) == 1 && !getdvarint( "#x398d84acbf2bee889", 0 ) )
         _id_07FF::_id_C9E0();
 
-    foreach ( var_1 in level._id_B758 )
+    foreach ( var_1 in level.players )
         var_1 thread _id_4E48();
 
     for (;;)
     {
         var_6 = 0;
 
-        foreach ( var_1 in level._id_B758 )
+        foreach ( var_1 in level.players )
         {
             if ( istrue( var_1._id_82BD ) )
             {
@@ -168,7 +168,7 @@ _id_4E48()
     }
 
     thread _id_07BE::_id_BA7C( var_0._id_E3DE, var_0._id_032E, var_0._id_E72A, var_0._id_532E );
-    var_1 = _id_077B::_id_1089D( "begin_killcam", "killcam_ended" );
+    var_1 = scripts\engine\utility::_id_1089D( "begin_killcam", "killcam_ended" );
 
     if ( var_1 == "killcam_ended" )
     {
@@ -176,14 +176,14 @@ _id_4E48()
         return;
     }
 
-    thread _id_0A69::_id_D72F( 1.0, self._id_8D4F - 0.5 );
+    thread scripts\mp\utility\game::_id_D72F( 1.0, self._id_8D4F - 0.5 );
     self waittill( "killcam_ended" );
     _id_BA81();
 }
 
 _id_BA81()
 {
-    self _meth_82F6( "post_game_state", 1 );
+    self setclientomnvar( "post_game_state", 1 );
     self._id_82BD = 0;
 }
 
@@ -192,12 +192,12 @@ _id_D897( var_0, var_1 )
     self endon( "disconnect" );
     self endon( "spawned" );
     level endon( "game_ended" );
-    self _meth_82F6( "ui_killcam_victim_or_attacker", 1 );
+    self setclientomnvar( "ui_killcam_victim_or_attacker", 1 );
     _id_07BE::_id_C627();
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
     var_2._id_8D4F = 0;
-    _id_07BE::_id_D87C( var_0._id_006E, var_0._id_103C0, var_0._id_A90B, var_2, 0, var_0._id_1DB2 );
-    self _meth_82F6( "ui_in_player_showcase", 1 );
+    _id_07BE::_id_D87C( var_0.attacker, var_0._id_103C0, var_0.objweapon, var_2, 0, var_0._id_1DB2 );
+    self setclientomnvar( "ui_in_player_showcase", 1 );
 }
 
 _id_4C8B()
@@ -222,7 +222,7 @@ _id_4C8B()
         return 0;
     }
 
-    var_2 = var_1._id_006E;
+    var_2 = var_1.attacker;
     var_3 = var_1._id_103C0;
 
     if ( !isdefined( var_3 ) || !isdefined( var_2 ) )
@@ -232,8 +232,8 @@ _id_4C8B()
     }
 
     var_4 = 20;
-    var_5 = _id_0A69::_id_6CFD();
-    var_6 = _func_0147( 0, _id_0A69::_id_6CFD() - var_1._id_F253 );
+    var_5 = scripts\mp\utility\game::_id_6CFD();
+    var_6 = max( 0, scripts\mp\utility\game::_id_6CFD() - var_1._id_F253 );
 
     if ( var_6 > var_4 )
     {
@@ -245,12 +245,12 @@ _id_4C8B()
     _func_02DE( "atmosphere", "killcam", 0.1 );
     level._id_9C67 = 0.0;
 
-    foreach ( var_8 in level._id_B758 )
+    foreach ( var_8 in level.players )
     {
-        var_8 _id_0A74::_id_C6FB( 0 );
-        var_8 _meth_82F6( "ui_total_fade", 0 );
-        var_8 _meth_82F6( "post_game_state", 3 );
-        var_8 _meth_82F6( "ui_killcam_final_length", int( var_6 * 1000 ) );
+        var_8 scripts\mp\utility\player::_id_C6FB( 0 );
+        var_8 setclientomnvar( "ui_total_fade", 0 );
+        var_8 setclientomnvar( "post_game_state", 3 );
+        var_8 setclientomnvar( "ui_killcam_final_length", int( var_6 * 1000 ) );
         var_8 _id_D897( var_1 );
     }
 
@@ -259,13 +259,13 @@ _id_4C8B()
 
     var_10 = ( gettime() - var_3._id_43FE ) / 1000;
 
-    foreach ( var_8 in level._id_B758 )
+    foreach ( var_8 in level.players )
     {
         var_8._id_024A = var_3 getentitynumber();
         var_8 _id_079A::_id_FC48( var_1._id_1DB6, var_1._id_1DAC, var_2 );
 
-        if ( !_id_0A7F::_id_88DC( var_1._id_A90B._id_0084 ) )
-            var_8 _id_07BE::_id_D5C0( var_1._id_A90B, var_1._id_DE28, var_1._id_50FD, var_1._id_56E5 );
+        if ( !scripts\mp\utility\weapon::_id_88DC( var_1.objweapon.basename ) )
+            var_8 _id_07BE::_id_D5C0( var_1.objweapon, var_1._id_DE28, var_1._id_50FD, var_1._id_56E5 );
 
         var_8 _meth_82FB( "killcam", "mix" );
         var_8 thread _id_07BE::_id_4CE3( var_1, var_10, 0, 1 );
@@ -282,8 +282,8 @@ _id_4C8B()
 _id_5A85()
 {
     self notify( "showing_final_killcam" );
-    thread _id_0A69::_id_D72F( 1.0, self._id_8D4F - 0.5 );
-    self _meth_82F6( "post_game_state", 3 );
+    thread scripts\mp\utility\game::_id_D72F( 1.0, self._id_8D4F - 0.5 );
+    self setclientomnvar( "post_game_state", 3 );
     thread _id_10BD0();
 }
 
@@ -293,7 +293,7 @@ _id_10BD0()
     self waittill( "killcam_ended" );
     _func_02DE( "atmosphere", "", 0.5 );
     self _meth_8077( 4 );
-    thread _id_07D9::_id_E2BE();
+    thread scripts\mp\playerlogic::_id_E2BE();
 }
 
 _id_C137( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10 )
@@ -301,29 +301,29 @@ _id_C137( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     if ( !_id_07DC::_id_DBD5() )
         return;
 
-    var_11 = _func_020F();
+    var_11 = spawnstruct();
 
-    if ( isdefined( var_4 ) && _func_0102( var_4 ) )
+    if ( isdefined( var_4 ) && isagent( var_4 ) )
     {
         var_11._id_11E7 = var_4._id_11E7;
         var_11._id_9038 = var_4._id_9038;
     }
 
-    var_12 = _id_07BE::_id_99E0( var_4, var_11, var_3, var_5, var_6, var_1 getentitynumber(), var_7, var_8, var_9, 3, var_2, var_1, var_10, var_2._id_0309["loadoutPerks"], 0, 1 );
-    var_12._id_F253 = _id_0A69::_id_6CFD();
+    var_12 = _id_07BE::_id_99E0( var_4, var_11, var_3, var_5, var_6, var_1 getentitynumber(), var_7, var_8, var_9, 3, var_2, var_1, var_10, var_2.pers["loadoutPerks"], 0, 1 );
+    var_12._id_F253 = scripts\mp\utility\game::_id_6CFD();
 
     if ( var_10 == "MOD_EXECUTION" )
     {
         var_12._id_F253 = var_12._id_F253 - 3.0;
-        var_12._id_F253 = _func_0147( 0, var_12._id_F253 );
+        var_12._id_F253 = max( 0, var_12._id_F253 );
     }
 
     var_12._id_1DB6 = var_1._id_1DB6;
     var_12._id_1DAC = var_1._id_1DAC;
 
-    if ( level._id_EF62 && isdefined( var_2._id_045B ) )
-        level._id_5A86[var_2._id_045B] = var_12;
-    else if ( !level._id_EF62 )
+    if ( level.teambased && isdefined( var_2.team ) )
+        level._id_5A86[var_2.team] = var_12;
+    else if ( !level.teambased )
         level._id_5A86[var_2._id_723F] = var_12;
 
     level._id_5A86["none"] = var_12;
@@ -333,8 +333,8 @@ _id_1085E()
 {
     self endon( "disconnect" );
     self endon( "killcam_death_done_waiting" );
-    self _meth_824A( "death_respawn", "+usereload" );
-    self _meth_824A( "death_respawn", "+activate" );
+    self notifyonplayercommand( "death_respawn", "+usereload" );
+    self notifyonplayercommand( "death_respawn", "+activate" );
     self waittill( "death_respawn" );
     self notify( "killcam_death_button_cancel" );
 }
@@ -354,11 +354,11 @@ _id_DDAE( var_0 )
     if ( level._id_DCB7 )
         return 0;
 
-    if ( !_func_0104( self ) )
+    if ( !isai( self ) )
     {
         thread _id_1085E();
         thread _id_1085F( var_0 );
-        var_1 = _id_077B::waittill_any_return( "killcam_death_done_waiting", "killcam_death_button_cancel" );
+        var_1 = scripts\engine\utility::_id_10895( "killcam_death_done_waiting", "killcam_death_button_cancel" );
 
         if ( isdefined( var_1 ) && var_1 == "killcam_death_done_waiting" )
         {
@@ -378,7 +378,7 @@ _id_DDAE( var_0 )
 
 _id_18F0()
 {
-    foreach ( var_1 in level._id_B758 )
+    foreach ( var_1 in level.players )
     {
         if ( isdefined( var_1._id_8D46 ) )
             return 1;

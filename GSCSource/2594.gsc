@@ -3,11 +3,11 @@
 
 _id_77FE()
 {
-    _id_0A28::_id_C25C( "radar_drone_recon", _id_098C::_id_F786 );
-    _id_0A28::_id_C25C( "radar_drone_escort", _id_098C::_id_F786 );
-    _id_0A28::_id_C25C( "radar_drone_overwatch", _id_098E::_id_F789 );
-    _id_0A28::_id_C25C( "scrambler_drone_escort", _id_098C::_id_F786 );
-    _id_0A28::_id_C25C( "scrambler_drone_guard", _id_098C::_id_F786 );
+    scripts\mp\killstreaks\killstreaks::_id_C25C( "radar_drone_recon", _id_098C::_id_F786 );
+    scripts\mp\killstreaks\killstreaks::_id_C25C( "radar_drone_escort", _id_098C::_id_F786 );
+    scripts\mp\killstreaks\killstreaks::_id_C25C( "radar_drone_overwatch", _id_098E::_id_F789 );
+    scripts\mp\killstreaks\killstreaks::_id_C25C( "scrambler_drone_escort", _id_098C::_id_F786 );
+    scripts\mp\killstreaks\killstreaks::_id_C25C( "scrambler_drone_guard", _id_098C::_id_F786 );
     var_0 = getarraykeys( level._id_7853 );
 
     foreach ( var_2 in var_0 )

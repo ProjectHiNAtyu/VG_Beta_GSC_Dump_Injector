@@ -23,7 +23,7 @@ _id_FF33()
 _id_0FF1( var_0, var_1, var_2 )
 {
     _id_8093();
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
     var_3._id_5D6C = var_1;
     var_3._id_5DB1 = var_2;
     anim._id_DE26[var_0] = var_3;
@@ -31,7 +31,7 @@ _id_0FF1( var_0, var_1, var_2 )
 
 _id_402A()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     var_0._id_1885 = [];
     return var_0;
 }
@@ -120,7 +120,7 @@ _id_DE1C()
         {
             if ( isdefined( var_4._id_A4D4 ) )
             {
-                var_4._id_A4D4 = _func_0147( var_4._id_A4D4, var_2 );
+                var_4._id_A4D4 = max( var_4._id_A4D4, var_2 );
                 continue;
             }
 
@@ -173,7 +173,7 @@ _id_68F7( var_0, var_1, var_2 )
     {
         var_7 = var_4[var_6];
 
-        if ( distancesquared( var_7._id_02EA, var_0 ) > var_3 )
+        if ( distancesquared( var_7.origin, var_0 ) > var_3 )
             break;
 
         if ( !_id_3142( var_7 ) )
@@ -199,13 +199,13 @@ _id_897D( var_0 )
     var_1 = 1600;
     var_2 = 4096;
 
-    foreach ( var_4 in level._id_B758 )
+    foreach ( var_4 in level.players )
     {
-        if ( distance2dsquared( var_0._id_02EA, var_4._id_02EA ) < var_1 && spawnstruct( var_0._id_02EA[2] - var_4._id_02EA[2] ) < var_2 )
+        if ( distance2dsquared( var_0.origin, var_4.origin ) < var_1 && _func_0214( var_0.origin[2] - var_4.origin[2] ) < var_2 )
         {
-            var_5 = vectordot( var_4._id_02EA - var_0._id_02EA );
+            var_5 = _func_025C( var_4.origin - var_0.origin );
 
-            if ( abs( _func_000B( var_5 - var_0._id_0054[1] ) ) < 90 )
+            if ( abs( _func_000B( var_5 - var_0.angles[1] ) ) < 90 )
                 return 1;
         }
     }
@@ -232,9 +232,9 @@ _id_68F8( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
         var_11 = var_2._id_1069F._id_CDA6;
 
     var_12 = var_1 - var_0;
-    var_13 = _func_0130( var_12 );
+    var_13 = length( var_12 );
     var_14 = var_12 / var_13;
-    var_15 = _func_025A( ( var_14[1], -1 * var_14[0], 0 ) );
+    var_15 = vectornormalize( ( var_14[1], -1 * var_14[0], 0 ) );
     var_16 = 0;
     var_17 = undefined;
     var_18 = 60;
@@ -248,7 +248,7 @@ _id_68F8( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
     foreach ( var_27 in var_2._id_DE12 )
     {
-        if ( distancesquared( var_27._id_02EA, self._id_02EA ) < var_9 )
+        if ( distancesquared( var_27.origin, self.origin ) < var_9 )
             continue;
 
         if ( !_id_3142( var_27 ) )
@@ -257,8 +257,8 @@ _id_68F8( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
         if ( !istrue( var_6 ) && !_id_31E3( var_27 ) )
             continue;
 
-        var_28 = var_27._id_02EA - var_0;
-        var_29 = _func_0257( var_14, var_28 );
+        var_28 = var_27.origin - var_0;
+        var_29 = vectordot( var_14, var_28 );
 
         if ( var_29 < var_4 )
             continue;
@@ -266,7 +266,7 @@ _id_68F8( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
         if ( var_29 > var_13 + var_7 )
             continue;
 
-        var_30 = abs( _func_0257( var_15, var_28 ) );
+        var_30 = abs( vectordot( var_15, var_28 ) );
         var_31 = _id_6D13( var_27 );
 
         if ( var_30 * var_30 > var_31 )
@@ -280,7 +280,7 @@ _id_68F8( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
         if ( var_30 > var_32 )
             continue;
 
-        if ( isdefined( var_3 ) && !_func_0119( var_27._id_02EA, var_3 ) )
+        if ( isdefined( var_3 ) && !_func_0119( var_27.origin, var_3 ) )
             continue;
 
         var_33 = _id_6D14( var_27._id_CE3B );
@@ -348,13 +348,13 @@ _id_8A24( var_0, var_1, var_2 )
     if ( isdefined( var_1 ) )
         var_3 = var_1;
     else
-        var_3 = self._id_02EA;
+        var_3 = self.origin;
 
-    var_4 = distancesquared( var_3, var_0._id_02EA );
+    var_4 = distancesquared( var_3, var_0.origin );
 
     if ( isdefined( var_0._id_0333 ) )
     {
-        if ( var_4 > spawnstruct( var_0._id_0333 ) )
+        if ( var_4 > _func_0214( var_0._id_0333 ) )
             return 0;
     }
     else
@@ -366,7 +366,7 @@ _id_8A24( var_0, var_1, var_2 )
             return 0;
     }
 
-    if ( isdefined( var_2 ) && !_func_0119( var_0._id_02EA, var_2 ) )
+    if ( isdefined( var_2 ) && !_func_0119( var_0.origin, var_2 ) )
         return 0;
 
     return 1;
@@ -380,7 +380,7 @@ _id_D4EB( var_0 )
     if ( !istrue( var_2._id_751F ) )
         return;
 
-    self._id_1C08._id_4249._id_1BDA = var_0._id_0054;
+    self._id_1C08._id_4249._id_1BDA = var_0.angles;
     self._id_1C08._id_4249._id_1BE8 = var_2._id_18BD;
     self._id_1C08._id_4249._id_1BED = 1;
     self._id_1C08._id_4249._id_1BE2 = "arrival";
@@ -421,20 +421,20 @@ _id_31E5( var_0 )
 
 _id_31E4( var_0 )
 {
-    var_1 = anglestoforward( self._id_0054 );
-    var_2 = _func_025A( var_0._id_02EA - self._id_02EA );
+    var_1 = anglestoforward( self.angles );
+    var_2 = vectornormalize( var_0.origin - self.origin );
 
-    if ( _func_0257( var_1, var_2 ) >= cos( 60 ) )
+    if ( vectordot( var_1, var_2 ) >= cos( 60 ) )
         var_3 = 64;
     else
         var_3 = 100;
 
-    if ( distancesquared( self._id_02EA, var_0._id_02EA ) <= var_3 * var_3 )
+    if ( distancesquared( self.origin, var_0.origin ) <= var_3 * var_3 )
         return 0;
 
-    var_1 = anglestoforward( var_0._id_0054 );
+    var_1 = anglestoforward( var_0.angles );
 
-    if ( _func_0257( var_1, var_2 ) < cos( 45 ) )
+    if ( vectordot( var_1, var_2 ) < cos( 45 ) )
         return 0;
 
     return 1;

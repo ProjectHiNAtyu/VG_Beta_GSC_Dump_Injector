@@ -7,7 +7,7 @@ _id_8271( var_0, var_1, var_2 )
     self._id_0B3E._id_D9F4 = 0;
     self._id_0B3E._id_D9EC = undefined;
 
-    if ( visionsetnight( self._id_04CE ) == "rocketlauncher" && !isdefined( self._id_0113 ) )
+    if ( weaponclass( self._id_04CE ) == "rocketlauncher" && !isdefined( self._id_0113 ) )
         self._id_0B3E._id_0399 = 0;
 }
 
@@ -42,7 +42,7 @@ _id_73FD( var_0, var_1 )
     }
     else if ( !istrue( self._id_7CFA ) )
     {
-        var_5 = self._id_04CE._id_00DE;
+        var_5 = self._id_04CE.classname;
 
         if ( isdefined( self._id_10D1D ) && isdefined( self._id_10D1D[var_5] ) )
         {
@@ -54,7 +54,7 @@ _id_73FD( var_0, var_1 )
 
             }
 
-            var_3 = _func_01B7( var_6, var_7 );
+            var_3 = randomfloatrange( var_6, var_7 );
             wait( var_3 );
         }
     }
@@ -81,7 +81,7 @@ _id_35FD( var_0, var_1, var_2 )
     var_3 = self _meth_8642();
     var_4 = "shoot_idle";
 
-    if ( !isai( self._id_017D ) || var_3 <= 120 || istrue( self._id_FDA6 ) )
+    if ( !isalive( self._id_017D ) || var_3 <= 120 || istrue( self._id_FDA6 ) )
     {
         if ( _id_0009::_id_1C4A( var_1, "cqb_shoot_idle" ) )
             var_4 = "cqb_shoot_idle";
@@ -150,7 +150,7 @@ _id_4E53( var_0, var_1, var_2 )
         var_3--;
         scripts\anim\utility_common::_id_DA1D( 0 );
 
-        if ( !_func_0102( self ) )
+        if ( !isagent( self ) )
             self _meth_831C( var_1, var_5, 1, var_7, var_6 );
 
         _id_08C8::_id_4534();
@@ -219,7 +219,7 @@ _id_D9F0( var_0, var_1, var_2, var_3, var_4 )
     self endon( var_5 );
     var_7 = _func_00BB( var_2, "fire" );
     var_8 = var_7.size > 0;
-    var_9 = visionsetnight( self._id_04CE ) == "rocketlauncher";
+    var_9 = weaponclass( self._id_04CE ) == "rocketlauncher";
 
     if ( var_8 )
     {
@@ -230,7 +230,7 @@ _id_D9F0( var_0, var_1, var_2, var_3, var_4 )
     var_10 = 0;
     var_11 = self._id_0B3E._id_03A3;
     var_12 = var_11 == 1 || self._id_0B3E._id_03A5 == "semi";
-    var_13 = _func_0117( self._id_017D ) && self._id_017D _meth_854D();
+    var_13 = isplayer( self._id_017D ) && self._id_017D _meth_854D();
     var_14 = scripts\anim\utility_common::_id_10D10();
 
     if ( self._id_0B3E._id_03A5 == "rack" )
@@ -253,7 +253,7 @@ _id_D9F0( var_0, var_1, var_2, var_3, var_4 )
 
         if ( !self._id_0159 )
         {
-            var_16 = self._id_04CE._id_00DE;
+            var_16 = self._id_04CE.classname;
 
             if ( isdefined( self._id_10D1D[var_16] ) )
             {
@@ -271,7 +271,7 @@ _id_D9F0( var_0, var_1, var_2, var_3, var_4 )
             if ( self._id_0355 > 0 )
                 self._id_0355--;
 
-            if ( visionsetnight( self._id_04CE ) == "rocketlauncher" && self tagexists( "tag_rocket" ) )
+            if ( weaponclass( self._id_04CE ) == "rocketlauncher" && self tagexists( "tag_rocket" ) )
                 self hidepart( "tag_rocket" );
         }
 
@@ -318,7 +318,7 @@ _id_D9F7()
     else if ( var_0 == "mg" )
         var_1 = _id_06BA::_id_2D83( self _meth_8182() );
     else if ( var_0 == "full" )
-        var_1 = scripts\anim\weaponlist::_id_1F56() * _func_01B7( 0.5, 1.0 );
+        var_1 = scripts\anim\weaponlist::_id_1F56() * randomfloatrange( 0.5, 1.0 );
     else if ( var_0 == "burst" )
         var_1 = scripts\anim\weaponlist::_id_2D8D();
     else if ( scripts\anim\utility_common::_id_8ABB() )
@@ -382,7 +382,7 @@ _id_6CCC()
 _id_6919()
 {
     [var_1, var_2] = _id_06BA::_id_2D7F( self _meth_8182() );
-    var_3 = var_1 + _func_01B6( var_2 );
+    var_3 = var_1 + randomfloat( var_2 );
     return var_3;
 }
 
@@ -392,19 +392,19 @@ _id_6918()
         return _id_6919();
 
     if ( scripts\anim\utility_common::_id_8ABB() )
-        return _func_01B7( 0.1, 0.45 );
+        return randomfloatrange( 0.1, 0.45 );
 
     if ( scripts\anim\utility_common::_id_10D10() )
-        return _func_01B7( 2.0, 2.7 );
+        return randomfloatrange( 2.0, 2.7 );
     else if ( scripts\anim\utility_common::_id_10CF7() )
         return _id_08C8::_id_714E();
-    else if ( visionsetnight( self._id_04CE ) == "rocketlauncher" )
-        return _func_01B7( 6, 8 );
+    else if ( weaponclass( self._id_04CE ) == "rocketlauncher" )
+        return randomfloatrange( 6, 8 );
 
     if ( scripts\anim\utility_common::_id_874C() )
         return _id_08C8::_id_6D1A();
 
-    var_0 = self._id_04CE._id_00DE;
+    var_0 = self._id_04CE.classname;
 
     if ( isdefined( self._id_10D1D[var_0] ) )
     {
@@ -424,7 +424,7 @@ _id_6918()
 
         }
 
-        return _func_01B7( var_1, var_2 );
+        return randomfloatrange( var_1, var_2 );
     }
 
     if ( _id_0694::_id_23E7() )
@@ -432,16 +432,16 @@ _id_6918()
         if ( self._id_0B3E._id_039E )
         {
             if ( isdefined( self._id_0B3E._id_039D ) )
-                return _func_01B7( 0.1, 0.35 );
+                return randomfloatrange( 0.1, 0.35 );
             else
-                return _func_01B7( 0.6, 1.0 );
+                return randomfloatrange( 0.6, 1.0 );
         }
 
         if ( isdefined( self._id_0B3E._id_039D ) )
-            return _func_01B7( 0.4, 0.9 );
+            return randomfloatrange( 0.4, 0.9 );
         else
-            return _func_01B7( 0.8, 1.2 );
+            return randomfloatrange( 0.8, 1.2 );
     }
 
-    return _func_01B7( 0.8, 1.2 );
+    return randomfloatrange( 0.8, 1.2 );
 }

@@ -3,7 +3,7 @@
 
 _id_6BC3( var_0 )
 {
-    return _id_0A7C::_id_69E2( var_0 );
+    return scripts\mp\utility\teams::_id_69E2( var_0 );
 }
 
 _id_6DC8()
@@ -61,10 +61,10 @@ _id_D72F( var_0, var_1 )
     else
         self._id_5893 = clamp( self._id_5893 - 0.5 * abs( self._id_5893 - var_0 ), 0.0, 1.0 );
 
-    self _meth_82F6( "ui_total_fade", self._id_5893 );
+    self setclientomnvar( "ui_total_fade", self._id_5893 );
     wait 0.1;
     self._id_5893 = var_0;
-    self _meth_82F6( "ui_total_fade", self._id_5893 );
+    self setclientomnvar( "ui_total_fade", self._id_5893 );
 }
 
 _id_C29C( var_0, var_1, var_2, var_3 )
@@ -117,16 +117,16 @@ _id_C29F( var_0, var_1 )
     _id_0A66::_id_C2BD( "scorelimit", var_1 );
 }
 
-registersharedfunc( var_0, var_1 )
+_id_C2B3( var_0, var_1 )
 {
     _id_0A66::_id_C2BC( "timelimit", var_1 );
-    _func_01D0( "ui_timelimit", _id_6DC7() );
+    setdvar( "ui_timelimit", _id_6DC7() );
 }
 
 _id_C24F( var_0, var_1 )
 {
     _id_0A66::_id_C2BD( "halftime", var_1 );
-    _func_01D0( "ui_halftime", _id_6A6E() );
+    setdvar( "ui_halftime", _id_6A6E() );
 }
 
 _id_C270( var_0, var_1 )
@@ -141,7 +141,7 @@ _id_C271( var_0, var_1 )
 
 _id_D629( var_0 )
 {
-    _func_01D0( "overtimeTimeLimit", var_0 );
+    setdvar( "overtimeTimeLimit", var_0 );
 }
 
 _id_C25E( var_0 )
@@ -191,13 +191,13 @@ _id_C260( var_0 )
 
 _id_89F1()
 {
-    if ( !level._id_EF62 )
+    if ( !level.teambased )
         return 0;
 
     if ( level._id_10E50 != 1 && level._id_C936 != 1 )
         return 1;
 
-    if ( _id_6A43() == "sr" || _id_6A43() == "sd" || _id_6A43() == "siege" || _id_6A43() == "cyber" || _id_6A43() == "mtmc" || _id_6A43() == "control" )
+    if ( getgametype() == "sr" || getgametype() == "sd" || getgametype() == "siege" || getgametype() == "cyber" || getgametype() == "mtmc" || getgametype() == "control" )
         return 1;
 
     return 0;
@@ -205,7 +205,7 @@ _id_89F1()
 
 _id_8842()
 {
-    if ( !level._id_EF62 )
+    if ( !level.teambased )
         return 1;
 
     if ( game["roundsPlayed"] == 0 )
@@ -219,7 +219,7 @@ _id_A4BA()
     if ( level._id_5E70 )
         return 1;
 
-    if ( !level._id_EF62 )
+    if ( !level.teambased )
         return 1;
 
     if ( level._id_C936 > 1 && game["roundsPlayed"] >= level._id_C936 - 1 && !_id_8A88() && !_id_89FC() )
@@ -269,7 +269,7 @@ _id_A4BB()
     if ( level._id_5E70 )
         return 1;
 
-    if ( !level._id_EF62 )
+    if ( !level.teambased )
         return 1;
 
     if ( level._id_C936 > 1 && game["roundsPlayed"] >= level._id_C936 - 1 && !_id_8A88() && !_id_89FC() )
@@ -306,7 +306,7 @@ _id_10A19()
     if ( level._id_B896 )
         return 0;
 
-    if ( !level._id_EF62 )
+    if ( !level.teambased )
         return 1;
 
     if ( isdefined( level._id_AB23 ) )
@@ -332,7 +332,7 @@ _id_10A14()
     if ( _id_10A19() )
         return 1;
 
-    if ( !level._id_EF62 )
+    if ( !level.teambased )
         return 1;
 
     if ( _id_7999() || _id_79A8() )
@@ -343,14 +343,14 @@ _id_10A14()
 
 _id_8AFA()
 {
-    switch ( _id_6A43() )
+    switch ( getgametype() )
     {
         case "arena_evo":
         case "arena":
         case "siege":
         case "sr":
         case "sd":
-            return getdvarint( "scr_" + _id_6A43() + "_winByTwoEnabled", 0 ) == 1;
+            return getdvarint( "scr_" + getgametype() + "_winByTwoEnabled", 0 ) == 1;
     }
 
     return 0;
@@ -358,7 +358,7 @@ _id_8AFA()
 
 _id_6B2F()
 {
-    return getdvarint( "scr_" + _id_6A43() + "_winByTwoMaxRounds", level._id_10E50 );
+    return getdvarint( "scr_" + getgametype() + "_winByTwoMaxRounds", level._id_10E50 );
 }
 
 _id_DBB9()
@@ -375,7 +375,7 @@ _id_88EA()
 
 _id_8A88()
 {
-    switch ( _id_6A43() )
+    switch ( getgametype() )
     {
         case "payload":
         case "ball":
@@ -397,7 +397,7 @@ _id_D71D( var_0 )
         return 0;
 
     var_1 = _id_6CFD();
-    var_2 = _id_07AE::_id_0BE6( var_0 );
+    var_2 = scripts\mp\gamescore::_id_0BE6( var_0 );
 
     if ( !_id_8A89() || var_1 < game["timeToBeat"] && var_2 >= game["timeToBeatScore"] )
     {
@@ -425,7 +425,7 @@ _id_DBB7()
 
 _id_89FC()
 {
-    switch ( _id_6A43() )
+    switch ( getgametype() )
     {
         case "rush":
             return 1;
@@ -450,10 +450,10 @@ _id_D6AA( var_0, var_1 )
         game["timeToBeatScore"] = var_1;
     }
 
-    foreach ( var_4 in level._id_B758 )
+    foreach ( var_4 in level.players )
     {
-        var_4 _meth_82F6( "ui_friendly_time_to_beat", _id_077B::_id_F07F( var_4._id_045B == game["timeToBeatTeam"], game["timeToBeatScore"], game["timeToBeatScoreOld"] ) );
-        var_4 _meth_82F6( "ui_enemy_time_to_beat", _id_077B::_id_F07F( var_4._id_045B != game["timeToBeatTeam"], game["timeToBeatScore"], game["timeToBeatScoreOld"] ) );
+        var_4 setclientomnvar( "ui_friendly_time_to_beat", scripts\engine\utility::ter_op( var_4.team == game["timeToBeatTeam"], game["timeToBeatScore"], game["timeToBeatScoreOld"] ) );
+        var_4 setclientomnvar( "ui_enemy_time_to_beat", scripts\engine\utility::ter_op( var_4.team != game["timeToBeatTeam"], game["timeToBeatScore"], game["timeToBeatScoreOld"] ) );
     }
 
     if ( var_2 )
@@ -472,7 +472,7 @@ _id_8952()
     if ( _func_0329() )
         return 1;
 
-    switch ( _id_6A43() )
+    switch ( getgametype() )
     {
         case "cmd":
         case "payload":
@@ -500,7 +500,7 @@ _id_6B23()
 
     var_0 = 0;
 
-    switch ( _id_6A43() )
+    switch ( getgametype() )
     {
         case "payload":
         case "ball":
@@ -551,7 +551,7 @@ _id_31D0()
 
     var_0 = 0;
 
-    switch ( _id_6A43() )
+    switch ( getgametype() )
     {
         case "dm":
         case "war":
@@ -578,7 +578,7 @@ _id_DBA3()
     if ( var_0 && _id_82B7() )
     {
         var_1 = _id_6B23();
-        var_0 = _id_077B::_id_F07F( var_1 == -1, 1, game["overtimeRoundsPlayed"] < var_1 );
+        var_0 = scripts\engine\utility::ter_op( var_1 == -1, 1, game["overtimeRoundsPlayed"] < var_1 );
     }
 
     var_2 = _id_DBB9();
@@ -592,7 +592,7 @@ _id_C632()
     if ( istrue( level._id_C632 ) )
         return 1;
 
-    return ( _id_6A43() == "ctf" || _id_6A43() == "blitz" ) && !_id_82B7() && _id_6E7C() == "roundsWon";
+    return ( getgametype() == "ctf" || getgametype() == "blitz" ) && !_id_82B7() && _id_6E7C() == "roundsWon";
 }
 
 _id_318B()
@@ -603,7 +603,7 @@ _id_318B()
     if ( level._id_4950 )
         return 0;
 
-    switch ( _id_6A43() )
+    switch ( getgametype() )
     {
         case "grnd":
         case "grind":
@@ -636,10 +636,10 @@ _id_318B()
 
 _id_79A6()
 {
-    if ( _id_0A66::getvehicle( "timelimit" ) <= 0 )
+    if ( _id_0A66::_id_6E38( "timelimit" ) <= 0 )
         return 0;
 
-    var_0 = _id_07AC::_id_6DCA();
+    var_0 = scripts\mp\gamelogic::_id_6DCA();
 
     if ( var_0 > 0 )
         return 0;
@@ -663,7 +663,7 @@ _id_799C()
     if ( level._id_C93B <= 0 )
         return 0;
 
-    if ( level._id_EF62 )
+    if ( level.teambased )
     {
         foreach ( var_1 in level._id_EF86 )
         {
@@ -673,9 +673,9 @@ _id_799C()
     }
     else
     {
-        for ( var_3 = 0; var_3 < level._id_B758.size; var_3++ )
+        for ( var_3 = 0; var_3 < level.players.size; var_3++ )
         {
-            var_4 = level._id_B758[var_3];
+            var_4 = level.players[var_3];
 
             if ( isdefined( var_4._id_0369 ) && var_4._id_0369 >= level._id_C93B )
                 return 1;
@@ -690,7 +690,7 @@ _id_79A8()
     if ( level._id_10E50 <= 0 )
         return 0;
 
-    if ( !level._id_EF62 )
+    if ( !level.teambased )
         return 1;
 
     foreach ( var_1 in level._id_EF86 )
@@ -758,13 +758,13 @@ _id_6DC7()
             if ( var_0 > 0 )
                 return var_0;
             else
-                return _id_0A66::getvehicle( "timelimit" );
+                return _id_0A66::_id_6E38( "timelimit" );
         }
     }
     else if ( isdefined( level._id_5836 ) && level._id_5836 > 0 )
-        return _id_0A66::getvehicle( "timelimit" ) + level._id_5836;
+        return _id_0A66::_id_6E38( "timelimit" ) + level._id_5836;
     else
-        return _id_0A66::getvehicle( "timelimit" );
+        return _id_0A66::_id_6E38( "timelimit" );
 }
 
 _id_6A6E()
@@ -774,7 +774,7 @@ _id_6A6E()
     else if ( isdefined( game["inNukeOvertime"] ) && game["inNukeOvertime"] )
         return 0;
     else
-        return _id_0A66::getvehicle( "halftime" );
+        return _id_0A66::_id_6E38( "halftime" );
 }
 
 _id_82B7()
@@ -787,11 +787,11 @@ _id_60A6()
     if ( isdefined( level._id_60A6 ) )
         return level._id_60A6;
 
-    if ( level._id_EF62 )
+    if ( level.teambased )
     {
         foreach ( var_1 in level._id_EF86 )
         {
-            if ( _id_0A7C::_id_6DAC( var_1, "hasSpawned" ) )
+            if ( scripts\mp\utility\teams::_id_6DAC( var_1, "hasSpawned" ) )
                 return 1;
         }
 
@@ -805,14 +805,14 @@ _id_6AF4( var_0 )
 {
     var_1 = [];
 
-    foreach ( var_3 in level._id_B758 )
+    foreach ( var_3 in level.players )
     {
-        if ( !isai( var_3 ) )
+        if ( !isalive( var_3 ) )
             continue;
 
-        if ( level._id_EF62 && isdefined( var_0 ) )
+        if ( level.teambased && isdefined( var_0 ) )
         {
-            if ( var_0 == var_3._id_0309["team"] )
+            if ( var_0 == var_3.pers["team"] )
                 var_1[var_1.size] = var_3;
 
             continue;
@@ -826,7 +826,7 @@ _id_6AF4( var_0 )
 
 _id_C01A()
 {
-    if ( !_func_0117( self ) )
+    if ( !isplayer( self ) )
         return 0;
 
     return level._id_C016 && !self._id_FF12;
@@ -834,7 +834,7 @@ _id_C01A()
 
 _id_AB13()
 {
-    if ( !_func_0117( self ) )
+    if ( !isplayer( self ) )
         return 0;
 
     return level._id_AB13 && !self._id_FF12;
@@ -857,19 +857,19 @@ _id_9BB3()
 
 _id_6A46()
 {
-    return _id_0A66::getvehicle( "numlives" );
+    return _id_0A66::_id_6E38( "numlives" );
 }
 
 _id_6AD8( var_0 )
 {
     var_1 = undefined;
 
-    foreach ( var_3 in level._id_B758 )
+    foreach ( var_3 in level.players )
     {
-        if ( isdefined( var_0 ) && var_3._id_045B != var_0 )
+        if ( isdefined( var_0 ) && var_3.team != var_0 )
             continue;
 
-        if ( !var_3 _id_099C::_giveweapon() && !var_3 _id_07D9::_id_9CB6() )
+        if ( !var_3 scripts\cp_mp\utility\player_utility::_id_0C14() && !var_3 scripts\mp\playerlogic::_id_9CB6() )
             continue;
 
         if ( isdefined( var_3._id_EC30 ) && var_3._id_EC30 )
@@ -885,9 +885,9 @@ _id_F741()
 {
     var_0 = undefined;
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
-        if ( !var_2 _id_099C::_giveweapon() && !var_2 _id_07D9::_id_9CB6() )
+        if ( !var_2 scripts\cp_mp\utility\player_utility::_id_0C14() && !var_2 scripts\mp\playerlogic::_id_9CB6() )
             continue;
 
         if ( level._id_39F9 )
@@ -912,9 +912,9 @@ _id_6C5C()
 {
     var_0 = [];
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
-        if ( !var_2 _id_099C::_giveweapon() && !var_2 _id_07D9::_id_9CB6() )
+        if ( !var_2 scripts\cp_mp\utility\player_utility::_id_0C14() && !var_2 scripts\mp\playerlogic::_id_9CB6() )
             continue;
 
         if ( level._id_39F9 )
@@ -931,7 +931,7 @@ _id_6C5C()
 
 _id_47A6()
 {
-    if ( !_func_0107( self ) && !_func_03D5( self ) )
+    if ( !isbot( self ) && !_func_03D5( self ) )
     {
         if ( _func_0329() )
             return 1;
@@ -943,7 +943,7 @@ _id_47A6()
             return 0;
     }
 
-    if ( getdvarint( "scr_skipclasschoice", 0 ) > 0 && _id_6A43() != "arena_evo" )
+    if ( getdvarint( "scr_skipclasschoice", 0 ) > 0 && getgametype() != "arena_evo" )
         return 1;
 
     return 0;
@@ -951,8 +951,8 @@ _id_47A6()
 
 _id_15B3()
 {
-    if ( _id_6A43() == "br" || _id_6A43() == "cranked" )
-        return level._id_EF62;
+    if ( getgametype() == "br" || getgametype() == "cranked" )
+        return level.teambased;
 
     var_0 = _id_4C58();
     return var_0;
@@ -960,10 +960,10 @@ _id_15B3()
 
 _id_4C58()
 {
-    if ( _id_6A43() == "gun" || _id_6A43() == "infect" )
+    if ( getgametype() == "gun" || getgametype() == "infect" )
         return 0;
 
-    var_0 = int( stopfxontag( "mp/gametypesTable.csv", 0, _id_6A43(), 4 ) );
+    var_0 = int( _func_021D( "mp/gametypesTable.csv", 0, getgametype(), 4 ) );
     return var_0 > 0;
 }
 
@@ -986,9 +986,9 @@ _id_1575()
     if ( _id_07A8::_id_609F( "infil_will_run" ) && isdefined( level._id_2DCE ) )
         return 0;
 
-    var_1 = int( stopfxontag( "mp/gametypesTable.csv", 0, _id_6A43(), 5 ) );
+    var_1 = int( _func_021D( "mp/gametypesTable.csv", 0, getgametype(), 5 ) );
 
-    if ( !_func_0104( self ) && istrue( level._id_47A5 ) )
+    if ( !isai( self ) && istrue( level._id_47A5 ) )
         return 0;
 
     return var_1;
@@ -996,7 +996,7 @@ _id_1575()
 
 _id_DDAF()
 {
-    if ( _id_6A43() == "dm" )
+    if ( getgametype() == "dm" )
         return istrue( level._id_18F6 );
     else if ( _id_8744() )
         return isdefined( level._id_1A91 ) && !scripts\mp\gametypes\arena::_id_8936();
@@ -1011,7 +1011,7 @@ _id_DCA5()
 
 _id_D54C( var_0, var_1 )
 {
-    var_2 = _id_0A7F::_id_6E6C( var_0 );
+    var_2 = scripts\mp\utility\weapon::getweaponrootname( var_0 );
     var_3 = [];
 
     if ( var_2 != "s4_me_knife_mp" )
@@ -1030,7 +1030,7 @@ _id_D54C( var_0, var_1 )
 
         if ( isdefined( var_3[var_5] ) )
         {
-            if ( !_id_0A7F::_id_8753( var_0, var_3[var_5] ) )
+            if ( !scripts\mp\utility\weapon::_id_8753( var_0, var_3[var_5] ) )
                 var_6 = _func_0225( "mp/attachmenttable.csv", 4, var_3[var_5] );
         }
     }
@@ -1039,89 +1039,89 @@ _id_D54C( var_0, var_1 )
 _id_D4D3( var_0 )
 {
     var_1 = getmatchrulesdata( "commonOption", "teamCount" );
-    _func_01D2( "scr_" + _id_6A43() + "_teamcount", var_1 );
+    _func_01D2( "scr_" + getgametype() + "_teamcount", var_1 );
     var_2 = getmatchrulesdata( "commonOption", "teamSize" );
-    _func_01D2( "scr_" + _id_6A43() + "_teamsize", var_2 );
+    _func_01D2( "scr_" + getgametype() + "_teamsize", var_2 );
     var_3 = getmatchrulesdata( "commonOption", "timeLimit" );
-    _func_01D2( "scr_" + _id_6A43() + "_timeLimit", var_3 );
-    registersharedfunc( _id_6A43(), var_3 );
+    _func_01D2( "scr_" + getgametype() + "_timeLimit", var_3 );
+    _id_C2B3( getgametype(), var_3 );
     var_4 = getmatchrulesdata( "commonOption", "scoreLimit" );
-    _func_01D2( "scr_" + _id_6A43() + "_scoreLimit", var_4 );
-    _id_C29F( _id_6A43(), var_4 );
+    _func_01D2( "scr_" + getgametype() + "_scoreLimit", var_4 );
+    _id_C29F( getgametype(), var_4 );
     var_5 = getmatchrulesdata( "commonOption", "winLimit" );
-    _func_01D2( "scr_" + _id_6A43() + "_winLimit", var_5 );
-    _id_C2C2( _id_6A43(), var_5 );
+    _func_01D2( "scr_" + getgametype() + "_winLimit", var_5 );
+    _id_C2C2( getgametype(), var_5 );
     var_6 = getmatchrulesdata( "commonOption", "roundLimit" );
-    _func_01D2( "scr_" + _id_6A43() + "_roundLimit", var_6 );
-    _id_C29B( _id_6A43(), var_6 );
+    _func_01D2( "scr_" + getgametype() + "_roundLimit", var_6 );
+    _id_C29B( getgametype(), var_6 );
     var_7 = getmatchrulesdata( "commonOption", "roundSwitch" );
-    _func_01D2( "scr_" + _id_6A43() + "_roundSwitch", var_7 );
-    _id_C29C( _id_6A43(), var_7, 0, 9 );
+    _func_01D2( "scr_" + getgametype() + "_roundSwitch", var_7 );
+    _id_C29C( getgametype(), var_7, 0, 9 );
     var_8 = getmatchrulesdata( "commonOption", "winByTwoEnabled" );
-    _func_01D2( "scr_" + _id_6A43() + "_winByTwoEnabled", var_8 );
-    _id_C2C0( _id_6A43(), var_8 );
+    _func_01D2( "scr_" + getgametype() + "_winByTwoEnabled", var_8 );
+    _id_C2C0( getgametype(), var_8 );
     var_9 = getmatchrulesdata( "commonOption", "winByTwoMaxRounds" );
-    _func_01D2( "scr_" + _id_6A43() + "_winByTwoMaxRounds", var_9 );
-    _id_C2C1( _id_6A43(), var_9 );
+    _func_01D2( "scr_" + getgametype() + "_winByTwoMaxRounds", var_9 );
+    _id_C2C1( getgametype(), var_9 );
     var_10 = getmatchrulesdata( "commonOption", "dogTags" );
-    _func_01D2( "scr_" + _id_6A43() + "_dogTags", var_10 );
-    _id_C242( _id_6A43(), var_10 );
+    _func_01D2( "scr_" + getgametype() + "_dogTags", var_10 );
+    _id_C242( getgametype(), var_10 );
     var_11 = getmatchrulesdata( "commonOption", "spawnProtectionTimer" );
-    _func_01D2( "scr_" + _id_6A43() + "_spawnProtectionTimer", var_11 );
+    _func_01D2( "scr_" + getgametype() + "_spawnProtectionTimer", var_11 );
     var_12 = getmatchrulesdata( "commonOption", "numLives" );
-    _func_01D2( "scr_" + _id_6A43() + "_numLives", var_12 );
-    _id_C270( _id_6A43(), var_12 );
+    _func_01D2( "scr_" + getgametype() + "_numLives", var_12 );
+    _id_C270( getgametype(), var_12 );
     var_13 = getmatchrulesdata( "commonOption", "numRevives" );
-    _func_01D2( "scr_" + _id_6A43() + "_numRevives", var_13 );
-    _id_C271( _id_6A43(), var_13 );
+    _func_01D2( "scr_" + getgametype() + "_numRevives", var_13 );
+    _id_C271( getgametype(), var_13 );
     _func_01D2( "scr_player_maxhealth", getmatchrulesdata( "commonOption", "maxHealth" ) );
     _func_01D2( "scr_player_healthregentime", getmatchrulesdata( "commonOption", "healthRegen" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_healthregentime", getmatchrulesdata( "commonOption", "healthRegen" ) );
+    _func_01D2( "scr_" + getgametype() + "_healthregentime", getmatchrulesdata( "commonOption", "healthRegen" ) );
     _func_01D2( "scr_player_disableSuperSprint", getmatchrulesdata( "commonOption", "disableSuperSprint" ) );
     _func_01D2( "scr_player_disableMount", getmatchrulesdata( "commonOption", "disableMount" ) );
     _func_01D2( "scr_player_lastStand", getmatchrulesdata( "commonOption", "lastStand" ) );
     var_14 = getmatchrulesdata( "commonOption", "lastStandHealth" );
-    _func_01D2( "scr_" + _id_6A43() + "_lastStandHealth", var_14 );
+    _func_01D2( "scr_" + getgametype() + "_lastStandHealth", var_14 );
     _id_C25E( var_14 );
     var_15 = getmatchrulesdata( "commonOption", "lastStandReviveHealth" );
-    _func_01D2( "scr_" + _id_6A43() + "_lastStandReviveHealth", var_15 );
+    _func_01D2( "scr_" + getgametype() + "_lastStandReviveHealth", var_15 );
     _id_C261( var_15 );
     var_16 = getmatchrulesdata( "commonOption", "lastStandTimer" );
-    _func_01D2( "scr_" + _id_6A43() + "_lastStandTimer", var_16 );
+    _func_01D2( "scr_" + getgametype() + "_lastStandTimer", var_16 );
     _id_C264( var_16 );
     var_17 = getmatchrulesdata( "commonOption", "lastStandReviveTimer" );
-    _func_01D2( "scr_" + _id_6A43() + "_lastStandReviveTimer", var_17 );
+    _func_01D2( "scr_" + getgametype() + "_lastStandReviveTimer", var_17 );
     _id_C262( var_17 );
     var_18 = getmatchrulesdata( "commonOption", "lastStandSuicideTimer" );
-    _func_01D2( "scr_" + _id_6A43() + "_lastStandSuicideTimer", var_18 );
+    _func_01D2( "scr_" + getgametype() + "_lastStandSuicideTimer", var_18 );
     _id_C263( var_18 );
     _func_01D2( "scr_player_reviveuseweapon", getmatchrulesdata( "commonOption", "reviveUseWeapon" ) );
     level._id_9BD4 = 0;
     _func_01D2( "scr_game_vampirism", getmatchrulesdata( "commonOption", "vampirism" ) );
     _func_01D2( "scr_game_spectatetype", getmatchrulesdata( "commonOption", "spectateModeAllowed" ) );
     _func_01D2( "#x34de038a0efe85dec", getmatchrulesdata( "commonOption", "showKillcam" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_killcamType", getmatchrulesdata( "commonOption", "killcamType" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_allow3rdspectate", getmatchrulesdata( "commonOption", "spectate3rdAllowed" ) );
+    _func_01D2( "scr_" + getgametype() + "_killcamType", getmatchrulesdata( "commonOption", "killcamType" ) );
+    _func_01D2( "scr_" + getgametype() + "_allow3rdspectate", getmatchrulesdata( "commonOption", "spectate3rdAllowed" ) );
     _func_01D2( "scr_game_enableMinimap", getmatchrulesdata( "commonOption", "enableMinimap" ) );
     _func_01D2( "scr_game_forceuav", getmatchrulesdata( "commonOption", "radarAlwaysOn" ) );
     _func_01D2( "scr_game_radarHidePings", getmatchrulesdata( "commonOption", "radarHideShots" ) );
     _func_01D2( "scr_game_navBarHideEnemy", getmatchrulesdata( "commonOption", "compassHideEnemy" ) );
     _func_01D2( "scr_game_navBarHidePings", getmatchrulesdata( "commonOption", "compassHidePings" ) );
     _func_01D2( "scr_game_disablespawncamera", getmatchrulesdata( "commonOption", "disableSpawnCamera" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_playerrespawndelay", getmatchrulesdata( "commonOption", "respawnDelay" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_suicidespawndelay", getmatchrulesdata( "commonOption", "suicideSpawnDelay" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_waverespawndelay", getmatchrulesdata( "commonOption", "waveRespawnDelay" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_waverespawndelay_alt", getmatchrulesdata( "commonOption", "waveRespawnDelayAlt" ) );
+    _func_01D2( "scr_" + getgametype() + "_playerrespawndelay", getmatchrulesdata( "commonOption", "respawnDelay" ) );
+    _func_01D2( "scr_" + getgametype() + "_suicidespawndelay", getmatchrulesdata( "commonOption", "suicideSpawnDelay" ) );
+    _func_01D2( "scr_" + getgametype() + "_waverespawndelay", getmatchrulesdata( "commonOption", "waveRespawnDelay" ) );
+    _func_01D2( "scr_" + getgametype() + "_waverespawndelay_alt", getmatchrulesdata( "commonOption", "waveRespawnDelayAlt" ) );
     _func_01D2( "scr_player_forcerespawn", getmatchrulesdata( "commonOption", "forceRespawn" ) );
     level._id_9BD3 = getmatchrulesdata( "commonOption", "allowCustomClasses" );
     level._id_EB98 = getmatchrulesdata( "commonOption", "allowIntel" );
-    _func_01D2( "scr_" + _id_6A43() + "_allowKillstreaks", getmatchrulesdata( "commonOption", "allowKillstreaks" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_allowPerks", getmatchrulesdata( "commonOption", "allowPerks" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_allowSupers", getmatchrulesdata( "commonOption", "allowSupers" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_ffPunishLimit", getmatchrulesdata( "commonOption", "ffPunishLimit" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_roundRetainStreaks", getmatchrulesdata( "commonOption", "roundRetainStreaks" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_roundRetainStreakProg", getmatchrulesdata( "commonOption", "roundRetainStreakProg" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_deathRetainStreaks", getmatchrulesdata( "commonOption", "deathRetainStreaks" ) );
+    _func_01D2( "scr_" + getgametype() + "_allowKillstreaks", getmatchrulesdata( "commonOption", "allowKillstreaks" ) );
+    _func_01D2( "scr_" + getgametype() + "_allowPerks", getmatchrulesdata( "commonOption", "allowPerks" ) );
+    _func_01D2( "scr_" + getgametype() + "_allowSupers", getmatchrulesdata( "commonOption", "allowSupers" ) );
+    _func_01D2( "scr_" + getgametype() + "_ffPunishLimit", getmatchrulesdata( "commonOption", "ffPunishLimit" ) );
+    _func_01D2( "scr_" + getgametype() + "_roundRetainStreaks", getmatchrulesdata( "commonOption", "roundRetainStreaks" ) );
+    _func_01D2( "scr_" + getgametype() + "_roundRetainStreakProg", getmatchrulesdata( "commonOption", "roundRetainStreakProg" ) );
+    _func_01D2( "scr_" + getgametype() + "_deathRetainStreaks", getmatchrulesdata( "commonOption", "deathRetainStreaks" ) );
     _func_01D2( "scr_game_casualScoreStreaks", getmatchrulesdata( "commonOption", "casualScoreStreaks" ) );
     _func_01D2( "scr_game_superFastChargeRate", getmatchrulesdata( "commonOption", "superFastChargeRate" ) );
     _func_01D2( "scr_game_superPointsMod", getmatchrulesdata( "commonOption", "superPointsMod" ) );
@@ -1132,14 +1132,14 @@ _id_D4D3( var_0 )
     _func_01D2( "scr_game_disableAnnouncer", getmatchrulesdata( "commonOption", "disableAnnouncer" ) );
     _func_01D2( "scr_game_inGameLoot", getmatchrulesdata( "commonOption", "inGameLoot" ) );
     _func_01D2( "scr_game_infilSkip", getmatchrulesdata( "commonOption", "infilSkip" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_practiceRound", getmatchrulesdata( "commonOption", "practiceRound" ) );
+    _func_01D2( "scr_" + getgametype() + "_practiceRound", getmatchrulesdata( "commonOption", "practiceRound" ) );
     _func_01D2( "scr_game_postGameExfil", getmatchrulesdata( "commonOption", "postGameExfil" ) );
     _func_01D2( "scr_game_exfilExtractTimer", getmatchrulesdata( "commonOption", "exfilExtractTimer" ) );
     _func_01D2( "scr_game_exfilActiveTimer", getmatchrulesdata( "commonOption", "exfilActiveTimer" ) );
     _func_01D2( "scr_player_postGameExfilWeapon", getmatchrulesdata( "commonOption", "postGameExfilWeapon" ) );
     level._id_3E39 = getmatchrulesdata( "commonOption", "crankedBombTimer" );
-    _func_01D2( "scr_" + _id_6A43() + "_crankedBombTimer", level._id_3E39 );
-    _id_0798::_id_C23F( _id_6A43(), level._id_3E39 );
+    _func_01D2( "scr_" + getgametype() + "_crankedBombTimer", level._id_3E39 );
+    _id_0798::_id_C23F( getgametype(), level._id_3E39 );
     _func_01D2( "scr_game_magcount", getmatchrulesdata( "commonOption", "magCount" ) );
     _func_01D2( "scr_game_tacticalmode", getmatchrulesdata( "commonOption", "tacticalMode" ) );
     _func_01D2( "scr_game_onlyheadshots", getmatchrulesdata( "commonOption", "headshotsOnly" ) );
@@ -1147,12 +1147,12 @@ _id_D4D3( var_0 )
     if ( !isdefined( var_0 ) )
         _func_01D2( "#x32b87090bf6ed2669", getmatchrulesdata( "commonOption", "friendlyFire" ) );
 
-    _func_01D0( "#x3dd44740c17e447cf", getdvarint( "scr_game_forceuav" ) == 1 );
-    _func_01D2( "scr_" + _id_6A43() + "_enemyDeathLoc", getmatchrulesdata( "commonOption", "enemyDeathLoc" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_pointsPerKill", getmatchrulesdata( "commonOption", "pointsPerKill" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_pointsPerDeath", getmatchrulesdata( "commonOption", "pointsPerDeath" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_pointsHeadshotBonus", getmatchrulesdata( "commonOption", "pointsHeadshotBonus" ) );
-    _func_01D2( "scr_" + _id_6A43() + "_pointsPerKSKill", getmatchrulesdata( "commonOption", "pointsPerKSKill" ) );
+    setdvar( "#x3dd44740c17e447cf", getdvarint( "scr_game_forceuav" ) == 1 );
+    _func_01D2( "scr_" + getgametype() + "_enemyDeathLoc", getmatchrulesdata( "commonOption", "enemyDeathLoc" ) );
+    _func_01D2( "scr_" + getgametype() + "_pointsPerKill", getmatchrulesdata( "commonOption", "pointsPerKill" ) );
+    _func_01D2( "scr_" + getgametype() + "_pointsPerDeath", getmatchrulesdata( "commonOption", "pointsPerDeath" ) );
+    _func_01D2( "scr_" + getgametype() + "_pointsHeadshotBonus", getmatchrulesdata( "commonOption", "pointsHeadshotBonus" ) );
+    _func_01D2( "scr_" + getgametype() + "_pointsPerKSKill", getmatchrulesdata( "commonOption", "pointsPerKSKill" ) );
     _func_01D2( "scr_game_cdltuning", getmatchrulesdata( "commonOption", "cdltuning" ) );
     _func_01D2( "#x3241a9a6ce36287b5", 0 );
     _func_01D2( "scr_devRemoveDomFlag", "" );
@@ -1163,7 +1163,7 @@ _id_D4D3( var_0 )
     if ( _id_BD25() || level._id_EC4B || _id_873A() )
     {
         level._id_39F9 = getmatchrulesdata( "commonOption", "codcasterEnabled" );
-        _func_01D0( "#x3827b80b44a7a53e5", level._id_39F9 );
+        setdvar( "#x3827b80b44a7a53e5", level._id_39F9 );
         _func_01D2( "scr_game_interactivemap_disable", getmatchrulesdata( "commonOption", "interactiveMapDisabled" ) );
         _func_01D2( "scr_game_matchStartTime", getmatchrulesdata( "commonOption", "matchStartTime" ) );
         _func_01D2( "scr_game_roundStartTime", getmatchrulesdata( "commonOption", "roundStartTime" ) );
@@ -1186,10 +1186,10 @@ _id_D4D3( var_0 )
     }
 
     if ( getdvarint( "scr_is_custom_rule_suppressive_enabled", 0 ) )
-        _func_01D0( "#x335822ef1bce26e0f", getmatchrulesdata( "commonOption", "disableSuppressiveFire" ) == 0 );
+        setdvar( "#x335822ef1bce26e0f", getmatchrulesdata( "commonOption", "disableSuppressiveFire" ) == 0 );
 
     if ( getdvarint( "#x33f300b8b8e3754a", 0 ) )
-        _func_01D0( "#x3323c457f447874b4", getmatchrulesdata( "commonOption", "disableCombatFog" ) );
+        setdvar( "#x3323c457f447874b4", getmatchrulesdata( "commonOption", "disableCombatFog" ) );
 }
 
 _id_C2DD()
@@ -1213,7 +1213,7 @@ _id_C2DE( var_0 )
         level waittill( "host_migration_begin" );
 
         if ( isdefined( self._id_90AD ) )
-            self _meth_8456( self._id_90AD, 0 );
+            self visionsetthermalforplayer( self._id_90AD, 0 );
     }
 }
 
@@ -1234,9 +1234,9 @@ _id_6B14( var_0, var_1 )
     var_2["loadoutSecondaryCamo"] = _id_6B13( "defaultClasses", var_0, var_1, "class", "weaponSetups", 1, "camo" );
     var_2["loadoutSecondaryReticle"] = _id_6B13( "defaultClasses", var_0, var_1, "class", "weaponSetups", 1, "reticle" );
     var_2["loadoutPerks"] = var_3;
-    var_2["loadoutKillstreak1"] = scripts\cp_mp\hostmigration::_id_C103( var_0, var_1, 0 );
-    var_2["loadoutKillstreak2"] = scripts\cp_mp\hostmigration::_id_C103( var_0, var_1, 1 );
-    var_2["loadoutKillstreak3"] = scripts\cp_mp\hostmigration::_id_C103( var_0, var_1, 2 );
+    var_2["loadoutKillstreak1"] = scripts\mp\class::_id_C103( var_0, var_1, 0 );
+    var_2["loadoutKillstreak2"] = scripts\mp\class::_id_C103( var_0, var_1, 1 );
+    var_2["loadoutKillstreak3"] = scripts\mp\class::_id_C103( var_0, var_1, 2 );
     return var_2;
 }
 
@@ -1316,16 +1316,16 @@ _id_D5EE( var_0, var_1, var_2, var_3 )
         if ( _func_02B2( var_3 ) )
             var_0 = var_0 + ( var_3 + 1 ) * 1000000;
         else
-            _id_077B::_id_5578( "mlg announcement extra data supports numbers only. Invalid extra data: " + var_3 );
+            scripts\engine\utility::_id_5578( "mlg announcement extra data supports numbers only. Invalid extra data: " + var_3 );
     }
 
     if ( isdefined( var_0 ) )
-        _func_01E4( "ui_mlg_announcement", var_0 );
+        setomnvar( "ui_mlg_announcement", var_0 );
 }
 
 _id_891B()
 {
-    if ( _id_6A43() == "dom" || _id_6A43() == "ctf" || _id_6A43() == "rush" || _id_6A43() == "blitz" )
+    if ( getgametype() == "dom" || getgametype() == "ctf" || getgametype() == "rush" || getgametype() == "blitz" )
         return 1;
 
     return 0;
@@ -1391,14 +1391,14 @@ _id_6C54()
     return var_0;
 }
 
-_id_6A43()
+getgametype()
 {
-    return level._id_60D1;
+    return level.gametype;
 }
 
 _id_60DB()
 {
-    var_0 = _id_6A43();
+    var_0 = getgametype();
 
     if ( var_0 == "arena_evo" || var_0 == "base" )
         return 1;
@@ -1408,7 +1408,7 @@ _id_60DB()
 
 _id_6D80()
 {
-    var_0 = _id_6A43();
+    var_0 = getgametype();
 
     if ( var_0 == "br" )
     {
@@ -1423,7 +1423,7 @@ _id_6D80()
 
 _id_8A55()
 {
-    var_0 = _id_6A43();
+    var_0 = getgametype();
     var_1 = _id_6D80();
     return var_0 != var_1;
 }
@@ -1433,7 +1433,7 @@ _id_98BC()
     if ( getdvarint( "scr_forceLeanThreadMode" ) == 1 )
         return 1;
 
-    if ( _id_6A43() == "arm" || _id_6A43() == "br" || level._id_9133 == 1 )
+    if ( getgametype() == "arm" || getgametype() == "br" || level._id_9133 == 1 )
         return 1;
 
     return 0;
@@ -1444,7 +1444,7 @@ _id_CA3E()
     if ( getdvarint( "scr_forceLeanThreadMode" ) == 1 )
         return 1;
 
-    if ( _id_6A43() == "br" || level._id_9133 == 1 )
+    if ( getgametype() == "br" || level._id_9133 == 1 )
         return 1;
 
     return 0;
@@ -1476,7 +1476,7 @@ _id_60A4()
 
 _id_EF73( var_0 )
 {
-    return _id_60A4() && _id_0A7C::_id_885E( var_0 ) && isdefined( game["infil"][var_0]["lanes"] );
+    return _id_60A4() && scripts\mp\utility\teams::_id_885E( var_0 ) && isdefined( game["infil"][var_0]["lanes"] );
 }
 
 _id_88D4()
@@ -1489,10 +1489,10 @@ _id_8722()
     if ( getdvarint( "scr_set_air_denied", 0 ) == 1 )
         return 1;
 
-    if ( self._id_045B == "spectator" )
+    if ( self.team == "spectator" )
         return 0;
 
-    if ( isdefined( level._id_1346 ) && istrue( level._id_1346[self._id_045B] ) )
+    if ( isdefined( level._id_1346 ) && istrue( level._id_1346[self.team] ) )
         return 1;
 
     return 0;
@@ -1504,7 +1504,7 @@ _id_6B22()
 
     if ( !isdefined( var_0 ) )
     {
-        var_0 = _func_0147( 0, getdvarfloat( "scr_outOfBoundsTime", 3 ) );
+        var_0 = max( 0, getdvarfloat( "scr_outOfBoundsTime", 3 ) );
         level._id_ACF7 = var_0;
     }
 
@@ -1517,7 +1517,7 @@ _id_6B1F()
 
     if ( !isdefined( var_0 ) )
     {
-        var_0 = _func_0147( 0, getdvarfloat( "scr_outOfBoundsCooldown", 3 ) );
+        var_0 = max( 0, getdvarfloat( "scr_outOfBoundsCooldown", 3 ) );
         level._id_ACF6 = var_0;
     }
 
@@ -1530,7 +1530,7 @@ _id_6B20()
 
     if ( !isdefined( var_0 ) )
     {
-        var_0 = _func_0147( 0, getdvarfloat( "scr_outOfBoundsTimeMinefield", 3 ) );
+        var_0 = max( 0, getdvarfloat( "scr_outOfBoundsTimeMinefield", 3 ) );
         level._id_ACF9 = var_0;
     }
 
@@ -1551,21 +1551,21 @@ _id_6B1E()
 
 _id_FCD0()
 {
-    if ( self._id_0309["team"] == "spectator" )
+    if ( self.pers["team"] == "spectator" )
         self _meth_82F4( "#x34e863b20c48c0055", "" );
     else
     {
         if ( level._id_C93B > 0 && !_id_893D() )
         {
-            if ( isdefined( _id_6BA0( self._id_0309["team"] ) ) )
+            if ( isdefined( _id_6BA0( self.pers["team"] ) ) )
             {
                 if ( level._id_E427 )
                 {
-                    self _meth_82F4( "#x34e863b20c48c0055", _id_6BA0( self._id_0309["team"] ) );
+                    self _meth_82F4( "#x34e863b20c48c0055", _id_6BA0( self.pers["team"] ) );
                     return;
                 }
 
-                self _meth_82F4( "#x34e863b20c48c0055", _id_6BA0( self._id_0309["team"] ), level._id_C93B );
+                self _meth_82F4( "#x34e863b20c48c0055", _id_6BA0( self.pers["team"] ), level._id_C93B );
                 return;
                 return;
             }
@@ -1573,8 +1573,8 @@ _id_FCD0()
             return;
         }
 
-        if ( isdefined( _id_6BA3( self._id_0309["team"] ) ) )
-            self _meth_82F4( "#x34e863b20c48c0055", _id_6BA3( self._id_0309["team"] ) );
+        if ( isdefined( _id_6BA3( self.pers["team"] ) ) )
+            self _meth_82F4( "#x34e863b20c48c0055", _id_6BA3( self.pers["team"] ) );
     }
 }
 
@@ -1613,7 +1613,7 @@ _id_F0D5( var_0, var_1 )
     if ( !isdefined( var_0 ) || var_0 == "" || !isdefined( var_1 ) || var_1 == "" )
         return 0;
 
-    return _func_0121( var_0, var_1 );
+    return issubstr( var_0, var_1 );
 }
 
 _id_88E8()
@@ -1632,35 +1632,35 @@ _id_352C()
     {
         if ( !isdefined( self._id_89D2 ) )
         {
-            if ( _id_077B::_id_3A02() )
+            if ( scripts\engine\utility::cointoss() )
             {
-                self _meth_82F6( "ui_realism_hud", 1 );
+                self setclientomnvar( "ui_realism_hud", 1 );
                 self._id_89D2 = 1;
             }
             else
             {
-                self _meth_82F6( "ui_realism_hud", 0 );
+                self setclientomnvar( "ui_realism_hud", 0 );
                 self._id_89D2 = 0;
             }
         }
     }
-    else if ( _id_0999::_id_89D2() )
-        self _meth_82F6( "ui_realism_hud", 1 );
+    else if ( scripts\cp_mp\utility\game_utility::_id_89D2() )
+        self setclientomnvar( "ui_realism_hud", 1 );
     else
-        self _meth_82F6( "ui_realism_hud", 0 );
+        self setclientomnvar( "ui_realism_hud", 0 );
 }
 
 _id_87DC( var_0 )
 {
     var_1 = 0;
 
-    switch ( _id_6A43() )
+    switch ( getgametype() )
     {
         case "cyber":
-            if ( isdefined( level._id_427B._id_32AF ) && self._id_045B == level._id_427B._id_AD9B && self != level._id_427B._id_32AF )
+            if ( isdefined( level._id_427B._id_32AF ) && self.team == level._id_427B._id_AD9B && self != level._id_427B._id_32AF )
             {
-                var_2 = distancesquared( level._id_427B._id_32AF._id_02EA, self._id_02EA );
-                var_3 = distancesquared( level._id_427B._id_32AF._id_02EA, var_0._id_02EA );
+                var_2 = distancesquared( level._id_427B._id_32AF.origin, self.origin );
+                var_3 = distancesquared( level._id_427B._id_32AF.origin, var_0.origin );
 
                 if ( var_2 < 90000 || var_3 < 90000 )
                 {
@@ -1676,10 +1676,10 @@ _id_87DC( var_0 )
 
                 var_6 = var_5._id_AD9B;
 
-                if ( var_6 == self._id_045B )
+                if ( var_6 == self.team )
                 {
-                    var_2 = distancesquared( var_5._id_047A._id_02EA, self._id_02EA );
-                    var_3 = distancesquared( var_5._id_047A._id_02EA, var_0._id_02EA );
+                    var_2 = distancesquared( var_5._id_047A.origin, self.origin );
+                    var_3 = distancesquared( var_5._id_047A.origin, var_0.origin );
 
                     if ( var_2 < 90000 || var_3 < 90000 )
                     {
@@ -1693,12 +1693,12 @@ _id_87DC( var_0 )
         case "dd":
         case "sr":
         case "sd":
-            if ( self._id_045B != game["defenders"] )
+            if ( self.team != game["defenders"] )
                 break;
 
             foreach ( var_9 in level._id_A8D5 )
             {
-                var_10 = distancesquared( var_9._id_047A._id_02EA, var_0._id_02EA );
+                var_10 = distancesquared( var_9._id_047A.origin, var_0.origin );
 
                 if ( var_10 < 90000 )
                 {
@@ -1716,11 +1716,11 @@ _id_87DC( var_0 )
         case "arm":
             foreach ( var_9 in level._id_A8D5 )
             {
-                if ( self._id_045B != var_9._id_AD9B )
+                if ( self.team != var_9._id_AD9B )
                     continue;
 
-                var_13 = distancesquared( var_9._id_411F, self._id_02EA );
-                var_14 = distancesquared( var_9._id_411F, var_0._id_02EA );
+                var_13 = distancesquared( var_9._id_411F, self.origin );
+                var_14 = distancesquared( var_9._id_411F, var_0.origin );
 
                 if ( var_13 < 90000 || var_14 < 90000 )
                 {
@@ -1735,7 +1735,7 @@ _id_87DC( var_0 )
         case "hq":
         case "patrol":
             if ( isdefined( level._id_110CD ) )
-                var_1 = _func_0119( self._id_02EA, level._id_110CD._id_047A ) || _func_0119( var_0._id_02EA, level._id_110CD._id_047A );
+                var_1 = _func_0119( self.origin, level._id_110CD._id_047A ) || _func_0119( var_0.origin, level._id_110CD._id_047A );
 
             break;
     }
@@ -1747,7 +1747,7 @@ _id_874E( var_0 )
 {
     var_1 = 0;
 
-    switch ( _id_6A43() )
+    switch ( getgametype() )
     {
         case "cyber":
             if ( istrue( var_0._id_8769 ) )
@@ -1756,10 +1756,10 @@ _id_874E( var_0 )
                 break;
             }
 
-            if ( isdefined( level._id_427B._id_32AF ) && self._id_045B == level._id_427B._id_AD9B && self != level._id_427B._id_32AF )
+            if ( isdefined( level._id_427B._id_32AF ) && self.team == level._id_427B._id_AD9B && self != level._id_427B._id_32AF )
             {
-                var_2 = distancesquared( level._id_427B._id_32AF._id_02EA, self._id_02EA );
-                var_3 = distancesquared( level._id_427B._id_32AF._id_02EA, var_0._id_02EA );
+                var_2 = distancesquared( level._id_427B._id_32AF.origin, self.origin );
+                var_3 = distancesquared( level._id_427B._id_32AF.origin, var_0.origin );
 
                 if ( var_2 < 90000 || var_3 < 90000 )
                 {
@@ -1775,10 +1775,10 @@ _id_874E( var_0 )
 
                 var_6 = var_5._id_AD9B;
 
-                if ( var_6 != self._id_045B )
+                if ( var_6 != self.team )
                 {
-                    var_7 = distancesquared( var_5._id_047A._id_02EA, self._id_02EA );
-                    var_8 = distancesquared( var_5._id_047A._id_02EA, var_0._id_02EA );
+                    var_7 = distancesquared( var_5._id_047A.origin, self.origin );
+                    var_8 = distancesquared( var_5._id_047A.origin, var_0.origin );
 
                     if ( var_7 < 90000 || var_8 < 90000 )
                     {
@@ -1792,12 +1792,12 @@ _id_874E( var_0 )
         case "dd":
         case "sr":
         case "sd":
-            if ( self._id_045B == game["defenders"] )
+            if ( self.team == game["defenders"] )
                 break;
 
             foreach ( var_11 in level._id_A8D5 )
             {
-                var_12 = distancesquared( var_11._id_047A._id_02EA, var_0._id_02EA );
+                var_12 = distancesquared( var_11._id_047A.origin, var_0.origin );
 
                 if ( var_12 < 90000 )
                 {
@@ -1815,11 +1815,11 @@ _id_874E( var_0 )
         case "arm":
             foreach ( var_11 in level._id_A8D5 )
             {
-                if ( self._id_045B == var_11._id_AD9B )
+                if ( self.team == var_11._id_AD9B )
                     continue;
 
-                var_7 = distancesquared( var_11._id_411F, self._id_02EA );
-                var_8 = distancesquared( var_11._id_411F, var_0._id_02EA );
+                var_7 = distancesquared( var_11._id_411F, self.origin );
+                var_8 = distancesquared( var_11._id_411F, var_0.origin );
 
                 if ( var_7 < 90000 || var_8 < 90000 )
                 {
@@ -1834,7 +1834,7 @@ _id_874E( var_0 )
         case "hq":
         case "patrol":
             if ( isdefined( level._id_110CD ) )
-                var_1 = _func_0119( self._id_02EA, level._id_110CD._id_047A ) || _func_0119( var_0._id_02EA, level._id_110CD._id_047A );
+                var_1 = _func_0119( self.origin, level._id_110CD._id_047A ) || _func_0119( var_0.origin, level._id_110CD._id_047A );
 
             break;
     }
@@ -1844,7 +1844,7 @@ _id_874E( var_0 )
 
 _id_60D8()
 {
-    switch ( _id_6A43() )
+    switch ( getgametype() )
     {
         case "war":
         case "trial":
@@ -1860,7 +1860,7 @@ _id_60D8()
 
 _id_9AB3()
 {
-    switch ( level._id_9AA7 )
+    switch ( level.mapname )
     {
         case "mp_quarry2":
         case "mp_donetsk":
@@ -1880,7 +1880,7 @@ _id_9AB3()
 
 _id_8744()
 {
-    switch ( _id_6A43() )
+    switch ( getgametype() )
     {
         case "arena":
             return 1;
@@ -1891,7 +1891,7 @@ _id_8744()
 
 _id_8743()
 {
-    switch ( _id_6A43() )
+    switch ( getgametype() )
     {
         case "arena_evo":
             return 1;
@@ -1902,13 +1902,13 @@ _id_8743()
 
 _id_60DA()
 {
-    if ( !level._id_EF62 )
+    if ( !level.teambased )
         return 0;
 
     if ( _id_8743() )
         return 1;
 
-    switch ( _id_6A43() )
+    switch ( getgametype() )
     {
         case "base":
             return 0;

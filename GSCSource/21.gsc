@@ -25,7 +25,7 @@ _id_00E6( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
         self [[ var_13 ]]( var_0, var_1, var_2, var_3, var_4, var_12, var_6, var_7, var_8, var_9, var_10, var_11, var_5 );
 }
 
-classname( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
+_id_00E8( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 {
     if ( isdefined( level._id_2F28 ) )
         [[ level._id_2F28 ]]( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 );
@@ -46,7 +46,7 @@ _id_00E7( var_0, var_1 )
 
 }
 
-_id_021D()
+init()
 {
     _id_8110();
     scripts\anim\notetracks_mp::_id_C26E();
@@ -65,7 +65,7 @@ _id_3B60( var_0, var_1, var_2 )
         if ( isdefined( var_1 ) )
             var_3 [[ level._id_D45B ]]( var_1 );
         else
-            var_3 [[ level._id_D45B ]]( var_3._id_045B );
+            var_3 [[ level._id_D45B ]]( var_3.team );
 
         if ( isdefined( var_2 ) )
             var_3._id_37DC = var_2;
@@ -106,6 +106,6 @@ _id_0F67()
 _id_D125( var_0 )
 {
     self._id_002C = var_0;
-    self._id_01FF = var_0;
-    self._id_027F = var_0;
+    self.health = var_0;
+    self.maxhealth = var_0;
 }

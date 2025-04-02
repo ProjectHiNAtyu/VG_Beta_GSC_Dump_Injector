@@ -18,7 +18,7 @@ _id_6A1C()
 
 _id_68D9( var_0 )
 {
-    if ( _id_0A69::_id_6A43() == "br" )
+    if ( scripts\mp\utility\game::getgametype() == "br" )
     {
         var_1 = 1;
 
@@ -39,7 +39,7 @@ _id_FE27( var_0, var_1 )
     self endon( "death_or_disconnect" );
     level endon( "game_ended" );
 
-    if ( self._id_01FF == self._id_027F )
+    if ( self.health == self.maxhealth )
     {
         self iprintlnbold( "Your health is full!" );
         return;
@@ -47,11 +47,11 @@ _id_FE27( var_0, var_1 )
 
     var_2 = "bandage_mp";
 
-    if ( _id_0A69::_id_6A43() == "br" )
+    if ( scripts\mp\utility\game::getgametype() == "br" )
         var_2 = "bandage_br_fake";
 
-    self disableweapons();
-    self _meth_800D( 0 );
+    self disableweaponswitch();
+    self allowfire( 0 );
     self _meth_8529( var_2 );
     wait 0.25;
     self._id_2196 = 1;
@@ -60,12 +60,12 @@ _id_FE27( var_0, var_1 )
     wait 0.25;
 
     if ( self hasweapon( var_2 ) )
-        _id_099A::_id_6CD8( var_2 );
+        scripts\cp_mp\utility\inventory_utility::_id_6CD8( var_2 );
 
-    self _meth_800D( 1 );
+    self allowfire( 1 );
     self enableweaponswitch();
     var_1--;
-    scripts\engine\trace::_id_D538( "health", var_1 );
+    scripts\mp\equipment::_id_D538( "health", var_1 );
     self._id_2196 = 0;
     self._id_762C = 1;
 }
@@ -76,7 +76,7 @@ _id_2197( var_0 )
     self endon( "death_or_disconnect" );
     level endon( "game_ended" );
     thread scripts\mp\gametypes\br_public::_id_10B78();
-    thread _id_07B4::_id_7612( var_0 );
+    thread scripts\mp\healthoverlay::_id_7612( var_0 );
     wait( _id_68D9( var_0 ) );
 }
 
@@ -94,23 +94,23 @@ _id_FEAB( var_0, var_1 )
         return;
     }
 
-    if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_br_healer" ) )
-        self._id_01FF = clamp( self._id_01FF + 20, 0, self._id_027F );
+    if ( scripts\mp\utility\perk::_hasperk( "specialty_br_healer" ) )
+        self.health = clamp( self.health + 20, 0, self.maxhealth );
 
     if ( var_0 == "equip_armorplate" )
         _id_09D7::_id_FE23( var_0, var_1 );
     else if ( var_0 != "equip_adrenalinebr" )
         _id_FE27( var_0, var_1 );
-    else if ( self._id_01FF < self._id_027F )
+    else if ( self.health < self.maxhealth )
     {
         var_1--;
-        scripts\engine\trace::_id_D538( "health", var_1 );
+        scripts\mp\equipment::_id_D538( "health", var_1 );
 
-        if ( _id_0A69::_id_6A43() == "br" )
+        if ( scripts\mp\utility\game::getgametype() == "br" )
         {
             self _meth_8529( "adrenaline_br_fake" );
             _id_09D3::_id_FE1F();
-            thread _id_07B4::_id_7612( var_0 );
+            thread scripts\mp\healthoverlay::_id_7612( var_0 );
         }
         else
         {
@@ -119,7 +119,7 @@ _id_FEAB( var_0, var_1 )
         }
     }
 
-    if ( scripts\engine\trace::_id_69F6( "health" ) == 0 )
+    if ( scripts\mp\equipment::_id_69F6( "health" ) == 0 )
     {
         var_2 = -1;
         var_3 = 0;
@@ -130,7 +130,7 @@ _id_FEAB( var_0, var_1 )
             {
                 if ( var_5._id_CF15 == level._id_2A6F._id_2A1D[var_0] )
                 {
-                    scripts\engine\trace::_id_D538( "health", var_5._id_010E );
+                    scripts\mp\equipment::_id_D538( "health", var_5._id_010E );
                     scripts\mp\gametypes\br_public::_id_C4C9( var_6 );
                     var_3 = 1;
                     break;
@@ -142,11 +142,11 @@ _id_FEAB( var_0, var_1 )
 
         if ( !var_3 && var_2 >= 0 )
         {
-            scripts\engine\trace::_id_6F76( level._id_2A6F._id_2A1C[self._id_2A3C[var_2]._id_CF15], "health" );
-            scripts\engine\trace::_id_D538( "health", self._id_2A3C[var_2]._id_010E );
+            scripts\mp\equipment::_id_6F76( level._id_2A6F._id_2A1C[self._id_2A3C[var_2]._id_CF15], "health" );
+            scripts\mp\equipment::_id_D538( "health", self._id_2A3C[var_2]._id_010E );
             self._id_2A3C[var_2] = undefined;
         }
         else
-            scripts\engine\trace::_id_EDBA( "health" );
+            scripts\mp\equipment::_id_EDBA( "health" );
     }
 }

@@ -3,20 +3,20 @@
 
 _id_27A4( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _func_00B4( self._id_02EA, var_1, var_0 );
+    var_4 = _func_00B4( self.origin, var_1, var_0 );
     var_5 = [];
     var_6 = self _meth_815E();
     var_7 = anglestoforward( self getplayerangles() );
-    var_8 = _func_025A( var_7 * ( 1, 1, 0 ) );
+    var_8 = vectornormalize( var_7 * ( 1, 1, 0 ) );
 
     foreach ( var_10 in var_4 )
     {
-        var_11 = _func_025A( ( var_10._id_02EA - self._id_02EA ) * ( 1, 1, 0 ) );
-        var_12 = _func_0257( var_11, var_8 );
+        var_11 = vectornormalize( ( var_10.origin - self.origin ) * ( 1, 1, 0 ) );
+        var_12 = vectordot( var_11, var_8 );
 
         if ( var_12 > var_2 )
         {
-            if ( !var_3 || isdefined( var_6 ) && newteamhudelem( var_10, var_6, 1 ) )
+            if ( !var_3 || isdefined( var_6 ) && _func_0156( var_10, var_6, 1 ) )
                 var_5[var_5.size] = var_10;
         }
     }
@@ -55,10 +55,10 @@ _id_289E( var_0, var_1 )
     var_3 = self _meth_802E();
     self _meth_8051( var_0 );
 
-    if ( _func_0117( self ) && var_3 != var_0 )
+    if ( isplayer( self ) && var_3 != var_0 )
     {
-        self._id_0309["rankxp"] = _id_66CD();
-        _id_07E1::_id_B7F7();
+        self.pers["rankxp"] = _id_66CD();
+        scripts\mp\rank::_id_B7F7();
     }
 }
 
@@ -93,30 +93,30 @@ _id_270C()
     if ( !isdefined( level._id_283D["all"] ) )
         level._id_283D["all"] = 0;
 
-    if ( !isdefined( self._id_0309["bot_chosen_difficulty"] ) )
+    if ( !isdefined( self.pers["bot_chosen_difficulty"] ) )
     {
         var_0 = undefined;
 
-        if ( level._id_EF62 && level._id_60D1 != "arena_evo" )
+        if ( level.teambased && level.gametype != "arena_evo" )
         {
-            var_1 = self._id_045B;
+            var_1 = self.team;
 
             if ( !isdefined( var_1 ) )
                 var_1 = self._id_28D1;
 
             if ( !isdefined( var_1 ) )
-                var_1 = self._id_0309["team"];
+                var_1 = self.pers["team"];
         }
         else
             var_1 = "all";
 
         var_0 = level._id_283D[var_1];
         var_2 = level._id_274D[var_0];
-        self._id_0309["bot_chosen_difficulty"] = _id_642C( var_2 );
+        self.pers["bot_chosen_difficulty"] = _id_642C( var_2 );
         level._id_283D[var_1] = ( level._id_283D[var_1] + 1 ) % level._id_274D.size;
     }
 
-    return self._id_0309["bot_chosen_difficulty"];
+    return self.pers["bot_chosen_difficulty"];
 }
 
 _id_642C( var_0 )
@@ -126,7 +126,7 @@ _id_642C( var_0 )
     else if ( var_0 == "normal" )
         return "regular";
     else if ( var_0 == "hard" )
-        return _id_077B::_id_BFC7( [ "hardened", "veteran" ] );
+        return scripts\engine\utility::random( [ "hardened", "veteran" ] );
     else
     {
 
@@ -269,8 +269,8 @@ _id_630D( var_0 )
 
         for ( var_4 = 0; var_4 < var_3.size; var_4++ )
         {
-            if ( !_id_077B::_id_1B78( var_1, var_3[var_4] ) )
-                var_1 = _id_077B::_id_1B63( var_1, var_3[var_4] );
+            if ( !scripts\engine\utility::array_contains( var_1, var_3[var_4] ) )
+                var_1 = scripts\engine\utility::array_add( var_1, var_3[var_4] );
         }
     }
 
@@ -283,8 +283,8 @@ _id_6800( var_0, var_1 )
 
     foreach ( var_4 in var_0 )
     {
-        if ( newteamhudelem( var_4, var_1, 1 ) )
-            var_2 = _id_077B::_id_1B63( var_2, var_4 );
+        if ( _func_0156( var_4, var_1, 1 ) )
+            var_2 = scripts\engine\utility::array_add( var_2, var_4 );
     }
 
     return var_2;
@@ -294,7 +294,7 @@ _id_C3A1( var_0 )
 {
     var_0[var_0.size - 1] = undefined;
     var_0[0] = undefined;
-    return _id_077B::_id_1BA9( var_0 );
+    return scripts\engine\utility::_id_1BA9( var_0 );
 }
 
 _id_28F5( var_0 )
@@ -373,9 +373,9 @@ _id_28F6( var_0, var_1, var_2, var_3 )
         var_4[var_4.size] = var_3;
 
     if ( isdefined( var_0 ) )
-        var_5 = _id_077B::_id_1088E( var_4, var_0 );
+        var_5 = scripts\engine\utility::_id_1088E( var_4, var_0 );
     else
-        var_5 = _id_077B::_id_10890( var_4 );
+        var_5 = scripts\engine\utility::_id_10890( var_4 );
 
     return var_5;
 }
@@ -384,7 +384,7 @@ _id_28E8( var_0, var_1, var_2 )
 {
     level endon( "game_ended" );
     childthread _id_FDC4();
-    var_3 = _id_077B::_id_108A8( var_0, var_1, var_2, "use_button_no_longer_pressed", "finished_use" );
+    var_3 = scripts\engine\utility::_id_108A8( var_0, var_1, var_2, "use_button_no_longer_pressed", "finished_use" );
     self notify( "stop_usebutton_watcher" );
     return var_3;
 }
@@ -394,7 +394,7 @@ _id_FDC4( var_0, var_1 )
     self endon( "stop_usebutton_watcher" );
     wait 0.05;
 
-    while ( self useanimtree() )
+    while ( self usebuttonpressed() )
         wait 0.05;
 
     self notify( "use_button_no_longer_pressed" );
@@ -404,7 +404,7 @@ _id_291C( var_0 )
 {
     foreach ( var_2 in level._id_AE69 )
     {
-        if ( _func_0104( var_2 ) )
+        if ( isai( var_2 ) )
         {
             if ( isdefined( var_0 ) && var_0 )
             {
@@ -424,7 +424,7 @@ _id_2797( var_0, var_1, var_2 )
     if ( !isdefined( level._id_54FE ) )
         return undefined;
 
-    if ( isalive( var_1 ) )
+    if ( _func_0106( var_1 ) )
     {
         if ( isdefined( var_2 ) && var_2 )
         {
@@ -433,9 +433,9 @@ _id_2797( var_0, var_1, var_2 )
 
             foreach ( var_6 in var_1 )
             {
-                var_7 = _id_077B::_id_1B83( level._id_54FA, var_6 );
+                var_7 = scripts\engine\utility::_id_1B83( level._id_54FA, var_6 );
                 var_8 = level._id_54FC[var_7];
-                var_9 = distancesquared( self._id_02EA, var_8 );
+                var_9 = distancesquared( self.origin, var_8 );
 
                 if ( var_9 < var_4 )
                 {
@@ -447,7 +447,7 @@ _id_2797( var_0, var_1, var_2 )
             var_1 = var_3;
         }
         else
-            var_1 = _id_077B::_id_BFC7( var_1 );
+            var_1 = scripts\engine\utility::random( var_1 );
     }
 
     var_11 = level._id_54FD[var_1];
@@ -461,7 +461,7 @@ _id_2797( var_0, var_1, var_2 )
         foreach ( var_14 in var_11 )
         {
             if ( var_14._id_407F[var_1] )
-                var_12 = _id_077B::_id_1B63( var_12, var_14 );
+                var_12 = scripts\engine\utility::array_add( var_12, var_14 );
         }
 
         return var_12;
@@ -473,7 +473,7 @@ _id_2797( var_0, var_1, var_2 )
         foreach ( var_14 in var_11 )
         {
             if ( var_14._id_BD9E[var_1] )
-                var_12 = _id_077B::_id_1B63( var_12, var_14 );
+                var_12 = scripts\engine\utility::array_add( var_12, var_14 );
         }
 
         return var_12;
@@ -491,13 +491,13 @@ _id_276D( var_0, var_1, var_2 )
     {
         var_5 = _func_00B4( var_0, var_1 * 1.75, var_1 * 0.5, 500 );
         var_6 = [];
-        var_7 = _func_025A( var_4 );
+        var_7 = vectornormalize( var_4 );
 
         for ( var_8 = 0; var_8 < var_5.size; var_8++ )
         {
-            var_9 = _func_025A( var_5[var_8]._id_02EA - self._id_273E._id_02EA );
+            var_9 = vectornormalize( var_5[var_8].origin - self._id_273E.origin );
 
-            if ( _func_0257( var_9, var_7 ) > 0.1 )
+            if ( vectordot( var_9, var_7 ) > 0.1 )
                 var_6[var_6.size] = var_5[var_8];
         }
     }
@@ -506,15 +506,15 @@ _id_276D( var_0, var_1, var_2 )
 
     if ( isdefined( var_2 ) && var_2 )
     {
-        var_10 = _func_025A( self._id_273E._id_02EA - self._id_02EA );
+        var_10 = vectornormalize( self._id_273E.origin - self.origin );
         var_11 = var_6;
         var_6 = [];
 
         foreach ( var_13 in var_11 )
         {
-            var_9 = _func_025A( var_13._id_02EA - self._id_273E._id_02EA );
+            var_9 = vectornormalize( var_13.origin - self._id_273E.origin );
 
-            if ( _func_0257( var_10, var_9 ) > 0.2 )
+            if ( vectordot( var_10, var_9 ) > 0.2 )
                 var_6[var_6.size] = var_13;
         }
     }
@@ -525,8 +525,8 @@ _id_276D( var_0, var_1, var_2 )
 
     for ( var_8 = 0; var_8 < var_6.size; var_8++ )
     {
-        var_18 = distancesquared( var_6[var_8]._id_02EA, var_0 ) > 10000;
-        var_19 = abs( var_6[var_8]._id_02EA[2] - self._id_273E._id_02EA[2] ) < 50;
+        var_18 = distancesquared( var_6[var_8].origin, var_0 ) > 10000;
+        var_19 = abs( var_6[var_8].origin[2] - self._id_273E.origin[2] ) < 50;
 
         if ( var_18 )
             var_15[var_15.size] = var_6[var_8];
@@ -619,8 +619,8 @@ _id_2865( var_0, var_1, var_2, var_3, var_4 )
         if ( !isdefined( var_4 ) )
             var_4 = 1;
 
-        var_7 = _func_01B7( self._id_2747 * var_3, self._id_2747 * var_4 );
-        var_8 = anglestoforward( ( 0, _func_01B8( 360 ), 0 ) );
+        var_7 = randomfloatrange( self._id_2747 * var_3, self._id_2747 * var_4 );
+        var_8 = anglestoforward( ( 0, randomint( 360 ), 0 ) );
         var_5 = var_0 + var_8 * var_7;
     }
 
@@ -636,9 +636,9 @@ _id_2864( var_0, var_1, var_2 )
 
     if ( !isdefined( var_3 ) )
     {
-        var_4 = _id_077B::_id_BFC7( var_1 );
-        var_5 = var_4._id_02EA - var_0;
-        var_3 = var_0 + _func_025A( var_5 ) * _func_0130( var_5 ) * _func_01B6( 1.0 );
+        var_4 = scripts\engine\utility::random( var_1 );
+        var_5 = var_4.origin - var_0;
+        var_3 = var_0 + vectornormalize( var_5 ) * length( var_5 ) * randomfloat( 1.0 );
     }
 
     return var_3;
@@ -647,7 +647,7 @@ _id_2864( var_0, var_1, var_2 )
 _id_276F( var_0, var_1 )
 {
     var_2 = undefined;
-    var_3 = _id_077B::_id_1B94( var_0 );
+    var_3 = scripts\engine\utility::_id_1B94( var_0 );
 
     for ( var_4 = 0; var_4 < var_3.size; var_4++ )
     {
@@ -656,9 +656,9 @@ _id_276F( var_0, var_1 )
             var_6 = var_3[var_4];
             var_7 = var_3[var_5];
 
-            if ( newteamhudelem( var_6, var_7, 1 ) )
+            if ( _func_0156( var_6, var_7, 1 ) )
             {
-                var_2 = ( ( var_6._id_02EA[0] + var_7._id_02EA[0] ) * 0.5, ( var_6._id_02EA[1] + var_7._id_02EA[1] ) * 0.5, ( var_6._id_02EA[2] + var_7._id_02EA[2] ) * 0.5 );
+                var_2 = ( ( var_6.origin[0] + var_7.origin[0] ) * 0.5, ( var_6.origin[1] + var_7.origin[1] ) * 0.5, ( var_6.origin[2] + var_7.origin[2] ) * 0.5 );
 
                 if ( isdefined( var_1 ) && self [[ var_1 ]]( var_2 ) == 1 )
                     return var_2;
@@ -672,7 +672,7 @@ _id_276F( var_0, var_1 )
 _id_45C2()
 {
     if ( isdefined( self._id_2746 ) )
-        return self._id_2746._id_02EA;
+        return self._id_2746.origin;
     else if ( isdefined( self._id_2744 ) )
         return self._id_2744;
 
@@ -684,7 +684,7 @@ _id_26D6()
     if ( !istrue( level._id_1595 ) )
         return 0;
 
-    if ( _id_0A69::_id_88D4() )
+    if ( scripts\mp\utility\game::_id_88D4() )
         return 0;
 
     if ( _id_27E9() )
@@ -705,13 +705,13 @@ _id_26D6()
     if ( self _meth_81D6() )
         return 0;
 
-    if ( _id_0A69::_id_6A46() > 0 )
+    if ( scripts\mp\utility\game::_id_6A46() > 0 )
     {
         var_0 = 1;
 
         foreach ( var_2 in level._id_AE69 )
         {
-            if ( isai( var_2 ) && !_func_03D4( self, var_2 ) )
+            if ( isalive( var_2 ) && !_func_03D4( self, var_2 ) )
                 var_0 = 0;
         }
 
@@ -725,7 +725,7 @@ _id_26D6()
     if ( !_id_27D1( 500 ) )
         return 1;
 
-    if ( !isai( self._id_017D ) )
+    if ( !isalive( self._id_017D ) )
         return 1;
 
     return 0;
@@ -736,7 +736,7 @@ _id_287E()
     var_0 = undefined;
     var_1 = _func_0027( "investigated", "killer_died" );
     var_2 = _func_0027( "investigated" );
-    var_3 = _id_077B::_id_BFC7( _func_0021( 0, gettime() - 10000, 1, "death", var_1, self ) );
+    var_3 = scripts\engine\utility::random( _func_0021( 0, gettime() - 10000, 1, "death", var_1, self ) );
 
     if ( isdefined( var_3 ) )
     {
@@ -752,7 +752,7 @@ _id_287E()
 
         var_5 = _func_0021( 0, gettime() - 45000, 1, "kill", var_2, self );
         var_6 = _func_0021( 0, gettime() - 45000, 1, "death", var_1, self );
-        var_3 = _id_077B::_id_BFC7( _id_077B::_id_1B72( var_5, var_6 ) );
+        var_3 = scripts\engine\utility::random( scripts\engine\utility::_id_1B72( var_5, var_6 ) );
 
         if ( isdefined( var_3 ) > 0 && ( !isdefined( var_4 ) || distancesquared( var_4, var_3 ) > 1000000 ) )
         {
@@ -764,11 +764,11 @@ _id_287E()
     if ( isdefined( var_0 ) )
     {
         var_7 = _func_00F5( var_0 );
-        var_8 = _func_00F5( self._id_02EA );
+        var_8 = _func_00F5( self.origin );
 
         if ( isdefined( var_7 ) && isdefined( var_8 ) && var_8 != var_7 )
         {
-            var_9 = _func_0029( var_7, self._id_045B, "ally" ) + _func_0029( var_7, self._id_045B, "path_ally" );
+            var_9 = _func_0029( var_7, self.team, "ally" ) + _func_0029( var_7, self.team, "path_ally" );
 
             if ( var_9 > 1 )
                 var_0 = undefined;
@@ -852,7 +852,7 @@ _id_27EC( var_0, var_1 )
     switch ( var_0 )
     {
         case "trap_directional":
-            switch ( var_1._id_0084 )
+            switch ( var_1.basename )
             {
                 case "claymore_mp":
                     return 1;
@@ -860,7 +860,7 @@ _id_27EC( var_0, var_1 )
 
             break;
         case "trap":
-            switch ( var_1._id_0084 )
+            switch ( var_1.basename )
             {
                 case "at_mine_mp":
                 case "motion_sensor_mp":
@@ -871,7 +871,7 @@ _id_27EC( var_0, var_1 )
 
             break;
         case "trap_follower":
-            switch ( var_1._id_0084 )
+            switch ( var_1.basename )
             {
                 case "tracking_drone_mp":
                     return 1;
@@ -879,7 +879,7 @@ _id_27EC( var_0, var_1 )
 
             break;
         case "c4":
-            switch ( var_1._id_0084 )
+            switch ( var_1.basename )
             {
                 case "s4_c4_mp":
                     return 1;
@@ -887,7 +887,7 @@ _id_27EC( var_0, var_1 )
 
             break;
         case "tacticalinsertion":
-            switch ( var_1._id_0084 )
+            switch ( var_1.basename )
             {
                 case "s4_hand_flare_mp":
                     return 1;
@@ -925,15 +925,15 @@ _id_28FF( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     if ( self _meth_81F3() )
         var_8 = 0;
 
-    var_9 = spawnstruct( self _meth_803C() );
+    var_9 = _func_0214( self _meth_803C() );
 
     while ( var_8 )
     {
         if ( self _meth_8041() && self _meth_804E() )
         {
-            if ( distancesquared( self _meth_803A(), self._id_02EA ) < var_9 )
+            if ( distancesquared( self _meth_803A(), self.origin ) < var_9 )
             {
-                if ( _func_0130( self getvelocity() ) <= 1 )
+                if ( length( self getvelocity() ) <= 1 )
                     var_8 = 0;
             }
         }
@@ -942,7 +942,7 @@ _id_28FF( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
             wait 0.05;
     }
 
-    var_10 = self._id_02EA;
+    var_10 = self.origin;
     var_11 = ( 0, 0, self _meth_8172() );
 
     if ( isdefined( var_0 ) )
@@ -953,11 +953,11 @@ _id_28FF( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
         {
             var_14 = 0;
 
-            if ( distance2dsquared( self._id_02EA, var_13._id_02EA ) <= 40 )
+            if ( distance2dsquared( self.origin, var_13.origin ) <= 40 )
                 var_14 = 1;
 
             var_15 = self geteye();
-            var_16 = _func_0257( ( 0, 0, 1 ), _func_025A( var_13._id_02EA + var_11 - var_15 ) );
+            var_16 = vectordot( ( 0, 0, 1 ), vectornormalize( var_13.origin + var_11 - var_15 ) );
 
             if ( abs( var_16 ) > 0.92 )
                 var_14 = 1;
@@ -971,7 +971,7 @@ _id_28FF( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
         return;
 
     thread _id_10A76();
-    self._id_10A75 = _id_077B::_id_1B94( self._id_10A75 );
+    self._id_10A75 = scripts\engine\utility::_id_1B94( self._id_10A75 );
 
     foreach ( var_13 in self._id_10A75 )
     {
@@ -984,18 +984,18 @@ _id_28FF( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     for ( var_21 = 0; var_21 < self._id_10A75.size; var_21++ )
     {
         var_20[var_21] = [];
-        var_22 = _func_025A( self._id_10A75[var_21]._id_02EA - self._id_02EA );
+        var_22 = vectornormalize( self._id_10A75[var_21].origin - self.origin );
 
         for ( var_23 = 0; var_23 < self._id_10A75.size; var_23++ )
         {
             if ( var_21 == var_23 )
                 continue;
 
-            var_24 = _func_025A( self._id_10A75[var_23]._id_02EA - self._id_02EA );
-            var_25 = _func_0257( var_22, var_24 );
+            var_24 = vectornormalize( self._id_10A75[var_23].origin - self.origin );
+            var_25 = vectordot( var_22, var_24 );
 
             if ( var_25 > 0.94 )
-                var_20[var_21] = _id_077B::_id_1B63( var_20[var_21], var_23 );
+                var_20[var_21] = scripts\engine\utility::array_add( var_20[var_21], var_23 );
         }
     }
 
@@ -1022,8 +1022,8 @@ _id_28FF( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 
         for ( var_21 = 0; var_21 < var_20.size; var_21++ )
         {
-            if ( _id_077B::_id_1B78( var_20[var_21], var_26 ) )
-                var_20[var_21] = _id_077B::_id_1B96( var_20[var_21], var_26 );
+            if ( scripts\engine\utility::array_contains( var_20[var_21], var_26 ) )
+                var_20[var_21] = scripts\engine\utility::array_remove( var_20[var_21], var_26 );
         }
     }
 
@@ -1076,13 +1076,13 @@ _id_28FF( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 
                 if ( var_39 && var_35 - var_39 < 5000 )
                 {
-                    var_40 = _func_025A( var_38 - self._id_02EA );
+                    var_40 = vectornormalize( var_38 - self.origin );
                     var_41 = 0;
 
                     for ( var_21 = 0; var_21 < self._id_10A75.size; var_21++ )
                     {
-                        var_42 = _func_025A( self._id_10A75[var_21]._id_02EA - self._id_02EA );
-                        var_25 = _func_0257( var_40, var_42 );
+                        var_42 = vectornormalize( self._id_10A75[var_21].origin - self.origin );
+                        var_25 = vectordot( var_40, var_42 );
 
                         if ( var_25 > var_41 )
                         {
@@ -1103,16 +1103,16 @@ _id_28FF( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
                     var_13 = self._id_10A75[var_21];
                     var_44 = var_13 _meth_8162();
 
-                    if ( var_32 && !_id_077B::_id_10E74( self._id_02EA, var_31, var_13._id_02EA, var_2 ) )
+                    if ( var_32 && !scripts\engine\utility::_id_10E74( self.origin, var_31, var_13.origin, var_2 ) )
                         continue;
 
-                    if ( distance2dsquared( self._id_02EA, var_13._id_02EA ) <= 10 )
+                    if ( distance2dsquared( self.origin, var_13.origin ) <= 10 )
                         continue;
 
                     if ( !isdefined( var_30[var_44] ) )
                         var_30[var_44] = 0;
 
-                    if ( _id_077B::_id_10E74( self._id_02EA, self getplayerangles(), var_13._id_02EA, var_36 ) )
+                    if ( scripts\engine\utility::_id_10E74( self.origin, self getplayerangles(), var_13.origin, var_36 ) )
                         var_30[var_44] = var_35;
 
                     for ( var_45 = 0; var_45 < var_43.size; var_45++ )
@@ -1121,7 +1121,7 @@ _id_28FF( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
                             break;
                     }
 
-                    var_43 = _id_077B::array_add( var_43, var_13, var_45 );
+                    var_43 = scripts\engine\utility::_id_1B8B( var_43, var_13, var_45 );
                 }
 
                 var_33 = var_34;
@@ -1142,7 +1142,7 @@ _id_28FF( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
                         var_47 = var_47 + var_49[1];
                     }
 
-                    var_50 = _func_01B6( var_47 );
+                    var_50 = randomfloat( var_47 );
 
                     for ( var_21 = 0; var_21 < var_46.size; var_21++ )
                     {
@@ -1158,7 +1158,7 @@ _id_28FF( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 
                 if ( isdefined( var_34 ) )
                 {
-                    var_29 = var_35 + _func_01B9( 3000, 5000 );
+                    var_29 = var_35 + randomintrange( 3000, 5000 );
                     var_51 = !isdefined( var_33 ) || var_33 != var_34;
 
                     if ( var_51 && istrue( self._id_26F4 ) )
@@ -1168,9 +1168,9 @@ _id_28FF( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 
             if ( isdefined( var_34 ) )
             {
-                var_52 = var_34._id_02EA + var_11;
+                var_52 = var_34.origin + var_11;
 
-                if ( distance2dsquared( self._id_02EA, var_52 ) <= 10 )
+                if ( distance2dsquared( self.origin, var_52 ) <= 10 )
                 {
                     self _meth_8044( undefined );
                     var_34 = undefined;
@@ -1224,7 +1224,7 @@ _id_10A79( var_0, var_1 )
 
     if ( !isdefined( var_0._id_BDA3 ) || !isdefined( var_0._id_BDA3[var_2] ) )
     {
-        var_3 = _func_01FD( var_0._id_02EA + ( 0, 0, 11 ), var_1._id_02EA + ( 0, 0, 11 ), 0, undefined );
+        var_3 = _func_01FD( var_0.origin + ( 0, 0, 11 ), var_1.origin + ( 0, 0, 11 ), 0, undefined );
         var_0._id_BDA3[var_2] = var_3;
     }
 
@@ -1237,7 +1237,7 @@ _id_10A78( var_0, var_1 )
 
     if ( !isdefined( var_0._id_BDA3 ) || !isdefined( var_0._id_BDA3[var_2] ) )
     {
-        var_3 = _func_01FD( var_0._id_02EA + ( 0, 0, 40 ), var_1._id_02EA + ( 0, 0, 11 ), 0, undefined );
+        var_3 = _func_01FD( var_0.origin + ( 0, 0, 40 ), var_1.origin + ( 0, 0, 11 ), 0, undefined );
         var_0._id_BDA3[var_2] = var_3;
     }
 
@@ -1272,7 +1272,7 @@ _id_10A76()
 
     for (;;)
     {
-        var_0 = _id_077B::_id_108A5( 0.5, "still_watching_nodes" );
+        var_0 = scripts\engine\utility::_id_108A5( 0.5, "still_watching_nodes" );
 
         if ( !isdefined( var_0 ) || var_0 != "still_watching_nodes" )
         {
@@ -1286,7 +1286,7 @@ _id_280C( var_0, var_1 )
 {
     if ( isdefined( var_1 ) && var_1 != ( 0, 0, 0 ) )
     {
-        if ( !_id_077B::_id_10E74( self._id_02EA, self getplayerangles(), var_1, self _meth_8031() ) )
+        if ( !scripts\engine\utility::_id_10E74( self.origin, self getplayerangles(), var_1, self _meth_8031() ) )
         {
             var_2 = self _meth_804C( var_1 );
 
@@ -1300,17 +1300,17 @@ _id_280C( var_0, var_1 )
 
 _id_279F( var_0, var_1 )
 {
-    if ( isdefined( var_1 ) && isdefined( var_1._id_00DE ) )
+    if ( isdefined( var_1 ) && isdefined( var_1.classname ) )
     {
-        if ( var_1._id_00DE == "grenade" )
+        if ( var_1.classname == "grenade" )
         {
-            if ( isdefined( var_0 ) && var_0._id_00DE == "worldspawn" )
+            if ( isdefined( var_0 ) && var_0.classname == "worldspawn" )
                 return undefined;
 
             if ( !_id_2761( var_1 ) )
                 return var_0;
         }
-        else if ( var_1._id_00DE == "rocket" )
+        else if ( var_1.classname == "rocket" )
         {
             if ( isdefined( var_1._id_100A7 ) )
                 return var_1._id_100A7;
@@ -1318,10 +1318,10 @@ _id_279F( var_0, var_1 )
             if ( isdefined( var_1._id_048F ) && var_1._id_048F == "remote" )
                 return var_1;
 
-            if ( isdefined( var_1._id_02F2 ) )
-                return var_1._id_02F2;
+            if ( isdefined( var_1.owner ) )
+                return var_1.owner;
         }
-        else if ( var_1._id_00DE == "worldspawn" || var_1._id_00DE == "trigger_hurt" )
+        else if ( var_1.classname == "worldspawn" || var_1.classname == "trigger_hurt" )
             return undefined;
 
         return var_1;
@@ -1340,16 +1340,16 @@ _id_2761( var_0 )
     if ( !isdefined( var_1 ) )
         return 0;
 
-    if ( _func_0121( var_1, "s4_c4_mp" ) )
+    if ( issubstr( var_1, "s4_c4_mp" ) )
         return 1;
 
-    if ( _func_0121( var_1, "claymore_mp" ) )
+    if ( issubstr( var_1, "claymore_mp" ) )
         return 1;
 
-    if ( _func_0121( var_1, "mine_mp" ) )
+    if ( issubstr( var_1, "mine_mp" ) )
         return 1;
 
-    if ( _func_0121( var_1, "proximity_explosive_mp" ) )
+    if ( issubstr( var_1, "proximity_explosive_mp" ) )
         return 1;
 
     return 0;
@@ -1377,15 +1377,15 @@ _id_26CF( var_0 )
 _id_2880( var_0 )
 {
     var_0._id_161A = 1;
-    level._id_9329 = _id_077B::_id_1B96( level._id_9329, var_0 );
+    level._id_9329 = scripts\engine\utility::array_remove( level._id_9329, var_0 );
 }
 
 _id_26D0( var_0 )
 {
-    if ( !_func_0121( var_0._id_00E1, "trigger_use" ) )
+    if ( !issubstr( var_0._id_00E1, "trigger_use" ) )
         return;
 
-    if ( !isdefined( var_0._id_0457 ) )
+    if ( !isdefined( var_0.target ) )
         return;
 
     if ( isdefined( var_0._id_28CE ) )
@@ -1394,7 +1394,7 @@ _id_26D0( var_0 )
     if ( !isdefined( var_0._id_FE10 ) )
         return;
 
-    var_1 = _func_00B3( var_0._id_0457, "targetname" );
+    var_1 = _func_00B3( var_0.target, "targetname" );
 
     if ( var_1.size != 1 )
         return;
@@ -1404,15 +1404,15 @@ _id_26D0( var_0 )
     if ( !isdefined( level._id_9329 ) )
         level._id_9329 = [];
 
-    level._id_9329 = _id_077B::_id_1B63( level._id_9329, var_0 );
+    level._id_9329 = scripts\engine\utility::array_add( level._id_9329, var_0 );
 }
 
 _id_26CE( var_0 )
 {
-    if ( !_func_0121( var_0._id_00E1, "trigger_damage" ) )
+    if ( !issubstr( var_0._id_00E1, "trigger_damage" ) )
         return;
 
-    var_1 = _func_00B3( var_0._id_0457, "targetname" );
+    var_1 = _func_00B3( var_0.target, "targetname" );
 
     if ( var_1.size != 2 )
         return;
@@ -1422,7 +1422,7 @@ _id_26CE( var_0 )
     if ( !isdefined( level._id_9329 ) )
         level._id_9329 = [];
 
-    level._id_9329 = _id_077B::_id_1B63( level._id_9329, var_0 );
+    level._id_9329 = scripts\engine\utility::array_add( level._id_9329, var_0 );
 }
 
 _id_27AB( var_0, var_1 )
@@ -1463,12 +1463,12 @@ _id_27B4( var_0, var_1 )
     {
         if ( !var_5._id_10424 )
         {
-            var_6 = distance( var_0._id_02EA, var_5._id_02EA );
+            var_6 = distance( var_0.origin, var_5.origin );
 
             if ( var_6 < var_1 )
             {
                 var_7 = _id_27B4( var_5, var_1 - var_6 );
-                var_2 = _id_077B::_id_1B72( var_7, var_2 );
+                var_2 = scripts\engine\utility::_id_1B72( var_7, var_2 );
             }
         }
     }
@@ -1489,7 +1489,7 @@ _id_27AC()
 _id_2794()
 {
     var_0 = getdvarint( "#x312f16e8838a7e035", 0 );
-    var_0 = _func_0147( var_0, getdvarint( "#x3d7f1b411cb19c79e", 0 ) );
+    var_0 = max( var_0, getdvarint( "#x3d7f1b411cb19c79e", 0 ) );
 
     if ( var_0 > level._id_9C46 )
         return level._id_9C46;
@@ -1509,22 +1509,22 @@ _id_2876()
         {
             var_0 = level._id_2878[0];
 
-            if ( isdefined( var_0 ) && isdefined( var_0._id_02F2 ) )
+            if ( isdefined( var_0 ) && isdefined( var_0.owner ) )
             {
                 var_1 = undefined;
 
                 if ( isdefined( var_0._id_AE52 ) )
-                    var_1 = var_0._id_02F2 [[ var_0._id_5FF7 ]]( var_0._id_AE4F, var_0._id_AE50, var_0._id_AE51, var_0._id_AE52 );
+                    var_1 = var_0.owner [[ var_0._id_5FF7 ]]( var_0._id_AE4F, var_0._id_AE50, var_0._id_AE51, var_0._id_AE52 );
                 else if ( isdefined( var_0._id_AE51 ) )
-                    var_1 = var_0._id_02F2 [[ var_0._id_5FF7 ]]( var_0._id_AE4F, var_0._id_AE50, var_0._id_AE51 );
+                    var_1 = var_0.owner [[ var_0._id_5FF7 ]]( var_0._id_AE4F, var_0._id_AE50, var_0._id_AE51 );
                 else if ( isdefined( var_0._id_AE50 ) )
-                    var_1 = var_0._id_02F2 [[ var_0._id_5FF7 ]]( var_0._id_AE4F, var_0._id_AE50 );
+                    var_1 = var_0.owner [[ var_0._id_5FF7 ]]( var_0._id_AE4F, var_0._id_AE50 );
                 else if ( isdefined( var_0._id_AE4F ) )
-                    var_1 = var_0._id_02F2 [[ var_0._id_5FF7 ]]( var_0._id_AE4F );
+                    var_1 = var_0.owner [[ var_0._id_5FF7 ]]( var_0._id_AE4F );
                 else
-                    var_1 = var_0._id_02F2 [[ var_0._id_5FF7 ]]();
+                    var_1 = var_0.owner [[ var_0._id_5FF7 ]]();
 
-                var_0._id_02F2 notify( var_0._id_A3B5, var_1 );
+                var_0.owner notify( var_0._id_A3B5, var_1 );
             }
 
             var_2 = [];
@@ -1546,17 +1546,17 @@ _id_2875( var_0, var_1, var_2, var_3, var_4, var_5 )
 
     foreach ( var_8, var_7 in level._id_2878 )
     {
-        if ( var_7._id_02F2 == self && var_7._id_02BA == var_0 )
+        if ( var_7.owner == self && var_7.name == var_0 )
         {
-            self notify( var_7._id_02BA );
+            self notify( var_7.name );
             level._id_2878[var_8] = undefined;
         }
     }
 
-    var_7 = _func_020F();
-    var_7._id_02F2 = self;
-    var_7._id_02BA = var_0;
-    var_7._id_A3B5 = var_7._id_02BA + "_done";
+    var_7 = spawnstruct();
+    var_7.owner = self;
+    var_7.name = var_0;
+    var_7._id_A3B5 = var_7.name + "_done";
     var_7._id_5FF7 = var_1;
     var_7._id_AE4F = var_2;
     var_7._id_AE50 = var_3;
@@ -1576,7 +1576,7 @@ _id_2875( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_27E9()
 {
-    return _id_0A74::_id_8AB5() || self _meth_81CB();
+    return scripts\mp\utility\player::_id_8AB5() || self _meth_81CB();
 }
 
 _id_27A2( var_0 )
@@ -1590,7 +1590,7 @@ _id_27A2( var_0 )
 
     foreach ( var_3 in var_1 )
     {
-        var_4 = visionsetthermal( var_3 );
+        var_4 = weaponclipsize( var_3 );
         var_5 = self getweaponammostock( var_3 );
 
         if ( var_5 <= var_4 )
@@ -1617,7 +1617,7 @@ _id_27A1( var_0 )
 
     foreach ( var_5 in var_1 )
     {
-        var_6 = visionsetthermal( var_5 );
+        var_6 = weaponclipsize( var_5 );
         var_7 = self getweaponammostock( var_5 );
 
         if ( var_7 <= var_6 || self _meth_8135( var_5 ) <= var_0 )
@@ -1641,7 +1641,7 @@ _id_286B( var_0, var_1, var_2 )
     var_3 = _func_02A6( var_0 );
     var_4 = var_3 - var_0;
 
-    if ( length( var_4 ) > var_1 * var_1 )
+    if ( _func_0132( var_4 ) > var_1 * var_1 )
         return 0;
 
     if ( abs( var_4[2] ) > var_2 )
@@ -1669,40 +1669,40 @@ _id_2834( var_0 )
 
         foreach ( var_3 in level._id_AE69 )
         {
-            if ( !isdefined( var_3._id_045B ) )
+            if ( !isdefined( var_3.team ) )
                 continue;
 
-            if ( var_3 [[ var_0 ]]() && !isdefined( var_1[var_3._id_045B] ) )
+            if ( var_3 [[ var_0 ]]() && !isdefined( var_1[var_3.team] ) )
             {
-                level._id_536A[var_3._id_045B] = undefined;
-                level._id_536C[var_3._id_045B] = var_3 _meth_804B( 1 );
+                level._id_536A[var_3.team] = undefined;
+                level._id_536C[var_3.team] = var_3 _meth_804B( 1 );
 
-                if ( isdefined( level._id_536C[var_3._id_045B] ) )
+                if ( isdefined( level._id_536C[var_3.team] ) )
                 {
-                    if ( !isdefined( level._id_536B[var_3._id_045B] ) || !_id_077B::_id_1B78( level._id_536C[var_3._id_045B], level._id_536B[var_3._id_045B] ) )
-                        level._id_536B[var_3._id_045B] = _id_077B::_id_BFC7( level._id_536C[var_3._id_045B] );
+                    if ( !isdefined( level._id_536B[var_3.team] ) || !scripts\engine\utility::array_contains( level._id_536C[var_3.team], level._id_536B[var_3.team] ) )
+                        level._id_536B[var_3.team] = scripts\engine\utility::random( level._id_536C[var_3.team] );
 
-                    if ( isdefined( level._id_536B[var_3._id_045B] ) )
+                    if ( isdefined( level._id_536B[var_3.team] ) )
                     {
                         var_4 = [];
 
                         foreach ( var_6 in level._id_AE69 )
                         {
-                            if ( !isdefined( var_6._id_045B ) )
+                            if ( !isdefined( var_6.team ) )
                                 continue;
 
-                            if ( var_6 [[ var_0 ]]() && var_6._id_045B == var_3._id_045B )
+                            if ( var_6 [[ var_0 ]]() && var_6.team == var_3.team )
                                 var_4[var_4.size] = var_6;
                         }
 
-                        var_4 = _func_01FF( var_4, level._id_536B[var_3._id_045B] );
+                        var_4 = _func_01FF( var_4, level._id_536B[var_3.team] );
 
                         if ( var_4.size > 0 )
-                            level._id_536A[var_3._id_045B] = var_4[0];
+                            level._id_536A[var_3.team] = var_4[0];
                     }
                 }
 
-                var_1[var_3._id_045B] = 1;
+                var_1[var_3.team] = 1;
             }
         }
     }
@@ -1713,16 +1713,16 @@ _id_28E9()
     if ( !isdefined( self ) )
         return 0;
 
-    if ( !_func_0104( self ) )
-        return 0;
-
-    if ( !isdefined( self._id_045B ) )
-        return 0;
-
-    if ( self._id_045B == "spectator" )
-        return 0;
-
     if ( !isai( self ) )
+        return 0;
+
+    if ( !isdefined( self.team ) )
+        return 0;
+
+    if ( self.team == "spectator" )
+        return 0;
+
+    if ( !isalive( self ) )
         return 0;
 
     if ( !_id_0A67::_id_872A( self ) )
@@ -1739,13 +1739,13 @@ _id_28E6()
     if ( !isdefined( level._id_536A ) )
         return;
 
-    if ( !isdefined( level._id_536A[self._id_045B] ) )
+    if ( !isdefined( level._id_536A[self.team] ) )
         return;
 
-    if ( level._id_536A[self._id_045B] == self )
+    if ( level._id_536A[self.team] == self )
     {
         _id_09D0::_id_2740();
-        self _meth_8057( level._id_536B[self._id_045B], 128, "objective", undefined, 256 );
+        self _meth_8057( level._id_536B[self.team], 128, "objective", undefined, 256 );
         _id_28F6();
     }
 }
@@ -1763,9 +1763,9 @@ _id_2775( var_0, var_1 )
 
 _id_D23C( var_0 )
 {
-    if ( !( isdefined( self._id_790A ) && _id_077B::_id_1B78( self._id_790A, var_0 ) ) )
+    if ( !( isdefined( self._id_790A ) && scripts\engine\utility::array_contains( self._id_790A, var_0 ) ) )
     {
-        self._id_790A = _id_077B::_id_1B63( self._id_790A, var_0 );
+        self._id_790A = scripts\engine\utility::array_add( self._id_790A, var_0 );
         var_0 notify( "calculate_new_level_targets" );
     }
 }
@@ -1820,7 +1820,7 @@ _id_27EB()
 
 _id_3977( var_0 )
 {
-    if ( !_func_0107( var_0 ) )
+    if ( !isbot( var_0 ) )
         return 0;
 
     if ( !_id_48B9() )
@@ -1847,8 +1847,8 @@ _id_274E( var_0 )
 
 _id_6003( var_0 )
 {
-    var_1 = strtok( var_0 );
-    var_2 = _func_020F();
+    var_1 = tablelookupgetnumrows( var_0 );
+    var_2 = spawnstruct();
     var_2._id_D71E = [];
     var_2._id_D71E["recruit"] = [];
     var_2._id_D71E["regular"] = [];
@@ -1857,18 +1857,18 @@ _id_6003( var_0 )
 
     for ( var_3 = 0; var_3 < var_1; var_3++ )
     {
-        var_4 = _func_021E( var_0, var_3, 0 );
-        var_2._id_D71E["recruit"][var_4] = _func_020F();
-        var_2._id_D71E["regular"][var_4] = _func_020F();
-        var_2._id_D71E["hardened"][var_4] = _func_020F();
-        var_2._id_D71E["veteran"][var_4] = _func_020F();
-        var_5 = _func_021E( var_0, var_3, 1 );
+        var_4 = tablelookupbyrow( var_0, var_3, 0 );
+        var_2._id_D71E["recruit"][var_4] = spawnstruct();
+        var_2._id_D71E["regular"][var_4] = spawnstruct();
+        var_2._id_D71E["hardened"][var_4] = spawnstruct();
+        var_2._id_D71E["veteran"][var_4] = spawnstruct();
+        var_5 = tablelookupbyrow( var_0, var_3, 1 );
         var_2._id_D71E["recruit"][var_4] = var_5;
-        var_6 = _func_021E( var_0, var_3, 2 );
+        var_6 = tablelookupbyrow( var_0, var_3, 2 );
         var_2._id_D71E["regular"][var_4] = var_6;
-        var_7 = _func_021E( var_0, var_3, 3 );
+        var_7 = tablelookupbyrow( var_0, var_3, 3 );
         var_2._id_D71E["hardened"][var_4] = var_7;
-        var_8 = _func_021E( var_0, var_3, 4 );
+        var_8 = tablelookupbyrow( var_0, var_3, 4 );
         var_2._id_D71E["veteran"][var_4] = var_8;
     }
 

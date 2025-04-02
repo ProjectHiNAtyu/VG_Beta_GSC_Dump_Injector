@@ -9,7 +9,7 @@ _id_68D2( var_0 )
         return undefined;
 
     foreach ( var_3 in var_0 )
-        var_1 = var_1 + var_3._id_02EA;
+        var_1 = var_1 + var_3.origin;
 
     var_5 = int( var_1[0] / var_0.size );
     var_6 = int( var_1[1] / var_0.size );
@@ -97,13 +97,13 @@ _id_F392()
 _id_5AD2( var_0, var_1, var_2 )
 {
     var_3 = cos( var_2 );
-    var_4 = anglestoforward( var_0._id_0054 );
-    var_5 = var_1._id_02EA - var_0._id_02EA;
+    var_4 = anglestoforward( var_0.angles );
+    var_5 = var_1.origin - var_0.origin;
     var_4 = var_4 * ( 1, 1, 0 );
     var_5 = var_5 * ( 1, 1, 0 );
-    var_5 = _func_025A( var_5 );
-    var_4 = _func_025A( var_4 );
-    var_6 = _func_0257( var_5, var_4 );
+    var_5 = vectornormalize( var_5 );
+    var_4 = vectornormalize( var_4 );
+    var_6 = vectordot( var_5, var_4 );
 
     if ( var_6 >= var_3 )
         return 1;
@@ -113,10 +113,10 @@ _id_5AD2( var_0, var_1, var_2 )
 
 _id_872A( var_0 )
 {
-    if ( _func_0102( var_0 ) && var_0._id_11E6 == 1 )
+    if ( isagent( var_0 ) && var_0._id_11E6 == 1 )
         return 1;
 
-    if ( _func_0107( var_0 ) )
+    if ( isbot( var_0 ) )
         return 1;
 
     return 0;
@@ -127,7 +127,7 @@ _id_8A7B( var_0 )
     if ( _id_872A( var_0 ) )
         return 1;
 
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
         return 1;
 
     return 0;
@@ -135,10 +135,10 @@ _id_8A7B( var_0 )
 
 _id_871D( var_0 )
 {
-    if ( _func_0102( var_0 ) && isdefined( var_0._id_11C7 ) && var_0._id_11C7 == 1 )
+    if ( isagent( var_0 ) && isdefined( var_0._id_11C7 ) && var_0._id_11C7 == 1 )
         return 1;
 
-    if ( _func_0107( var_0 ) )
+    if ( isbot( var_0 ) )
         return 1;
 
     return 0;
@@ -149,7 +149,7 @@ _id_885D( var_0 )
     if ( _id_871D( var_0 ) )
         return 1;
 
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
         return 1;
 
     return 0;
@@ -159,7 +159,7 @@ _id_6DB3( var_0 )
 {
     var_1 = 0;
 
-    if ( level._id_EF62 )
+    if ( level.teambased )
     {
         switch ( var_0 )
         {
@@ -177,7 +177,7 @@ _id_6DB3( var_0 )
 
 _id_8AD5( var_0, var_1, var_2 )
 {
-    return isdefined( var_2._id_045B ) && var_2._id_045B == var_1;
+    return isdefined( var_2.team ) && var_2.team == var_1;
 }
 
 _id_8ACC( var_0, var_1, var_2 )
@@ -191,7 +191,7 @@ _id_6AF0()
 
     if ( isdefined( self._id_0373 ) )
     {
-        var_1 = _func_021A( self._id_0373, " " );
+        var_1 = strtok( self._id_0373, " " );
 
         for ( var_2 = 0; var_2 < var_1.size; var_2++ )
         {
@@ -207,7 +207,7 @@ _id_6AF0()
 
 _id_6BF1( var_0, var_1, var_2, var_3 )
 {
-    return _id_69EB( var_0, var_1, var_2, var_3, _id_077A::_id_3EBE() );
+    return _id_69EB( var_0, var_1, var_2, var_3, scripts\engine\trace::_id_3EBE() );
 }
 
 _id_69EB( var_0, var_1, var_2, var_3, var_4 )
@@ -219,7 +219,7 @@ _id_69EB( var_0, var_1, var_2, var_3, var_4 )
 
     if ( isdefined( var_3 ) )
     {
-        if ( isalive( var_3 ) )
+        if ( _func_0106( var_3 ) )
             var_5 = var_3;
         else
             var_5 = [ var_3 ];
@@ -244,7 +244,7 @@ _id_69EB( var_0, var_1, var_2, var_3, var_4 )
         {
             var_10 = var_9["entity"];
 
-            if ( isdefined( var_10 ) && isdefined( var_10._id_045B ) && var_10._id_045B == var_2 )
+            if ( isdefined( var_10 ) && isdefined( var_10.team ) && var_10.team == var_2 )
                 var_7[var_7.size] = var_10;
         }
     }
@@ -266,9 +266,9 @@ _id_10AD9( var_0, var_1, var_2, var_3, var_4 )
         var_5 = undefined;
 
         if ( var_4 )
-            var_5 = _id_0A74::_id_6C40( self._id_02EA, var_0 );
+            var_5 = scripts\mp\utility\player::_id_6C40( self.origin, var_0 );
         else
-            var_5 = _id_69EB( self._id_02EA, var_0 );
+            var_5 = _id_69EB( self.origin, var_0 );
 
         if ( var_5.size > 0 )
         {
@@ -281,8 +281,8 @@ _id_10AD9( var_0, var_1, var_2, var_3, var_4 )
                 foreach ( var_8 in var_5 )
                 {
                     var_9 = self _meth_8169();
-                    var_10 = _id_077B::_id_F07F( var_4, var_8 geteye(), var_8._id_02EA );
-                    var_11 = _func_02C4( [ "physicscontents_vehicleclip", "physicscontents_item", "physicscontents_ainoshoot" ] );
+                    var_10 = scripts\engine\utility::ter_op( var_4, var_8 geteye(), var_8.origin );
+                    var_11 = physics_createcontents( [ "physicscontents_vehicleclip", "physicscontents_item", "physicscontents_ainoshoot" ] );
                     var_12 = _func_02BC( var_9, var_10, var_11, undefined, 0, "physicsquery_closest" );
 
                     if ( var_12.size <= 0 )
@@ -304,18 +304,18 @@ _id_3134()
 
 _id_B151( var_0, var_1, var_2, var_3 )
 {
-    self _meth_8275( "scavenger_pack_pickup" );
+    self playlocalsound( "scavenger_pack_pickup" );
 
     if ( istrue( var_1 ) )
     {
         var_4 = undefined;
 
         if ( isdefined( var_3 ) )
-            var_4 = _func_0208( _id_077B::_id_6A40( "placeEquipmentFailed" ), var_2, self, anglestoforward( var_3 ), anglestoup( var_3 ) );
+            var_4 = _func_0208( scripts\engine\utility::getfx( "placeEquipmentFailed" ), var_2, self, anglestoforward( var_3 ), anglestoup( var_3 ) );
         else
-            var_4 = _func_0208( _id_077B::_id_6A40( "placeEquipmentFailed" ), var_2, self );
+            var_4 = _func_0208( scripts\engine\utility::getfx( "placeEquipmentFailed" ), var_2, self );
 
-        _func_024B( var_4 );
+        triggerfx( var_4 );
         thread _id_B152( var_4 );
     }
 
@@ -326,7 +326,7 @@ _id_B151( var_0, var_1, var_2, var_3 )
         case "micro_turret_mp":
         case "trip_mine_mp":
         case "cryo_mine_mp":
-            if ( _func_0117( self ) && _id_099C::_giveweapon() )
+            if ( isplayer( self ) && scripts\cp_mp\utility\player_utility::_id_0C14() )
             {
                 self iprintlnbold( "Placement Failed" );
                 return;
@@ -336,13 +336,13 @@ _id_B151( var_0, var_1, var_2, var_3 )
 
 _id_B153()
 {
-    level._id_0BA3["placeEquipmentFailed"] = _func_0139( "vfx/iw7/_requests/mp/vfx_generic_equipment_exp.vfx" );
+    level._effect["placeEquipmentFailed"] = loadfx( "vfx/iw7/_requests/mp/vfx_generic_equipment_exp.vfx" );
 }
 
 _id_B152( var_0 )
 {
     wait 2;
-    var_0 _meth_809A();
+    var_0 delete();
 }
 
 _id_8A40( var_0 )
@@ -381,49 +381,49 @@ _id_8915( var_0 )
 
 _id_8794( var_0 )
 {
-    if ( !isdefined( var_0._id_EA0B ) )
+    if ( !isdefined( var_0.streakinfo ) )
         return 0;
 
-    if ( !isdefined( var_0._id_EA0B._id_EA0F ) )
+    if ( !isdefined( var_0.streakinfo._id_EA0F ) )
         return 0;
 
-    var_1 = var_0._id_EA0B._id_EA0F == "chopper_gunner";
+    var_1 = var_0.streakinfo._id_EA0F == "chopper_gunner";
     return var_1;
 }
 
 _id_8A66( var_0 )
 {
-    if ( !isdefined( var_0._id_EA0B ) )
+    if ( !isdefined( var_0.streakinfo ) )
         return 0;
 
-    if ( !isdefined( var_0._id_EA0B._id_EA0F ) )
+    if ( !isdefined( var_0.streakinfo._id_EA0F ) )
         return 0;
 
-    var_1 = var_0._id_EA0B._id_EA0F == "chopper_support";
+    var_1 = var_0.streakinfo._id_EA0F == "chopper_support";
     return var_1;
 }
 
 _id_879A( var_0 )
 {
-    if ( !isdefined( var_0._id_EA0B ) )
+    if ( !isdefined( var_0.streakinfo ) )
         return 0;
 
-    if ( !isdefined( var_0._id_EA0B._id_EA0F ) )
+    if ( !isdefined( var_0.streakinfo._id_EA0F ) )
         return 0;
 
-    var_1 = var_0._id_EA0B._id_EA0F == "toma_strike";
+    var_1 = var_0.streakinfo._id_EA0F == "toma_strike";
     return var_1;
 }
 
 _id_8AA2( var_0 )
 {
-    if ( !isdefined( var_0._id_EA0B ) )
+    if ( !isdefined( var_0.streakinfo ) )
         return 0;
 
-    if ( !isdefined( var_0._id_EA0B._id_EA0F ) )
+    if ( !isdefined( var_0.streakinfo._id_EA0F ) )
         return 0;
 
-    if ( var_0._id_EA0B._id_EA0F == "uav" || var_0._id_EA0B._id_EA0F == "counter_uav" || var_0._id_EA0B._id_EA0F == "directional_uav" )
+    if ( var_0.streakinfo._id_EA0F == "uav" || var_0.streakinfo._id_EA0F == "counter_uav" || var_0.streakinfo._id_EA0F == "directional_uav" )
         return 1;
 
     return 0;
@@ -431,55 +431,55 @@ _id_8AA2( var_0 )
 
 _id_886F( var_0 )
 {
-    if ( !isdefined( var_0._id_EA0B ) )
+    if ( !isdefined( var_0.streakinfo ) )
         return 0;
 
-    if ( !isdefined( var_0._id_EA0B._id_EA0F ) )
+    if ( !isdefined( var_0.streakinfo._id_EA0F ) )
         return 0;
 
-    var_1 = var_0._id_EA0B._id_EA0F == "gunship";
+    var_1 = var_0.streakinfo._id_EA0F == "gunship";
     return var_1;
 }
 
 _id_89B8( var_0 )
 {
-    if ( !isdefined( var_0._id_EA0B ) )
+    if ( !isdefined( var_0.streakinfo ) )
         return 0;
 
-    if ( !isdefined( var_0._id_EA0B._id_EA0F ) )
+    if ( !isdefined( var_0.streakinfo._id_EA0F ) )
         return 0;
 
-    var_1 = var_0._id_EA0B._id_EA0F == "radar_drone_escort" || var_0._id_EA0B._id_EA0F == "radar_drone_recon";
+    var_1 = var_0.streakinfo._id_EA0F == "radar_drone_escort" || var_0.streakinfo._id_EA0F == "radar_drone_recon";
     return var_1;
 }
 
 _id_8A00( var_0 )
 {
-    if ( !isdefined( var_0._id_EA0B ) )
+    if ( !isdefined( var_0.streakinfo ) )
         return 0;
 
-    if ( !isdefined( var_0._id_EA0B._id_EA0F ) )
+    if ( !isdefined( var_0.streakinfo._id_EA0F ) )
         return 0;
 
-    var_1 = var_0._id_EA0B._id_EA0F == "scrambler_drone_guard";
+    var_1 = var_0.streakinfo._id_EA0F == "scrambler_drone_guard";
     return var_1;
 }
 
 _id_89B9( var_0 )
 {
-    if ( !isdefined( var_0._id_EA0B ) )
+    if ( !isdefined( var_0.streakinfo ) )
         return 0;
 
-    if ( !isdefined( var_0._id_EA0B._id_EA0F ) )
+    if ( !isdefined( var_0.streakinfo._id_EA0F ) )
         return 0;
 
-    var_1 = var_0._id_EA0B._id_EA0F == "radar_drone_overwatch";
+    var_1 = var_0.streakinfo._id_EA0F == "radar_drone_overwatch";
     return var_1;
 }
 
 _id_8A9D( var_0 )
 {
-    return isdefined( var_0._id_00DE ) && var_0._id_00DE == "misc_turret";
+    return isdefined( var_0.classname ) && var_0.classname == "misc_turret";
 }
 
 _id_87F7( var_0 )
@@ -565,12 +565,12 @@ _id_475C( var_0 )
 {
     self endon( "death" );
     var_0 waittill( "death_or_disconnect" );
-    self _meth_809A();
+    self delete();
 }
 
 _id_473B()
 {
     self endon( "death" );
     waittillframeend;
-    self _meth_809A();
+    self delete();
 }

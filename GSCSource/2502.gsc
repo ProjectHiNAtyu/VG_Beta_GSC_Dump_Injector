@@ -8,18 +8,18 @@ _id_11EC( var_0 )
 
 _id_D129( var_0, var_1 )
 {
-    self._id_045B = var_0;
+    self.team = var_0;
     self._id_002E = var_0;
-    self._id_0309["team"] = var_0;
-    self._id_02F2 = var_1;
-    self setorigin( var_1 );
-    self _meth_8312( var_1 );
+    self.pers["team"] = var_0;
+    self.owner = var_1;
+    self setotherent( var_1 );
+    self setentityowner( var_1 );
 }
 
 _id_8111()
 {
     self._id_11E7 = "player";
-    self._id_0309 = [];
+    self.pers = [];
     self._id_7536 = 0;
     self._id_8716 = 0;
     self._id_871B = 1;
@@ -31,7 +31,7 @@ _id_8111()
     self._id_002D = undefined;
     self._id_020F = 0;
     self._id_0213 = 0;
-    self detach();
+    self _meth_809D();
     _id_8253( 0 );
 }
 
@@ -39,12 +39,12 @@ _id_8253( var_0 )
 {
     if ( !var_0 )
     {
-        self._id_37D9 = undefined;
+        self.class = undefined;
         self._id_8F98 = undefined;
         self._id_A24C = undefined;
         self._id_1F87 = undefined;
         self._id_723F = undefined;
-        self._id_02BA = undefined;
+        self.name = undefined;
         self._id_AFE4 = undefined;
         self._id_10DA7 = undefined;
         self._id_A8D9 = undefined;
@@ -52,13 +52,13 @@ _id_8253( var_0 )
         self._id_32C6 = undefined;
         self._id_3186 = undefined;
         self._id_0393 = undefined;
-        self._id_0392 = undefined;
+        self.sessionstate = undefined;
         self._id_9038 = undefined;
         self._id_9035 = undefined;
-        _id_06B0::_id_388C( "weapon" );
-        _id_06B0::_id_388C( "weaponSwitch" );
-        _id_06B0::_id_388C( "offhandWeaps" );
-        _id_06B0::_id_388C( "usability" );
+        scripts\common\input_allow::_id_388C( "weapon" );
+        scripts\common\input_allow::_id_388C( "weaponSwitch" );
+        scripts\common\input_allow::_id_388C( "offhandWeaps" );
+        scripts\common\input_allow::_id_388C( "usability" );
         self._id_D9CC = undefined;
         self._id_C0ED = undefined;
     }
@@ -66,10 +66,10 @@ _id_8253( var_0 )
     {
         self._id_A24C = 1;
         self._id_1F87 = 5;
-        self._id_723F = _id_0A74::_id_6E04();
-        self._id_02BA = self._id_723F;
-        self._id_0393 = self._id_045B;
-        self._id_0392 = "playing";
+        self._id_723F = scripts\mp\utility\player::_id_6E04();
+        self.name = self._id_723F;
+        self._id_0393 = self.team;
+        self.sessionstate = "playing";
         self._id_D9CC = 0;
         self._id_C0ED = 0;
         self._id_11C7 = 1;
@@ -131,11 +131,11 @@ _id_4366()
     wait 0.05;
     self._id_8716 = 0;
     self._id_7536 = 0;
-    self._id_02F2 = undefined;
+    self.owner = undefined;
     self._id_3B62 = undefined;
     self._id_10845 = undefined;
 
-    foreach ( var_1 in level._id_33D8 )
+    foreach ( var_1 in level.characters )
     {
         if ( isdefined( var_1._id_1DB6 ) )
         {
@@ -149,7 +149,7 @@ _id_4366()
 
     if ( isdefined( self._id_75F6 ) )
     {
-        self destroy( self._id_75F6 );
+        self detach( self._id_75F6 );
         self._id_75F6 = undefined;
     }
 
@@ -200,7 +200,7 @@ _id_6B96( var_0, var_1 )
     {
         if ( isdefined( var_4._id_8716 ) && var_4._id_8716 )
         {
-            if ( isdefined( var_4._id_02F2 ) && var_4._id_02F2 == var_0 )
+            if ( isdefined( var_4.owner ) && var_4.owner == var_0 )
             {
                 if ( var_1 == "all" && var_4._id_11E7 != "alien" || var_4._id_11E7 == var_1 )
                     var_2++;
@@ -222,7 +222,7 @@ _id_6B97( var_0, var_1 )
     {
         if ( isdefined( var_4._id_8716 ) && var_4._id_8716 )
         {
-            if ( isdefined( var_4._id_045B ) && var_4._id_045B == var_0 )
+            if ( isdefined( var_4.team ) && var_4.team == var_0 )
             {
                 if ( var_1 == "all" && var_4._id_11E7 != "alien" || var_4._id_11E7 == var_1 )
                     var_2++;
@@ -235,7 +235,7 @@ _id_6B97( var_0, var_1 )
 
 _id_6DD4( var_0, var_1, var_2 )
 {
-    var_3 = _func_00B4( self._id_02EA, 350, 64, 128, "Path" );
+    var_3 = _func_00B4( self.origin, 350, 64, 128, "Path" );
 
     if ( !isdefined( var_3 ) || var_3.size == 0 )
         return undefined;
@@ -247,12 +247,12 @@ _id_6DD4( var_0, var_1, var_2 )
 
         foreach ( var_6 in var_4 )
         {
-            if ( var_6._id_02EA[2] > level._id_10C5B || !_func_0119( var_6._id_02EA, level._id_F63A ) )
+            if ( var_6.origin[2] > level._id_10C5B || !_func_0119( var_6.origin, level._id_F63A ) )
                 var_3[var_3.size] = var_6;
         }
     }
 
-    var_8 = anglestoforward( self._id_0054 );
+    var_8 = anglestoforward( self.angles );
     var_9 = -10;
     var_10 = _id_07EE::_id_6C4D( self );
     var_11 = ( 0, 0, var_10 );
@@ -268,11 +268,11 @@ _id_6DD4( var_0, var_1, var_2 )
 
     foreach ( var_15 in var_3 )
     {
-        if ( !var_15 dodamage( "stand" ) || isdefined( var_15._id_A4EF ) )
+        if ( !var_15 _meth_80B8( "stand" ) || isdefined( var_15._id_A4EF ) )
             continue;
 
-        var_16 = _func_025A( var_15._id_02EA - self._id_02EA );
-        var_17 = _func_0257( var_8, var_16 );
+        var_16 = vectornormalize( var_15.origin - self.origin );
+        var_17 = vectordot( var_8, var_16 );
 
         for ( var_18 = 0; var_18 < var_13.size; var_18++ )
         {
@@ -297,8 +297,8 @@ _id_6DD4( var_0, var_1, var_2 )
     for ( var_18 = 0; var_18 < var_12.size; var_18++ )
     {
         var_15 = var_12[var_18];
-        var_22 = self._id_02EA + var_11;
-        var_23 = var_15._id_02EA + var_11;
+        var_22 = self.origin + var_11;
+        var_23 = var_15.origin + var_11;
 
         if ( var_18 > 0 )
             wait 0.05;
@@ -311,9 +311,9 @@ _id_6DD4( var_0, var_1, var_2 )
             if ( var_18 > 0 )
                 wait 0.05;
 
-            var_24 = physicsexplosionsphere( var_15._id_02EA + var_11, var_15._id_02EA );
+            var_24 = physicsexplosionsphere( var_15.origin + var_11, var_15.origin );
 
-            if ( distancesquared( var_24, var_15._id_02EA ) > 1 )
+            if ( distancesquared( var_24, var_15.origin ) > 1 )
                 continue;
         }
 
@@ -349,10 +349,10 @@ _id_6E16( var_0, var_1 )
 
 _id_8D45( var_0 )
 {
-    var_0 _meth_80B7( var_0._id_01FF + 500000, var_0._id_02EA );
+    var_0 dodamage( var_0.health + 500000, var_0.origin );
 }
 
 _id_8D58()
 {
-    self [[ _id_11EC( "on_damaged" ) ]]( level, undefined, self._id_01FF + 1, 0, "MOD_CRUSH", "none", ( 0, 0, 0 ), ( 0, 0, 0 ), "none", 0 );
+    self [[ _id_11EC( "on_damaged" ) ]]( level, undefined, self.health + 1, 0, "MOD_CRUSH", "none", ( 0, 0, 0 ), ( 0, 0, 0 ), "none", 0 );
 }

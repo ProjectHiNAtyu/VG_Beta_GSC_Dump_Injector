@@ -8,7 +8,7 @@ _id_10274( var_0, var_1 )
 
     if ( !isdefined( var_3 ) && istrue( var_1 ) )
     {
-        var_3 = _func_020F();
+        var_3 = spawnstruct();
         var_2._id_4335[var_0] = var_3;
         var_3._id_C17B = var_0;
         var_3._id_9C64 = 0;
@@ -34,11 +34,11 @@ _id_10267( var_0, var_1, var_2 )
 
     if ( _id_10271() < var_3._id_9C64 )
     {
-        if ( [[ _id_099D::_id_6D05( "vehicle_spawn", "canSpawnVehicle" ) ]]( var_0 ) )
+        if ( [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_spawn", "canSpawnVehicle" ) ]]( var_0 ) )
         {
             if ( isdefined( var_0 ) )
             {
-                if ( !_id_09BC::_id_102BF( var_0 ) || !_id_09BC::_id_102B7( var_0, var_1, var_2 ) )
+                if ( !scripts\cp_mp\vehicles\vehicle_tracking::_id_102BF( var_0 ) || !scripts\cp_mp\vehicles\vehicle_tracking::_id_102B7( var_0, var_1, var_2 ) )
                 {
                     var_4 = _id_10274( var_0 );
 
@@ -60,14 +60,14 @@ _id_10267( var_0, var_1, var_2 )
     return 0;
 }
 
-_id_1028C( var_0, var_1, var_2 )
+vehicle_spawn_spawnvehicle( var_0, var_1, var_2 )
 {
     var_3 = _id_10274( var_0 );
 
     if ( _id_1027A() )
     {
-        var_4 = _id_0999::_id_6B0E();
-        var_5 = _id_09BC::_id_102BA( var_0 );
+        var_4 = scripts\cp_mp\utility\game_utility::_id_6B0E();
+        var_5 = scripts\cp_mp\vehicles\vehicle_tracking::_id_102BA( var_0 );
 
         if ( var_5.size > 0 )
             return;
@@ -76,26 +76,26 @@ _id_1028C( var_0, var_1, var_2 )
         {
             if ( var_4 == "mp_downtown_gw" )
             {
-                var_1._id_02EA = ( 44455, -12715, 108 );
-                var_1._id_0054 = ( 360, 315, 0 );
+                var_1.origin = ( 44455, -12715, 108 );
+                var_1.angles = ( 360, 315, 0 );
             }
             else if ( var_4 == "mp_farms2_gw" )
             {
-                var_1._id_02EA = ( 45735, -12397, 121 );
-                var_1._id_0054 = ( 0, 358, 0 );
+                var_1.origin = ( 45735, -12397, 121 );
+                var_1.angles = ( 0, 358, 0 );
             }
             else if ( var_4 == "mp_quarry2" )
             {
-                var_1._id_02EA = ( 29480, 33349, 589 );
-                var_1._id_0054 = ( 0, 202, 0 );
+                var_1.origin = ( 29480, 33349, 589 );
+                var_1.angles = ( 0, 202, 0 );
             }
         }
         else if ( var_0 == "large_transport" )
         {
             if ( var_4 == "mp_downtown_gw" )
             {
-                var_1._id_02EA = ( 20845, -12233, -57 );
-                var_1._id_0054 = ( 7, 81, 0 );
+                var_1.origin = ( 20845, -12233, -57 );
+                var_1.angles = ( 7, 81, 0 );
             }
             else if ( var_4 == "mp_farms2_gw" )
                 return;
@@ -106,44 +106,44 @@ _id_1028C( var_0, var_1, var_2 )
         {
             if ( var_4 == "mp_downtown_gw" )
             {
-                var_1._id_02EA = ( 20845, -12233, -57 );
-                var_1._id_0054 = ( 7, 81, 0 );
+                var_1.origin = ( 20845, -12233, -57 );
+                var_1.angles = ( 7, 81, 0 );
             }
             else if ( var_4 == "mp_farms2_gw" )
             {
-                var_1._id_02EA = ( 44559, -12331, 87 );
-                var_1._id_0054 = ( 0, 11, 0 );
+                var_1.origin = ( 44559, -12331, 87 );
+                var_1.angles = ( 0, 11, 0 );
             }
             else if ( var_4 == "mp_quarry2" )
             {
-                var_1._id_02EA = ( 29135, 33754, 605 );
-                var_1._id_0054 = ( 0, 7, 0 );
+                var_1.origin = ( 29135, 33754, 605 );
+                var_1.angles = ( 0, 7, 0 );
             }
         }
         else if ( var_0 == "atv" )
         {
             if ( var_4 == "mp_downtown_gw" )
             {
-                var_1._id_02EA = ( 22421, -13456, -48 );
-                var_1._id_0054 = ( 13, 36, 0 );
+                var_1.origin = ( 22421, -13456, -48 );
+                var_1.angles = ( 13, 36, 0 );
             }
             else if ( var_4 == "mp_farms2_gw" )
             {
-                var_1._id_02EA = ( 45202, -11294, 149 );
-                var_1._id_0054 = ( 0, 283, 0 );
+                var_1.origin = ( 45202, -11294, 149 );
+                var_1.angles = ( 0, 283, 0 );
             }
             else if ( var_4 == "mp_quarry2" )
             {
-                var_1._id_02EA = ( 29250, 35115, 616 );
-                var_1._id_0054 = ( 0, 321, 0 );
+                var_1.origin = ( 29250, 35115, 616 );
+                var_1.angles = ( 0, 321, 0 );
             }
         }
         else if ( var_0 == "technical" )
         {
             if ( var_4 == "mp_downtown_gw" )
             {
-                var_1._id_02EA = ( 22742, -12693, -56 );
-                var_1._id_0054 = ( 360, 315, 0 );
+                var_1.origin = ( 22742, -12693, -56 );
+                var_1.angles = ( 360, 315, 0 );
             }
             else if ( var_4 == "mp_farms2_gw" )
                 return;
@@ -154,72 +154,72 @@ _id_1028C( var_0, var_1, var_2 )
         {
             if ( var_4 == "mp_downtown_gw" )
             {
-                var_1._id_02EA = ( 22787, -13503, -56 );
-                var_1._id_0054 = ( 3, 269, 0 );
+                var_1.origin = ( 22787, -13503, -56 );
+                var_1.angles = ( 3, 269, 0 );
             }
             else if ( var_4 == "mp_farms2_gw" )
             {
-                var_1._id_02EA = ( 45259, -12740, 63 );
-                var_1._id_0054 = ( 0, 274, 0 );
+                var_1.origin = ( 45259, -12740, 63 );
+                var_1.angles = ( 0, 274, 0 );
             }
             else if ( var_4 == "mp_quarry2" )
             {
-                var_1._id_02EA = ( 32524, 34558, 599 );
-                var_1._id_0054 = ( 0, 107, 0 );
+                var_1.origin = ( 32524, 34558, 599 );
+                var_1.angles = ( 0, 107, 0 );
             }
         }
         else if ( var_0 == "little_bird" )
         {
             if ( var_4 == "mp_downtown_gw" )
             {
-                var_1._id_02EA = ( 21108, -12603, 100 );
-                var_1._id_0054 = ( 6, 353, 0 );
+                var_1.origin = ( 21108, -12603, 100 );
+                var_1.angles = ( 6, 353, 0 );
             }
             else if ( var_4 == "mp_farms2_gw" )
             {
-                var_1._id_02EA = ( 46478, -12482, 400 );
-                var_1._id_0054 = ( 0, 84, 0 );
+                var_1.origin = ( 46478, -12482, 400 );
+                var_1.angles = ( 0, 84, 0 );
             }
             else if ( var_4 == "mp_quarry2" )
             {
-                var_1._id_02EA = ( 28735, 34000, 767 );
-                var_1._id_0054 = ( 0, 80, 0 );
+                var_1.origin = ( 28735, 34000, 767 );
+                var_1.angles = ( 0, 80, 0 );
             }
         }
         else if ( var_0 == "cargo_truck" )
         {
             if ( var_4 == "mp_downtown_gw" )
             {
-                var_1._id_02EA = ( 23503, -12799, -56 );
-                var_1._id_0054 = ( 6, 359, 0 );
+                var_1.origin = ( 23503, -12799, -56 );
+                var_1.angles = ( 6, 359, 0 );
             }
             else if ( var_4 == "mp_farms2_gw" )
             {
-                var_1._id_02EA = ( 45644, -11370, 160 );
-                var_1._id_0054 = ( 0, 80, 0 );
+                var_1.origin = ( 45644, -11370, 160 );
+                var_1.angles = ( 0, 80, 0 );
             }
             else if ( var_4 == "mp_quarry2" )
             {
-                var_1._id_02EA = ( 29280, 35546, 626 );
-                var_1._id_0054 = ( 0, 148, 0 );
+                var_1.origin = ( 29280, 35546, 626 );
+                var_1.angles = ( 0, 148, 0 );
             }
         }
         else if ( var_0 == "jeep" )
         {
             if ( var_4 == "mp_downtown_gw" )
             {
-                var_1._id_02EA = ( 22781, -14070, -56 );
-                var_1._id_0054 = ( 5, 86, 0 );
+                var_1.origin = ( 22781, -14070, -56 );
+                var_1.angles = ( 5, 86, 0 );
             }
             else if ( var_4 == "mp_farms2_gw" )
             {
-                var_1._id_02EA = ( 46119, -11995, 168 );
-                var_1._id_0054 = ( 0, 4, 0 );
+                var_1.origin = ( 46119, -11995, 168 );
+                var_1.angles = ( 0, 4, 0 );
             }
             else if ( var_4 == "mp_quarry2" )
             {
-                var_1._id_02EA = ( 30351, 34420, 593 );
-                var_1._id_0054 = ( 0, 31, 0 );
+                var_1.origin = ( 30351, 34420, 593 );
+                var_1.angles = ( 0, 31, 0 );
             }
         }
         else
@@ -263,12 +263,12 @@ _id_10288( var_0, var_1 )
 
 _id_10270()
 {
-    return [[ _id_099D::_id_6D05( "vehicle_spawn", "gameModeSupportsRespawn" ) ]]();
+    return [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_spawn", "gameModeSupportsRespawn" ) ]]();
 }
 
 _id_10275()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     level._id_FFF1._id_E09B = var_0;
     var_0._id_9C64 = 128;
     var_0._id_4335 = [];
@@ -279,7 +279,7 @@ _id_10275()
     var_0._id_C691 = getdvarint( "scr_respawnVehicleDelay", 60 );
     var_0._id_0DD9 = getdvarint( "scr_abandonedVehicleTimeout", 30 );
     _id_10278();
-    [[ _id_099D::_id_6D05( "vehicle_spawn", "init" ) ]]();
+    [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_spawn", "init" ) ]]();
     _id_10277();
 }
 
@@ -287,8 +287,8 @@ _id_10277()
 {
     thread _id_1028A();
 
-    if ( _id_099D::_id_8A10( "vehicle_spawn", "initLate" ) )
-        [[ _id_099D::_id_6D05( "vehicle_spawn", "initLate" ) ]]();
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_spawn", "initLate" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_spawn", "initLate" ) ]]();
 }
 
 _id_1028A()
@@ -317,9 +317,9 @@ _id_1028A()
     if ( var_1.size > 0 )
     {
         if ( var_1.size > 1 )
-            var_1 = _id_077B::_id_1BAE( var_1, ::_id_1028B );
+            var_1 = scripts\engine\utility::_id_1BAE( var_1, ::_id_1028B );
 
-        var_5 = isdefined( _id_0999::_id_6AF9() );
+        var_5 = isdefined( scripts\cp_mp\utility\game_utility::_id_6AF9() );
 
         if ( _id_1027A() )
             var_5 = 0;
@@ -338,12 +338,12 @@ _id_1028A()
 
                 if ( _id_10267( var_3._id_C17B ) )
                 {
-                    var_10 = _func_020F();
-                    var_10._id_02EA = var_9._id_02EA;
-                    var_10._id_0054 = var_9._id_0054;
-                    var_10._id_E39A = "LEVEL";
-                    var_11 = _func_020F();
-                    var_12 = _id_1028C( var_3._id_C17B, var_10, var_11 );
+                    var_10 = spawnstruct();
+                    var_10.origin = var_9.origin;
+                    var_10.angles = var_9.angles;
+                    var_10.spawntype = "LEVEL";
+                    var_11 = spawnstruct();
+                    var_12 = vehicle_spawn_spawnvehicle( var_3._id_C17B, var_10, var_11 );
 
                     if ( !isdefined( var_12 ) )
                     {
@@ -465,20 +465,20 @@ _id_10268( var_0, var_1, var_2, var_3, var_4 )
     var_13 = var_2;
 
     if ( !isdefined( var_13 ) )
-        var_13 = _func_02C4( [ "physicscontents_vehicle" ] );
+        var_13 = physics_createcontents( [ "physicscontents_vehicle" ] );
 
     var_14 = var_3;
 
     if ( !isdefined( var_14 ) )
     {
         var_14 = [];
-        var_14[var_14.size] = _id_09BC::_id_102BA( "emp_drone" );
-        var_14[var_14.size] = _id_09BC::_id_102BA( "cruise_predator" );
+        var_14[var_14.size] = scripts\cp_mp\vehicles\vehicle_tracking::_id_102BA( "emp_drone" );
+        var_14[var_14.size] = scripts\cp_mp\vehicles\vehicle_tracking::_id_102BA( "cruise_predator" );
 
         if ( isdefined( level._id_EB97 ) )
             var_14[var_14.size] = level._id_EB97;
 
-        var_14 = _id_077B::_id_1B73( var_14 );
+        var_14 = scripts\engine\utility::_id_1B73( var_14 );
     }
 
     var_15 = isbotmatchmakingenabled( var_11, var_12, var_13, var_14 );
@@ -503,7 +503,7 @@ _id_10268( var_0, var_1, var_2, var_3, var_4 )
 
                 var_20 = playrumbleonposition( var_9 + var_19, 2 );
 
-                if ( isdefined( var_20 ) && var_20 < distance2dsquared( var_17._id_02EA, var_0 ) )
+                if ( isdefined( var_20 ) && var_20 < distance2dsquared( var_17.origin, var_0 ) )
                     continue;
 
                 return 0;
@@ -528,7 +528,7 @@ _id_10289( var_0, var_1 )
     var_2._id_38FC[var_0] = var_1;
 }
 
-vehicle_spawn_spawnvehicle( var_0, var_1, var_2 )
+_id_1028E( var_0, var_1, var_2 )
 {
     level endon( "game_ended" );
     level endon( "cancel_pending_vehicle_respawns" );
@@ -564,9 +564,9 @@ vehicle_spawn_spawnvehicle( var_0, var_1, var_2 )
 
         if ( _id_10267( var_0 ) )
         {
-            if ( _id_10268( var_1._id_02EA, var_0 ) )
+            if ( _id_10268( var_1.origin, var_0 ) )
             {
-                var_6 = _id_1028C( var_0, var_1, var_2 );
+                var_6 = vehicle_spawn_spawnvehicle( var_0, var_1, var_2 );
 
                 if ( !isdefined( var_6 ) )
                     continue;
@@ -589,7 +589,7 @@ _id_10266()
 
 _id_1026F()
 {
-    return [[ _id_099D::_id_6D05( "vehicle_spawn", "gameModeSupportsAbandonedTimeout" ) ]]();
+    return [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_spawn", "gameModeSupportsAbandonedTimeout" ) ]]();
 }
 
 _id_1028F()
@@ -655,7 +655,7 @@ vehicle_spawn()
 
         if ( isdefined( var_1 ) )
         {
-            self._id_01FF = int( _func_0148( var_1, self._id_01FF ) );
+            self.health = int( min( var_1, self.health ) );
             _id_09A1::_id_10390( self );
         }
 
@@ -684,7 +684,7 @@ _id_1027A()
 
 _id_1027B()
 {
-    var_0 = _id_0999::_id_6B0E();
+    var_0 = scripts\cp_mp\utility\game_utility::_id_6B0E();
 
     switch ( var_0 )
     {

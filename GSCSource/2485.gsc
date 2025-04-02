@@ -63,7 +63,7 @@ _id_1001C( var_0, var_1 )
         return;
     }
 
-    foreach ( var_4 in level._id_B758 )
+    foreach ( var_4 in level.players )
         _id_1001D( var_0, var_4 );
 }
 
@@ -80,15 +80,15 @@ _id_1001B( var_0 )
 
 _id_10019( var_0, var_1 )
 {
-    if ( _id_099D::_id_8A10( "vehicle_compass", "shouldBeVisibleToPlayer" ) )
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_compass", "shouldBeVisibleToPlayer" ) )
     {
-        var_2 = [[ _id_099D::_id_6D05( "vehicle_compass", "shouldBeVisibleToPlayer" ) ]]( var_0, var_1 );
+        var_2 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_compass", "shouldBeVisibleToPlayer" ) ]]( var_0, var_1 );
 
         if ( isdefined( var_2 ) )
             return var_2;
     }
 
-    if ( !_id_09B4::_id_10122( var_0, var_1 ) )
+    if ( !scripts\cp_mp\vehicles\vehicle::_id_10122( var_0, var_1 ) )
         return 0;
 
     return 1;
@@ -103,10 +103,10 @@ _id_1001A( var_0 )
 
     if ( isdefined( var_1._id_82E6[var_0 getentitynumber()] ) )
     {
-        if ( level._id_EF62 )
-            _id_10018( var_0, _id_09BA::_id_101AB( var_0 ) );
+        if ( level.teambased )
+            _id_10018( var_0, scripts\cp_mp\vehicles\vehicle_occupancy::_id_101AB( var_0 ) );
         else
-            _id_10017( var_0, _id_09BA::_id_101A6( var_0 ) );
+            _id_10017( var_0, scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A6( var_0 ) );
 
         _id_1001C( var_0, 1 );
     }
@@ -131,23 +131,23 @@ _id_10018( var_0, var_1 )
 
 _id_10017( var_0, var_1 )
 {
-    var_0 _meth_8312( undefined );
+    var_0 setentityowner( undefined );
 }
 
 _id_10010()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     level._id_FFF1._id_3AE2 = var_0;
     var_0._id_82E6 = [];
     var_1 = 0;
 
-    if ( _id_099D::_id_8A10( "game", "runLeanThreadMode" ) )
-        var_1 = [[ _id_099D::_id_6D05( "game", "runLeanThreadMode" ) ]]();
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "game", "runLeanThreadMode" ) )
+        var_1 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "game", "runLeanThreadMode" ) ]]();
 
     var_0._id_10412 = !var_1 || getdvarint( "scr_vehicleCompassVisibilityIsScriptControlled", 0 ) > 0;
 
-    if ( _id_099D::_id_8A10( "vehicle_compass", "init" ) )
-        [[ _id_099D::_id_6D05( "vehicle_compass", "init" ) ]]();
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_compass", "init" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_compass", "init" ) ]]();
 }
 
 _id_1000E()
@@ -163,7 +163,7 @@ _id_1000D( var_0, var_1, var_2 )
     if ( !var_4 )
         return;
 
-    if ( level._id_EF62 )
+    if ( level.teambased )
         _id_10018( var_0, var_2 );
     else
         _id_10017( var_0, var_2 );
@@ -173,7 +173,7 @@ _id_1000D( var_0, var_1, var_2 )
 
 _id_10014( var_0 )
 {
-    if ( !level._id_EF62 )
+    if ( !level.teambased )
         return;
 
     _id_1001B( var_0 );

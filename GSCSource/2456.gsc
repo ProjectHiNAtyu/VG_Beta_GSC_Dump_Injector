@@ -9,7 +9,7 @@ _id_AC2B( var_0, var_1, var_2, var_3, var_4 )
     if ( !isdefined( game["dialog"][var_0] ) )
         return;
 
-    var_5 = _id_6DB6( self._id_0309["team"] );
+    var_5 = _id_6DB6( self.pers["team"] );
 
     if ( isdefined( var_4 ) )
         var_5 = var_4;
@@ -35,8 +35,8 @@ _id_B894()
 
     var_0 = self;
 
-    if ( isdefined( self._id_02F2 ) )
-        var_0 = self._id_02F2;
+    if ( isdefined( self.owner ) )
+        var_0 = self.owner;
 
     var_0 _meth_8286( "dx_mpo_static_crash", "static_crash", 2 );
 }

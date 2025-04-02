@@ -11,9 +11,9 @@ _id_AB4E( var_0 )
     var_3 = undefined;
     var_4 = undefined;
 
-    if ( var_0._id_006E == var_0._id_103C0 && !istrue( var_4 ) )
+    if ( var_0.attacker == var_0._id_103C0 && !istrue( var_4 ) )
     {
-        var_2 = distancesquared( var_0._id_103C0._id_02EA, var_0._id_0317 );
+        var_2 = distancesquared( var_0._id_103C0.origin, var_0._id_0317 );
 
         if ( var_2 > 65536 )
             return 0;
@@ -23,16 +23,16 @@ _id_AB4E( var_0 )
             var_3 = _func_0213( var_2 );
     }
     else
-        var_3 = distance( var_0._id_103C0._id_02EA, var_0._id_0317 );
+        var_3 = distance( var_0._id_103C0.origin, var_0._id_0317 );
 
-    if ( var_0._id_103C0 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_stun_resistance" ) && var_0._id_006E != var_0._id_103C0 )
+    if ( var_0._id_103C0 scripts\mp\utility\perk::_hasperk( "specialty_stun_resistance" ) && var_0.attacker != var_0._id_103C0 )
     {
-        var_0._id_006E _id_079B::_id_FC44( "hittacresist", undefined, undefined, undefined, 1 );
+        var_0.attacker _id_079B::_id_FC44( "hittacresist", undefined, undefined, undefined, 1 );
 
-        if ( _id_099C::_id_B779( var_0._id_006E, var_0._id_103C0 ) )
-            var_0._id_103C0 _id_0793::_id_C663( var_0._id_006E );
+        if ( scripts\cp_mp\utility\player_utility::_id_B779( var_0.attacker, var_0._id_103C0 ) )
+            var_0._id_103C0 _id_0793::_id_C663( var_0.attacker );
 
-        var_0._id_103C0 thread _id_19AA( var_0._id_006E, 3.6 );
+        var_0._id_103C0 thread _id_19AA( var_0.attacker, 3.6 );
     }
     else
     {
@@ -40,26 +40,26 @@ _id_AB4E( var_0 )
         var_5 = 1 - ( var_3 - 0 ) / 540;
         var_1 = var_1 + floor( var_5 * 65 );
 
-        if ( _id_077B::_id_10E74( var_0._id_103C0._id_02EA, var_0._id_103C0 getplayerangles(), var_0._id_0317, 0.5 ) )
+        if ( scripts\engine\utility::_id_10E74( var_0._id_103C0.origin, var_0._id_103C0 getplayerangles(), var_0._id_0317, 0.5 ) )
             var_1 = var_1 + 35;
 
-        if ( !_id_099C::_id_B779( var_0._id_006E, var_0._id_103C0 ) )
+        if ( !scripts\cp_mp\utility\player_utility::_id_B779( var_0.attacker, var_0._id_103C0 ) )
         {
             if ( !istrue( var_4 ) )
             {
-                if ( var_0._id_006E == var_0._id_103C0 )
+                if ( var_0.attacker == var_0._id_103C0 )
                     var_1 = var_1 + -30;
                 else
                     var_1 = var_1 + -30;
             }
         }
 
-        var_1 = _func_0147( 0, var_1 );
+        var_1 = max( 0, var_1 );
         var_6 = var_1 / 100;
         var_7 = 4.0 + 2.0 * var_6;
-        var_0._id_103C0 thread _id_19AA( var_0._id_006E, var_7 );
-        var_0._id_006E _id_079A::_id_3A9F( "equip_flash" );
-        var_0._id_006E _id_0A7B::_id_7D93( "flashbangHits", 1 );
+        var_0._id_103C0 thread _id_19AA( var_0.attacker, var_7 );
+        var_0.attacker _id_079A::_id_3A9F( "equip_flash" );
+        var_0.attacker _id_0A7B::_id_7D93( "flashbangHits", 1 );
     }
 }
 
@@ -67,11 +67,11 @@ _id_19AA( var_0, var_1 )
 {
     self endon( "disconnect" );
 
-    if ( _id_0A74::_id_8AB5() )
+    if ( scripts\mp\utility\player::_id_8AB5() )
         return;
 
-    if ( _id_0A69::_id_8744() || level._id_60D1 == "br" && var_0 scripts\mp\gametypes\br_public::_id_8976() )
-        var_1 = _func_0148( _id_077B::_id_F07F( level._id_ED29 <= 3, level._id_ED29 + 1.5, level._id_ED29 ), var_1 );
+    if ( scripts\mp\utility\game::_id_8744() || level.gametype == "br" && var_0 scripts\mp\gametypes\br_public::_id_8976() )
+        var_1 = min( scripts\engine\utility::ter_op( level._id_ED29 <= 3, level._id_ED29 + 1.5, level._id_ED29 ), var_1 );
 
     self notify( "applyFlash" );
     self endon( "applyFlash" );
@@ -80,25 +80,25 @@ _id_19AA( var_0, var_1 )
     {
         self._id_5C76 = 1;
         scripts\mp\weapons::_id_D64E();
-        _id_0A74::_id_78E8();
+        scripts\mp\utility\player::_id_78E8();
     }
 
     _id_099F::_id_0CD0( "flash_grenade_mp", "flash", var_1, 1 );
-    _id_0A74::_id_39FC( "flash", var_1 );
+    scripts\mp\utility\player::_id_39FC( "flash", var_1 );
 
-    if ( _id_099C::_id_B779( self, var_0 ) )
+    if ( scripts\cp_mp\utility\player_utility::_id_B779( self, var_0 ) )
     {
         var_0 _id_0793::_id_AB9D( "equip_flash" );
-        thread _id_07AE::_id_F3F8( var_0, self, "flash_grenade_mp", var_1 );
+        thread scripts\mp\gamescore::_id_F3F8( var_0, self, "flash_grenade_mp", var_1 );
     }
 
-    if ( _id_0A69::_id_8744() )
-        var_1 = _func_0147( 0, var_1 );
+    if ( scripts\mp\utility\game::_id_8744() )
+        var_1 = max( 0, var_1 );
     else
-        var_1 = _func_0147( 0, var_1 - 0.5 );
+        var_1 = max( 0, var_1 - 0.5 );
 
-    _id_077B::_id_108F3( "death", var_1 );
-    thread _id_391C( !_id_0A74::_id_89D3( self ), var_0 );
+    scripts\engine\utility::_id_108F3( "death", var_1 );
+    thread _id_391C( !scripts\mp\utility\player::isreallyalive( self ), var_0 );
 }
 
 _id_391C( var_0, var_1 )
@@ -110,7 +110,7 @@ _id_391C( var_0, var_1 )
         if ( !istrue( var_0 ) )
         {
             scripts\mp\weapons::_id_D66C();
-            _id_0A74::_id_78E6();
+            scripts\mp\utility\player::_id_78E6();
         }
     }
 
@@ -119,5 +119,5 @@ _id_391C( var_0, var_1 )
 
 _id_2EC6( var_0 )
 {
-    return _func_0147( 0, var_0 - 1.5 ) * 1000;
+    return max( 0, var_0 - 1.5 ) * 1000;
 }

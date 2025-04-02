@@ -39,11 +39,11 @@ _id_0D88()
             if ( !isdefined( var_1 ) )
                 continue;
 
-            var_2 = _id_06BB::_id_B7B4( var_1._id_02EA, 300 );
+            var_2 = scripts\common\utility::_id_B7B4( var_1.origin, 300 );
 
             foreach ( var_4 in var_2 )
             {
-                if ( !istrue( _id_099C::_id_B779( var_4, var_1._id_02F2 ) || getdvarint( "scr_interact_allied_equipment", 0 ) == 1 ) || isdefined( var_1._id_8870 ) && var_1._id_8870 || istrue( var_1._id_8765 ) || !var_4 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_hack" ) || var_4 _id_0764::_id_8599() || level._id_609B )
+                if ( !istrue( scripts\cp_mp\utility\player_utility::_id_B779( var_4, var_1.owner ) || getdvarint( "scr_interact_allied_equipment", 0 ) == 1 ) || isdefined( var_1._id_8870 ) && var_1._id_8870 || istrue( var_1._id_8765 ) || !var_4 scripts\mp\utility\perk::_hasperk( "specialty_hack" ) || var_4 _id_0764::_id_8599() || level._id_609B )
                 {
                     var_1 _meth_86A6( var_4 );
                     continue;
@@ -64,9 +64,9 @@ _id_C330( var_0, var_1, var_2 )
 _id_0BEF( var_0 )
 {
     level._id_FE96[self getentitynumber()] = self;
-    self _meth_8373( "hack_usable", "on" );
+    self setscriptablepartstate( "hack_usable", "on" );
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
         self _meth_86A6( var_2 );
 }
 
@@ -82,7 +82,7 @@ _id_0C79( var_0 )
 
     while ( var_2 > gettime() )
     {
-        if ( !self useanimtree() )
+        if ( !self usebuttonpressed() )
             return 0;
 
         waitframe();
@@ -103,13 +103,13 @@ _id_0D5E( var_0, var_1 )
     if ( var_2 )
     {
         var_1._id_8398 = 2;
-        var_3 = _id_07F2::_id_698D();
+        var_3 = scripts\mp\supers::getcurrentsuper();
 
         if ( var_3._id_E768._id_C17B == "super_hijack" )
         {
             self._id_7922 = 1;
-            var_4 = _func_020F();
-            var_4._id_0084 = "s4_super_default_mp";
+            var_4 = spawnstruct();
+            var_4.basename = "s4_super_default_mp";
             self notify( "special_weapon_fired", var_4 );
         }
     }
@@ -130,7 +130,7 @@ _id_0D5E( var_0, var_1 )
             return;
 
         if ( isdefined( var_0 ) )
-            var_0 scripts\engine\trace::_id_7342( self );
+            var_0 scripts\mp\equipment::_id_7342( self );
     }
 }
 
@@ -138,8 +138,8 @@ _id_0B90( var_0, var_1 )
 {
     level endon( "game_ended" );
     self endon( "disconnect" );
-    var_2 = _func_034C( "ks_remote_hack_mp" );
-    var_3 = _id_099B::_id_4034( "", self );
+    var_2 = makeweapon( "ks_remote_hack_mp" );
+    var_3 = scripts\cp_mp\utility\killstreak_utility::_id_4034( "", self );
     var_3._id_8398 = var_1;
     thread _id_0D80( var_0, var_1 );
     var_4 = 1;
@@ -163,29 +163,29 @@ _id_0D80( var_0, var_1 )
 
     if ( isdefined( var_0._id_5542 ) )
     {
-        var_3 = _func_0243( var_0._id_5542 );
-        var_2 = scripts\engine\trace::_id_69F8( var_3 )._id_7C71;
+        var_3 = tolower( var_0._id_5542 );
+        var_2 = scripts\mp\equipment::_id_69F8( var_3 )._id_7C71;
     }
-    else if ( isdefined( var_0._id_EA0B ) )
+    else if ( isdefined( var_0.streakinfo ) )
     {
-        var_2 = _id_0A6F::_id_6AC4( var_0._id_EA0B._id_EA0F );
+        var_2 = _id_0A6F::_id_6AC4( var_0.streakinfo._id_EA0F );
         var_2 = var_2 + 100;
     }
 
-    self _meth_82F6( "ui_hack_index", var_2 );
+    self setclientomnvar( "ui_hack_index", var_2 );
     _spawnvehicle( var_0 );
 
     if ( var_1 == 2 )
     {
-        self _meth_82F6( "ui_hack_progress", 1 );
+        self setclientomnvar( "ui_hack_progress", 1 );
         var_4 = getdvarfloat( "perk_hack_equipment_success_time", 0.5 );
         wait( var_4 );
     }
     else
-        self _meth_82F6( "ui_hack_progress", 0 );
+        self setclientomnvar( "ui_hack_progress", 0 );
 
     wait 0.1;
-    self _meth_82F6( "ui_hack_index", 0 );
+    self setclientomnvar( "ui_hack_index", 0 );
 }
 
 _spawnvehicle( var_0 )
@@ -204,7 +204,7 @@ _spawnvehicle( var_0 )
     {
         var_8 = ( gettime() - var_7 ) / var_5;
         var_8 = clamp( var_8, 0, 1 );
-        self _meth_82F6( "ui_hack_progress", var_8 );
+        self setclientomnvar( "ui_hack_progress", var_8 );
         wait 0.05;
 
         if ( gettime() > var_6 )
@@ -228,7 +228,7 @@ _id_0B69( var_0 )
 
     for (;;)
     {
-        if ( !self useanimtree() )
+        if ( !self usebuttonpressed() )
             break;
 
         waitframe();
@@ -264,20 +264,20 @@ _id_0B72()
 {
     level endon( "game_ended" );
     self endon( "disconnect" );
-    _id_077B::_id_1087E( "death", "tabletPutAway" );
+    scripts\engine\utility::waittill_any_2( "death", "tabletPutAway" );
     _id_0D6F( 0 );
 }
 
 _id_0D6F( var_0 )
 {
-    _id_0A74::_id_0BC5( var_0 );
+    scripts\mp\utility\player::_id_0BC5( var_0 );
 
-    if ( isai( self ) )
+    if ( isalive( self ) )
     {
-        _id_06BB::_id_1531( !var_0 );
-        _id_06BB::_id_1526( !var_0 );
-        _id_06BB::_id_1562( !var_0 );
-        _id_06BB::_id_152C( !var_0 );
-        _id_06BB::allow_equipment( !var_0 );
+        scripts\common\utility::_id_1531( !var_0 );
+        scripts\common\utility::_id_1526( !var_0 );
+        scripts\common\utility::_id_1562( !var_0 );
+        scripts\common\utility::_id_152C( !var_0 );
+        scripts\common\utility::allow_equipment( !var_0 );
     }
 }

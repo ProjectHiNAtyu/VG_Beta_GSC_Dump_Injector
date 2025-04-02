@@ -3,36 +3,36 @@
 
 _id_F1A5()
 {
-    _id_099D::_id_C2A5( "throwing_star", "onGive", ::_id_F1A6 );
-    _id_099D::_id_C2A5( "throwing_star", "onTake", ::_id_F1A8 );
-    _id_099D::_id_C2A5( "throwing_star", "onStuck", ::_id_F1A7 );
-    _id_099D::_id_C2A5( "throwing_star", "tryToPickup", ::_id_F1A9 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "throwing_star", "onGive", ::_id_F1A6 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "throwing_star", "onTake", ::_id_F1A8 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "throwing_star", "onStuck", ::_id_F1A7 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "throwing_star", "tryToPickup", ::_id_F1A9 );
 }
 
 _id_F1A6( var_0, var_1 )
 {
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_equip_throwingKnife" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_equip_throwingKnife" );
     thread _id_F1C5();
 }
 
 _id_F1A8( var_0, var_1 )
 {
-    if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_equip_throwingStar" ) )
-        scripts\mp\tac_ops\hostage_utility::_id_C4EF( "specialty_equip_throwingStar" );
+    if ( scripts\mp\utility\perk::_hasperk( "specialty_equip_throwingStar" ) )
+        scripts\mp\utility\perk::removeperk( "specialty_equip_throwingStar" );
 }
 
 _id_F1A7( var_0, var_1, var_2 )
 {
-    var_0 _meth_8373( "showLocation", "active", 0 );
+    var_0 setscriptablepartstate( "showLocation", "active", 0 );
     return 1;
 }
 
 _id_F1A9( var_0 )
 {
-    if ( scripts\engine\trace::_id_69F0( var_0 ) >= scripts\engine\trace::_id_69F3( var_0 ) )
+    if ( scripts\mp\equipment::_id_69F0( var_0 ) >= scripts\mp\equipment::_id_69F3( var_0 ) )
         return 0;
 
-    scripts\engine\trace::_id_7DD2( var_0 );
+    scripts\mp\equipment::_id_7DD2( var_0 );
     _id_079B::_id_7B50( "throwingStar" );
     return 1;
 }
@@ -46,9 +46,9 @@ _id_F1C5()
     for (;;)
     {
         var_1 = 0;
-        var_2 = self _meth_8570();
+        var_2 = self getheldoffhand();
 
-        if ( !_func_036F( var_2 ) && var_2._id_0084 == "throwingstar_fire_mp" )
+        if ( !isnullweapon( var_2 ) && var_2.basename == "throwingstar_fire_mp" )
             var_1 = 1;
 
         if ( !var_1 && !var_0 )
@@ -69,11 +69,11 @@ _id_F1C2()
     self endon( "death_or_disconnect" );
     self endon( "throwingStar_end_fx" );
     self._id_B856 = 1;
-    self _meth_8373( "equipMtovFXWorld", "neutral", 0 );
-    self _meth_8373( "equipMtovFXView", "active", 0 );
+    self setscriptablepartstate( "equipMtovFXWorld", "neutral", 0 );
+    self setscriptablepartstate( "equipMtovFXView", "active", 0 );
     var_0 = 0.4;
     wait( var_0 );
-    self _meth_8373( "equipMtovFXWorld", "active", 0 );
+    self setscriptablepartstate( "equipMtovFXWorld", "active", 0 );
 }
 
 _id_F1C4()
@@ -82,8 +82,8 @@ _id_F1C4()
 
     if ( istrue( self._id_B856 ) )
     {
-        self _meth_8373( "equipMtovFXWorld", "neutral", 0 );
-        self _meth_8373( "equipMtovFXView", "neutral", 0 );
+        self setscriptablepartstate( "equipMtovFXWorld", "neutral", 0 );
+        self setscriptablepartstate( "equipMtovFXView", "neutral", 0 );
     }
 
     self._id_B856 = undefined;

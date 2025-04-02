@@ -10,11 +10,11 @@ _id_CA45()
     {
         if ( getdvarint( "scr_tapeMeasure", 0 ) == 1 )
         {
-            var_2 = level._id_B758[0] _id_6CC5();
+            var_2 = level.players[0] _id_6CC5();
             var_1[var_1.size] = var_2;
             var_0 = _id_6DD5( var_1 );
             iprintlnbold( "Total Distance: " + var_0 );
-            _func_01D0( "scr_tapeMeasure", 0 );
+            setdvar( "scr_tapeMeasure", 0 );
         }
 
         if ( var_1.size > 0 )
@@ -34,7 +34,7 @@ _id_CA45()
 
 _id_6CC5()
 {
-    var_0 = _id_077A::_id_3EC3( 0, 1, 1, 1, 1, 0, 0 );
+    var_0 = scripts\engine\trace::_id_3EC3( 0, 1, 1, 1, 1, 0, 0 );
     var_1 = anglestoforward( self getplayerangles() );
     var_2 = self geteye() + var_1 * 90000;
     var_3 = _func_02BC( self geteye(), var_2, var_0, undefined, 0, "physicsquery_closest", 0 );

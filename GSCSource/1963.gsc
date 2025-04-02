@@ -5,12 +5,12 @@ _id_CE1D()
 {
     if ( !isdefined( self._id_CD58 ) || !isdefined( self._id_CD56 ) || !isdefined( self._id_036D ) )
     {
-        self _meth_809A();
+        self delete();
         return;
     }
 
-    if ( isdefined( self._id_0457 ) )
-        var_0 = getent( self._id_0457 )._id_02EA;
+    if ( isdefined( self.target ) )
+        var_0 = getent( self.target ).origin;
     else
         var_0 = "undefined";
 
@@ -30,15 +30,15 @@ _id_CE1D()
 
 _id_7145( var_0 )
 {
-    _func_0196( level._id_0BA3["mechanical explosion"], var_0 );
+    playfx( level._effect["mechanical explosion"], var_0 );
     earthquake( 0.15, 0.5, var_0, 250 );
 }
 
 _id_E060( var_0, var_1, var_2 )
 {
-    var_3 = _func_0205( "script_origin", ( 0, 0, 0 ) );
-    var_3._id_02EA = var_1;
-    var_3 playlocalsound( var_0 );
+    var_3 = spawn( "script_origin", ( 0, 0, 0 ) );
+    var_3.origin = var_1;
+    var_3 playloopsound( var_0 );
 
     if ( isdefined( var_2 ) )
         var_3 thread _id_E061( var_2 );
@@ -47,7 +47,7 @@ _id_E060( var_0, var_1, var_2 )
 _id_E061( var_0 )
 {
     level waittill( var_0 );
-    self _meth_809A();
+    self delete();
 }
 
 _id_6002()
@@ -94,7 +94,7 @@ _id_6002()
             {
                 if ( _func_0110( var_12 ) )
                 {
-                    var_4 _meth_809A();
+                    var_4 delete();
                     var_7--;
                     var_1[var_12] = undefined;
                 }
@@ -110,5 +110,5 @@ _id_6002()
 _id_2530( var_0 )
 {
     self waittill( "death" );
-    var_0 _meth_809A();
+    var_0 delete();
 }

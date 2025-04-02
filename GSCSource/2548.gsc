@@ -3,7 +3,7 @@
 
 _id_F68A()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     var_0._id_ED6C = [];
     var_0._id_ED6C[0] = "tag_barrel_1";
     var_0._id_ED6C[1] = "tag_barrel_2";
@@ -36,12 +36,12 @@ _id_F69B( var_0 )
     thread scripts\mp\weapons::_id_A0F3( self, var_0 );
     var_0 thread _id_F689();
     var_0 waittill( "missile_stuck", var_1 );
-    var_0 setorigin( self );
-    var_0 setneargoalnotifydist( 1 );
+    var_0 setotherent( self );
+    var_0 _meth_8357( 1 );
     var_0._id_8A5A = isdefined( self._id_EB06 ) && self._id_EB06._id_E768._id_04CE == "trophy_mp";
     var_0._id_EB2E = level._id_EB28._id_E76A["super_trophy"]._id_7C71;
     var_0._id_FE44 = 0;
-    var_2 = scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_rugged_eqp" );
+    var_2 = scripts\mp\utility\perk::_hasperk( "specialty_rugged_eqp" );
 
     if ( var_2 )
         var_0._id_758C = 1;
@@ -62,18 +62,18 @@ _id_F69B( var_0 )
     thread scripts\mp\weapons::_id_A0F2( self, var_0 );
     var_0 _id_07E9::_id_C2A4( "Tactical_Static", self );
     var_0._id_57B2 = _id_F679( var_0 );
-    var_3 = _id_077B::_id_F07F( var_2, 200, 100 );
+    var_3 = scripts\engine\utility::ter_op( var_2, 200, 100 );
     var_4 = "hitequip";
     var_0 thread _id_079A::_id_A0EC( var_3, var_4, ::_id_F688, ::_id_F687, 0 );
     var_0 _id_0764::_id_D151( ::_id_F673 );
-    var_0 _meth_8373( "visibility", "show", 0 );
+    var_0 setscriptablepartstate( "visibility", "show", 0 );
     var_0 thread _id_F67B();
 }
 
 _id_F67B()
 {
     self endon( "death" );
-    self _meth_8373( "effects", "activeLand" );
+    self setscriptablepartstate( "effects", "activeLand" );
     wait 0.1;
     thread _id_F67C();
     wait 0.2;
@@ -81,16 +81,16 @@ _id_F67B()
     thread scripts\mp\weapons::_id_ACC5( self );
     thread _id_F69C();
     thread _id_F69D();
-    thread scripts\engine\utility::_id_C330( ::_id_F694, 1, 1 );
+    thread _id_07A4::_id_C330( ::_id_F694, 1, 1 );
     thread _id_0A40::_id_CA27();
 }
 
 _id_F67C()
 {
     self endon( "death" );
-    self _meth_8373( "effects", "activeDeployStart" );
+    self setscriptablepartstate( "effects", "activeDeployStart" );
     wait( _id_F683() );
-    self _meth_8373( "effects", "activeDeployEnd" );
+    self setscriptablepartstate( "effects", "activeDeployEnd" );
 }
 
 _id_F689()
@@ -98,9 +98,9 @@ _id_F689()
     self endon( "death" );
     self endon( "missile_stuck" );
     var_0 = getdvarfloat( "scr_trophy_proj_hide_duration", 0 );
-    self _meth_8373( "visibility", "hide", 0 );
+    self setscriptablepartstate( "visibility", "hide", 0 );
     wait( var_0 );
-    self _meth_8373( "visibility", "show", 0 );
+    self setscriptablepartstate( "visibility", "show", 0 );
 }
 
 _id_F694( var_0 )
@@ -111,35 +111,35 @@ _id_F694( var_0 )
 _id_EC14()
 {
     thread _id_F67A( 0 );
-    self _meth_8373( "effects", "activeDestroyEnd", 0 );
+    self setscriptablepartstate( "effects", "activeDestroyEnd", 0 );
 }
 
 _id_F67E( var_0 )
 {
     thread _id_F67A( 0.1, var_0 );
-    self _meth_8373( "effects", "activeDestroyEnd", 0 );
+    self setscriptablepartstate( "effects", "activeDestroyEnd", 0 );
 }
 
 _id_F697( var_0 )
 {
     thread _id_F67A( 2.6, var_0 );
-    self _meth_8373( "effects", "activeDestroyStart", 0 );
+    self setscriptablepartstate( "effects", "activeDestroyStart", 0 );
     wait 2.5;
-    self _meth_8373( "effects", "activeDestroyEnd", 0 );
+    self setscriptablepartstate( "effects", "activeDestroyEnd", 0 );
 }
 
 _id_F67A( var_0, var_1 )
 {
     self notify( "death" );
-    self _meth_8373( "hack_usable", "off" );
-    self._id_02F2 _id_0793::_id_AAD4( "super_trophy", self._id_FE44 );
-    _id_0780::_id_9751( self._id_02F2, self._id_EB2E, self._id_FE44, istrue( var_1 ) );
+    self setscriptablepartstate( "hack_usable", "off" );
+    self.owner _id_0793::_id_AAD4( "super_trophy", self._id_FE44 );
+    _id_0780::_id_9751( self.owner, self._id_EB2E, self._id_FE44, istrue( var_1 ) );
     level._id_9ECB[self getentitynumber()] = undefined;
-    self _meth_82F0( 0 );
+    self setcandamage( 0 );
 
     if ( !istrue( self._id_8A5A ) )
     {
-        self _meth_8225();
+        self makeunusable();
         scripts\mp\weapons::_id_99D5();
     }
 
@@ -147,17 +147,17 @@ _id_F67A( var_0, var_1 )
     self._id_75D8 = undefined;
     self._id_57AE = 1;
 
-    if ( isdefined( self._id_02F2 ) )
+    if ( isdefined( self.owner ) )
     {
-        self._id_02F2 notify( "trophy_update", 0 );
-        self._id_02F2 scripts\mp\weapons::_id_C48A( self );
+        self.owner notify( "trophy_update", 0 );
+        self.owner scripts\mp\weapons::_id_C48A( self );
     }
 
     if ( isdefined( var_0 ) )
         wait( var_0 );
 
     _id_0765::_id_47E6();
-    self _meth_809A();
+    self delete();
 }
 
 _id_F69C()
@@ -175,7 +175,7 @@ _id_F69C()
 
     var_0 = _id_F674();
 
-    while ( isdefined( self._id_02F2 ) )
+    while ( isdefined( self.owner ) )
     {
         var_1 = _id_F675();
         var_2 = [];
@@ -183,7 +183,7 @@ _id_F69C()
         var_2[1] = level._id_9F67;
         var_2[2] = level._id_9ECB;
         var_2[3] = level._id_BD93;
-        var_3 = _id_077B::_id_1B73( var_2 );
+        var_3 = scripts\engine\utility::_id_1B73( var_2 );
 
         foreach ( var_5 in var_3 )
         {
@@ -196,25 +196,25 @@ _id_F69C()
             if ( _id_F676( var_5 ) )
                 continue;
 
-            var_6 = var_5._id_02F2;
+            var_6 = var_5.owner;
 
-            if ( !isdefined( var_6 ) && isdefined( var_5._id_10D06 ) && visionsetnight( var_5._id_10D06 ) == "grenade" )
+            if ( !isdefined( var_6 ) && isdefined( var_5._id_10D06 ) && weaponclass( var_5._id_10D06 ) == "grenade" )
                 var_6 = _func_00AF( var_5 );
 
             var_7 = 1;
 
             if ( var_7 )
             {
-                if ( isdefined( var_6 ) && !istrue( _id_099C::_id_B779( self._id_02F2, var_6 ) ) )
+                if ( isdefined( var_6 ) && !istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_6 ) ) )
                     continue;
             }
             else if ( var_5 == self )
                 continue;
 
-            if ( distancesquared( var_5._id_02EA, self._id_02EA ) > _id_F68D( var_5, 105625 ) )
+            if ( distancesquared( var_5.origin, self.origin ) > _id_F68D( var_5, 105625 ) )
                 continue;
 
-            var_8 = _func_02BC( var_1, var_5._id_02EA, var_0, [ self, var_5 ], 0, "physicsquery_closest" );
+            var_8 = _func_02BC( var_1, var_5.origin, var_0, [ self, var_5 ], 0, "physicsquery_closest" );
 
             if ( isdefined( var_8 ) && var_8.size > 0 )
                 continue;
@@ -228,30 +228,30 @@ _id_F69C()
 
 _id_F693( var_0 )
 {
-    self._id_02F2 _id_0A28::_id_6FD1();
-    self._id_02F2 thread _id_07AC::_id_F13A( "trophy_mp", 1, "hits" );
-    self._id_02F2 _id_0A7B::_id_7D93( "trophySystemHits", 1 );
-    self._id_02F2 _id_07F2::_id_3A9D( "super_trophy" );
+    self.owner scripts\mp\killstreaks\killstreaks::_id_6FD1();
+    self.owner thread scripts\mp\gamelogic::_id_F13A( "trophy_mp", 1, "hits" );
+    self.owner _id_0A7B::_id_7D93( "trophySystemHits", 1 );
+    self.owner scripts\mp\supers::_id_3A9D( "super_trophy" );
     self._id_FE44++;
-    var_0 _meth_82F0( 0 );
+    var_0 setcandamage( 0 );
     var_0._id_57AE = 1;
     var_0 _meth_83F7();
-    _id_F68F( var_0, "trophy_mp", self._id_02F2 );
-    _id_F699( var_0, var_0._id_02F2, self._id_02F2 );
-    var_1 = var_0._id_02EA;
+    _id_F68F( var_0, "trophy_mp", self.owner );
+    _id_F699( var_0, var_0.owner, self.owner );
+    var_1 = var_0.origin;
 
-    if ( !var_0 scripts\engine\trace::_id_AA9F() )
+    if ( !var_0 scripts\mp\equipment::_id_AA9F() )
     {
         if ( isdefined( var_0._id_EA0F ) && var_0._id_EA0F == "cruise_predator" )
             var_0 notify( "trophy_blocked" );
         else
-            var_0 _meth_809A();
+            var_0 delete();
     }
 
     var_2 = _id_F682( var_1 );
     var_3 = _id_F684( var_2 );
-    self _meth_8373( var_3, "active", 0 );
-    var_4 = _func_025B( self gettagorigin( var_2 ) - var_1 );
+    self setscriptablepartstate( var_3, "active", 0 );
+    var_4 = vectortoangles( self gettagorigin( var_2 ) - var_1 );
     var_5 = _func_0047( var_4, ( -90, 0, 0 ) );
     self._id_57B2 thread _id_F681( var_1, var_5 );
     self._id_16A4--;
@@ -265,14 +265,14 @@ _id_F699( var_0, var_1, var_2 )
     if ( !isdefined( var_0._id_5542 ) || var_0._id_5542 != "equip_snapshot_grenade" )
         return;
 
-    if ( !isdefined( var_0._id_02F2 ) || !isdefined( self._id_02F2 ) )
+    if ( !isdefined( var_0.owner ) || !isdefined( self.owner ) )
         return;
 
-    if ( !_id_0A74::_id_89D3( var_1 ) )
+    if ( !scripts\mp\utility\player::isreallyalive( var_1 ) )
         return;
 
     var_3 = var_2;
-    var_4 = var_1._id_02EA;
+    var_4 = var_1.origin;
     var_5 = _id_09EB::_id_DEB3( var_3, var_4 );
     _id_09EB::_id_DEAE( var_1, var_2, var_5 );
 }
@@ -287,52 +287,52 @@ _id_F69D()
 _id_F69E()
 {
     level endon( "game_ended" );
-    _id_07B7::_id_1084D( 45 );
+    scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause( 45 );
 }
 
 _id_F687( var_0 )
 {
-    var_1 = var_0._id_006E;
-    var_2 = var_0._id_A90B;
+    var_1 = var_0.attacker;
+    var_2 = var_0.objweapon;
     var_3 = var_0._id_9CBF;
-    var_4 = var_0._id_0134;
+    var_4 = var_0.damage;
     var_5 = var_4;
     var_5 = _id_079A::_id_744C( var_2, var_3, var_5 );
     var_5 = _id_079A::_id_7401( var_2, var_3, var_5 );
-    scripts\mp\weapons::_id_553D( self._id_02F2, var_1, var_2, var_3 );
+    scripts\mp\weapons::_id_553D( self.owner, var_1, var_2, var_3 );
     return var_5;
 }
 
 _id_F688( var_0 )
 {
-    var_1 = var_0._id_006E;
+    var_1 = var_0.attacker;
     _id_F686( var_1 );
     thread _id_F67E( 1 );
 }
 
 _id_F673( var_0 )
 {
-    var_0._id_103C0 _id_F686( var_0._id_006E );
+    var_0._id_103C0 _id_F686( var_0.attacker );
     var_0._id_103C0 thread _id_F697( 1 );
 }
 
 _id_F691()
 {
-    if ( self._id_02F2 scripts\engine\trace::_id_753F( "equip_trophy" ) )
-        self._id_02F2 _id_F672( self._id_16A4 );
+    if ( self.owner scripts\mp\equipment::_id_753F( "equip_trophy" ) )
+        self.owner _id_F672( self._id_16A4 );
 }
 
 _id_F679( var_0 )
 {
-    var_1 = _func_0205( "script_model", var_0._id_02EA );
-    var_1._id_8D49 = var_0;
-    var_1._id_02F2 = var_0._id_02F2;
-    var_1._id_045B = var_0._id_045B;
+    var_1 = spawn( "script_model", var_0.origin );
+    var_1.killcament = var_0;
+    var_1.owner = var_0.owner;
+    var_1.team = var_0.team;
     var_1._id_5542 = var_0._id_5542;
     var_1._id_10D06 = var_0._id_10D06;
-    var_1 setorigin( var_1._id_02F2 );
-    var_1 _meth_8312( var_1._id_02F2 );
-    var_1 setmode( "trophy_system_mp_explode" );
+    var_1 setotherent( var_1.owner );
+    var_1 setentityowner( var_1.owner );
+    var_1 setmodel( "trophy_system_mp_explode" );
     var_1._id_578F = 1;
     var_1 thread _id_F677( var_0, 0.1 );
     return var_1;
@@ -340,35 +340,35 @@ _id_F679( var_0 )
 
 _id_F681( var_0, var_1 )
 {
-    self _meth_80BE();
-    self._id_02EA = var_0;
-    self._id_0054 = var_1;
+    self dontinterpolate();
+    self.origin = var_0;
+    self.angles = var_1;
 
     if ( self._id_578F )
     {
-        self _meth_8373( "explode1", "activeDirectional", 0 );
+        self setscriptablepartstate( "explode1", "activeDirectional", 0 );
         self._id_578F = 0;
     }
     else
     {
-        self _meth_8373( "explode2", "activeDirectional", 0 );
+        self setscriptablepartstate( "explode2", "activeDirectional", 0 );
         self._id_578F = 1;
     }
 }
 
 _id_F675()
 {
-    return self._id_02EA + anglestoup( self._id_0054 ) * 45;
+    return self.origin + anglestoup( self.angles ) * 45;
 }
 
 _id_F674()
 {
-    return _func_02C4( [ "physicscontents_missileclip", "physicscontents_vehicle", "physicscontents_glass", "physicscontents_water", "physicscontents_item" ] );
+    return physics_createcontents( [ "physicscontents_missileclip", "physicscontents_vehicle", "physicscontents_glass", "physicscontents_water", "physicscontents_item" ] );
 }
 
 _id_F68D( var_0, var_1 )
 {
-    if ( isdefined( var_0._id_10D06 ) && isdefined( var_0._id_02F2 ) )
+    if ( isdefined( var_0._id_10D06 ) && isdefined( var_0.owner ) )
     {
         switch ( var_0._id_10D06 )
         {
@@ -396,14 +396,14 @@ _id_F676( var_0 )
     var_1 = var_0._id_10D06;
 
     if ( !isdefined( var_1 ) && isdefined( var_0._id_10D0A ) )
-        var_1 = var_0._id_10D0A._id_0084;
+        var_1 = var_0._id_10D0A.basename;
 
     if ( isdefined( var_1 ) )
     {
-        if ( _id_0A7F::_id_88DC( var_1 ) && var_1 != "cruise_proj_mp" && var_1 != "apache_proj_mp" )
+        if ( scripts\mp\utility\weapon::_id_88DC( var_1 ) && var_1 != "cruise_proj_mp" && var_1 != "apache_proj_mp" )
             return 1;
 
-        if ( _id_0A7F::_id_875A( var_1 ) )
+        if ( scripts\mp\utility\weapon::_id_875A( var_1 ) )
             return 1;
 
         switch ( var_1 )
@@ -435,10 +435,10 @@ _id_F676( var_0 )
 
 _id_F68F( var_0, var_1, var_2 )
 {
-    if ( !isdefined( var_0._id_02F2 ) || !_func_0117( var_0._id_02F2 ) )
+    if ( !isdefined( var_0.owner ) || !isplayer( var_0.owner ) )
         return;
 
-    var_0._id_02F2 thread _id_079B::_id_FC44( "hittrophysystem" );
+    var_0.owner thread _id_079B::_id_FC44( "hittrophysystem" );
 
     if ( isdefined( var_0._id_10D06 ) )
     {
@@ -447,7 +447,7 @@ _id_F68F( var_0, var_1, var_2 )
             case "drone_hive_projectile_mp":
             case "jackal_cannon_mp":
             case "switch_blade_child_mp":
-                var_0._id_02F2 notify( "destroyed_by_trophy", var_2, var_1, var_0._id_10D06, var_0._id_02EA, var_0._id_0054 );
+                var_0.owner notify( "destroyed_by_trophy", var_2, var_1, var_0._id_10D06, var_0.origin, var_0.angles );
                 break;
         }
     }
@@ -464,7 +464,7 @@ _id_F682( var_0 )
         var_6 = self gettagorigin( var_5 );
         var_7 = self gettagangles( var_5 );
         var_8 = anglestoforward( var_7 );
-        var_9 = _func_0257( _func_025A( var_0 - var_6 ), var_8 );
+        var_9 = vectordot( vectornormalize( var_0 - var_6 ), var_8 );
 
         if ( var_10 == 0 || var_9 > var_2 )
         {
@@ -491,11 +491,11 @@ _id_F684( var_0 )
 
 _id_F686( var_0 )
 {
-    if ( istrue( _id_099C::_id_B779( self._id_02F2, var_0 ) ) )
+    if ( istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_0 ) ) )
     {
         var_0 notify( "destroyed_equipment" );
         var_0 thread _id_0A76::_id_6FE6( "destroyed_equipment" );
-        var_0 thread _id_0789::_id_553B( self );
+        var_0 thread scripts\mp\battlechatter_mp::_id_553B( self );
     }
 }
 
@@ -513,7 +513,7 @@ _id_F685( var_0 )
     if ( istrue( self._id_758C ) )
         var_1 = "hitequip";
 
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
         var_0 _id_079B::_id_FC44( var_1 );
 }
 
@@ -550,7 +550,7 @@ _id_F678()
 
 _id_F692()
 {
-    var_0 = scripts\engine\trace::_id_69F3( "equip_trophy" );
+    var_0 = scripts\mp\equipment::_id_69F3( "equip_trophy" );
 
     for ( var_1 = 0; var_1 < var_0; var_1++ )
         _id_F672();
@@ -558,7 +558,7 @@ _id_F692()
 
 _id_F68B()
 {
-    return scripts\engine\trace::_id_69F3( "equip_trophy" );
+    return scripts\mp\equipment::_id_69F3( "equip_trophy" );
 }
 
 _id_F68C( var_0, var_1, var_2, var_3, var_4 )
@@ -588,7 +588,7 @@ _id_F68C( var_0, var_1, var_2, var_3, var_4 )
     if ( isdefined( var_5 ) )
         var_6 = var_5 - var_3;
 
-    var_6 = _func_0148( var_6, var_4 );
+    var_6 = min( var_6, var_4 );
     return [ var_3, var_4 ];
 }
 
@@ -597,5 +597,5 @@ _id_F677( var_0, var_1 )
     self endon( "death" );
     var_0 waittill( "death" );
     wait( var_1 );
-    self _meth_809A();
+    self delete();
 }

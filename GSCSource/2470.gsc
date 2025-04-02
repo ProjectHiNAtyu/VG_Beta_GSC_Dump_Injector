@@ -3,7 +3,7 @@
 
 _id_2BE9()
 {
-    var_0 = _id_09B4::_id_100BF( "bronco_sfps_mp", 1 );
+    var_0 = scripts\cp_mp\vehicles\vehicle::_id_100BF( "bronco_sfps_mp", 1 );
     var_0._id_4820 = ::_id_2BE7;
     var_0._id_315D = 1;
     _id_2BEE();
@@ -12,8 +12,8 @@ _id_2BE9()
     _id_2BEA();
     _id_2BEB();
 
-    if ( _id_099D::_id_8A10( "bronco_sfps_mp", "init" ) )
-        [[ _id_099D::_id_6D05( "bronco_sfps_mp", "init" ) ]]();
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "bronco_sfps_mp", "init" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "bronco_sfps_mp", "init" ) ]]();
 
     _id_2BF0();
     _id_2BED();
@@ -21,19 +21,19 @@ _id_2BE9()
 
 _id_2BED()
 {
-    if ( _id_099D::_id_8A10( "bronco_sfps_mp", "initLate" ) )
-        [[ _id_099D::_id_6D05( "bronco_sfps_mp", "initLate" ) ]]();
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "bronco_sfps_mp", "initLate" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "bronco_sfps_mp", "initLate" ) ]]();
 }
 
 _id_2BEE()
 {
-    var_0 = _id_09BA::_id_101A1( "bronco_sfps_mp", 1 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A1( "bronco_sfps_mp", 1 );
     var_0._id_54C3 = ::_id_2BE4;
     var_0._id_54B6 = ::_id_2BE2;
-    var_0._id_5770 = _id_09BA::_id_10183;
+    var_0._id_5770 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10183;
     var_0._id_575B = ::_id_2BE5;
     var_0._id_C179 = ::_id_2BFA;
-    var_0._id_C718 = _id_09BA::_id_1018F();
+    var_0._id_C718 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1018F();
     var_0._id_575C["front"] = 95;
     var_0._id_575C["back"] = 195;
     var_0._id_575C["left"] = 55;
@@ -58,14 +58,14 @@ _id_2BEE()
     var_0._id_5758[var_1] = "back";
     var_2 = [ "driver" ];
     var_3 = "driver";
-    var_4 = _id_09BA::_id_101A0( "bronco_sfps_mp", var_3, 1 );
-    var_4._id_CFB8 = _id_09BA::_id_10188( var_3, var_2 );
+    var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( "bronco_sfps_mp", var_3, 1 );
+    var_4._id_CFB8 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10188( var_3, var_2 );
     var_4._id_5760 = [ var_3, "middle_left", "front_right", "front", "back" ];
     var_0._id_5768[var_3] = ( 40, 17, -40 );
     var_0._id_5758[var_3] = "left";
     var_4._id_18CA = "tag_seat_0";
-    var_4._id_5775 = _id_09BA::_id_1015D( var_4._id_18CA );
-    var_4._id_C718 = _id_09BA::_id_10192();
+    var_4._id_5775 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015D( var_4._id_18CA );
+    var_4._id_C718 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10192();
     var_4._id_E351 = 10;
     var_4._id_AAB3 = "ping_vehicle_pilot";
 }
@@ -88,7 +88,7 @@ _id_2BEA()
 {
     _id_09B6::_id_10067( "bronco_sfps_mp", 720 );
     var_0 = _id_09B6::_id_1003F( "bronco_sfps_mp" );
-    var_0._id_37D9 = "medium_heavy";
+    var_0.class = "medium_heavy";
     var_1 = _id_09B6::_id_1003E( "bronco_sfps_mp", "heavy" );
     var_1._id_AAB4 = ::_id_2BF8;
     var_1._id_AACA = ::_id_2BF9;
@@ -100,31 +100,31 @@ _id_2BEA()
 
 _id_2BEB()
 {
-    level._id_0BA3["bronco_explode"] = _func_0139( "vfx/iw8/prop/scriptables/vfx_vh8_mil_air_lbravo_debris.vfx" );
+    level._effect["bronco_explode"] = loadfx( "vfx/iw8/prop/scriptables/vfx_vh8_mil_air_lbravo_debris.vfx" );
 }
 
 _id_2BDF( var_0, var_1 )
 {
-    if ( !isdefined( var_0._id_0054 ) )
-        var_0._id_0054 = ( 0, 0, 0 );
+    if ( !isdefined( var_0.angles ) )
+        var_0.angles = ( 0, 0, 0 );
 
     var_0._id_02AF = "veh8_mil_lnd_mkilo23_physics_mp";
     var_0._id_045A = "bronco_sfps_mp";
     var_0.type = "bronco_mp";
     var_0._id_317A = 1;
-    var_2 = _id_09BC::_id_0D58( var_0, var_1 );
+    var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_id_0D58( var_0, var_1 );
 
     if ( !isdefined( var_2 ) )
         return undefined;
 
     var_2._id_26A0 = gettime();
-    _id_09B4::_id_10024( var_2, "bronco_sfps_mp", var_0 );
-    var_2._id_A90B = _func_034C( "bronco_sfps_mp" );
+    scripts\cp_mp\vehicles\vehicle::_id_10024( var_2, "bronco_sfps_mp", var_0 );
+    var_2.objweapon = makeweapon( "bronco_sfps_mp" );
     _id_09B5::_id_10016( var_2 );
-    _id_09B4::vehicle_create( var_2, var_0 );
+    scripts\cp_mp\vehicles\vehicle::vehicle_create( var_2, var_0 );
 
-    if ( _id_099D::_id_8A10( "bronco_sfps_mp", "create" ) )
-        [[ _id_099D::_id_6D05( "bronco_sfps_mp", "create" ) ]]( var_2 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "bronco_sfps_mp", "create" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "bronco_sfps_mp", "create" ) ]]( var_2 );
 
     var_2 thread _id_3A3E();
     return var_2;
@@ -140,40 +140,40 @@ _id_2BE7( var_0, var_1 )
 {
     if ( !isdefined( var_0 ) )
     {
-        var_0 = _func_020F();
-        var_0._id_7E78 = self;
-        var_0._id_A90B = "bronco_sfps_mp";
+        var_0 = spawnstruct();
+        var_0.inflictor = self;
+        var_0.objweapon = "bronco_sfps_mp";
         var_0._id_9CBF = "MOD_EXPLOSIVE";
     }
 
     _id_09B6::_id_1005E( var_0 );
-    _id_09BA::_id_101C3( self, var_0 );
-    self _meth_8373( "visibility", "hide", 0 );
+    scripts\cp_mp\vehicles\vehicle_occupancy::_id_101C3( self, var_0 );
+    self setscriptablepartstate( "visibility", "hide", 0 );
     _id_09B6::_id_1002E( undefined, undefined, 1 );
     thread _id_2BE1();
 
     if ( !istrue( level._id_EBC0 ) )
     {
         var_2 = self gettagorigin( "tag_origin" );
-        var_3 = _id_077B::_id_F07F( isdefined( var_0._id_006E ), var_0._id_006E, self );
-        self _meth_8287( var_2, 256, 140, 70, var_3, "MOD_EXPLOSIVE", "bronco_sfps_mp" );
-        _func_0196( _id_077B::_id_6A40( "bronco_explode" ), var_2, anglestoforward( self._id_0054 ), anglestoup( self._id_0054 ) );
-        _func_019D( var_2, "veh_lbravo_explode" );
+        var_3 = scripts\engine\utility::ter_op( isdefined( var_0.attacker ), var_0.attacker, self );
+        self radiusdamage( var_2, 256, 140, 70, var_3, "MOD_EXPLOSIVE", "bronco_sfps_mp" );
+        playfx( scripts\engine\utility::getfx( "bronco_explode" ), var_2, anglestoforward( self.angles ), anglestoup( self.angles ) );
+        playsoundatpos( var_2, "veh_lbravo_explode" );
         earthquake( 0.4, 800, var_2, 0.7 );
-        playfxontag( "grenade_rumble", var_2 );
+        playrumbleonposition( "grenade_rumble", var_2 );
         _func_0190( var_2, 500, 200, 1 );
     }
 }
 
 _id_2BE1()
 {
-    _id_09B4::_id_1008D( self );
+    scripts\cp_mp\vehicles\vehicle::_id_1008D( self );
 
-    if ( _id_099D::_id_8A10( "bronco_sfps_mp", "delete" ) )
-        [[ _id_099D::_id_6D05( "bronco_sfps_mp", "delete" ) ]]( self );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "bronco_sfps_mp", "delete" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "bronco_sfps_mp", "delete" ) ]]( self );
 
     waitframe();
-    _id_09B4::_id_1008E( self );
+    scripts\cp_mp\vehicles\vehicle::_id_1008E( self );
 }
 
 _id_2BE0( var_0 )
@@ -196,9 +196,9 @@ _id_2BE4( var_0, var_1, var_2, var_3, var_4 )
 {
     if ( istrue( var_0._id_89BF ) )
     {
-        foreach ( var_6 in level._id_B758 )
+        foreach ( var_6 in level.players )
         {
-            if ( istrue( var_0._id_C7A3 ) || var_6._id_045B == var_0._id_045B )
+            if ( istrue( var_0._id_C7A3 ) || var_6.team == var_0.team )
                 _id_07D0::_id_A88A( var_0._id_9B36._id_A8F5, var_6 );
         }
 
@@ -222,18 +222,18 @@ _id_2BE3( var_0, var_1, var_2, var_3, var_4 )
 {
     if ( var_1 == "driver" )
     {
-        var_0 setorigin( var_3 );
-        var_0 _meth_8312( var_3 );
+        var_0 setotherent( var_3 );
+        var_0 setentityowner( var_3 );
         var_3 _meth_8093( var_0 );
-        var_3 thread _id_09BA::_id_1015C( var_0, var_1, var_2 );
+        var_3 thread scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015C( var_0, var_1, var_2 );
     }
     else
-        var_3 thread _id_09BA::_id_1015C( var_0, var_1, var_2 );
+        var_3 thread scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015C( var_0, var_1, var_2 );
 
     _id_09A1::_id_10391( var_0, var_2, var_1, var_3 );
 
-    if ( _id_099D::_id_8A10( "bronco_sfps_mp", "endEnterInternal", 0 ) )
-        [[ _id_099D::_id_6D05( "bronco_sfps_mp", "endEnterInternal" ) ]]( var_0, var_1, var_2, var_3, var_4 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "bronco_sfps_mp", "endEnterInternal", 0 ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "bronco_sfps_mp", "endEnterInternal" ) ]]( var_0, var_1, var_2, var_3, var_4 );
 }
 
 _id_2BE5( var_0, var_1, var_2, var_3, var_4 )
@@ -247,8 +247,8 @@ _id_2BE6( var_0, var_1, var_2, var_3, var_4 )
     if ( var_1 == "driver" )
     {
         var_0 notify( "bronco_driver_exit" );
-        var_0 setorigin( undefined );
-        var_0 _meth_8312( undefined );
+        var_0 setotherent( undefined );
+        var_0 setentityowner( undefined );
 
         if ( !istrue( var_4._id_B682 ) )
             var_3 _meth_8094();
@@ -256,11 +256,11 @@ _id_2BE6( var_0, var_1, var_2, var_3, var_4 )
 
     if ( !istrue( var_4._id_B682 ) )
     {
-        var_3 _id_09BA::_id_10200();
-        var_5 = _id_09BA::_id_101D0( var_3, var_2, var_4 );
+        var_3 scripts\cp_mp\vehicles\vehicle_occupancy::_id_10200();
+        var_5 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101D0( var_3, var_2, var_4 );
 
         if ( !var_5 )
-            var_3 _meth_83FD();
+            var_3 suicide();
         else if ( istrue( var_0._id_89BF ) )
             _id_07D0::_id_A88A( var_0._id_9B36._id_A8F5, var_3 );
     }
@@ -275,11 +275,11 @@ _id_2BFA( var_0, var_1, var_2, var_3, var_4 )
 
 _id_2BF0()
 {
-    var_0 = _id_09BB::_id_10274( "bronco_sfps_mp", 1 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10274( "bronco_sfps_mp", 1 );
     var_0._id_9C64 = 5;
     var_0._id_BD19 = 100;
     var_0._id_6D3F = ::_id_2BE8;
-    var_0._id_E271 = _id_099D::_id_6D05( "bronco_sfps_mp", "spawnCallback" );
+    var_0._id_E271 = scripts\cp_mp\utility\script_utility::getsharedfunc( "bronco_sfps_mp", "spawnCallback" );
     var_0._id_38FF = 185;
     var_0._id_38FB = 100;
     var_0._id_38FE = -100;
@@ -288,14 +288,14 @@ _id_2BF0()
 
 _id_2BE8()
 {
-    var_0 = _id_077B::_id_6D7C( "bronco_spawn", "targetname" );
+    var_0 = scripts\engine\utility::_id_6D7C( "bronco_spawn", "targetname" );
 
     if ( var_0.size > 0 )
     {
-        var_0 = _id_09BB::_id_10288( var_0, 1 );
+        var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10288( var_0, 1 );
 
         if ( var_0.size > 1 )
-            var_0 = _id_077B::_id_1B94( var_0 );
+            var_0 = scripts\engine\utility::_id_1B94( var_0 );
     }
 
     return var_0;

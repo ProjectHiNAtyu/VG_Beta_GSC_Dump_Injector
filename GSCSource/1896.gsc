@@ -3,9 +3,9 @@
 
 _id_5FB9( var_0, var_1 )
 {
-    level._id_2FD3 = _func_0205( "script_model", var_0 );
-    level._id_2FD3 setmode( "tag_origin" );
-    level._id_2FD3._id_0054 = var_1;
+    level._id_2FD3 = spawn( "script_model", var_0 );
+    level._id_2FD3 setmodel( "tag_origin" );
+    level._id_2FD3.angles = var_1;
 }
 
 _id_5FBB( var_0 )
@@ -21,9 +21,9 @@ _id_5FBB( var_0 )
     {
         var_1 = _func_0326();
 
-        if ( var_1._id_02BA == level._id_0F03._id_02BA && var_1.health == level._id_0F03.health )
+        if ( var_1.name == level._id_0F03.name && var_1._id_0219 == level._id_0F03._id_0219 )
         {
-            if ( level._id_0F03._id_02BA == getdvar( "#x340c6c27455c4e43b" ) )
+            if ( level._id_0F03.name == getdvar( "#x340c6c27455c4e43b" ) )
                 _func_0397();
 
             waitframe();
@@ -37,7 +37,7 @@ _id_5FBB( var_0 )
 
 _id_3053( var_0 )
 {
-    if ( var_0._id_02BA == "" )
+    if ( var_0.name == "" )
         return;
 
     var_1 = _id_6725( var_0 );
@@ -47,7 +47,7 @@ _id_3053( var_0 )
 
     _id_D123( var_1["scene"], var_1["camera"] );
     _id_56C7( var_0, level._id_41CC );
-    level._id_41CC = var_0._id_02BA;
+    level._id_41CC = var_0.name;
 }
 
 _id_D123( var_0, var_1 )
@@ -77,9 +77,9 @@ _id_56C7( var_0, var_1 )
     var_14 = undefined;
     var_15 = undefined;
 
-    if ( isdefined( var_3[var_0._id_02BA] ) )
+    if ( isdefined( var_3[var_0.name] ) )
     {
-        var_16 = var_3[var_0._id_02BA];
+        var_16 = var_3[var_0.name];
         var_17 = var_16["default"];
 
         if ( isdefined( var_1 ) && isdefined( var_16[var_1] ) )
@@ -100,21 +100,21 @@ _id_56C7( var_0, var_1 )
                 var_7 = var_16[var_1]["transition"];
         }
 
-        var_6 = _id_077B::_id_F07F( isdefined( var_6 ), var_6, var_17["callback"] );
+        var_6 = scripts\engine\utility::ter_op( isdefined( var_6 ), var_6, var_17["callback"] );
 
         if ( !isdefined( var_7 ) )
         {
-            var_7 = _id_077B::_id_F07F( isdefined( var_5 ), var_5, var_17["transition"] );
-            var_5 = _id_077B::_id_F07F( isdefined( var_5 ), var_5, var_17["fov"] );
-            var_4 = _id_077B::_id_F07F( isdefined( var_4 ), var_4, var_17["speed"] );
-            var_8 = _id_077B::_id_F07F( isdefined( var_8 ), var_6, var_17["fadeOutTime"] );
-            var_9 = _id_077B::_id_F07F( isdefined( var_9 ), var_5, var_17["fadeInTime"] );
-            var_10 = _id_077B::_id_F07F( isdefined( var_10 ), var_10, var_17["cinematicName"] );
-            var_11 = _id_077B::_id_F07F( isdefined( var_11 ), var_11, var_17["accelScalar"] );
-            var_12 = _id_077B::_id_F07F( isdefined( var_12 ), var_12, var_17["decelScalar"] );
-            var_13 = _id_077B::_id_F07F( isdefined( var_13 ), var_13, var_17["moveTime"] );
-            var_14 = _id_077B::_id_F07F( isdefined( var_14 ), var_14, var_17["use_bounce"] );
-            var_15 = _id_077B::_id_F07F( isdefined( var_15 ), var_15, var_17["lighting_change"] );
+            var_7 = scripts\engine\utility::ter_op( isdefined( var_5 ), var_5, var_17["transition"] );
+            var_5 = scripts\engine\utility::ter_op( isdefined( var_5 ), var_5, var_17["fov"] );
+            var_4 = scripts\engine\utility::ter_op( isdefined( var_4 ), var_4, var_17["speed"] );
+            var_8 = scripts\engine\utility::ter_op( isdefined( var_8 ), var_6, var_17["fadeOutTime"] );
+            var_9 = scripts\engine\utility::ter_op( isdefined( var_9 ), var_5, var_17["fadeInTime"] );
+            var_10 = scripts\engine\utility::ter_op( isdefined( var_10 ), var_10, var_17["cinematicName"] );
+            var_11 = scripts\engine\utility::ter_op( isdefined( var_11 ), var_11, var_17["accelScalar"] );
+            var_12 = scripts\engine\utility::ter_op( isdefined( var_12 ), var_12, var_17["decelScalar"] );
+            var_13 = scripts\engine\utility::ter_op( isdefined( var_13 ), var_13, var_17["moveTime"] );
+            var_14 = scripts\engine\utility::ter_op( isdefined( var_14 ), var_14, var_17["use_bounce"] );
+            var_15 = scripts\engine\utility::ter_op( isdefined( var_15 ), var_15, var_17["lighting_change"] );
         }
     }
     else
@@ -128,22 +128,22 @@ _id_56C7( var_0, var_1 )
 
     if ( var_7 == ::_id_5FBA )
     {
-        var_5 = _id_077B::_id_F07F( isdefined( var_5 ), var_5, level._id_0F01._id_A35D );
-        var_8 = _id_077B::_id_F07F( isdefined( var_8 ), var_8, 0.2 );
-        var_9 = _id_077B::_id_F07F( isdefined( var_9 ), var_9, 0.2 );
-        var_10 = _id_077B::_id_F07F( isdefined( var_10 ), var_10, level._id_0F01._id_36EF );
+        var_5 = scripts\engine\utility::ter_op( isdefined( var_5 ), var_5, level._id_0F01._id_A35D );
+        var_8 = scripts\engine\utility::ter_op( isdefined( var_8 ), var_8, 0.2 );
+        var_9 = scripts\engine\utility::ter_op( isdefined( var_9 ), var_9, 0.2 );
+        var_10 = scripts\engine\utility::ter_op( isdefined( var_10 ), var_10, level._id_0F01._id_36EF );
         [[ var_7 ]]( level._id_0EF0, var_5, var_10, var_8, var_9, var_6 );
     }
     else if ( var_7 == ::_id_5FB8 )
     {
-        var_11 = _id_077B::_id_F07F( isdefined( var_11 ), var_11, 0.1 );
-        var_12 = _id_077B::_id_F07F( isdefined( var_12 ), var_12, 0.1 );
-        var_4 = _id_077B::_id_F07F( isdefined( var_4 ), var_4, 5000 );
-        var_14 = _id_077B::_id_F07F( isdefined( var_14 ), var_14, 0 );
-        var_13 = _id_077B::_id_F07F( isdefined( var_13 ), var_13, 0 );
+        var_11 = scripts\engine\utility::ter_op( isdefined( var_11 ), var_11, 0.1 );
+        var_12 = scripts\engine\utility::ter_op( isdefined( var_12 ), var_12, 0.1 );
+        var_4 = scripts\engine\utility::ter_op( isdefined( var_4 ), var_4, 5000 );
+        var_14 = scripts\engine\utility::ter_op( isdefined( var_14 ), var_14, 0 );
+        var_13 = scripts\engine\utility::ter_op( isdefined( var_13 ), var_13, 0 );
         _id_FB3E();
 
-        if ( var_6 == ::_id_FB3E && !level._id_B7FF _meth_8427() )
+        if ( var_6 == ::_id_FB3E && !level._id_B7FF usinggamepad() )
             var_6 = ::_id_FB3F;
 
         [[ var_7 ]]( level._id_0EF0, var_4, 0, 1, var_6, var_11, var_12, var_14, var_13 );
@@ -156,7 +156,7 @@ _id_56C7( var_0, var_1 )
 
 _id_304C( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    level._id_B7FF _meth_8281( var_0._id_02EA );
+    level._id_B7FF _meth_8281( var_0.origin );
 
     if ( var_1 < 0.05 )
         var_1 = 0.05;
@@ -173,26 +173,26 @@ _id_304C( var_0, var_1, var_2, var_3, var_4, var_5 )
     if ( var_5 )
     {
         var_8 = 1.3;
-        var_9 = _func_025A( var_0._id_02EA - level._id_2FD3._id_02EA );
-        var_10 = var_0._id_02EA + var_9 * var_8;
+        var_9 = vectornormalize( var_0.origin - level._id_2FD3.origin );
+        var_10 = var_0.origin + var_9 * var_8;
         var_11 = var_1 / 2.0;
         var_12 = var_11 * 0.0;
         var_13 = var_11 * 0.5;
         var_14 = var_11 * 0.5;
         var_15 = var_11 * 0.0;
-        level._id_2FD3 _meth_823B( var_10, var_11, var_12, var_13 );
-        level._id_2FD3 rotateroll( var_0._id_0054, var_11, var_12, var_13 );
+        level._id_2FD3 moveto( var_10, var_11, var_12, var_13 );
+        level._id_2FD3 rotateto( var_0.angles, var_11, var_12, var_13 );
         wait( var_11 );
-        level._id_2FD3 _meth_823B( var_0._id_02EA, var_11, var_14, var_15 );
+        level._id_2FD3 moveto( var_0.origin, var_11, var_14, var_15 );
         wait( var_11 );
     }
     else
     {
         level._id_2FD3._id_A1F0 = var_0;
-        level._id_2FD3 _meth_823B( var_0._id_02EA, var_1, var_6, var_7 );
-        level._id_2FD3 rotateroll( var_0._id_0054, var_1, var_6, var_7 );
+        level._id_2FD3 moveto( var_0.origin, var_1, var_6, var_7 );
+        level._id_2FD3 rotateto( var_0.angles, var_1, var_6, var_7 );
 
-        if ( level._id_B7FF _meth_8427() )
+        if ( level._id_B7FF usinggamepad() )
             wait( var_1 );
     }
 }
@@ -204,8 +204,8 @@ _id_5FB8( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
 
     if ( isdefined( level._id_2FD3._id_A1F0 ) )
     {
-        level._id_2FD3._id_02EA = level._id_2FD3._id_A1F0._id_02EA;
-        level._id_2FD3._id_0054 = level._id_2FD3._id_A1F0._id_0054;
+        level._id_2FD3.origin = level._id_2FD3._id_A1F0.origin;
+        level._id_2FD3.angles = level._id_2FD3._id_A1F0.angles;
     }
 
     level notify( "camera_move" );
@@ -216,16 +216,16 @@ _id_5FB8( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
 
     var_9 = var_0;
 
-    if ( var_8 == 0 || level._id_B7FF _meth_8427() )
+    if ( var_8 == 0 || level._id_B7FF usinggamepad() )
     {
-        var_10 = distance( level._id_2FD3._id_02EA, var_9._id_02EA );
+        var_10 = distance( level._id_2FD3.origin, var_9.origin );
         var_8 = var_10 / var_1;
     }
 
     if ( var_2 )
     {
-        level._id_2FD3._id_02EA = var_9._id_02EA;
-        level._id_2FD3._id_0054 = var_9._id_0054;
+        level._id_2FD3.origin = var_9.origin;
+        level._id_2FD3.angles = var_9.angles;
     }
     else
         _id_304C( var_9, var_8, var_3, var_5, var_6, var_7 );
@@ -238,12 +238,12 @@ _id_5FB8( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
         var_6 = var_6 / var_11;
     }
 
-    while ( isdefined( var_9._id_0457 ) )
+    while ( isdefined( var_9.target ) )
     {
-        if ( !isdefined( var_9._id_0457 ) )
+        if ( !isdefined( var_9.target ) )
             return;
 
-        var_9 = getent( var_9._id_0457, "targetname" );
+        var_9 = getent( var_9.target, "targetname" );
         _id_304C( var_9, var_8, var_3, var_5, var_6, var_7 );
     }
 
@@ -261,14 +261,14 @@ _id_5FBA( var_0, var_1, var_2, var_3, var_4, var_5 )
     self endon( "disconnect" );
     level notify( "camera_teleport" );
     level endon( "camera_teleport" );
-    level._id_B7FF _meth_8281( var_0._id_02EA );
+    level._id_B7FF _meth_8281( var_0.origin );
     level._id_F487 = 1;
     _func_0324( 0, var_3 );
     wait( var_3 + 0.05 );
     _func_0325( var_1, 0 );
-    level._id_2FD3 _meth_80BE();
-    level._id_2FD3._id_02EA = var_0._id_02EA;
-    level._id_2FD3._id_0054 = var_0._id_0054;
+    level._id_2FD3 dontinterpolate();
+    level._id_2FD3.origin = var_0.origin;
+    level._id_2FD3.angles = var_0.angles;
     level._id_2FD3._id_A1F0 = undefined;
 
     if ( isdefined( var_2 ) )
@@ -295,8 +295,8 @@ _id_FB44()
         if ( isdefined( level._id_0F01._id_33CE ) )
             var_0 = level._id_0F01._id_33CE;
 
-        level._id_33D8[var_0]._id_02EA = level._id_0F01._id_33D1._id_02EA;
-        level._id_33D8[var_0]._id_0054 = level._id_0F01._id_33D1._id_0054;
+        level.characters[var_0].origin = level._id_0F01._id_33D1.origin;
+        level.characters[var_0].angles = level._id_0F01._id_33D1.angles;
     }
 }
 
@@ -339,22 +339,22 @@ _id_FB64()
 _id_FBC9()
 {
     if ( isdefined( level._id_0F01._id_E431 ) )
-        _func_01D0( "#x352b7fb15df055cdf", level._id_0F01._id_E431 );
+        setdvar( "#x352b7fb15df055cdf", level._id_0F01._id_E431 );
     else
-        _func_01D0( "#x352b7fb15df055cdf", 2 );
+        setdvar( "#x352b7fb15df055cdf", 2 );
 }
 
 _id_A20B( var_0 )
 {
-    level._id_10DC7[var_0]._id_02EA = level._id_0F01._id_10D04[var_0]._id_02EA;
-    level._id_10DC7[var_0]._id_0054 = level._id_0F01._id_10D04[var_0]._id_0054;
+    level.weapons[var_0].origin = level._id_0F01._id_10D04[var_0].origin;
+    level.weapons[var_0].angles = level._id_0F01._id_10D04[var_0].angles;
 }
 
 _id_FBE6()
 {
     if ( isdefined( level._id_0F01._id_10D04 ) )
     {
-        if ( isalive( level._id_0F01._id_10D04 ) )
+        if ( _func_0106( level._id_0F01._id_10D04 ) )
         {
             for ( var_0 = 0; var_0 <= 3; var_0++ )
             {
@@ -377,8 +377,8 @@ _id_FB37()
             var_1 = getent( "tourroom_charslot_right_0" + ( var_2 + 1 ), "targetname" );
         }
 
-        level._id_33D8[var_0]._id_02EA = var_1._id_02EA;
-        level._id_33D8[var_0]._id_0054 = var_1._id_0054;
+        level.characters[var_0].origin = var_1.origin;
+        level.characters[var_0].angles = var_1.angles;
     }
 }
 
@@ -394,8 +394,8 @@ _id_FB6E()
             var_1 = getent( "tourroom_charslot_right_0" + ( var_2 + 1 ), "targetname" );
         }
 
-        level._id_33D8[var_0]._id_02EA = var_1._id_02EA;
-        level._id_33D8[var_0]._id_0054 = var_1._id_0054;
+        level.characters[var_0].origin = var_1.origin;
+        level.characters[var_0].angles = var_1.angles;
     }
 }
 
@@ -413,7 +413,7 @@ update_tank_char_loc()
     var_1[var_1.size] = getent( "lobby_charslot_08", "targetname" );
 
     foreach ( var_4, var_3 in var_1 )
-        var_3._id_02EA = var_0._id_02EA + get_tank_anim_offset( var_4 );
+        var_3.origin = var_0.origin + get_tank_anim_offset( var_4 );
 
     var_1 = [];
     var_1[var_1.size] = getent( "lobby_charslot_09", "targetname" );
@@ -422,23 +422,23 @@ update_tank_char_loc()
     var_1[var_1.size] = getent( "lobby_charslot_12", "targetname" );
 
     foreach ( var_6, var_3 in var_1 )
-        var_3._id_02EA = var_0._id_02EA + get_tank_anim_offset( var_6 );
+        var_3.origin = var_0.origin + get_tank_anim_offset( var_6 );
 }
 
 update_character_select_char_loc()
 {
     var_0 = getent( "charroom_char_west_b", "targetname" );
     var_1 = get_offset_transform_from_position_table( "charroom_char_west_b" );
-    var_0 adjust_ent_with_table_data( var_0._id_02EA, var_1 );
+    var_0 adjust_ent_with_table_data( var_0.origin, var_1 );
     var_2 = getent( "char_west_b", "targetname" );
     var_1 = get_offset_transform_from_position_table( "char_west_b" );
-    var_2 adjust_ent_with_table_data( var_0._id_02EA, var_1 );
+    var_2 adjust_ent_with_table_data( var_0.origin, var_1 );
     var_2 = getent( "char_west_b_detail", "targetname" );
     var_1 = get_offset_transform_from_position_table( "char_west_b_detail" );
-    var_2 adjust_ent_with_table_data( var_0._id_02EA, var_1 );
+    var_2 adjust_ent_with_table_data( var_0.origin, var_1 );
     var_2 = getent( "char_west_b_quips", "targetname" );
     var_1 = get_offset_transform_from_position_table( "char_west_b_quips" );
-    var_2 adjust_ent_with_table_data( var_0._id_02EA, var_1 );
+    var_2 adjust_ent_with_table_data( var_0.origin, var_1 );
 }
 
 get_tank_anim_offset( var_0 )
@@ -460,9 +460,9 @@ get_tank_anim_offset( var_0 )
     var_1[var_1.size] = "s4_mp_lobby_walk_06_generic_a";
     var_1[var_1.size] = "s4_mp_lobby_walk_07_generic_a";
     var_1[var_1.size] = "s4_mp_lobby_walk_08_generic_a";
-    var_2 = stopfxontag( "frontEndSceneData/frontendCharacterPositionData.csv", 0, var_1[int( var_0 )], 1 );
-    var_3 = stopfxontag( "frontEndSceneData/frontendCharacterPositionData.csv", 0, var_1[int( var_0 )], 2 );
-    var_4 = stopfxontag( "frontEndSceneData/frontendCharacterPositionData.csv", 0, var_1[int( var_0 )], 3 );
+    var_2 = _func_021D( "frontEndSceneData/frontendCharacterPositionData.csv", 0, var_1[int( var_0 )], 1 );
+    var_3 = _func_021D( "frontEndSceneData/frontendCharacterPositionData.csv", 0, var_1[int( var_0 )], 2 );
+    var_4 = _func_021D( "frontEndSceneData/frontendCharacterPositionData.csv", 0, var_1[int( var_0 )], 3 );
     var_5 = ( int( var_2 ), int( var_3 ), int( var_4 ) );
     var_6 = get_dvar_offset( var_5, ( 0, 0, 0 ), var_1[int( var_0 )] );
     return var_6["pos"];
@@ -480,8 +480,8 @@ _id_FB7C()
     update_tank_char_loc();
     update_character_select_char_loc();
     var_0 = getent( "lobby_charslot_01", "targetname" );
-    level._id_33D8[0]._id_02EA = var_0._id_02EA;
-    level._id_33D8[0]._id_0054 = var_0._id_0054;
+    level.characters[0].origin = var_0.origin;
+    level.characters[0].angles = var_0.angles;
 
     for ( var_1 = 1; var_1 < 8; var_1++ )
     {
@@ -494,8 +494,8 @@ _id_FB7C()
 
         if ( isdefined( var_0 ) )
         {
-            level._id_33D8[var_1]._id_02EA = var_0._id_02EA;
-            level._id_33D8[var_1]._id_0054 = var_0._id_0054;
+            level.characters[var_1].origin = var_0.origin;
+            level.characters[var_1].angles = var_0.angles;
         }
     }
 
@@ -504,8 +504,8 @@ _id_FB7C()
         var_2 = var_3 + 1;
         var_1 = 8 + var_3;
         var_0 = getent( "lobby_charslot_0" + var_2 + "_dog", "targetname" );
-        level._id_33D8[var_1]._id_02EA = var_0._id_02EA;
-        level._id_33D8[var_1]._id_0054 = var_0._id_0054;
+        level.characters[var_1].origin = var_0.origin;
+        level.characters[var_1].angles = var_0.angles;
     }
 }
 
@@ -523,7 +523,7 @@ update_multicamera_lobby()
     var_0 = level.charactercount;
 
     if ( getdvarint( "scr_camera_position_override", 0 ) > 0 )
-        var_0 = _func_0147( getdvarint( "scr_camera_position_override", 0 ), 8 );
+        var_0 = max( getdvarint( "scr_camera_position_override", 0 ), 8 );
 
     thread multicam_switch_timer();
     level endon( "kill_multicam" );
@@ -566,7 +566,7 @@ multicam_switch_timer()
         if ( var_0 > 6 )
             level._id_3045 adjust_cam_to_tank_v2( "char_lobby_8" );
         else
-            level._id_3045 adjust_cam_to_tank_v2( "char_lobby_" + _id_077B::_id_EA4F( var_0 ) );
+            level._id_3045 adjust_cam_to_tank_v2( "char_lobby_" + scripts\engine\utility::_id_EA4F( var_0 ) );
 
         teleport_cam_lobby_walk( level._id_3045._id_2289, level._id_3045._id_A35D );
         wait( getdvarfloat( "scr_camera_switch_time_override", 7.0 ) );
@@ -576,9 +576,9 @@ multicam_switch_timer()
 teleport_cam_lobby_walk( var_0, var_1 )
 {
     _func_0325( var_1, 0 );
-    level._id_2FD3 _meth_80BE();
-    level._id_2FD3._id_02EA = var_0._id_02EA;
-    level._id_2FD3._id_0054 = var_0._id_0054;
+    level._id_2FD3 dontinterpolate();
+    level._id_2FD3.origin = var_0.origin;
+    level._id_2FD3.angles = var_0.angles;
     var_2 = var_0._id_47DA;
     self _meth_865E( var_2[0], var_2[1], 20, 20 );
 }
@@ -600,7 +600,7 @@ adjust_cam_to_tank_v2( var_0, var_1 )
         var_3 = var_1;
 
     var_5 = get_offset_transform_from_position_table( var_0 + var_4[var_3] );
-    self._id_2289 adjust_ent_with_table_data( var_2._id_02EA, var_5 );
+    self._id_2289 adjust_ent_with_table_data( var_2.origin, var_5 );
     self._id_A35D = var_5["fov"];
     self._id_2289._id_47DA = [ var_5["fStop"], var_5["fDist"] ];
 }
@@ -619,7 +619,7 @@ set_lobby_cam_initial_pos()
             return;
         }
 
-        level._id_3045 adjust_cam_to_tank_v2( "char_lobby_" + _id_077B::_id_EA4F( var_0 ) );
+        level._id_3045 adjust_cam_to_tank_v2( "char_lobby_" + scripts\engine\utility::_id_EA4F( var_0 ) );
     }
 }
 
@@ -631,19 +631,19 @@ _id_FB82()
 _id_FB9E()
 {
     var_0 = getent( "charroom_char_west_b", "targetname" );
-    level._id_33D8[0]._id_02EA = var_0._id_02EA;
-    level._id_33D8[0]._id_0054 = var_0._id_0054;
-    level._id_33D8[8]._id_02EA = var_0._id_02EA;
-    level._id_33D8[8]._id_0054 = var_0._id_0054;
+    level.characters[0].origin = var_0.origin;
+    level.characters[0].angles = var_0.angles;
+    level.characters[8].origin = var_0.origin;
+    level.characters[8].angles = var_0.angles;
 }
 
 _id_FB9D()
 {
     var_0 = getent( "charroom_char_east_a", "targetname" );
-    level._id_33D8[1]._id_02EA = var_0._id_02EA;
-    level._id_33D8[1]._id_0054 = var_0._id_0054;
-    level._id_33D8[9]._id_02EA = var_0._id_02EA;
-    level._id_33D8[9]._id_0054 = var_0._id_0054;
+    level.characters[1].origin = var_0.origin;
+    level.characters[1].angles = var_0.angles;
+    level.characters[9].origin = var_0.origin;
+    level.characters[9].angles = var_0.angles;
 }
 
 _id_C033( var_0 )
@@ -652,22 +652,22 @@ _id_C033( var_0 )
     {
         case "small":
             foreach ( var_2 in level._id_F907 )
-                var_2._id_02EA = level._id_C036._id_02EA;
+                var_2.origin = level._id_C036.origin;
 
             break;
         case "medium":
             foreach ( var_2 in level._id_F907 )
-                var_2._id_02EA = level._id_C035._id_02EA;
+                var_2.origin = level._id_C035.origin;
 
             break;
         case "large":
             foreach ( var_2 in level._id_F907 )
-                var_2._id_02EA = level._id_C034._id_02EA;
+                var_2.origin = level._id_C034.origin;
 
             break;
         case "watch":
             foreach ( var_2 in level._id_F907 )
-                var_2._id_02EA = level._id_C037._id_02EA;
+                var_2.origin = level._id_C037.origin;
 
             break;
     }
@@ -1162,7 +1162,7 @@ _id_81BF()
     var_0["player_character_showcase"]["default"]["callback"] = ::_id_FBA9;
 
     foreach ( var_7 in level.frontend_transition_adds )
-        var_0[var_7.from][var_7.to][var_7._id_02BA] = var_7._id_5FF7;
+        var_0[var_7.from][var_7.to][var_7.name] = var_7._id_5FF7;
 
     level._id_F48E = var_0;
 }
@@ -1172,7 +1172,7 @@ _id_6725( var_0 )
     var_1 = [];
     var_2 = !isdefined( level._id_0F01 ) || level._id_F487;
 
-    switch ( var_0._id_02BA )
+    switch ( var_0.name )
     {
         case "mlg.tv":
             break;
@@ -1580,7 +1580,7 @@ _id_6725( var_0 )
             var_1["camera"] = level._id_3056._id_2289;
             break;
         case "barracks":
-            var_3 = _id_077B::_id_F07F( var_2, level._id_3056, level._id_0F01 );
+            var_3 = scripts\engine\utility::ter_op( var_2, level._id_3056, level._id_0F01 );
             var_1["scene"] = level._id_3056;
             var_1["camera"] = level._id_3056._id_2289;
             break;
@@ -1597,7 +1597,7 @@ _id_6725( var_0 )
 
 _id_3EBD()
 {
-    level._id_2FF1 = _func_020F();
+    level._id_2FF1 = spawnstruct();
     level._id_2FF1._id_2289 = getent( "camera_mp_gunsmith", "targetname" );
     level._id_2FF1._id_2289._id_47DA = [ 2, 100 ];
     level._id_2FF1._id_A35D = 36;
@@ -1605,7 +1605,7 @@ _id_3EBD()
     level._id_2FF1._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_2FF1._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_2FF1._id_E431 = 6;
-    level._id_2FF6 = _func_020F();
+    level._id_2FF6 = spawnstruct();
     level._id_2FF6._id_2289 = getent( "camera_mp_gunsmith_overview", "targetname" );
     level._id_2FF6._id_2289._id_47DA = [ 3.05, 105 ];
     level._id_2FF6._id_A35D = 28;
@@ -1613,31 +1613,31 @@ _id_3EBD()
     level._id_2FF6._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_2FF6._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_2FF6._id_E431 = 6;
-    level._id_2FFA = _func_020F();
+    level._id_2FFA = spawnstruct();
     level._id_2FFA._id_2289 = getent( "camera_mp_gunsmith_preview", "targetname" );
     level._id_2FFA._id_2289._id_47DA = [ 22, 56 ];
     level._id_2FFA._id_A35D = 36;
     level._id_2FFA._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_2FFA._id_E431 = 6;
-    level._id_3003 = _func_020F();
+    level._id_3003 = spawnstruct();
     level._id_3003._id_2289 = getent( "camera_mp_gunsmith_preview_large", "targetname" );
     level._id_3003._id_2289._id_47DA = [ 22, 64 ];
     level._id_3003._id_A35D = 36;
     level._id_3003._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3003._id_E431 = 6;
-    level._id_3028 = _func_020F();
+    level._id_3028 = spawnstruct();
     level._id_3028._id_2289 = getent( "camera_mp_gunsmith_preview_secondary", "targetname" );
     level._id_3028._id_2289._id_47DA = [ 22, 36 ];
     level._id_3028._id_A35D = 36;
     level._id_3028._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3028._id_E431 = 6;
-    level._id_303D = _func_020F();
+    level._id_303D = spawnstruct();
     level._id_303D._id_2289 = getent( "camera_mp_gunsmith_preview_watch", "targetname" );
     level._id_303D._id_2289._id_47DA = [ 20, 16 ];
     level._id_303D._id_A35D = 36;
     level._id_303D._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_303D._id_E431 = 6;
-    level._id_2FF2 = _func_020F();
+    level._id_2FF2 = spawnstruct();
     level._id_2FF2._id_2289 = getent( "camera_mp_gunsmith_armory", "targetname" );
     level._id_2FF2._id_2289._id_47DA = [ 7, 67 ];
     level._id_2FF2._id_A35D = 44;
@@ -1645,7 +1645,7 @@ _id_3EBD()
     level._id_2FF2._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_2FF2._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_2FF2._id_E431 = 6;
-    level._id_2FF7 = _func_020F();
+    level._id_2FF7 = spawnstruct();
     level._id_2FF7._id_2289 = getent( "camera_mp_gunsmith_alt_p_large", "targetname" );
     level._id_2FF7._id_2289._id_47DA = [ 7, 38 ];
     level._id_2FF7._id_A35D = 55;
@@ -1653,7 +1653,7 @@ _id_3EBD()
     level._id_2FF7._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_2FF7._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_2FF7._id_E431 = 6;
-    level._id_2FF8 = _func_020F();
+    level._id_2FF8 = spawnstruct();
     level._id_2FF8._id_2289 = getent( "camera_mp_gunsmith_alt_p_large", "targetname" );
     level._id_2FF8._id_2289._id_47DA = [ 7, 100 ];
     level._id_2FF8._id_A35D = 55;
@@ -1661,7 +1661,7 @@ _id_3EBD()
     level._id_2FF8._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_2FF8._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_2FF8._id_E431 = 6;
-    level._id_303E = _func_020F();
+    level._id_303E = spawnstruct();
     level._id_303E._id_2289 = getent( "camera_mp_gunsmith_alt_s", "targetname" );
     level._id_303E._id_2289._id_47DA = [ 3, 44 ];
     level._id_303E._id_A35D = 55;
@@ -1669,7 +1669,7 @@ _id_3EBD()
     level._id_303E._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_303E._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_303E._id_E431 = 6;
-    level._id_2FF4 = _func_020F();
+    level._id_2FF4 = spawnstruct();
     level._id_2FF4._id_2289 = getent( "camera_mp_gunsmith_alt_o_large", "targetname" );
     level._id_2FF4._id_2289._id_47DA = [ 14, 38 ];
     level._id_2FF4._id_A35D = 55;
@@ -1677,7 +1677,7 @@ _id_3EBD()
     level._id_2FF4._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_2FF4._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_2FF4._id_E431 = 6;
-    level._id_2FF5 = _func_020F();
+    level._id_2FF5 = spawnstruct();
     level._id_2FF5._id_2289 = getent( "camera_mp_gunsmith_alt_o_large", "targetname" );
     level._id_2FF5._id_2289._id_47DA = [ 14, 65 ];
     level._id_2FF5._id_A35D = 55;
@@ -1685,7 +1685,7 @@ _id_3EBD()
     level._id_2FF5._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_2FF5._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_2FF5._id_E431 = 6;
-    level._id_2FF3 = _func_020F();
+    level._id_2FF3 = spawnstruct();
     level._id_2FF3._id_2289 = getent( "camera_mp_gunsmith_alt_l", "targetname" );
     level._id_2FF3._id_2289._id_47DA = [ 5, 28 ];
     level._id_2FF3._id_A35D = 55;
@@ -1693,7 +1693,7 @@ _id_3EBD()
     level._id_2FF3._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_2FF3._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_2FF3._id_E431 = 6;
-    level._id_3040 = _func_020F();
+    level._id_3040 = spawnstruct();
     level._id_3040._id_2289 = getent( "camera_mp_gunsmith_alt_t", "targetname" );
     level._id_3040._id_2289._id_47DA = [ 6, 29 ];
     level._id_3040._id_A35D = 55;
@@ -1701,7 +1701,7 @@ _id_3EBD()
     level._id_3040._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_3040._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_3040._id_E431 = 6;
-    level._id_2FF9 = _func_020F();
+    level._id_2FF9 = spawnstruct();
     level._id_2FF9._id_2289 = getent( "camera_mp_gunsmith_alt_perks", "targetname" );
     level._id_2FF9._id_2289._id_47DA = [ 1.2, 75 ];
     level._id_2FF9._id_A35D = 55;
@@ -1709,7 +1709,7 @@ _id_3EBD()
     level._id_2FF9._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_2FF9._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_2FF9._id_E431 = 6;
-    level._id_3042 = _func_020F();
+    level._id_3042 = spawnstruct();
     level._id_3042._id_2289 = getent( "camera_mp_gunsmith_alt_x", "targetname" );
     level._id_3042._id_2289._id_47DA = [ 3, 40 ];
     level._id_3042._id_A35D = 55;
@@ -1717,7 +1717,7 @@ _id_3EBD()
     level._id_3042._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_3042._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_3042._id_E431 = 6;
-    level._id_3043 = _func_020F();
+    level._id_3043 = spawnstruct();
     level._id_3043._id_2289 = getent( "camera_mp_gunsmith_alt_y", "targetname" );
     level._id_3043._id_2289._id_47DA = [ 3, 40 ];
     level._id_3043._id_A35D = 55;
@@ -1725,7 +1725,7 @@ _id_3EBD()
     level._id_3043._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_3043._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_3043._id_E431 = 6;
-    level._id_3044 = _func_020F();
+    level._id_3044 = spawnstruct();
     level._id_3044._id_2289 = getent( "camera_mp_gunsmith_alt_z", "targetname" );
     level._id_3044._id_2289._id_47DA = [ 3, 40 ];
     level._id_3044._id_A35D = 55;
@@ -1733,7 +1733,7 @@ _id_3EBD()
     level._id_3044._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_3044._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_3044._id_E431 = 6;
-    level._id_303F = _func_020F();
+    level._id_303F = spawnstruct();
     level._id_303F._id_2289 = getent( "camera_mp_gunsmith_alt_specialist", "targetname" );
     level._id_303F._id_2289._id_47DA = [ 22, 16 ];
     level._id_303F._id_A35D = 55;
@@ -1741,7 +1741,7 @@ _id_3EBD()
     level._id_303F._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_303F._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_303F._id_E431 = 6;
-    level._id_3041 = _func_020F();
+    level._id_3041 = spawnstruct();
     level._id_3041._id_2289 = getent( "camera_mp_gunsmith_alt_watch", "targetname" );
     level._id_3041._id_2289._id_47DA = [ 22, 8 ];
     level._id_3041._id_A35D = 55;
@@ -1749,474 +1749,474 @@ _id_3EBD()
     level._id_3041._id_10D04[1] = getent( "weapon_loc_hq2", "targetname" );
     level._id_3041._id_10D04[3] = getent( "weapon_loc_watch", "targetname" );
     level._id_3041._id_E431 = 6;
-    level._id_3027 = _func_020F();
+    level._id_3027 = spawnstruct();
     level._id_3027._id_2289 = getent( "camera_mp_gunsmith_preview_riot", "targetname" );
     level._id_3027._id_2289._id_47DA = [ 16, 152 ];
     level._id_3027._id_A35D = 36;
     level._id_3027._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3027._id_E431 = 6;
-    level._id_2FFB = _func_020F();
+    level._id_2FFB = spawnstruct();
     level._id_2FFB._id_2289 = getent( "camera_mp_gunsmith_preview_barrel", "targetname" );
     level._id_2FFB._id_2289._id_47DA = [ 8, 34 ];
     level._id_2FFB._id_A35D = 36;
     level._id_2FFB._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_2FFB._id_E431 = 6;
-    level._id_2FFC = _func_020F();
+    level._id_2FFC = spawnstruct();
     level._id_2FFC._id_2289 = getent( "camera_mp_gunsmith_preview_barrel_alt1", "targetname" );
     level._id_2FFC._id_2289._id_47DA = [ 8, 48 ];
     level._id_2FFC._id_A35D = 36;
     level._id_2FFC._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_2FFC._id_E431 = 6;
-    level._id_2FFD = _func_020F();
+    level._id_2FFD = spawnstruct();
     level._id_2FFD._id_2289 = getent( "camera_mp_gunsmith_preview_barrel_alt2", "targetname" );
     level._id_2FFD._id_2289._id_47DA = [ 8, 54 ];
     level._id_2FFD._id_A35D = 36;
     level._id_2FFD._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_2FFD._id_E431 = 6;
-    level._id_2FFE = _func_020F();
+    level._id_2FFE = spawnstruct();
     level._id_2FFE._id_2289 = getent( "camera_mp_gunsmith_preview_charm", "targetname" );
     level._id_2FFE._id_2289._id_47DA = [ 21, 16 ];
     level._id_2FFE._id_A35D = 36;
     level._id_2FFE._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_2FFE._id_E431 = 6;
-    level._id_2FFF = _func_020F();
+    level._id_2FFF = spawnstruct();
     level._id_2FFF._id_2289 = getent( "camera_mp_gunsmith_preview_charm_alt1", "targetname" );
     level._id_2FFF._id_2289._id_47DA = [ 21, 16 ];
     level._id_2FFF._id_A35D = 36;
     level._id_2FFF._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_2FFF._id_E431 = 6;
-    level._id_3000 = _func_020F();
+    level._id_3000 = spawnstruct();
     level._id_3000._id_2289 = getent( "camera_mp_gunsmith_preview_charm_alt2", "targetname" );
     level._id_3000._id_2289._id_47DA = [ 21, 16 ];
     level._id_3000._id_A35D = 36;
     level._id_3000._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3000._id_E431 = 6;
-    level._id_3001 = _func_020F();
+    level._id_3001 = spawnstruct();
     level._id_3001._id_2289 = getent( "camera_mp_gunsmith_preview_charm_alt3", "targetname" );
     level._id_3001._id_2289._id_47DA = [ 21, 16 ];
     level._id_3001._id_A35D = 36;
     level._id_3001._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3001._id_E431 = 6;
-    level._id_3002 = _func_020F();
+    level._id_3002 = spawnstruct();
     level._id_3002._id_2289 = getent( "camera_mp_gunsmith_preview_charm_alt4", "targetname" );
     level._id_3002._id_2289._id_47DA = [ 21, 18 ];
     level._id_3002._id_A35D = 36;
     level._id_3002._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3002._id_E431 = 6;
-    level._id_301A = _func_020F();
+    level._id_301A = spawnstruct();
     level._id_301A._id_2289 = getent( "camera_mp_gunsmith_preview_laser", "targetname" );
     level._id_301A._id_2289._id_47DA = [ 8, 25 ];
     level._id_301A._id_A35D = 36;
     level._id_301A._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_301A._id_E431 = 6;
-    level._id_301B = _func_020F();
+    level._id_301B = spawnstruct();
     level._id_301B._id_2289 = getent( "camera_mp_gunsmith_preview_laser_alt1", "targetname" );
     level._id_301B._id_2289._id_47DA = [ 8, 25 ];
     level._id_301B._id_A35D = 36;
     level._id_301B._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_301B._id_E431 = 6;
-    level._id_301C = _func_020F();
+    level._id_301C = spawnstruct();
     level._id_301C._id_2289 = getent( "camera_mp_gunsmith_preview_laser_alt2", "targetname" );
     level._id_301C._id_2289._id_47DA = [ 8, 25 ];
     level._id_301C._id_A35D = 36;
     level._id_301C._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_301C._id_E431 = 6;
-    level._id_301D = _func_020F();
+    level._id_301D = spawnstruct();
     level._id_301D._id_2289 = getent( "camera_mp_gunsmith_preview_magazine", "targetname" );
     level._id_301D._id_2289._id_47DA = [ 8, 24 ];
     level._id_301D._id_A35D = 36;
     level._id_301D._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_301D._id_E431 = 6;
-    level._id_301E = _func_020F();
+    level._id_301E = spawnstruct();
     level._id_301E._id_2289 = getent( "camera_mp_gunsmith_preview_magazine_alt1", "targetname" );
     level._id_301E._id_2289._id_47DA = [ 8, 24 ];
     level._id_301E._id_A35D = 36;
     level._id_301E._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_301E._id_E431 = 6;
-    level._id_301F = _func_020F();
+    level._id_301F = spawnstruct();
     level._id_301F._id_2289 = getent( "camera_mp_gunsmith_preview_magazine_alt2", "targetname" );
     level._id_301F._id_2289._id_47DA = [ 8, 24 ];
     level._id_301F._id_A35D = 36;
     level._id_301F._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_301F._id_E431 = 6;
-    level._id_3020 = _func_020F();
+    level._id_3020 = spawnstruct();
     level._id_3020._id_2289 = getent( "camera_mp_gunsmith_preview_muzzle", "targetname" );
     level._id_3020._id_2289._id_47DA = [ 12, 30 ];
     level._id_3020._id_A35D = 36;
     level._id_3020._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3020._id_E431 = 6;
-    level._id_3021 = _func_020F();
+    level._id_3021 = spawnstruct();
     level._id_3021._id_2289 = getent( "camera_mp_gunsmith_preview_muzzle_alt1", "targetname" );
     level._id_3021._id_2289._id_47DA = [ 18, 32 ];
     level._id_3021._id_A35D = 36;
     level._id_3021._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3021._id_E431 = 6;
-    level._id_3022 = _func_020F();
+    level._id_3022 = spawnstruct();
     level._id_3022._id_2289 = getent( "camera_mp_gunsmith_preview_optic", "targetname" );
     level._id_3022._id_2289._id_47DA = [ 21.5, 17 ];
     level._id_3022._id_A35D = 36;
     level._id_3022._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3022._id_E431 = 6;
-    level._id_3023 = _func_020F();
+    level._id_3023 = spawnstruct();
     level._id_3023._id_2289 = getent( "camera_mp_gunsmith_preview_optic_alt1", "targetname" );
     level._id_3023._id_2289._id_47DA = [ 21.5, 17 ];
     level._id_3023._id_A35D = 36;
     level._id_3023._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3023._id_E431 = 6;
-    level._id_3024 = _func_020F();
+    level._id_3024 = spawnstruct();
     level._id_3024._id_2289 = getent( "camera_mp_gunsmith_preview_reargrip", "targetname" );
     level._id_3024._id_2289._id_47DA = [ 8, 20 ];
     level._id_3024._id_A35D = 36;
     level._id_3024._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3024._id_E431 = 6;
-    level._id_3025 = _func_020F();
+    level._id_3025 = spawnstruct();
     level._id_3025._id_2289 = getent( "camera_mp_gunsmith_preview_reargrip_alt1", "targetname" );
     level._id_3025._id_2289._id_47DA = [ 8, 20 ];
     level._id_3025._id_A35D = 36;
     level._id_3025._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3025._id_E431 = 6;
-    level._id_3026 = _func_020F();
+    level._id_3026 = spawnstruct();
     level._id_3026._id_2289 = getent( "camera_mp_gunsmith_preview_reargrip_alt2", "targetname" );
     level._id_3026._id_2289._id_47DA = [ 12, 22 ];
     level._id_3026._id_A35D = 36;
     level._id_3026._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3026._id_E431 = 6;
-    level._id_3034 = _func_020F();
+    level._id_3034 = spawnstruct();
     level._id_3034._id_2289 = getent( "camera_mp_gunsmith_preview_sticker", "targetname" );
     level._id_3034._id_2289._id_47DA = [ 20, 32 ];
     level._id_3034._id_A35D = 36;
     level._id_3034._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3034._id_E431 = 6;
-    level._id_3035 = _func_020F();
+    level._id_3035 = spawnstruct();
     level._id_3035._id_2289 = getent( "camera_mp_gunsmith_preview_sticker_alt1", "targetname" );
     level._id_3035._id_2289._id_47DA = [ 20, 32 ];
     level._id_3035._id_A35D = 36;
     level._id_3035._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3035._id_E431 = 6;
-    level._id_3036 = _func_020F();
+    level._id_3036 = spawnstruct();
     level._id_3036._id_2289 = getent( "camera_mp_gunsmith_preview_sticker_alt2", "targetname" );
     level._id_3036._id_2289._id_47DA = [ 20, 34 ];
     level._id_3036._id_A35D = 36;
     level._id_3036._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3036._id_E431 = 6;
-    level._id_3037 = _func_020F();
+    level._id_3037 = spawnstruct();
     level._id_3037._id_2289 = getent( "camera_mp_gunsmith_preview_sticker_alt3", "targetname" );
     level._id_3037._id_2289._id_47DA = [ 20, 34 ];
     level._id_3037._id_A35D = 36;
     level._id_3037._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3037._id_E431 = 6;
-    level._id_3038 = _func_020F();
+    level._id_3038 = spawnstruct();
     level._id_3038._id_2289 = getent( "camera_mp_gunsmith_preview_sticker_alt4", "targetname" );
     level._id_3038._id_2289._id_47DA = [ 20, 34 ];
     level._id_3038._id_A35D = 36;
     level._id_3038._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3038._id_E431 = 6;
-    level._id_3039 = _func_020F();
+    level._id_3039 = spawnstruct();
     level._id_3039._id_2289 = getent( "camera_mp_gunsmith_preview_stock", "targetname" );
     level._id_3039._id_2289._id_47DA = [ 12, 40 ];
     level._id_3039._id_A35D = 36;
     level._id_3039._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3039._id_E431 = 6;
-    level._id_303A = _func_020F();
+    level._id_303A = spawnstruct();
     level._id_303A._id_2289 = getent( "camera_mp_gunsmith_preview_stock_alt1", "targetname" );
     level._id_303A._id_2289._id_47DA = [ 12, 40 ];
     level._id_303A._id_A35D = 36;
     level._id_303A._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_303A._id_E431 = 6;
-    level._id_303B = _func_020F();
+    level._id_303B = spawnstruct();
     level._id_303B._id_2289 = getent( "camera_mp_gunsmith_preview_stock_alt2", "targetname" );
     level._id_303B._id_2289._id_47DA = [ 16, 43 ];
     level._id_303B._id_A35D = 36;
     level._id_303B._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_303B._id_E431 = 6;
-    level._id_303C = _func_020F();
+    level._id_303C = spawnstruct();
     level._id_303C._id_2289 = getent( "camera_mp_gunsmith_preview_underbarrel", "targetname" );
     level._id_303C._id_2289._id_47DA = [ 10, 34 ];
     level._id_303C._id_A35D = 36;
     level._id_303C._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_303C._id_E431 = 6;
-    level._id_3029 = _func_020F();
+    level._id_3029 = spawnstruct();
     level._id_3029._id_2289 = getent( "camera_mp_gunsmith_preview_small_barrel", "targetname" );
     level._id_3029._id_2289._id_47DA = [ 12, 22.5 ];
     level._id_3029._id_A35D = 36;
     level._id_3029._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3029._id_E431 = 6;
-    level._id_302A = _func_020F();
+    level._id_302A = spawnstruct();
     level._id_302A._id_2289 = getent( "camera_mp_gunsmith_preview_small_charm", "targetname" );
     level._id_302A._id_2289._id_47DA = [ 21, 15 ];
     level._id_302A._id_A35D = 36;
     level._id_302A._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_302A._id_E431 = 6;
-    level._id_302B = _func_020F();
+    level._id_302B = spawnstruct();
     level._id_302B._id_2289 = getent( "camera_mp_gunsmith_preview_small_laser", "targetname" );
     level._id_302B._id_2289._id_47DA = [ 12, 19 ];
     level._id_302B._id_A35D = 36;
     level._id_302B._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_302B._id_E431 = 6;
-    level._id_302C = _func_020F();
+    level._id_302C = spawnstruct();
     level._id_302C._id_2289 = getent( "camera_mp_gunsmith_preview_small_magazine", "targetname" );
     level._id_302C._id_2289._id_47DA = [ 12, 20 ];
     level._id_302C._id_A35D = 36;
     level._id_302C._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_302C._id_E431 = 6;
-    level._id_302D = _func_020F();
+    level._id_302D = spawnstruct();
     level._id_302D._id_2289 = getent( "camera_mp_gunsmith_preview_small_magazine_alt1", "targetname" );
     level._id_302D._id_2289._id_47DA = [ 12, 20 ];
     level._id_302D._id_A35D = 36;
     level._id_302D._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_302D._id_E431 = 6;
-    level._id_302E = _func_020F();
+    level._id_302E = spawnstruct();
     level._id_302E._id_2289 = getent( "camera_mp_gunsmith_preview_small_muzzle", "targetname" );
     level._id_302E._id_2289._id_47DA = [ 16, 25 ];
     level._id_302E._id_A35D = 36;
     level._id_302E._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_302E._id_E431 = 6;
-    level._id_302F = _func_020F();
+    level._id_302F = spawnstruct();
     level._id_302F._id_2289 = getent( "camera_mp_gunsmith_preview_small_optic", "targetname" );
     level._id_302F._id_2289._id_47DA = [ 20, 15 ];
     level._id_302F._id_A35D = 36;
     level._id_302F._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_302F._id_E431 = 6;
-    level._id_3030 = _func_020F();
+    level._id_3030 = spawnstruct();
     level._id_3030._id_2289 = getent( "camera_mp_gunsmith_preview_small_reargrip", "targetname" );
     level._id_3030._id_2289._id_47DA = [ 12, 20 ];
     level._id_3030._id_A35D = 36;
     level._id_3030._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3030._id_E431 = 6;
-    level._id_3031 = _func_020F();
+    level._id_3031 = spawnstruct();
     level._id_3031._id_2289 = getent( "camera_mp_gunsmith_preview_small_sticker", "targetname" );
     level._id_3031._id_2289._id_47DA = [ 16, 22 ];
     level._id_3031._id_A35D = 36;
     level._id_3031._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3031._id_E431 = 6;
-    level._id_3032 = _func_020F();
+    level._id_3032 = spawnstruct();
     level._id_3032._id_2289 = getent( "camera_mp_gunsmith_preview_small_stock", "targetname" );
     level._id_3032._id_2289._id_47DA = [ 16, 36 ];
     level._id_3032._id_A35D = 36;
     level._id_3032._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3032._id_E431 = 6;
-    level._id_3033 = _func_020F();
+    level._id_3033 = spawnstruct();
     level._id_3033._id_2289 = getent( "camera_mp_gunsmith_preview_small_trigger", "targetname" );
     level._id_3033._id_2289._id_47DA = [ 21, 12 ];
     level._id_3033._id_A35D = 36;
     level._id_3033._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3033._id_E431 = 6;
-    level._id_3004 = _func_020F();
+    level._id_3004 = spawnstruct();
     level._id_3004._id_2289 = getent( "camera_mp_gunsmith_preview_large_barrel", "targetname" );
     level._id_3004._id_2289._id_47DA = [ 12, 46 ];
     level._id_3004._id_A35D = 36;
     level._id_3004._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3004._id_E431 = 6;
-    level._id_3006 = _func_020F();
+    level._id_3006 = spawnstruct();
     level._id_3006._id_2289 = getent( "camera_mp_gunsmith_preview_large_charm", "targetname" );
     level._id_3006._id_2289._id_47DA = [ 21, 17 ];
     level._id_3006._id_A35D = 36;
     level._id_3006._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3006._id_E431 = 6;
-    level._id_3007 = _func_020F();
+    level._id_3007 = spawnstruct();
     level._id_3007._id_2289 = getent( "camera_mp_gunsmith_preview_large_charm_alt1", "targetname" );
     level._id_3007._id_2289._id_47DA = [ 21, 17 ];
     level._id_3007._id_A35D = 36;
     level._id_3007._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3007._id_E431 = 6;
-    level._id_3008 = _func_020F();
+    level._id_3008 = spawnstruct();
     level._id_3008._id_2289 = getent( "camera_mp_gunsmith_preview_large_charm_alt2", "targetname" );
     level._id_3008._id_2289._id_47DA = [ 21, 17 ];
     level._id_3008._id_A35D = 36;
     level._id_3008._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3008._id_E431 = 6;
-    level._id_3005 = _func_020F();
+    level._id_3005 = spawnstruct();
     level._id_3005._id_2289 = getent( "camera_mp_gunsmith_preview_large_barrel_alt1", "targetname" );
     level._id_3005._id_2289._id_47DA = [ 16, 52 ];
     level._id_3005._id_A35D = 36;
     level._id_3005._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3005._id_E431 = 6;
-    level._id_3009 = _func_020F();
+    level._id_3009 = spawnstruct();
     level._id_3009._id_2289 = getent( "camera_mp_gunsmith_preview_large_laser", "targetname" );
     level._id_3009._id_2289._id_47DA = [ 12, 26 ];
     level._id_3009._id_A35D = 36;
     level._id_3009._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3009._id_E431 = 6;
-    level._id_300A = _func_020F();
+    level._id_300A = spawnstruct();
     level._id_300A._id_2289 = getent( "camera_mp_gunsmith_preview_large_magazine", "targetname" );
     level._id_300A._id_2289._id_47DA = [ 14, 32 ];
     level._id_300A._id_A35D = 36;
     level._id_300A._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_300A._id_E431 = 6;
-    level._id_300B = _func_020F();
+    level._id_300B = spawnstruct();
     level._id_300B._id_2289 = getent( "camera_mp_gunsmith_preview_large_magazine_alt1", "targetname" );
     level._id_300B._id_2289._id_47DA = [ 14, 32 ];
     level._id_300B._id_A35D = 36;
     level._id_300B._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_300B._id_E431 = 6;
-    level._id_300C = _func_020F();
+    level._id_300C = spawnstruct();
     level._id_300C._id_2289 = getent( "camera_mp_gunsmith_preview_large_magazine_alt2", "targetname" );
     level._id_300C._id_2289._id_47DA = [ 14, 32 ];
     level._id_300C._id_A35D = 36;
     level._id_300C._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_300C._id_E431 = 6;
-    level._id_300D = _func_020F();
+    level._id_300D = spawnstruct();
     level._id_300D._id_2289 = getent( "camera_mp_gunsmith_preview_large_muzzle", "targetname" );
     level._id_300D._id_2289._id_47DA = [ 21, 34 ];
     level._id_300D._id_A35D = 36;
     level._id_300D._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_300D._id_E431 = 6;
-    level._id_300E = _func_020F();
+    level._id_300E = spawnstruct();
     level._id_300E._id_2289 = getent( "camera_mp_gunsmith_preview_large_muzzle_alt1", "targetname" );
     level._id_300E._id_2289._id_47DA = [ 21, 32 ];
     level._id_300E._id_A35D = 36;
     level._id_300E._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_300E._id_E431 = 6;
-    level._id_300F = _func_020F();
+    level._id_300F = spawnstruct();
     level._id_300F._id_2289 = getent( "camera_mp_gunsmith_preview_large_optic", "targetname" );
     level._id_300F._id_2289._id_47DA = [ 21.5, 25 ];
     level._id_300F._id_A35D = 36;
     level._id_300F._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_300F._id_E431 = 6;
-    level._id_3010 = _func_020F();
+    level._id_3010 = spawnstruct();
     level._id_3010._id_2289 = getent( "camera_mp_gunsmith_preview_large_reargrip", "targetname" );
     level._id_3010._id_2289._id_47DA = [ 12, 23 ];
     level._id_3010._id_A35D = 36;
     level._id_3010._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3010._id_E431 = 6;
-    level._id_3011 = _func_020F();
+    level._id_3011 = spawnstruct();
     level._id_3011._id_2289 = getent( "camera_mp_gunsmith_preview_large_reargrip_alt1", "targetname" );
     level._id_3011._id_2289._id_47DA = [ 12, 21 ];
     level._id_3011._id_A35D = 36;
     level._id_3011._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3011._id_E431 = 6;
-    level._id_3012 = _func_020F();
+    level._id_3012 = spawnstruct();
     level._id_3012._id_2289 = getent( "camera_mp_gunsmith_preview_large_sticker", "targetname" );
     level._id_3012._id_2289._id_47DA = [ 20, 32 ];
     level._id_3012._id_A35D = 36;
     level._id_3012._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3012._id_E431 = 6;
-    level._id_3013 = _func_020F();
+    level._id_3013 = spawnstruct();
     level._id_3013._id_2289 = getent( "camera_mp_gunsmith_preview_large_sticker_alt1", "targetname" );
     level._id_3013._id_2289._id_47DA = [ 20, 35 ];
     level._id_3013._id_A35D = 36;
     level._id_3013._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3013._id_E431 = 6;
-    level._id_3014 = _func_020F();
+    level._id_3014 = spawnstruct();
     level._id_3014._id_2289 = getent( "camera_mp_gunsmith_preview_large_sticker_alt2", "targetname" );
     level._id_3014._id_2289._id_47DA = [ 20, 32 ];
     level._id_3014._id_A35D = 36;
     level._id_3014._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3014._id_E431 = 6;
-    level._id_3015 = _func_020F();
+    level._id_3015 = spawnstruct();
     level._id_3015._id_2289 = getent( "camera_mp_gunsmith_preview_large_sticker_alt3", "targetname" );
     level._id_3015._id_2289._id_47DA = [ 20, 35 ];
     level._id_3015._id_A35D = 36;
     level._id_3015._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3015._id_E431 = 6;
-    level._id_3016 = _func_020F();
+    level._id_3016 = spawnstruct();
     level._id_3016._id_2289 = getent( "camera_mp_gunsmith_preview_large_stock", "targetname" );
     level._id_3016._id_2289._id_47DA = [ 16, 43 ];
     level._id_3016._id_A35D = 36;
     level._id_3016._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3016._id_E431 = 6;
-    level._id_3017 = _func_020F();
+    level._id_3017 = spawnstruct();
     level._id_3017._id_2289 = getent( "camera_mp_gunsmith_preview_large_stock_alt1", "targetname" );
     level._id_3017._id_2289._id_47DA = [ 16, 43 ];
     level._id_3017._id_A35D = 36;
     level._id_3017._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3017._id_E431 = 6;
-    level._id_3018 = _func_020F();
+    level._id_3018 = spawnstruct();
     level._id_3018._id_2289 = getent( "camera_mp_gunsmith_preview_large_underbarrel", "targetname" );
     level._id_3018._id_2289._id_47DA = [ 20, 35 ];
     level._id_3018._id_A35D = 36;
     level._id_3018._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3018._id_E431 = 6;
-    level._id_3019 = _func_020F();
+    level._id_3019 = spawnstruct();
     level._id_3019._id_2289 = getent( "camera_mp_gunsmith_preview_large_underbarrel_alt1", "targetname" );
     level._id_3019._id_2289._id_47DA = [ 20, 36 ];
     level._id_3019._id_A35D = 36;
     level._id_3019._id_10D04[2] = getent( "weapon_loc_preview", "targetname" );
     level._id_3019._id_E431 = 6;
-    level._id_2FE0 = _func_020F();
+    level._id_2FE0 = spawnstruct();
     level._id_2FE0._id_2289 = getent( "char_tango", "targetname" );
     level._id_2FE0._id_2289._id_47DA = [ 4.5, 125 ];
     level._id_2FE0._id_A35D = 30;
     level._id_2FE0._id_FB43 = ::_id_FB82;
     level._id_2FE0._id_E431 = 6;
     level._id_2FE0.update_lighting = scripts\mp\maps\mp_frontend3\mp_frontend3_lighting::operator_far();
-    level.camera_character_faction_select = _func_020F();
+    level.camera_character_faction_select = spawnstruct();
     level.camera_character_faction_select._id_2289 = getent( "char_west_b_detail", "targetname" );
     level.camera_character_faction_select._id_2289._id_47DA = [ 5, 83 ];
     level.camera_character_faction_select._id_A35D = 30;
     level.camera_character_faction_select._id_FB43 = ::_id_FB9E;
     level.camera_character_faction_select._id_E431 = 6;
     level._id_2FE0.update_lighting = scripts\mp\maps\mp_frontend3\mp_frontend3_lighting::operator_far();
-    level.camera_character_faction_select_detail = _func_020F();
+    level.camera_character_faction_select_detail = spawnstruct();
     level.camera_character_faction_select_detail._id_2289 = getent( "char_west_b", "targetname" );
     level.camera_character_faction_select_detail._id_2289._id_47DA = [ 4, 114 ];
     level.camera_character_faction_select_detail._id_A35D = 34;
     level.camera_character_faction_select_detail._id_FB43 = ::_id_FB9E;
     level.camera_character_faction_select_detail._id_E431 = 6;
     level._id_2FE0.update_lighting = scripts\mp\maps\mp_frontend3\mp_frontend3_lighting::operator_close();
-    level.camera_character_faction_select_quips = _func_020F();
+    level.camera_character_faction_select_quips = spawnstruct();
     level.camera_character_faction_select_quips._id_2289 = getent( "char_west_b_quips", "targetname" );
     level.camera_character_faction_select_quips._id_2289._id_47DA = [ 6, 50 ];
     level.camera_character_faction_select_quips._id_A35D = 37;
     level.camera_character_faction_select_quips._id_FB43 = ::_id_FB9E;
     level.camera_character_faction_select_quips._id_E431 = 6;
-    level._id_2FDE = _func_020F();
+    level._id_2FDE = spawnstruct();
     level._id_2FDE._id_2289 = getent( "char_preview_detail", "targetname" );
     level._id_2FDE._id_2289._id_47DA = [ 22, 60 ];
     level._id_2FDE._id_A35D = 37;
     level._id_2FDE._id_33D1 = getent( "charroom_char_preview", "targetname" );
     level._id_2FDE._id_E431 = 6;
-    level._id_2FDF = _func_020F();
+    level._id_2FDF = spawnstruct();
     level._id_2FDF._id_2289 = getent( "char_preview", "targetname" );
     level._id_2FDF._id_2289._id_47DA = [ 22, 181 ];
     level._id_2FDF._id_A35D = 37;
     level._id_2FDF._id_33D1 = getent( "charroom_char_preview", "targetname" );
     level._id_2FDF._id_E431 = 6;
-    level._id_2FD5 = _func_020F();
+    level._id_2FD5 = spawnstruct();
     level._id_2FD5._id_2289 = getent( "char_blackcell", "targetname" );
     level._id_2FD5._id_2289._id_47DA = [ 5, 110 ];
     level._id_2FD5._id_A35D = 28;
     level._id_2FD5._id_33D1 = getent( "charroom_char_blackcell", "targetname" );
-    level._id_2FD6 = _func_020F();
+    level._id_2FD6 = spawnstruct();
     level._id_2FD6._id_2289 = getent( "char_blackcell_detail", "targetname" );
     level._id_2FD6._id_2289._id_47DA = [ 22, 256 ];
     level._id_2FD6._id_A35D = 28;
     level._id_2FD6._id_33D1 = getent( "charroom_char_blackcell", "targetname" );
-    level._id_3055 = _func_020F();
+    level._id_3055 = spawnstruct();
     level._id_3055._id_2289 = getent( "char_store", "targetname" );
     level._id_3055._id_2289._id_47DA = [ 16, 264 ];
     level._id_3055._id_A35D = 28;
-    level._id_3050 = _func_020F();
+    level._id_3050 = spawnstruct();
     level._id_3050._id_2289 = getent( "char_quartermaster", "targetname" );
     level._id_3050._id_2289._id_47DA = [ 16, 264 ];
     level._id_3050._id_A35D = 28;
-    level._id_3051 = _func_020F();
+    level._id_3051 = spawnstruct();
     level._id_3051._id_2289 = getent( "char_quartermaster_detail", "targetname" );
     level._id_3051._id_2289._id_47DA = [ 22, 264 ];
     level._id_3051._id_A35D = 28;
-    level._id_3045 = _func_020F();
+    level._id_3045 = spawnstruct();
     level._id_3045._id_2289 = getent( "char_lobby", "targetname" );
     level._id_3045._id_2289._id_47DA = [ 3.5, 225 ];
     level._id_3045._id_FB43 = ::update_lobby_char_loc_v2;
     level._id_3045._id_E431 = 6;
     level._id_3045 set_lobby_cam_initial_pos();
-    level._id_3046 = _func_020F();
+    level._id_3046 = spawnstruct();
     level._id_3046._id_2289 = getent( "char_lobby_detail", "targetname" );
     level._id_3046._id_2289._id_47DA = [ 4, 55 ];
     level._id_3046._id_FB43 = ::_id_FB7C;
     level._id_3046._id_E431 = 6;
     level._id_3046 adjust_cam_to_tank();
-    level._id_3057 = _func_020F();
+    level._id_3057 = spawnstruct();
     level._id_3057._id_2289 = getent( "char_worldmap", "targetname" );
     level._id_3057._id_2289._id_47DA = [ 5, 110 ];
     level._id_3057._id_A35D = 28;
     level._id_3057._id_33D1 = getent( "charroom_char_worldmap", "targetname" );
-    level._id_2FE1 = _func_020F();
+    level._id_2FE1 = spawnstruct();
     level._id_2FE1._id_2289 = getent( "char_tournament_overcam", "targetname" );
     level._id_2FE1._id_2289._id_47DA = [ 22, 256 ];
     level._id_2FE1._id_A35D = 36;
     level._id_2FE1._id_FB43 = ::_id_FB37;
-    level._id_2FDD = _func_020F();
+    level._id_2FDD = spawnstruct();
     level._id_2FDD._id_2289 = getent( "char_tournament_overcam", "targetname" );
     level._id_2FDD._id_2289._id_47DA = [ 22, 256 ];
     level._id_2FDD._id_A35D = 36;
@@ -2228,7 +2228,7 @@ adjust_cam_to_tank()
     var_0 = self._id_2289._id_045A;
     var_1 = getent( "tank_scene_frontend_s4", "targetname" );
     var_2 = get_offset_transform_from_position_table( var_0 );
-    self._id_2289 adjust_ent_with_table_data( var_1._id_02EA, var_2 );
+    self._id_2289 adjust_ent_with_table_data( var_1.origin, var_2 );
     self._id_A35D = var_2["Fov"];
     self._id_2289._id_47DA = [ var_2["fStop"], var_2["fDist"] ];
 }
@@ -2237,8 +2237,8 @@ adjust_ent_with_table_data( var_0, var_1 )
 {
     var_2["pos"] = ( var_1["off_x"], var_1["off_y"], var_1["off_z"] );
     var_2["rotation"] = ( var_1["off_Rx"], var_1["off_Ry"], var_1["off_Rz"] );
-    self._id_02EA = var_0 + var_2["pos"];
-    self._id_0054 = ( -1 * ( var_2["rotation"][0] - 90 ), var_2["rotation"][2] + 90, var_2["rotation"][1] );
+    self.origin = var_0 + var_2["pos"];
+    self.angles = ( -1 * ( var_2["rotation"][0] - 90 ), var_2["rotation"][2] + 90, var_2["rotation"][1] );
 }
 
 get_offset_transform_from_position_table( var_0 )
@@ -2258,12 +2258,12 @@ get_offset_transform_from_position_table( var_0 )
 
 get_frontend_position_data( var_0, var_1 )
 {
-    return int( stopfxontag( "frontEndSceneData/frontendCharacterPositionData.csv", 0, var_0, var_1 ) );
+    return int( _func_021D( "frontEndSceneData/frontendCharacterPositionData.csv", 0, var_0, var_1 ) );
 }
 
 _id_D7C6()
 {
-    level._id_33D8 = [];
+    level.characters = [];
 
     for ( var_0 = 0; var_0 < 8; var_0++ )
     {
@@ -2275,33 +2275,33 @@ _id_D7C6()
         else
             var_1 = getent( "lobby_charslot_" + var_2, "targetname" );
 
-        level._id_33D8[var_0] = _func_0205( "script_character", var_1._id_02EA, 0, 0, var_0, "MPClientCharacter" );
+        level.characters[var_0] = spawn( "script_character", var_1.origin, 0, 0, var_0, "MPClientCharacter" );
     }
 
-    level._id_33D8[14] = _func_0205( "script_character", level._id_33D8[0]._id_02EA, 0, 0, 14, "MPClientCharacter" );
-    level._id_33D8[14]._id_0054 = ( 0, 270, 0 );
+    level.characters[14] = spawn( "script_character", level.characters[0].origin, 0, 0, 14, "MPClientCharacter" );
+    level.characters[14].angles = ( 0, 270, 0 );
 
     for ( var_3 = 0; var_3 < 4; var_3++ )
     {
         var_2 = var_3 + 1;
         var_0 = 8 + var_3;
         var_1 = getent( "lobby_charslot_0" + var_2 + "_dog", "targetname" );
-        level._id_33D8[var_0] = _func_0205( "script_character", var_1._id_02EA, 0, 0, var_0, "MPClientCharacter" );
+        level.characters[var_0] = spawn( "script_character", var_1.origin, 0, 0, var_0, "MPClientCharacter" );
     }
 
     var_4 = getent( "weapon_loc_hq1", "targetname" );
-    level._id_10DC7 = [];
-    level._id_10DC7[0] = _func_0205( "script_weapon", var_4._id_02EA, 0, 0, 0 );
-    level._id_10DC7[0]._id_0054 = var_4._id_0054;
-    level._id_10DC7[1] = _func_0205( "script_weapon", var_4._id_02EA, 0, 0, 1 );
-    level._id_10DC7[1]._id_0054 = var_4._id_0054;
+    level.weapons = [];
+    level.weapons[0] = spawn( "script_weapon", var_4.origin, 0, 0, 0 );
+    level.weapons[0].angles = var_4.angles;
+    level.weapons[1] = spawn( "script_weapon", var_4.origin, 0, 0, 1 );
+    level.weapons[1].angles = var_4.angles;
     var_5 = getent( "weapon_loc_preview", "targetname" );
-    level._id_10DC7[2] = _func_0205( "script_weapon", var_5._id_02EA, 0, 0, 2 );
-    level._id_10DC7[2]._id_0054 = var_5._id_0054;
+    level.weapons[2] = spawn( "script_weapon", var_5.origin, 0, 0, 2 );
+    level.weapons[2].angles = var_5.angles;
     var_6 = getent( "weapon_loc_watch", "targetname" );
-    level._id_10DC7[3] = _func_0205( "script_weapon", var_6._id_02EA, 0, 0, 3 );
-    level._id_10DC7[3]._id_0054 = var_6._id_0054;
-    _id_5FB9( level._id_3046._id_2289._id_02EA, level._id_3046._id_2289._id_0054 );
+    level.weapons[3] = spawn( "script_weapon", var_6.origin, 0, 0, 3 );
+    level.weapons[3].angles = var_6.angles;
+    _id_5FB9( level._id_3046._id_2289.origin, level._id_3046._id_2289.angles );
 }
 
 _id_6A68()
@@ -2320,7 +2320,7 @@ _id_5521()
         if ( var_0 == "taunt_started" )
         {
             _id_078F::_id_C68F();
-            var_2 = stopfxontag( "mp/cac/taunts.csv", 0, var_1, 9 );
+            var_2 = _func_021D( "mp/cac/taunts.csv", 0, var_1, 9 );
             _id_078F::_id_BD5D( var_2, -1, 0 );
             continue;
         }
@@ -2336,7 +2336,7 @@ _id_48CF( var_0 )
         var_2 hide();
 
     if ( var_0 > 0 && var_0 <= level._id_F907.size )
-        level._id_F907[var_0] _meth_83C3();
+        level._id_F907[var_0] show();
 }
 
 _id_98F6()
@@ -2398,13 +2398,13 @@ _id_98F6()
 
         if ( var_0 == "mvp_highlight_started" )
         {
-            level._id_33D8[0] thread play_menu_animation( var_0, var_1 );
+            level.characters[0] thread play_menu_animation( var_0, var_1 );
             continue;
         }
 
         if ( var_0 == "mvp_highlight_reset" )
         {
-            level._id_33D8[0] stop_menu_animation();
+            level.characters[0] stop_menu_animation();
             continue;
         }
 
@@ -2421,7 +2421,7 @@ _id_98F6()
         }
 
         if ( var_0 == "current_operator_count" )
-            level.charactercount = _func_0147( int( var_1 ), 1 );
+            level.charactercount = max( int( var_1 ), 1 );
     }
 }
 
@@ -2431,16 +2431,16 @@ stop_menu_animation()
         return;
 
     level endon( "play_menu_animation" );
-    var_0 = level._id_33D8[0];
+    var_0 = level.characters[0];
     level._id_B7FF cameralinkto();
     level._id_B7FF _meth_805E( level._id_2FD3, "tag_origin" );
     _id_FB9E();
     var_1 = getent( "charroom_char_west_b", "targetname" );
-    var_2 = var_1._id_02EA;
-    var_3 = var_1._id_0054;
+    var_2 = var_1.origin;
+    var_3 = var_1.angles;
     var_0 deletelinkent();
-    var_0._id_02EA = var_2;
-    var_0._id_0054 = var_3;
+    var_0.origin = var_2;
+    var_0.angles = var_3;
     level.playing_menu_animation = 0;
 }
 
@@ -2448,30 +2448,30 @@ play_menu_animation( var_0, var_1 )
 {
     var_2 = "postMatchFlowAnimations.csv";
     var_3 = 14;
-    var_4 = level._id_33D8[0];
-    var_5 = level._id_33D8[var_3];
+    var_4 = level.characters[0];
+    var_5 = level.characters[var_3];
     level.playing_menu_animation = 1;
     level notify( "play_menu_animation" );
     level endon( "play_menu_animation" );
     waitframe();
     var_6 = getent( "charroom_char_west_b_fatality", "targetname" );
-    var_7 = var_6._id_02EA;
-    var_8 = var_6._id_0054;
+    var_7 = var_6.origin;
+    var_8 = var_6.angles;
 
     if ( isdefined( level._id_B7FF._id_305F ) )
-        level._id_B7FF._id_305F _meth_809A();
+        level._id_B7FF._id_305F delete();
 
     var_9 = scripts\mp\team_mvp_characters_util::create_client_character_camera( var_7, var_8, 1 );
     level._id_B7FF._id_305F = var_9;
     var_4 deletelinkent();
     var_5 deletelinkent();
-    var_4._id_02EA = var_7;
-    var_4._id_0054 = var_8 + ( 0, 90, 0 );
-    var_5._id_02EA = var_7;
-    var_5._id_0054 = var_8 + ( 0, 90, 0 );
-    var_10 = _func_021E( var_2, var_1 - 1, 2 );
-    var_11 = _func_021E( var_2, var_1 - 1, 3 );
-    var_12 = _func_021E( var_2, var_1 - 1, 4 );
+    var_4.origin = var_7;
+    var_4.angles = var_8 + ( 0, 90, 0 );
+    var_5.origin = var_7;
+    var_5.angles = var_8 + ( 0, 90, 0 );
+    var_10 = tablelookupbyrow( var_2, var_1 - 1, 2 );
+    var_11 = tablelookupbyrow( var_2, var_1 - 1, 3 );
+    var_12 = tablelookupbyrow( var_2, var_1 - 1, 4 );
     var_4.linkent = var_4 scripts\mp\team_mvp_characters_util::run_delta_motion_on_client_character( var_10, var_7, var_8 + ( 0, 90, 0 ) );
     var_5.linkent = var_5 scripts\mp\team_mvp_characters_util::run_delta_motion_on_client_character( var_11, var_7, var_8 + ( 0, 90, 0 ) );
     _func_0325( 65, 0 );
@@ -2485,7 +2485,7 @@ play_menu_animation( var_0, var_1 )
 deletelinkent()
 {
     if ( isdefined( self.linkent ) )
-        self.linkent _meth_809A();
+        self.linkent delete();
 }
 
 _id_D80A()
@@ -2496,9 +2496,9 @@ _id_D80A()
     level._id_F907[3] = getent( "weapRarity03", "targetname" );
     level._id_F907[4] = getent( "weapRarity04", "targetname" );
     level._id_F907[5] = getent( "weapRarity05", "targetname" );
-    level._id_C036 = _id_077B::_id_6D7A( "weapRaritySmall", "targetname" );
-    level._id_C035 = _id_077B::_id_6D7A( "weapRarityMedium", "targetname" );
-    level._id_C034 = _id_077B::_id_6D7A( "weapRarityLarge", "targetname" );
-    level._id_C037 = _id_077B::_id_6D7A( "weapRarityWatch", "targetname" );
+    level._id_C036 = scripts\engine\utility::_id_6D7A( "weapRaritySmall", "targetname" );
+    level._id_C035 = scripts\engine\utility::_id_6D7A( "weapRarityMedium", "targetname" );
+    level._id_C034 = scripts\engine\utility::_id_6D7A( "weapRarityLarge", "targetname" );
+    level._id_C037 = scripts\engine\utility::_id_6D7A( "weapRarityWatch", "targetname" );
     _id_48CF( 0 );
 }

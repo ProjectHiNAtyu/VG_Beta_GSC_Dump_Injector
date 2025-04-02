@@ -11,7 +11,7 @@ _id_9B72( var_0, var_1 )
     self endon( "death_or_disconnect" );
     level endon( "game_ended" );
 
-    if ( _id_077B::_id_877A( var_1 ) && _func_0117( var_0 ) && var_0._id_045B != self._id_045B && !var_0 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_empimmune" ) && !isdefined( var_0._id_8907 ) )
+    if ( scripts\engine\utility::_id_877A( var_1 ) && isplayer( var_0 ) && var_0.team != self.team && !var_0 scripts\mp\utility\perk::_hasperk( "specialty_empimmune" ) && !isdefined( var_0._id_8907 ) )
         thread _id_9B70( var_0 );
 }
 
@@ -32,7 +32,7 @@ _id_ED67( var_0 )
     self endon( "death_or_disconnect" );
     var_1 = gettime() + 3500;
 
-    while ( isai( var_0 ) && gettime() < var_1 )
+    while ( isalive( var_0 ) && gettime() < var_1 )
         wait 1.1;
 }
 

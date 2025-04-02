@@ -3,7 +3,7 @@
 
 _id_10148()
 {
-    _id_099D::_id_C2A5( "vehicle_mines", "trigger", ::_id_10149 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_mines", "trigger", ::_id_10149 );
 }
 
 _id_10149( var_0, var_1 )

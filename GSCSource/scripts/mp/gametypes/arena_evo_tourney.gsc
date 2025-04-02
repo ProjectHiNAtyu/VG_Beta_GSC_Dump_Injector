@@ -6,13 +6,13 @@ debugscripterrors()
 
 }
 
-_id_021D()
+init()
 {
     level.arena_evo_num_matches_until_buy_round = 3;
     level._id_2AA8 = 1;
     level._id_DDBF = 1;
     level._id_10D0E = scripts\mp\gametypes\arena_evo_tourney_loot::_id_AD33;
-    level._id_2A75 = _func_020F();
+    level._id_2A75 = spawnstruct();
     level._id_2A75._id_B954 = 9999;
     scripts\mp\gametypes\arena_evo_tourney_util::_id_1A63( "arena_evo_player_state_intermission" );
 
@@ -32,7 +32,7 @@ _id_021D()
 
 _id_1AAE()
 {
-    precachemodel( "v_ui_icon_chapion_hill_weapon_waypoint" );
+    _func_01AD( "v_ui_icon_chapion_hill_weapon_waypoint" );
     scripts\mp\gametypes\arena_evo_tourney_loot::_id_9844();
     scripts\mp\gametypes\arena_evo_tourney_util::_id_A43B();
     _func_01E5( "ui_hide_minimap", !getdvarint( "scr_arena_evo_minimap_enabled", 1 ) );
@@ -54,7 +54,7 @@ _id_1AAE()
     level._id_2A6F._id_2A1C["brloot_armor_plate"] = "equip_armorplate";
     level._id_CAA9 = scripts\mp\gametypes\arena_evo_tourney_loot::_id_1AC8;
     level._id_CAA5 = scripts\mp\gametypes\arena_evo_tourney_loot::_id_1AA7;
-    scripts\mp\gametypes\s4_armory_kiosk::_id_021D();
+    scripts\mp\gametypes\s4_armory_kiosk::init();
 }
 
 _id_AD2E()
@@ -68,8 +68,8 @@ _id_AD2E()
     {
         foreach ( var_5, var_4 in var_2 )
         {
-            level._id_E275[var_6][var_5]._id_02EA = var_0[0]._id_02EA;
-            level._id_E275[var_6][var_5]._id_0054 = var_0[0]._id_0054;
+            level._id_E275[var_6][var_5].origin = var_0[0].origin;
+            level._id_E275[var_6][var_5].angles = var_0[0].angles;
         }
     }
 }
@@ -94,12 +94,12 @@ _id_1AC6()
     foreach ( var_3 in level._id_29E3 )
         var_0._id_29D3[var_3] = 30;
 
-    if ( _func_0107( var_0 ) )
+    if ( isbot( var_0 ) )
         var_0 thread scripts\mp\gametypes\arena_evo_tourney_util::_id_5E25();
 
     var_0 scripts\mp\gametypes\arena_evo_tourney_util::_id_1A62( level._id_1A43 );
     var_0._id_AC77 = var_0 getplayerangles();
-    var_0 _meth_82F6( "ui_hide_minimap", !getdvarint( "scr_arena_evo_minimap_enabled", 1 ) );
+    var_0 setclientomnvar( "ui_hide_minimap", !getdvarint( "scr_arena_evo_minimap_enabled", 1 ) );
     var_0 thread scripts\mp\gametypes\arena_evo_tourney_util::_id_F707();
 }
 
@@ -123,31 +123,31 @@ _id_1AC7( var_0 )
         return;
     }
 
-    var_1 _meth_82F6( "ui_match_start_countdown", -1 );
-    var_1 _meth_82F6( "ui_match_in_progress", 1 );
-    var_1 _meth_82F6( "ui_arena_evo_bye", 0 );
+    var_1 setclientomnvar( "ui_match_start_countdown", -1 );
+    var_1 setclientomnvar( "ui_match_in_progress", 1 );
+    var_1 setclientomnvar( "ui_arena_evo_bye", 0 );
 
     if ( istrue( var_0 ) )
     {
         foreach ( var_3 in level._id_EF86 )
         {
             var_4 = scripts\mp\gametypes\arena_evo_tourney_util::_id_67A0( var_3 ) + 1;
-            _func_01E4( "ui_arena_match_score_team" + var_4, 0 );
+            setomnvar( "ui_arena_match_score_team" + var_4, 0 );
         }
     }
     else
     {
-        var_6 = scripts\mp\gametypes\arena_evo_tourney_util::_id_66F5( var_1._id_0309["team"] );
+        var_6 = scripts\mp\gametypes\arena_evo_tourney_util::_id_66F5( var_1.pers["team"] );
         _id_B264( var_1, var_6, 3 );
     }
 
     if ( istrue( var_1._id_DC91 ) )
     {
-        var_1 _meth_82F6( "ui_arena_mod_card", level._id_4147._id_7C71 );
+        var_1 setclientomnvar( "ui_arena_mod_card", level._id_4147._id_7C71 );
         var_1._id_DC91 = 0;
 
-        if ( !_id_077B::_id_85A4( level._id_4147._id_C17B, "none" ) )
-            _id_077B::_id_46C3( 1, _id_0A64::_id_9122, "mod_card_activated", [ var_1 ] );
+        if ( !scripts\engine\utility::is_equal( level._id_4147._id_C17B, "none" ) )
+            scripts\engine\utility::_id_46C3( 1, _id_0A64::_id_9122, "mod_card_activated", [ var_1 ] );
     }
     else if ( !istrue( var_1._id_7552 ) && scripts\mp\gametypes\arena_evo_tourney_util::_id_1A6F( var_1 scripts\mp\gametypes\arena_evo_tourney_util::_id_6642() ) )
     {
@@ -190,7 +190,7 @@ _id_1AC7( var_0 )
             var_1 thread scripts\mp\gametypes\arena_evo_tourney_gameplay_modifiers::_id_1A9D();
     }
 
-    var_3 = var_1._id_0309["team"];
+    var_3 = var_1.pers["team"];
 
     if ( !scripts\mp\gametypes\arena_evo_tourney_util::_id_85E8( var_3 ) )
         var_1 scripts\mp\gametypes\arena_evo_tourney_loot::run_match_start_funcs();
@@ -203,24 +203,24 @@ _id_B264( var_0, var_1, var_2 )
     if ( var_3 >= 15 )
     {
         if ( var_1 < 15 && var_1 > 10 )
-            _id_077B::_id_46C3( var_2, _id_0A64::_id_9122, "large_amount_lives_remaining", [ var_0 ] );
+            scripts\engine\utility::_id_46C3( var_2, _id_0A64::_id_9122, "large_amount_lives_remaining", [ var_0 ] );
     }
 
     if ( var_3 >= 10 )
     {
         if ( var_1 < 10 && var_1 > 5 )
-            _id_077B::_id_46C3( var_2, _id_0A64::_id_9122, "medium_amount_lives_remaining", [ var_0 ] );
+            scripts\engine\utility::_id_46C3( var_2, _id_0A64::_id_9122, "medium_amount_lives_remaining", [ var_0 ] );
     }
 
     if ( var_1 < 6 && var_1 > 0 )
-        _id_077B::_id_46C3( var_2, _id_0A64::_id_9122, "ch_" + var_1 + "_lives_left", [ var_0 ] );
+        scripts\engine\utility::_id_46C3( var_2, _id_0A64::_id_9122, "ch_" + var_1 + "_lives_left", [ var_0 ] );
 }
 
 _id_1AD2( var_0 )
 {
-    _func_01E4( "ui_arena_round_index", var_0 );
-    _func_01E4( "ui_arena_match_display_index", scripts\mp\gametypes\arena_evo_tourney_util::_id_6564() );
-    _func_01E4( "ui_arena_matches_until_buy_round", scripts\mp\gametypes\arena_evo_tourney_util::_id_6567() );
+    setomnvar( "ui_arena_round_index", var_0 );
+    setomnvar( "ui_arena_match_display_index", scripts\mp\gametypes\arena_evo_tourney_util::_id_6564() );
+    setomnvar( "ui_arena_matches_until_buy_round", scripts\mp\gametypes\arena_evo_tourney_util::_id_6567() );
 
     foreach ( var_2 in scripts\mp\gametypes\arena_evo_tourney_util::_id_631B() )
     {
@@ -254,11 +254,11 @@ _id_1AA5()
         }
     }
 
-    level thread _id_0999::_id_58A7( var_0, 1, 0.5 );
+    level thread scripts\cp_mp\utility\game_utility::_id_58A7( var_0, 1, 0.5 );
     wait 0.5;
     level._id_91C9 = 5;
-    var_0._id_0309["wmStreakAmmo"] = undefined;
-    var_0._id_0309["mgStreakAmmo"] = undefined;
+    var_0.pers["wmStreakAmmo"] = undefined;
+    var_0.pers["mgStreakAmmo"] = undefined;
 
     if ( getdvarint( "scr_killPlayerOnArenaChange", 0 ) )
     {
@@ -274,33 +274,33 @@ _id_1AA5()
         if ( istrue( level._id_CA36 ) )
             var_0._id_DDA5 = 0;
 
-        if ( _id_0A74::_id_89D3( var_0 ) )
+        if ( scripts\mp\utility\player::isreallyalive( var_0 ) )
             var_0._id_161B = 1;
 
-        var_0 _id_07D9::_id_E334();
+        var_0 scripts\mp\playerlogic::_id_E334();
         var_0._id_C6B3 = 0;
     }
-    else if ( _id_0A74::_id_89D3( var_0 ) )
+    else if ( scripts\mp\utility\player::isreallyalive( var_0 ) )
     {
         var_0 notify( "jugg_force_ended" );
         waitframe();
-        var_1 = var_0 _id_07D9::_id_6D2C();
+        var_1 = var_0 scripts\mp\playerlogic::_id_6D2C();
         var_0 _id_07EE::_id_5A80( var_1._id_E33F );
         var_0 _meth_8062();
-        var_0 _meth_835E( var_1._id_E32F, 1 );
+        var_0 setorigin( var_1._id_E32F, 1 );
         var_0 thread delayedsetplayerangles( var_1._id_E264 );
-        var_0 _meth_8382( "stand" );
+        var_0 setstance( "stand" );
         var_0 _id_09E8::_id_A033();
-        var_0._id_01FF = self._id_027F;
-        var_0 _id_07B4::_id_AACC( 1 );
-        var_0 scripts\cp_mp\hostmigration::_id_BB8A( self._id_37D9, 1 );
-        var_0 scripts\cp_mp\hostmigration::_id_6F94( self._id_045B, self._id_37D9 );
+        var_0.health = self.maxhealth;
+        var_0 scripts\mp\healthoverlay::_id_AACC( 1 );
+        var_0 scripts\mp\class::_id_BB8A( self.class, 1 );
+        var_0 scripts\mp\class::_id_6F94( self.team, self.class );
         var_0 _id_1AC6();
     }
     else
-        var_0 _id_07D9::_id_E334();
+        var_0 scripts\mp\playerlogic::_id_E334();
 
-    level thread _id_0999::_id_58A7( var_0, 0, 0.5 );
+    level thread scripts\cp_mp\utility\game_utility::_id_58A7( var_0, 0, 0.5 );
 
     if ( istrue( var_0._id_C698 ) )
     {
@@ -312,7 +312,7 @@ _id_1AA5()
 delayedsetplayerangles( var_0 )
 {
     wait 1;
-    self _meth_8362( var_0 );
+    self setplayerangles( var_0 );
 }
 
 _id_1ACC()
@@ -320,10 +320,10 @@ _id_1ACC()
     scripts\mp\gametypes\arena_evo_tourney_util::_id_106EF();
 
     if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_65E4( 1 ) == 0 )
-        level thread _id_0A64::_id_9122( "champion_hill_start", level._id_B758 );
+        level thread _id_0A64::_id_9122( "champion_hill_start", level.players );
 
     if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_65E4( 1 ) == 1 )
-        level thread _id_0A64::_id_9122( "arena_evo_matchup_2", level._id_B758 );
+        level thread _id_0A64::_id_9122( "arena_evo_matchup_2", level.players );
 
     level._id_5E42 = 1;
     scripts\mp\gametypes\arena_evo_tourney_util::_id_D66A();
@@ -408,15 +408,15 @@ _id_1AB2( var_0 )
 {
     var_0 endon( "disconnect" );
 
-    if ( _func_0107( var_0 ) )
+    if ( isbot( var_0 ) )
         return;
 
     if ( !getdvarint( "scr_arena_evo_upgrades_enabled", 1 ) )
         return;
 
     level endon( "game_ended" );
-    var_0 _meth_824A( "spend_kill_credit_command", "-actionslot 4" );
-    var_0 _meth_824A( "spend_kill_credit_command", "killstreak1" );
+    var_0 notifyonplayercommand( "spend_kill_credit_command", "-actionslot 4" );
+    var_0 notifyonplayercommand( "spend_kill_credit_command", "killstreak1" );
 
     for (;;)
     {
@@ -430,16 +430,16 @@ _id_1AD4()
     var_0 = self;
     self endon( "disconnect" );
     self endon( "noLongerAffordUpgrade" );
-    var_0 _meth_82F6( "ui_arena_upgrade_ready", gettime() );
+    var_0 setclientomnvar( "ui_arena_upgrade_ready", gettime() );
 
     while ( var_0._id_C322 )
     {
         wait 20;
 
         if ( !var_0 _meth_876B( "ui_arena_remind_upgrades", 0 ) )
-            var_0 _meth_82F6( "ui_arena_remind_upgrades", 1 );
+            var_0 setclientomnvar( "ui_arena_remind_upgrades", 1 );
 
-        var_0 _meth_82F6( "ui_arena_remind_upgrades_notify", gettime() );
+        var_0 setclientomnvar( "ui_arena_remind_upgrades_notify", gettime() );
     }
 }
 
@@ -450,7 +450,7 @@ _id_1AB3()
     var_0 notify( "ArenaTournament_Listen_Weapon_Change" );
     var_0 endon( "ArenaTournament_Listen_Weapon_Change" );
 
-    if ( _func_0107( var_0 ) )
+    if ( isbot( var_0 ) )
         return;
 
     for (;;)
@@ -466,7 +466,7 @@ _id_1AB3()
                 var_0 scripts\mp\gametypes\arena_evo_tourney_loot::_id_1ACE( var_3, 0 );
         }
         else
-            var_0 _meth_82F6( "ui_player_current_weapon_upgrade_cost", -1 );
+            var_0 setclientomnvar( "ui_player_current_weapon_upgrade_cost", -1 );
 
         if ( var_0 scripts\mp\gametypes\arena_evo_tourney_loot::_id_1AAD( var_3 ) )
         {
@@ -477,14 +477,14 @@ _id_1AB3()
             else
                 var_6 = -1;
 
-            var_0 _meth_82F6( "ui_arena_current_weapon_rank", var_5 );
-            var_0 _meth_82F6( "ui_player_current_weapon_upgrade_cost", var_6 );
+            var_0 setclientomnvar( "ui_arena_current_weapon_rank", var_5 );
+            var_0 setclientomnvar( "ui_player_current_weapon_upgrade_cost", var_6 );
             var_0 scripts\mp\gametypes\arena_evo_tourney_loot::_id_1AC5();
 
             if ( istrue( var_0._id_DCE2 ) && var_5 > 0 )
             {
                 var_0._id_DCE2 = undefined;
-                var_0 _id_07B9::_id_DCE0( "weapon_upgrade", var_0 scripts\mp\gametypes\arena_evo_tourney_weapon_util::_id_1AAA( var_3 ) );
+                var_0 scripts\mp\hud_message::showsplash( "weapon_upgrade", var_0 scripts\mp\gametypes\arena_evo_tourney_weapon_util::_id_1AAA( var_3 ) );
             }
         }
 
@@ -494,7 +494,7 @@ _id_1AB3()
             var_0 scripts\mp\gametypes\arena_evo_tourney_util::_id_B608();
         }
 
-        var_0 _id_077B::_id_108C3( "weapon_change", "giveLoadout" );
+        var_0 scripts\engine\utility::_id_108C3( "weapon_change", "giveLoadout" );
     }
 }
 
@@ -503,16 +503,16 @@ arenatournament_listen_report()
     var_0 = self;
     var_0 endon( "disconnect" );
     var_0 endon( "exit_spectate_listener" );
-    var_0 _meth_824A( "report_player", "+melee_zoom" );
-    var_0 _meth_824A( "dpad_up_release", "-actionslot 1" );
+    var_0 notifyonplayercommand( "report_player", "+melee_zoom" );
+    var_0 notifyonplayercommand( "dpad_up_release", "-actionslot 1" );
 
     for (;;)
     {
-        var_1 = var_0 _id_077B::_id_10894( "report_player", "dpad_up_release" );
+        var_1 = var_0 scripts\engine\utility::_id_10894( "report_player", "dpad_up_release" );
 
         if ( var_1 == "report_player" )
         {
-            var_0 _meth_82F6( "ui_arena_report_player_spectating", gettime() );
+            var_0 setclientomnvar( "ui_arena_report_player_spectating", gettime() );
             continue;
         }
 
@@ -526,15 +526,15 @@ arenatournament_listen_spectate( var_0 )
     var_0 endon( "disconnect" );
     var_0 endon( "exit_spectate_listener" );
 
-    if ( _func_0107( var_0 ) )
+    if ( isbot( var_0 ) )
         return;
 
     if ( !getdvarint( "scr_arena_evo_spectate_enabled", 1 ) )
         return;
 
     level endon( "game_ended" );
-    var_0 _meth_824A( "dpad_up_release", "-actionslot 1" );
-    var_0 _meth_824A( "special_pressed", "+special" );
+    var_0 notifyonplayercommand( "dpad_up_release", "-actionslot 1" );
+    var_0 notifyonplayercommand( "special_pressed", "+special" );
 
     for (;;)
     {
@@ -543,25 +543,25 @@ arenatournament_listen_spectate( var_0 )
             if ( istrue( var_0.isspectatingarena ) )
             {
                 var_0 thread arenatournament_listen_report();
-                var_0 _id_077B::_id_108C3( "dpad_up_release", "special_pressed" );
+                var_0 scripts\engine\utility::_id_108C3( "dpad_up_release", "special_pressed" );
                 var_0 arenatournament_enter_spectate_overview();
             }
             else
             {
                 var_0 waittill( "luinotifyserver", var_1, var_2 );
 
-                if ( _id_077B::_id_85A4( var_1, "arena_evo_close_spectate_overview" ) )
+                if ( scripts\engine\utility::is_equal( var_1, "arena_evo_close_spectate_overview" ) )
                     var_0 _id_1AA6();
-                else if ( _id_077B::_id_85A4( var_1, "arena_evo_spectate_arena" ) )
+                else if ( scripts\engine\utility::is_equal( var_1, "arena_evo_spectate_arena" ) )
                     var_0 arenatournament_enter_spectate_arena( var_2 );
             }
 
             continue;
         }
 
-        var_0 _id_077B::_id_108C3( "dpad_up_release", "special_pressed" );
+        var_0 scripts\engine\utility::_id_108C3( "dpad_up_release", "special_pressed" );
 
-        if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_85E8( var_0._id_0309["team"] ) && !scripts\mp\gametypes\arena_evo_tourney_util::_id_88B5() || scripts\mp\gametypes\arena_evo_tourney_util::_id_86C8( var_0 ) )
+        if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_85E8( var_0.pers["team"] ) && !scripts\mp\gametypes\arena_evo_tourney_util::_id_88B5() || scripts\mp\gametypes\arena_evo_tourney_util::_id_86C8( var_0 ) )
             var_0 arenatournament_enter_spectate_overview();
     }
 }
@@ -576,9 +576,9 @@ _id_1AAC( var_0, var_1, var_2 )
     if ( var_2 )
     {
         if ( isdefined( var_0._id_2FD1 ) )
-            var_0._id_2FD1 _meth_809A();
+            var_0._id_2FD1 delete();
 
-        if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_86C8( var_0._id_0309["team"] ) )
+        if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_86C8( var_0.pers["team"] ) )
             return;
     }
 
@@ -601,8 +601,8 @@ _id_1AAC( var_0, var_1, var_2 )
     var_5 = var_0 scripts\mp\gametypes\arena_evo_tourney_util::_id_6345();
     var_6 = var_5["opponents"];
 
-    if ( isdefined( var_1 ) && isdefined( var_1._id_0309 ) )
-        var_7 = var_1._id_0309["team"];
+    if ( isdefined( var_1 ) && isdefined( var_1.pers ) )
+        var_7 = var_1.pers["team"];
     else
         var_7 = undefined;
 
@@ -610,16 +610,16 @@ _id_1AAC( var_0, var_1, var_2 )
         var_0 scripts\mp\gametypes\arena_evo_tourney_loot::_id_E1BD( 0, var_1 );
 
     var_8 = var_5["teammates"];
-    var_9 = var_0._id_0309["team"];
+    var_9 = var_0.pers["team"];
     thread _id_081F::_id_DEF5( scripts\mp\gametypes\arena_evo_tourney_util::_id_668A( var_9 ) );
 
     if ( var_2 )
     {
-        var_10 = _id_077B::_id_1B96( var_8, var_0 );
+        var_10 = scripts\engine\utility::array_remove( var_8, var_0 );
 
         foreach ( var_12 in var_10 )
         {
-            if ( _id_077B::_id_85A4( var_0, var_12 ) )
+            if ( scripts\engine\utility::is_equal( var_0, var_12 ) )
                 continue;
 
             var_13 = var_0 scripts\mp\gametypes\arena_evo_tourney_loot::_id_1AA7();
@@ -627,17 +627,17 @@ _id_1AAC( var_0, var_1, var_2 )
         }
     }
 
-    var_15 = _id_64BD( var_0._id_0309["team"] );
+    var_15 = _id_64BD( var_0.pers["team"] );
 
-    if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_DA9F( var_0._id_0309["team"], var_2 ) )
+    if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_DA9F( var_0.pers["team"], var_2 ) )
     {
-        var_16 = scripts\mp\gametypes\arena_evo_tourney_util::_id_66F5( var_0._id_0309["team"] );
-        scripts\mp\gametypes\arena_evo_tourney_util::_id_C433( var_0._id_0309["team"], var_16, 1 );
+        var_16 = scripts\mp\gametypes\arena_evo_tourney_util::_id_66F5( var_0.pers["team"] );
+        scripts\mp\gametypes\arena_evo_tourney_util::_id_C433( var_0.pers["team"], var_16, 1 );
     }
     else
     {
         var_17 = var_15 == 9999;
-        var_18 = var_0._id_0309["team"];
+        var_18 = var_0.pers["team"];
         var_19 = scripts\mp\gametypes\arena_evo_tourney_util::_id_66F5( var_18 );
         scripts\mp\gametypes\arena_evo_tourney_util::_id_C433( var_18, var_15, var_17 );
         var_20 = var_19 > 0;
@@ -646,7 +646,7 @@ _id_1AAC( var_0, var_1, var_2 )
 
     if ( isdefined( var_7 ) )
     {
-        if ( _id_077B::_id_85A4( var_9, var_7 ) )
+        if ( scripts\engine\utility::is_equal( var_9, var_7 ) )
             var_21 = scripts\mp\gametypes\arena_evo_tourney_util::_id_67A2( var_7 );
         else
             var_21 = var_7;
@@ -654,10 +654,10 @@ _id_1AAC( var_0, var_1, var_2 )
         var_22 = scripts\mp\gametypes\arena_evo_tourney_util::_id_67A0( var_21 ) + 1;
         var_23 = _func_00BE( "ui_arena_match_score_team" + var_22 );
         var_23 = var_23 + 1;
-        _func_01E4( "ui_arena_match_score_team" + var_22, var_23 );
+        setomnvar( "ui_arena_match_score_team" + var_22, var_23 );
     }
 
-    if ( !_id_077B::_id_85A4( var_9, var_7 ) )
+    if ( !scripts\engine\utility::is_equal( var_9, var_7 ) )
     {
         if ( !scripts\mp\gametypes\arena_evo_tourney_util::_id_1A6F( var_4 ) )
         {
@@ -670,14 +670,14 @@ _id_1AAC( var_0, var_1, var_2 )
             scripts\mp\gametypes\arena_evo_tourney_loot::_id_1A9E( var_1 );
     }
 
-    if ( isdefined( var_1 ) && _func_0117( var_1 ) && !_id_077B::_id_85A4( var_9, var_7 ) )
+    if ( isdefined( var_1 ) && isplayer( var_1 ) && !scripts\engine\utility::is_equal( var_9, var_7 ) )
     {
         if ( !isdefined( var_1._id_E770 ) )
             var_1._id_E770 = 1;
         else
             var_1._id_E770 = var_1._id_E770 + 1;
 
-        var_1 _meth_82F6( "ui_arena_evo_stat_kills", var_1._id_E770 );
+        var_1 setclientomnvar( "ui_arena_evo_stat_kills", var_1._id_E770 );
     }
 
     _id_F725( var_9, var_0 );
@@ -728,11 +728,11 @@ _id_F725( var_0, var_1 )
                 if ( !istrue( var_1._id_9CB6 ) )
                     var_1 scripts\mp\gametypes\arena_evo_tourney_util::_id_4A15();
 
-                if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_65E6( var_1._id_0309["team"] ) > 0 )
+                if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_65E6( var_1.pers["team"] ) > 0 )
                 {
                     var_8 = 0;
 
-                    if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_65E6( var_1._id_0309["team"] ) == 1 )
+                    if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_65E6( var_1.pers["team"] ) == 1 )
                     {
                         foreach ( var_10 in var_5 )
                         {
@@ -779,14 +779,14 @@ _id_F725( var_0, var_1 )
                 var_19 = getdvarint( "scr_arena_evo_cash_elimination_reward", 500 );
                 scripts\mp\gametypes\arena_evo_tourney_loot::_id_1A9E( var_18, var_19, "arena_evo_team_eliminated" );
 
-                if ( isdefined( var_18 ) && _func_0117( var_18 ) )
+                if ( isdefined( var_18 ) && isplayer( var_18 ) )
                 {
                     if ( !isdefined( var_18._id_E758 ) )
                         var_18._id_E758 = 1;
                     else
                         var_18._id_E758 = var_18._id_E758 + 1;
 
-                    var_18 _meth_82F6( "ui_arena_evo_stat_eliminations", var_18._id_E758 );
+                    var_18 setclientomnvar( "ui_arena_evo_stat_eliminations", var_18._id_E758 );
                 }
             }
 
@@ -862,10 +862,10 @@ _id_1AB0()
 
 _id_64BD( var_0 )
 {
-    if ( getdvarint( "scr_insta_kill_other_team", 0 ) && _id_077B::_id_1B78( scripts\mp\gametypes\arena_evo_tourney_util::_id_6309(), var_0 ) )
+    if ( getdvarint( "scr_insta_kill_other_team", 0 ) && scripts\engine\utility::array_contains( scripts\mp\gametypes\arena_evo_tourney_util::_id_6309(), var_0 ) )
         return 9999;
 
-    if ( getdvarint( "scr_insta_kill_my_team", 0 ) && !_id_077B::_id_1B78( scripts\mp\gametypes\arena_evo_tourney_util::_id_6309(), var_0 ) )
+    if ( getdvarint( "scr_insta_kill_my_team", 0 ) && !scripts\engine\utility::array_contains( scripts\mp\gametypes\arena_evo_tourney_util::_id_6309(), var_0 ) )
         return 9999;
 
     return getdvarint( "scr_arena_evo_team_health_penalty", 1 );
@@ -882,10 +882,10 @@ _id_1ACA()
 arenatournament_enter_eliminated_screen( var_0 )
 {
     var_0 scripts\mp\gametypes\arena_evo_tourney_util::_id_FD41();
-    var_0 _meth_82F6( "post_game_state", 2 );
+    var_0 setclientomnvar( "post_game_state", 2 );
     var_1 = game["round_end"]["round_win"];
     var_2 = game["round_end"]["defeat"];
-    var_0 thread _id_07B9::_id_EF88( "", 0, var_1, var_2 );
+    var_0 thread scripts\mp\hud_message::_id_EF88( "", 0, var_1, var_2 );
     var_0._id_C934 = "";
     wait( level._id_C931 );
     level thread arenatournament_listen_eliminated_choice( var_0 );
@@ -897,7 +897,7 @@ arenatournament_listen_eliminated_choice( var_0 )
     var_0 endon( "disconnect" );
     var_0 endon( "exit_eliminated_listener" );
 
-    if ( _func_0107( var_0 ) )
+    if ( isbot( var_0 ) )
         return;
 
     level endon( "game_ended" );
@@ -906,7 +906,7 @@ arenatournament_listen_eliminated_choice( var_0 )
     {
         var_0 waittill( "luinotifyserver", var_1, var_2 );
 
-        if ( _id_077B::_id_85A4( var_1, "arena_evo_eliminated_enter_spectate" ) )
+        if ( scripts\engine\utility::is_equal( var_1, "arena_evo_eliminated_enter_spectate" ) )
             var_0 arenatournament_enter_octagon();
     }
 }
@@ -914,7 +914,7 @@ arenatournament_listen_eliminated_choice( var_0 )
 arenatournament_enter_octagon()
 {
     var_0 = self;
-    var_0 _meth_82F6( "post_game_state", 0 );
+    var_0 setclientomnvar( "post_game_state", 0 );
 }
 
 _startcameraspectateoverview()
@@ -931,7 +931,7 @@ _startcameraspectateoverview()
 
         if ( 0 )
         {
-            foreach ( var_2 in level._id_B758 )
+            foreach ( var_2 in level.players )
                 var_2 _meth_81B1( var_0, "outline_nodepth_orange" );
         }
 
@@ -945,15 +945,15 @@ _endcameraspectateoverview()
     var_0 notify( "force_stop_camera_spectate" );
     var_0 cameralinkto();
     var_0.isspectatingoverview = 0;
-    var_0 _meth_82F6( "ui_options_menu", 0 );
+    var_0 setclientomnvar( "ui_options_menu", 0 );
 
     if ( 0 )
     {
-        foreach ( var_2 in level._id_B758 )
+        foreach ( var_2 in level.players )
             var_2 _meth_81AE( var_0 );
     }
 
-    var_0 _meth_835E( var_0 get_spectate_ended_origin() );
+    var_0 setorigin( var_0 get_spectate_ended_origin() );
 
     if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_86C8( var_0 ) )
         var_0 scripts\mp\gametypes\arena_evo_tourney_util::_id_D34B();
@@ -964,9 +964,9 @@ _endspectatearena()
     var_0 = self;
     var_0.spectatingarenaindex = undefined;
     var_0 _id_07F1::_id_D6D7();
-    var_0 _meth_82F6( "ui_arena_evo_spectating_arena", 0 );
-    var_0 _id_0A74::_id_FD24( "playing" );
-    var_0 _meth_835E( var_0 get_spectate_ended_origin() );
+    var_0 setclientomnvar( "ui_arena_evo_spectating_arena", 0 );
+    var_0 scripts\mp\utility\player::_id_FD24( "playing" );
+    var_0 setorigin( var_0 get_spectate_ended_origin() );
 }
 
 get_spectate_ended_origin()
@@ -976,17 +976,17 @@ get_spectate_ended_origin()
 
     for ( var_2 = 0; var_2 < var_0; var_2++ )
     {
-        var_1 = _id_6B5E( "mp_arena_spawn" )._id_02EA;
+        var_1 = _id_6B5E( "mp_arena_spawn" ).origin;
 
-        foreach ( var_4 in level._id_B758 )
+        foreach ( var_4 in level.players )
         {
-            if ( !_id_077B::_id_85A4( var_4, self ) )
+            if ( !scripts\engine\utility::is_equal( var_4, self ) )
                 continue;
 
             if ( !scripts\mp\gametypes\arena_evo_tourney_util::_id_85E8( var_4 ) && !scripts\mp\gametypes\arena_evo_tourney_util::_id_86C8( var_4 ) )
                 continue;
 
-            if ( distance( var_4._id_02EA, self._id_02EA ) < 80 )
+            if ( distance( var_4.origin, self.origin ) < 80 )
                 continue;
 
             return var_1;
@@ -1011,7 +1011,7 @@ arenatournament_enter_spectate_overview()
     {
         var_0.isspectating = 1;
         var_0.isspectatingoverview = 1;
-        var_0 _meth_82F6( "ui_options_menu", 4 );
+        var_0 setclientomnvar( "ui_options_menu", 4 );
         var_0 thread _startcameraspectateoverview();
     }
 }
@@ -1033,14 +1033,14 @@ arenatournament_enter_spectate_arena( var_0 )
         var_1.isspectatingarena = 1;
         var_1.spectatingarenaindex = var_0;
         var_2 = 0;
-        var_1 allowprone( "freelook", 0 );
-        var_1 allowprone( "none", 0 );
+        var_1 _meth_8012( "freelook", 0 );
+        var_1 _meth_8012( "none", 0 );
 
         foreach ( var_4 in scripts\mp\gametypes\arena_evo_tourney_util::_id_631B() )
         {
             var_5 = scripts\mp\gametypes\arena_evo_tourney_util::_id_679A( var_4 );
-            var_6 = isdefined( var_5 ) && _id_077B::_id_85A4( var_5.arena_index, var_0 );
-            var_1 allowprone( var_4, var_6 );
+            var_6 = isdefined( var_5 ) && scripts\engine\utility::is_equal( var_5.arena_index, var_0 );
+            var_1 _meth_8012( var_4, var_6 );
             var_2 = var_2 || var_6;
         }
 
@@ -1048,8 +1048,8 @@ arenatournament_enter_spectate_arena( var_0 )
             var_1 _id_1AA6();
         else
         {
-            var_1 _meth_82F6( "ui_arena_evo_spectating_arena", 1 );
-            var_1 _id_0A74::_id_FD24( "spectator" );
+            var_1 setclientomnvar( "ui_arena_evo_spectating_arena", 1 );
+            var_1 scripts\mp\utility\player::_id_FD24( "spectator" );
         }
     }
 }
@@ -1080,19 +1080,19 @@ _id_1AA8()
     if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_88B5() || scripts\mp\gametypes\arena_evo_tourney_util::_id_DBC6() )
         return _id_6B5E( "mp_dom_spawn" );
 
-    if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_85E8( self._id_0309["team"] ) )
+    if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_85E8( self.pers["team"] ) )
         return _id_6B5E( "mp_arena_spawn" );
 
     if ( scripts\mp\gametypes\arena_evo_tourney_util::_id_86C8( self ) )
         return _id_6B5E( "mp_arena_spawn" );
 
-    var_0 = scripts\mp\gametypes\arena_evo_tourney_util::_id_65BA( self._id_0309["team"] );
+    var_0 = scripts\mp\gametypes\arena_evo_tourney_util::_id_65BA( self.pers["team"] );
     var_1 = var_0._id_03C2;
     var_2 = var_0._id_1A34;
     scripts\mp\gametypes\arena_evo_tourney_util::_id_D323( var_2 );
 
-    if ( !_id_077B::_id_1B78( var_2._id_B758, self ) )
-        var_2._id_B758[var_2._id_B758.size] = self;
+    if ( !scripts\engine\utility::array_contains( var_2.players, self ) )
+        var_2.players[var_2.players.size] = self;
 
     return var_1;
 }
@@ -1109,7 +1109,7 @@ _id_6B5E( var_0 )
         level._id_1A3F = [];
 
     if ( !isdefined( level._id_1A3F[var_0] ) )
-        level._id_1A3F[var_0] = _id_077B::_id_1B99( _id_077B::_id_1B94( _func_00CB( var_0 ) ) );
+        level._id_1A3F[var_0] = scripts\engine\utility::_id_1B99( scripts\engine\utility::_id_1B94( _func_00CB( var_0 ) ) );
 
     var_1 = level._id_1A3F[var_0][level._id_1A64[var_0]];
     level._id_1A64[var_0]++;
@@ -1131,7 +1131,7 @@ _id_1AAF()
         if ( level._id_CA36 )
         {
             _func_01E5( "ui_arena_ui_state", 4 );
-            _func_01E4( "ui_match_start_text", "waiting_for_players" );
+            setomnvar( "ui_match_start_text", "waiting_for_players" );
             level thread scripts\mp\gametypes\arena_evo_tourney_util::_id_10A40();
 
             while ( !istrue( level._id_1A48 ) )

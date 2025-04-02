@@ -24,13 +24,13 @@ _id_2B8D()
 _id_2B8C( var_0 )
 {
     var_1 = self _meth_876B( "ui_br_events" );
-    self _meth_82F6( "ui_br_events", var_1 | var_0 );
+    self setclientomnvar( "ui_br_events", var_1 | var_0 );
 }
 
 _id_2B8B( var_0 )
 {
     var_1 = self _meth_876B( "ui_br_events" );
-    self _meth_82F6( "ui_br_events", var_1 & ~var_0 );
+    self setclientomnvar( "ui_br_events", var_1 & ~var_0 );
 }
 
 _id_2B85()
@@ -40,16 +40,16 @@ _id_2B85()
 
     var_0 = getdvarfloat( "scr_br_event1_chance", 0.04 );
 
-    if ( var_0 <= _func_01B6( 1.0 ) )
+    if ( var_0 <= randomfloat( 1.0 ) )
         return;
 
     _id_07A8::_id_60A3( "prematch_done" );
     var_1 = getdvarfloat( "scr_br_event1_start_time_min", 180 );
     var_2 = getdvarfloat( "scr_br_event1_start_time_max", 300 );
-    var_3 = _func_01B6( var_2 - var_1 ) + var_1;
+    var_3 = randomfloat( var_2 - var_1 ) + var_1;
     wait( var_3 );
 
-    if ( _id_0A69::_id_6D80() == "dmz" || !isdefined( level._id_29F5._id_370B ) || level._id_29F5._id_370B < 0 )
+    if ( scripts\mp\utility\game::_id_6D80() == "dmz" || !isdefined( level._id_29F5._id_370B ) || level._id_29F5._id_370B < 0 )
     {
         var_4 = level._id_2A4D._id_2A54;
         var_5 = level._id_2A4D._id_2A55[0] * getdvarfloat( "scr_br_event1_start_radius_scale", 0.5 );
@@ -63,34 +63,34 @@ _id_2B85()
     var_6 = getdvarint( "scr_br_event1_path_height", 18000 );
     var_4 = ( var_4[0], var_4[1], var_6 );
     var_7 = scripts\mp\gametypes\br_circle::_id_6CA8( var_4, var_5, 0.0, 1.0, 0, 0 );
-    var_8 = ( 0, _func_01B6( 360.0 ), 0 );
+    var_8 = ( 0, randomfloat( 360.0 ), 0 );
     var_9 = anglestoforward( var_8 );
     var_10 = getdvarfloat( "scr_br_event1_path_scale", 2.0 );
     var_11 = level._id_2A4D._id_2A55[0] * var_10;
     var_12 = var_7 - var_9 * var_11;
     var_13 = var_7 + var_9 * var_11;
-    var_14 = _func_0205( "script_model", var_12 );
-    var_14 setmode( "x1_u2_plane" );
-    var_14._id_0054 = var_8;
+    var_14 = spawn( "script_model", var_12 );
+    var_14 setmodel( "x1_u2_plane" );
+    var_14.angles = var_8;
     var_15 = distance( var_12, var_13 );
     var_16 = getdvarint( "scr_br_event1_speed", 8800 );
     var_17 = var_15 / var_16;
     var_18 = getdvarfloat( "scr_br_event1_player_event_time", 2.0 );
     var_19 = anglestoright( var_8 );
 
-    foreach ( var_21 in level._id_B758 )
+    foreach ( var_21 in level.players )
     {
         if ( !_id_2B87( var_21 ) )
             continue;
 
-        var_22 = distance2d( var_14._id_02EA, var_21._id_02EA );
+        var_22 = distance2d( var_14.origin, var_21.origin );
         var_3 = var_22 / var_16;
         var_21 thread _id_2B86( var_3, var_18 );
     }
 
-    var_14 _meth_823B( var_13, var_17 );
+    var_14 moveto( var_13, var_17 );
     wait( var_17 );
-    var_14 _meth_809A();
+    var_14 delete();
 }
 
 _id_2B87( var_0 )
@@ -98,7 +98,7 @@ _id_2B87( var_0 )
     if ( !isdefined( var_0 ) )
         return 0;
 
-    if ( istrue( var_0._id_2A3D ) || !isai( var_0 ) || istrue( var_0._id_7245 ) )
+    if ( istrue( var_0._id_2A3D ) || !isalive( var_0 ) || istrue( var_0._id_7245 ) )
         return 0;
 
     return 1;
@@ -113,10 +113,10 @@ _id_2B86( var_0, var_1 )
         return;
 
     _id_2B8C( 1 );
-    self _meth_82F6( "ui_br_bink_overlay_state", 8 );
+    self setclientomnvar( "ui_br_bink_overlay_state", 8 );
     wait( var_1 );
     _id_2B8B( 1 );
-    self _meth_82F6( "ui_br_bink_overlay_state", 0 );
+    self setclientomnvar( "ui_br_bink_overlay_state", 0 );
 }
 
 _id_2B88()

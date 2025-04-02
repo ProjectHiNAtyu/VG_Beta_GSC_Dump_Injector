@@ -11,7 +11,7 @@ _id_CEDA( var_0, var_1, var_2 )
 
         foreach ( var_6 in var_3 )
         {
-            var_7 = var_6._id_02EA[2] - var_0[2];
+            var_7 = var_6.origin[2] - var_0[2];
 
             if ( var_7 <= var_2 )
                 var_4[var_4.size] = var_6;
@@ -41,17 +41,17 @@ _id_CED6( var_0 )
         var_2 = self._id_39B2 + ( 0, -90, 0 );
     }
 
-    while ( _func_000C( self._id_0054, var_2 ) > 1 )
+    while ( _func_000C( self.angles, var_2 ) > 1 )
     {
         var_3 = self _meth_8574( "door" );
 
         if ( var_3 != var_1 )
-            self _meth_8373( "door", var_1, 0 );
+            self setscriptablepartstate( "door", var_1, 0 );
 
         wait 0.05;
     }
 
-    self _meth_8373( "door", "ajar", 0 );
+    self setscriptablepartstate( "door", "ajar", 0 );
     self _meth_8724( 1 );
 }
 
@@ -73,7 +73,7 @@ _id_CEDE( var_0 )
 _id_4DF1( var_0, var_1 )
 {
     var_2 = !var_0;
-    var_3 = _id_06B0::_id_1522( "door_frozen", var_2, var_1 );
+    var_3 = scripts\common\input_allow::allow_input_internal( "door_frozen", var_2, var_1 );
 
     if ( isdefined( var_3 ) )
         self _meth_8724( !var_3 );
@@ -81,5 +81,5 @@ _id_4DF1( var_0, var_1 )
 
 _id_4DD5()
 {
-    return _id_06B0::_id_85F2( "door_frozen" );
+    return scripts\common\input_allow::_id_85F2( "door_frozen" );
 }

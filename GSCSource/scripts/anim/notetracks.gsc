@@ -62,7 +62,7 @@ _id_A63F( var_0, var_1 )
 
 _id_A600( var_0, var_1 )
 {
-    var_2 = _func_021A( var_0, " = " )[1];
+    var_2 = strtok( var_0, " = " )[1];
 
     switch ( var_2 )
     {
@@ -128,9 +128,9 @@ _id_A62F( var_0, var_1 )
 
 _id_A617( var_0, var_1 )
 {
-    if ( _func_0121( var_0, "on" ) )
+    if ( issubstr( var_0, "on" ) )
         self _meth_8018( "gravity" );
-    else if ( _func_0121( var_0, "off" ) )
+    else if ( issubstr( var_0, "off" ) )
         self _meth_8018( "nogravity" );
 }
 
@@ -151,8 +151,8 @@ _id_4257( var_0, var_1 )
     if ( !isdefined( var_3 ) )
         return;
 
-    if ( _func_0104( self ) && isdefined( var_3._id_603C ) )
-        _func_0197( var_3._id_603C, self, var_3._id_0400 );
+    if ( isai( self ) && isdefined( var_3._id_603C ) )
+        playfxontag( var_3._id_603C, self, var_3._id_0400 );
 
     if ( !isdefined( var_3._id_E057 ) && !isdefined( var_3._id_E058 ) )
         return;
@@ -160,7 +160,7 @@ _id_4257( var_0, var_1 )
     var_4 = "" + var_3._id_E057 + var_2 + var_3._id_E058;
 
     if ( _func_0200( var_4 ) )
-        self _meth_827B( var_4 );
+        self playsound( var_4 );
 }
 
 _id_A5FF( var_0, var_1 )
@@ -177,7 +177,7 @@ _id_A5FE( var_0, var_1 )
 {
     var_2 = "_small";
 
-    if ( _func_0121( var_0, "large" ) )
+    if ( issubstr( var_0, "large" ) )
         var_2 = "_large";
 
     if ( isdefined( self._id_01F3 ) )
@@ -202,7 +202,7 @@ _id_4D42( var_0, var_1, var_2 )
         if ( !isdefined( var_4 ) )
             var_4 = [ "undefined" ];
 
-        if ( !isalive( var_4 ) )
+        if ( !_func_0106( var_4 ) )
             var_4 = [ var_4 ];
 
         _id_06B3::_id_FF4B( var_0, var_4 );
@@ -277,14 +277,14 @@ _id_7410( var_0, var_1, var_2, var_3 )
             var_4 = self gettagorigin( "TAG_WEAPON_RIGHT", 1 );
 
             if ( isdefined( var_4 ) )
-                thread _id_077B::_id_B2C7( "melee_swing_small", var_4 );
+                thread scripts\engine\utility::_id_B2C7( "melee_swing_small", var_4 );
 
             break;
         case "swish large":
             var_4 = self gettagorigin( "TAG_WEAPON_RIGHT", 1 );
 
             if ( isdefined( var_4 ) )
-                thread _id_077B::_id_B2C7( "melee_swing_large", var_4 );
+                thread scripts\engine\utility::_id_B2C7( "melee_swing_large", var_4 );
 
             break;
         case "no death":
@@ -309,12 +309,12 @@ _id_7410( var_0, var_1, var_2, var_3 )
             {
                 if ( isdefined( self._id_77F4 ) )
                 {
-                    self destroy( self._id_77F4, "TAG_HELMETSIDE" );
+                    self detach( self._id_77F4, "TAG_HELMETSIDE" );
                     self._id_77F4 = undefined;
                 }
 
-                self destroy( self._id_75AA, "" );
-                self _meth_801E( self._id_75AA, "TAG_WEAPON_LEFT" );
+                self detach( self._id_75AA, "" );
+                self attach( self._id_75AA, "TAG_WEAPON_LEFT" );
                 self._id_75AA = undefined;
             }
 
@@ -344,7 +344,7 @@ _id_4D4C( var_0, var_1, var_2 )
         if ( !isdefined( var_3 ) )
             var_3 = [ "undefined" ];
 
-        if ( !isalive( var_3 ) )
+        if ( !_func_0106( var_3 ) )
             var_3 = [ var_3 ];
 
         _id_06B3::_id_FF4B( var_0, var_3 );
@@ -380,7 +380,7 @@ _id_4D4D( var_0, var_1 )
         if ( !isdefined( var_2 ) )
             var_2 = [ "undefined" ];
 
-        if ( !isalive( var_2 ) )
+        if ( !_func_0106( var_2 ) )
             var_2 = [ var_2 ];
 
         _id_06B3::_id_FF4B( var_0, var_2 );
@@ -449,21 +449,21 @@ _id_4D46( var_0, var_1, var_2, var_3, var_4 )
 
 _id_4D4E( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
     var_4 thread _id_4D48( var_1 );
     _id_4D4B( ::_id_4D4A, var_0, var_2, var_3, var_4 );
 }
 
 _id_4D47( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
     var_4 thread _id_4D48( var_0 );
     _id_4D4B( ::_id_4D44, var_1, var_2, var_3, var_4 );
 }
 
 _id_4D49( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
     var_4 thread _id_4D48( var_0 );
     _id_4D4B( ::_id_4D45, var_1, var_2, var_3, var_4 );
 }
@@ -491,10 +491,10 @@ _id_A5F2( var_0 )
 
     if ( var_1 == "fsf_" )
     {
-        var_2 = _func_021A( var_0, "_" );
+        var_2 = strtok( var_0, "_" );
         var_3 = float( var_2[1] );
         var_4 = float( var_2[2] );
-        level._id_030F _meth_8208( var_3, var_4 );
+        level.player _meth_8208( var_3, var_4 );
         return 1;
     }
 
@@ -515,7 +515,7 @@ _id_DA27()
         scripts\anim\utility_common::_id_DA1D( var_0 );
         _id_08C8::_id_4534();
 
-        if ( visionsetnight( self._id_04CE ) == "rocketlauncher" )
+        if ( weaponclass( self._id_04CE ) == "rocketlauncher" )
             self._id_0355--;
     }
 }
@@ -530,7 +530,7 @@ _id_A613( var_0, var_1 )
 
 _id_A614( var_0, var_1 )
 {
-    if ( !isai( self ) && self _meth_81B9() )
+    if ( !isalive( self ) && self _meth_81B9() )
     {
         if ( isdefined( self._id_33B4 ) )
             return;
@@ -538,7 +538,7 @@ _id_A614( var_0, var_1 )
         self._id_33B4 = 1;
         var_2["axis"] = "team3";
         var_2["team3"] = "axis";
-        self._id_045B = var_2[self._id_045B];
+        self.team = var_2[self.team];
     }
 
     if ( !_func_011C( self ) )
@@ -559,11 +559,11 @@ _id_A614( var_0, var_1 )
 
     var_6 = 0;
 
-    if ( isai( self._id_017D ) && _func_011C( self._id_017D ) && self _meth_8068() )
+    if ( isalive( self._id_017D ) && _func_011C( self._id_017D ) && self _meth_8068() )
     {
-        var_7 = _func_025A( self._id_017D geteye() - var_3 );
+        var_7 = vectornormalize( self._id_017D geteye() - var_3 );
 
-        if ( _func_0257( var_4, var_7 ) > cos( var_5 ) )
+        if ( vectordot( var_4, var_7 ) > cos( var_5 ) )
             var_6 = 1;
     }
 
@@ -571,7 +571,7 @@ _id_A614( var_0, var_1 )
         scripts\anim\utility_common::_id_DA1D();
     else
     {
-        var_4 = var_4 + ( ( _func_01B6( 2 ) - 1 ) * 0.1, ( _func_01B6( 2 ) - 1 ) * 0.1, ( _func_01B6( 2 ) - 1 ) * 0.1 );
+        var_4 = var_4 + ( ( randomfloat( 2 ) - 1 ) * 0.1, ( randomfloat( 2 ) - 1 ) * 0.1, ( randomfloat( 2 ) - 1 ) * 0.1 );
         var_8 = var_3 + var_4 * 1000;
         self [[ anim._id_DA2F ]]( var_8 );
     }
@@ -610,7 +610,7 @@ _id_A61A( var_0, var_1 )
         self [[ self._id_5D8F ]]( self._id_04CE, "back" );
 
     self._id_04CE = _id_6C66();
-    self._id_00C4 = visionsetthermal( self._id_04CE );
+    self._id_00C4 = weaponclipsize( self._id_04CE );
 }
 
 _id_A62D( var_0, var_1 )
@@ -618,7 +618,7 @@ _id_A62D( var_0, var_1 )
     if ( isdefined( self._id_5D8F ) )
         self [[ self._id_5D8F ]]( self._id_03AF, "right" );
 
-    self._id_00C4 = visionsetthermal( self._id_04CE );
+    self._id_00C4 = weaponclipsize( self._id_04CE );
     self notify( "weapon_switch_done" );
 }
 
@@ -633,7 +633,7 @@ _id_A62E( var_0, var_1 )
     }
 
     self._id_04CE = _id_6C66();
-    self._id_00C4 = visionsetthermal( self._id_04CE );
+    self._id_00C4 = weaponclipsize( self._id_04CE );
 }
 
 _id_A61C( var_0, var_1 )
@@ -641,7 +641,7 @@ _id_A61C( var_0, var_1 )
     if ( isdefined( self._id_5D8F ) )
         self [[ self._id_5D8F ]]( self._id_04CE, "right" );
 
-    self._id_00C4 = visionsetthermal( self._id_04CE );
+    self._id_00C4 = weaponclipsize( self._id_04CE );
 }
 
 _id_A621( var_0, var_1 )

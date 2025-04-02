@@ -12,13 +12,13 @@ _id_11AE( var_0 )
     var_1 notify( "advanced_supply_drop_finished" );
     thread _id_11AD( var_2 );
 
-    if ( _id_07D3::_id_899E( var_2 ) )
+    if ( scripts\mp\outofbounds::_id_899E( var_2 ) )
     {
         if ( isdefined( var_0 ) )
-            var_0 _meth_809A();
+            var_0 delete();
 
         if ( isdefined( var_1._id_EB06 ) )
-            var_1 _id_07F2::_id_EB4D( 1 );
+            var_1 scripts\mp\supers::_id_EB4D( 1 );
 
         return;
     }
@@ -26,7 +26,7 @@ _id_11AE( var_0 )
     var_1 thread scripts\mp\gametypes\br_rewards::_id_E298( var_2 );
 
     if ( isdefined( var_1._id_EB06 ) )
-        var_1 _id_07F2::_id_EB4D( undefined, undefined, undefined, 1 );
+        var_1 scripts\mp\supers::_id_EB4D( undefined, undefined, undefined, 1 );
 }
 
 _id_11AF( var_0 )
@@ -38,16 +38,16 @@ _id_11AF( var_0 )
     waitframe();
 
     if ( isdefined( var_1._id_EB06 ) )
-        var_1 _id_07F2::_id_EB4D( 1 );
+        var_1 scripts\mp\supers::_id_EB4D( 1 );
 }
 
 _id_11AD( var_0 )
 {
-    var_1 = _func_0205( "script_origin", var_0 );
-    var_1 playlocalsound( "smoke_carepackage_smoke_lp" );
+    var_1 = spawn( "script_origin", var_0 );
+    var_1 playloopsound( "smoke_carepackage_smoke_lp" );
     wait 21;
-    var_1 _meth_827B( "smoke_canister_tail_dissipate" );
-    var_1 stoplookat( "smoke_carepackage_smoke_lp" );
+    var_1 playsound( "smoke_canister_tail_dissipate" );
+    var_1 stoploopsound( "smoke_carepackage_smoke_lp" );
     wait 5;
-    var_1 _meth_809A();
+    var_1 delete();
 }

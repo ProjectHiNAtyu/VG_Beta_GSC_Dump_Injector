@@ -8,14 +8,14 @@ _id_7A85()
     level._id_7D69 = [];
     level._id_0F16 = [];
     level._id_0F17 = [];
-    level._id_7A77 = _id_077B::_id_6D7C( "hostage", "targetname" );
-    level._id_7A75 = _id_077B::_id_6D7C( "hostage_exit", "targetname" );
+    level._id_7A77 = scripts\engine\utility::_id_6D7C( "hostage", "targetname" );
+    level._id_7A75 = scripts\engine\utility::_id_6D7C( "hostage_exit", "targetname" );
 
     foreach ( var_1 in level._id_7A75 )
-        level._id_A850[level._id_A850.size] = _func_0205( "trigger_radius", var_1._id_02EA, 0, 90, 128 );
+        level._id_A850[level._id_A850.size] = spawn( "trigger_radius", var_1.origin, 0, 90, 128 );
 
-    level._id_BFC6 = _id_077B::_id_1B94( level._id_7A77 );
-    level._id_0BA3["vfx_smk_signal"] = _func_0139( "vfx/_requests/mp_gameplay/vfx_smk_signal" );
+    level._id_BFC6 = scripts\engine\utility::_id_1B94( level._id_7A77 );
+    level._effect["vfx_smk_signal"] = loadfx( "vfx/_requests/mp_gameplay/vfx_smk_signal" );
     thread _id_7A83();
 }
 
@@ -36,7 +36,7 @@ _id_77FC( var_0 )
         iprintlnbold( "COPTERS ALREADY ON THE WAY" );
 
         if ( isdefined( var_1._id_04C5 ) )
-            var_1._id_04C5 _meth_809A();
+            var_1._id_04C5 delete();
 
         return 0;
     }
@@ -55,7 +55,7 @@ _id_E2FB( var_0, var_1, var_2 )
     if ( !isdefined( var_2 ) )
         var_2 = 1;
 
-    if ( _id_0A69::_id_6A43() == "vip" )
+    if ( scripts\mp\utility\game::getgametype() == "vip" )
     {
         var_1 = game["attackers"];
         var_3 = "body_opforce_london_terrorist_1_2";
@@ -68,19 +68,19 @@ _id_E2FB( var_0, var_1, var_2 )
         var_4 = "head_mp_western_fireteam_west_ar_1_1";
     }
 
-    var_5 = _func_0205( "script_model", var_0 );
-    var_6 = _func_0205( "script_model", var_0 );
-    var_7 = _func_0205( "script_model", var_0 );
-    var_6 setmode( var_3 );
-    var_7 setmode( var_4 );
-    var_7 _meth_820B( var_6, "j_neck", ( -9, 1, 0 ), ( 0, 0, 0 ) );
-    var_6 _meth_820B( var_5, "", ( 0, 0, -48 ), ( 0, 0, 0 ) );
-    var_8 = _func_0205( "script_model", var_0 );
-    var_8._id_045B = var_1;
+    var_5 = spawn( "script_model", var_0 );
+    var_6 = spawn( "script_model", var_0 );
+    var_7 = spawn( "script_model", var_0 );
+    var_6 setmodel( var_3 );
+    var_7 setmodel( var_4 );
+    var_7 linkto( var_6, "j_neck", ( -9, 1, 0 ), ( 0, 0, 0 ) );
+    var_6 linkto( var_5, "", ( 0, 0, -48 ), ( 0, 0, 0 ) );
+    var_8 = spawn( "script_model", var_0 );
+    var_8.team = var_1;
     var_8._id_4802 = var_0;
     var_5._id_047A = var_8;
-    var_8 _meth_820B( var_5 );
-    var_5._id_047A makeunusable();
+    var_8 linkto( var_5 );
+    var_5._id_047A makeuseable();
     var_5._id_25A4 = var_6;
     var_5._id_75BF = var_7;
     var_5 = _id_5012( undefined, var_5, var_0, 1 );
@@ -89,21 +89,21 @@ _id_E2FB( var_0, var_1, var_2 )
     var_5._id_10A11 = 0;
     var_5._id_C57B = 1;
     var_5._id_D52A = ::_id_5012;
-    var_5._id_045B = var_1;
+    var_5.team = var_1;
     var_5._id_FE7E = 1;
     var_5._id_AD9B = var_1;
-    var_5._id_839C = _id_077B::_id_F07F( var_1 == "neutral", "any", "friendly" );
+    var_5._id_839C = scripts\engine\utility::ter_op( var_1 == "neutral", "any", "friendly" );
     var_5._id_56C2 = 0;
     var_5._id_4122 = 0;
-    var_5._id_FEE5 = _id_077B::_id_F07F( _id_0A69::_id_6A43() == "cmd", 500, 0 );
+    var_5._id_FEE5 = scripts\engine\utility::ter_op( scripts\mp\utility\game::getgametype() == "cmd", 500, 0 );
     var_5._id_FEAF = 1;
     var_5._id_7C71 = "care_package";
     var_5._id_DDC6 = 1;
     var_5._id_ABB8 = ::_id_7A79;
     var_5 thread _id_07AD::_id_FE95();
     var_9 = "icon_minimap_tac_ops_hostage_unknown";
-    var_10 = _func_0205( "script_model", var_0 );
-    var_10 _meth_820B( var_5 );
+    var_10 = spawn( "script_model", var_0 );
+    var_10 linkto( var_5 );
     var_5._id_1D92 = var_10;
 
     if ( var_1 == "neutral" )
@@ -117,7 +117,7 @@ _id_E2FB( var_0, var_1, var_2 )
         var_12 = "friendly";
     }
 
-    if ( _id_0A69::_id_6A43() != "cmd" && var_2 )
+    if ( scripts\mp\utility\game::getgametype() != "cmd" && var_2 )
     {
         var_5._id_F3FB = var_5 _id_07AD::_id_4047( var_10, ( 0, 0, 0 ) );
         var_5._id_F3FB._id_A8F9 = 0;
@@ -138,7 +138,7 @@ _id_E2FB( var_0, var_1, var_2 )
         var_5._id_F3FB _id_07AD::_id_D62D( var_1 );
         var_5._id_F3FB _id_07AD::_id_D60F( level._id_7C65, level._id_7C65 );
 
-        if ( _id_0A69::_id_6A43() == "btm" || _id_0A69::_id_6A43() == "arm" )
+        if ( scripts\mp\utility\game::getgametype() == "btm" || scripts\mp\utility\game::getgametype() == "arm" )
         {
             var_5._id_F3FB._id_3144 = 1;
             var_5._id_F3FB._id_E578 = 0;
@@ -154,18 +154,18 @@ _id_E2FB( var_0, var_1, var_2 )
 _id_E25F( var_0 )
 {
     for ( var_1 = 0; var_1 < level._id_7A77.size; var_1++ )
-        level._id_7A7B[var_1] = _id_E2FB( level._id_7A77[var_1]._id_02EA, var_0 );
+        level._id_7A7B[var_1] = _id_E2FB( level._id_7A77[var_1].origin, var_0 );
 }
 
 _id_E356( var_0, var_1 )
 {
-    var_2 = int( _func_0148( 5 - level._id_0F1C, _func_0148( level._id_BFC6.size - level._id_E2B6, var_0 ) ) );
+    var_2 = int( min( 5 - level._id_0F1C, min( level._id_BFC6.size - level._id_E2B6, var_0 ) ) );
 
     if ( var_2 == 0 )
         return;
 
     for ( var_3 = 0; var_3 < var_2; var_3++ )
-        level._id_7A7B[level._id_E2B6 + var_3] = _id_E2FB( level._id_BFC6[level._id_E2B6 + var_3]._id_02EA, var_1 );
+        level._id_7A7B[level._id_E2B6 + var_3] = _id_E2FB( level._id_BFC6[level._id_E2B6 + var_3].origin, var_1 );
 
     level._id_E2B6 = level._id_E2B6 + var_2;
     level._id_0F1C = level._id_0F1C + var_2;
@@ -173,23 +173,23 @@ _id_E356( var_0, var_1 )
 
 _id_E3A8()
 {
-    var_0 = _func_0205( "script_model", self._id_02EA );
-    var_1 = _func_0205( "script_model", self._id_02EA );
-    var_0 setmode( "body_opforce_london_terrorist_1_2" );
-    var_1 setmode( "head_male_bc_03" );
-    var_1 _meth_820B( var_0, "j_neck", ( -9, 1, 0 ), ( 0, 0, 0 ) );
+    var_0 = spawn( "script_model", self.origin );
+    var_1 = spawn( "script_model", self.origin );
+    var_0 setmodel( "body_opforce_london_terrorist_1_2" );
+    var_1 setmodel( "head_male_bc_03" );
+    var_1 linkto( var_0, "j_neck", ( -9, 1, 0 ), ( 0, 0, 0 ) );
 
     if ( 0 )
     {
         var_0 _meth_82CB( "wm_firemancarry_loop_mp_stand" );
-        var_0 _meth_820B( self, "j_shoulder_le" );
+        var_0 linkto( self, "j_shoulder_le" );
     }
     else
     {
         var_0 _meth_82CB( "hm_grnd_civ_react02_idle04" );
-        var_0 _meth_820B( self, "j_shoulder_le", ( -12, -8, -8 ), ( 0, 0, 30 ) );
-        var_1 _meth_847B( self );
-        var_0 _meth_847B( self );
+        var_0 linkto( self, "j_shoulder_le", ( -12, -8, -8 ), ( 0, 0, 30 ) );
+        var_1 hidefromplayer( self );
+        var_0 hidefromplayer( self );
     }
 
     var_0._id_75BF = var_1;
@@ -207,16 +207,16 @@ _id_7A79( var_0 )
     if ( istrue( self._id_82AC ) )
         return;
 
-    var_0 _meth_82F6( "ui_securing", 0 );
-    var_0 _meth_82F6( "ui_securing_progress", 0.01 );
+    var_0 setclientomnvar( "ui_securing", 0 );
+    var_0 setclientomnvar( "ui_securing_progress", 0.01 );
     var_0._id_F910 = undefined;
     thread _id_07AD::_id_FC40();
     level._id_7A6F = var_0;
-    self._id_047A _meth_8225();
+    self._id_047A makeunusable();
     var_0._id_7A6E = self;
 
-    if ( _id_0A69::_id_6A43() == "vip" || _id_0A69::_id_6A43() == "btm" )
-        level thread _id_07B9::_id_FCBD( self._id_045B, 11, 12, level._id_7A6F, 13 );
+    if ( scripts\mp\utility\game::getgametype() == "vip" || scripts\mp\utility\game::getgametype() == "btm" )
+        level thread scripts\mp\hud_message::_id_FCBD( self.team, 11, 12, level._id_7A6F, 13 );
 
     var_0 _id_32BF();
     thread _id_B8EC();
@@ -224,61 +224,61 @@ _id_7A79( var_0 )
     var_0 _id_E3A8();
     var_0._id_7A6E._id_25A4 hide( 1 );
     var_0._id_7A6E._id_75BF hide( 1 );
-    self _meth_820B( var_0, "tag_eye", ( 0, 0, 0 ), ( 0, 0, 0 ) );
+    self linkto( var_0, "tag_eye", ( 0, 0, 0 ), ( 0, 0, 0 ) );
 
     if ( isdefined( self._id_F3FB ) )
     {
-        self._id_F3FB._id_AD9B = var_0._id_045B;
+        self._id_F3FB._id_AD9B = var_0.team;
         self._id_F3FB._id_32AF = var_0;
         self._id_F3FB _id_07AD::_id_D60F( level._id_7C3A, level._id_7C4F );
     }
 
-    if ( _id_0A69::_id_6A43() != "btm" && isdefined( level._id_7A76 ) )
+    if ( scripts\mp\utility\game::getgametype() != "btm" && isdefined( level._id_7A76 ) )
     {
-        level._id_7A76._id_AD9B = var_0._id_045B;
+        level._id_7A76._id_AD9B = var_0.team;
         level._id_7A76 _id_07AD::_id_C56B( 1, 1 );
         level._id_7A76 _id_07AD::_id_D8D5( "any" );
         level._id_7A76 _id_07AD::_id_D60F( level._id_7C3D, level._id_7C62 );
     }
-    else if ( _id_0A69::_id_6A43() == "btm" )
+    else if ( scripts\mp\utility\game::getgametype() == "btm" )
     {
-        var_0 scripts\mp\gametypes\btm::_id_EAF5( level._id_10409[var_0._id_045B] );
-        level._id_10409[var_0._id_045B]._id_706A _id_07AD::_id_D8D5( "any" );
+        var_0 scripts\mp\gametypes\btm::_id_EAF5( level._id_10409[var_0.team] );
+        level._id_10409[var_0.team]._id_706A _id_07AD::_id_D8D5( "any" );
     }
 
     if ( isdefined( self._id_ACD2 ) )
-        _id_0A72::_id_ACB7( self._id_ACD2, self );
+        scripts\mp\utility\outline::outlinedisable( self._id_ACD2, self );
 
-    if ( _id_0A69::_id_6A43() != "cmd" && _id_0A69::_id_6A43() != "btm" || _id_0A69::_id_6A43() == "arm" )
+    if ( scripts\mp\utility\game::getgametype() != "cmd" && scripts\mp\utility\game::getgametype() != "btm" || scripts\mp\utility\game::getgametype() == "arm" )
     {
-        if ( var_0._id_045B == "axis" )
-            var_0._id_7A7A = _id_0A72::_id_ACBF( var_0, "axis", "outline_nodepth_orange", "killstreak_personal" );
+        if ( var_0.team == "axis" )
+            var_0._id_7A7A = scripts\mp\utility\outline::_id_ACBF( var_0, "axis", "outline_nodepth_orange", "killstreak_personal" );
         else
-            var_0._id_7A7A = _id_0A72::_id_ACBF( var_0, "allies", "outline_nodepth_cyan", "killstreak_personal" );
+            var_0._id_7A7A = scripts\mp\utility\outline::_id_ACBF( var_0, "allies", "outline_nodepth_cyan", "killstreak_personal" );
     }
 
     if ( !isdefined( self._id_FE8E ) )
-        self._id_FE8E = _func_0205( "script_model", var_0._id_02EA );
+        self._id_FE8E = spawn( "script_model", var_0.origin );
 
-    self._id_FE8E _meth_820B( var_0, "tag_eye" );
-    self._id_FE8E makeunusable();
-    self._id_FE8E _meth_8305( "HINT_NOICON" );
+    self._id_FE8E linkto( var_0, "tag_eye" );
+    self._id_FE8E makeuseable();
+    self._id_FE8E setcursorhint( "HINT_NOICON" );
     self._id_FE8E _meth_84D8( "show" );
 
-    if ( _id_0A69::_id_6A43() == "vip" )
-        self._id_FE8E _meth_832B( &"MP/HOLD_TO_DROP_VIP" );
+    if ( scripts\mp\utility\game::getgametype() == "vip" )
+        self._id_FE8E sethintstring( &"MP/HOLD_TO_DROP_VIP" );
     else
-        self._id_FE8E _meth_832B( &"MP/HOLD_TO_DROP_HOSTAGE" );
+        self._id_FE8E sethintstring( &"MP/HOLD_TO_DROP_HOSTAGE" );
 
+    self._id_FE8E sethintdisplayfov( 360 );
     self._id_FE8E setusefov( 360 );
-    self._id_FE8E _meth_84D4( 360 );
     self._id_FE8E _meth_84D3( 100 );
-    self._id_FE8E _meth_84CE( 100 );
+    self._id_FE8E setuserange( 100 );
     self._id_FE8E _meth_83A0( -3 );
     var_0 _meth_8529( "temp_hostage_carry_mp" );
     var_0._id_32C6 = self;
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
         if ( var_2 == var_0 )
         {
@@ -286,13 +286,13 @@ _id_7A79( var_0 )
             continue;
         }
 
-        self._id_FE8E disableoffhandweapons( var_2 );
+        self._id_FE8E disableplayeruse( var_2 );
     }
 
     foreach ( var_5 in level._id_7A7B )
     {
         if ( var_5 != self )
-            var_5 disableoffhandweapons( var_0 );
+            var_5 disableplayeruse( var_0 );
     }
 
     thread _id_10B7D( var_0, self, self._id_FE8E );
@@ -314,7 +314,7 @@ _id_7A79( var_0 )
 _id_B8EC()
 {
     wait 4;
-    self _meth_827B( "dx_mpb_us3_hvt_thank" );
+    self playsound( "dx_mpb_us3_hvt_thank" );
 }
 
 _id_E285()
@@ -323,16 +323,16 @@ _id_E285()
     self endon( "death" );
     self endon( "dropped_hostage" );
     var_0 = ( -1970, -1692, 5 );
-    level._id_7A76 = _func_0205( "script_model", var_0 );
-    level._id_7A76._id_0054 = ( 0, 270, 0 );
-    level._id_7A76._id_045B = "allies";
-    level._id_7A76 setmode( "cop_marker_scriptable" );
-    level._id_7A76 _meth_8373( "marker", "red" );
-    level._id_7A76 playlocalsound( "mp_flare_burn_lp" );
+    level._id_7A76 = spawn( "script_model", var_0 );
+    level._id_7A76.angles = ( 0, 270, 0 );
+    level._id_7A76.team = "allies";
+    level._id_7A76 setmodel( "cop_marker_scriptable" );
+    level._id_7A76 setscriptablepartstate( "marker", "red" );
+    level._id_7A76 playloopsound( "mp_flare_burn_lp" );
     level._id_7A76 thread _id_0766::_id_D587( 0, 60 );
     waitframe();
-    _func_0197( level._id_0BA3["vfx_smk_signal"], level._id_7A76, "tag_origin" );
-    var_1 = _func_0205( "trigger_radius", var_0, 0, 120, 128 );
+    playfxontag( level._effect["vfx_smk_signal"], level._id_7A76, "tag_origin" );
+    var_1 = spawn( "trigger_radius", var_0, 0, 120, 128 );
     var_1 thread _id_7072( self );
 }
 
@@ -345,19 +345,19 @@ _id_7072( var_0 )
 
     if ( isdefined( var_0._id_7A6E ) )
     {
-        _id_5012( var_0, level._id_7A7B[0], var_0._id_02EA );
-        level._id_7A7B[0]._id_047A _meth_8225();
-        level._id_7A7B[0] _meth_8225();
-        level._id_7A7B[0]._id_FE8E _meth_8415();
-        level._id_7A7B[0]._id_FE8E _meth_8225();
+        _id_5012( var_0, level._id_7A7B[0], var_0.origin );
+        level._id_7A7B[0]._id_047A makeunusable();
+        level._id_7A7B[0] makeunusable();
+        level._id_7A7B[0]._id_FE8E unlink();
+        level._id_7A7B[0]._id_FE8E makeunusable();
 
         if ( isdefined( level._id_7A7B[0]._id_ACD2 ) )
-            _id_0A72::_id_ACB7( level._id_7A7B[0]._id_ACD2, level._id_7A7B[0]._id_25A4 );
+            scripts\mp\utility\outline::outlinedisable( level._id_7A7B[0]._id_ACD2, level._id_7A7B[0]._id_25A4 );
 
         thread _id_E37F( var_0 );
     }
 
-    self _meth_809A();
+    self delete();
 }
 
 _id_E37F( var_0 )
@@ -367,50 +367,50 @@ _id_E37F( var_0 )
 
     var_1 = ( -2139, -1977, 64 );
     var_2 = ( 0, 270, 0 );
-    var_3 = var_0._id_045B;
+    var_3 = var_0.team;
     var_4 = [];
 
-    foreach ( var_6 in _id_0A7C::_id_6DAC( "allies", "players" ) )
+    foreach ( var_6 in scripts\mp\utility\teams::_id_6DAC( "allies", "players" ) )
     {
-        if ( distancesquared( var_6._id_02EA, var_1 ) < 360000 )
+        if ( distancesquared( var_6.origin, var_1 ) < 360000 )
             var_6 _meth_8286( "dx_mpp_usp1_hostage_extraction", "cop_hostage_extraction", 2 );
     }
 
     wait 3;
     _id_0A64::_id_911F( "cop_killstreak_bradley", var_3, "killstreak_used", var_4 );
-    _id_0A64::_id_911F( "cop_enemy_bradley", _id_0A69::_id_6BC3( var_3 )[0], "killstreak_used", var_4 );
+    _id_0A64::_id_911F( "cop_enemy_bradley", scripts\mp\utility\game::_id_6BC3( var_3 )[0], "killstreak_used", var_4 );
     scripts\mp\gametypes\bradley_spawner::_id_E26B( var_1, var_2, "allies" );
 }
 
 _id_694D( var_0 )
 {
-    var_1 = level._id_5817._id_02EA;
-    var_2 = var_1 - level._id_7A71[0][0]._id_02EA;
+    var_1 = level._id_5817.origin;
+    var_2 = var_1 - level._id_7A71[0][0].origin;
     var_3 = undefined;
 
     for ( var_4 = 0; var_4 < level._id_7A71.size; var_4++ )
     {
-        var_5 = level._id_7A71[var_4][0]._id_02EA;
+        var_5 = level._id_7A71[var_4][0].origin;
         var_6 = var_5 - var_0;
 
-        if ( _func_0257( var_2, var_6 ) < 0 )
+        if ( vectordot( var_2, var_6 ) < 0 )
             var_3 = var_5;
     }
 
     if ( !isdefined( var_3 ) )
-        var_3 = level._id_7A71[0][0]._id_02EA;
+        var_3 = level._id_7A71[0][0].origin;
 
     return var_3;
 }
 
 _id_6950( var_0 )
 {
-    var_1 = level._id_7A75[0]._id_02EA;
+    var_1 = level._id_7A75[0].origin;
     var_2 = distancesquared( var_0, var_1 );
 
     for ( var_3 = 1; var_3 < level._id_7A75.size; var_3++ )
     {
-        var_4 = level._id_7A75[var_3]._id_02EA;
+        var_4 = level._id_7A75[var_3].origin;
         var_5 = distancesquared( var_4, var_0 );
 
         if ( var_2 > var_5 )
@@ -431,11 +431,11 @@ _id_7A86()
 
     for (;;)
     {
-        foreach ( var_1 in level._id_B758 )
+        foreach ( var_1 in level.players )
         {
-            var_2 = distancesquared( var_1 geteye(), self._id_02EA );
+            var_2 = distancesquared( var_1 geteye(), self.origin );
 
-            if ( var_1._id_045B == "allies" && isai( var_1 ) )
+            if ( var_1.team == "allies" && isalive( var_1 ) )
             {
                 if ( var_2 < 57600 )
                 {
@@ -453,7 +453,7 @@ _id_7A84()
 {
     self notify( "hostage_stopped" );
     self._id_89F2 = 0;
-    _id_5012( undefined, self, self._id_02EA );
+    _id_5012( undefined, self, self.origin );
 }
 
 _id_7A78()
@@ -463,9 +463,9 @@ _id_7A78()
 
     for (;;)
     {
-        foreach ( var_1 in level._id_B758 )
+        foreach ( var_1 in level.players )
         {
-            if ( var_1._id_045B != "axis" )
+            if ( var_1.team != "axis" )
                 continue;
 
             var_2 = var_1 _id_7546();
@@ -480,7 +480,7 @@ _id_7A78()
 
             foreach ( var_9 in level._id_7A7B )
             {
-                var_10 = distancesquared( var_1 geteye(), var_9._id_02EA );
+                var_10 = distancesquared( var_1 geteye(), var_9.origin );
 
                 if ( !istrue( var_9._id_89F2 ) )
                 {
@@ -496,8 +496,8 @@ _id_7A78()
             {
                 var_1 _id_C48C();
                 var_1 notify( "equip_deploy_end" );
-                var_1 _id_0A28::_id_FC99();
-                var_1 _id_0A28::_id_FC97();
+                var_1 scripts\mp\killstreaks\killstreaks::_id_FC99();
+                var_1 scripts\mp\killstreaks\killstreaks::_id_FC97();
 
                 if ( !var_4 && istrue( level._id_8FB9 ) )
                     var_1 _id_46B4( "The last evac copter is already en route!" );
@@ -507,7 +507,7 @@ _id_7A78()
             else if ( !var_4 && !var_2 && var_3 )
             {
                 var_1 _meth_849D();
-                var_1 _id_0A28::_id_1FA0( "tacops_beacon_mp" );
+                var_1 scripts\mp\killstreaks\killstreaks::_id_1FA0( "tacops_beacon_mp" );
                 var_1 iprintlnbold( "DPAD-Right to call an evac copter" );
                 break;
             }
@@ -523,24 +523,24 @@ _id_BDBA( var_0 )
         return 1;
 
     var_1 = var_0 geteye();
-    var_2 = _id_077A::_id_3EC3( 0, 1, 1, 1, 0, 1, 0 );
+    var_2 = scripts\engine\trace::_id_3EC3( 0, 1, 1, 1, 0, 1, 0 );
     var_3 = [];
-    var_4 = self._id_02EA + ( 0, 0, 32 );
+    var_4 = self.origin + ( 0, 0, 32 );
     var_5 = 1;
     var_3[0] = self._id_1042E;
     var_3[1] = var_0;
-    var_6 = _id_077A::_id_C042( var_1, var_4, var_3, var_2, 0 );
+    var_6 = scripts\engine\trace::ray_trace( var_1, var_4, var_3, var_2, 0 );
 
     if ( var_6["fraction"] != 1 && var_5 )
     {
-        var_4 = self._id_02EA + ( 0, 0, 16 );
-        var_6 = _id_077A::_id_C042( var_1, var_4, var_3, var_2, 0 );
+        var_4 = self.origin + ( 0, 0, 16 );
+        var_6 = scripts\engine\trace::ray_trace( var_1, var_4, var_3, var_2, 0 );
     }
 
     if ( var_6["fraction"] != 1 )
     {
-        var_4 = self._id_02EA + ( 0, 0, 0 );
-        var_6 = _id_077A::_id_C042( var_1, var_4, var_3, var_2, 0 );
+        var_4 = self.origin + ( 0, 0, 0 );
+        var_6 = scripts\engine\trace::ray_trace( var_1, var_4, var_3, var_2, 0 );
     }
 
     return var_6["fraction"] == 1;
@@ -565,7 +565,7 @@ _id_E6DC()
 
 _id_7546()
 {
-    var_0 = _id_0A28::_id_6A4D();
+    var_0 = scripts\mp\killstreaks\killstreaks::_id_6A4D();
 
     for ( var_1 = 0; var_1 < var_0.size; var_1++ )
     {
@@ -580,14 +580,14 @@ _id_7546()
 
 _id_C48C()
 {
-    var_0 = _id_0A28::_id_6A4D();
+    var_0 = scripts\mp\killstreaks\killstreaks::_id_6A4D();
 
     for ( var_1 = 0; var_1 < var_0.size; var_1++ )
     {
         var_2 = var_0[var_1];
 
         if ( var_2._id_EA0F == "tacops_beacon_mp" )
-            _id_0A28::_id_C4CE( 0 );
+            scripts\mp\killstreaks\killstreaks::_id_C4CE( 0 );
     }
 }
 
@@ -595,8 +595,8 @@ _id_9A06( var_0 )
 {
     self._id_AD9D = _id_07D0::_id_C56F( 99 );
     _func_015C( self._id_AD9D, self );
-    _func_0182( self._id_AD9D, var_0._id_045B );
-    self._id_EF76 = thread _id_0766::_id_D58E( var_0._id_045B, "waypoint_blitz_defend", 36 );
+    _func_0182( self._id_AD9D, var_0.team );
+    self._id_EF76 = thread _id_0766::_id_D58E( var_0.team, "waypoint_blitz_defend", 36 );
 }
 
 _id_A22F( var_0 )
@@ -611,14 +611,14 @@ _id_A22F( var_0 )
     {
         var_3 = var_0[var_2];
         var_4 = _id_6C0B( var_3 );
-        var_5 = distance( self._id_02EA, var_4 );
+        var_5 = distance( self.origin, var_4 );
 
         if ( var_5 == 0 )
             continue;
 
         var_6 = var_5 / var_1;
-        self._id_0054 = _func_025B( var_4 - self._id_02EA );
-        self _meth_823B( var_4, var_6, 0, 0 );
+        self.angles = vectortoangles( var_4 - self.origin );
+        self moveto( var_4, var_6, 0, 0 );
         wait( var_6 );
     }
 
@@ -627,17 +627,17 @@ _id_A22F( var_0 )
 
 _id_CBF9( var_0, var_1 )
 {
-    level._id_7A7B = _id_077B::_id_1B96( level._id_7A7B, self );
+    level._id_7A7B = scripts\engine\utility::array_remove( level._id_7A7B, self );
     _id_07AD::_id_4778();
     level._id_0F1C--;
 
     if ( isdefined( self._id_FE8E ) )
-        self._id_FE8E _meth_809A();
+        self._id_FE8E delete();
 
-    self._id_25A4 _meth_809A();
-    self._id_75BF _meth_809A();
-    self _meth_809A();
-    level _id_07AE::_id_6FE4( var_0, var_1, 0 );
+    self._id_25A4 delete();
+    self._id_75BF delete();
+    self delete();
+    level scripts\mp\gamescore::_id_6FE4( var_0, var_1, 0 );
     self notify( "hostage_scored" );
 }
 
@@ -650,21 +650,21 @@ _id_C4DD()
 
     if ( isdefined( self._id_FE8E ) && isdefined( self._id_FE8E._id_EF76 ) )
     {
-        self._id_FE8E._id_EF76 delete();
+        self._id_FE8E._id_EF76 destroy();
 
         foreach ( var_2, var_1 in self._id_FE8E._id_54E4 )
         {
             if ( !isdefined( var_1 ) )
                 continue;
 
-            var_1 delete();
+            var_1 destroy();
         }
     }
 }
 
 _id_6C0B( var_0 )
 {
-    var_1 = _id_077A::_id_3EC3( undefined, 1, 1, undefined, undefined, undefined, undefined );
+    var_1 = scripts\engine\trace::_id_3EC3( undefined, 1, 1, undefined, undefined, undefined, undefined );
     var_2 = _func_02BC( var_0 + ( 0, 0, 48 ), var_0 - ( 0, 0, 48 ), var_1, undefined, 0, "physicsquery_closest" );
     var_3 = isdefined( var_2 ) && var_2.size > 0;
 
@@ -698,10 +698,10 @@ _id_5012( var_0, var_1, var_2, var_3, var_4 )
         var_1._id_F3FB _id_07AD::_id_D60F( level._id_7C65, level._id_7C65 );
 
         if ( isdefined( var_0 ) && isdefined( var_0._id_7A7A ) )
-            _id_0A72::_id_ACB7( var_0._id_7A7A, var_0 );
+            scripts\mp\utility\outline::outlinedisable( var_0._id_7A7A, var_0 );
 
-        if ( _id_0A69::_id_6A43() != "cmd" && _id_0A69::_id_6A43() != "btm" || _id_0A69::_id_6A43() == "arm" )
-            var_1._id_ACD2 = _id_0A72::_id_ACBC( var_1._id_25A4, "outline_nodepth_cyan", "killstreak_personal" );
+        if ( scripts\mp\utility\game::getgametype() != "cmd" && scripts\mp\utility\game::getgametype() != "btm" || scripts\mp\utility\game::getgametype() == "arm" )
+            var_1._id_ACD2 = scripts\mp\utility\outline::_id_ACBC( var_1._id_25A4, "outline_nodepth_cyan", "killstreak_personal" );
     }
 
     if ( isdefined( level._id_7A76 ) )
@@ -710,23 +710,23 @@ _id_5012( var_0, var_1, var_2, var_3, var_4 )
         level._id_7A76 _id_07AD::_id_C2F2();
     }
 
-    if ( _id_0A69::_id_6A43() == "btm" && isdefined( level._id_10409 ) )
-        level._id_10409[var_0._id_045B]._id_706A _id_07AD::_id_D8D5( "none" );
+    if ( scripts\mp\utility\game::getgametype() == "btm" && isdefined( level._id_10409 ) )
+        level._id_10409[var_0.team]._id_706A _id_07AD::_id_D8D5( "none" );
 
     var_1._id_3293 = 0;
     var_5 = var_2;
-    var_1 _meth_8415();
+    var_1 unlink();
     var_5 = _func_02A6( var_2 );
-    var_1._id_02EA = _id_6C0B( var_5 ) + ( 0, 0, 2 );
-    var_1._id_0054 = ( 0, var_1._id_0054[1], 0 );
+    var_1.origin = _id_6C0B( var_5 ) + ( 0, 0, 2 );
+    var_1.angles = ( 0, var_1.angles[1], 0 );
 
     if ( !isdefined( var_3 ) && isdefined( var_1._id_FE8E ) )
-        var_1._id_FE8E._id_02EA = var_1._id_02EA;
+        var_1._id_FE8E.origin = var_1.origin;
 
     if ( isdefined( var_0 ) )
     {
         var_0._id_32C6 = undefined;
-        var_6 = var_0._id_045B;
+        var_6 = var_0.team;
 
         foreach ( var_8 in level._id_7A7B )
         {
@@ -739,9 +739,9 @@ _id_5012( var_0, var_1, var_2, var_3, var_4 )
 
     if ( isdefined( var_1._id_10E82 ) )
     {
-        var_1._id_10E82 _meth_8415();
-        var_1._id_10E82._id_75BF _meth_809A();
-        var_1._id_10E82 _meth_809A();
+        var_1._id_10E82 unlink();
+        var_1._id_10E82._id_75BF delete();
+        var_1._id_10E82 delete();
         var_1._id_10E82 = undefined;
     }
 
@@ -750,44 +750,44 @@ _id_5012( var_0, var_1, var_2, var_3, var_4 )
 
     if ( isdefined( var_0 ) && isdefined( var_0._id_7A6E ) )
     {
-        var_0._id_7A6E._id_25A4 _meth_83C3();
-        var_0._id_7A6E._id_75BF _meth_83C3();
+        var_0._id_7A6E._id_25A4 show();
+        var_0._id_7A6E._id_75BF show();
         var_0._id_7A6E = undefined;
     }
     else
     {
-        var_1._id_25A4 _meth_83C3();
-        var_1._id_75BF _meth_83C3();
+        var_1._id_25A4 show();
+        var_1._id_75BF show();
     }
 
-    var_1._id_047A makeunusable();
+    var_1._id_047A makeuseable();
 
     if ( isdefined( var_4 ) )
         var_0 _id_C708();
 
     level._id_7A6F = undefined;
 
-    if ( _id_0A69::_id_6A43() == "vip" )
+    if ( scripts\mp\utility\game::getgametype() == "vip" )
     {
-        foreach ( var_0 in level._id_B758 )
+        foreach ( var_0 in level.players )
         {
-            if ( var_0._id_045B != var_1._id_047A._id_045B )
+            if ( var_0.team != var_1._id_047A.team )
             {
-                var_1._id_047A disableoffhandweapons( var_0 );
-                var_1._id_047A _meth_847B( var_0 );
+                var_1._id_047A disableplayeruse( var_0 );
+                var_1._id_047A hidefromplayer( var_0 );
             }
         }
 
-        var_1._id_047A _meth_832B( &"MP/HOLD_TO_PICKUP_VIP" );
-        level thread _id_07B9::_id_FCBD( var_1._id_045B, 10, 12 );
+        var_1._id_047A sethintstring( &"MP/HOLD_TO_PICKUP_VIP" );
+        level thread scripts\mp\hud_message::_id_FCBD( var_1.team, 10, 12 );
     }
-    else if ( _id_0A69::_id_6A43() == "btm" )
+    else if ( scripts\mp\utility\game::getgametype() == "btm" )
     {
-        var_1._id_047A _meth_832B( &"MP/HOLD_TO_PICKUP_VIP" );
-        level thread _id_07B9::_id_FCBD( var_1._id_045B, 10, 12 );
+        var_1._id_047A sethintstring( &"MP/HOLD_TO_PICKUP_VIP" );
+        level thread scripts\mp\hud_message::_id_FCBD( var_1.team, 10, 12 );
     }
     else
-        var_1._id_047A _meth_832B( &"MP/HOLD_TO_PICKUP_HOSTAGE" );
+        var_1._id_047A sethintstring( &"MP/HOLD_TO_PICKUP_HOSTAGE" );
 
     var_1 _meth_83A0( -3 );
 
@@ -796,7 +796,7 @@ _id_5012( var_0, var_1, var_2, var_3, var_4 )
 
     if ( isdefined( var_1._id_25A4 ) )
     {
-        var_1._id_25A4 _meth_820B( var_1, "", ( 0, 0, 0 ), ( 0, 0, 0 ) );
+        var_1._id_25A4 linkto( var_1, "", ( 0, 0, 0 ), ( 0, 0, 0 ) );
         var_1._id_25A4 _meth_82CB( "hm_grnd_civ_react02_idle07" );
     }
 
@@ -805,20 +805,20 @@ _id_5012( var_0, var_1, var_2, var_3, var_4 )
 
 _id_C708()
 {
-    self switchtoweaponimmediate();
+    self takeallweapons();
 
     foreach ( var_1 in self._id_C707 )
     {
-        _id_099A::_id_0BEB( var_1, undefined, undefined, 0 );
+        scripts\cp_mp\utility\inventory_utility::_giveweapon( var_1, undefined, undefined, 0 );
 
-        if ( var_1._id_0084 == "s4_knifestab_mp" )
+        if ( var_1.basename == "s4_knifestab_mp" )
             self _meth_8513( var_1 );
     }
 
-    var_3 = _id_07F2::_id_698D();
+    var_3 = scripts\mp\supers::getcurrentsuper();
 
     if ( isdefined( var_3 ) )
-        thread _id_07F2::_id_6FDE( var_3 );
+        thread scripts\mp\supers::_id_6FDE( var_3 );
 
     var_4 = self._id_965F;
 
@@ -829,22 +829,22 @@ _id_C708()
     }
 
     var_5 = "primary";
-    var_6 = scripts\engine\trace::_id_6985( var_5 );
+    var_6 = scripts\mp\equipment::_id_6985( var_5 );
 
     if ( isdefined( var_6 ) )
-        scripts\engine\trace::_id_6F76( var_6, var_5 );
+        scripts\mp\equipment::_id_6F76( var_6, var_5 );
 
     var_5 = "secondary";
-    var_6 = scripts\engine\trace::_id_6985( var_5 );
+    var_6 = scripts\mp\equipment::_id_6985( var_5 );
 
     if ( isdefined( var_6 ) )
-        scripts\engine\trace::_id_6F76( var_6, var_5 );
+        scripts\mp\equipment::_id_6F76( var_6, var_5 );
 
     foreach ( var_1 in self._id_C707 )
     {
-        if ( var_1._id_0084 != "s4_knifestab_mp" )
+        if ( var_1.basename != "s4_knifestab_mp" )
         {
-            _id_099A::_id_0D66( var_1 );
+            scripts\cp_mp\utility\inventory_utility::_switchtoweapon( var_1 );
             break;
         }
     }
@@ -855,23 +855,23 @@ _id_32BF()
     if ( istrue( level._id_7A70[self._id_723F] ) )
         return;
 
-    _id_06BB::_id_1548( 0 );
-    _id_06BB::_id_152B( 0 );
-    _id_0A74::_id_0CC7( "iw8_hvtcarry_mp" );
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_sprintfire" );
+    scripts\common\utility::_id_1548( 0 );
+    scripts\common\utility::_id_152B( 0 );
+    scripts\mp\utility\player::_id_0CC7( "iw8_hvtcarry_mp" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_sprintfire" );
     self._id_AD59 = 0.75;
     scripts\mp\weapons::_id_FCCA();
     var_0 = "s4_pi_mike1911";
-    var_1 = _id_0A7F::_id_6E6C( var_0 );
+    var_1 = scripts\mp\utility\weapon::getweaponrootname( var_0 );
     var_2 = [];
     var_2[var_2.size] = "mod_hvt";
-    var_3 = scripts\cp_mp\hostmigration::_id_2CEB( var_1, [ "mod_hvt" ], "none", "none" );
+    var_3 = scripts\mp\class::buildweapon( var_1, [ "mod_hvt" ], "none", "none" );
     self._id_C531 = var_3;
     self._id_C707 = self._id_10DA7;
-    self switchtoweaponimmediate();
-    _id_06BB::_id_156B( 0 );
-    _id_099A::_id_0BEB( var_3, undefined, undefined, 1 );
-    _id_099A::_id_0D67( var_3 );
+    self takeallweapons();
+    scripts\common\utility::_id_156B( 0 );
+    scripts\cp_mp\utility\inventory_utility::_giveweapon( var_3, undefined, undefined, 1 );
+    scripts\cp_mp\utility\inventory_utility::_switchtoweaponimmediate( var_3 );
     thread _id_C188();
     thread _id_C185();
     level._id_7A70[self._id_723F] = 1;
@@ -886,7 +886,7 @@ _id_C188()
 
     for (;;)
     {
-        if ( _id_0A74::_id_89D3( self ) && self._id_045B != "spectator" && isdefined( self._id_8FAB ) && self getcurrentweaponclipammo() == 0 )
+        if ( scripts\mp\utility\player::isreallyalive( self ) && self.team != "spectator" && isdefined( self._id_8FAB ) && self getcurrentweaponclipammo() == 0 )
         {
             wait 1;
             self notify( "reload" );
@@ -917,14 +917,14 @@ _id_C474( var_0 )
     if ( !istrue( level._id_7A70[self._id_723F] ) )
         return;
 
-    _id_06BB::_id_1548( 1 );
-    _id_06BB::_id_152B( 1 );
-    _id_0A74::_id_0CC7( "iw8_defaultsuit_mp" );
-    scripts\mp\tac_ops\hostage_utility::_id_C4EF( "specialty_sprintfire" );
+    scripts\common\utility::_id_1548( 1 );
+    scripts\common\utility::_id_152B( 1 );
+    scripts\mp\utility\player::_id_0CC7( "iw8_defaultsuit_mp" );
+    scripts\mp\utility\perk::removeperk( "specialty_sprintfire" );
     self._id_AD59 = undefined;
     scripts\mp\weapons::_id_FCCA();
-    _id_099A::_id_6CD8( "temp_hostage_carry_mp" );
-    _id_06BB::_id_156B( 1 );
+    scripts\cp_mp\utility\inventory_utility::_id_6CD8( "temp_hostage_carry_mp" );
+    scripts\common\utility::_id_156B( 1 );
 
     if ( var_0 )
         _id_C708();
@@ -941,9 +941,9 @@ _id_354C()
 
     for (;;)
     {
-        wait( 5.0 + _func_01B7( 3.0, 10.0 ) );
-        _func_019D( self._id_02EA, "dx_mpb_chem_phase2_chemreact" );
-        wait( 5.0 + _func_01B7( 3.0, 10.0 ) );
+        wait( 5.0 + randomfloatrange( 3.0, 10.0 ) );
+        playsoundatpos( self.origin, "dx_mpb_chem_phase2_chemreact" );
+        wait( 5.0 + randomfloatrange( 3.0, 10.0 ) );
     }
 }
 
@@ -965,21 +965,21 @@ _id_10B7D( var_0, var_1, var_2 )
 
     while ( self._id_3293 )
     {
-        if ( !var_0 useanimtree() )
+        if ( !var_0 usebuttonpressed() )
             var_3 = 1;
 
         var_5 = 0;
 
-        while ( var_3 && var_0 useanimtree() )
+        while ( var_3 && var_0 usebuttonpressed() )
         {
             var_5 = var_5 + var_4;
 
             if ( var_5 > 0.3 )
             {
-                var_2 _meth_8415();
-                var_2 disableoffhandweapons( var_0 );
-                var_2 _meth_8225();
-                var_6 = var_0._id_02EA + anglestoforward( var_0._id_0054 ) * 72.0 + ( 0, 0, 24 );
+                var_2 unlink();
+                var_2 disableplayeruse( var_0 );
+                var_2 makeunusable();
+                var_6 = var_0.origin + anglestoforward( var_0.angles ) * 72.0 + ( 0, 0, 24 );
                 _id_5012( var_0, var_1, var_6, undefined, 1.4 );
                 return;
             }
@@ -999,19 +999,19 @@ _id_A7B4()
 
     for (;;)
     {
-        var_2 = _func_01B7( var_1 / 3.0, var_1 );
+        var_2 = randomfloatrange( var_1 / 3.0, var_1 );
 
-        if ( _func_01B8( 2 ) == 0 )
+        if ( randomint( 2 ) == 0 )
             var_2 = var_2 * -1;
 
-        var_3 = _func_01B7( var_1 / 3.0, var_1 );
+        var_3 = randomfloatrange( var_1 / 3.0, var_1 );
 
-        if ( _func_01B8( 2 ) == 0 )
+        if ( randomint( 2 ) == 0 )
             var_3 = var_3 * -1;
 
         var_4 = ( var_2, var_3, 0 );
-        _id_07D0::_id_FB94( self._id_411E, self._id_02EA + ( var_2, var_3, 0 ) );
-        wait( _func_01B7( 8, 13 ) );
+        _id_07D0::_id_FB94( self._id_411E, self.origin + ( var_2, var_3, 0 ) );
+        wait( randomfloatrange( 8, 13 ) );
     }
 }
 
@@ -1136,14 +1136,14 @@ _id_7A80()
 _id_BDB9()
 {
     level endon( "death" );
-    var_0 = _func_0205( "trigger_radius", level._id_7A7B[0]._id_02EA, 0, 120, 128 );
+    var_0 = spawn( "trigger_radius", level._id_7A7B[0].origin, 0, 120, 128 );
     var_0 waittill( "trigger", var_1 );
 
-    foreach ( var_3 in _id_0A7C::_id_6DAC( "allies", "players" ) )
+    foreach ( var_3 in scripts\mp\utility\teams::_id_6DAC( "allies", "players" ) )
     {
-        if ( distancesquared( var_3._id_02EA, var_0._id_02EA ) < 250000 )
+        if ( distancesquared( var_3.origin, var_0.origin ) < 250000 )
             var_3 _meth_8286( "dx_mpp_usp1_hostage_located", "cop_hostage_located", 2 );
     }
 
-    var_0 _meth_809A();
+    var_0 delete();
 }

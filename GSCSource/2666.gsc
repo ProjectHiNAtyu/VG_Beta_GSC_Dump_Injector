@@ -3,7 +3,7 @@
 
 _id_6097()
 {
-    _id_099D::_id_C2A5( "game_utility", "getTimeSinceGameStart", ::_id_6096 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "game_utility", "getTimeSinceGameStart", ::_id_6096 );
 }
 
 _id_6096()

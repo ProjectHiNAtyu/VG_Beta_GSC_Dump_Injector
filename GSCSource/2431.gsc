@@ -5,42 +5,42 @@ _id_F1A3()
 {
     level._id_F1C6 = getdvarfloat( "scr_throwingStarCount", 12 );
     level._id_F1C7 = getdvarfloat( "scr_throwingStarTimeout", 20 );
-    [[ _id_099D::_id_6D05( "throwing_star", "init" ) ]]();
+    [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "throwing_star", "init" ) ]]();
 }
 
 _id_F1AA( var_0, var_1 )
 {
-    if ( _id_099D::_id_8A10( "throwing_star", "onGive" ) )
-        self [[ _id_099D::_id_6D05( "throwing_star", "onGive" ) ]]( var_0, var_1 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "throwing_star", "onGive" ) )
+        self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "throwing_star", "onGive" ) ]]( var_0, var_1 );
 }
 
 _id_F1AB( var_0, var_1 )
 {
-    if ( _id_099D::_id_8A10( "throwing_star", "onTake" ) )
-        self [[ _id_099D::_id_6D05( "throwing_star", "onTake" ) ]]( var_0, var_1 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "throwing_star", "onTake" ) )
+        self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "throwing_star", "onTake" ) ]]( var_0, var_1 );
 }
 
 _id_F1AD( var_0 )
 {
-    var_0 _meth_8225();
+    var_0 makeunusable();
 
     if ( !isdefined( var_0._id_5542 ) )
         var_0._id_5542 = "equip_throwing_star";
 
     var_1 = undefined;
     var_2 = undefined;
-    var_3 = self._id_02BA;
+    var_3 = self.name;
     var_0 waittill( "missile_stuck", var_1, var_2 );
     level notify( "grenade_exploded_during_stealth", var_0, "s4_throwing_star_mp", var_3 );
     var_4 = isdefined( var_2 ) && var_2 == "tag_flicker";
     var_5 = isdefined( var_2 ) && var_2 == "tag_weapon";
 
-    if ( isdefined( var_1 ) && ( _func_0117( var_1 ) || _func_0102( var_1 ) ) && var_4 )
+    if ( isdefined( var_1 ) && ( isplayer( var_1 ) || isagent( var_1 ) ) && var_4 )
         var_1 notify( "shield_hit", var_0 );
 
-    if ( _id_099D::_id_8A10( "throwing_star", "onStuck" ) )
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "throwing_star", "onStuck" ) )
     {
-        var_6 = [[ _id_099D::_id_6D05( "throwing_star", "onStuck" ) ]]( var_0, var_4, var_5 );
+        var_6 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "throwing_star", "onStuck" ) ]]( var_0, var_4, var_5 );
 
         if ( !var_6 )
             return;
@@ -51,11 +51,11 @@ _id_F1AD( var_0 )
 
 _id_F1A4()
 {
-    self _meth_8225();
-    var_0 = _func_0205( "trigger_radius", self._id_02EA, 0, 64, 64 );
+    self makeunusable();
+    var_0 = spawn( "trigger_radius", self.origin, 0, 64, 64 );
     var_0._id_045A = "dropped_star";
     var_0 _meth_80DB();
-    var_0 _meth_820B( self );
+    var_0 linkto( self );
     self._id_E596 = var_0;
 
     if ( !isdefined( level._id_F1C1 ) )
@@ -90,10 +90,10 @@ _id_F1AE()
     {
         self._id_E596 waittill( "trigger", var_0 );
 
-        if ( !_func_0117( var_0 ) )
+        if ( !isplayer( var_0 ) )
             continue;
 
-        if ( !var_0 _id_099C::_giveweapon() )
+        if ( !var_0 scripts\cp_mp\utility\player_utility::_id_0C14() )
             continue;
 
         if ( !var_0 hasweapon( self._id_10D0A ) )
@@ -114,16 +114,16 @@ _id_F1AF()
 _id_F1A2()
 {
     if ( isdefined( self._id_E596 ) )
-        self._id_E596 _meth_809A();
+        self._id_E596 delete();
 
-    self _meth_809A();
+    self delete();
 }
 
 _id_F1AC( var_0 )
 {
-    if ( _id_099D::_id_8A10( "throwing_star", "tryToPickup" ) )
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "throwing_star", "tryToPickup" ) )
     {
-        var_1 = self [[ _id_099D::_id_6D05( "throwing_star", "tryToPickup" ) ]]( var_0 );
+        var_1 = self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "throwing_star", "tryToPickup" ) ]]( var_0 );
         return var_1;
     }
 

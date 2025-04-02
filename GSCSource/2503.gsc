@@ -20,16 +20,16 @@ _id_1EDD()
 {
     self endon( "death_or_disconnect" );
     self endon( "removeArchetype" );
-    self _meth_82F6( "ui_aura_quickswap", 0 );
+    self setclientomnvar( "ui_aura_quickswap", 0 );
 
     for (;;)
     {
         self waittill( "got_a_kill" );
-        var_0 = _id_06BB::_id_B7A3( self._id_02EA, 384 );
+        var_0 = scripts\common\utility::_id_B7A3( self.origin, 384 );
 
         foreach ( var_2 in var_0 )
         {
-            if ( var_2._id_045B != self._id_045B )
+            if ( var_2.team != self.team )
                 continue;
 
             var_2 thread _id_1EDC( self );
@@ -46,15 +46,15 @@ _id_1EDC( var_0 )
     if ( self != var_0 )
         var_0 thread _id_0A76::_id_6FE6( "buff_teammate" );
 
-    self _meth_82F6( "ui_aura_quickswap", 1 );
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_fastreload" );
-    self _meth_8275( "mp_overcharge_on" );
+    self setclientomnvar( "ui_aura_quickswap", 1 );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_fastreload" );
+    self playlocalsound( "mp_overcharge_on" );
     thread _id_3848();
     wait 5;
-    self _meth_8275( "mp_overcharge_off" );
+    self playlocalsound( "mp_overcharge_off" );
     self notify( "removeAuraQuickswap" );
-    scripts\mp\tac_ops\hostage_utility::_id_C4EF( "specialty_fastreload" );
-    self _meth_82F6( "ui_aura_quickswap", 0 );
+    scripts\mp\utility\perk::removeperk( "specialty_fastreload" );
+    self setclientomnvar( "ui_aura_quickswap", 0 );
 }
 
 _id_3848()
@@ -62,5 +62,5 @@ _id_3848()
     self endon( "disconnect" );
     level endon( "game_ended" );
     self waittill( "death" );
-    self _meth_82F6( "ui_aura_quickswap", 0 );
+    self setclientomnvar( "ui_aura_quickswap", 0 );
 }

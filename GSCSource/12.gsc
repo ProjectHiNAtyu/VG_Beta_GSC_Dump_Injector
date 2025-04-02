@@ -8,8 +8,8 @@ _id_021E()
 
 _id_011A()
 {
-    var_0 = _func_020F();
-    var_0._id_0054 = ( 0, 0, 0 );
+    var_0 = spawnstruct();
+    var_0.angles = ( 0, 0, 0 );
     level._id_EA67[level._id_EA67.size] = var_0;
     return var_0;
 }

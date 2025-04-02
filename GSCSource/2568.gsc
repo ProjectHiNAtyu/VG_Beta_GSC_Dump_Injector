@@ -3,8 +3,8 @@
 
 _id_1366()
 {
-    _id_0A28::_id_C25C( "airdrop_multiple", _id_0980::_id_F765 );
-    _id_099D::_id_C2A5( "airdrop_multiple", "monitorDamage", ::_id_1368 );
+    scripts\mp\killstreaks\killstreaks::_id_C25C( "airdrop_multiple", scripts\cp_mp\killstreaks\airdrop::_id_F765 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "airdrop_multiple", "monitorDamage", ::_id_1368 );
 }
 
 _id_1368( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )

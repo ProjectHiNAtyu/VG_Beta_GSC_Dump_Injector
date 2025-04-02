@@ -3,7 +3,7 @@
 
 _id_BADE()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     level._id_BA9E = var_0;
     var_0._id_AA2D = [ "primary", "secondary" ];
     var_0._id_AA2D["primary"][0] = "ui_power_num_charges";
@@ -27,15 +27,15 @@ _id_BAD7( var_0, var_1, var_2, var_3 )
     if ( var_0 == "scripted" )
         return;
 
-    self _meth_82F6( _id_BADD( var_0, 3 ), var_1 );
-    var_4 = _id_077B::_id_F07F( var_2, 1000, 0 );
-    self _meth_82F6( _id_BADD( var_0, 2 ), var_4 );
+    self setclientomnvar( _id_BADD( var_0, 3 ), var_1 );
+    var_4 = scripts\engine\utility::ter_op( var_2, 1000, 0 );
+    self setclientomnvar( _id_BADD( var_0, 2 ), var_4 );
 
     if ( !isdefined( var_3 ) )
         var_3 = 0;
 
-    self _meth_82F6( _id_BADD( var_0, 0 ), var_3 );
-    self _meth_82F6( _id_BADD( var_0, 4 ), 0 );
+    self setclientomnvar( _id_BADD( var_0, 0 ), var_3 );
+    self setclientomnvar( _id_BADD( var_0, 4 ), 0 );
 }
 
 _id_BADA( var_0 )
@@ -43,46 +43,46 @@ _id_BADA( var_0 )
     if ( var_0 == "scripted" )
         return;
 
-    self _meth_82F6( _id_BADD( var_0, 3 ), -1 );
-    self _meth_82F6( _id_BADD( var_0, 2 ), -1 );
-    self _meth_82F6( _id_BADD( var_0, 0 ), 0 );
-    self _meth_82F6( _id_BADD( var_0, 4 ), -1 );
+    self setclientomnvar( _id_BADD( var_0, 3 ), -1 );
+    self setclientomnvar( _id_BADD( var_0, 2 ), -1 );
+    self setclientomnvar( _id_BADD( var_0, 0 ), 0 );
+    self setclientomnvar( _id_BADD( var_0, 4 ), -1 );
 }
 
 _id_BADF( var_0, var_1 )
 {
-    self _meth_82F6( _id_BADD( var_0, 0 ), int( var_1 ) );
+    self setclientomnvar( _id_BADD( var_0, 0 ), int( var_1 ) );
 }
 
 _id_BAE5( var_0, var_1 )
 {
-    self _meth_82F6( _id_BADD( var_0, 1 ), int( var_1 ) );
+    self setclientomnvar( _id_BADD( var_0, 1 ), int( var_1 ) );
 }
 
 _id_BAE3( var_0, var_1 )
 {
-    self _meth_82F6( _id_BADD( var_0, 4 ), var_1 );
+    self setclientomnvar( _id_BADD( var_0, 4 ), var_1 );
 }
 
 _id_BAE6( var_0, var_1 )
 {
-    self _meth_82F6( _id_BADD( var_0, 2 ), int( var_1 ) );
+    self setclientomnvar( _id_BADD( var_0, 2 ), int( var_1 ) );
 }
 
 _id_BAE2( var_0, var_1 )
 {
-    self _meth_82F6( _id_BADD( var_0, 5 ), var_1 );
+    self setclientomnvar( _id_BADD( var_0, 5 ), var_1 );
 }
 
 _id_BAE7( var_0, var_1 )
 {
-    var_2 = _id_077B::_id_F07F( var_1, 1, 0 );
-    self _meth_82F6( _id_BADD( var_0, 6 ), var_2 );
+    var_2 = scripts\engine\utility::ter_op( var_1, 1, 0 );
+    self setclientomnvar( _id_BADD( var_0, 6 ), var_2 );
 }
 
 _id_BAE8( var_0, var_1 )
 {
-    self _meth_82F6( _id_BADD( var_0, 6 ), var_1 );
+    self setclientomnvar( _id_BADD( var_0, 6 ), var_1 );
 }
 
 _id_BAD9( var_0 )
@@ -113,9 +113,9 @@ _id_BADC( var_0, var_1 )
         _id_BAE2( var_0, 0 );
 
     if ( var_0 == "primary" )
-        self _meth_8275( "iw8_new_objective_sfx" );
+        self playlocalsound( "iw8_new_objective_sfx" );
     else
-        self _meth_8275( "iw8_new_objective_sfx" );
+        self playlocalsound( "iw8_new_objective_sfx" );
 
     _id_BAE8( var_0, 0 );
 }

@@ -3,7 +3,7 @@
 
 _id_C568( var_0, var_1, var_2, var_3, var_4 )
 {
-    self._id_10326 = _func_020F();
+    self._id_10326 = spawnstruct();
     self._id_10326._id_FFF1 = var_0;
     self._id_10326._id_36CE = var_2;
     self._id_10326._id_36CD = var_3;
@@ -13,7 +13,7 @@ _id_C568( var_0, var_1, var_2, var_3, var_4 )
 
 _id_107FF()
 {
-    var_0 = _id_077B::_id_10897( "entervehicle", "death", "long_death", "failedentervehicle" );
+    var_0 = scripts\engine\utility::_id_10897( "entervehicle", "death", "long_death", "failedentervehicle" );
 
     if ( var_0 != "entervehicle" )
         return 0;
@@ -70,7 +70,7 @@ _id_D89F()
 
 _id_5765()
 {
-    if ( _id_06BB::_id_8A2C() )
+    if ( scripts\common\utility::_id_8A2C() )
         return;
 
     self._id_0B3E._id_41E5._id_317F = 0;

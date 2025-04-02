@@ -18,7 +18,7 @@ _id_955A()
     level._id_9104 = getdvarfloat( "scr_little_bird_dmg_pitch_roll_threshold", 55.0 );
     level._id_9103 = getdvarfloat( "scr_little_bird_dmg_pitch_roll_factor", 10.0 );
     level._id_9108 = getdvarfloat( "scr_little_bird_wood_surf_dmg_scalar", 0.6 );
-    var_0 = _id_09B4::_id_100BF( "little_bird", 1 );
+    var_0 = scripts\cp_mp\vehicles\vehicle::_id_100BF( "little_bird", 1 );
     var_0._id_4820 = ::_id_9556;
     var_0._id_315D = 1;
     _id_955F();
@@ -27,8 +27,8 @@ _id_955A()
     _id_955B();
     _id_955C();
 
-    if ( _id_099D::_id_8A10( "little_bird", "init" ) )
-        [[ _id_099D::_id_6D05( "little_bird", "init" ) ]]();
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "little_bird", "init" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "little_bird", "init" ) ]]();
 
     _id_9561();
     _id_955E();
@@ -36,19 +36,19 @@ _id_955A()
 
 _id_955E()
 {
-    if ( _id_099D::_id_8A10( "little_bird", "initLate" ) )
-        [[ _id_099D::_id_6D05( "little_bird", "initLate" ) ]]();
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "little_bird", "initLate" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "little_bird", "initLate" ) ]]();
 }
 
 _id_955F()
 {
-    var_0 = _id_09BA::_id_101A1( "little_bird", 1 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A1( "little_bird", 1 );
     var_0._id_54C3 = ::_id_9553;
     var_0._id_54B6 = ::_id_9551;
-    var_0._id_5770 = _id_09BA::_id_10183;
+    var_0._id_5770 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10183;
     var_0._id_575B = ::_id_9554;
     var_0._id_C179 = ::_id_956E;
-    var_0._id_C718 = _id_09BA::_id_1018F();
+    var_0._id_C718 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1018F();
     var_0._id_575C["front"] = 95;
     var_0._id_575C["back"] = 195;
     var_0._id_575C["left"] = 55;
@@ -79,51 +79,51 @@ _id_955F()
         var_2 = [ "pilot", "fr_platform", "br_platform", "bl_platform", "fl_platform" ];
 
     var_3 = "pilot";
-    var_4 = _id_09BA::_id_101A0( "little_bird", var_3, 1 );
-    var_4._id_CFB8 = _id_09BA::_id_10188( var_3, var_2 );
+    var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( "little_bird", var_3, 1 );
+    var_4._id_CFB8 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10188( var_3, var_2 );
     var_4._id_5760 = [ var_3, "middle_left", "front_right", "front", "back" ];
     var_0._id_5768[var_3] = ( 40, 17, -40 );
     var_0._id_5758[var_3] = "left";
     var_4._id_18CA = "tag_seat_0";
-    var_4._id_5775 = _id_09BA::_id_1015D( var_4._id_18CA );
-    var_4._id_C718 = _id_09BA::_id_10192();
+    var_4._id_5775 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015D( var_4._id_18CA );
+    var_4._id_C718 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10192();
     var_4._id_E351 = 10;
     var_4._id_AAB3 = "ping_vehicle_pilot";
     var_3 = "fl_platform";
-    var_4 = _id_09BA::_id_101A0( "little_bird", var_3, 1 );
-    var_4._id_CFB8 = _id_09BA::_id_10188( var_3, var_2 );
+    var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( "little_bird", var_3, 1 );
+    var_4._id_CFB8 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10188( var_3, var_2 );
     var_4._id_5760 = [ "middle_left", "pilot", "middle_right", "front", "back" ];
     var_4._id_103D0["top"] = 180;
     var_4._id_103D0["bottom"] = 180;
     var_4._id_103D0["left"] = 110;
     var_4._id_103D0["right"] = 125;
     var_4._id_18CA = "tag_seat_2";
-    var_4._id_5775 = _id_09BA::_id_1015D( var_4._id_18CA );
+    var_4._id_5775 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015D( var_4._id_18CA );
     var_4._id_AAB3 = "ping_vehicle_rider";
     var_3 = "bl_platform";
-    var_4 = _id_09BA::_id_101A0( "little_bird", var_3, 1 );
-    var_4._id_CFB8 = _id_09BA::_id_10188( var_3, var_2 );
+    var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( "little_bird", var_3, 1 );
+    var_4._id_CFB8 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10188( var_3, var_2 );
     var_4._id_5760 = [ "middle_left", "pilot", "middle_right", "front", "back" ];
     var_4._id_103D0["top"] = 180;
     var_4._id_103D0["bottom"] = 180;
     var_4._id_103D0["left"] = 120;
     var_4._id_103D0["right"] = 105;
     var_4._id_18CA = "tag_seat_3";
-    var_4._id_5775 = _id_09BA::_id_1015D( var_4._id_18CA );
+    var_4._id_5775 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015D( var_4._id_18CA );
     var_4._id_AAB3 = "ping_vehicle_rider";
     var_3 = "fr_platform";
 
     if ( !0 )
     {
-        var_4 = _id_09BA::_id_101A0( "little_bird", var_3, 1 );
-        var_4._id_CFB8 = _id_09BA::_id_10188( var_3, var_2 );
+        var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( "little_bird", var_3, 1 );
+        var_4._id_CFB8 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10188( var_3, var_2 );
         var_4._id_5760 = [ "middle_right", "front_right", "middle_left", "front", "back" ];
         var_4._id_103D0["top"] = 180;
         var_4._id_103D0["bottom"] = 180;
         var_4._id_103D0["left"] = 125;
         var_4._id_103D0["right"] = 110;
         var_4._id_18CA = "tag_seat_4";
-        var_4._id_5775 = _id_09BA::_id_1015D( var_4._id_18CA );
+        var_4._id_5775 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015D( var_4._id_18CA );
         var_4._id_AAB3 = "ping_vehicle_rider";
     }
 
@@ -131,15 +131,15 @@ _id_955F()
 
     if ( !0 )
     {
-        var_4 = _id_09BA::_id_101A0( "little_bird", var_3, 1 );
-        var_4._id_CFB8 = _id_09BA::_id_10188( var_3, var_2 );
+        var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( "little_bird", var_3, 1 );
+        var_4._id_CFB8 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10188( var_3, var_2 );
         var_4._id_5760 = [ "middle_right", "front_right", "middle_left", "front", "back" ];
         var_4._id_103D0["top"] = 180;
         var_4._id_103D0["bottom"] = 180;
         var_4._id_103D0["left"] = 105;
         var_4._id_103D0["right"] = 120;
         var_4._id_18CA = "tag_seat_5";
-        var_4._id_5775 = _id_09BA::_id_1015D( var_4._id_18CA );
+        var_4._id_5775 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015D( var_4._id_18CA );
         var_4._id_AAB3 = "ping_vehicle_rider";
     }
 
@@ -147,8 +147,8 @@ _id_955F()
 
     if ( 0 )
     {
-        var_4 = _id_09BA::_id_101A0( "little_bird", var_3, 1 );
-        var_4._id_CFB8 = _id_09BA::_id_10188( var_3, var_2 );
+        var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101A0( "little_bird", var_3, 1 );
+        var_4._id_CFB8 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10188( var_3, var_2 );
         var_4._id_5760 = [ "middle_right", "front_right", "middle_left", "front", "back" ];
         var_4._id_AAB3 = "ping_vehicle_gunner";
     }
@@ -185,14 +185,14 @@ _id_9560()
 
 _id_955B()
 {
-    if ( level._id_60D1 == "br" )
+    if ( level.gametype == "br" )
         var_0 = 3000;
     else
         var_0 = 2500;
 
     _id_09B6::_id_10067( "little_bird", var_0 );
     var_1 = _id_09B6::_id_1003F( "little_bird" );
-    var_1._id_37D9 = "medium_heavy";
+    var_1.class = "medium_heavy";
     var_2 = _id_09B6::_id_1003E( "little_bird", "heavy" );
     var_2._id_AAB4 = ::_id_956C;
     var_2._id_AACA = ::_id_956D;
@@ -204,19 +204,19 @@ _id_955B()
 
 _id_955C()
 {
-    level._id_0BA3["little_bird_explode"] = _func_0139( "vfx/iw8/prop/scriptables/vfx_vh8_mil_air_lbravo_debris.vfx" );
+    level._effect["little_bird_explode"] = loadfx( "vfx/iw8/prop/scriptables/vfx_vh8_mil_air_lbravo_debris.vfx" );
 }
 
 _id_954C( var_0, var_1 )
 {
-    if ( !isdefined( var_0._id_0054 ) )
-        var_0._id_0054 = ( 0, 0, 0 );
+    if ( !isdefined( var_0.angles ) )
+        var_0.angles = ( 0, 0, 0 );
 
     var_0._id_02AF = "veh8_mil_air_lbravo_personnel_mp_flyable";
     var_0._id_045A = "little_bird";
     var_0.type = "lbravo_physics_mp";
     var_0._id_317A = 1;
-    var_2 = _id_09BC::_id_0D58( var_0, var_1 );
+    var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_id_0D58( var_0, var_1 );
 
     if ( !isdefined( var_2 ) )
         return undefined;
@@ -225,18 +225,18 @@ _id_954C( var_0, var_1 )
     var_2._id_5C69 = [];
     var_2._id_5C52 = 1;
 
-    if ( level._id_60D1 == "br" )
+    if ( level.gametype == "br" )
         var_2._id_5C4D = 35;
     else
         var_2._id_5C4D = 10;
 
-    _id_09B4::_id_10024( var_2, "little_bird", var_0 );
-    var_2._id_A90B = _func_034C( "little_bird_mp" );
+    scripts\cp_mp\vehicles\vehicle::_id_10024( var_2, "little_bird", var_0 );
+    var_2.objweapon = makeweapon( "little_bird_mp" );
     _id_09B5::_id_10016( var_2 );
-    _id_09B4::vehicle_create( var_2, var_0 );
+    scripts\cp_mp\vehicles\vehicle::vehicle_create( var_2, var_0 );
 
-    if ( _id_099D::_id_8A10( "little_bird", "create" ) )
-        [[ _id_099D::_id_6D05( "little_bird", "create" ) ]]( var_2 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "little_bird", "create" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "little_bird", "create" ) ]]( var_2 );
 
     var_2 thread _id_100D0();
     var_2 thread _id_3A3E();
@@ -280,12 +280,12 @@ _id_3A3E()
         }
 
         var_10 = var_6 * var_9;
-        var_11 = _id_09BA::_id_10191( self );
+        var_11 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10191( self );
 
         if ( !isdefined( var_11 ) )
             var_10 = var_10 * level._id_90F0;
 
-        var_12 = self._id_0054[0];
+        var_12 = self.angles[0];
 
         if ( var_12 > 180 )
             var_12 = var_12 - 360;
@@ -293,7 +293,7 @@ _id_3A3E()
         if ( abs( var_12 > level._id_9104 ) )
             var_10 = var_10 * level._id_9103;
 
-        var_13 = self._id_0054[2];
+        var_13 = self.angles[2];
 
         if ( var_13 > 180 )
             var_13 = var_13 - 360;
@@ -304,17 +304,17 @@ _id_3A3E()
         var_14 = 0;
 
         if ( var_10 > level._id_90FC )
-            var_14 = self._id_027F;
+            var_14 = self.maxhealth;
         else if ( var_10 > level._id_90FB )
         {
             var_15 = level._id_90FC - level._id_90FB;
             var_16 = ( var_10 - level._id_90FB ) / var_15;
-            var_17 = self._id_027F * level._id_90F9;
-            var_18 = self._id_027F * level._id_90F8;
-            var_14 = _id_0777::_id_9192( var_17, var_18, var_16 );
+            var_17 = self.maxhealth * level._id_90F9;
+            var_18 = self.maxhealth * level._id_90F8;
+            var_14 = scripts\engine\math::_id_9192( var_17, var_18, var_16 );
         }
         else if ( var_10 > level._id_90FA )
-            var_14 = self._id_027F * level._id_90F7;
+            var_14 = self.maxhealth * level._id_90F7;
 
         if ( var_14 > 0 )
         {
@@ -322,7 +322,7 @@ _id_3A3E()
                 var_14 = var_14 * level._id_9108;
 
             _id_09B6::_id_10033( 1 );
-            self _meth_80B7( var_14, var_4, undefined, undefined, "MOD_CRUSH" );
+            self dodamage( var_14, var_4, undefined, undefined, "MOD_CRUSH" );
             _id_09B6::_id_10033( 0 );
         }
 
@@ -333,17 +333,17 @@ _id_3A3E()
 _id_954D( var_0 )
 {
     var_1 = _func_0210( "misc_turret", var_0 gettagorigin( "tag_origin" ), "tur_gun_lighttank_mp", 0 );
-    var_1 _meth_820B( var_0, "tag_origin", ( 0, 0, 0 ), ( 0, 0, 0 ) );
-    var_1 setmode( "veh8_mil_lnd_coscar_west_turret_gun" );
+    var_1 linkto( var_0, "tag_origin", ( 0, 0, 0 ), ( 0, 0, 0 ) );
+    var_1 setmodel( "veh8_mil_lnd_coscar_west_turret_gun" );
     var_1 _meth_834F( "sentry_offline" );
     var_1 _meth_8376( undefined );
-    var_1 _meth_8225();
+    var_1 makeunusable();
     var_1 _meth_8309( 0 );
     var_1 _meth_839C( 1 );
-    var_1._id_0054 = var_0._id_0054;
+    var_1.angles = var_0.angles;
     var_1._id_FFF1 = var_0;
-    var_1._id_027F = 999999;
-    var_1._id_01FF = var_1._id_027F;
+    var_1.maxhealth = 999999;
+    var_1.health = var_1.maxhealth;
     return var_1;
 }
 
@@ -351,39 +351,39 @@ _id_9556( var_0, var_1 )
 {
     if ( !isdefined( var_0 ) )
     {
-        var_0 = _func_020F();
-        var_0._id_7E78 = self;
-        var_0._id_A90B = "little_bird_mp";
+        var_0 = spawnstruct();
+        var_0.inflictor = self;
+        var_0.objweapon = "little_bird_mp";
         var_0._id_9CBF = "MOD_EXPLOSIVE";
     }
 
     _id_09B6::_id_1005E( var_0 );
-    _id_09BA::_id_101C3( self, var_0 );
+    scripts\cp_mp\vehicles\vehicle_occupancy::_id_101C3( self, var_0 );
     _id_09B6::_id_1002E( undefined, undefined, 1 );
     thread _id_954F();
 
     if ( !istrue( level._id_EBC0 ) )
     {
         var_2 = self gettagorigin( "tag_detach" );
-        var_3 = _id_077B::_id_F07F( isdefined( var_0._id_006E ), var_0._id_006E, self );
-        self _meth_8287( var_2, 256, 140, 70, var_3, "MOD_EXPLOSIVE", "little_bird_mp" );
-        _func_0196( _id_077B::_id_6A40( "little_bird_explode" ), var_2, anglestoforward( self._id_0054 ), anglestoup( self._id_0054 ) );
-        _func_019D( var_2, "veh_lbravo_explode" );
+        var_3 = scripts\engine\utility::ter_op( isdefined( var_0.attacker ), var_0.attacker, self );
+        self radiusdamage( var_2, 256, 140, 70, var_3, "MOD_EXPLOSIVE", "little_bird_mp" );
+        playfx( scripts\engine\utility::getfx( "little_bird_explode" ), var_2, anglestoforward( self.angles ), anglestoup( self.angles ) );
+        playsoundatpos( var_2, "veh_lbravo_explode" );
         earthquake( 0.4, 800, var_2, 0.7 );
-        playfxontag( "grenade_rumble", var_2 );
+        playrumbleonposition( "grenade_rumble", var_2 );
         _func_0190( var_2, 500, 200, 1 );
     }
 }
 
 _id_954F()
 {
-    _id_09B4::_id_1008D( self );
+    scripts\cp_mp\vehicles\vehicle::_id_1008D( self );
 
-    if ( _id_099D::_id_8A10( "little_bird", "delete" ) )
-        [[ _id_099D::_id_6D05( "little_bird", "delete" ) ]]( self );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "little_bird", "delete" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "little_bird", "delete" ) ]]( self );
 
     waitframe();
-    _id_09B4::_id_1008E( self );
+    scripts\cp_mp\vehicles\vehicle::_id_1008E( self );
 }
 
 _id_954E( var_0 )
@@ -394,13 +394,13 @@ _id_954E( var_0 )
 
 _id_956C( var_0, var_1 )
 {
-    self _meth_8373( "alarm", "engineFailure", 0 );
+    self setscriptablepartstate( "alarm", "engineFailure", 0 );
     _id_09B6::_id_1005F( var_0, var_1 );
 }
 
 _id_956D( var_0, var_1 )
 {
-    self _meth_8373( "alarm", "off", 0 );
+    self setscriptablepartstate( "alarm", "off", 0 );
     _id_09B6::_id_10063( var_0, var_1 );
 }
 
@@ -411,9 +411,9 @@ _id_9553( var_0, var_1, var_2, var_3, var_4 )
 
     if ( istrue( var_0._id_89BF ) )
     {
-        foreach ( var_6 in level._id_B758 )
+        foreach ( var_6 in level.players )
         {
-            if ( istrue( var_0._id_C7A3 ) || var_6._id_045B == var_0._id_045B )
+            if ( istrue( var_0._id_C7A3 ) || var_6.team == var_0.team )
                 _id_07D0::_id_A88A( var_0._id_9B36._id_A8F5, var_6 );
         }
 
@@ -437,29 +437,29 @@ _id_9552( var_0, var_1, var_2, var_3, var_4 )
 {
     if ( var_1 == "pilot" )
     {
-        var_0 setorigin( var_3 );
-        var_0 _meth_8312( var_3 );
+        var_0 setotherent( var_3 );
+        var_0 setentityowner( var_3 );
         var_3 _meth_8093( var_0 );
-        var_3 thread _id_09BA::_id_1015C( var_0, var_1, var_2 );
+        var_3 thread scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015C( var_0, var_1, var_2 );
         var_0 thread _id_100CF( var_3 );
     }
     else if ( var_1 == "gunner" )
     {
-        var_0._id_72A5._id_02F2 = var_3;
-        var_0._id_72A5 setorigin( var_3 );
-        var_0._id_72A5 _meth_8312( var_3 );
+        var_0._id_72A5.owner = var_3;
+        var_0._id_72A5 setotherent( var_3 );
+        var_0._id_72A5 setentityowner( var_3 );
         var_0._id_72A5 _meth_8376( var_3 );
         var_3 _meth_80AE();
         var_3 _meth_8290( var_0._id_72A5 );
-        var_3 _id_09BA::_id_10200();
+        var_3 scripts\cp_mp\vehicles\vehicle_occupancy::_id_10200();
     }
     else
-        var_3 thread _id_09BA::_id_1015C( var_0, var_1, var_2 );
+        var_3 thread scripts\cp_mp\vehicles\vehicle_occupancy::_id_1015C( var_0, var_1, var_2 );
 
     _id_09A1::_id_10391( var_0, var_2, var_1, var_3 );
 
-    if ( _id_099D::_id_8A10( "little_bird", "endEnterInternal", 0 ) )
-        [[ _id_099D::_id_6D05( "little_bird", "endEnterInternal" ) ]]( var_0, var_1, var_2, var_3, var_4 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "little_bird", "endEnterInternal", 0 ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "little_bird", "endEnterInternal" ) ]]( var_0, var_1, var_2, var_3, var_4 );
 }
 
 _id_9554( var_0, var_1, var_2, var_3, var_4 )
@@ -473,8 +473,8 @@ _id_9555( var_0, var_1, var_2, var_3, var_4 )
     if ( var_1 == "pilot" )
     {
         var_0 notify( "little_bird_driver_exit" );
-        var_0 setorigin( undefined );
-        var_0 _meth_8312( undefined );
+        var_0 setotherent( undefined );
+        var_0 setentityowner( undefined );
 
         if ( !istrue( var_4._id_B682 ) )
             var_3 _meth_8094();
@@ -491,19 +491,19 @@ _id_9555( var_0, var_1, var_2, var_3, var_4 )
                 var_3 thread _id_9570( var_0, var_4, 1 );
         }
 
-        var_0._id_72A5._id_02F2 = undefined;
-        var_0._id_72A5 setorigin( undefined );
-        var_0._id_72A5 _meth_8312( undefined );
+        var_0._id_72A5.owner = undefined;
+        var_0._id_72A5 setotherent( undefined );
+        var_0._id_72A5 setentityowner( undefined );
         var_0._id_72A5 _meth_8376( undefined );
     }
 
     if ( !istrue( var_4._id_B682 ) )
     {
-        var_3 _id_09BA::_id_10200();
-        var_5 = _id_09BA::_id_101D0( var_3, var_2, var_4 );
+        var_3 scripts\cp_mp\vehicles\vehicle_occupancy::_id_10200();
+        var_5 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_101D0( var_3, var_2, var_4 );
 
         if ( !var_5 )
-            var_3 _meth_83FD();
+            var_3 suicide();
         else if ( istrue( var_0._id_89BF ) )
             _id_07D0::_id_A88A( var_0._id_9B36._id_A8F5, var_3 );
     }
@@ -526,14 +526,14 @@ _id_9558( var_0, var_1, var_2 )
         childthread _id_9559( var_1, 1.5 );
 
     if ( !self hasweapon( "tur_gun_lighttank_mp" ) )
-        _id_099A::_id_0BEB( "tur_gun_lighttank_mp" );
+        scripts\cp_mp\utility\inventory_utility::_giveweapon( "tur_gun_lighttank_mp" );
 
     var_3 = undefined;
 
-    if ( _id_099A::_id_87C6( "tur_gun_lighttank_mp" ) )
+    if ( scripts\cp_mp\utility\inventory_utility::_id_87C6( "tur_gun_lighttank_mp" ) )
         var_3 = 1;
     else
-        var_3 = _id_099A::_id_4D21( "tur_gun_lighttank_mp", 1 );
+        var_3 = scripts\cp_mp\utility\inventory_utility::_id_4D21( "tur_gun_lighttank_mp", 1 );
 
     if ( isdefined( var_1 ) && isdefined( var_3 ) && !var_3 )
     {
@@ -554,9 +554,9 @@ _id_9570( var_0, var_1, var_2 )
     {
         var_3 = undefined;
 
-        if ( _id_099A::_id_8A6D( "tur_gun_lighttank_mp" ) )
+        if ( scripts\cp_mp\utility\inventory_utility::_id_8A6D( "tur_gun_lighttank_mp" ) )
         {
-            _id_099A::_id_0DE3( "tur_gun_lighttank_mp" );
+            scripts\cp_mp\utility\inventory_utility::_id_0DE3( "tur_gun_lighttank_mp" );
             var_3 = 1;
         }
         else
@@ -566,15 +566,15 @@ _id_9570( var_0, var_1, var_2 )
 
             if ( self hasweapon( "tur_gun_lighttank_mp" ) )
             {
-                var_4 = _id_099A::_id_87C6( "tur_gun_lighttank_mp" );
+                var_4 = scripts\cp_mp\utility\inventory_utility::_id_87C6( "tur_gun_lighttank_mp" );
 
                 if ( var_4 )
                 {
-                    _id_099A::_id_0D6A( "tur_gun_lighttank_mp" );
-                    thread _id_099A::_id_5EB7();
+                    scripts\cp_mp\utility\inventory_utility::_takeweapon( "tur_gun_lighttank_mp" );
+                    thread scripts\cp_mp\utility\inventory_utility::_id_5EB7();
                 }
                 else
-                    thread _id_099A::_id_6CD8( "tur_gun_lighttank_mp", 1 );
+                    thread scripts\cp_mp\utility\inventory_utility::_id_6CD8( "tur_gun_lighttank_mp", 1 );
             }
 
             var_3 = 1;
@@ -605,7 +605,7 @@ _id_100D0()
         {
             wait( self._id_5C4D );
             self._id_5C52 = 1;
-            var_0 = _id_09BA::_id_10191( self );
+            var_0 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10191( self );
 
             if ( isdefined( var_0 ) )
                 _id_09A1::_id_10380( "little_bird", "flares", 1, var_0 );
@@ -621,8 +621,8 @@ _id_100CF( var_0 )
     self endon( "little_bird_driver_exit" );
     var_0 endon( "death_or_disconnect" );
     var_0 endon( "vehicle_exit" );
-    var_0 _meth_824A( "shoot_flare", "+attack" );
-    _id_09A1::_id_10380( "little_bird", "flares", _id_077B::_id_F07F( self._id_5C52, 1, 0 ), var_0 );
+    var_0 notifyonplayercommand( "shoot_flare", "+attack" );
+    _id_09A1::_id_10380( "little_bird", "flares", scripts\engine\utility::ter_op( self._id_5C52, 1, 0 ), var_0 );
 
     for (;;)
     {
@@ -630,17 +630,17 @@ _id_100CF( var_0 )
 
         if ( !self._id_5C52 )
         {
-            self _meth_827E( "lbravo_noflares_warning", var_0 );
+            self playsoundtoplayer( "lbravo_noflares_warning", var_0 );
             continue;
         }
 
-        if ( _id_099D::_id_8A10( "flares", "playFx" ) )
-            self thread [[ _id_099D::_id_6D05( "flares", "playFx" ) ]]();
+        if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "flares", "playFx" ) )
+            self thread [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "flares", "playFx" ) ]]();
 
         var_1 = undefined;
 
-        if ( _id_099D::_id_8A10( "flares", "deploy" ) )
-            var_1 = self [[ _id_099D::_id_6D05( "flares", "deploy" ) ]]();
+        if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "flares", "deploy" ) )
+            var_1 = self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "flares", "deploy" ) ]]();
 
         if ( isdefined( level._id_9F67 ) )
         {
@@ -649,15 +649,15 @@ _id_100CF( var_0 )
                 if ( !isdefined( var_3._id_96EA ) || var_3._id_96EA != self )
                     continue;
 
-                var_4 = distance( self._id_02EA, var_3._id_02EA );
+                var_4 = distance( self.origin, var_3.origin );
 
                 if ( var_4 < 4000 )
                 {
-                    if ( _id_099D::_id_8A10( "player", "giveUnifiedPoints" ) )
-                        var_0 thread [[ _id_099D::_id_6D05( "player", "giveUnifiedPoints" ) ]]( "manual_flare_missile_redirect" );
+                    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "player", "giveUnifiedPoints" ) )
+                        var_0 thread [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "player", "giveUnifiedPoints" ) ]]( "manual_flare_missile_redirect" );
 
-                    _id_09A2::_id_394D( var_3 );
-                    var_3 _meth_8232( var_1 );
+                    scripts\cp_mp\utility\weapon_utility::_id_394D( var_3 );
+                    var_3 missile_settargetent( var_1 );
                     var_3 notify( "missile_pairedWithFlare" );
                 }
             }
@@ -665,17 +665,17 @@ _id_100CF( var_0 )
 
         self._id_5C52 = 0;
         _id_09A1::_id_10380( "little_bird", "flares", 0, var_0 );
-        _id_09BA::_id_10184( var_0 );
+        scripts\cp_mp\vehicles\vehicle_occupancy::_id_10184( var_0 );
     }
 }
 
 _id_9561()
 {
-    var_0 = _id_09BB::_id_10274( "little_bird", 1 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10274( "little_bird", 1 );
     var_0._id_9C64 = 5;
     var_0._id_BD19 = 100;
     var_0._id_6D3F = ::_id_9557;
-    var_0._id_E271 = _id_099D::_id_6D05( "little_bird", "spawnCallback" );
+    var_0._id_E271 = scripts\cp_mp\utility\script_utility::getsharedfunc( "little_bird", "spawnCallback" );
     var_0._id_38FF = 185;
     var_0._id_38FB = 100;
     var_0._id_38FE = -100;
@@ -684,14 +684,14 @@ _id_9561()
 
 _id_9557()
 {
-    var_0 = _id_077B::_id_6D7C( "littlebird_spawn", "targetname" );
+    var_0 = scripts\engine\utility::_id_6D7C( "littlebird_spawn", "targetname" );
 
     if ( var_0.size > 0 )
     {
-        var_0 = _id_09BB::_id_10288( var_0, 1 );
+        var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10288( var_0, 1 );
 
         if ( var_0.size > 1 )
-            var_0 = _id_077B::_id_1B94( var_0 );
+            var_0 = scripts\engine\utility::_id_1B94( var_0 );
     }
 
     return var_0;

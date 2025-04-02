@@ -7,8 +7,8 @@ _id_CA27( var_0, var_1 )
         return;
 
     self endon( "death" );
-    self._id_02F2 endon( "disconnect" );
-    var_2 = self._id_02F2;
+    self.owner endon( "disconnect" );
+    var_2 = self.owner;
     var_3 = level._id_F8FF["uav_3dping"];
 
     if ( !isdefined( var_1 ) )
@@ -16,7 +16,7 @@ _id_CA27( var_0, var_1 )
 
     self._id_5570 = var_1;
 
-    if ( var_2 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_equipment_ping" ) )
+    if ( var_2 scripts\mp\utility\perk::_hasperk( "specialty_equipment_ping" ) )
     {
         for (;;)
         {
@@ -24,32 +24,32 @@ _id_CA27( var_0, var_1 )
 
             if ( gettime() >= self._id_5570 + 3000 )
             {
-                var_5 = _id_06BB::_id_B7A3( self._id_02EA, 300 );
+                var_5 = scripts\common\utility::_id_B7A3( self.origin, 300 );
 
                 foreach ( var_7 in var_5 )
                 {
-                    if ( !_id_0A74::_id_89D3( var_7 ) )
+                    if ( !scripts\mp\utility\player::isreallyalive( var_7 ) )
                         continue;
 
-                    if ( !var_2 _id_0A74::_id_8803( var_7 ) )
+                    if ( !var_2 scripts\mp\utility\player::_id_8803( var_7 ) )
                         continue;
 
-                    if ( var_7 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_location_marking" ) )
+                    if ( var_7 scripts\mp\utility\perk::_hasperk( "specialty_location_marking" ) )
                         continue;
 
                     if ( isdefined( var_7._id_ACB2 ) )
                         continue;
 
-                    var_8 = _id_077B::_id_1B63( level._id_B758, self );
+                    var_8 = scripts\engine\utility::array_add( level.players, self );
 
                     if ( isdefined( var_0 ) )
-                        var_8 = _id_077B::_id_1B63( var_8, var_0 );
+                        var_8 = scripts\engine\utility::array_add( var_8, var_0 );
 
-                    var_9 = self._id_02EA + anglestoup( self._id_0054 ) * 10;
+                    var_9 = self.origin + anglestoup( self.angles ) * 10;
 
-                    if ( _id_077A::_id_C047( var_9, var_7 gettagorigin( "j_head" ), var_8 ) )
+                    if ( scripts\engine\trace::ray_trace_passed( var_9, var_7 gettagorigin( "j_head" ), var_8 ) )
                     {
-                        if ( !var_7 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_gpsjammer" ) )
+                        if ( !var_7 scripts\mp\utility\perk::_hasperk( "specialty_gpsjammer" ) )
                             var_2 thread _id_9B10( var_7 );
 
                         var_4 = 1;
@@ -62,8 +62,8 @@ _id_CA27( var_0, var_1 )
                         self._id_5844 = 1;
 
                     _func_0198( var_3._id_6074, self, "tag_origin", var_2 );
-                    self _meth_827E( "ghost_senses_ping", var_2 );
-                    _func_024C( self._id_02EA, var_2, 400, 800 );
+                    self playsoundtoplayer( "ghost_senses_ping", var_2 );
+                    _func_024C( self.origin, var_2, 400, 800 );
                     wait 3;
                 }
             }
@@ -77,7 +77,7 @@ _id_9B13( var_0, var_1 )
 {
     var_0 endon( "death_or_disconnect" );
 
-    if ( !isdefined( var_0 ) || !_id_0A74::_id_89D3( var_0 ) )
+    if ( !isdefined( var_0 ) || !scripts\mp\utility\player::isreallyalive( var_0 ) )
         return;
 
     thread _id_9B10( var_0 );
@@ -86,7 +86,7 @@ _id_9B13( var_0, var_1 )
     if ( var_2 == -1 )
         return;
 
-    _id_07D0::_id_A854( var_2, "active", var_1._id_02EA, "cb_compassping_eqp_ping", "icon_large" );
+    _id_07D0::_id_A854( var_2, "active", var_1.origin, "cb_compassping_eqp_ping", "icon_large" );
     _id_07D0::_id_A892( var_2, self );
     var_0 thread _id_10B00( var_2 );
     wait 3;
@@ -114,6 +114,6 @@ _id_9B10( var_0 )
     }
 
     self._id_C2E3[var_1] = 1;
-    var_0 _id_077B::_id_108A5( 10, "death_or_disconnect" );
+    var_0 scripts\engine\utility::_id_108A5( 10, "death_or_disconnect" );
     self._id_C2E3[var_1] = 0;
 }

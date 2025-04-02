@@ -13,13 +13,13 @@ _id_1D21( var_0 )
     self endon( "disconnect" );
     var_0 endon( "death" );
 
-    if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_rugged_eqp" ) )
+    if ( scripts\mp\utility\perk::_hasperk( "specialty_rugged_eqp" ) )
         var_0._id_758C = 1;
 
     var_0 _id_0765::_id_C2A7( 2, ::_id_4753 );
     thread scripts\mp\weapons::_id_A0F3( self, var_0 );
     var_0 thread _id_1D28();
-    var_1 = _func_020F();
+    var_1 = spawnstruct();
     var_1._id_F1CD = 100;
     var_1._id_F1CE = -50;
     var_1._id_32E8 = 3;
@@ -31,11 +31,11 @@ _id_1D21( var_0 )
     var_1._id_B1BE = 20;
     var_1._id_B1C2 = 45;
     var_1._id_B1C3 = 0.342;
-    var_0 _meth_8373( "visibility", "show", 0 );
+    var_0 setscriptablepartstate( "visibility", "show", 0 );
     var_0 waittill( "missile_stuck", var_2 );
 
     if ( isdefined( var_2 ) )
-        var_0 _meth_820B( var_2 );
+        var_0 linkto( var_2 );
 
     thread _id_1D1C( var_0 );
 }
@@ -48,30 +48,30 @@ _id_1D20()
     if ( isdefined( self._id_4325 ) )
         _id_07EE::_id_C511( self._id_4325 );
 
-    self._id_4325 = _id_07EE::_id_110C( self._id_02EA, _id_07EE::_id_69B5(), 72, self._id_02F2._id_045B, undefined, self._id_02F2, 0, self, 1 );
+    self._id_4325 = _id_07EE::_id_110C( self.origin, _id_07EE::_id_69B5(), 72, self.owner.team, undefined, self.owner, 0, self, 1 );
 }
 
 _id_1D1C( var_0 )
 {
     var_0 endon( "mine_destroyed" );
     var_0 endon( "death" );
-    var_0 setorigin( self );
-    var_0 _meth_8312( self );
+    var_0 setotherent( self );
+    var_0 setentityowner( self );
     var_0 _meth_85B7();
     var_0 _meth_85B8();
-    var_0 setneargoalnotifydist( 1 );
-    var_0 _meth_8373( "plant", "active", 0 );
-    self _meth_8373( "equipATMineFXView", "plant", 0 );
+    var_0 _meth_8357( 1 );
+    var_0 setscriptablepartstate( "plant", "active", 0 );
+    self setscriptablepartstate( "equipATMineFXView", "plant", 0 );
     scripts\mp\weapons::_id_AABC( var_0, "equip_at_mine_stun", ::_id_1D12 );
     thread scripts\mp\weapons::_id_A0F2( self, var_0 );
-    var_0 _id_07E9::_id_C2A4( "Lethal_Static", var_0._id_02F2, 1 );
+    var_0 _id_07E9::_id_C2A4( "Lethal_Static", var_0.owner, 1 );
     var_0 thread scripts\mp\weapons::_id_9EBB();
     var_0 thread _id_1D23();
     var_0 _id_0764::_id_D151( ::_id_1D14 );
     var_0 _id_1D20();
     wait 1.5;
-    var_0 thread scripts\engine\utility::_id_C330( ::_id_1D16, 1, 1 );
-    var_0 _meth_8373( "arm", "active", 0 );
+    var_0 thread _id_07A4::_id_C330( ::_id_1D16, 1, 1 );
+    var_0 setscriptablepartstate( "arm", "active", 0 );
     var_0 thread _id_1D2A();
     var_0 thread scripts\mp\weapons::_id_99D8( "tag_use", 1 );
     thread scripts\mp\weapons::_id_ACC5( var_0 );
@@ -83,20 +83,20 @@ _id_1D16( var_0 )
     thread _id_1D12( 5 );
 
     if ( !isdefined( var_0 ) )
-        var_0 = self._id_02F2;
+        var_0 = self.owner;
 
-    self _meth_8312( var_0 );
+    self setentityowner( var_0 );
     self _meth_85AC();
-    self _meth_8373( "arm", "neutral", 0 );
-    self _meth_8373( "trigger", "neutral", 0 );
-    self _meth_8373( "explode", "fromPlayer", 0 );
-    self _meth_8373( "hacked", "neutral", 0 );
+    self setscriptablepartstate( "arm", "neutral", 0 );
+    self setscriptablepartstate( "trigger", "neutral", 0 );
+    self setscriptablepartstate( "explode", "fromPlayer", 0 );
+    self setscriptablepartstate( "hacked", "neutral", 0 );
 }
 
 _id_1D17( var_0 )
 {
-    var_0 _meth_80B7( 200, self._id_02EA, self._id_02F2, self, "MOD_EXPLOSIVE", _func_034C( "s4_mine_ger_s44_mp" ) );
-    var_1 = var_0 _id_0A62::_id_A58E( self._id_02F2, _func_034C( "s4_mine_ger_s44_mp" ), self, "MOD_EXPLOSIVE" );
+    var_0 dodamage( 200, self.origin, self.owner, self, "MOD_EXPLOSIVE", makeweapon( "s4_mine_ger_s44_mp" ) );
+    var_1 = var_0 _id_0A62::_id_A58E( self.owner, makeweapon( "s4_mine_ger_s44_mp" ), self, "MOD_EXPLOSIVE" );
     thread _id_1D18();
     waitframe();
 
@@ -107,37 +107,37 @@ _id_1D17( var_0 )
 _id_1D18()
 {
     thread _id_1D12( 5 );
-    self _meth_8312( self._id_02F2 );
+    self setentityowner( self.owner );
     self _meth_85AC();
-    self _meth_8373( "arm", "neutral", 0 );
-    self _meth_8373( "launch", "neutral", 0 );
-    self _meth_8373( "explode", "fromVehicle", 0 );
+    self setscriptablepartstate( "arm", "neutral", 0 );
+    self setscriptablepartstate( "launch", "neutral", 0 );
+    self setscriptablepartstate( "explode", "fromVehicle", 0 );
 }
 
 _id_1D15( var_0 )
 {
     thread _id_1D12( 5 );
-    self _meth_8312( var_0 );
+    self setentityowner( var_0 );
     self _meth_85AC();
-    self _meth_8373( "arm", "neutral", 0 );
-    self _meth_8373( "launch", "neutral", 0 );
-    self _meth_8373( "explode", "fromDamage", 0 );
+    self setscriptablepartstate( "arm", "neutral", 0 );
+    self setscriptablepartstate( "launch", "neutral", 0 );
+    self setscriptablepartstate( "explode", "fromDamage", 0 );
 }
 
 _id_1D13( var_0 )
 {
     thread _id_1D12( 5 );
-    self _meth_8373( "arm", "neutral", 0 );
-    self _meth_8373( "launch", "neutral", 0 );
-    self _meth_8373( "destroy", "active", 0 );
+    self setscriptablepartstate( "arm", "neutral", 0 );
+    self setscriptablepartstate( "launch", "neutral", 0 );
+    self setscriptablepartstate( "destroy", "active", 0 );
 }
 
 _id_1D12( var_0 )
 {
     self notify( "death" );
     level._id_9ECB[self getentitynumber()] = undefined;
-    self _meth_8373( "hack_usable", "off" );
-    self _meth_82F0( 0 );
+    self setscriptablepartstate( "hack_usable", "off" );
+    self setcandamage( 0 );
     scripts\mp\weapons::_id_99D5();
     _id_0766::_id_D586( self._id_75D8 );
     self._id_75D8 = undefined;
@@ -149,11 +149,11 @@ _id_1D12( var_0 )
         self._id_4325 = undefined;
     }
 
-    if ( isdefined( self._id_02F2 ) )
-        self._id_02F2 scripts\mp\weapons::_id_C48A( self );
+    if ( isdefined( self.owner ) )
+        self.owner scripts\mp\weapons::_id_C48A( self );
 
     if ( isdefined( self._id_4320 ) )
-        self._id_4320 _meth_809A();
+        self._id_4320 delete();
 
     var_1 = self _meth_8150();
 
@@ -170,7 +170,7 @@ _id_1D12( var_0 )
         wait( var_0 );
 
     _id_0765::_id_47E6();
-    self _meth_809A();
+    self delete();
 }
 
 _id_1D1E()
@@ -190,7 +190,7 @@ _id_1D2A()
 
         foreach ( var_2 in var_0 )
         {
-            if ( var_2._id_00DE == "script_vehicle" )
+            if ( var_2.classname == "script_vehicle" )
             {
                 if ( var_2 _id_09B9::_id_10146( self ) )
                     continue;
@@ -202,15 +202,15 @@ _id_1D2A()
                 break;
             }
 
-            if ( var_2._id_00DE == "agent" || var_2._id_00DE == "player" )
+            if ( var_2.classname == "agent" || var_2.classname == "player" )
             {
-                if ( !_func_0117( var_2 ) && !_func_0102( var_2 ) )
+                if ( !isplayer( var_2 ) && !isagent( var_2 ) )
                     continue;
 
                 if ( isdefined( var_2._id_FFF1 ) )
                     continue;
 
-                if ( !_id_0A74::_id_89D3( var_2 ) )
+                if ( !scripts\mp\utility\player::isreallyalive( var_2 ) )
                     continue;
 
                 thread _id_1D1D( var_2 );
@@ -227,12 +227,12 @@ _id_1D1D( var_0 )
     self notify( "mine_triggered" );
     self._id_F615 = 1;
     scripts\mp\weapons::_id_99D5();
-    self _meth_8373( "arm", "neutral", 0 );
-    self _meth_8373( "trigger", "active", 0 );
-    var_1 = _id_0A7F::_hasperk( "s4_mine_ger_s44_mp", self._id_02EA, ( 0, 0, 0 ), 100, 1 );
-    var_1 _meth_820B( self );
+    self setscriptablepartstate( "arm", "neutral", 0 );
+    self setscriptablepartstate( "trigger", "active", 0 );
+    var_1 = scripts\mp\utility\weapon::_id_0C1F( "s4_mine_ger_s44_mp", self.origin, ( 0, 0, 0 ), 100, 1 );
+    var_1 linkto( self );
     thread _id_1D0E( var_1 );
-    var_1._id_10D0A = _func_034C( "s4_mine_ger_s44_mp" );
+    var_1._id_10D0A = makeweapon( "s4_mine_ger_s44_mp" );
     self._id_4320 = var_1;
     scripts\mp\weapons::_id_57CC( var_0, 0.05 );
     thread _id_1D25();
@@ -242,11 +242,11 @@ _id_1D22( var_0, var_1 )
 {
     var_1 endon( "mine_destroyed" );
     var_1 endon( "death" );
-    var_1._id_02F2 endon( "disconnect" );
+    var_1.owner endon( "disconnect" );
     var_1 notify( "mine_triggered" );
     var_1 scripts\mp\weapons::_id_99D5();
-    var_1 _meth_8373( "arm", "neutral", 0 );
-    var_1 _meth_8373( "trigger", "active", 0 );
+    var_1 setscriptablepartstate( "arm", "neutral", 0 );
+    var_1 setscriptablepartstate( "trigger", "active", 0 );
     wait 0.2;
     var_1 thread _id_1D17( var_0 );
 }
@@ -254,15 +254,15 @@ _id_1D22( var_0, var_1 )
 _id_1D27( var_0 )
 {
     self endon( "death" );
-    self._id_01EA _id_077B::_id_108A6( var_0, "death", "mine_destroyed" );
+    self._id_01EA scripts\engine\utility::_id_108A6( var_0, "death", "mine_destroyed" );
 
     if ( isdefined( self._id_01EA ) )
-        self _meth_823B( self._id_02EA, 0.05, 0, 0 );
+        self moveto( self.origin, 0.05, 0, 0 );
 
     while ( isdefined( self._id_01EA ) )
         waitframe();
 
-    self _meth_809A();
+    self delete();
 }
 
 _id_4753()
@@ -279,24 +279,24 @@ _id_1D25()
     if ( var_0 > 0 )
     {
         var_1 = ( 0, 0, 1 );
-        var_2 = self._id_02EA + var_1 * 64;
-        var_3 = _func_02C4( [ "physicscontents_glass", "physicscontents_water", "physicscontents_item", "physicscontents_vehicle", "physicscontents_missileclip" ] );
+        var_2 = self.origin + var_1 * 64;
+        var_3 = physics_createcontents( [ "physicscontents_glass", "physicscontents_water", "physicscontents_item", "physicscontents_vehicle", "physicscontents_missileclip" ] );
         var_4 = _id_0A68::_id_6589();
-        var_5 = self._id_02EA;
+        var_5 = self.origin;
         var_6 = var_2;
         var_7 = _func_02BC( var_5, var_6, var_3, var_4, 0, "physicsquery_closest", 1 );
 
         if ( isdefined( var_7 ) && var_7.size > 0 )
         {
-            var_8 = _func_0257( var_7[0]["position"] - var_5, var_1 );
-            var_8 = _func_0147( 0, var_8 - 1 );
+            var_8 = vectordot( var_7[0]["position"] - var_5, var_1 );
+            var_8 = max( 0, var_8 - 1 );
             var_0 = 0;
-            var_2 = self._id_02EA;
+            var_2 = self.origin;
 
             if ( var_8 > 0 )
             {
                 var_0 = var_8 / 64 * 0.25;
-                var_2 = self._id_02EA + var_1 * var_8;
+                var_2 = self.origin + var_1 * var_8;
             }
         }
 
@@ -310,13 +310,13 @@ _id_1D25()
             if ( var_9 > 0 )
                 var_11 = var_9 * 0;
 
-            var_12 = _func_0205( "script_model", self._id_02EA );
-            var_12._id_0054 = _func_025B( anglestoforward( self._id_0054 ) * ( 1, 1, 0 ) );
-            var_12 setmode( "tag_origin" );
+            var_12 = spawn( "script_model", self.origin );
+            var_12.angles = vectortoangles( anglestoforward( self.angles ) * ( 1, 1, 0 ) );
+            var_12 setmodel( "tag_origin" );
             self._id_A239 = var_12;
             var_12._id_01EA = self;
-            self _meth_820B( var_12, "tag_origin", ( 0, 0, 0 ), ( 0, 0, 0 ) );
-            var_12 _meth_823B( var_2, var_0, var_11, var_10 );
+            self linkto( var_12, "tag_origin", ( 0, 0, 0 ), ( 0, 0, 0 ) );
+            var_12 moveto( var_2, var_0, var_11, var_10 );
             var_12 thread _id_1D27( var_0 );
             thread _id_1D26( var_0 );
             wait( var_0 );
@@ -330,25 +330,25 @@ _id_1D26( var_0 )
 {
     self endon( "mine_destroyed" );
     self endon( "death" );
-    self _meth_8373( "launch", "active", 0 );
+    self setscriptablepartstate( "launch", "active", 0 );
 }
 
 _id_1D14( var_0 )
 {
-    var_1 = var_0._id_006E;
+    var_1 = var_0.attacker;
 
-    if ( istrue( _id_099C::_id_B779( self._id_02F2, var_1 ) ) )
+    if ( istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_1 ) ) )
     {
         var_1 notify( "destroyed_equipment" );
-        var_1 _id_0A28::_id_6FCD( self );
+        var_1 scripts\mp\killstreaks\killstreaks::_id_6FCD( self );
 
-        if ( isdefined( self._id_02F2 ) && self._id_02F2._id_B1BD.size > 1 )
-            self._id_02F2 thread _id_0A64::_id_9120( "sm_destroyed_m" );
+        if ( isdefined( self.owner ) && self.owner._id_B1BD.size > 1 )
+            self.owner thread _id_0A64::_id_9120( "sm_destroyed_m" );
         else
-            self._id_02F2 thread _id_0A64::_id_9120( "sm_destroyed_s" );
+            self.owner thread _id_0A64::_id_9120( "sm_destroyed_s" );
     }
 
-    if ( _func_0117( var_1 ) )
+    if ( isplayer( var_1 ) )
         var_1 _id_079B::_id_FC44( "" );
 
     thread _id_1D13();
@@ -361,8 +361,8 @@ _id_1D23()
 
     if ( isdefined( var_0 ) )
         thread _id_1D15( var_0 );
-    else if ( isdefined( self._id_02F2 ) )
-        thread _id_1D15( self._id_02F2 );
+    else if ( isdefined( self.owner ) )
+        thread _id_1D15( self.owner );
     else
         thread _id_1D13();
 }
@@ -371,14 +371,14 @@ _id_1D28()
 {
     self endon( "mine_destroyed" );
     self endon( "death" );
-    level _id_077B::_id_1087E( "game_ended", "bro_shot_start" );
+    level scripts\engine\utility::waittill_any_2( "game_ended", "bro_shot_start" );
     thread _id_1D13();
 }
 
 _id_1D11( var_0 )
 {
-    var_0 _meth_80B7( 200, self._id_02EA, self._id_02F2, self, "MOD_EXPLOSIVE", _func_034C( "s4_mine_ger_s44_mp" ) );
-    var_1 = var_0 _id_0A62::_id_A58E( self._id_02F2, _func_034C( "s4_mine_ger_s44_mp" ), self, "MOD_EXPLOSIVE" );
+    var_0 dodamage( 200, self.origin, self.owner, self, "MOD_EXPLOSIVE", makeweapon( "s4_mine_ger_s44_mp" ) );
+    var_1 = var_0 _id_0A62::_id_A58E( self.owner, makeweapon( "s4_mine_ger_s44_mp" ), self, "MOD_EXPLOSIVE" );
     waitframe();
 
     if ( isdefined( var_0 ) )
@@ -396,35 +396,35 @@ _id_1D1A( var_0, var_1, var_2, var_3, var_4 )
     if ( !isdefined( var_2 ) )
         return var_4;
 
-    if ( _func_036F( var_2 ) )
+    if ( isnullweapon( var_2 ) )
         return var_4;
 
-    if ( var_2._id_0084 != "s4_mine_ger_s44_mp" && var_2._id_0084 != "at_mine_ap_mp" )
+    if ( var_2.basename != "s4_mine_ger_s44_mp" && var_2.basename != "at_mine_ap_mp" )
         return var_4;
 
-    var_5 = anglestoup( var_1._id_0054 );
-    var_6 = var_1._id_02EA - self geteye();
-    var_7 = _func_0257( var_6, var_5 );
+    var_5 = anglestoup( var_1.angles );
+    var_6 = var_1.origin - self geteye();
+    var_7 = vectordot( var_6, var_5 );
 
     if ( var_7 > 46 )
         return 0;
 
-    var_6 = self._id_02EA - var_1._id_02EA;
-    var_8 = _func_0257( var_6, var_5 );
+    var_6 = self.origin - var_1.origin;
+    var_8 = vectordot( var_6, var_5 );
 
     if ( var_8 > 46 )
         return 0;
 
-    if ( var_2._id_0084 == "at_mine_ap_mp" || istrue( var_1._id_F615 ) )
+    if ( var_2.basename == "at_mine_ap_mp" || istrue( var_1._id_F615 ) )
     {
         if ( var_7 >= 0 )
         {
             var_9 = var_0 getstance();
 
             if ( var_9 == "prone" )
-                var_4 = int( _func_0148( var_4, 35 ) );
-            else if ( var_9 == "crouch" || self _meth_81E6() )
-                var_4 = int( _func_0148( var_4, 55 ) );
+                var_4 = int( min( var_4, 35 ) );
+            else if ( var_9 == "crouch" || self issprintsliding() )
+                var_4 = int( min( var_4, 55 ) );
         }
     }
 
@@ -435,13 +435,13 @@ _id_1D0E( var_0 )
 {
     var_0 endon( "death" );
     self waittill( "death" );
-    var_0 _meth_809A();
+    var_0 delete();
 }
 
 _id_1D1B( var_0 )
 {
-    self _meth_8373( "hacked", "active", 0 );
+    self setscriptablepartstate( "hacked", "active", 0 );
     _id_1D20();
-    thread scripts\mp\weapons::_id_A0F2( self._id_02F2, self );
+    thread scripts\mp\weapons::_id_A0F2( self.owner, self );
     thread scripts\mp\weapons::_id_ACC5( self );
 }

@@ -20,15 +20,15 @@ _id_A6B4( var_0 )
 {
     level endon( "white_phosphorus_end" );
     level endon( "game_ended" );
-    var_1 = _func_020F();
+    var_1 = spawnstruct();
     var_1._id_42F4 = var_0;
     var_1._id_5C51 = var_0;
     var_2 = _func_03C0( "ks_white_phosphorus_mp_p", var_1._id_5C51 );
-    var_2._id_02F2 = self;
-    var_2._id_045B = self._id_045B;
+    var_2.owner = self;
+    var_2.team = self.team;
     var_2._id_EA67 = var_1;
     var_2._id_10D06 = "white_phosphorus_proj_mp";
-    var_3 = _id_077A::_id_C042( var_0, var_0 - ( 0, 0, 10000 ), self, undefined, 1, 1 );
+    var_3 = scripts\engine\trace::ray_trace( var_0, var_0 - ( 0, 0, 10000 ), self, undefined, 1, 1 );
     var_4 = var_3["surfacetype"];
     var_2 thread _id_0995::_id_10F92( "burn" );
     var_2 thread _id_10F7A( 10, "burn", var_4 );
@@ -42,23 +42,23 @@ _id_10F7A( var_0, var_1, var_2 )
     level endon( "game_ended" );
     self._id_BD95 = 1;
     level _id_0995::_id_10F58( "inner", self );
-    self _meth_8373( "impact", "on", 0 );
+    self setscriptablepartstate( "impact", "on", 0 );
 
     if ( isdefined( var_2 ) && var_2 == "surftype_water" )
-        self _meth_8373( "flare_death_water", "on", 0 );
+        self setscriptablepartstate( "flare_death_water", "on", 0 );
     else
-        self _meth_8373( "flare", "on", 0 );
+        self setscriptablepartstate( "flare", "on", 0 );
 
     var_3 = self._id_EA67._id_42F4 + ( 0, 0, 10 );
 
-    if ( isdefined( self._id_02F2 ) )
-        self._id_02F2 _meth_8287( var_3, 300, 17, 17, self._id_02F2, "MOD_EXPLOSIVE", "s4_smoke_gbr_n77_mp" );
+    if ( isdefined( self.owner ) )
+        self.owner radiusdamage( var_3, 300, 17, 17, self.owner, "MOD_EXPLOSIVE", "s4_smoke_gbr_n77_mp" );
 
     if ( isdefined( var_2 ) && var_2 != "surftype_water" )
     {
         if ( isdefined( var_1 ) )
         {
-            self._id_8D49 = _func_0205( "script_model", self._id_02EA + ( 0, 0, 100 ) );
+            self.killcament = spawn( "script_model", self.origin + ( 0, 0, 100 ) );
 
             if ( var_1 == "burn" )
                 thread _id_0995::_id_10F8D( 200, "s4_smoke_gbr_n77_mp" );
@@ -66,15 +66,15 @@ _id_10F7A( var_0, var_1, var_2 )
                 thread _id_0995::_id_10F8C( 200 );
         }
 
-        _id_076B::_id_7A8B( var_0 );
+        scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause( var_0 );
         level _id_0995::_id_10F7B( "inner", self, var_1, 1 );
         self notify( "stop_wp_status_effect" );
-        self _meth_8373( "flare", "off", 0 );
-        self _meth_8373( "flare_death", "on", 0 );
+        self setscriptablepartstate( "flare", "off", 0 );
+        self setscriptablepartstate( "flare_death", "on", 0 );
     }
 
-    if ( isdefined( self._id_8D49 ) )
-        self._id_8D49 _meth_809A();
+    if ( isdefined( self.killcament ) )
+        self.killcament delete();
 }
 
 _id_10F6A( var_0, var_1 )
@@ -92,26 +92,26 @@ _id_10F6A( var_0, var_1 )
     var_4 = 0;
 
     if ( var_4 )
-        var_5 = _func_03C0( "ks_white_phosphorus_mp_p", var_0, self._id_0054 );
+        var_5 = _func_03C0( "ks_white_phosphorus_mp_p", var_0, self.angles );
     else
     {
-        var_5 = _func_0205( "script_model", var_0 );
-        var_5 setmode( "ks_white_phosphorus_mp" );
-        var_5 _meth_8312( self._id_02F2 );
+        var_5 = spawn( "script_model", var_0 );
+        var_5 setmodel( "ks_white_phosphorus_mp" );
+        var_5 setentityowner( self.owner );
     }
 
-    var_5._id_045B = self._id_045B;
-    var_5._id_02F2 = self;
+    var_5.team = self.team;
+    var_5.owner = self;
     var_5 thread _id_0995::_id_10F96();
     level thread _id_0995::_id_10F79( var_5 );
 
-    if ( _id_0999::_id_8926() || _id_0999::_id_8934() )
-        var_5 _meth_8373( "smoke_night", "on", 0 );
+    if ( scripts\cp_mp\utility\game_utility::isnightmap() || scripts\cp_mp\utility\game_utility::_id_8934() )
+        var_5 setscriptablepartstate( "smoke_night", "on", 0 );
     else
-        var_5 _meth_8373( "smoke", "on", 0 );
+        var_5 setscriptablepartstate( "smoke", "on", 0 );
 
     var_5 thread _id_0995::_id_10F8E( 400, var_2, undefined, "s4_smoke_gbr_n77_mp" );
     level _id_0995::_id_10F58( "smoke", var_5 );
-    _id_076B::_id_7A8B( var_1 );
+    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause( var_1 );
     level _id_0995::_id_10F7B( "smoke", var_5 );
 }

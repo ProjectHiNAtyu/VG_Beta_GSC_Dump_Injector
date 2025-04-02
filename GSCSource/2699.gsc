@@ -3,15 +3,15 @@
 
 _id_93E6()
 {
-    _id_099D::_id_C2A5( "light_tank", "activate", ::_id_93D6 );
-    _id_099D::_id_C2A5( "light_tank", "startCapture", ::_id_93F8 );
-    _id_099D::_id_C2A5( "light_tank", "endCapture", ::_id_93E2 );
-    _id_099D::_id_C2A5( "light_tank", "filterDropSpawns", ::_id_93E3 );
-    _id_099D::_id_C2A5( "light_tank", "getDropSpawnIgnoreList", ::_id_93E4 );
-    _id_099D::_id_C2A5( "light_tank", "spawnCallback", ::_id_93F7 );
-    _id_099D::_id_C2A5( "light_tank", "initLate", ::_id_93E9 );
-    _id_09BC::_id_102C0( "light_tank", 6 );
-    _id_09BC::_id_102C2( "light_tank", 3 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "light_tank", "activate", ::_id_93D6 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "light_tank", "startCapture", ::_id_93F8 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "light_tank", "endCapture", ::_id_93E2 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "light_tank", "filterDropSpawns", ::_id_93E3 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "light_tank", "getDropSpawnIgnoreList", ::_id_93E4 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "light_tank", "spawnCallback", ::_id_93F7 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "light_tank", "initLate", ::_id_93E9 );
+    scripts\cp_mp\vehicles\vehicle_tracking::_id_102C0( "light_tank", 6 );
+    scripts\cp_mp\vehicles\vehicle_tracking::_id_102C2( "light_tank", 3 );
     _id_0A6E::_id_C27C( _id_09AD::_id_9419 );
     _id_93EA();
     _id_93EB();
@@ -21,7 +21,7 @@ _id_93E6()
 
 _id_93E9()
 {
-    _id_0A28::_id_C25C( "bradley", _id_09AD::_id_940E );
+    scripts\mp\killstreaks\killstreaks::_id_C25C( "bradley", _id_09AD::_id_940E );
 }
 
 _id_93EA()
@@ -37,10 +37,10 @@ _id_93EA()
 
 _id_93EB()
 {
-    var_0 = _id_09BB::_id_10274( "light_tank", 1 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10274( "light_tank", 1 );
     var_0._id_0DD8 = _id_09AD::_id_940C;
 
-    if ( _id_0A69::_id_6A43() == "arm" )
+    if ( scripts\mp\utility\game::getgametype() == "arm" )
     {
         var_0._id_0DD9 = 105;
         var_0._id_C691 = level._id_EE42;
@@ -51,7 +51,7 @@ _id_93EB()
 
 _id_93E7()
 {
-    scripts\mp\gamescore::_id_C22D( "vehicleCapture", [ "offhand_weapons", "weapon", "killstreaks", "supers" ] );
+    scripts\mp\playeractions::_id_C22D( "vehicleCapture", [ "offhand_weapons", "weapon", "killstreaks", "supers" ] );
 }
 
 _id_93D6( var_0 )
@@ -65,7 +65,7 @@ _id_93F8( var_0, var_1, var_2 )
     if ( isdefined( var_1 ) )
         _id_93DC( var_0, var_1 );
 
-    if ( level._id_EF62 )
+    if ( level.teambased )
         _id_93DB( var_0 );
 }
 
@@ -76,9 +76,9 @@ _id_93E2( var_0 )
 
 _id_93DC( var_0, var_1 )
 {
-    var_2 = _id_09B4::_id_100CA( var_0, "tur_bradley_mp" );
-    var_3 = _func_0205( "script_model", var_2 gettagorigin( "TAG_PLAYER" ) );
-    var_3 _meth_820B( var_2 );
+    var_2 = scripts\cp_mp\vehicles\vehicle::_id_100CA( var_0, "tur_bradley_mp" );
+    var_3 = spawn( "script_model", var_2 gettagorigin( "TAG_PLAYER" ) );
+    var_3 linkto( var_2 );
     var_3 _id_93F5( 0.5 );
     var_3._id_FFF1 = var_0;
     var_0._id_AD8B = var_3;
@@ -89,9 +89,9 @@ _id_93DC( var_0, var_1 )
 
 _id_93DB( var_0 )
 {
-    var_1 = _id_09B4::_id_100CA( var_0, "tur_bradley_mp" );
-    var_2 = _func_0205( "script_model", var_1 gettagorigin( "TAG_PLAYER" ) );
-    var_2 _meth_820B( var_1 );
+    var_1 = scripts\cp_mp\vehicles\vehicle::_id_100CA( var_0, "tur_bradley_mp" );
+    var_2 = spawn( "script_model", var_1 gettagorigin( "TAG_PLAYER" ) );
+    var_2 linkto( var_1 );
     var_2 _id_93F5( 3 );
     var_2._id_FFF1 = var_0;
     var_0._id_AC88 = var_2;
@@ -102,20 +102,20 @@ _id_93DB( var_0 )
 
 _id_93F5( var_0 )
 {
-    self _meth_8305( "HINT_BUTTON" );
+    self setcursorhint( "HINT_BUTTON" );
 
-    if ( !_id_0999::_id_89D2() )
-        self _meth_832B( &"KILLSTREAKS_HINTS/BRADLEY_CAPTURE" );
+    if ( !scripts\cp_mp\utility\game_utility::_id_89D2() )
+        self sethintstring( &"KILLSTREAKS_HINTS/BRADLEY_CAPTURE" );
 
-    self sethintdisplayfov( "none" );
+    self _meth_84D6( "none" );
     self _meth_84D3( 200 );
+    self sethintdisplayfov( 360 );
+    self setuserange( 200 );
     self setusefov( 360 );
-    self _meth_84CE( 200 );
-    self _meth_84D4( 360 );
     self _meth_84D8( "show" );
-    self setuserange( "duration_none" );
-    self setuseholdduration( 1 );
-    self makeunusable();
+    self setuseholdduration( "duration_none" );
+    self hashed_0x84D0( 1 );
+    self makeuseable();
     self._id_FEAF = 1;
     self._id_4122 = 0;
     self._id_FEE5 = var_0;
@@ -129,7 +129,7 @@ _id_93DF()
     if ( isdefined( self._id_B7FB ) )
         _id_93F4( self._id_B7FB );
 
-    self _meth_809A();
+    self delete();
 }
 
 _id_93E0()
@@ -221,9 +221,9 @@ _id_93F1( var_0 )
 
     while ( isdefined( var_0 ) )
     {
-        foreach ( var_2 in level._id_B758 )
+        foreach ( var_2 in level.players )
         {
-            self disableoffhandweapons( var_2 );
+            self disableplayeruse( var_2 );
 
             if ( var_2 == var_0 )
             {
@@ -254,9 +254,9 @@ _id_93EF()
     {
         if ( isdefined( self._id_B7FB ) )
         {
-            foreach ( var_1 in level._id_B758 )
+            foreach ( var_1 in level.players )
             {
-                self disableoffhandweapons( var_1 );
+                self disableplayeruse( var_1 );
 
                 if ( var_1 == self._id_B7FB )
                 {
@@ -267,9 +267,9 @@ _id_93EF()
         }
         else
         {
-            foreach ( var_1 in level._id_B758 )
+            foreach ( var_1 in level.players )
             {
-                self disableoffhandweapons( var_1 );
+                self disableplayeruse( var_1 );
 
                 if ( _id_93D8( var_1 ) )
                     self _meth_80E0( var_1 );
@@ -288,13 +288,13 @@ _id_93D8( var_0 )
     if ( !isdefined( var_0 ) )
         return 0;
 
-    if ( !var_0 _id_099C::_giveweapon() )
+    if ( !var_0 scripts\cp_mp\utility\player_utility::_id_0C14() )
         return 0;
 
-    if ( var_0._id_045B == "spectator" )
+    if ( var_0.team == "spectator" )
         return 0;
 
-    if ( !var_0 _id_06BB::_id_86F6() )
+    if ( !var_0 scripts\common\utility::_id_86F6() )
         return 0;
 
     if ( !istrue( _id_09B8::_id_100FE( var_0, self._id_FFF1 ) ) )
@@ -308,22 +308,22 @@ _id_93D7()
     if ( istrue( self._id_FFF1._id_87E1 ) )
         return 0;
 
-    if ( !self._id_B7FB _id_06BB::_id_86F6() )
+    if ( !self._id_B7FB scripts\common\utility::_id_86F6() )
         return 0;
 
     if ( !istrue( _id_09B8::_id_100FE( self._id_B7FB, self._id_FFF1 ) ) )
         return 0;
 
-    if ( !self._id_B7FB useanimtree() )
+    if ( !self._id_B7FB usebuttonpressed() )
         return 0;
 
-    if ( self._id_B7FB isonground() )
+    if ( self._id_B7FB isonladder() )
         return 0;
 
-    if ( self._id_B7FB _meth_822E() )
+    if ( self._id_B7FB meleebuttonpressed() )
         return 0;
 
-    if ( distancesquared( self._id_B7FB._id_02EA, self._id_02EA ) > 90000 )
+    if ( distancesquared( self._id_B7FB.origin, self.origin ) > 90000 )
         return 0;
 
     return 1;
@@ -331,14 +331,14 @@ _id_93D7()
 
 _id_93F3( var_0 )
 {
-    var_0 scripts\mp\gamescore::_id_156E( "vehicleCapture", 0 );
+    var_0 scripts\mp\playeractions::_id_156E( "vehicleCapture", 0 );
     var_0 _id_07AD::_id_FD73( self, 0 );
 }
 
 _id_93F4( var_0 )
 {
-    if ( var_0 _id_099C::_giveweapon() )
-        var_0 scripts\mp\gamescore::_id_156E( "vehicleCapture", 1 );
+    if ( var_0 scripts\cp_mp\utility\player_utility::_id_0C14() )
+        var_0 scripts\mp\playeractions::_id_156E( "vehicleCapture", 1 );
 
     var_0 _id_07AD::_id_FD73( self, 0 );
 }
@@ -348,10 +348,10 @@ _id_93F6( var_0, var_1 )
     if ( !isdefined( var_1 ) )
         return 0;
 
-    if ( level._id_EF62 && var_1._id_045B == var_0._id_045B )
+    if ( level.teambased && var_1.team == var_0.team )
         return 0;
 
-    if ( isdefined( var_0._id_02F2 ) && var_1 == var_0._id_02F2 )
+    if ( isdefined( var_0.owner ) && var_1 == var_0.owner )
         return 0;
 
     return 1;
@@ -364,19 +364,19 @@ _id_243B()
 
     for (;;)
     {
-        if ( _id_0A7C::_id_885E( self._id_045B ) )
+        if ( scripts\mp\utility\teams::_id_885E( self.team ) )
         {
-            var_0 = _id_06BB::_id_B7AC( self._id_02EA, 3000 );
+            var_0 = scripts\common\utility::_id_B7AC( self.origin, 3000 );
 
             foreach ( var_2 in var_0 )
             {
-                var_3 = isdefined( var_2 ) && var_2 _id_099C::_giveweapon() && _id_0A74::_id_8803( var_2 );
+                var_3 = isdefined( var_2 ) && var_2 scripts\cp_mp\utility\player_utility::_id_0C14() && scripts\mp\utility\player::_id_8803( var_2 );
 
                 if ( !var_3 )
                     continue;
 
                 var_4 = anglestoforward( var_2 getplayerangles() );
-                var_5 = _id_0777::_id_1763( var_4, self._id_02EA - var_2._id_02EA );
+                var_5 = scripts\engine\math::_id_1763( var_4, self.origin - var_2.origin );
 
                 if ( isdefined( var_5 ) && var_5 <= 60 )
                 {
@@ -407,7 +407,7 @@ _id_93F7( var_0, var_1 )
     var_0._id_31D1 = 0;
     var_2 = _id_09AD::_id_9403( var_0, var_1 );
 
-    if ( isdefined( var_2 ) && _id_09BB::_id_10270() )
+    if ( isdefined( var_2 ) && scripts\cp_mp\vehicles\vehicle_spawn::_id_10270() )
         var_2._id_AA96 = ::_id_93F2;
 
     return var_2;
@@ -420,26 +420,26 @@ _id_93F2()
 
 _id_93F9()
 {
-    var_0 = _id_09BC::_id_6E22( self );
-    var_1 = _func_020F();
-    _id_09BC::_id_3D43( var_0, var_1 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_tracking::_id_6E22( self );
+    var_1 = spawnstruct();
+    scripts\cp_mp\vehicles\vehicle_tracking::_id_3D43( var_0, var_1 );
     _id_09AD::_id_938E( var_0, var_1 );
-    var_2 = _func_020F();
-    var_3 = _id_09BB::vehicle_spawn_spawnvehicle( "light_tank", var_1, var_2 );
+    var_2 = spawnstruct();
+    var_3 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028E( "light_tank", var_1, var_2 );
 
     if ( isdefined( var_3 ) )
     {
-        if ( _id_0A69::_id_6A43() == "arm" )
+        if ( scripts\mp\utility\game::getgametype() == "arm" )
         {
             if ( _id_07A8::_id_609F( "prematch_done" ) )
                 scripts\mp\gametypes\arm::_id_504C( var_1 );
 
             if ( istrue( level._id_DCEE ) )
-                scripts\mp\gametypes\arm::_id_10028( var_3, var_3._id_045B );
+                scripts\mp\gametypes\arm::_id_10028( var_3, var_3.team );
 
-            foreach ( var_5 in level._id_B758 )
+            foreach ( var_5 in level.players )
             {
-                if ( var_5._id_045B == var_3._id_045B )
+                if ( var_5.team == var_3.team )
                     var_5 _id_0A70::_id_D5DD( 62, undefined, 5 );
             }
         }
@@ -456,7 +456,7 @@ _id_93E3( var_0 )
 
         foreach ( var_3 in var_0 )
         {
-            if ( _func_0119( var_3._id_02EA, level._id_10396 ) )
+            if ( _func_0119( var_3.origin, level._id_10396 ) )
                 var_1[var_1.size] = var_3;
         }
     }
@@ -478,7 +478,7 @@ _id_93E4( var_0 )
     if ( isdefined( level._id_EB97 ) )
         var_1[var_1.size] = level._id_EB97;
 
-    var_1[var_1.size] = _id_09BC::_id_102BA( "emp_drone" );
-    var_1[var_1.size] = _id_09BC::_id_102BA( "cruise_predator" );
-    return _id_077B::_id_1B73( var_1 );
+    var_1[var_1.size] = scripts\cp_mp\vehicles\vehicle_tracking::_id_102BA( "emp_drone" );
+    var_1[var_1.size] = scripts\cp_mp\vehicles\vehicle_tracking::_id_102BA( "cruise_predator" );
+    return scripts\engine\utility::_id_1B73( var_1 );
 }

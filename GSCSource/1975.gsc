@@ -13,25 +13,25 @@ _id_2F0C()
 
     level thread _id_7A8D();
 
-    foreach ( var_1 in level._id_33D8 )
+    foreach ( var_1 in level.characters )
         var_1._id_7A8E = 0;
 
     level._id_7A93 = 1;
-    _func_01D0( "ui_inhostmigration", 1 );
+    setdvar( "ui_inhostmigration", 1 );
     level._id_7A8A = 1;
     level notify( "host_migration_begin" );
-    _id_07AC::_id_FD63();
+    scripts\mp\gamelogic::_id_FD63();
 
-    foreach ( var_1 in level._id_33D8 )
+    foreach ( var_1 in level.characters )
     {
         if ( !isdefined( var_1 ) )
             continue;
 
         var_1 thread _id_7A94();
 
-        if ( _func_0117( var_1 ) )
+        if ( isplayer( var_1 ) )
         {
-            var_1 _meth_82F6( "ui_session_state", var_1._id_0392 );
+            var_1 setclientomnvar( "ui_session_state", var_1.sessionstate );
 
             if ( _func_038C() )
                 _func_038B( var_1._id_723F );
@@ -41,11 +41,11 @@ _id_2F0C()
     level endon( "host_migration_begin" );
     _id_7A96();
     level._id_7A93 = undefined;
-    _func_01D0( "ui_inhostmigration", 0 );
-    _func_0266( game["thermal_vision"] );
+    setdvar( "ui_inhostmigration", 0 );
+    visionsetthermal( game["thermal_vision"] );
     level._id_7A8A = 0;
     level notify( "host_migration_end" );
-    _id_07AC::_id_FD63();
+    scripts\mp\gamelogic::_id_FD63();
     level thread [[ level._id_FC72 ]]();
 }
 
@@ -56,23 +56,23 @@ _id_7A8D()
     level waittill( "connected", var_0 );
     var_0 thread _id_7A94();
 
-    if ( _func_0117( var_0 ) )
-        var_0 _meth_82F6( "ui_session_state", var_0._id_0392 );
+    if ( isplayer( var_0 ) )
+        var_0 setclientomnvar( "ui_session_state", var_0.sessionstate );
 }
 
 _id_7A96()
 {
     level endon( "game_ended" );
     level._id_7E95 = 25;
-    thread _id_07AC::_id_9BDB( "waiting_for_players", 20.0 );
+    thread scripts\mp\gamelogic::_id_9BDB( "waiting_for_players", 20.0 );
     _id_7A97();
     level._id_7E95 = 10;
-    thread _id_07AC::_id_9BDB( "match_resuming_in", 5.0 );
+    thread scripts\mp\gamelogic::_id_9BDB( "match_resuming_in", 5.0 );
     wait 5;
     level._id_7E95 = 0;
 
     if ( istrue( level._id_5EDE ) && !istrue( level._id_5EDD ) )
-        _func_01E4( "ui_match_start_text", "opponent_forfeiting_in" );
+        setomnvar( "ui_match_start_text", "opponent_forfeiting_in" );
 }
 
 _id_7A97()
@@ -92,16 +92,16 @@ _id_7A90( var_0 )
     if ( isdefined( var_0._id_54E1 ) )
         var_1 = var_0._id_54E1;
 
-    if ( _func_0117( var_0 ) && isdefined( var_0._id_02BA ) )
-        var_2 = var_0._id_02BA;
+    if ( isplayer( var_0 ) && isdefined( var_0.name ) )
+        var_2 = var_0.name;
 
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
         return "player <" + var_2 + ">";
 
-    if ( _func_0102( var_0 ) && _id_0A67::_id_885D( var_0 ) )
+    if ( isagent( var_0 ) && _id_0A67::_id_885D( var_0 ) )
         return "participant agent <" + var_1 + ">";
 
-    if ( _func_0102( var_0 ) )
+    if ( isagent( var_0 ) )
         return "non-participant agent <" + var_1 + ">";
 
     return "unknown entity <" + var_1 + ">";
@@ -112,11 +112,11 @@ _id_7A95()
     level endon( "host_migration_begin" );
     level endon( "host_migration_end" );
 
-    while ( !_id_0A74::_id_89D3( self ) )
+    while ( !scripts\mp\utility\player::isreallyalive( self ) )
         self waittill( "spawned" );
 
     self._id_7A8E = 1;
-    _id_0A74::_id_0BC4( 1 );
+    scripts\mp\utility\player::_id_0BC4( 1 );
     level waittill( "host_migration_end" );
 }
 
@@ -127,7 +127,7 @@ _id_7A94()
 
     if ( self._id_7A8E )
     {
-        _id_0A74::_id_0BC4( 0 );
+        scripts\mp\utility\player::_id_0BC4( 0 );
         self._id_7A8E = undefined;
     }
 }
@@ -151,7 +151,7 @@ _id_10957( var_0 )
     wait( var_0 );
 }
 
-_id_1084D( var_0 )
+waitlongdurationwithhostmigrationpause( var_0 )
 {
     if ( var_0 == 0 )
         return;

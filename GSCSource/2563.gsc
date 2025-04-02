@@ -40,16 +40,16 @@ _id_FEC2( var_0 )
 _id_81CF()
 {
     level._id_CC0E = [];
-    _func_01D1( "#x313642599afd2185f", 0 );
+    setdvarifuninitialized( "#x313642599afd2185f", 0 );
 }
 
 _id_3FD9( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _func_020F();
-    var_4._id_02EA = var_0;
+    var_4 = spawnstruct();
+    var_4.origin = var_0;
     var_4._id_01C1 = anglestoforward( ( 0, var_1, 0 ) );
     var_4._id_EA0F = var_2;
-    var_4._id_045B = var_3;
+    var_4.team = var_3;
     level._id_CC0E[level._id_CC0E.size] = var_4;
 }
 
@@ -61,7 +61,7 @@ _id_9A17( var_0, var_1 )
 
     for ( var_8 = 0; var_8 < level._id_CC0E.size; var_8++ )
     {
-        if ( !var_6 && level._id_CC0E[var_8]._id_02EA == var_0 )
+        if ( !var_6 && level._id_CC0E[var_8].origin == var_0 )
         {
             var_6 = 1;
             continue;
@@ -79,7 +79,7 @@ _id_6CF3( var_0 )
 
     for ( var_2 = 0; var_2 < level._id_CC0E.size; var_2++ )
     {
-        var_3 = level._id_CC0E[var_2]._id_02EA;
+        var_3 = level._id_CC0E[var_2].origin;
         var_4 = level._id_CC0E[var_2]._id_01C1;
         var_5 = level._id_CC0E[var_2]._id_EA0F;
         var_1 = var_1 + getscoreinfovalue( var_0, var_3, var_4, var_5 );
@@ -95,7 +95,7 @@ getscoreinfovalue( var_0, var_1, var_2, var_3 )
         var_4 = var_1 + level._id_CC10[var_3] * level._id_CC11[var_3] * var_2;
         var_5 = var_0 - var_4;
         var_5 = ( var_5[0], var_5[1], 0 );
-        var_6 = _func_0257( var_5, var_2 ) * var_2;
+        var_6 = vectordot( var_5, var_2 ) * var_2;
         var_7 = var_5 - var_6;
         var_8 = var_7 + var_6 / level._id_CC13[var_3];
     }

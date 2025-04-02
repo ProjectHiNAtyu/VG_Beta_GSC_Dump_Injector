@@ -48,7 +48,7 @@ _id_8E2A()
 
 _id_FBF1()
 {
-    foreach ( var_1 in level._id_B758 )
+    foreach ( var_1 in level.players )
         var_1 notify( "updateKillStreakMarker" );
 }
 
@@ -127,7 +127,7 @@ _id_D6B3( var_0, var_1, var_2 )
 
 _id_9502( var_0, var_1, var_2, var_3 )
 {
-    self _meth_820B( var_0, var_1, var_2, var_3 );
+    self linkto( var_0, var_1, var_2, var_3 );
 }
 
 _id_D59F( var_0, var_1, var_2, var_3, var_4, var_5 )
@@ -137,8 +137,8 @@ _id_D59F( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_E286( var_0, var_1 )
 {
-    var_2 = _func_0205( var_0, var_1 );
-    var_2 setmode( "tag_origin" );
+    var_2 = spawn( var_0, var_1 );
+    var_2 setmodel( "tag_origin" );
     return var_2;
 }
 
@@ -159,7 +159,7 @@ _id_89BD()
 
 _id_2D15( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
 {
-    return _id_077A::_id_0B4C( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 );
+    return scripts\engine\trace::_bullet_trace( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 );
 }
 
 _id_D478( var_0 )
@@ -172,9 +172,9 @@ _id_9934( var_0, var_1, var_2, var_3, var_4, var_5 )
     return _func_0141( var_0, var_1, var_2, var_5 );
 }
 
-_id_0BF6( var_0 )
+_hasperk( var_0 )
 {
-    if ( _id_077B::_id_85A4( var_0, "specialty_improvedstreaks" ) )
+    if ( scripts\engine\utility::is_equal( var_0, "specialty_improvedstreaks" ) )
         return 0;
 
     return self _meth_81A3( var_0 );
@@ -182,7 +182,7 @@ _id_0BF6( var_0 )
 
 _id_10956()
 {
-    return _id_07B7::_id_10956();
+    return scripts\mp\hostmigration::_id_10956();
 }
 
 _id_5AC1( var_0, var_1 )
@@ -195,14 +195,14 @@ _id_4766( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
         if ( isdefined( var_2 ) )
             var_2._id_82BB = undefined;
     }
 
     var_0 notify( "death" );
-    var_0 _meth_809A();
+    var_0 delete();
     self._id_47C7 = undefined;
 }
 
@@ -283,12 +283,12 @@ _id_9B12( var_0 )
 
 _id_8AA4( var_0, var_1 )
 {
-    var_2 = self._id_045B;
+    var_2 = self.team;
 
     if ( isdefined( var_1 ) )
         var_2 = var_1;
 
-    if ( level._id_EF62 && isdefined( level._id_EF66 ) && level._id_EF66[var_2] || !level._id_EF62 && isdefined( level._id_3D80 ) && level._id_3D80 != self )
+    if ( level.teambased && isdefined( level._id_EF66 ) && level._id_EF66[var_2] || !level.teambased && isdefined( level._id_3D80 ) && level._id_3D80 != self )
     {
         if ( !isdefined( var_0 ) || var_0 )
             self iprintlnbold( &"KILLSTREAKS_COUNTER_RECON_ACTIVE" );
@@ -308,8 +308,8 @@ _id_B757()
 {
     if ( isdefined( self._id_C6FA ) )
     {
-        if ( self._id_045B != "spectator" )
-            self _meth_8362( self._id_C6FA );
+        if ( self.team != "spectator" )
+            self setplayerangles( self._id_C6FA );
 
         self._id_C6FA = undefined;
     }
@@ -347,28 +347,28 @@ _id_D6B9( var_0 )
 
 _id_69E4( var_0, var_1 )
 {
-    var_2 = _id_077B::_id_6D7C( var_0, var_1 );
+    var_2 = scripts\engine\utility::_id_6D7C( var_0, var_1 );
     var_3 = getentarray( var_0, var_1 );
 
     if ( var_3.size > 0 )
-        var_2 = _id_077B::_id_1B72( var_2, var_3 );
+        var_2 = scripts\engine\utility::_id_1B72( var_2, var_3 );
 
     return var_2;
 }
 
 _id_2D16( var_0, var_1, var_2, var_3 )
 {
-    return _id_077A::_id_0B4D( var_0, var_1, var_2, var_3 );
+    return scripts\engine\trace::_id_0B4D( var_0, var_1, var_2, var_3 );
 }
 
-_id_89D3( var_0 )
+isreallyalive( var_0 )
 {
-    return _id_0A74::_id_89D3( var_0 );
+    return scripts\mp\utility\player::isreallyalive( var_0 );
 }
 
 _id_1770( var_0, var_1, var_2 )
 {
-    return _func_025B( ( 0, 0, -1 ) );
+    return vectortoangles( ( 0, 0, -1 ) );
 }
 
 _id_C722( var_0, var_1 )
@@ -393,7 +393,7 @@ _id_6E54( var_0, var_1, var_2 )
 
 _id_5F44( var_0, var_1 )
 {
-    _id_0A74::_id_0BC4( var_0, var_1 );
+    scripts\mp\utility\player::_id_0BC4( var_0, var_1 );
 }
 
 _id_B77A()

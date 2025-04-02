@@ -4,7 +4,7 @@
 _id_7FD4()
 {
     level._id_CBFD = ::_id_9FED;
-    level._id_9BB2 = _func_020F();
+    level._id_9BB2 = spawnstruct();
     level._id_9BB2._id_FE1E = [ 10, 15, 20, 30, 40, 50, 60, 75, 80, 90, 100, 125, 150, 175, 200, 225, 250, 300 ];
     level._id_9BB2._id_8311 = [ "very_low", "low", "medium", "high", "very_high" ];
     level._id_9BB2._id_8310 = [];
@@ -40,7 +40,7 @@ _id_9FED( var_0 )
     var_6 = 77;
     var_7 = getdvar( "#x3e619352055ca1c48" );
     var_8 = getdvar( "#x32ea5e908954bfea7" );
-    var_10 = _id_0A69::_id_6C54();
+    var_10 = scripts\mp\utility\game::_id_6C54();
     var_12 = 1;
     var_13 = var_12 + 3;
     var_14 = 1.0;
@@ -49,7 +49,7 @@ _id_9FED( var_0 )
     if ( isdefined( var_15 ) )
     {
         var_16 = var_13 + var_15;
-        var_17 = stopfxontag( "mp/matchIntensityTable.csv", 0, var_7, var_16 );
+        var_17 = _func_021D( "mp/matchIntensityTable.csv", 0, var_7, var_16 );
 
         if ( isdefined( var_17 ) && var_17 != "" )
             var_14 = float( var_17 );
@@ -80,7 +80,7 @@ _id_9FED( var_0 )
                 break;
         }
 
-        var_19 = _func_01B9( 1, 10 );
+        var_19 = randomintrange( 1, 10 );
 
         if ( var_19 == 10 )
             var_18 = _func_00D6( var_18, 1, 2 );
@@ -98,7 +98,7 @@ _id_9FED( var_0 )
     if ( var_7 == "conf_tdm" )
         var_7 = "conf";
 
-    var_20 = _id_077B::_id_1B83( var_2, var_7 );
+    var_20 = scripts\engine\utility::_id_1B83( var_2, var_7 );
 
     if ( !isdefined( var_20 ) || var_20 < 0 )
         return level._id_CBFC;
@@ -109,15 +109,15 @@ _id_9FED( var_0 )
 
     for ( var_24 = var_5; var_24 <= var_6; var_24++ )
     {
-        var_22 = _func_021E( "mp/matchIntensityValuesTable.csv", var_24, 0 );
+        var_22 = tablelookupbyrow( "mp/matchIntensityValuesTable.csv", var_24, 0 );
 
         if ( var_22 == var_8 )
         {
-            var_25 = _func_021E( "mp/matchIntensityValuesTable.csv", var_24, 1 );
+            var_25 = tablelookupbyrow( "mp/matchIntensityValuesTable.csv", var_24, 1 );
 
             if ( var_25 == var_10 )
             {
-                var_23 = int( _func_021E( "mp/matchIntensityValuesTable.csv", var_24, var_21 ) );
+                var_23 = int( tablelookupbyrow( "mp/matchIntensityValuesTable.csv", var_24, var_21 ) );
                 break;
             }
         }
@@ -126,8 +126,8 @@ _id_9FED( var_0 )
     if ( !isdefined( var_23 ) || var_23 < 0 )
         return level._id_CBFC;
 
-    var_26 = int( _id_077B::_id_1B83( var_3, var_23 ) ) + 1;
-    var_27 = int( stopfxontag( "mp/matchIntensityScoreTable.csv", 0, var_7, var_26 ) );
+    var_26 = int( scripts\engine\utility::_id_1B83( var_3, var_23 ) ) + 1;
+    var_27 = int( _func_021D( "mp/matchIntensityScoreTable.csv", 0, var_7, var_26 ) );
 
     if ( !isdefined( var_27 ) || var_27 < 0 )
         return level._id_CBFC;

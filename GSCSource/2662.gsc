@@ -3,11 +3,11 @@
 
 _id_507C( var_0, var_1, var_2, var_3 )
 {
-    var_0 = "scr_" + level._id_60D1 + "_" + var_0;
+    var_0 = "scr_" + level.gametype + "_" + var_0;
 
     if ( getdvar( var_0 ) == "" )
     {
-        _func_01D0( var_0, var_1 );
+        setdvar( var_0, var_1 );
         return var_1;
     }
 
@@ -20,17 +20,17 @@ _id_507C( var_0, var_1, var_2, var_3 )
     else
         return var_4;
 
-    _func_01D0( var_0, var_4 );
+    setdvar( var_0, var_4 );
     return var_4;
 }
 
 _id_507A( var_0, var_1, var_2, var_3 )
 {
-    var_0 = "scr_" + level._id_60D1 + "_" + var_0;
+    var_0 = "scr_" + level.gametype + "_" + var_0;
 
     if ( getdvar( var_0 ) == "" )
     {
-        _func_01D0( var_0, var_1 );
+        setdvar( var_0, var_1 );
         return var_1;
     }
 
@@ -43,18 +43,18 @@ _id_507A( var_0, var_1, var_2, var_3 )
     else
         return var_4;
 
-    _func_01D0( var_0, var_4 );
+    setdvar( var_0, var_4 );
     return var_4;
 }
 
 _id_C2BD( var_0, var_1 )
 {
-    var_2 = "scr_" + level._id_60D1 + "_" + var_0;
+    var_2 = "scr_" + level.gametype + "_" + var_0;
 
     if ( getdvarint( var_2, -1 ) == -1 )
-        _func_01D0( var_2, var_1 );
+        setdvar( var_2, var_1 );
 
-    level._id_10AD2[var_2] = _func_020F();
+    level._id_10AD2[var_2] = spawnstruct();
     level._id_10AD2[var_2]._id_04A3 = getdvarint( var_2, var_1 );
     level._id_10AD2[var_2]._id_048F = "int";
     level._id_10AD2[var_2]._id_A6A2 = "update_" + var_0;
@@ -62,12 +62,12 @@ _id_C2BD( var_0, var_1 )
 
 _id_C2BC( var_0, var_1 )
 {
-    var_2 = "scr_" + level._id_60D1 + "_" + var_0;
+    var_2 = "scr_" + level.gametype + "_" + var_0;
 
     if ( getdvarfloat( var_2, -1 ) == -1 )
-        _func_01D0( var_2, var_1 );
+        setdvar( var_2, var_1 );
 
-    level._id_10AD2[var_2] = _func_020F();
+    level._id_10AD2[var_2] = spawnstruct();
     level._id_10AD2[var_2]._id_04A3 = getdvarfloat( var_2, var_1 );
     level._id_10AD2[var_2]._id_048F = "float";
     level._id_10AD2[var_2]._id_A6A2 = "update_" + var_0;
@@ -75,12 +75,12 @@ _id_C2BC( var_0, var_1 )
 
 _id_C2BB( var_0, var_1 )
 {
-    var_2 = "scr_" + level._id_60D1 + "_" + var_0;
+    var_2 = "scr_" + level.gametype + "_" + var_0;
 
     if ( getdvar( var_2, "" ) == "" )
-        _func_01D0( var_2, var_1 );
+        setdvar( var_2, var_1 );
 
-    level._id_10AD2[var_2] = _func_020F();
+    level._id_10AD2[var_2] = spawnstruct();
     level._id_10AD2[var_2]._id_04A3 = getdvar( var_2, var_1 );
     level._id_10AD2[var_2]._id_048F = "string";
     level._id_10AD2[var_2]._id_A6A2 = "update_" + var_0;
@@ -88,11 +88,11 @@ _id_C2BB( var_0, var_1 )
 
 _id_D627( var_0, var_1 )
 {
-    var_0 = "scr_" + level._id_60D1 + "_" + var_0;
+    var_0 = "scr_" + level.gametype + "_" + var_0;
     level._id_AD57[var_0] = var_1;
 }
 
-getvehicle( var_0 )
+_id_6E38( var_0 )
 {
     var_0 = _id_6E39( var_0 );
 
@@ -106,7 +106,7 @@ getvehicle( var_0 )
 
 _id_6E39( var_0 )
 {
-    return "scr_" + level._id_60D1 + "_" + var_0;
+    return "scr_" + level.gametype + "_" + var_0;
 }
 
 _id_FD82()

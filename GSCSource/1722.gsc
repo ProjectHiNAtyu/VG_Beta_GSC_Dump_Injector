@@ -18,7 +18,7 @@ _id_86F7( var_0 )
         var_0 = self;
 
     if ( isdefined( var_0._id_00E1 ) )
-        return var_0._id_00E1 == "script_vehicle" && !_func_036F( var_0 _meth_8185() );
+        return var_0._id_00E1 == "script_vehicle" && !isnullweapon( var_0 _meth_8185() );
     else
         return 0;
 }
@@ -30,7 +30,7 @@ _id_2D84( var_0, var_1, var_2 )
     if ( isdefined( var_0._id_CCC5 ) || isdefined( var_0._id_CCC3 ) )
     {
         [var_5, var_6] = _id_2D81( var_0 );
-        var_7 = var_5 + _func_01B6( var_6 );
+        var_7 = var_5 + randomfloat( var_6 );
 
         if ( var_2 > 0 )
             var_3 = var_7 / var_2;
@@ -110,7 +110,7 @@ _id_2D7F( var_0 )
 {
     var_1 = undefined;
 
-    if ( _func_0104( self ) )
+    if ( isai( self ) )
         var_1 = self;
 
     if ( isdefined( var_0 ) && isdefined( var_0._id_CCF0 ) )
@@ -134,7 +134,7 @@ _id_2D80( var_0 )
 {
     var_1 = undefined;
 
-    if ( _func_0104( self ) )
+    if ( isai( self ) )
         var_1 = self;
 
     if ( isdefined( var_0 ) && isdefined( var_0._id_CCF0 ) )
@@ -199,7 +199,7 @@ set_turret_shoot_params()
 
         }
 
-        var_4 = _func_01B7( var_2, var_3 );
+        var_4 = randomfloatrange( var_2, var_3 );
         self._id_0B3E._id_03A9 = int( var_1 * var_4 );
     }
 }
@@ -215,7 +215,7 @@ _id_F876()
 
     for (;;)
     {
-        var_1 = _id_077B::_id_10893( "turretownerchange", "death" );
+        var_1 = scripts\engine\utility::waittill_any_return( "turretownerchange", "death" );
 
         if ( var_1 == "death" )
             return;
@@ -224,20 +224,20 @@ _id_F876()
         var_3 = undefined;
         var_0 = undefined;
 
-        if ( isdefined( var_2 ) && _func_0117( var_2 ) && !_func_0107( var_2 ) )
+        if ( isdefined( var_2 ) && isplayer( var_2 ) && !isbot( var_2 ) )
         {
-            var_2 giveweapon( self._id_04D5 );
+            var_2 giveweapon( self.weaponinfo );
             var_3 = var_2 getcurrentweapon();
             var_0 = self _meth_8185();
-            var_2 switchtoweapon( var_0 );
+            var_2 switchtoweaponimmediate( var_0 );
         }
 
-        var_1 = _id_077B::_id_10893( "turretownerchange", "death" );
+        var_1 = scripts\engine\utility::waittill_any_return( "turretownerchange", "death" );
 
-        if ( isdefined( var_2 ) && _func_0117( var_2 ) && !_func_0107( var_2 ) )
+        if ( isdefined( var_2 ) && isplayer( var_2 ) && !isbot( var_2 ) )
         {
-            var_2 switchtoweapon( var_3 );
-            var_2 takeallweapons( var_0 );
+            var_2 switchtoweaponimmediate( var_3 );
+            var_2 takeweapon( var_0 );
         }
 
         if ( var_1 == "death" )
@@ -264,15 +264,15 @@ _id_F865()
 {
     var_0 = "turret";
 
-    if ( _id_06BB::_id_8703( var_0 ) )
+    if ( scripts\common\utility::_id_8703( var_0 ) )
     {
         if ( !isdefined( self._id_10D1D[var_0] ) )
         {
-            self._id_10D1D[var_0] = _func_020F();
-            self._id_10D1D[var_0]._id_9E98 = _id_06BB::_id_6838( var_0, 2 );
-            self._id_10D1D[var_0]._id_9C42 = _id_06BB::_id_6838( var_0, 3 );
-            self._id_10D1D[var_0].minpercentcliptofire = _id_06BB::_id_6838( var_0, 10 );
-            self._id_10D1D[var_0].maxpercentcliptofire = _id_06BB::_id_6838( var_0, 11 );
+            self._id_10D1D[var_0] = spawnstruct();
+            self._id_10D1D[var_0]._id_9E98 = scripts\common\utility::_id_6838( var_0, 2 );
+            self._id_10D1D[var_0]._id_9C42 = scripts\common\utility::_id_6838( var_0, 3 );
+            self._id_10D1D[var_0].minpercentcliptofire = scripts\common\utility::_id_6838( var_0, 10 );
+            self._id_10D1D[var_0].maxpercentcliptofire = scripts\common\utility::_id_6838( var_0, 11 );
         }
     }
 }
@@ -302,7 +302,7 @@ play_paired_turret_anim_if_needed( var_0, var_1, var_2 )
     if ( isdefined( var_3 ) )
     {
         var_2 _meth_8845( 1 );
-        var_2 _meth_841D( #animtree );
+        var_2 useanimtree( #animtree );
         var_4 = _func_0079( var_3 );
         var_2 _meth_82E4( var_3, 1.0, 0.05 );
         wait( var_4 );

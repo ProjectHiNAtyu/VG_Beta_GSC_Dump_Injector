@@ -6,19 +6,19 @@ _id_69FF()
     var_0 = undefined;
     var_1 = 400;
 
-    if ( _id_077B::_id_0F4F() )
+    if ( scripts\engine\utility::_id_0F4F() )
         var_1 = 1024;
     else if ( isdefined( self._id_763B ) )
         var_1 = 4096;
 
-    if ( isdefined( self._id_02CD ) && distancesquared( self._id_02EA, self._id_02CD._id_02EA ) < var_1 )
+    if ( isdefined( self._id_02CD ) && distancesquared( self.origin, self._id_02CD.origin ) < var_1 )
         var_0 = self._id_02CD;
-    else if ( isdefined( self._id_0321 ) && distancesquared( self._id_02EA, self._id_0321._id_02EA ) < var_1 )
+    else if ( isdefined( self._id_0321 ) && distancesquared( self.origin, self._id_0321.origin ) < var_1 )
         var_0 = self._id_0321;
 
-    if ( isdefined( self._id_763B ) && !_id_077B::_id_0F4F() )
+    if ( isdefined( self._id_763B ) && !scripts\engine\utility::_id_0F4F() )
     {
-        if ( isdefined( var_0 ) && _func_0438( self._id_0054[1] - var_0._id_0054[1] ) > 30 )
+        if ( isdefined( var_0 ) && _func_0438( self.angles[1] - var_0.angles[1] ) > 30 )
             return undefined;
     }
 

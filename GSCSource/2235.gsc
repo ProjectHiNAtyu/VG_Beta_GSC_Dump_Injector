@@ -11,7 +11,7 @@ _id_4C9C( var_0 )
     self._id_0286 = 384;
     self._id_9D5D = 1;
 
-    if ( _id_06BB::_id_8A2C() )
+    if ( scripts\common\utility::_id_8A2C() )
         self._id_F99D = 250000;
 
     self._id_9D82 = 9216;
@@ -44,7 +44,7 @@ listenforunreachablegoalandbadpath()
 
     for (;;)
     {
-        _id_077B::_id_108B2( "unreachable_goal", "bad_path" );
+        scripts\engine\utility::_id_108B2( "unreachable_goal", "bad_path" );
         setcantreachtargettime();
     }
 }
@@ -62,17 +62,17 @@ monitornearplayers()
 
     for (;;)
     {
-        var_0 = _id_06BB::_id_B7A3( self._id_02EA, 100 );
+        var_0 = scripts\common\utility::_id_B7A3( self.origin, 100 );
 
         foreach ( var_2 in var_0 )
         {
-            if ( !_func_010D( var_2._id_045B, self._id_045B ) )
+            if ( !_func_010D( var_2.team, self.team ) )
                 continue;
 
-            var_3 = self._id_02EA - var_2._id_02EA;
+            var_3 = self.origin - var_2.origin;
             var_3 = ( var_3[0], var_3[1], 0 );
 
-            if ( _func_0257( var_3, anglestoforward( var_2._id_0054 ) ) > 0 )
+            if ( vectordot( var_3, anglestoforward( var_2.angles ) ) > 0 )
                 var_2 thread extendmeleeheightfortime( 40, 0.1 );
         }
 
@@ -97,13 +97,13 @@ _id_3172( var_0, var_1 )
 
 _id_FC54( var_0 )
 {
-    if ( !isai( self ) )
+    if ( !isalive( self ) )
         return anim._id_58C3;
 
     if ( !isdefined( self._id_017D ) )
         self._id_5E5C = 0;
 
-    var_1 = _id_077B::_id_85A4( self._id_014A, "sprint" ) || isdefined( self._id_017D );
+    var_1 = scripts\engine\utility::is_equal( self._id_014A, "sprint" ) || isdefined( self._id_017D );
 
     if ( var_1 )
         var_2 = "run";
@@ -128,19 +128,19 @@ _id_FC54( var_0 )
 
 _id_FC5A( var_0 )
 {
-    var_1 = level._id_030F;
+    var_1 = level.player;
 
     switch ( self._id_03E1._id_2C30 )
     {
         case 0:
-            var_2 = distancesquared( var_1._id_02EA, self._id_02EA );
+            var_2 = distancesquared( var_1.origin, self.origin );
 
             if ( var_2 < self._id_DE2A )
                 _id_D6E6( "investigate" );
 
             break;
         case 1:
-            var_2 = distancesquared( var_1._id_02EA, self._id_02EA );
+            var_2 = distancesquared( var_1.origin, self.origin );
 
             if ( var_2 > self._id_DE29 )
             {
@@ -178,7 +178,7 @@ _id_4C99()
     self _meth_8078();
     _id_0883::_id_D393( "hidden" );
 
-    foreach ( var_1 in level._id_B758 )
+    foreach ( var_1 in level.players )
     {
         if ( !isdefined( var_1._id_03E1 ) )
             continue;
@@ -195,7 +195,7 @@ _id_4C99()
     if ( isdefined( self._id_03E1._id_6016["hidden"] ) )
         _id_087F::_id_E79A( "hidden" );
 
-    if ( isdefined( self._id_0457 ) )
+    if ( isdefined( self.target ) )
     {
         self._id_01E8 = 32;
 
@@ -206,14 +206,14 @@ _id_4C99()
 
 _id_4C9A( var_0 )
 {
-    self._id_2C38._id_82E3[var_0] = _func_020F();
+    self._id_2C38._id_82E3[var_0] = spawnstruct();
     self._id_03E1._id_24D7 = 0;
 }
 
 _id_4C98( var_0 )
 {
     var_1 = self._id_2C38._id_82E3[var_0];
-    var_2 = level._id_030F;
+    var_2 = level.player;
     var_3 = self _meth_8514( var_2 );
     var_4 = 0.25;
 
@@ -255,15 +255,15 @@ _id_4C9B( var_0 )
 
 _id_4C9E( var_0 )
 {
-    self._id_2C38._id_82E3[var_0] = _func_020F();
+    self._id_2C38._id_82E3[var_0] = spawnstruct();
     self._id_03E1._id_23F6 = 0;
     self._id_03E1._id_24CB = 0;
 }
 
 _id_4C9D( var_0 )
 {
-    var_1 = level._id_030F;
-    var_2 = distancesquared( self._id_02EA, var_1._id_02EA );
+    var_1 = level.player;
+    var_2 = distancesquared( self.origin, var_1.origin );
 
     if ( var_2 < self._id_2245 )
     {
@@ -277,9 +277,9 @@ _id_4C9D( var_0 )
     }
 
     if ( self._id_03E1._id_23F6 || self._id_03E1._id_24CB )
-        self._id_0B3E._id_0457 = var_1;
+        self._id_0B3E.target = var_1;
     else
-        self._id_0B3E._id_0457 = undefined;
+        self._id_0B3E.target = undefined;
 
     self._id_0B3E._id_02B7 = "run";
     return anim._id_CA52;
@@ -290,7 +290,7 @@ _id_4C9F( var_0 )
     self._id_2C38._id_82E3[var_0] = undefined;
     self._id_03E1._id_23F6 = undefined;
     self._id_03E1._id_24CB = undefined;
-    self._id_0B3E._id_0457 = undefined;
+    self._id_0B3E.target = undefined;
 }
 
 _id_8911( var_0, var_1 )
@@ -303,7 +303,7 @@ _id_8911( var_0, var_1 )
 
 _id_4C96( var_0 )
 {
-    var_1 = _func_020F();
+    var_1 = spawnstruct();
     var_1._id_A4D2 = 0;
     self._id_2C38._id_82E3[var_0] = var_1;
 }
@@ -319,10 +319,10 @@ _id_4C95( var_0 )
         if ( isdefined( self._id_01A8 ) )
         {
             var_1 = self._id_01A8;
-            var_3 = distancesquared( self._id_02F2._id_02EA, self._id_01A8._id_02EA ) < self._id_AD8C || distancesquared( self._id_02EA, self._id_01A8._id_02EA ) < self._id_4CA6;
+            var_3 = distancesquared( self.owner.origin, self._id_01A8.origin ) < self._id_AD8C || distancesquared( self.origin, self._id_01A8.origin ) < self._id_4CA6;
         }
         else
-            var_3 = distancesquared( self._id_02EA, var_1._id_02EA ) < self._id_1DCF;
+            var_3 = distancesquared( self.origin, var_1.origin ) < self._id_1DCF;
 
         if ( isdefined( self._id_31D5 ) && gettime() - self._id_31D5 < 300 && isdefined( self.usedtarget ) && self.usedtarget == var_1 )
         {
@@ -339,7 +339,7 @@ _id_4C95( var_0 )
         if ( var_5 >= var_4._id_A4D2 && !istrue( self._id_4D87 ) )
         {
             var_4._id_A4D2 = var_5 + 500;
-            var_6 = var_1._id_02EA - self._id_02EA;
+            var_6 = var_1.origin - self.origin;
             var_7 = _func_0133( var_6 );
 
             if ( var_7 <= 36864 )
@@ -364,7 +364,7 @@ _id_4C95( var_0 )
                     if ( gettime() - self._id_31D5 > 300 )
                     {
                         var_10 = _id_06B7::_id_68C8( var_1 );
-                        var_11 = _id_06B7::_id_3183( self._id_02EA, var_10 );
+                        var_11 = _id_06B7::_id_3183( self.origin, var_10 );
 
                         if ( var_11._id_3182 )
                         {
@@ -379,13 +379,13 @@ _id_4C95( var_0 )
                 if ( var_9 )
                 {
                     self _meth_84BF( 1 );
-                    self _meth_8325( self._id_02EA );
+                    self _meth_8325( self.origin );
                 }
                 else
                 {
                     var_10 = _id_06B7::_id_68C8( var_1 );
 
-                    if ( _id_06BB::_id_8A2C() )
+                    if ( scripts\common\utility::_id_8A2C() )
                         var_10 = self _meth_86F5( var_10 );
 
                     self _meth_84BB( 1, var_10 );

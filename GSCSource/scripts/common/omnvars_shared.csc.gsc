@@ -12,8 +12,8 @@ callbackomnvarschanged( var_0, var_1, var_2 )
     {
         var_4 = var_3[var_5];
 
-        if ( isdefined( level.omnvarcallbacks[var_4._id_02BA] ) )
-            omnvarchanged( var_0, var_4._id_02BA, var_4._id_0320, var_4._id_011F, var_4._id_046D, var_2 );
+        if ( isdefined( level.omnvarcallbacks[var_4.name] ) )
+            omnvarchanged( var_0, var_4.name, var_4._id_0320, var_4._id_011F, var_4._id_046D, var_2 );
     }
 
     __asm_var_clear( 2 )

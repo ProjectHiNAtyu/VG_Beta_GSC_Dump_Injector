@@ -3,9 +3,9 @@
 
 _id_BD0B( var_0, var_1 )
 {
-    foreach ( var_3 in level._id_B758 )
+    foreach ( var_3 in level.players )
     {
-        if ( var_3._id_045B != var_1 )
+        if ( var_3.team != var_1 )
             continue;
 
         var_3 iprintln( var_0 );
@@ -14,46 +14,46 @@ _id_BD0B( var_0, var_1 )
 
 _id_BD01( var_0, var_1 )
 {
-    for ( var_2 = 0; var_2 < level._id_B758.size; var_2++ )
+    for ( var_2 = 0; var_2 < level.players.size; var_2++ )
     {
-        var_3 = level._id_B758[var_2];
+        var_3 = level.players[var_2];
 
-        if ( isdefined( var_3._id_0309["team"] ) && var_3._id_0309["team"] == var_1 )
+        if ( isdefined( var_3.pers["team"] ) && var_3.pers["team"] == var_1 )
             var_3 iprintlnbold( var_0 );
     }
 }
 
 _id_BD02( var_0, var_1, var_2 )
 {
-    for ( var_3 = 0; var_3 < level._id_B758.size; var_3++ )
+    for ( var_3 = 0; var_3 < level.players.size; var_3++ )
     {
-        var_4 = level._id_B758[var_3];
+        var_4 = level.players[var_3];
 
-        if ( isdefined( var_4._id_0309["team"] ) && var_4._id_0309["team"] == var_1 )
+        if ( isdefined( var_4.pers["team"] ) && var_4.pers["team"] == var_1 )
             var_4 iprintlnbold( var_0, var_2 );
     }
 }
 
 _id_BD0C( var_0, var_1, var_2 )
 {
-    for ( var_3 = 0; var_3 < level._id_B758.size; var_3++ )
+    for ( var_3 = 0; var_3 < level.players.size; var_3++ )
     {
-        var_4 = level._id_B758[var_3];
+        var_4 = level.players[var_3];
 
-        if ( isdefined( var_4._id_0309["team"] ) && var_4._id_0309["team"] == var_1 )
+        if ( isdefined( var_4.pers["team"] ) && var_4.pers["team"] == var_1 )
             var_4 iprintln( var_0, var_2 );
     }
 }
 
 _id_BD0A( var_0, var_1 )
 {
-    var_2 = level._id_B758;
+    var_2 = level.players;
 
     for ( var_3 = 0; var_3 < var_2.size; var_3++ )
     {
         if ( isdefined( var_1 ) )
         {
-            if ( isdefined( var_2[var_3]._id_0309["team"] ) && var_2[var_3]._id_0309["team"] == var_1 )
+            if ( isdefined( var_2[var_3].pers["team"] ) && var_2[var_3].pers["team"] == var_1 )
                 var_2[var_3] iprintln( var_0 );
 
             continue;
@@ -73,10 +73,10 @@ _id_BCFE( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
     if ( level._id_E427 || !var_7 )
     {
-        for ( var_9 = 0; var_9 < level._id_B758.size; var_9++ )
+        for ( var_9 = 0; var_9 < level.players.size; var_9++ )
         {
-            var_10 = level._id_B758[var_9];
-            var_11 = var_10._id_045B;
+            var_10 = level.players[var_9];
+            var_11 = var_10.team;
 
             if ( isdefined( var_11 ) )
             {
@@ -92,14 +92,14 @@ _id_BCFE( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
         }
 
         if ( var_7 )
-            level._id_B758[0] _meth_8275( var_4 );
+            level.players[0] playlocalsound( var_4 );
     }
     else if ( var_8 )
     {
-        for ( var_9 = 0; var_9 < level._id_B758.size; var_9++ )
+        for ( var_9 = 0; var_9 < level.players.size; var_9++ )
         {
-            var_10 = level._id_B758[var_9];
-            var_11 = var_10._id_045B;
+            var_10 = level.players[var_9];
+            var_11 = var_10.team;
 
             if ( isdefined( var_11 ) )
             {
@@ -108,7 +108,7 @@ _id_BCFE( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
                     if ( isdefined( var_2 ) )
                         var_10 iprintln( var_2, var_6 );
 
-                    var_10 _meth_8275( var_4 );
+                    var_10 playlocalsound( var_4 );
                     continue;
                 }
 
@@ -117,17 +117,17 @@ _id_BCFE( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
                     if ( isdefined( var_3 ) )
                         var_10 iprintln( var_3, var_6 );
 
-                    var_10 _meth_8275( var_5 );
+                    var_10 playlocalsound( var_5 );
                 }
             }
         }
     }
     else
     {
-        for ( var_9 = 0; var_9 < level._id_B758.size; var_9++ )
+        for ( var_9 = 0; var_9 < level.players.size; var_9++ )
         {
-            var_10 = level._id_B758[var_9];
-            var_11 = var_10._id_045B;
+            var_10 = level.players[var_9];
+            var_11 = var_10.team;
 
             if ( isdefined( var_11 ) )
             {
@@ -136,7 +136,7 @@ _id_BCFE( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
                     if ( isdefined( var_2 ) )
                         var_10 iprintln( var_2, var_6 );
 
-                    var_10 _meth_8275( var_4 );
+                    var_10 playlocalsound( var_4 );
                     continue;
                 }
 
@@ -152,9 +152,9 @@ _id_BCFE( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
 _id_BD00( var_0, var_1, var_2 )
 {
-    foreach ( var_4 in level._id_B758 )
+    foreach ( var_4 in level.players )
     {
-        if ( var_4._id_045B != var_0 )
+        if ( var_4.team != var_0 )
             continue;
 
         var_4 _id_BCFF( var_1, var_2 );
@@ -164,7 +164,7 @@ _id_BD00( var_0, var_1, var_2 )
 _id_BCFF( var_0, var_1 )
 {
     self iprintln( var_0 );
-    self _meth_8275( var_1 );
+    self playlocalsound( var_1 );
 }
 
 _id_BD07( var_0, var_1 )
@@ -175,15 +175,15 @@ _id_BD07( var_0, var_1 )
     var_2 = "";
 
     if ( isdefined( var_1 ) )
-        var_2 = "[" + var_1 getentitynumber() + ":" + var_1._id_02BA + "] ";
+        var_2 = "[" + var_1 getentitynumber() + ":" + var_1.name + "] ";
 }
 
 _id_EF78( var_0, var_1, var_2 )
 {
-    if ( !_id_0A7C::_id_6DAC( var_1, "teamCount" ) )
+    if ( !scripts\mp\utility\teams::_id_6DAC( var_1, "teamCount" ) )
         return;
 
-    foreach ( var_4 in _id_0A7C::_id_6DAC( var_1, "players" ) )
+    foreach ( var_4 in scripts\mp\utility\teams::_id_6DAC( var_1, "players" ) )
         var_4 thread _id_F8CD( var_0, var_2 );
 }
 
@@ -214,8 +214,8 @@ _id_6A36()
     else
         var_4 = "" + var_1;
 
-    var_5 = _id_077B::_id_F07F( var_2 < 10, "0" + var_2, "" + var_2 );
-    var_6 = _id_077B::_id_F07F( var_3 < 10, "0" + var_3, "" + var_3 );
+    var_5 = scripts\engine\utility::ter_op( var_2 < 10, "0" + var_2, "" + var_2 );
+    var_6 = scripts\engine\utility::ter_op( var_3 < 10, "0" + var_3, "" + var_3 );
     var_7 = undefined;
 
     if ( var_0 < 10 )

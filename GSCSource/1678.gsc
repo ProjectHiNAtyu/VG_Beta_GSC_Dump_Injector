@@ -9,14 +9,14 @@ _id_4033()
     if ( !isdefined( level._id_E47D ) )
         level._id_E47D = 2;
 
-    _func_01D1( "#x37910bb2efd41be7b", "0" );
+    setdvarifuninitialized( "#x37910bb2efd41be7b", "0" );
 
     if ( !isdefined( level._id_E4A5 ) )
         level._id_E4A5 = [];
 
     var_0 = _id_6B5A();
     var_1 = gettime();
-    level._id_E4A5[var_0] = _func_020F();
+    level._id_E4A5[var_0] = spawnstruct();
     level._id_E4A5[var_0]._id_9D9E = [];
     level._id_E4A5[var_0]._id_9123 = [];
     level._id_E4A5[var_0]._id_CFD6 = [];
@@ -43,7 +43,7 @@ _id_1147( var_0, var_1 )
     level._id_E4A5[var_0]._id_9D9E[var_2] = var_1;
     var_1._id_03D6 = var_0;
     var_1 thread _id_E4A4( var_1._id_03D6 );
-    var_1 _id_077B::_id_D16D( 1 );
+    var_1 scripts\engine\utility::_id_D16D( 1 );
     var_1._id_03D5 = 0;
 
     if ( var_2 != 0 )
@@ -100,7 +100,7 @@ _id_1BA5( var_0, var_1 )
 
     foreach ( var_4 in var_0 )
     {
-        if ( !isai( var_4 ) )
+        if ( !isalive( var_4 ) )
             continue;
 
         if ( var_4 == var_1 )
@@ -148,8 +148,8 @@ _id_E486( var_0, var_1 )
 {
     var_2 = level._id_E4A5[var_0]._id_9D9E[var_1];
     level._id_E4A5[var_0]._id_9119 = var_2;
-    level._id_E4A5[var_0]._id_9123 = _id_077B::_id_1B96( level._id_E4A5[var_0]._id_9123, var_2 );
-    level._id_E4A5[var_0]._id_CFD6 = _id_077B::_id_1B96( level._id_E4A5[var_0]._id_CFD6, var_2 );
+    level._id_E4A5[var_0]._id_9123 = scripts\engine\utility::array_remove( level._id_E4A5[var_0]._id_9123, var_2 );
+    level._id_E4A5[var_0]._id_CFD6 = scripts\engine\utility::array_remove( level._id_E4A5[var_0]._id_CFD6, var_2 );
     var_2 _id_E483();
 
     foreach ( var_4 in level._id_E4A5[var_0]._id_9D9E )
@@ -186,7 +186,7 @@ _id_D6DD( var_0, var_1, var_2 )
         var_4._id_1CF0 = var_1;
         var_4._id_01E8 = var_2;
         var_4 _meth_8325( var_1 );
-        var_4 _id_077B::_id_D16D( 1 );
+        var_4 scripts\engine\utility::_id_D16D( 1 );
     }
 }
 
@@ -245,13 +245,13 @@ _id_5AD7( var_0, var_1 )
         if ( var_6.size >= level._id_E47F )
             continue;
 
-        if ( !isai( var_6[0] ) )
+        if ( !isalive( var_6[0] ) )
             continue;
 
-        if ( var_6[0]._id_045B != self._id_045B )
+        if ( var_6[0].team != self.team )
             continue;
 
-        var_7 = distancesquared( var_6[0]._id_02EA, self._id_02EA );
+        var_7 = distancesquared( var_6[0].origin, self.origin );
 
         if ( var_1 )
         {
@@ -286,7 +286,7 @@ _id_E4A4( var_0 )
 
     if ( !isdefined( self ) )
     {
-        level._id_E4A5[var_0]._id_9D9E = _id_077B::_id_1BA9( level._id_E4A5[var_0]._id_9D9E );
+        level._id_E4A5[var_0]._id_9D9E = scripts\engine\utility::_id_1BA9( level._id_E4A5[var_0]._id_9D9E );
 
         if ( level._id_E4A5[var_0]._id_9D9E.size == 0 )
             level._id_E4A5[var_0] = undefined;

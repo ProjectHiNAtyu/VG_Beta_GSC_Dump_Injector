@@ -17,13 +17,13 @@ processenqueuednotifications()
 
     for (;;)
     {
-        if ( !isdefined( game["codcasterEncodedNotificationQueue"] ) || !isalive( game["codcasterEncodedNotificationQueue"] ) )
+        if ( !isdefined( game["codcasterEncodedNotificationQueue"] ) || !_func_0106( game["codcasterEncodedNotificationQueue"] ) )
             game["codcasterEncodedNotificationQueue"] = [];
 
         while ( game["codcasterEncodedNotificationQueue"].size > 0 )
         {
             setcodcasternotificationomnvar( game["codcasterEncodedNotificationQueue"][0] );
-            game["codcasterEncodedNotificationQueue"] = _id_077B::_id_1B9C( game["codcasterEncodedNotificationQueue"], 0, 0 );
+            game["codcasterEncodedNotificationQueue"] = scripts\engine\utility::array_remove_index( game["codcasterEncodedNotificationQueue"], 0, 0 );
             waitframe();
         }
 
@@ -33,13 +33,13 @@ processenqueuednotifications()
 
 enqueuenotification( var_0 )
 {
-    game["codcasterEncodedNotificationQueue"] = _id_077B::_id_1B65( game["codcasterEncodedNotificationQueue"], var_0 );
+    game["codcasterEncodedNotificationQueue"] = scripts\engine\utility::_id_1B65( game["codcasterEncodedNotificationQueue"], var_0 );
 }
 
 setcodcasternotificationomnvar( var_0 )
 {
     if ( isdefined( var_0 ) )
-        _func_01E4( "ui_codcaster_notification", var_0 );
+        setomnvar( "ui_codcaster_notification", var_0 );
 }
 
 encodenotification( var_0, var_1, var_2 )
@@ -54,7 +54,7 @@ encodenotification( var_0, var_1, var_2 )
         if ( _func_02B2( var_2 ) )
             var_3 = var_3 + var_2 * 100 * 100;
         else
-            _id_077B::_id_5578( "codcaster notification extra data supports numbers only. Invalid extra data: " + var_2 );
+            scripts\engine\utility::_id_5578( "codcaster notification extra data supports numbers only. Invalid extra data: " + var_2 );
     }
 
     return var_3;

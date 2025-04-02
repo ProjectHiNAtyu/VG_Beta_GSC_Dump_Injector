@@ -6,7 +6,7 @@ _id_AFE7()
     return level._id_159F;
 }
 
-_id_0BF6( var_0 )
+_hasperk( var_0 )
 {
     return isdefined( self._id_AFE4 ) && isdefined( self._id_AFE4[var_0] );
 }
@@ -22,7 +22,7 @@ _id_C61C()
     _id_0A43::_id_AFD1();
 }
 
-_id_C4EF( var_0 )
+removeperk( var_0 )
 {
     if ( istrue( level._id_609B ) )
         return;
@@ -38,7 +38,7 @@ _id_2577( var_0 )
     else
         self._id_AFE5[var_0]++;
 
-    if ( self._id_AFE5[var_0] == 1 && _id_0BF6( var_0 ) )
+    if ( self._id_AFE5[var_0] == 1 && _hasperk( var_0 ) )
     {
         _id_0A44::_id_0D79( var_0 );
 
@@ -71,7 +71,7 @@ _id_F931( var_0 )
     {
         self._id_AFE5[var_0] = undefined;
 
-        if ( _id_0BF6( var_0 ) )
+        if ( _hasperk( var_0 ) )
         {
             _id_0A44::_id_0CC4( var_0 );
 

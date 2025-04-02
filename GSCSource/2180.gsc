@@ -138,10 +138,10 @@ _id_5684()
 
     for (;;)
     {
-        _id_077B::_id_5456( "stealth_enabled" );
+        scripts\engine\utility::_id_5456( "stealth_enabled" );
         self waittill( "ai_events", var_0 );
 
-        if ( !_id_077B::_id_544E( "stealth_enabled" ) )
+        if ( !scripts\engine\utility::_id_544E( "stealth_enabled" ) )
             continue;
 
         if ( self._id_020F || self _meth_81DE() )
@@ -152,7 +152,7 @@ _id_5684()
             if ( !isdefined( var_2._id_0186 ) )
                 continue;
 
-            if ( _func_011C( var_2._id_0186 ) && ( var_2._id_0186._id_0213 || var_2._id_0186.name ) )
+            if ( _func_011C( var_2._id_0186 ) && ( var_2._id_0186._id_0213 || var_2._id_0186._id_02DA ) )
                 continue;
 
             if ( isdefined( var_2._id_0186._id_ADA1 ) )
@@ -211,7 +211,7 @@ _id_5684()
 
 _id_54DE( var_0 )
 {
-    switch ( var_0._id_00DE )
+    switch ( var_0.classname )
     {
         case "script_vehicle_blackhornet":
             return 1;
@@ -223,29 +223,29 @@ _id_54DE( var_0 )
 _id_566C( var_0, var_1, var_2, var_3, var_4 )
 {
     var_5 = _func_0074( "bad_guys", "all" );
-    var_6 = spawnstruct( var_3 );
-    var_7 = spawnstruct( var_4 );
-    var_8 = self._id_045B;
+    var_6 = _func_0214( var_3 );
+    var_7 = _func_0214( var_4 );
+    var_8 = self.team;
 
     if ( !isdefined( var_8 ) )
         var_8 = self._id_002E;
 
     foreach ( var_10 in var_5 )
     {
-        if ( !isai( var_10 ) )
+        if ( !isalive( var_10 ) )
             continue;
 
         if ( var_10 == self )
             continue;
 
-        if ( var_10._id_045B != var_8 )
+        if ( var_10.team != var_8 )
             continue;
 
         if ( !isdefined( var_10._id_03E1 ) )
             continue;
 
         var_11 = 0;
-        var_12 = distancesquared( var_10._id_02EA, self._id_02EA );
+        var_12 = distancesquared( var_10.origin, self.origin );
 
         if ( var_12 <= var_6 )
             var_11 = self _meth_8618( var_10 );
@@ -267,15 +267,15 @@ _id_566C( var_0, var_1, var_2, var_3, var_4 )
         if ( var_11 )
         {
             if ( var_10 _meth_8204( var_2 ) == 0 )
-                var_10 _meth_8522( var_0, var_2, self._id_02EA );
+                var_10 _meth_8522( var_0, var_2, self.origin );
             else
-                var_10 _meth_8522( var_0, var_2, var_2._id_02EA );
+                var_10 _meth_8522( var_0, var_2, var_2.origin );
 
             continue;
         }
 
         if ( var_10 _meth_861F( self ) )
-            var_10 _meth_8522( var_1, var_2, self._id_02EA );
+            var_10 _meth_8522( var_1, var_2, self.origin );
     }
 }
 
@@ -284,19 +284,19 @@ _id_5670( var_0, var_1, var_2, var_3 )
     var_4 = _func_0074( "bad_guys" );
 
     if ( !isdefined( var_3 ) )
-        var_3 = level._id_030F;
+        var_3 = level.player;
 
-    var_5 = spawnstruct( var_2 );
+    var_5 = _func_0214( var_2 );
 
     foreach ( var_7 in var_4 )
     {
-        if ( !isai( var_7 ) )
+        if ( !isalive( var_7 ) )
             continue;
 
         if ( !isdefined( var_7._id_03E1 ) )
             continue;
 
-        if ( distancesquared( var_7._id_02EA, var_1 ) <= var_5 )
+        if ( distancesquared( var_7.origin, var_1 ) <= var_5 )
             var_7 _meth_8522( var_0, var_3, var_1 );
     }
 }
@@ -319,13 +319,13 @@ _id_566F( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
     foreach ( var_11 in var_7 )
     {
-        if ( !isai( var_11 ) )
+        if ( !isalive( var_11 ) )
             continue;
 
         if ( !isdefined( var_11._id_03E1 ) )
             continue;
 
-        var_12 = distancesquared( var_11._id_02EA, var_2 );
+        var_12 = distancesquared( var_11.origin, var_2 );
 
         if ( var_12 > var_8 )
             continue;
@@ -363,13 +363,13 @@ _id_566E( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
     foreach ( var_12 in var_7 )
     {
-        if ( !isai( var_12 ) )
+        if ( !isalive( var_12 ) )
             continue;
 
         if ( !isdefined( var_12._id_03E1 ) )
             continue;
 
-        var_13 = distancesquared( var_12._id_02EA, var_2 );
+        var_13 = distancesquared( var_12.origin, var_2 );
 
         if ( var_13 > var_8 )
             continue;

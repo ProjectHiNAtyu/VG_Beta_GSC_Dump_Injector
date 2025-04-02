@@ -47,7 +47,7 @@ changesecondaryblankets( var_0 )
         foreach ( var_4 in var_1 )
         {
             if ( isdefined( var_4 ) )
-                var_4 _meth_83C3();
+                var_4 show();
         }
 
         var_2 hide();
@@ -60,6 +60,6 @@ changesecondaryblankets( var_0 )
                 var_4 hide();
         }
 
-        var_2 _meth_83C3();
+        var_2 show();
     }
 }

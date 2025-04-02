@@ -9,67 +9,67 @@ _id_D8B7()
     if ( !isdefined( self._id_0375 ) )
         return;
 
-    self._id_027F = 500;
-    self._id_7617 = self._id_027F;
+    self.maxhealth = 500;
+    self._id_7617 = self.maxhealth;
     self._id_505C = 1.0;
     self._id_9191 = 32;
-    self._id_0201 = 32;
+    self.height = 32;
 
     switch ( self._id_0375 )
     {
         case "dest32x120a":
-            self._id_109B9 = self._id_02EA + anglestoright( self._id_0054 ) * self._id_9191 * 1.8 + anglestoup( self._id_0054 ) * self._id_0201;
+            self._id_109B9 = self.origin + anglestoright( self.angles ) * self._id_9191 * 1.8 + anglestoup( self.angles ) * self.height;
             break;
         case "dest32x120b":
-            self._id_109B9 = self._id_02EA + anglestoright( self._id_0054 ) * self._id_9191 + anglestoup( self._id_0054 ) * self._id_0201;
+            self._id_109B9 = self.origin + anglestoright( self.angles ) * self._id_9191 + anglestoup( self.angles ) * self.height;
             break;
         case "dest32x120c":
-            self._id_109B9 = self._id_02EA + anglestoup( self._id_0054 ) * self._id_0201;
+            self._id_109B9 = self.origin + anglestoup( self.angles ) * self.height;
             break;
         case "dest32x120d":
-            self._id_109B9 = self._id_02EA + _func_0301( self._id_0054 ) * self._id_9191 * 0.8 + anglestoup( self._id_0054 ) * self._id_0201;
+            self._id_109B9 = self.origin + anglestoleft( self.angles ) * self._id_9191 * 0.8 + anglestoup( self.angles ) * self.height;
             break;
         case "dest32x120a2":
-            self._id_0201 = 75;
-            self._id_109B9 = self._id_02EA + anglestoright( self._id_0054 ) * self._id_9191 * 1.8 + anglestoup( self._id_0054 ) * self._id_0201;
+            self.height = 75;
+            self._id_109B9 = self.origin + anglestoright( self.angles ) * self._id_9191 * 1.8 + anglestoup( self.angles ) * self.height;
             break;
         case "dest32x120b2":
-            self._id_0201 = 75;
-            self._id_109B9 = self._id_02EA + anglestoright( self._id_0054 ) * self._id_9191 + anglestoup( self._id_0054 ) * self._id_0201;
+            self.height = 75;
+            self._id_109B9 = self.origin + anglestoright( self.angles ) * self._id_9191 + anglestoup( self.angles ) * self.height;
             break;
         case "dest32x120c2":
-            self._id_0201 = 64;
-            self._id_109B9 = self._id_02EA + anglestoup( self._id_0054 ) * self._id_0201;
+            self.height = 64;
+            self._id_109B9 = self.origin + anglestoup( self.angles ) * self.height;
             break;
         case "dest32x120d2":
-            self._id_0201 = 75;
-            self._id_109B9 = self._id_02EA + _func_0301( self._id_0054 ) * self._id_9191 * 0.8 + anglestoup( self._id_0054 ) * self._id_0201;
+            self.height = 75;
+            self._id_109B9 = self.origin + anglestoleft( self.angles ) * self._id_9191 * 0.8 + anglestoup( self.angles ) * self.height;
             break;
         case "dest64x120a":
             self._id_9191 = 64;
-            self._id_109B9 = self._id_02EA + anglestoright( self._id_0054 ) * self._id_9191 * 0.7 + anglestoup( self._id_0054 ) * self._id_0201;
+            self._id_109B9 = self.origin + anglestoright( self.angles ) * self._id_9191 * 0.7 + anglestoup( self.angles ) * self.height;
             break;
         case "dest64x120b":
             self._id_9191 = 64;
-            self._id_109B9 = self._id_02EA + _func_0301( self._id_0054 ) * self._id_9191 * 0.2 + anglestoup( self._id_0054 ) * self._id_0201;
+            self._id_109B9 = self.origin + anglestoleft( self.angles ) * self._id_9191 * 0.2 + anglestoup( self.angles ) * self.height;
             break;
         case "dest64x120a2":
             self._id_9191 = 64;
-            self._id_0201 = 90;
-            self._id_109B9 = self._id_02EA + anglestoright( self._id_0054 ) * self._id_9191 * 0.7 + anglestoup( self._id_0054 ) * self._id_0201;
+            self.height = 90;
+            self._id_109B9 = self.origin + anglestoright( self.angles ) * self._id_9191 * 0.7 + anglestoup( self.angles ) * self.height;
             break;
         case "dest64x120b2":
             self._id_9191 = 64;
-            self._id_0201 = 90;
-            self._id_109B9 = self._id_02EA + _func_0301( self._id_0054 ) * self._id_9191 * 0.2 + anglestoup( self._id_0054 ) * self._id_0201;
+            self.height = 90;
+            self._id_109B9 = self.origin + anglestoleft( self.angles ) * self._id_9191 * 0.2 + anglestoup( self.angles ) * self.height;
             break;
         case "s4_jpn_fence_staked_128x48":
             self._id_9191 = 48;
-            self._id_0201 = 48;
-            self._id_109B9 = self._id_02EA - anglestoforward( self._id_0054 ) * self._id_9191 * 0.5 + anglestoup( self._id_0054 ) * self._id_0201;
+            self.height = 48;
+            self._id_109B9 = self.origin - anglestoforward( self.angles ) * self._id_9191 * 0.5 + anglestoup( self.angles ) * self.height;
             break;
         default:
-            self._id_109B9 = self._id_02EA + anglestoup( self._id_0054 ) * self._id_0201;
+            self._id_109B9 = self.origin + anglestoup( self.angles ) * self.height;
             break;
     }
 }
@@ -85,7 +85,7 @@ _id_B652()
         if ( !isdefined( self ) )
             continue;
 
-        if ( !isai( self ) )
+        if ( !isalive( self ) )
             continue;
 
         _id_B651();
@@ -129,28 +129,28 @@ _id_8831( var_0 )
 {
     var_1 = undefined;
     var_2 = 0.75;
-    var_3 = _func_025A( var_0._id_109B9 - self geteye() );
-    var_4 = _id_077B::_id_5CBB( anglestoforward( self._id_0054 ) );
-    var_5 = _func_0257( var_4, _id_077B::_id_5CBB( var_3 ) );
+    var_3 = vectornormalize( var_0._id_109B9 - self geteye() );
+    var_4 = scripts\engine\utility::_id_5CBB( anglestoforward( self.angles ) );
+    var_5 = vectordot( var_4, scripts\engine\utility::_id_5CBB( var_3 ) );
 
     if ( var_0._id_0375 == "s4_jpn_fence_staked_128x48" )
-        var_1 = _func_0257( var_4, _id_077B::_id_5CBB( anglestoright( var_0._id_0054 ) ) );
+        var_1 = vectordot( var_4, scripts\engine\utility::_id_5CBB( anglestoright( var_0.angles ) ) );
     else
-        var_1 = _func_0257( var_4, _id_077B::_id_5CBB( anglestoforward( var_0._id_0054 ) ) );
+        var_1 = vectordot( var_4, scripts\engine\utility::_id_5CBB( anglestoforward( var_0.angles ) ) );
 
     return var_5 > var_2 && abs( var_1 ) > var_2;
 }
 
 _id_8972()
 {
-    if ( !isai( self ) )
+    if ( !isalive( self ) )
         return 0;
 
     var_0 = self getvelocity();
     var_1 = 200;
-    var_2 = _func_0130( var_0 );
+    var_2 = length( var_0 );
 
-    if ( var_2 > var_1 && ( self _meth_86CC() || self _meth_81E6() || self _meth_81E4() ) )
+    if ( var_2 > var_1 && ( self _meth_86CC() || self issprintsliding() || self issprinting() ) )
         return 1;
     else if ( self _meth_8469() && var_2 > 275 )
         return 1;
@@ -160,14 +160,14 @@ _id_8972()
 
 _id_69C7( var_0, var_1 )
 {
-    var_2 = distance2dsquared( self._id_02EA, var_0._id_109B9 );
+    var_2 = distance2dsquared( self.origin, var_0._id_109B9 );
     var_3 = var_1 * var_1;
     return var_2 < var_3;
 }
 
 _id_69C8( var_0, var_1 )
 {
-    var_2 = self._id_02EA + ( 0, 0, self _meth_8172() );
+    var_2 = self.origin + ( 0, 0, self _meth_8172() );
     var_3 = distancesquared( var_2, var_0._id_109B9 );
     var_4 = var_1 * var_1;
     return var_3 < var_4;
@@ -177,16 +177,16 @@ _id_4385( var_0 )
 {
     var_1 = 1500;
 
-    if ( self._id_7617 <= self._id_027F * self._id_505C )
+    if ( self._id_7617 <= self.maxhealth * self._id_505C )
     {
 
     }
 
     if ( self._id_7617 <= var_1 )
     {
-        var_0 _meth_8278( "heavy_2s" );
-        var_0 _meth_849F( 0.65, 0.6, var_0._id_02EA, 200 );
-        self _meth_8373( "main_part", "no_more_collmap" );
+        var_0 playrumbleonentity( "heavy_2s" );
+        var_0 earthquakeforplayer( 0.65, 0.6, var_0.origin, 200 );
+        self setscriptablepartstate( "main_part", "no_more_collmap" );
         var_0 notify( "wall_break" );
     }
 

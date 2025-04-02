@@ -3,7 +3,7 @@
 
 _id_8EC2()
 {
-    _id_099D::_id_C2A5( "large_transport", "spawnCallback", ::_id_8EC6 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "large_transport", "spawnCallback", ::_id_8EC6 );
     _id_8EC3();
     _id_8EC4();
     scripts\mp\utility\killstreak::_id_10228( "large_transport", _id_09AC::_id_8EB5 );
@@ -11,8 +11,8 @@ _id_8EC2()
 
 _id_8EC4()
 {
-    var_0 = _id_09BB::_id_10274( "large_transport", 1 );
-    var_0._id_0DD8 = _id_09BB::vehicle_spawn;
+    var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10274( "large_transport", 1 );
+    var_0._id_0DD8 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn;
 }
 
 _id_8EC3()
@@ -31,7 +31,7 @@ _id_8EC6( var_0, var_1 )
 {
     var_2 = _id_09AC::_id_8EAE( var_0, var_1 );
 
-    if ( isdefined( var_2 ) && _id_09BB::_id_10270() )
+    if ( isdefined( var_2 ) && scripts\cp_mp\vehicles\vehicle_spawn::_id_10270() )
         var_2._id_AA96 = ::_id_8EC5;
 
     return var_2;
@@ -44,9 +44,9 @@ _id_8EC5()
 
 _id_8EC7()
 {
-    var_0 = _id_09BC::_id_6E22( self );
-    var_1 = _func_020F();
-    _id_09BC::_id_3D43( var_0, var_1 );
-    var_2 = _func_020F();
-    var_3 = _id_09BB::vehicle_spawn_spawnvehicle( "large_transport", var_1, var_2 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_tracking::_id_6E22( self );
+    var_1 = spawnstruct();
+    scripts\cp_mp\vehicles\vehicle_tracking::_id_3D43( var_0, var_1 );
+    var_2 = spawnstruct();
+    var_3 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028E( "large_transport", var_1, var_2 );
 }

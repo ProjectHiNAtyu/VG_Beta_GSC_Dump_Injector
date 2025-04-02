@@ -27,7 +27,7 @@ _id_7433( var_0 )
     if ( !isdefined( var_1 ) )
         var_1 = [ "undefined" ];
 
-    if ( !isalive( var_1 ) )
+    if ( !_func_0106( var_1 ) )
         var_1 = [ var_1 ];
 
     var_2 = undefined;
@@ -115,7 +115,7 @@ _id_628B( var_0 )
                 }
             }
 
-            self._id_0B3E._id_62CE._id_90BD = _id_64A8( self._id_0B3E._id_62CE._id_628B, self._id_0B3E._id_62CE._id_0457 );
+            self._id_0B3E._id_62CE._id_90BD = _id_64A8( self._id_0B3E._id_62CE._id_628B, self._id_0B3E._id_62CE.target );
             var_2 = self _meth_8674( self._id_0B3E._id_62CE._id_90BD );
 
             if ( !isdefined( var_2 ) )
@@ -157,7 +157,7 @@ _id_62BE( var_0 )
     if ( isdefined( self._id_0B3E._id_378D ) && var_0 == "beckon" )
         return 0;
 
-    if ( _id_077B::_id_1B78( var_1, var_0 ) )
+    if ( scripts\engine\utility::array_contains( var_1, var_0 ) )
         return 1;
 
     return 0;
@@ -168,9 +168,9 @@ _id_12A7( var_0, var_1, var_2, var_3 )
     if ( isdefined( self._id_0B3E._id_62CE ) )
         _id_1219();
 
-    self._id_0B3E._id_62CE = _func_020F();
+    self._id_0B3E._id_62CE = spawnstruct();
     self._id_0B3E._id_62CE._id_628B = var_0;
-    self._id_0B3E._id_62CE._id_0457 = var_1;
+    self._id_0B3E._id_62CE.target = var_1;
     self._id_0B3E._id_62CE._id_F22F = gettime() + var_2;
     self._id_0B3E._id_62CE._id_A693 = var_3;
     self._id_0B3E._id_62CE._id_4AA5 = _id_62BE( var_0 );
@@ -193,7 +193,7 @@ _id_64A8( var_0, var_1 )
     {
         if ( var_0 == "beckon" )
         {
-            var_2 = _func_01B8( 3 ) + 1;
+            var_2 = randomint( 3 ) + 1;
 
             if ( _id_37A5() )
                 var_0 = var_0 + "_" + var_2 + "_l";
@@ -202,7 +202,7 @@ _id_64A8( var_0, var_1 )
         }
         else if ( var_0 == "glance" )
         {
-            var_2 = _func_01B8( 2 ) + 1;
+            var_2 = randomint( 2 ) + 1;
 
             if ( _id_37A5() )
                 var_0 = var_0 + "_" + var_2 + "_l";
@@ -213,8 +213,8 @@ _id_64A8( var_0, var_1 )
 
     if ( isdefined( var_1 ) && ( var_0 == "casual_point" || var_0 == "military_point" || var_0 == "beckon" || var_0 == "stop" || var_0 == "look" || var_0 == "hide" ) )
     {
-        var_3 = vectordot( var_1._id_02EA - self._id_02EA );
-        var_4 = _func_000B( var_3 - self._id_0054[1] );
+        var_3 = _func_025C( var_1.origin - self.origin );
+        var_4 = _func_000B( var_3 - self.angles[1] );
         var_5 = _func_0321( var_4, 22.5 );
         var_5 = _id_08C8::_id_9A8E( var_5 );
         return var_0 + var_5;
@@ -249,7 +249,7 @@ _id_B360( var_0, var_1, var_2 )
     if ( _id_0009::_id_1C1B( var_0, "notetrackAim" ) )
     {
         var_5 = _func_0077( var_4, 0.0, 1.0 );
-        self._id_E837 = self._id_0054[1] + var_5;
+        self._id_E837 = self.angles[1] + var_5;
     }
 
     self._id_0B3E._id_62CE = undefined;
@@ -280,7 +280,7 @@ _id_629D( var_0, var_1, var_2, var_3 )
     {
         if ( isdefined( self._id_62CC ) )
         {
-            if ( distancesquared( self._id_02EA, level._id_030F._id_02EA ) < self._id_62CC * self._id_62CC )
+            if ( distancesquared( self.origin, level.player.origin ) < self._id_62CC * self._id_62CC )
                 return 1;
         }
         else

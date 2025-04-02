@@ -179,7 +179,7 @@ _id_D72B( var_0, var_1, var_2 )
             break;
     }
 
-    _func_01D0( var_3, var_2 );
+    setdvar( var_3, var_2 );
 }
 
 _id_D72D( var_0, var_1, var_2 )
@@ -208,7 +208,7 @@ _id_D72D( var_0, var_1, var_2 )
             level._id_74AE[var_1]._id_04A3 = var_2;
             break;
         case "hud":
-            level._id_7B7B[var_1]._id_FF25 = var_2;
+            level._id_7B7B[var_1].v = var_2;
             break;
         default:
             break;
@@ -259,7 +259,7 @@ _id_C2B5( var_0, var_1, var_2, var_3 )
     {
         case "rule":
             if ( !isdefined( level._id_C982[var_1] ) )
-                level._id_C982[var_1] = _func_020F();
+                level._id_C982[var_1] = spawnstruct();
 
             level._id_C982[var_1]._id_04A3 = var_3;
             level._id_C982[var_1]._id_90AA = var_3;
@@ -267,7 +267,7 @@ _id_C2B5( var_0, var_1, var_2, var_3 )
             break;
         case "game":
             if ( !isdefined( level._id_60D0[var_1] ) )
-                level._id_60D0[var_1] = _func_020F();
+                level._id_60D0[var_1] = spawnstruct();
 
             level._id_60D0[var_1]._id_04A3 = var_3;
             level._id_60D0[var_1]._id_90AA = var_3;
@@ -275,7 +275,7 @@ _id_C2B5( var_0, var_1, var_2, var_3 )
             break;
         case "team":
             if ( !isdefined( level._id_EFB2[var_1] ) )
-                level._id_EFB2[var_1] = _func_020F();
+                level._id_EFB2[var_1] = spawnstruct();
 
             level._id_EFB2[var_1]._id_04A3 = var_3;
             level._id_EFB2[var_1]._id_90AA = var_3;
@@ -283,7 +283,7 @@ _id_C2B5( var_0, var_1, var_2, var_3 )
             break;
         case "player":
             if ( !isdefined( level._id_B7F3[var_1] ) )
-                level._id_B7F3[var_1] = _func_020F();
+                level._id_B7F3[var_1] = spawnstruct();
 
             level._id_B7F3[var_1]._id_04A3 = var_3;
             level._id_B7F3[var_1]._id_90AA = var_3;
@@ -291,7 +291,7 @@ _id_C2B5( var_0, var_1, var_2, var_3 )
             break;
         case "class":
             if ( !isdefined( level._id_37E7[var_1] ) )
-                level._id_37E7[var_1] = _func_020F();
+                level._id_37E7[var_1] = spawnstruct();
 
             level._id_37E7[var_1]._id_04A3 = var_3;
             level._id_37E7[var_1]._id_90AA = var_3;
@@ -299,7 +299,7 @@ _id_C2B5( var_0, var_1, var_2, var_3 )
             break;
         case "weapon":
             if ( !isdefined( level._id_10DE4[var_1] ) )
-                level._id_10DE4[var_1] = _func_020F();
+                level._id_10DE4[var_1] = spawnstruct();
 
             level._id_10DE4[var_1]._id_04A3 = var_3;
             level._id_10DE4[var_1]._id_90AA = var_3;
@@ -307,7 +307,7 @@ _id_C2B5( var_0, var_1, var_2, var_3 )
             break;
         case "hardpoint":
             if ( !isdefined( level._id_74AE[var_1] ) )
-                level._id_74AE[var_1] = _func_020F();
+                level._id_74AE[var_1] = spawnstruct();
 
             level._id_74AE[var_1]._id_04A3 = var_3;
             level._id_74AE[var_1]._id_90AA = var_3;
@@ -315,7 +315,7 @@ _id_C2B5( var_0, var_1, var_2, var_3 )
             break;
         case "hud":
             if ( !isdefined( level._id_7B7B[var_1] ) )
-                level._id_7B7B[var_1] = _func_020F();
+                level._id_7B7B[var_1] = spawnstruct();
 
             level._id_7B7B[var_1]._id_04A3 = var_3;
             level._id_7B7B[var_1]._id_90AA = var_3;
@@ -324,7 +324,7 @@ _id_C2B5( var_0, var_1, var_2, var_3 )
     }
 }
 
-_id_021D()
+init()
 {
     level._id_3981 = [];
     level._id_F8D2 = 1;
@@ -365,5 +365,5 @@ _id_021D()
     _id_C2B5( "hardpoint", "allowsupply", "scr_hardpoint_allowsupply", 1 );
     _id_C2B5( "hardpoint", "allowhelicopter", "scr_hardpoint_allowhelicopter", 1 );
     _id_C2B5( "hud", "showobjicons", "ui_hud_showobjicons", 1 );
-    _func_01D0( "ui_hud_showobjicons", 1 );
+    setdvar( "ui_hud_showobjicons", 1 );
 }

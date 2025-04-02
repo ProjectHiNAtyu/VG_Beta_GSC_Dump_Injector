@@ -20,7 +20,7 @@ _id_B363( var_0, var_1, var_2, var_3 )
     {
         if ( isdefined( var_1 ) )
         {
-            if ( _id_077B::_id_0F4F() )
+            if ( scripts\engine\utility::_id_0F4F() )
             {
                 var_4 = _func_0078( var_2 );
                 var_5 = _id_08C8::_id_6B7D( var_1, 0 );
@@ -40,8 +40,8 @@ _id_B363( var_0, var_1, var_2, var_3 )
     {
         var_7 = _func_00B0( var_2 );
 
-        if ( distancesquared( var_1._id_02EA, self._id_02EA ) < 16 )
-            self rotateyaw( var_1._id_02EA );
+        if ( distancesquared( var_1.origin, self.origin ) < 16 )
+            self hashed_0x82A9( var_1.origin );
         else
             thread _id_91C5( var_1, 4, var_0 + "_finished" );
     }
@@ -49,7 +49,7 @@ _id_B363( var_0, var_1, var_2, var_3 )
 
 _id_3611( var_0, var_1, var_2 )
 {
-    var_3 = _id_077B::_id_F07F( _id_08D7::_id_DBBD( var_0, var_1, var_2 ), "react_newenemy_", "" );
+    var_3 = scripts\engine\utility::ter_op( _id_08D7::_id_DBBD( var_0, var_1, var_2 ), "react_newenemy_", "" );
     var_4 = _id_0009::_id_1C55( var_1, var_3 + "2" );
     var_5 = _id_0009::_id_1C46( var_1, var_4 );
     var_6 = _func_0077( var_5, 0.0, 1.0 );
@@ -57,8 +57,8 @@ _id_3611( var_0, var_1, var_2 )
 
     if ( isdefined( self._id_0303 ) && self._id_01A2 )
     {
-        var_8 = _func_025B( self._id_0261 );
-        var_9 = var_8[1] - self._id_0054[1];
+        var_8 = vectortoangles( self._id_0261 );
+        var_9 = var_8[1] - self.angles[1];
         var_10 = _func_000B( var_9 + var_7 );
     }
     else if ( isdefined( self._id_0303 ) && !self._id_01A2 && isdefined( self._id_017D ) && !scripts\anim\utility_common::_id_31A6() )
@@ -68,19 +68,19 @@ _id_3611( var_0, var_1, var_2 )
     }
     else if ( isdefined( self._id_03B5 ) )
     {
-        var_9 = _func_000B( vectordot( self._id_03B5 - self._id_02EA ) - self._id_0054[1] );
+        var_9 = _func_000B( _func_025C( self._id_03B5 - self.origin ) - self.angles[1] );
         var_10 = _func_000B( var_9 + var_7 );
     }
     else
     {
         var_11 = self._id_017D;
-        var_9 = _id_077B::_id_6C63( 0.25, var_11, undefined );
+        var_9 = scripts\engine\utility::_id_6C63( 0.25, var_11, undefined );
         var_10 = _func_000B( var_9 + var_7 );
     }
 
     var_12 = isdefined( var_2 ) && var_2 == "Cover Left";
     var_13 = isdefined( var_2 ) && var_2 == "Cover Right";
-    var_14 = _func_020F();
+    var_14 = spawnstruct();
 
     if ( var_12 && var_10 < 0 && var_10 > -90 )
         var_14._id_F80C = _id_0009::_id_1C55( var_1, var_3 + "8" );
@@ -104,7 +104,7 @@ _id_B8F3( var_0, var_1, var_2 )
     var_4 = 1.0;
     self _meth_873F();
 
-    if ( ( _id_0694::_id_23B8() || _id_0694::_id_23BB() ) && isdefined( self._id_9D22._id_0457 ) && _func_0117( self._id_9D22._id_0457 ) )
+    if ( ( _id_0694::_id_23B8() || _id_0694::_id_23BB() ) && isdefined( self._id_9D22.target ) && isplayer( self._id_9D22.target ) )
         var_4 = 2.0;
     else if ( isdefined( level._id_3DD7 ) )
         var_4 = level._id_3DD7;
@@ -145,12 +145,12 @@ _id_B8F4( var_0, var_1 )
     while ( var_6 > 0 )
     {
         var_7 = 1 / var_6;
-        var_8 = _id_077B::_id_6E83( var_2._id_02EA );
-        self._id_E837 = _func_000B( self._id_0054[1] + var_8 );
+        var_8 = scripts\engine\utility::_id_6E83( var_2.origin );
+        self._id_E837 = _func_000B( self.angles[1] + var_8 );
         var_9 = self _meth_85F5( var_0 );
         var_10 = _func_0077( var_0, var_9, 1.0 );
         var_11 = _func_000B( var_8 - var_10 );
-        self _meth_8250( "face angle", _func_000A( self._id_0054[1] + var_11 * var_7 ) );
+        self _meth_8250( "face angle", _func_000A( self.angles[1] + var_11 * var_7 ) );
         var_6--;
         wait 0.05;
     }
@@ -179,12 +179,12 @@ _id_B8F2( var_0, var_1, var_2 )
         var_8 = var_3._id_03DE;
         var_9 = _func_000B( var_7 - var_3._id_0051 );
         self _meth_8018( "zonly_physics", 0 );
-        self _meth_8250( "face angle", self._id_0054[1] );
+        self _meth_8250( "face angle", self.angles[1] );
         _id_0009::_id_1C66( var_0, var_1, var_6 );
         self _meth_85EB( var_1, var_3._id_03E8, self._id_1890 );
         var_10 = int( 1000 * _func_0079( var_6 ) - 200 );
         self _meth_83D8();
-        self _meth_85F9( var_8, ( 0, var_9, 0 ), var_5._id_02EA, ( 0, var_7, 0 ), var_10 );
+        self _meth_85F9( var_8, ( 0, var_9, 0 ), var_5.origin, ( 0, var_7, 0 ), var_10 );
         _id_0009::_id_1C1D( var_0, var_1 );
         self._id_0DB6._id_A222 = "stop";
     }
@@ -215,13 +215,13 @@ _id_2E8B( var_0, var_1, var_2, var_3 )
 {
     var_4 = var_1 - var_3;
     var_5 = ( 0, var_4, 0 );
-    var_6 = _func_01C2( var_2, var_5 );
+    var_6 = rotatevector( var_2, var_5 );
     return var_0 - var_6;
 }
 
 _id_6957( var_0 )
 {
-    var_1 = _func_000B( self._id_0054[1] - var_0 );
+    var_1 = _func_000B( self.angles[1] - var_0 );
 
     if ( var_1 >= -45 && var_1 < 45 )
         return 8;
@@ -274,7 +274,7 @@ _id_6D75( var_0, var_1, var_2 )
 
     if ( !isdefined( var_3 ) )
     {
-        if ( isdefined( self._id_02CD ) && distancesquared( self._id_02EA, self._id_02CD._id_02EA ) < 4096 )
+        if ( isdefined( self._id_02CD ) && distancesquared( self.origin, self._id_02CD.origin ) < 4096 )
             var_3 = self._id_02CD;
     }
 
@@ -283,7 +283,7 @@ _id_6D75( var_0, var_1, var_2 )
     if ( !isdefined( var_3 ) )
         return self [[ var_2 ]]( var_0, var_1 );
 
-    var_4 = var_3._id_02EA;
+    var_4 = var_3.origin;
     var_5 = _id_08C8::_id_A568( var_3 );
     var_6 = undefined;
     var_7 = undefined;
@@ -292,22 +292,22 @@ _id_6D75( var_0, var_1, var_2 )
     {
         var_8 = undefined;
 
-        if ( _id_077B::_id_892C( var_3 ) && _id_08C8::_id_874A( var_0, var_1, undefined, "Cover Left Crouch" ) || _id_077B::_id_892E( var_3 ) && _id_08C8::_id_874A( var_0, var_1, undefined, "Cover Right Crouch" ) )
+        if ( scripts\engine\utility::_id_892C( var_3 ) && _id_08C8::_id_874A( var_0, var_1, undefined, "Cover Left Crouch" ) || scripts\engine\utility::_id_892E( var_3 ) && _id_08C8::_id_874A( var_0, var_1, undefined, "Cover Right Crouch" ) )
             var_8 = "crouch";
 
         var_6 = _id_08C8::_id_6B7E( var_3, var_8 );
-        var_7 = var_3._id_0054;
+        var_7 = var_3.angles;
     }
 
     var_9 = self [[ var_2 ]]( var_0, var_1, undefined, var_7 );
-    var_10 = _func_020F();
+    var_10 = spawnstruct();
     var_11 = _id_0009::_id_1C46( var_1, var_9 );
     var_10._id_03E8 = var_9;
     var_10._id_02CD = var_3;
     var_10._id_02B4 = _func_00B0( var_11, 0.0, 1.0 );
     var_10._id_0051 = _func_0077( var_11, 0.0, 1.0 );
     var_10._id_03DE = _id_2E8B( var_4, var_6, var_10._id_02B4, var_10._id_0051 );
-    var_10._id_0054 = var_7;
+    var_10.angles = var_7;
     var_10._id_01AA = var_6;
     return var_10;
 }
@@ -317,7 +317,7 @@ _id_888A( var_0 )
     if ( !isdefined( var_0 ) )
         return 0;
 
-    if ( var_0 _id_077B::_id_8ACE( "over" ) )
+    if ( var_0 scripts\engine\utility::_id_8ACE( "over" ) )
         return 0;
 
     return 1;
@@ -340,7 +340,7 @@ _id_B35E( var_0, var_1, var_2 )
 
     if ( self._id_0B3E._id_0119 != "exposed" && self._id_0243 )
         thread _id_C60C( var_1 + "_finished" );
-    else if ( _func_0121( var_1, "exposed" ) )
+    else if ( issubstr( var_1, "exposed" ) )
         self._id_0243 = 1;
 
     childthread _id_08C8::_id_D8C3( var_1, 0.2 );
@@ -351,7 +351,7 @@ _id_B35E( var_0, var_1, var_2 )
 
     if ( isdefined( var_2 ) )
     {
-        if ( isalive( var_2 ) )
+        if ( _func_0106( var_2 ) )
         {
             foreach ( var_7 in var_2 )
                 _id_B363( var_1, var_5, var_4, var_7 );
@@ -363,7 +363,7 @@ _id_B35E( var_0, var_1, var_2 )
     if ( _id_0009::_id_1C1B( var_0, "notetrackAim" ) )
     {
         var_9 = _func_0077( var_4, 0.0, 1.0 );
-        self._id_E837 = self._id_0054[1] + var_9;
+        self._id_E837 = self.angles[1] + var_9;
     }
 
     var_10 = 1.0;
@@ -374,7 +374,7 @@ _id_B35E( var_0, var_1, var_2 )
     self _meth_85EB( var_1, var_3, var_10 );
     _id_0009::_id_1C66( var_0, var_1, var_4 );
 
-    if ( !_func_0102( self ) )
+    if ( !isagent( self ) )
     {
         var_11 = _id_0009::_id_1C56( var_1, "conceal_add" );
         var_5 = _id_0694::_id_2394();
@@ -402,7 +402,7 @@ _id_C60C( var_0 )
 _id_E5BC( var_0, var_1, var_2 )
 {
     self endon( var_0 + "_finished" );
-    var_2 = _func_0147( var_2, 0.05 );
+    var_2 = max( var_2, 0.05 );
     wait( var_2 );
     self _meth_82D8( var_1, 1.0, 0.4, 1.0, 1 );
     thread _id_3B34( var_0 );
@@ -422,7 +422,7 @@ _id_F490( var_0 )
     {
         if ( var_1 == "stand_run_loop" )
             return 1;
-        else if ( _id_077B::_id_0F4F() && var_1 == "stand_run_strafe_loop" )
+        else if ( scripts\engine\utility::_id_0F4F() && var_1 == "stand_run_strafe_loop" )
             return 1;
     }
 
@@ -437,7 +437,7 @@ _id_B365( var_0, var_1, var_2 )
 
         for ( var_4 = 0; !isdefined( self._id_1C08._id_8F9C ) && var_4 < var_3.size; var_4++ )
         {
-            if ( isdefined( var_3[var_4] ) && distancesquared( self._id_02EA, var_3[var_4]._id_02EA ) < 256 )
+            if ( isdefined( var_3[var_4] ) && distancesquared( self.origin, var_3[var_4].origin ) < 256 )
                 self._id_1C08._id_8F9C = var_3[var_4];
         }
     }
@@ -455,8 +455,8 @@ _id_B364( var_0, var_1, var_2 )
 
             if ( isdefined( var_3 ) )
             {
-                if ( distancesquared( var_3._id_02EA, self._id_02EA ) < 16 )
-                    self rotateyaw( var_3._id_02EA );
+                if ( distancesquared( var_3.origin, self.origin ) < 16 )
+                    self hashed_0x82A9( var_3.origin );
                 else
                     thread _id_91C5( var_3, 4, var_1 + "_finished" );
             }
@@ -466,7 +466,7 @@ _id_B364( var_0, var_1, var_2 )
         }
     }
 
-    if ( !_func_0102( self ) )
+    if ( !isagent( self ) )
     {
         var_4 = _func_0318( self._id_1C08._id_1A0D, var_1, "conceal_add", 0 );
         var_3 = _id_0694::_id_2394();
@@ -499,18 +499,18 @@ _id_91C5( var_0, var_1, var_2 )
 
     for (;;)
     {
-        var_3 = var_0._id_02EA - self._id_02EA;
-        var_4 = _func_0130( var_3 );
+        var_3 = var_0.origin - self.origin;
+        var_4 = length( var_3 );
 
         if ( var_4 < var_1 )
         {
-            self rotateyaw( var_0._id_02EA );
+            self hashed_0x82A9( var_0.origin );
             break;
         }
 
         var_3 = var_3 / var_4;
-        var_5 = self._id_02EA + var_3 * var_1;
-        self rotateyaw( var_5 );
+        var_5 = self.origin + var_3 * var_1;
+        self hashed_0x82A9( var_5 );
         wait 0.05;
     }
 }
@@ -556,11 +556,11 @@ _id_B8C6( var_0, var_1, var_2 )
     _id_0009::_id_1C66( var_0, var_1, var_5 );
 
     if ( isdefined( self._id_0B3E._id_03AE ) )
-        var_6 = self._id_0B3E._id_03AE._id_0054[1];
+        var_6 = self._id_0B3E._id_03AE.angles[1];
     else if ( isdefined( self._id_02CD ) )
-        var_6 = self._id_02CD._id_0054[1];
+        var_6 = self._id_02CD.angles[1];
     else
-        var_6 = self._id_0054[1];
+        var_6 = self.angles[1];
 
     if ( self._id_0492 != "c6" && isdefined( var_3[var_1] ) )
         var_6 = var_6 + var_3[var_1];
@@ -575,7 +575,7 @@ _id_DBAD( var_0, var_1, var_2, var_3 )
     var_5 = _id_0009::_id_1C46( var_2, var_4 );
     var_6 = _func_00B0( var_5 );
     var_7 = _func_0133( var_6 );
-    var_8 = distancesquared( self._id_02EA, self._id_0B3E._id_03AE._id_02EA );
+    var_8 = distancesquared( self.origin, self._id_0B3E._id_03AE.origin );
     return var_7 <= var_8 + 1;
 }
 
@@ -608,19 +608,19 @@ _id_DB05( var_0, var_1, var_2, var_3 )
 
     var_7 = _id_0009::_id_1C44( var_0, var_2 );
     var_8 = _id_0009::_id_1C46( var_1, var_7 );
-    var_9 = self._id_0B3E._id_03AE._id_02EA - self._id_02EA;
-    var_10 = _func_025A( var_9 );
+    var_9 = self._id_0B3E._id_03AE.origin - self.origin;
+    var_10 = vectornormalize( var_9 );
     var_11 = _func_00B0( var_8, 0, 1 );
-    var_12 = _func_0130( var_11 );
-    var_13 = self._id_0B3E._id_03AE._id_02EA - var_10 * var_12;
-    var_9 = var_13 - self._id_02EA;
-    var_14 = self._id_0B3E._id_03AE._id_02EA - var_4._id_02EA;
+    var_12 = length( var_11 );
+    var_13 = self._id_0B3E._id_03AE.origin - var_10 * var_12;
+    var_9 = var_13 - self.origin;
+    var_14 = self._id_0B3E._id_03AE.origin - var_4.origin;
     var_14 = ( var_14[0], var_14[1], 0 );
 
-    if ( _func_0257( var_14, var_9 ) <= 0 )
+    if ( vectordot( var_14, var_9 ) <= 0 )
         return 1;
 
-    if ( length( self._id_04B7 ) > 1 && _func_0257( var_10, self._id_04B7 ) <= 0 )
+    if ( _func_0132( self._id_04B7 ) > 1 && vectordot( var_10, self._id_04B7 ) <= 0 )
         return 1;
 
     return 0;
@@ -643,17 +643,17 @@ _id_B8C4( var_0, var_1, var_2 )
 
     if ( isdefined( var_7 ) )
     {
-        var_8 = var_7._id_02EA;
+        var_8 = var_7.origin;
         var_9 = ( 0, _id_08C8::_id_6B7E( var_7 ), 0 );
         var_10 = _func_0047( var_9, _func_00FF( var_6 ) );
-        var_11 = var_7._id_02EA - _func_01C2( var_5, var_10 );
+        var_11 = var_7.origin - rotatevector( var_5, var_10 );
     }
     else
     {
-        var_8 = self._id_02EA + var_5;
-        var_9 = _func_0047( self._id_0054, var_6 );
-        var_11 = self._id_02EA;
-        var_10 = self._id_0054;
+        var_8 = self.origin + var_5;
+        var_9 = _func_0047( self.angles, var_6 );
+        var_11 = self.origin;
+        var_10 = self.angles;
     }
 
     var_12 = int( 1000 * _func_0079( var_4 ) - 200 );
@@ -683,9 +683,9 @@ _id_3DC9( var_0, var_1, var_2 )
 _id_3DA0( var_0, var_1, var_2, var_3 )
 {
     self._id_2C38._id_010F._id_3D9F = undefined;
-    var_4 = ( self._id_017D._id_02EA + scripts\anim\utility_common::_id_69DD() ) / 2;
+    var_4 = ( self._id_017D.origin + scripts\anim\utility_common::_id_69DD() ) / 2;
     var_5 = anim._id_1C08[var_0]._id_E75B[var_2];
-    var_6 = _id_077B::_id_1B94( var_5._id_F49A );
+    var_6 = scripts\engine\utility::_id_1B94( var_5._id_F49A );
     var_7 = undefined;
 
     foreach ( var_9 in var_6 )
@@ -696,7 +696,7 @@ _id_3DA0( var_0, var_1, var_2, var_3 )
             break;
 
         var_10 = scripts\anim\utility_common::_id_696D( self._id_02CD, var_7 );
-        var_11 = self._id_02CD._id_02EA + var_10;
+        var_11 = self._id_02CD.origin + var_10;
 
         if ( _func_01FD( var_11, var_4, 0, undefined ) )
             break;
@@ -739,7 +739,7 @@ _id_34C8( var_0, var_1, var_2, var_3 )
     if ( var_7 != var_3 )
         return 0;
 
-    self._id_1C08._id_3DC6 = _func_020F();
+    self._id_1C08._id_3DC6 = spawnstruct();
     self._id_1C08._id_3DC6._id_C563 = var_6;
     self._id_1C08._id_3DC6._id_C564 = var_7;
     return 1;
@@ -756,7 +756,7 @@ _id_5AF4( var_0, var_1, var_2 )
 
 _id_A1AC( var_0, var_1, var_2, var_3 )
 {
-    var_4 = visionsetnight( self._id_0326 );
+    var_4 = weaponclass( self._id_0326 );
 
     if ( istrue( self._id_C56D ) && var_4 == "mg" )
     {

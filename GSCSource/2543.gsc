@@ -6,7 +6,7 @@ _id_ECF7()
     level._id_ED09 = [];
     _id_0A6E::_id_C27C( ::_id_ECFB );
 
-    if ( _id_0A69::_id_6A43() == "br" )
+    if ( scripts\mp\utility\game::getgametype() == "br" )
         level thread _id_ECEE();
 }
 
@@ -36,14 +36,14 @@ _id_ECEE()
             if ( istrue( var_3._id_87E1 ) )
                 continue;
 
-            if ( !isdefined( var_3._id_02F2 ) )
+            if ( !isdefined( var_3.owner ) )
                 continue;
 
-            var_4 = distance2dsquared( var_3._id_02EA, var_3._id_02F2._id_02EA );
+            var_4 = distance2dsquared( var_3.origin, var_3.owner.origin );
 
             if ( var_4 >= 144000000 )
             {
-                var_3._id_02F2 thread _id_07B9::_id_DCE0( "tac_insert_fail_br_too_far" );
+                var_3.owner thread scripts\mp\hud_message::showsplash( "tac_insert_fail_br_too_far" );
                 var_3 _id_ECEF( 0 );
             }
 
@@ -80,16 +80,16 @@ _id_ECFA()
     for (;;)
     {
         _id_ED04();
-        var_0 = self _meth_8570();
-        var_1 = var_0._id_0084 == "s4_hand_flare_mp";
-        var_2 = _id_077B::_id_F07F( var_1, 0.05, 1.0 );
-        _id_077B::_id_108A5( var_2, "offhand_pullback" );
+        var_0 = self getheldoffhand();
+        var_1 = var_0.basename == "s4_hand_flare_mp";
+        var_2 = scripts\engine\utility::ter_op( var_1, 0.05, 1.0 );
+        scripts\engine\utility::_id_108A5( var_2, "offhand_pullback" );
     }
 }
 
 _id_ED04()
 {
-    var_0 = self._id_02EA;
+    var_0 = self.origin;
     var_1 = _id_ECF8( var_0 );
 
     if ( istrue( var_1 ) )
@@ -103,15 +103,15 @@ _id_ECF8( var_0 )
     if ( !_func_0034( var_1 ) )
         return 0;
 
-    if ( _id_07D3::_id_8A91() )
+    if ( scripts\mp\outofbounds::_id_8A91() )
         return 0;
 
-    if ( !self _meth_81D7() )
+    if ( !self isonground() )
         return 0;
 
     waitframe();
 
-    if ( !self _meth_81D7() )
+    if ( !self isonground() )
         return 0;
 
     return 1;
@@ -146,7 +146,7 @@ _id_4776()
 
 _id_ED05( var_0 )
 {
-    var_0 _meth_809A();
+    var_0 delete();
     var_1 = _id_ECF4();
 
     if ( !isdefined( var_1 ) )
@@ -160,40 +160,40 @@ _id_ED05( var_0 )
     var_3 = var_1 + ( 0, 0, -16 );
     var_4 = [];
     var_4[0] = self;
-    var_5 = _id_077A::_id_3EC3( 0, 1, 1, 1, 0, 0, 1 );
-    var_6 = _id_077A::_id_C043( var_2, var_3, var_4, var_5, 0 );
+    var_5 = scripts\engine\trace::_id_3EC3( 0, 1, 1, 1, 0, 0, 1 );
+    var_6 = scripts\engine\trace::_id_C043( var_2, var_3, var_4, var_5, 0 );
 
     if ( var_6["hittype"] == "hittype_none" )
     {
         waitframe();
         var_7 = 14;
-        var_6 = _id_077A::_id_E406( var_2, var_3, var_7, var_4, var_5, 0 );
+        var_6 = scripts\engine\trace::_id_E406( var_2, var_3, var_7, var_4, var_5, 0 );
     }
 
     var_8 = var_6["normal"];
     var_9 = var_6["position"] + var_8 * ( 0, 0, 0.5 );
-    var_10 = anglestoforward( self._id_0054 );
+    var_10 = anglestoforward( self.angles );
     var_11 = -1 * var_8;
-    var_12 = _id_077B::_id_5CBB( var_10, var_8 );
+    var_12 = scripts\engine\utility::_id_5CBB( var_10, var_8 );
     var_13 = _func_0256( var_12, var_11 );
     var_14 = _func_0017( var_11, var_13, var_12 );
-    var_15 = self._id_0054;
-    var_16 = _func_0205( "script_model", var_9 );
-    var_16._id_0054 = var_14;
-    var_16._id_045B = self._id_045B;
-    var_16._id_02F2 = self;
+    var_15 = self.angles;
+    var_16 = spawn( "script_model", var_9 );
+    var_16.angles = var_14;
+    var_16.team = self.team;
+    var_16.owner = self;
     var_16 _id_0765::_id_C2A7( 3, ::_id_4776 );
-    var_16 setmode( "wm_tact_gen_handflare" );
-    var_16 _meth_8373( "smoke", "active", 0 );
-    var_16 _meth_884D( 3, self._id_045B );
+    var_16 setmodel( "wm_tact_gen_handflare" );
+    var_16 setscriptablepartstate( "smoke", "active", 0 );
+    var_16 _meth_884D( 3, self.team );
     var_16._id_8A5A = isdefined( self._id_EB06 ) && self._id_EB06._id_E768._id_04CE == "s4_hand_flare_mp";
     var_16._id_EB2E = level._id_EB28._id_E76A["super_tac_insert"]._id_7C71;
     var_16 thread _id_ECFE( self );
     var_16 thread _id_ECF0();
-    var_16 setorigin( self );
+    var_16 setotherent( self );
     var_16._id_10D06 = "tac_insert_trigger";
     var_16 _id_07E9::_id_C2A4( "Tactical_Static", self );
-    level thread _id_0789::_id_F756( self, "use_tac_insert" );
+    level thread scripts\mp\battlechatter_mp::_id_F756( self, "use_tac_insert" );
     scripts\mp\weapons::_id_AABC( var_16, "equip_tac_insert", ::_id_ECEF );
     thread scripts\mp\weapons::_id_A0F2( self, var_16 );
     var_16 _id_0764::_id_D151( ::_id_ECF2 );
@@ -220,19 +220,19 @@ _id_ECEC( var_0 )
 
 _id_ECF9( var_0 )
 {
-    var_1 = var_0._id_A90B;
+    var_1 = var_0.objweapon;
     var_2 = var_0._id_9CBF;
     return _id_079A::_id_744C( var_1, var_2 );
 }
 
 _id_ECF6( var_0 )
 {
-    var_1 = var_0._id_006E;
+    var_1 = var_0.attacker;
 
-    if ( isdefined( self._id_02F2 ) && istrue( _id_099C::_id_B779( self._id_02F2, var_1 ) ) )
+    if ( isdefined( self.owner ) && istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_1 ) ) )
     {
         _id_ECF5( var_1 );
-        self._id_02F2 thread _id_0A64::_id_9120( "ti_destroyed" );
+        self.owner thread _id_0A64::_id_9120( "ti_destroyed" );
     }
 
     thread _id_ECEF( 1 );
@@ -243,19 +243,19 @@ _id_ECFC( var_0 )
     self endon( "death" );
     level endon( "game_ended" );
     var_0 endon( "disconnect" );
-    self._id_B0A2 = _func_0205( "script_origin", self._id_02EA );
-    self._id_B0A2 makeunusable();
-    self._id_B0A2 _meth_8305( "HINT_NOICON" );
-    self._id_B0A2 _meth_832B( &"MP_PATCH/PICKUP_TI" );
+    self._id_B0A2 = spawn( "script_origin", self.origin );
+    self._id_B0A2 makeuseable();
+    self._id_B0A2 setcursorhint( "HINT_NOICON" );
+    self._id_B0A2 sethintstring( &"MP_PATCH/PICKUP_TI" );
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
         _id_ED03( var_2 );
 
     for (;;)
     {
         self._id_B0A2 waittill( "trigger", var_2 );
-        var_2 _meth_827B( "iw8_tactical_insert_flare_pu" );
-        var_2 scripts\engine\trace::_id_6F76( "equip_tac_insert", "secondary" );
+        var_2 playsound( "iw8_tactical_insert_flare_pu" );
+        var_2 scripts\mp\equipment::_id_6F76( "equip_tac_insert", "secondary" );
         thread _id_ECEF( 0, 0, 1 );
     }
 }
@@ -271,12 +271,12 @@ _id_ED03( var_0 )
     if ( istrue( self._id_87E1 ) )
         return;
 
-    var_1 = isdefined( self._id_02F2 ) && var_0 == self._id_02F2;
+    var_1 = isdefined( self.owner ) && var_0 == self.owner;
 
     if ( var_1 )
         self._id_B0A2 _meth_80E0( var_0 );
     else
-        self._id_B0A2 disableoffhandweapons( var_0 );
+        self._id_B0A2 disableplayeruse( var_0 );
 }
 
 _id_ECEF( var_0, var_1, var_2 )
@@ -288,40 +288,40 @@ _id_ECEF( var_0, var_1, var_2 )
     _id_0766::_id_D586( self._id_75CE );
     self._id_75CE = undefined;
 
-    if ( isdefined( self._id_02F2 ) )
+    if ( isdefined( self.owner ) )
     {
         if ( istrue( var_1 ) )
         {
             thread _id_ECEA();
-            self._id_02F2 _id_0A7B::_id_7D93( "tacticalInsertionSpawns", 1 );
-            self._id_02F2 _id_07F2::_id_3A9D( "super_tac_insert" );
-            self._id_02F2 _id_0793::_id_AAD4( "super_tac_insert", 1 );
-            _id_0780::_id_9751( self._id_02F2, self._id_EB2E, 1, istrue( var_0 ) );
+            self.owner _id_0A7B::_id_7D93( "tacticalInsertionSpawns", 1 );
+            self.owner scripts\mp\supers::_id_3A9D( "super_tac_insert" );
+            self.owner _id_0793::_id_AAD4( "super_tac_insert", 1 );
+            _id_0780::_id_9751( self.owner, self._id_EB2E, 1, istrue( var_0 ) );
         }
         else
         {
-            self._id_02F2 _id_0793::_id_AAD4( "super_tac_insert", 0 );
-            _id_0780::_id_9751( self._id_02F2, self._id_EB2E, 0, istrue( var_0 ) );
+            self.owner _id_0793::_id_AAD4( "super_tac_insert", 0 );
+            _id_0780::_id_9751( self.owner, self._id_EB2E, 0, istrue( var_0 ) );
         }
 
         if ( !istrue( var_1 ) && !istrue( var_2 ) )
-            self._id_02F2 thread _id_ECFF();
+            self.owner thread _id_ECFF();
 
-        self._id_02F2._id_D6CF = undefined;
+        self.owner._id_D6CF = undefined;
     }
 
-    self _meth_8225();
+    self makeunusable();
 
     if ( isdefined( self._id_B0A2 ) )
-        self._id_B0A2 _meth_809A();
+        self._id_B0A2 delete();
 
     self notify( "death" );
-    self _meth_8373( "smoke", "neutral", 0 );
+    self setscriptablepartstate( "smoke", "neutral", 0 );
 
     if ( istrue( var_0 ) )
     {
-        self _meth_8373( "destroy", "active", 0 );
-        self _meth_8373( "visibility", "hide", 0 );
+        self setscriptablepartstate( "destroy", "active", 0 );
+        self setscriptablepartstate( "visibility", "hide", 0 );
     }
 
     thread _id_ECED();
@@ -333,7 +333,7 @@ _id_ECFF()
     self endon( "disconnect" );
     var_0 = 0;
 
-    while ( !_id_0A74::_id_89D3( self ) || _id_0A74::_id_88AD() )
+    while ( !scripts\mp\utility\player::isreallyalive( self ) || scripts\mp\utility\player::_id_88AD() )
     {
         var_0 = 1;
         waitframe();
@@ -347,14 +347,14 @@ _id_ECFF()
 
 _id_ECEA()
 {
-    if ( _id_0A69::_id_6A43() != "br" )
+    if ( scripts\mp\utility\game::getgametype() != "br" )
         return;
 
-    var_0 = self._id_02F2;
+    var_0 = self.owner;
     level endon( "game_ended" );
     var_0 endon( "death_or_disconnect" );
     wait 1.5;
-    var_0 thread _id_07B9::_id_DCE0( "tac_insert_success_br" );
+    var_0 thread scripts\mp\hud_message::showsplash( "tac_insert_success_br" );
 }
 
 _id_ECF0()
@@ -368,7 +368,7 @@ _id_ECED()
 {
     wait 1;
     _id_0765::_id_47E6();
-    self _meth_809A();
+    self delete();
 }
 
 _id_ECF1( var_0 )
@@ -376,11 +376,11 @@ _id_ECF1( var_0 )
     self endon( "death" );
     level endon( "game_ended" );
     var_0 endon( "disconnect" );
-    self makeunusable();
-    self _meth_8305( "HINT_NOICON" );
-    self _meth_832B( &"MP_PATCH/DESTROY_TI" );
+    self makeuseable();
+    self setcursorhint( "HINT_NOICON" );
+    self sethintstring( &"MP_PATCH/DESTROY_TI" );
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
         _id_ED01( var_2 );
 
     for (;;)
@@ -389,7 +389,7 @@ _id_ECF1( var_0 )
         var_2 notify( "destroyed_insertion", var_0 );
         var_2 notify( "destroyed_equipment" );
         _id_ECF5( var_2 );
-        self._id_02F2 thread _id_0A64::_id_9120( "ti_destroyed" );
+        self.owner thread _id_0A64::_id_9120( "ti_destroyed" );
         thread _id_ECEF( 1 );
     }
 }
@@ -405,32 +405,32 @@ _id_ED01( var_0 )
     if ( istrue( self._id_87E1 ) )
         return;
 
-    var_1 = _id_099C::_id_B779( self._id_02F2, var_0 );
+    var_1 = scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_0 );
 
     if ( var_1 )
         self _meth_80E0( var_0 );
     else
-        self disableoffhandweapons( var_0 );
+        self disableplayeruse( var_0 );
 }
 
 _id_ECF2( var_0 )
 {
-    var_1 = var_0._id_006E;
+    var_1 = var_0.attacker;
     _id_ECF5( var_1 );
 
-    if ( isdefined( self._id_02F2 ) && istrue( _id_099C::_id_B779( self._id_02F2, var_1 ) ) )
-        self._id_02F2 thread _id_0A64::_id_9120( "ti_destroyed" );
+    if ( isdefined( self.owner ) && istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_1 ) ) )
+        self.owner thread _id_0A64::_id_9120( "ti_destroyed" );
 
     thread _id_ECEF( 1 );
 }
 
 _id_ECF5( var_0 )
 {
-    if ( istrue( _id_099C::_id_B779( self._id_02F2, var_0 ) ) )
+    if ( istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_0 ) ) )
     {
         var_0 notify( "destroyed_equipment" );
-        var_0 thread _id_0A28::_id_6FC9();
-        var_0 _id_0789::_id_553B( self );
+        var_0 thread scripts\mp\killstreaks\killstreaks::_id_6FC9();
+        var_0 scripts\mp\battlechatter_mp::_id_553B( self );
     }
 }
 
@@ -442,7 +442,7 @@ _id_E343( var_0, var_1, var_2, var_3 )
     if ( isdefined( var_2 ) )
         var_4 = var_2;
     else
-        var_4 = _func_0205( "script_model", var_0 );
+        var_4 = spawn( "script_model", var_0 );
 
     var_4._id_B7BE = var_0;
     var_4._id_B7B8 = var_1;
@@ -456,7 +456,7 @@ _id_E340( var_0, var_1, var_2 )
     if ( isdefined( self._id_D6CF ) )
     {
         if ( istrue( self._id_D6CF._id_A6AD ) )
-            self._id_D6CF _meth_809A();
+            self._id_D6CF delete();
         else
             self._id_D6CF _id_ECEF( var_0, var_1, var_2 );
     }

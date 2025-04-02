@@ -6,7 +6,7 @@ _id_273D()
     var_0 = _id_273C( self._id_410C );
 
     if ( isdefined( var_0 ) && var_0.size > 0 )
-        return _id_077B::_id_BFC7( var_0 )._id_02EA;
+        return scripts\engine\utility::random( var_0 ).origin;
 
     return undefined;
 }
@@ -101,17 +101,17 @@ _id_289B( var_0, var_1, var_2, var_3, var_4 )
                 continue;
             }
 
-            if ( distancesquared( var_9._id_02EA, var_2._id_02EA ) > 90000 )
+            if ( distancesquared( var_9.origin, var_2.origin ) > 90000 )
             {
-                if ( _func_0257( var_7, _func_025A( var_9._id_02EA - var_2._id_02EA ) ) < 0.4 )
+                if ( vectordot( var_7, vectornormalize( var_9.origin - var_2.origin ) ) < 0.4 )
                     var_6[var_6.size] = var_9;
             }
         }
 
         if ( var_6.size > 0 )
         {
-            var_5 = _id_077B::_id_BFC7( var_6 );
-            var_11 = _func_00B4( var_5._id_02EA, 300, 50 );
+            var_5 = scripts\engine\utility::random( var_6 );
+            var_11 = _func_00B4( var_5.origin, 300, 50 );
             var_12 = [];
 
             foreach ( var_14 in var_11 )
@@ -121,7 +121,7 @@ _id_289B( var_0, var_1, var_2, var_3, var_4 )
             }
 
             var_11 = var_12;
-            var_4 = self _meth_8048( var_11, _func_0148( var_11.size, 3 ), "node_trap", var_2, var_5 );
+            var_4 = self _meth_8048( var_11, min( var_11.size, 3 ), "node_trap", var_2, var_5 );
         }
     }
 
@@ -131,7 +131,7 @@ _id_289B( var_0, var_1, var_2, var_3, var_4 )
 
         if ( var_0["purpose"] == "trap_directional" && isdefined( var_5 ) )
         {
-            var_17 = _func_025B( var_5._id_02EA - var_4._id_02EA );
+            var_17 = vectortoangles( var_5.origin - var_4.origin );
             var_16 = var_17[1];
         }
 
@@ -153,13 +153,13 @@ _id_289B( var_0, var_1, var_2, var_3, var_4 )
                     thread _id_09D1::_id_274E( 4.0 );
                     var_20 = ( 0, 0, 0 );
 
-                    if ( _func_0121( var_0["weap_name"]._id_0084, "claymore" ) )
+                    if ( issubstr( var_0["weap_name"].basename, "claymore" ) )
                         var_20 = ( 0, 0, 55 );
 
                     if ( isdefined( var_16 ) )
-                        self _meth_8044( var_5._id_02EA + var_20, 3.0, "script_forced" );
+                        self _meth_8044( var_5.origin + var_20, 3.0, "script_forced" );
                     else
-                        self _meth_8044( self._id_02EA + var_20 + anglestoforward( self getplayerangles() ) * 50, 3.0, "script_forced" );
+                        self _meth_8044( self.origin + var_20 + anglestoforward( self getplayerangles() ) * 50, 3.0, "script_forced" );
 
                     if ( !isdefined( var_0["item_action"] ) )
                         var_0 = _id_2790( "trap_directional", "trap" );
@@ -170,8 +170,8 @@ _id_289B( var_0, var_1, var_2, var_3, var_4 )
                     self._id_1695 = undefined;
                     thread _id_289C( "grenade_fire" );
                     thread _id_289C( "missile_fire" );
-                    var_21 = _id_077B::_id_F07F( isdefined( var_0["purpose"] ) && var_0["purpose"] == "tacticalinsertion", 6.0, 3.0 );
-                    _id_077B::_id_108A6( var_21, "missile_fire", "grenade_fire" );
+                    var_21 = scripts\engine\utility::ter_op( isdefined( var_0["purpose"] ) && var_0["purpose"] == "tacticalinsertion", 6.0, 3.0 );
+                    scripts\engine\utility::_id_108A6( var_21, "missile_fire", "grenade_fire" );
                     wait 0.05;
                     self notify( "ambush_trap_ent" );
 
@@ -179,7 +179,7 @@ _id_289B( var_0, var_1, var_2, var_3, var_4 )
                         thread _id_28FD( self._id_1695, 300 );
 
                     self._id_1695 = undefined;
-                    wait( _func_01B6( 0.25 ) );
+                    wait( randomfloat( 0.25 ) );
                     self notify( "bot_force_stance_for_time" );
                     self _meth_805A( "none" );
                     self _meth_83FF( "none" );
@@ -226,9 +226,9 @@ _id_28FD( var_0, var_1 )
 
     for (;;)
     {
-        if ( distancesquared( self._id_02EA, var_0._id_02EA ) > var_2 )
+        if ( distancesquared( self.origin, var_0.origin ) > var_2 )
         {
-            var_3 = self _meth_8120( var_0._id_02EA, 1.0 );
+            var_3 = self _meth_8120( var_0.origin, 1.0 );
 
             if ( var_3 < var_2 )
             {
@@ -239,7 +239,7 @@ _id_28FD( var_0, var_1 )
             }
         }
 
-        wait( _func_01B7( 0.25, 1.0 ) );
+        wait( randomfloatrange( 0.25, 1.0 ) );
     }
 }
 
@@ -368,7 +368,7 @@ _id_2741( var_0, var_1, var_2, var_3 )
 
         if ( isdefined( var_3["score_flags"] ) )
         {
-            if ( isalive( var_3["score_flags"] ) )
+            if ( _func_0106( var_3["score_flags"] ) )
                 self._id_4607 = var_3["score_flags"];
             else
                 self._id_4607[0] = var_3["score_flags"];
@@ -412,10 +412,10 @@ _id_2741( var_0, var_1, var_2, var_3 )
 
             for ( var_10 = 0; var_10 < var_9.size; var_10++ )
             {
-                var_11 = _func_025A( var_9[var_10]._id_02EA - var_8 );
+                var_11 = vectornormalize( var_9[var_10].origin - var_8 );
                 var_12 = var_8 + var_11 * 15;
 
-                if ( _func_01FD( var_12, var_9[var_10]._id_02EA, 0, undefined ) )
+                if ( _func_01FD( var_12, var_9[var_10].origin, 0, undefined ) )
                 {
                     var_7 = var_9[var_10];
                     break;
@@ -423,7 +423,7 @@ _id_2741( var_0, var_1, var_2, var_3 )
 
                 wait 0.05;
 
-                if ( _func_01FD( var_12 + ( 0, 0, 55 ), var_9[var_10]._id_02EA + ( 0, 0, 55 ), 0, undefined ) )
+                if ( _func_01FD( var_12 + ( 0, 0, 55 ), var_9[var_10].origin + ( 0, 0, 55 ), 0, undefined ) )
                 {
                     var_7 = var_9[var_10];
                     break;
@@ -454,7 +454,7 @@ _id_2741( var_0, var_1, var_2, var_3 )
     if ( _id_09D1::_id_27DB() )
     {
         var_14 = 1;
-        var_15 = isdefined( var_3 ) && isdefined( var_3["entrance_points_index"] ) && isalive( var_3["entrance_points_index"] );
+        var_15 = isdefined( var_3 ) && isdefined( var_3["entrance_points_index"] ) && _func_0106( var_3["entrance_points_index"] );
     }
     else if ( isdefined( var_3 ) && istrue( var_3["random_stance"] ) )
     {
@@ -505,9 +505,9 @@ _id_2741( var_0, var_1, var_2, var_3 )
         }
         else
         {
-            if ( isdefined( level._id_11B5 ) && level._id_11B5[self._id_045B] )
+            if ( isdefined( level._id_11B5 ) && level._id_11B5[self.team] )
             {
-                if ( !_id_077B::_id_1B78( self._id_4607, "avoid_aerial_enemies" ) )
+                if ( !scripts\engine\utility::array_contains( self._id_4607, "avoid_aerial_enemies" ) )
                     self._id_4607[self._id_4607.size] = "avoid_aerial_enemies";
             }
 
@@ -519,7 +519,7 @@ _id_2741( var_0, var_1, var_2, var_3 )
 
         if ( isdefined( self._id_410A ) || isdefined( self._id_410B ) )
         {
-            if ( var_21 && _id_09D1::_id_27E5() && !_func_0117( var_0 ) && isdefined( self._id_45BA ) )
+            if ( var_21 && _id_09D1::_id_27E5() && !isplayer( var_0 ) && isdefined( self._id_45BA ) )
             {
                 var_23 = _id_2790( "trap_directional", "trap", "c4" );
 
@@ -576,7 +576,7 @@ _id_2741( var_0, var_1, var_2, var_3 )
 
                 childthread _id_4609();
 
-                if ( var_21 && _id_09D1::_id_27E5() && !_func_0117( var_0 ) && isdefined( self._id_45BA ) )
+                if ( var_21 && _id_09D1::_id_27E5() && !isplayer( var_0 ) && isdefined( self._id_45BA ) )
                     _id_09CE::_id_28E4();
             }
         }
@@ -592,8 +592,8 @@ _id_2741( var_0, var_1, var_2, var_3 )
             continue;
         }
 
-        var_29 = _func_01B7( var_19, var_20 );
-        var_22 = _id_077B::_id_108A9( var_29, "node_relinquished", "goal_changed", "script_goal_changed", "defend_force_node_recalculation", "bad_path" );
+        var_29 = randomfloatrange( var_19, var_20 );
+        var_22 = scripts\engine\utility::_id_108A9( var_29, "node_relinquished", "goal_changed", "script_goal_changed", "defend_force_node_recalculation", "bad_path" );
 
         if ( ( var_22 == "node_relinquished" || var_22 == "bad_path" || var_22 == "goal_changed" || var_22 == "script_goal_changed" ) && ( self._id_410C == "crouch" || self._id_410C == "prone" ) )
             self _meth_805A( "none" );
@@ -627,7 +627,7 @@ _id_2EA9( var_0, var_1 )
             var_5 = 70;
         }
 
-        var_7 = _func_01B8( 100 );
+        var_7 = randomint( 100 );
 
         if ( var_7 < var_4 )
             var_2 = "crouch";
@@ -671,9 +671,9 @@ _id_DAD6( var_0 )
         if ( self._id_2749 == "capture_zone" && self _meth_81EF( self._id_2748 ) )
             return 0;
 
-        return distancesquared( self._id_02EA, self._id_2744 ) > var_2 * 0.75 * 0.75;
+        return distancesquared( self.origin, self._id_2744 ) > var_2 * 0.75 * 0.75;
     }
-    else if ( self _meth_804E() && distancesquared( self._id_02EA, self._id_2744 ) < var_2 )
+    else if ( self _meth_804E() && distancesquared( self.origin, self._id_2744 ) < var_2 )
     {
         var_3 = self _meth_8038();
         return 0 <= var_3 && var_3 <= var_1;
@@ -684,12 +684,12 @@ _id_DAD6( var_0 )
 
 _id_D7CB( var_0, var_1 )
 {
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
 
     if ( isdefined( var_1 ) )
-        var_2._id_02EA = var_1;
+        var_2.origin = var_1;
     else
-        var_2._id_02EA = var_0._id_02EA;
+        var_2.origin = var_0.origin;
 
     var_2._id_02CD = var_0;
     var_2._id_5F1C = 0;
@@ -770,13 +770,13 @@ _id_4600()
         return;
 
     var_11 = 5 + self _meth_802F( "strategyLevel" ) * 2;
-    var_12 = int( _func_0148( var_11, var_10.size ) );
+    var_12 = int( min( var_11, var_10.size ) );
     var_13 = self _meth_8049( var_10, 15, var_12, "node_protect", _id_09D1::_id_45C2(), "ignore_occupancy" );
 
     for ( var_14 = 0; var_14 < var_13.size; var_14++ )
     {
         var_15 = _id_D7CB( var_13[var_14] );
-        self._id_96C8 = _id_077B::_id_1B63( self._id_96C8, var_15 );
+        self._id_96C8 = scripts\engine\utility::array_add( self._id_96C8, var_15 );
     }
 
     var_16 = _func_0021( 0, gettime() - 60000, 1, "death", 0, self );
@@ -790,7 +790,7 @@ _id_4600()
             if ( isdefined( var_19 ) )
             {
                 var_15 = _id_D7CB( var_19, var_18 );
-                self._id_96C8 = _id_077B::_id_1B63( self._id_96C8, var_15 );
+                self._id_96C8 = scripts\engine\utility::array_add( self._id_96C8, var_15 );
             }
         }
     }
@@ -802,7 +802,7 @@ _id_4600()
         for ( var_14 = 0; var_14 < var_21.size; var_14++ )
         {
             var_15 = _id_D7CB( var_21[var_14] );
-            self._id_96C8 = _id_077B::_id_1B63( self._id_96C8, var_15 );
+            self._id_96C8 = scripts\engine\utility::array_add( self._id_96C8, var_15 );
         }
     }
 
@@ -827,16 +827,16 @@ _id_4600()
 
         for ( var_14 = 0; var_14 < var_26.size; var_14++ )
         {
-            if ( !_id_077B::_id_10E74( self._id_02EA, self getplayerangles(), var_26[var_14]._id_02EA, 0 ) )
+            if ( !scripts\engine\utility::_id_10E74( self.origin, self getplayerangles(), var_26[var_14].origin, 0 ) )
                 continue;
 
             for ( var_28 = 0; var_28 < self._id_96C8.size; var_28++ )
             {
                 var_18 = self._id_96C8[var_28];
 
-                if ( newteamhudelem( var_18._id_02CD, var_26[var_14], 1 ) )
+                if ( _func_0156( var_18._id_02CD, var_26[var_14], 1 ) )
                 {
-                    var_27 = _id_077B::_id_1B63( var_27, var_26[var_14] );
+                    var_27 = scripts\engine\utility::array_add( var_27, var_26[var_14] );
                     var_28 = self._id_96C8.size;
                 }
             }
@@ -853,10 +853,10 @@ _id_4600()
 
             for ( var_14 = 0; var_14 < self._id_96C8.size; var_14++ )
             {
-                if ( newteamhudelem( self._id_96C8[var_14]._id_02CD, var_29, 1 ) )
+                if ( _func_0156( self._id_96C8[var_14]._id_02CD, var_29, 1 ) )
                 {
-                    if ( distance2dsquared( self._id_96C8[var_14]._id_02EA, var_29._id_02EA ) > 3600 )
-                        var_30 = _id_077B::_id_1B63( var_30, self._id_96C8[var_14] );
+                    if ( distance2dsquared( self._id_96C8[var_14].origin, var_29.origin ) > 3600 )
+                        var_30 = scripts\engine\utility::array_add( var_30, self._id_96C8[var_14] );
                 }
             }
 
@@ -873,12 +873,12 @@ _id_4600()
             {
                 for ( var_14 = 0; var_14 < var_30.size; var_14++ )
                 {
-                    if ( distance2dsquared( self._id_02EA, var_30[var_14]._id_02EA ) < 1600 )
+                    if ( distance2dsquared( self.origin, var_30[var_14].origin ) < 1600 )
                         continue;
 
                     for ( var_4 = 0; var_30[var_14]._id_5F1C < 18 && var_4 < 3.6; var_4 = var_4 + 0.25 )
                     {
-                        self _meth_8044( var_30[var_14]._id_02EA + ( 0, 0, self _meth_8172() ), 0.25, "script_search" );
+                        self _meth_8044( var_30[var_14].origin + ( 0, 0, self _meth_8172() ), 0.25, "script_search" );
                         wait 0.25;
                     }
                 }
@@ -915,7 +915,7 @@ _id_A0B0()
 
     for (;;)
     {
-        if ( distancesquared( self._id_02EA, self._id_2744 ) < var_0 )
+        if ( distancesquared( self.origin, self._id_2744 ) < var_0 )
             self notify( "cautious_approach_early_out" );
 
         wait 0.05;
@@ -937,12 +937,12 @@ _id_A0AF()
 
             for ( var_3 = 0; var_3 < self._id_96C8.size; var_3++ )
             {
-                if ( newteamhudelem( var_1, self._id_96C8[var_3]._id_02CD, 1 ) )
+                if ( _func_0156( var_1, self._id_96C8[var_3]._id_02CD, 1 ) )
                 {
-                    var_4 = _id_077B::_id_10E74( self._id_02EA, self getplayerangles(), self._id_96C8[var_3]._id_02EA, var_2 );
+                    var_4 = scripts\engine\utility::_id_10E74( self.origin, self getplayerangles(), self._id_96C8[var_3].origin, var_2 );
                     var_5 = !var_4 || self._id_96C8[var_3]._id_5F1C < 17;
 
-                    if ( var_5 && distancesquared( self._id_02EA, self._id_96C8[var_3]._id_02EA ) < var_0 )
+                    if ( var_5 && distancesquared( self.origin, self._id_96C8[var_3].origin ) < var_0 )
                     {
                         var_4 = 1;
                         self._id_96C8[var_3]._id_5F1C = 18;
@@ -997,20 +997,20 @@ _id_BDB2()
             if ( !isdefined( var_7._id_8F1B ) )
                 var_7._id_8F1B = var_4 - 10001;
 
-            if ( var_7._id_01FF == 0 && isdefined( var_7._id_43FE ) && var_4 - var_7._id_43FE < 5000 )
+            if ( var_7.health == 0 && isdefined( var_7._id_43FE ) && var_4 - var_7._id_43FE < 5000 )
             {
                 if ( var_4 - var_7._id_8F1B > 10000 && var_4 > var_0[var_8] )
                 {
-                    if ( isdefined( var_7._id_0251 ) && isdefined( var_7._id_0251._id_045B ) && var_7._id_0251._id_045B == _id_077B::_id_6460( self._id_045B ) )
+                    if ( isdefined( var_7._id_0251 ) && isdefined( var_7._id_0251.team ) && var_7._id_0251.team == scripts\engine\utility::_id_6460( self.team ) )
                     {
-                        if ( distancesquared( var_7._id_25A4._id_02EA, self._id_02EA ) < var_2 )
+                        if ( distancesquared( var_7._id_25A4.origin, self.origin ) < var_2 )
                         {
-                            self _meth_8033( var_7._id_0251, var_7._id_25A4._id_02EA );
-                            var_9 = _func_0080( var_7._id_25A4._id_02EA );
+                            self _meth_8033( var_7._id_0251, var_7._id_25A4.origin );
+                            var_9 = _func_0080( var_7._id_25A4.origin );
 
                             if ( isdefined( var_9 ) )
                             {
-                                self._id_4604 = var_9._id_02EA;
+                                self._id_4604 = var_9.origin;
                                 self notify( "defend_force_node_recalculation" );
                             }
 
@@ -1023,7 +1023,7 @@ _id_BDB2()
             }
         }
 
-        wait( ( _func_01B8( 5 ) + 1 ) * 0.05 );
+        wait( ( randomint( 5 ) + 1 ) * 0.05 );
     }
 }
 
@@ -1035,7 +1035,7 @@ _id_4603()
         return _id_273C( self._id_410C, 1 );
     else if ( _id_09D1::_id_27E5() || _id_09D1::_id_27DA() )
     {
-        var_0 = _func_0066( self._id_02EA );
+        var_0 = _func_0066( self.origin );
         return var_0;
     }
 }
@@ -1058,23 +1058,23 @@ _id_4609()
         {
             foreach ( var_4 in var_2 )
             {
-                if ( newteamhudelem( var_0, var_4, 1 ) )
-                    var_1 = _id_077B::_id_1B63( var_1, var_4 );
+                if ( _func_0156( var_0, var_4, 1 ) )
+                    var_1 = scripts\engine\utility::array_add( var_1, var_4 );
             }
         }
 
         if ( var_1.size == 0 )
-            var_1 = _func_0066( self._id_02EA );
+            var_1 = _func_0066( self.origin );
     }
     else if ( _id_09D1::_id_27E5() || _id_09D1::_id_27DA() )
     {
         var_1 = _id_4603();
         var_6 = self getcurrentweapon();
 
-        if ( isdefined( var_0 ) && !_func_0121( var_6._id_0084, "riotshield" ) && isdefined( self._id_A53D ) )
+        if ( isdefined( var_0 ) && !issubstr( var_6.basename, "riotshield" ) && isdefined( self._id_A53D ) )
         {
-            if ( newteamhudelem( var_0, self._id_A53D, 1 ) )
-                var_1 = _id_077B::_id_1B63( var_1, self._id_A53D );
+            if ( _func_0156( var_0, self._id_A53D, 1 ) )
+                var_1 = scripts\engine\utility::array_add( var_1, self._id_A53D );
         }
     }
 
@@ -1109,7 +1109,7 @@ _id_2836()
         var_1 = 0.8;
         var_2 = 1.0;
 
-        if ( _id_077B::_id_1B78( self._id_4607, "strict_los" ) )
+        if ( scripts\engine\utility::array_contains( self._id_4607, "strict_los" ) )
         {
             var_1 = 1.0;
             var_2 = 0.5;
@@ -1146,7 +1146,7 @@ _id_2836()
                 var_4._id_10A73[self._id_54E1] = var_4._id_10A73[self._id_54E1] * 0.5;
         }
 
-        wait( _func_01B7( 0.5, 0.75 ) );
+        wait( randomfloatrange( 0.5, 0.75 ) );
     }
 }
 
@@ -1163,14 +1163,14 @@ _id_2837()
     for (;;)
     {
         var_0 = anglestoforward( self._id_273E getplayerangles() ) * ( 1, 1, 0 );
-        var_0 = _func_025A( var_0 );
+        var_0 = vectornormalize( var_0 );
 
         foreach ( var_2 in self._id_10A75 )
         {
             var_2._id_10A73[self._id_54E1] = var_2._id_10A72[self._id_54E1];
-            var_3 = var_2._id_02EA - self._id_273E._id_02EA;
-            var_3 = _func_025A( var_3 );
-            var_4 = _func_0257( var_0, var_3 );
+            var_3 = var_2.origin - self._id_273E.origin;
+            var_3 = vectornormalize( var_3 );
+            var_4 = vectordot( var_0, var_3 );
 
             if ( var_4 > 0.6 )
                 var_2._id_10A73[self._id_54E1] = var_2._id_10A73[self._id_54E1] * 0.33;
@@ -1181,25 +1181,25 @@ _id_2837()
                 var_2._id_10A73[self._id_54E1] = var_2._id_10A73[self._id_54E1] * 0.5;
         }
 
-        wait( _func_01B7( 0.4, 0.6 ) );
+        wait( randomfloatrange( 0.4, 0.6 ) );
     }
 }
 
 _id_54FF( var_0 )
 {
     var_1 = _func_00B8( var_0 );
-    var_2 = _func_025A( var_0._id_02EA - self._id_02EA );
+    var_2 = vectornormalize( var_0.origin - self.origin );
 
     for ( var_3 = 0; var_3 < level._id_110DF; var_3++ )
     {
-        if ( _func_0029( var_3, self._id_045B, "enemy_predict" ) > 0 )
+        if ( _func_0029( var_3, self.team, "enemy_predict" ) > 0 )
         {
             if ( isdefined( var_1 ) && var_3 == var_1 )
                 return 1;
             else
             {
-                var_4 = _func_025A( _func_00F9( var_3 ) - self._id_02EA );
-                var_5 = _func_0257( var_2, var_4 );
+                var_4 = vectornormalize( _func_00F9( var_3 ) - self.origin );
+                var_5 = vectordot( var_2, var_4 );
 
                 if ( var_5 > 0.2 )
                     return 1;
@@ -1219,13 +1219,13 @@ _id_BD18( var_0 )
 
     for ( var_2 = 0; var_2 < level._id_110DF; var_2++ )
     {
-        if ( _func_0029( var_2, self._id_045B, "enemy_predict" ) <= 0 )
+        if ( _func_0029( var_2, self.team, "enemy_predict" ) <= 0 )
             continue;
 
         if ( var_1.size == 0 )
             break;
 
-        var_3 = _func_025A( _func_00F9( var_2 ) - self._id_02EA );
+        var_3 = vectornormalize( _func_00F9( var_2 ) - self.origin );
 
         for ( var_4 = 0; var_4 < var_1.size; var_4++ )
         {
@@ -1236,8 +1236,8 @@ _id_BD18( var_0 )
                 var_6 = 1;
             else
             {
-                var_7 = _func_025A( var_1[var_4]._id_02EA - self._id_02EA );
-                var_8 = _func_0257( var_7, var_3 );
+                var_7 = vectornormalize( var_1[var_4].origin - self.origin );
+                var_8 = vectordot( var_7, var_3 );
 
                 if ( var_8 > 0.2 )
                     var_6 = 1;
@@ -1273,8 +1273,8 @@ _id_5501( var_0 )
 _id_5502( var_0, var_1 )
 {
     var_2 = anglestoforward( var_0 getplayerangles() );
-    var_3 = _func_025A( var_1._id_02EA - var_0._id_02EA );
-    var_4 = _func_0257( var_2, var_3 );
+    var_3 = vectornormalize( var_1.origin - var_0.origin );
+    var_4 = vectordot( var_2, var_3 );
 
     if ( var_4 > 0.6 )
         return 1;
@@ -1285,12 +1285,12 @@ _id_5502( var_0, var_1 )
 _id_27AF( var_0 )
 {
     var_1 = [];
-    var_2 = _id_27B0( self._id_02EA, 1000 );
+    var_2 = _id_27B0( self.origin, 1000 );
 
     foreach ( var_4 in var_2 )
     {
-        if ( !_func_0104( var_4 ) || var_4 _id_09D1::_id_27DF() && var_4._id_274A == var_0 )
-            var_1 = _id_077B::_id_1B63( var_1, var_4 );
+        if ( !isai( var_4 ) || var_4 _id_09D1::_id_27DF() && var_4._id_274A == var_0 )
+            var_1 = scripts\engine\utility::array_add( var_1, var_4 );
     }
 
     return var_1;
@@ -1311,8 +1311,8 @@ _id_27AE( var_0, var_1 )
 
     foreach ( var_5 in var_3 )
     {
-        if ( !_func_0104( var_5 ) || var_5 _id_09D1::_id_27E0( var_0 ) )
-            var_2 = _id_077B::_id_1B63( var_2, var_5 );
+        if ( !isai( var_5 ) || var_5 _id_09D1::_id_27E0( var_0 ) )
+            var_2 = scripts\engine\utility::array_add( var_2, var_5 );
     }
 
     return var_2;
@@ -1327,10 +1327,10 @@ _id_27B0( var_0, var_1 )
     {
         var_5 = level._id_AE69[var_4];
 
-        if ( var_5 != self && isdefined( var_5._id_045B ) && var_5._id_045B == self._id_045B && _id_0A67::_id_8A7B( var_5 ) )
+        if ( var_5 != self && isdefined( var_5.team ) && var_5.team == self.team && _id_0A67::_id_8A7B( var_5 ) )
         {
-            if ( distancesquared( var_0, var_5._id_02EA ) < var_2 )
-                var_3 = _id_077B::_id_1B63( var_3, var_5 );
+            if ( distancesquared( var_0, var_5.origin ) < var_2 )
+                var_3 = scripts\engine\utility::array_add( var_3, var_5 );
         }
     }
 
@@ -1382,13 +1382,13 @@ _id_45BC( var_0 )
 
     foreach ( var_3 in level._id_AE69 )
     {
-        if ( !isdefined( var_3._id_045B ) )
+        if ( !isdefined( var_3.team ) )
             continue;
 
-        if ( var_3._id_045B == self._id_045B && var_3 != self && _func_0104( var_3 ) && var_3 _id_09D1::_id_27DF() && isdefined( var_3._id_410C ) && var_3._id_410C == var_0 )
+        if ( var_3.team == self.team && var_3 != self && isai( var_3 ) && var_3 _id_09D1::_id_27DF() && isdefined( var_3._id_410C ) && var_3._id_410C == var_0 )
         {
             if ( var_3._id_2749 == self._id_2749 && _id_09D1::_id_27E0( var_3._id_2744 ) )
-                var_1 = _id_077B::_id_1B63( var_1, var_3 );
+                var_1 = scripts\engine\utility::array_add( var_1, var_3 );
         }
     }
 
@@ -1399,7 +1399,7 @@ _id_A0B3()
 {
     var_0 = 0;
     var_1 = 175;
-    var_2 = self._id_273E._id_02EA;
+    var_2 = self._id_273E.origin;
     var_3 = 0;
     var_4 = 0;
 
@@ -1408,7 +1408,7 @@ _id_A0B3()
         if ( !isdefined( self._id_273E ) )
             thread _id_2740();
 
-        self._id_2744 = self._id_273E._id_02EA;
+        self._id_2744 = self._id_273E.origin;
         self._id_A53D = self._id_273E _meth_815E();
 
         if ( !isdefined( self._id_A53D ) )
@@ -1424,14 +1424,14 @@ _id_A0B3()
             {
                 var_0 = 0;
 
-                if ( distancesquared( var_2, self._id_273E._id_02EA ) > var_1 * var_1 )
+                if ( distancesquared( var_2, self._id_273E.origin ) > var_1 * var_1 )
                 {
-                    var_2 = self._id_273E._id_02EA;
+                    var_2 = self._id_273E.origin;
                     var_4 = 1;
-                    var_8 = _func_025A( var_5 - self._id_273E._id_02EA );
-                    var_9 = _func_025A( var_6 );
+                    var_8 = vectornormalize( var_5 - self._id_273E.origin );
+                    var_9 = vectornormalize( var_6 );
 
-                    if ( _func_0257( var_8, var_9 ) < 0.1 )
+                    if ( vectordot( var_8, var_9 ) < 0.1 )
                     {
                         self notify( "defend_force_node_recalculation" );
                         wait 0.25;
@@ -1444,7 +1444,7 @@ _id_A0B3()
 
                 if ( var_3 > 100 && var_4 )
                 {
-                    var_2 = self._id_273E._id_02EA;
+                    var_2 = self._id_273E.origin;
                     var_4 = 0;
                 }
 
@@ -1462,7 +1462,7 @@ _id_A0B3()
 
             var_3 = var_7;
 
-            if ( abs( self._id_273E._id_02EA[2] - var_5[2] ) >= 50 )
+            if ( abs( self._id_273E.origin[2] - var_5[2] ) >= 50 )
             {
                 self notify( "defend_force_node_recalculation" );
                 wait 0.25;
@@ -1482,13 +1482,13 @@ _id_5AA1()
     {
         if ( isdefined( var_0 ) )
         {
-            var_2 = _func_025A( var_0 - var_1._id_02EA );
-            self._id_4109 = _func_025B( var_2 );
+            var_2 = vectornormalize( var_0 - var_1.origin );
+            self._id_4109 = vectortoangles( var_2 );
         }
         else
         {
-            var_3 = _func_025A( var_1._id_02EA - _id_09D1::_id_45C2() );
-            self._id_4109 = _func_025B( var_3 );
+            var_3 = vectornormalize( var_1.origin - _id_09D1::_id_45C2() );
+            self._id_4109 = vectortoangles( var_3 );
         }
 
         self._id_410A = var_1;
@@ -1508,13 +1508,13 @@ _id_5AA2()
     {
         if ( isdefined( var_0 ) )
         {
-            var_2 = _func_025A( var_0 - var_1._id_02EA );
-            self._id_4109 = _func_025B( var_2 );
+            var_2 = vectornormalize( var_0 - var_1.origin );
+            self._id_4109 = vectortoangles( var_2 );
         }
         else
         {
-            var_3 = _func_025A( var_1._id_02EA - _id_09D1::_id_45C2() );
-            self._id_4109 = _func_025B( var_3 );
+            var_3 = vectornormalize( var_1.origin - _id_09D1::_id_45C2() );
+            self._id_4109 = vectortoangles( var_3 );
         }
 
         self._id_410A = var_1;
@@ -1531,8 +1531,8 @@ _id_5AA4()
 
     if ( isdefined( var_0 ) )
     {
-        var_1 = _func_025A( _id_09D1::_id_45C2() - var_0._id_02EA );
-        self._id_4109 = _func_025B( var_1 );
+        var_1 = vectornormalize( _id_09D1::_id_45C2() - var_0.origin );
+        self._id_4109 = vectortoangles( var_1 );
         self._id_410A = var_0;
     }
     else
@@ -1562,7 +1562,7 @@ _id_5AA0()
         if ( isdefined( var_1 ) )
             self._id_410A = var_1;
         else
-            self._id_410B = self._id_02EA;
+            self._id_410B = self.origin;
     }
 }
 
@@ -1583,7 +1583,7 @@ _id_5AA3()
 _id_27C1( var_0, var_1 )
 {
     if ( self._id_2749 == "protect_zone" )
-        self._id_410B = _id_077B::_id_BFC7( self._id_2745 )._id_02EA;
+        self._id_410B = scripts\engine\utility::random( self._id_2745 ).origin;
     else
     {
         if ( self._id_2749 == "capture_zone" )
@@ -1593,15 +1593,15 @@ _id_27C1( var_0, var_1 )
 
         if ( isdefined( var_0 ) )
         {
-            var_2 = _func_025A( var_0 - self._id_410B );
-            self._id_4109 = _func_025B( var_2 );
+            var_2 = vectornormalize( var_0 - self._id_410B );
+            self._id_4109 = vectortoangles( var_2 );
             return;
         }
 
         if ( isdefined( var_1 ) )
         {
-            var_2 = _func_025A( self._id_410B - var_1 );
-            self._id_4109 = _func_025B( var_2 );
+            var_2 = vectornormalize( self._id_410B - var_1 );
+            self._id_4109 = vectortoangles( var_2 );
         }
     }
 }
@@ -1620,13 +1620,13 @@ _id_2707( var_0, var_1, var_2, var_3 )
     {
         var_5 = level._id_AE69[var_4];
 
-        if ( var_5._id_045B == self._id_045B && var_5 != self )
+        if ( var_5.team == self.team && var_5 != self )
         {
-            if ( _func_0104( var_5 ) )
+            if ( isai( var_5 ) )
             {
                 if ( var_2 )
                 {
-                    if ( distancesquared( var_0, var_5._id_02EA ) < 441 )
+                    if ( distancesquared( var_0, var_5.origin ) < 441 )
                         return 1;
                 }
 
@@ -1643,7 +1643,7 @@ _id_2707( var_0, var_1, var_2, var_3 )
 
             if ( var_1 )
             {
-                if ( distancesquared( var_0, var_5._id_02EA ) < 441 )
+                if ( distancesquared( var_0, var_5.origin ) < 441 )
                     return 1;
             }
         }
@@ -1660,8 +1660,8 @@ _id_2705()
     {
         foreach ( var_2 in self._id_2745 )
         {
-            var_3 = distance( self._id_2744, var_2._id_02EA );
-            var_0 = _func_0147( var_3, var_0 );
+            var_3 = distance( self._id_2744, var_2.origin );
+            var_0 = max( var_3, var_0 );
         }
     }
 
@@ -1720,7 +1720,7 @@ _id_28DC()
                     self [[ var_0._id_52AD ]]( var_0 );
             }
 
-            self._id_ED26 = _id_077B::_id_1B96( self._id_ED26, var_0 );
+            self._id_ED26 = scripts\engine\utility::array_remove( self._id_ED26, var_0 );
         }
 
         wait 0.05;
@@ -1747,13 +1747,13 @@ _id_283C( var_0, var_1, var_2, var_3 )
     if ( _func_0133( var_1 ) == 0 )
         var_1 = var_1 + ( 0, 0, 1 );
 
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
     var_4._id_048F = var_0;
     var_4._id_7061 = var_1;
 
     if ( isdefined( self._id_AB1B ) )
     {
-        if ( !_id_077B::_id_1B78( self._id_AB1B, var_0 ) )
+        if ( !scripts\engine\utility::array_contains( self._id_AB1B, var_0 ) )
             return;
     }
 
@@ -1880,17 +1880,17 @@ _id_282F()
         if ( isdefined( self._id_017D ) && self _meth_8027( self._id_017D ) )
             return 0;
 
-        var_2 = _func_00F5( self._id_02EA );
+        var_2 = _func_00F5( self.origin );
 
         if ( !isdefined( var_2 ) )
             return 0;
 
-        var_3 = _func_002B( var_2, self._id_045B, 1, "enemy_predict", ">", 0 );
+        var_3 = _func_002B( var_2, self.team, 1, "enemy_predict", ">", 0 );
 
         if ( !isdefined( var_3 ) )
             return 0;
 
-        var_4 = _func_00B4( self._id_02EA, 500, 0 );
+        var_4 = _func_00B4( self.origin, 500, 0 );
 
         if ( var_4.size <= 0 )
             return 0;

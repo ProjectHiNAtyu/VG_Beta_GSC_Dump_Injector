@@ -3,7 +3,7 @@
 
 _id_C040()
 {
-    scripts\mp\supers::_id_C03F();
+    _id_081B::_id_C03F();
     level._id_CA95 = ::_id_0CA7;
 }
 

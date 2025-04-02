@@ -6,7 +6,7 @@ _id_2CB3( var_0, var_1, var_2, var_3 )
     if ( !isdefined( var_0 ) )
         var_0 = ( 0, 0, 0 );
 
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
     var_4._id_A96A = var_0;
     var_4._id_C00D = var_1;
     var_4._id_027B = var_2;
@@ -37,7 +37,7 @@ _id_2C93( var_0, var_1, var_2 )
 
 _id_2CB1( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_5 = _func_020F();
+    var_5 = spawnstruct();
     var_5._id_CB69 = var_0;
     var_5._id_5070 = var_1;
     var_5._id_0333 = var_2;
@@ -62,8 +62,8 @@ _id_2C99( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     if ( !isdefined( var_4 ) )
         var_4 = 1;
 
-    var_12 = _func_020F();
-    var_12._id_50E6 = _func_0139( var_0 );
+    var_12 = spawnstruct();
+    var_12._id_50E6 = loadfx( var_0 );
     var_12._id_0400 = var_1;
     var_12._id_E04D = var_2;
     var_12._id_2C32 = var_5;
@@ -143,12 +143,12 @@ _id_2CA7( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
 
 _id_2CC3( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
 {
-    _func_01A8( var_2 );
+    precachemodel( var_2 );
     _func_01B1( var_0 );
-    var_10 = _func_020F();
+    var_10 = spawnstruct();
     var_10._id_7E83 = var_0;
     var_10._id_0400 = var_1;
-    var_10._id_02AE = var_2;
+    var_10.model = var_2;
     var_10._id_4599 = var_3;
     var_10._id_458C = var_4;
     var_10._id_458D = var_5;
@@ -184,11 +184,11 @@ _id_2CA4( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     if ( isdefined( level._id_FFF1._id_F075._id_10133[var_4] ) && !level._id_106B9 )
         return;
 
-    var_8 = _func_020F();
-    var_8._id_02BA = var_1;
+    var_8 = spawnstruct();
+    var_8.name = var_1;
     var_8._id_0400 = var_2;
     var_8._id_4628 = var_5;
-    var_8._id_50E6 = _func_0139( var_3 );
+    var_8._id_50E6 = loadfx( var_3 );
 
     if ( isdefined( var_7 ) )
         var_8._id_F844 = var_7;
@@ -207,11 +207,11 @@ _id_2CA3( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     if ( !isdefined( level._id_FFF1._id_F075._id_4859 ) )
         level._id_FFF1._id_F075._id_4859 = [];
 
-    var_7 = _func_020F();
-    var_7._id_02BA = var_1;
+    var_7 = spawnstruct();
+    var_7.name = var_1;
     var_7._id_0400 = var_2;
     var_7._id_4628 = var_5;
-    var_7._id_50E6 = _func_0139( var_3 );
+    var_7._id_50E6 = loadfx( var_3 );
     level._id_FFF1._id_F075._id_4859[var_0][var_1] = var_7;
 }
 
@@ -236,8 +236,8 @@ _id_2C92( var_0, var_1 )
     if ( !isdefined( var_1 ) )
         var_1 = var_0;
 
-    _func_01A8( var_0 );
-    _func_01A8( var_1 );
+    precachemodel( var_0 );
+    precachemodel( var_1 );
     level._id_FFF1._id_F075._id_43D2[var_0] = var_1;
 }
 
@@ -276,19 +276,19 @@ _id_2CBD( var_0, var_1, var_2, var_3 )
         var_0 = var_2;
 
     _func_01B2( var_0 );
-    level._id_FFF1._id_F075._id_045B[var_3] = "axis";
+    level._id_FFF1._id_F075.team[var_3] = "axis";
     level._id_FFF1._id_F075._id_934E[var_3] = 999;
     level._id_FFF1._id_F075._id_74E4[var_1] = 0;
     level._id_FFF1._id_F075._id_995B[var_1] = [];
     level._id_106B8 = var_1;
     level._id_106BA = var_0;
     level._id_106B7 = var_3;
-    level._id_FFF1._id_F075._id_02AE[var_3] = var_1;
+    level._id_FFF1._id_F075.model[var_3] = var_1;
 }
 
 _id_2C98( var_0 )
 {
-    level._id_FFF1._id_F075._id_570F[level._id_106B8] = _func_0139( var_0 );
+    level._id_FFF1._id_F075._id_570F[level._id_106B8] = loadfx( var_0 );
 }
 
 _id_2C97( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
@@ -296,25 +296,25 @@ _id_2C97( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     if ( !isdefined( var_1 ) )
         var_1 = "tag_engine_fx";
 
-    var_8 = _func_020F();
-    var_8._id_50E6 = _func_0139( var_0 );
+    var_8 = spawnstruct();
+    var_8._id_50E6 = loadfx( var_0 );
     var_8._id_50EB = var_1;
 
     if ( isdefined( var_2 ) )
     {
-        var_8._id_9BFF = _func_0139( var_2 );
+        var_8._id_9BFF = loadfx( var_2 );
         var_8._id_9C00 = var_3;
     }
 
     if ( isdefined( var_4 ) )
     {
-        var_8._id_9CC2 = _func_0139( var_4 );
+        var_8._id_9CC2 = loadfx( var_4 );
         var_8._id_9CC3 = var_5;
     }
 
     if ( isdefined( var_6 ) )
     {
-        var_8._id_9E84 = _func_0139( var_6 );
+        var_8._id_9E84 = loadfx( var_6 );
         var_8._id_9E85 = var_7;
     }
 
@@ -323,7 +323,7 @@ _id_2C97( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 
 _id_2CB2( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    var_6 = _func_020F();
+    var_6 = spawnstruct();
 
     if ( isdefined( var_0 ) )
     {
@@ -348,7 +348,7 @@ _id_2CB2( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_2CBE( var_0, var_1, var_2, var_3 )
 {
-    if ( !_id_06BB::_id_8A2C() )
+    if ( !scripts\common\utility::_id_8A2C() )
         return;
 
     if ( isdefined( var_0 ) )
@@ -364,7 +364,7 @@ _id_2CBE( var_0, var_1, var_2, var_3 )
     else
     {
         var_0 = level._id_106B7;
-        _id_06C3::_id_0271();
+        _id_06C3::main();
     }
 }
 
@@ -388,7 +388,7 @@ _id_D41D( var_0, var_1, var_2, var_3 )
     }
 
     if ( isdefined( var_2 ) )
-        level._id_FFF1._id_F075._id_EBC6[var_0][var_1] = _func_0139( var_2 );
+        level._id_FFF1._id_F075._id_EBC6[var_0][var_1] = loadfx( var_2 );
     else if ( isdefined( level._id_FFF1._id_F075._id_EBC6[var_0] ) && isdefined( level._id_FFF1._id_F075._id_EBC6[var_0][var_1] ) )
         level._id_FFF1._id_F075._id_EBC6[var_0][var_1] = undefined;
 }
@@ -400,7 +400,7 @@ _id_677F()
 
 _id_2CBC( var_0 )
 {
-    level._id_FFF1._id_F075._id_045B[level._id_106B7] = var_0;
+    level._id_FFF1._id_F075.team[level._id_106B7] = var_0;
 }
 
 _id_2C89( var_0 )
@@ -461,7 +461,7 @@ _id_2C8F( var_0, var_1, var_2, var_3 )
     if ( !isdefined( var_3 ) )
         var_3 = 8;
 
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
     var_4._id_10153 = level._id_106B7;
     var_4._id_942F = var_0;
     var_4._id_9CEC = var_1;
@@ -493,10 +493,10 @@ _id_2CB8( var_0 )
 
 _id_2CB0( var_0, var_1 )
 {
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
     var_2._id_B66F = var_0;
     var_2._id_10F4B = var_1;
-    _func_01A8( var_0 );
+    precachemodel( var_0 );
     level._id_FFF1._id_F075._id_10323[level._id_106B7] = var_2;
 }
 
@@ -574,7 +574,7 @@ _id_2CAF( var_0, var_1, var_2 )
 
 build_rider_seat( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
 {
-    var_10 = _func_020F();
+    var_10 = spawnstruct();
     var_10._id_DD69 = var_0;
     var_10._id_31AE = var_1;
     var_10._id_24CE = var_2;
@@ -601,7 +601,7 @@ build_mainturret_fire_jolt( var_0, var_1 )
     if ( !isdefined( var_1 ) )
         var_1 = 1;
 
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
     var_3._id_0400 = var_0;
     var_3._id_0220 = var_1;
     level._id_FFF1._id_F075.mainturret_jolt[var_2] = var_3;
@@ -626,7 +626,7 @@ build_mainturret_fire_quake( var_0, var_1, var_2, var_3 )
     if ( !isdefined( var_3 ) )
         var_3 = 350;
 
-    var_5 = _func_020F();
+    var_5 = spawnstruct();
     var_5._id_0400 = var_0;
     var_5._id_0220 = var_1;
     var_5._id_5070 = var_2;
@@ -659,7 +659,7 @@ build_mainturret_fire_rumble( var_0, var_1, var_2, var_3, var_4, var_5 )
     if ( !isdefined( var_5 ) )
         var_5 = 0;
 
-    var_7 = _func_020F();
+    var_7 = spawnstruct();
     var_7._id_0400 = var_0;
     var_7.near_dist = var_1;
     var_7._id_5953 = var_3;

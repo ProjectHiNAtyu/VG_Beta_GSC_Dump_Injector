@@ -23,14 +23,14 @@ _id_11CB()
 
 _id_D86D()
 {
-    anim._id_7167["AI_frag_grenade_mp"] = _func_01B9( 0, 20000 );
-    anim._id_7167["AI_flash_grenade_mp"] = _func_01B9( 0, 20000 );
-    anim._id_7167["AI_smoke_grenade_mp"] = _func_01B9( 0, 20000 );
-    anim._id_7167["AI_concussion_grenade_mp"] = _func_01B9( 5000, 20000 );
-    anim._id_7167["AI_splash_grenade_mp"] = _func_01B9( 5000, 20000 );
-    anim._id_7167["AI_molotov_mp"] = _func_01B9( 5000, 20000 );
-    anim._id_7167["AI_semtex_mp"] = _func_01B9( 5000, 20000 );
-    anim._id_7167["AI_gas_mp"] = _func_01B9( 5000, 20000 );
+    anim._id_7167["AI_frag_grenade_mp"] = randomintrange( 0, 20000 );
+    anim._id_7167["AI_flash_grenade_mp"] = randomintrange( 0, 20000 );
+    anim._id_7167["AI_smoke_grenade_mp"] = randomintrange( 0, 20000 );
+    anim._id_7167["AI_concussion_grenade_mp"] = randomintrange( 5000, 20000 );
+    anim._id_7167["AI_splash_grenade_mp"] = randomintrange( 5000, 20000 );
+    anim._id_7167["AI_molotov_mp"] = randomintrange( 5000, 20000 );
+    anim._id_7167["AI_semtex_mp"] = randomintrange( 5000, 20000 );
+    anim._id_7167["AI_gas_mp"] = randomintrange( 5000, 20000 );
 }
 
 _id_8115()

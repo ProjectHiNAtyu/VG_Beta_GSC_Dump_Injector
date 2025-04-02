@@ -17,14 +17,14 @@ _id_F789( var_0 )
 
     if ( isdefined( self._id_82F7 ) && istrue( self._id_82F7 ) )
     {
-        if ( _id_099D::_id_8A10( "hud", "showErrorMessage" ) )
-            self [[ _id_099D::_id_6D05( "hud", "showErrorMessage" ) ]]( "KILLSTREAKS/INTEL_ACTIVE" );
+        if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "hud", "showErrorMessage" ) )
+            self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "hud", "showErrorMessage" ) ]]( "KILLSTREAKS/INTEL_ACTIVE" );
 
         return 0;
     }
 
     var_1 = "s4_ks_gesture_generic_mp";
-    var_2 = _func_034C( var_1 );
+    var_2 = makeweapon( var_1 );
     var_3 = _id_0990::_id_E9FE( var_0, var_2 );
 
     if ( !istrue( var_3 ) || level._id_609B )
@@ -36,8 +36,8 @@ _id_F789( var_0 )
             return 0;
     }
 
-    if ( _id_099D::_id_8A10( "hud", "teamPlayerCardSplash" ) )
-        level thread [[ _id_099D::_id_6D05( "hud", "teamPlayerCardSplash" ) ]]( "used_intel", var_0._id_02F2 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "hud", "teamPlayerCardSplash" ) )
+        level thread [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "hud", "teamPlayerCardSplash" ) ]]( "used_intel", var_0.owner );
 
     self._id_82F7 = 1;
     thread playintelvo( var_0 );
@@ -52,8 +52,8 @@ playintelvo( var_0 )
     self endon( "death" );
     self endon( "disconnect" );
 
-    if ( _id_099D::_id_8A10( "sound", "playKillstreakDeployDialog" ) )
-        [[ _id_099D::_id_6D05( "sound", "playKillstreakDeployDialog" ) ]]( self, var_0._id_EA0F );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "sound", "playKillstreakDeployDialog" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "sound", "playKillstreakDeployDialog" ) ]]( self, var_0._id_EA0F );
 
     wait( _func_0140( "mp_glob_" + self._id_AC2A._id_1068F + "_inac" ) / 1000.0 );
     thread _id_0A64::_id_9120( "intel_loop" );
@@ -62,7 +62,7 @@ playintelvo( var_0 )
 _id_10B88()
 {
     self endon( "intel_complete" );
-    _id_077B::_id_1087E( "death", "disconnect" );
+    scripts\engine\utility::waittill_any_2( "death", "disconnect" );
     self._id_82F7 = 0;
     self _meth_8080();
 }
@@ -71,7 +71,7 @@ _id_10B87()
 {
     self endon( "death" );
     self endon( "disconnect" );
-    _id_076B::_id_7A8B( 35 );
+    scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause( 35 );
     self._id_82F7 = 0;
     self _meth_8080();
     thread _id_0A64::_id_9120( "intel_time" );

@@ -87,7 +87,7 @@ addcallback( var_0, var_1 )
 
     __asm_var_clear( 2 )
     __asm_var_clear( 0 )
-    level._id_0B4F[var_0] = _id_04E7::_id_1B63( level._id_0B4F[var_0], var_1 );
+    level._id_0B4F[var_0] = _id_04E7::array_add( level._id_0B4F[var_0], var_1 );
 }
 
 removecallback( var_0, var_1 )
@@ -100,7 +100,7 @@ removecallback( var_0, var_1 )
 
         if ( var_3 == var_1 )
         {
-            level._id_0B4F[var_0] = _id_04E7::_id_1B9C( level._id_0B4F[var_0], var_4, 0 );
+            level._id_0B4F[var_0] = _id_04E7::array_remove_index( level._id_0B4F[var_0], var_4, 0 );
             return;
         }
     }

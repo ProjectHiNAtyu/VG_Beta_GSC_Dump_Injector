@@ -17,9 +17,9 @@ _id_0D58( var_0, var_1 )
     var_2 = undefined;
 
     if ( isdefined( var_0._id_81E0 ) )
-        var_2 = _func_0211( var_0._id_02AF, var_0._id_045A, var_0.type, var_0._id_02EA, var_0._id_0054, var_0._id_02F2, var_0._id_81E0 );
+        var_2 = _func_0211( var_0._id_02AF, var_0._id_045A, var_0.type, var_0.origin, var_0.angles, var_0.owner, var_0._id_81E0 );
     else
-        var_2 = _func_0211( var_0._id_02AF, var_0._id_045A, var_0.type, var_0._id_02EA, var_0._id_0054, var_0._id_02F2 );
+        var_2 = _func_0211( var_0._id_02AF, var_0._id_045A, var_0.type, var_0.origin, var_0.angles, var_0.owner );
 
     if ( !isdefined( var_2 ) )
     {
@@ -29,8 +29,8 @@ _id_0D58( var_0, var_1 )
         return undefined;
     }
 
-    if ( _id_099D::_id_8A10( "vehicle_tracking", "vehicle_spawned" ) )
-        [[ _id_099D::_id_6D05( "vehicle_tracking", "vehicle_spawned" ) ]]( var_2 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_tracking", "vehicle_spawned" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_tracking", "vehicle_spawned" ) ]]( var_2 );
 
     var_2._id_E290 = var_0;
     level._id_102F1++;
@@ -51,13 +51,13 @@ _id_0D58( var_0, var_1 )
 
 _id_0D54( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_5 = _func_020F();
-    var_6 = _func_020F();
+    var_5 = spawnstruct();
+    var_6 = spawnstruct();
     var_6._id_02AF = var_4;
     var_6.type = var_3;
-    var_6._id_02EA = var_1;
-    var_6._id_0054 = var_2;
-    var_6._id_02F2 = var_0;
+    var_6.origin = var_1;
+    var_6.angles = var_2;
+    var_6.owner = var_0;
 
     if ( !_id_31BB() )
     {
@@ -67,7 +67,7 @@ _id_0D54( var_0, var_1, var_2, var_3, var_4 )
         return undefined;
     }
 
-    var_7 = _func_0209( var_6._id_02F2, var_6._id_02EA, var_6._id_0054, var_6.type, var_6._id_02AF );
+    var_7 = _func_0209( var_6.owner, var_6.origin, var_6.angles, var_6.type, var_6._id_02AF );
 
     if ( !isdefined( var_7 ) )
     {
@@ -92,7 +92,7 @@ _id_0B8F( var_0 )
         level._id_EBE2[var_0 getentitynumber()] = undefined;
     }
 
-    var_0 _meth_809A();
+    var_0 delete();
     return 1;
 }
 
@@ -296,7 +296,7 @@ _id_396E( var_0 )
         var_0 = 1;
 
     level._id_102F1 = level._id_102F1 - var_0;
-    level._id_102F1 = int( _func_0147( 0, level._id_102F1 ) );
+    level._id_102F1 = int( max( 0, level._id_102F1 ) );
 }
 
 _id_6E22( var_0 )
@@ -309,14 +309,14 @@ _id_3D43( var_0, var_1 )
     var_1._id_02AF = var_0._id_02AF;
     var_1._id_045A = var_0._id_045A;
     var_1.type = var_0.type;
-    var_1._id_02EA = var_0._id_02EA;
-    var_1._id_0054 = var_0._id_0054;
-    var_1._id_02F2 = var_0._id_02F2;
+    var_1.origin = var_0.origin;
+    var_1.angles = var_0.angles;
+    var_1.owner = var_0.owner;
     var_1._id_81E0 = var_0._id_81E0;
     var_1._id_317A = var_0._id_317A;
     var_1._id_E725 = var_0._id_E725;
-    var_1._id_E39A = var_0._id_E39A;
-    var_1._id_045B = var_0._id_045B;
+    var_1.spawntype = var_0.spawntype;
+    var_1.team = var_0.team;
     var_1._id_FE20 = var_0._id_FE20;
 }
 

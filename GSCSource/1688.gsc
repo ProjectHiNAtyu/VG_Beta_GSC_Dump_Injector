@@ -21,7 +21,7 @@ _id_F412( var_0, var_1, var_2, var_3 )
     self._id_0DB6._id_1330 = 1.0;
     self._id_0DB6._id_1333 = 0;
     self._id_0DB6._id_1332 = 0;
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
     var_4._id_1303 = var_0;
     var_4._id_1305 = var_1;
     var_4._id_1308 = var_2;
@@ -36,7 +36,7 @@ _id_DFA9()
 
     if ( isdefined( self._id_DF7B ) )
     {
-        self._id_DF7B _meth_809A();
+        self._id_DF7B delete();
         self._id_DF7B = undefined;
     }
 }
@@ -47,7 +47,7 @@ _id_DFB2()
     {
         self notify( "stop_sniper" );
         self._id_DF7B [[ self._id_5D7F ]]();
-        self._id_DF7B _meth_809A();
+        self._id_DF7B delete();
         self._id_DF7B = undefined;
         self._id_24CF = undefined;
         self [[ self._id_5D9D ]]( "none" );
@@ -115,31 +115,31 @@ _id_DFB1()
 
     thread _id_DFA9();
     var_0 = _id_6AD6();
-    self._id_DF7B = _func_0205( "script_model", var_0 );
-    self._id_DF7B setmode( "tag_laser" );
+    self._id_DF7B = spawn( "script_model", var_0 );
+    self._id_DF7B setmodel( "tag_laser" );
     self._id_DF7B _meth_8590( self._id_04CE );
-    self._id_DF7B setorigin( self );
-    self._id_DF7B._id_02EA = var_0;
+    self._id_DF7B setotherent( self );
+    self._id_DF7B.origin = var_0;
     self [[ self._id_5D9D ]]( "interpolate" );
     self._id_DF7B [[ self._id_5D80 ]]();
 
-    while ( isai( self ) && isdefined( self._id_DF7B ) )
+    while ( isalive( self ) && isdefined( self._id_DF7B ) )
     {
         if ( isdefined( self._id_3C4E._id_1313 ) )
         {
             var_0 = _id_6AD6();
-            self._id_DF7B._id_02EA = var_0;
+            self._id_DF7B.origin = var_0;
             var_1 = self._id_3C4E._id_1313;
-            var_2 = _func_025A( var_1 - var_0 );
+            var_2 = vectornormalize( var_1 - var_0 );
             var_3 = _id_6AD5();
-            var_2 = _func_025A( ( var_2[0], var_2[1], 0 ) );
-            var_3 = _func_025A( ( var_3[0], var_3[1], 0 ) );
-            var_4 = _func_0257( var_2, var_3 );
+            var_2 = vectornormalize( ( var_2[0], var_2[1], 0 ) );
+            var_3 = vectornormalize( ( var_3[0], var_3[1], 0 ) );
+            var_4 = vectordot( var_2, var_3 );
 
             if ( var_4 < 0.996 )
-                self._id_DF7B._id_0054 = _id_6AD4();
+                self._id_DF7B.angles = _id_6AD4();
             else
-                self._id_DF7B._id_0054 = _func_025B( self._id_3C4E._id_1313 - self._id_DF7B._id_02EA );
+                self._id_DF7B.angles = vectortoangles( self._id_3C4E._id_1313 - self._id_DF7B.origin );
         }
 
         waitframe();
@@ -165,10 +165,10 @@ _id_390A()
 _id_C5FF( var_0, var_1, var_2 )
 {
     if ( !isdefined( self._id_3C4E ) )
-        self._id_3C4E = _func_020F();
+        self._id_3C4E = spawnstruct();
 
     self._id_3C4E._id_DF67 = undefined;
-    self._id_3C4E._id_0457 = self._id_0B3E._id_039D;
+    self._id_3C4E.target = self._id_0B3E._id_039D;
     self._id_3C4E._id_3C4A = 96;
 
     if ( var_0 )
@@ -189,7 +189,7 @@ _id_C5FF( var_0, var_1, var_2 )
         self._id_3C4E._id_3C4D = self._id_3C4E._id_3C4D * level._id_DF53;
 
     self._id_3C4E._id_3C49 = 12;
-    self.color = 750;
+    self._id_010A = 750;
     self._id_010B = -1;
 
     if ( !isdefined( self._id_DF7B ) )
@@ -211,9 +211,9 @@ _id_C5FF( var_0, var_1, var_2 )
         {
             if ( isdefined( self._id_0B3E._id_039D ) )
             {
-                var_7 = self._id_0B3E._id_039D._id_02EA;
+                var_7 = self._id_0B3E._id_039D.origin;
 
-                if ( _func_0117( self._id_0B3E._id_039D ) )
+                if ( isplayer( self._id_0B3E._id_039D ) )
                 {
                     var_6 = self._id_0B3E._id_039D getvelocity();
 
@@ -224,40 +224,40 @@ _id_C5FF( var_0, var_1, var_2 )
             else
                 var_7 = self._id_0B3E._id_03A1 - ( 0, 0, 70 );
 
-            var_8 = var_7 - self._id_02EA;
+            var_8 = var_7 - self.origin;
             var_8 = ( var_8[0], var_8[1], 0 );
-            var_9 = _func_025A( var_8 );
+            var_9 = vectornormalize( var_8 );
 
             if ( istrue( var_2 ) )
             {
                 var_5 = var_7;
-                var_5 = var_5 + ( 0, 0, _func_01B7( 12, 36 ) );
+                var_5 = var_5 + ( 0, 0, randomfloatrange( 12, 36 ) );
             }
             else
-                var_5 = var_7 - var_9 * _func_01B7( 120, 180 );
+                var_5 = var_7 - var_9 * randomfloatrange( 120, 180 );
 
             var_10 = _func_0256( var_9, ( 0, 0, 1 ) );
-            var_11 = _func_01B7( 6, 36 );
+            var_11 = randomfloatrange( 6, 36 );
 
             if ( istrue( var_2 ) )
-                var_11 = _func_01B7( 12, 24 );
+                var_11 = randomfloatrange( 12, 24 );
 
             if ( isdefined( var_6 ) )
             {
-                var_12 = _func_0257( var_6, var_10 );
+                var_12 = vectordot( var_6, var_10 );
 
                 if ( var_12 < 0 )
                     var_5 = var_5 + var_10 * var_11;
                 else
                     var_5 = var_5 - var_10 * var_11;
             }
-            else if ( _func_01B9( 0, 2 ) )
+            else if ( randomintrange( 0, 2 ) )
                 var_5 = var_5 + var_10 * var_11;
             else
                 var_5 = var_5 - var_10 * var_11;
         }
 
-        self._id_3C4E._id_3C4B = _func_025A( var_5 - self._id_0B3E._id_03A1 );
+        self._id_3C4E._id_3C4B = vectornormalize( var_5 - self._id_0B3E._id_03A1 );
         self._id_3C4E._id_3C4A = distance( var_5, self._id_0B3E._id_03A1 );
     }
 }
@@ -268,7 +268,7 @@ _id_2E8E()
     {
         var_0 = gettime() - self._id_010B;
 
-        if ( isdefined( self._id_0B3E._id_039D ) && _func_0117( self._id_0B3E._id_039D ) )
+        if ( isdefined( self._id_0B3E._id_039D ) && isplayer( self._id_0B3E._id_039D ) )
             self [[ self._id_5D9D ]]( "lock" );
         else
             self [[ self._id_5D9D ]]( "interpolate" );
@@ -276,8 +276,8 @@ _id_2E8E()
         return self._id_0B3E._id_03A1 - ( 0, 0, 1.3 );
     }
 
-    var_1 = _func_025A( self._id_0B3E._id_03A1 - self._id_02EA );
-    var_2 = _func_025B( var_1 );
+    var_1 = vectornormalize( self._id_0B3E._id_03A1 - self.origin );
+    var_2 = vectortoangles( var_1 );
 
     if ( self._id_0109 < 0 )
     {
@@ -294,7 +294,7 @@ _id_2E8E()
     var_5 = var_4 * ( self._id_3C4E._id_3C4A - self._id_3C4E._id_3C49 ) + self._id_3C4E._id_3C49;
     var_3 = self._id_0B3E._id_03A1 + self._id_3C4E._id_3C4B * var_5;
 
-    if ( isdefined( self._id_0B3E._id_039D ) && _func_0117( self._id_0B3E._id_039D ) )
+    if ( isdefined( self._id_0B3E._id_039D ) && isplayer( self._id_0B3E._id_039D ) )
         self [[ self._id_5D9D ]]( "interpolate" );
 
     return var_3;
@@ -335,7 +335,7 @@ _id_3C4F()
     {
         var_0 = self _meth_8066( self._id_0B3E._id_039D );
 
-        if ( isdefined( self._id_3C4E ) && isdefined( self._id_3C4E._id_0457 ) && self._id_3C4E._id_0457 != self._id_0B3E._id_039D )
+        if ( isdefined( self._id_3C4E ) && isdefined( self._id_3C4E.target ) && self._id_3C4E.target != self._id_0B3E._id_039D )
             var_1 = 1;
 
         if ( var_0 )
@@ -356,7 +356,7 @@ _id_3C4F()
         self [[ self._id_5D9D ]]( "interpolate" );
         self._id_3C4E._id_DF67 = undefined;
 
-        if ( isdefined( self._id_0B3E._id_039D ) && _func_0117( self._id_0B3E._id_039D ) && self _meth_8066( self._id_0B3E._id_039D ) )
+        if ( isdefined( self._id_0B3E._id_039D ) && isplayer( self._id_0B3E._id_039D ) && self _meth_8066( self._id_0B3E._id_039D ) )
             _id_C5FF( var_1, undefined, 1 );
     }
 
@@ -364,7 +364,7 @@ _id_3C4F()
     var_2 = 1;
     var_3 = _id_6AD6();
     var_4 = _id_2E8E();
-    var_5 = _func_025A( var_4 - var_3 );
+    var_5 = vectornormalize( var_4 - var_3 );
     var_6 = self _meth_8560();
 
     if ( self._id_0109 < 0 )
@@ -373,14 +373,14 @@ _id_3C4F()
             return 0;
 
         self._id_0109 = self._id_0109 + 50;
-        var_7 = _func_0257( var_5, var_6 );
+        var_7 = vectordot( var_5, var_6 );
 
         if ( var_7 < 0.984 )
             return 0;
 
-        var_5 = _func_025A( ( var_5[0], var_5[1], 0 ) );
-        var_6 = _func_025A( ( var_6[0], var_6[1], 0 ) );
-        var_8 = _func_0257( var_5, var_6 );
+        var_5 = vectornormalize( ( var_5[0], var_5[1], 0 ) );
+        var_6 = vectornormalize( ( var_6[0], var_6[1], 0 ) );
+        var_8 = vectordot( var_5, var_6 );
 
         if ( var_8 < 0.996 )
             return 0;
@@ -390,14 +390,14 @@ _id_3C4F()
     else
     {
         self._id_0109 = self._id_0109 + 50;
-        var_7 = _func_0257( var_5, var_6 );
+        var_7 = vectordot( var_5, var_6 );
 
         if ( var_7 < 0.984 )
             var_2 = 0;
 
-        var_5 = _func_025A( ( var_5[0], var_5[1], 0 ) );
-        var_6 = _func_025A( ( var_6[0], var_6[1], 0 ) );
-        var_8 = _func_0257( var_5, var_6 );
+        var_5 = vectornormalize( ( var_5[0], var_5[1], 0 ) );
+        var_6 = vectornormalize( ( var_6[0], var_6[1], 0 ) );
+        var_8 = vectordot( var_5, var_6 );
 
         if ( var_8 < 0.996 )
             var_2 = 0;
@@ -444,7 +444,7 @@ _id_DB15()
 
 _id_6D0A( var_0 )
 {
-    var_1 = _func_020F();
+    var_1 = spawnstruct();
 
     if ( istrue( self._id_5EAF ) )
     {
@@ -483,7 +483,7 @@ _id_6D0A( var_0 )
     {
         if ( isdefined( self._id_1317 ) )
         {
-            var_1._id_DA2D = self._id_1317._id_02EA;
+            var_1._id_DA2D = self._id_1317.origin;
             var_1._id_24BB = 1;
             return var_1;
         }
@@ -577,7 +577,7 @@ _id_F418( var_0 )
         _id_7D95();
         var_6 = _id_0009::_id_1C1B( self._id_1C08._id_F3EE, "aim" );
 
-        if ( isdefined( self._id_0303 ) && distance2dsquared( self._id_0303, self._id_02EA ) > 16 && !_id_30EC() )
+        if ( isdefined( self._id_0303 ) && distance2dsquared( self._id_0303, self.origin ) > 16 && !_id_30EC() )
             var_6 = 0;
 
         var_7 = 0;
@@ -627,8 +627,8 @@ _id_F418( var_0 )
             if ( var_12 )
             {
                 var_13 = var_11 _meth_8547();
-                var_14 = anglestoforward( self._id_0054 );
-                var_15 = _func_01C2( var_14, var_13 );
+                var_14 = anglestoforward( self.angles );
+                var_15 = rotatevector( var_14, var_13 );
                 var_10 = var_9 + var_15 * 512.0;
             }
             else if ( _id_0694::_id_23E8() && isdefined( self._id_0B3E._id_03A1 ) )
@@ -715,8 +715,8 @@ _id_F418( var_0 )
                 if ( istrue( self._id_4CDC ) )
                 {
                     var_34 = self _meth_8560();
-                    var_35 = _func_025A( var_8._id_DA2D - var_9 );
-                    var_36 = _func_0257( var_34, var_35 );
+                    var_35 = vectornormalize( var_8._id_DA2D - var_9 );
+                    var_36 = vectordot( var_34, var_35 );
 
                     if ( var_36 >= 0.966 )
                     {
@@ -743,7 +743,7 @@ _id_F418( var_0 )
         if ( var_4 > 0 )
         {
             var_4 = var_4 - 1;
-            var_5 = _func_0147( 10, var_5 - 5 );
+            var_5 = max( 10, var_5 - 5 );
         }
         else if ( self._id_0340 && self._id_0340 != var_3 )
         {
@@ -765,7 +765,7 @@ _id_F418( var_0 )
         {
             var_41 = var_38 - self._id_1C08._id_BC5F;
 
-            if ( spawnstruct( var_41 ) > var_39 )
+            if ( _func_0214( var_41 ) > var_39 )
             {
                 var_42 = var_41 * 0.4;
                 var_38 = self._id_1C08._id_BC5F + clamp( var_42, -1 * var_5, var_5 );
@@ -774,7 +774,7 @@ _id_F418( var_0 )
 
             var_43 = var_37 - self._id_1C08._id_BC47;
 
-            if ( spawnstruct( var_43 ) > var_39 )
+            if ( _func_0214( var_43 ) > var_39 )
             {
                 var_44 = var_43 * 0.4;
                 var_37 = self._id_1C08._id_BC47 + clamp( var_44, -1 * var_5, var_5 );
@@ -812,22 +812,22 @@ _id_F41D()
 _id_F41B( var_0 )
 {
     var_1 = undefined;
-    var_2 = anglestoforward( self._id_0054 );
+    var_2 = anglestoforward( self.angles );
     var_3 = 0;
 
     if ( isdefined( self._id_3E0F ) )
     {
-        if ( _func_02DA( self._id_3E0F ) )
+        if ( isvector( self._id_3E0F ) )
             var_1 = self._id_3E0F;
         else
             var_1 = self._id_3E0F _meth_8176();
 
         if ( isdefined( self._id_3E13 ) )
         {
-            if ( _func_0257( _func_025A( var_1 - var_0 ), var_2 ) < 0.177 )
+            if ( vectordot( vectornormalize( var_1 - var_0 ), var_2 ) < 0.177 )
                 var_1 = undefined;
         }
-        else if ( _func_0257( _func_025A( var_1 - var_0 ), var_2 ) < 0.643 )
+        else if ( vectordot( vectornormalize( var_1 - var_0 ), var_2 ) < 0.643 )
             var_1 = undefined;
     }
 
@@ -844,19 +844,19 @@ _id_F41B( var_0 )
         }
         else if ( isdefined( self._id_3E0E ) )
         {
-            if ( !_id_077B::_id_85A4( self._id_3E0E, self._id_41C3 ) )
+            if ( !scripts\engine\utility::is_equal( self._id_3E0E, self._id_41C3 ) )
             {
                 _id_D674( self._id_3E0E );
 
                 if ( !istrue( self._id_41C3._id_88FE ) )
                 {
-                    var_1 = self._id_41C3._id_02EA;
+                    var_1 = self._id_41C3.origin;
                     self._id_0DB6._id_8EE9 = 0;
                     scripts\anim\shared::_id_FC9C();
                 }
             }
             else if ( !istrue( self._id_41C3._id_88FE ) )
-                var_1 = self._id_41C3._id_02EA;
+                var_1 = self._id_41C3.origin;
         }
     }
 
@@ -866,14 +866,14 @@ _id_F41B( var_0 )
     if ( !isdefined( var_1 ) && isdefined( self._id_0303 ) && !isdefined( self._id_017D ) && self._id_01A2 )
     {
         var_4 = self _meth_84A5( self._id_97C7 );
-        var_5 = var_4 - self._id_02EA;
-        var_5 = _func_025A( ( var_5[0], var_5[1], 0 ) );
+        var_5 = var_4 - self.origin;
+        var_5 = vectornormalize( ( var_5[0], var_5[1], 0 ) );
 
-        if ( _func_0257( var_2, var_5 ) < 0.9994 )
+        if ( vectordot( var_2, var_5 ) < 0.9994 )
             var_1 = var_4 + ( 0, 0, 54 );
     }
 
-    var_6 = _func_020F();
+    var_6 = spawnstruct();
     var_6._id_DA2D = var_1;
     var_6._id_2D99 = var_3;
     var_6._id_24BB = 1;
@@ -900,12 +900,12 @@ _id_B98C()
         {
             var_1 = _id_08C8::_id_B993( self._id_B992 );
             self._id_B98A._id_416F = var_1;
-            _id_06BB::_id_97D9( var_1, 0 );
+            scripts\common\utility::_id_97D9( var_1, 0 );
         }
         else
         {
             self._id_B98A._id_416F = var_0;
-            _id_06BB::_id_97D9( var_0, 0 );
+            scripts\common\utility::_id_97D9( var_0, 0 );
         }
     }
 
@@ -923,12 +923,12 @@ _id_D674( var_0 )
     else
     {
         if ( istrue( var_0._id_88FE ) )
-            self _meth_819F( var_0._id_02EA, var_0._id_97D5 );
+            self _meth_819F( var_0.origin, var_0._id_97D5 );
         else
         {
             self._id_0B3E._id_01BE = istrue( var_0._id_CE19 );
-            self._id_0B3E._id_01BF = var_0._id_02EA;
-            self _meth_8343( var_0._id_02EA );
+            self._id_0B3E._id_01BF = var_0.origin;
+            self _meth_8343( var_0.origin );
         }
 
         var_1 = gettime();
@@ -1013,8 +1013,8 @@ _id_F41F( var_0, var_1 )
     var_13 = [ 80, 91.787, 45, 91.787, 80, 91.787, 45, 91.787, 80 ];
     var_14 = ( var_1, var_0, 0 );
     var_15 = _func_0131( var_14 );
-    var_16 = _func_025A( var_14 );
-    var_17 = vectordot( var_16 );
+    var_16 = vectornormalize( var_14 );
+    var_17 = _func_025C( var_16 );
     var_17 = _func_000B( var_17 );
 
     for ( var_18 = 0; var_17 > var_11[var_18]; var_18++ )
@@ -1032,7 +1032,7 @@ _id_F41F( var_0, var_1 )
         if ( var_20 == var_18 || var_20 == var_18 - 1 )
         {
             var_21 = clamp( var_15 / var_13[var_20], 0.0, 1.0 );
-            var_22 = _func_0002( _func_0257( var_12[var_20], var_16 ) );
+            var_22 = _func_0002( vectordot( var_12[var_20], var_16 ) );
             var_23 = clamp( 1 - var_22 / var_13[var_20], 0.0, 1.0 );
             var_24 = _id_0009::_id_1C46( var_19, var_10[var_20] );
             var_25 = self _meth_85F5( var_24 );
@@ -1121,7 +1121,7 @@ _id_1322()
         {
             var_0 = gettime() - self._id_010B;
 
-            if ( var_0 >= self.color )
+            if ( var_0 >= self._id_010A )
             {
                 self._id_0081 = 1;
                 return 1;
@@ -1145,7 +1145,7 @@ _id_1322()
             var_1 = !_id_0009::_id_1C28( self._id_1C08._id_F3EE, "start_aim" );
 
         if ( !var_1 )
-            var_1 = isdefined( self._id_0303 ) && distance2dsquared( self._id_0303, self._id_02EA ) > 16 && !_id_30EC();
+            var_1 = isdefined( self._id_0303 ) && distance2dsquared( self._id_0303, self.origin ) > 16 && !_id_30EC();
 
         if ( var_1 )
         {
@@ -1166,14 +1166,14 @@ _id_1322()
     var_4 = var_3._id_DA2D;
     var_5 = self _meth_8182();
 
-    if ( _id_077B::_id_0F4F() )
+    if ( scripts\engine\utility::_id_0F4F() )
     {
         var_6 = self _meth_8560();
-        var_7 = _func_01C3( var_6, self._id_0054 );
-        var_8 = _func_025B( var_7 );
+        var_7 = _func_01C3( var_6, self.angles );
+        var_8 = vectortoangles( var_7 );
         var_9 = var_4 - var_2;
-        var_10 = _func_01C3( var_9, self._id_0054 );
-        var_11 = _func_025B( var_10 );
+        var_10 = _func_01C3( var_9, self.angles );
+        var_11 = vectortoangles( var_10 );
     }
     else if ( isdefined( var_5 ) )
     {
@@ -1189,17 +1189,17 @@ _id_1322()
     }
     else if ( istrue( self._id_035A ) )
     {
-        var_11 = _func_025B( var_4 - var_2 );
+        var_11 = vectortoangles( var_4 - var_2 );
         var_8 = self _meth_815B();
     }
     else
     {
-        var_11 = _func_025B( var_4 - var_2 );
+        var_11 = vectortoangles( var_4 - var_2 );
 
-        if ( _func_0438( var_11[1] - self._id_0054[1] ) > 100 || _func_0438( var_11[0] - self._id_0054[0] ) > 100 )
+        if ( _func_0438( var_11[1] - self.angles[1] ) > 100 || _func_0438( var_11[0] - self.angles[0] ) > 100 )
             return 0;
 
-        if ( _id_06BB::_id_87BA() && self._id_0492 == "zombie" )
+        if ( scripts\common\utility::_id_87BA() && self._id_0492 == "zombie" )
             var_8 = self gettagangles( "j_gun" );
         else
             var_8 = self _meth_815B();

@@ -22,7 +22,7 @@ _id_1006B( var_0 )
         }
     }
 
-    self _meth_82F0( var_0 );
+    self setcandamage( var_0 );
     _id_1002C( self );
 }
 
@@ -35,10 +35,10 @@ _id_1003F( var_0, var_1, var_2 )
     {
         if ( istrue( var_1 ) )
         {
-            var_4 = _func_020F();
+            var_4 = spawnstruct();
             var_3._id_102F4[var_0] = var_4;
             var_4._id_430B = [];
-            var_4._id_37D9 = "none";
+            var_4.class = "none";
             var_4._id_7625 = undefined;
             var_4._id_BD24 = undefined;
             var_4._id_7649 = undefined;
@@ -65,7 +65,7 @@ _id_1003C( var_0, var_1, var_2 )
     {
         if ( istrue( var_1 ) )
         {
-            var_3 = _func_020F();
+            var_3 = spawnstruct();
             var_0._id_42CF = var_3;
             var_3._id_4840 = undefined;
             var_3._id_4841 = undefined;
@@ -104,9 +104,9 @@ _id_1003E( var_0, var_1, var_2, var_3 )
     {
         if ( istrue( var_2 ) )
         {
-            var_5 = _func_020F();
+            var_5 = spawnstruct();
             var_4._id_430B[var_1] = var_5;
-            var_5._id_027F = undefined;
+            var_5.maxhealth = undefined;
             var_5._id_AAB4 = undefined;
             var_5._id_AACA = undefined;
         }
@@ -172,8 +172,8 @@ _id_1002E( var_0, var_1, var_2 )
 
 _id_1004B()
 {
-    var_0 = _func_020F();
-    level._id_FFF1._id_0134 = var_0;
+    var_0 = spawnstruct();
+    level._id_FFF1.damage = var_0;
     var_0._id_102F4 = [];
     var_0._id_BD24 = getdvarint( "scr_vehicleDamageStatePristineHealthAdd", 125 );
     var_0._id_7649 = getdvarint( "scr_vehicleDamageStateHeavyHealthAdd", 350 );
@@ -182,10 +182,10 @@ _id_1004B()
     _id_10057();
     _id_1004C();
 
-    if ( _id_099D::_id_8A10( "vehicle_damage", "init" ) )
-        [[ _id_099D::_id_6D05( "vehicle_damage", "init" ) ]]();
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_damage", "init" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_damage", "init" ) ]]();
 
-    if ( level._id_60D1 == "br" )
+    if ( level.gametype == "br" )
         _id_1004E();
     else
         _id_1004D();
@@ -196,7 +196,7 @@ _id_1004B()
 _id_10057()
 {
     var_0 = _id_1003D();
-    var_1 = _func_020F();
+    var_1 = spawnstruct();
     var_0._id_EC59 = var_1;
     var_1._id_A002 = [];
     var_1._id_A003 = [];
@@ -212,7 +212,7 @@ _id_10057()
     var_3["weaponHPA"] = [];
     var_3["weaponSkipBurnDown"] = [];
 
-    if ( level._id_60D1 == "br" )
+    if ( level.gametype == "br" )
         var_1 = "mp_cp/vehicleDamageTable_br.csv";
     else
         var_1 = "mp_cp/vehicleDamageTable.csv";
@@ -222,7 +222,7 @@ _id_10057()
 
     for ( var_6 = 1; var_6 < var_5; var_6++ )
     {
-        var_7 = _func_021E( var_1, 0, var_6 );
+        var_7 = tablelookupbyrow( var_1, 0, var_6 );
 
         if ( isdefined( var_7 ) && var_7 != "" )
         {
@@ -239,11 +239,11 @@ _id_10057()
 
     var_8 = undefined;
     var_9 = 0;
-    var_10 = strtok( var_1 );
+    var_10 = tablelookupgetnumrows( var_1 );
 
     for ( var_9 = 0; var_9 < var_10; var_9++ )
     {
-        var_11 = _func_021E( var_1, var_9, 1 );
+        var_11 = tablelookupbyrow( var_1, var_9, 1 );
 
         if ( isdefined( var_11 ) && var_11 != "" )
         {
@@ -266,7 +266,7 @@ _id_10057()
             {
                 foreach ( var_7, var_19 in var_17 )
                 {
-                    var_20 = stopfxontag( var_1, 0, var_15, var_19 );
+                    var_20 = _func_021D( var_1, 0, var_15, var_19 );
 
                     if ( isdefined( var_20 ) && var_20 != "" )
                         _id_10058( var_20, var_11, var_8, var_7, var_4 );
@@ -351,7 +351,7 @@ _id_1002A( var_0, var_1 )
     if ( !isdefined( var_4 ) )
         return;
 
-    var_5 = var_4._id_37D9;
+    var_5 = var_4.class;
 
     if ( isdefined( var_3._id_A002[var_5] ) )
     {
@@ -460,25 +460,25 @@ _id_1004F()
 
 _id_1003D()
 {
-    return level._id_FFF1._id_0134;
+    return level._id_FFF1.damage;
 }
 
 _id_10052( var_0, var_1 )
 {
-    if ( isdefined( var_1._id_7E78 ) )
+    if ( isdefined( var_1.inflictor ) )
     {
-        if ( var_1._id_7E78 == var_0 )
+        if ( var_1.inflictor == var_0 )
             return 1;
 
-        var_2 = _id_09B4::_id_100CB( var_0 );
+        var_2 = scripts\cp_mp\vehicles\vehicle::_id_100CB( var_0 );
 
         foreach ( var_4 in var_2 )
         {
-            if ( var_1._id_7E78 == var_4 )
+            if ( var_1.inflictor == var_4 )
                 return 1;
         }
 
-        if ( var_1._id_7E78._id_00DE == "rocket" && isdefined( var_1._id_7E78._id_FFF1 ) && var_1._id_7E78._id_FFF1 == var_0 )
+        if ( var_1.inflictor.classname == "rocket" && isdefined( var_1.inflictor._id_FFF1 ) && var_1.inflictor._id_FFF1 == var_0 )
             return 1;
     }
 
@@ -540,12 +540,12 @@ _id_10066( var_0, var_1, var_2 )
         }
     }
 
-    if ( !isdefined( var_2._id_7E78 ) )
-        var_2._id_7E78 = undefined;
+    if ( !isdefined( var_2.inflictor ) )
+        var_2.inflictor = undefined;
 
     var_0 endon( "death" );
     var_0 endon( "vehicle_damage_clearEventLog" );
-    var_0 _meth_80B7( var_2._id_0134, var_2._id_0317, var_2._id_006E, var_2._id_7E78, var_2._id_9CBF, var_2._id_A90B, var_2._id_798E );
+    var_0 dodamage( var_2.damage, var_2._id_0317, var_2.attacker, var_2.inflictor, var_2._id_9CBF, var_2.objweapon, var_2._id_798E );
     _id_10059( var_0, var_2 );
 }
 
@@ -553,18 +553,18 @@ _id_10053( var_0 )
 {
     self endon( "death" );
     self endon( "vehicle_damage_keepTurretAliveEnd" );
-    self _meth_82F0( 1 );
-    self._id_01FF = 2147483647;
+    self setcandamage( 1 );
+    self.health = 2147483647;
     self waittill( "damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15 );
     var_16 = _id_0996::_id_ADB7( var_2, self, var_1, var_10, var_5, var_14, var_4, var_3, var_6, var_8, var_7, var_9, var_15 );
     _id_10066( var_0, self, var_16 );
-    self._id_01FF = 2147483647;
+    self.health = 2147483647;
 }
 
 _id_10054( var_0 )
 {
     self notify( "vehicle_damage_keepTurretAliveEnd" );
-    self _meth_82F0( 0 );
+    self setcandamage( 0 );
 }
 
 _id_10034( var_0 )
@@ -573,14 +573,14 @@ _id_10034( var_0 )
 
     if ( isdefined( var_1 ) )
     {
-        var_2 = self._id_01FF / self._id_027F;
-        var_3 = self._id_01FF;
+        var_2 = self.health / self.maxhealth;
+        var_3 = self.health;
         var_4 = 0;
 
-        if ( isdefined( var_0 ) && isdefined( var_0._id_0134 ) )
-            var_3 = int( _func_0147( 0, self._id_01FF - var_0._id_0134 ) );
+        if ( isdefined( var_0 ) && isdefined( var_0.damage ) )
+            var_3 = int( max( 0, self.health - var_0.damage ) );
 
-        var_5 = var_3 / self._id_027F;
+        var_5 = var_3 / self.maxhealth;
         var_6 = getarraykeys( var_1._id_1042D );
 
         if ( istrue( var_1._id_1042C ) )
@@ -640,11 +640,11 @@ _id_1007B( var_0, var_1 )
 
     while ( isdefined( self ) )
     {
-        if ( !_id_09BC::_id_0C18() )
+        if ( !scripts\cp_mp\vehicles\vehicle_tracking::_id_0C18() )
         {
             var_3 = undefined;
             var_4 = int( self _meth_842D() );
-            var_5 = istrue( _id_09B4::_id_102EC() );
+            var_5 = istrue( scripts\cp_mp\vehicles\vehicle::_id_102EC() );
 
             if ( var_5 && self _meth_8723() )
                 var_3 = 0;
@@ -676,21 +676,21 @@ _id_1007A()
 
 _id_10055( var_0, var_1 )
 {
-    if ( _id_09BC::_id_0C18() )
-        self _meth_8373( "damageLight", "stopped", 1 );
+    if ( scripts\cp_mp\vehicles\vehicle_tracking::_id_0C18() )
+        self setscriptablepartstate( "damageLight", "stopped", 1 );
     else
     {
         var_2 = int( self _meth_842D() );
-        var_3 = istrue( _id_09B4::_id_102EC() );
+        var_3 = istrue( scripts\cp_mp\vehicles\vehicle::_id_102EC() );
 
         if ( var_3 && self _meth_8723() )
-            self _meth_8373( "damageLight", "stopped", 1 );
+            self setscriptablepartstate( "damageLight", "stopped", 1 );
         else if ( !var_3 && var_2 <= 3 )
-            self _meth_8373( "damageLight", "stopped", 1 );
+            self setscriptablepartstate( "damageLight", "stopped", 1 );
         else if ( var_2 <= 25 )
-            self _meth_8373( "damageLight", "lowSpeed", 1 );
+            self setscriptablepartstate( "damageLight", "lowSpeed", 1 );
         else
-            self _meth_8373( "damageLight", "highSpeed", 1 );
+            self setscriptablepartstate( "damageLight", "highSpeed", 1 );
     }
 
     thread _id_1007B( "light", var_0 );
@@ -698,26 +698,26 @@ _id_10055( var_0, var_1 )
 
 _id_10056( var_0, var_1, var_2 )
 {
-    self _meth_8373( "damageLight", "off", 1 );
+    self setscriptablepartstate( "damageLight", "off", 1 );
 }
 
 _id_1005A( var_0, var_1 )
 {
-    if ( _id_09BC::_id_0C18() )
-        self _meth_8373( "damageMedium", "stopped", 1 );
+    if ( scripts\cp_mp\vehicles\vehicle_tracking::_id_0C18() )
+        self setscriptablepartstate( "damageMedium", "stopped", 1 );
     else
     {
         var_2 = int( self _meth_842D() );
-        var_3 = istrue( _id_09B4::_id_102EC() );
+        var_3 = istrue( scripts\cp_mp\vehicles\vehicle::_id_102EC() );
 
         if ( var_3 && self _meth_8723() )
-            self _meth_8373( "damageMedium", "stopped", 1 );
+            self setscriptablepartstate( "damageMedium", "stopped", 1 );
         else if ( !var_3 && var_2 <= 3 )
-            self _meth_8373( "damageMedium", "stopped", 1 );
+            self setscriptablepartstate( "damageMedium", "stopped", 1 );
         else if ( var_2 <= 25 )
-            self _meth_8373( "damageMedium", "lowSpeed", 1 );
+            self setscriptablepartstate( "damageMedium", "lowSpeed", 1 );
         else
-            self _meth_8373( "damageMedium", "highSpeed", 1 );
+            self setscriptablepartstate( "damageMedium", "highSpeed", 1 );
     }
 
     thread _id_1007B( "medium", var_0 );
@@ -725,26 +725,26 @@ _id_1005A( var_0, var_1 )
 
 _id_1005B( var_0, var_1, var_2 )
 {
-    self _meth_8373( "damageMedium", "off", 1 );
+    self setscriptablepartstate( "damageMedium", "off", 1 );
 }
 
 _id_10049( var_0, var_1 )
 {
-    if ( _id_09BC::_id_0C18() )
-        self _meth_8373( "damageHeavy", "stopped", 1 );
+    if ( scripts\cp_mp\vehicles\vehicle_tracking::_id_0C18() )
+        self setscriptablepartstate( "damageHeavy", "stopped", 1 );
     else
     {
         var_2 = int( self _meth_842D() );
-        var_3 = istrue( _id_09B4::_id_102EC() );
+        var_3 = istrue( scripts\cp_mp\vehicles\vehicle::_id_102EC() );
 
         if ( var_3 && self _meth_8723() )
-            self _meth_8373( "damageHeavy", "stopped", 1 );
+            self setscriptablepartstate( "damageHeavy", "stopped", 1 );
         else if ( !var_3 && var_2 <= 3 )
-            self _meth_8373( "damageHeavy", "stopped", 1 );
+            self setscriptablepartstate( "damageHeavy", "stopped", 1 );
         else if ( var_2 <= 25 )
-            self _meth_8373( "damageHeavy", "lowSpeed", 1 );
+            self setscriptablepartstate( "damageHeavy", "lowSpeed", 1 );
         else
-            self _meth_8373( "damageHeavy", "highSpeed", 1 );
+            self setscriptablepartstate( "damageHeavy", "highSpeed", 1 );
     }
 
     thread _id_1007B( "heavy", var_0 );
@@ -752,17 +752,17 @@ _id_10049( var_0, var_1 )
 
 _id_1004A( var_0, var_1, var_2 )
 {
-    self _meth_8373( "damageHeavy", "off", 1 );
+    self setscriptablepartstate( "damageHeavy", "off", 1 );
 }
 
 _id_10037( var_0, var_1 )
 {
-    self _meth_8373( "damageEngine", "explode", 1 );
+    self setscriptablepartstate( "damageEngine", "explode", 1 );
 }
 
 _id_10038( var_0, var_1, var_2 )
 {
-    self _meth_8373( "damageEngine", "off", 1 );
+    self setscriptablepartstate( "damageEngine", "off", 1 );
 }
 
 _id_10044()
@@ -803,10 +803,10 @@ _id_10077( var_0, var_1, var_2 )
     if ( !isdefined( var_3 ) )
         return;
 
-    var_4 = self._id_01FF;
+    var_4 = self.health;
 
-    if ( isdefined( var_0 ) && isdefined( var_0._id_0134 ) )
-        var_4 = var_4 - int( var_0._id_0134 );
+    if ( isdefined( var_0 ) && isdefined( var_0.damage ) )
+        var_4 = var_4 - int( var_0.damage );
 
     self._id_9090 = gettime();
     var_5 = "pristine";
@@ -815,13 +815,13 @@ _id_10077( var_0, var_1, var_2 )
 
     foreach ( var_10, var_9 in var_3._id_430B )
     {
-        if ( !isdefined( var_7 ) || var_9._id_027F < var_7 )
+        if ( !isdefined( var_7 ) || var_9.maxhealth < var_7 )
         {
-            if ( var_4 <= var_9._id_027F )
+            if ( var_4 <= var_9.maxhealth )
             {
                 var_5 = var_10;
                 var_6 = var_9;
-                var_7 = var_9._id_027F;
+                var_7 = var_9.maxhealth;
             }
         }
     }
@@ -840,8 +840,8 @@ _id_10077( var_0, var_1, var_2 )
 
                     if ( isdefined( var_12 ) )
                     {
-                        if ( isdefined( var_0 ) && isdefined( var_0._id_0134 ) && var_0._id_0134 != 0 )
-                            self._id_01FF = self._id_01FF + ( var_12 - var_4 );
+                        if ( isdefined( var_0 ) && isdefined( var_0.damage ) && var_0.damage != 0 )
+                            self.health = self.health + ( var_12 - var_4 );
                     }
                 }
             }
@@ -858,13 +858,13 @@ _id_10078( var_0, var_1 )
     if ( !isdefined( var_2 ) )
         return;
 
-    var_3 = self._id_01FF;
+    var_3 = self.health;
 
-    if ( isdefined( var_0 ) && isdefined( var_0._id_0134 ) )
-        var_3 = var_3 - int( var_0._id_0134 );
+    if ( isdefined( var_0 ) && isdefined( var_0.damage ) )
+        var_3 = var_3 - int( var_0.damage );
 
     self._id_9090 = gettime();
-    var_4 = var_3 / self._id_027F;
+    var_4 = var_3 / self.maxhealth;
 
     if ( var_4 <= 0.1 )
         var_5 = "heavy";
@@ -916,7 +916,7 @@ _id_1005F( var_0, var_1 )
 
     if ( !isdefined( var_0 ) || var_0 != "heavy" )
     {
-        _id_09BA::_id_10159( self, 0 );
+        scripts\cp_mp\vehicles\vehicle_occupancy::_id_10159( self, 0 );
         _id_10060( var_0, var_1 );
         thread _id_1002B( var_1 );
     }
@@ -929,7 +929,7 @@ _id_10063( var_0, var_1 )
 
     if ( !isdefined( var_0 ) || var_0 != "heavy" )
     {
-        _id_09BA::_id_10159( self, 1 );
+        scripts\cp_mp\vehicles\vehicle_occupancy::_id_10159( self, 1 );
         _id_10036();
     }
 }
@@ -937,7 +937,7 @@ _id_10063( var_0, var_1 )
 _id_10067( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
     var_6 = _id_1003F( var_0, 1 );
-    var_6._id_01FF = var_1;
+    var_6.health = var_1;
     var_6._id_BD24 = var_2;
     var_6._id_7649 = var_3;
     var_6._id_9CED = var_4;
@@ -965,20 +965,20 @@ _id_10040( var_0, var_1 )
     if ( !isdefined( var_3 ) )
     {
         if ( isdefined( var_0 ) )
-            return var_0._id_027F;
+            return var_0.maxhealth;
 
         return undefined;
     }
 
-    if ( !isdefined( var_3._id_01FF ) )
+    if ( !isdefined( var_3.health ) )
     {
         if ( isdefined( var_0 ) )
-            return var_0._id_027F;
+            return var_0.maxhealth;
 
         return undefined;
     }
 
-    var_4 = var_3._id_01FF;
+    var_4 = var_3.health;
     var_5 = _id_10042( var_1 );
 
     if ( isdefined( var_5 ) )
@@ -1003,10 +1003,10 @@ _id_10043( var_0, var_1 )
     if ( !isdefined( var_3 ) )
         return undefined;
 
-    if ( !isdefined( var_3._id_01FF ) )
+    if ( !isdefined( var_3.health ) )
         return undefined;
 
-    var_4 = var_3._id_01FF;
+    var_4 = var_3.health;
     var_5 = _id_1003A( var_1 );
 
     if ( isdefined( var_5 ) )
@@ -1029,7 +1029,7 @@ _id_1003B( var_0, var_1 )
     if ( !isdefined( var_3 ) )
         return undefined;
 
-    if ( !isdefined( var_3._id_01FF ) )
+    if ( !isdefined( var_3.health ) )
         return undefined;
 
     var_4 = _id_1003A( var_1 );
@@ -1050,15 +1050,15 @@ _id_10079( var_0 )
     {
         if ( var_6 == "light" )
         {
-            var_5._id_027F = _id_10043( undefined, var_0 );
-            var_3 = var_5._id_027F;
+            var_5.maxhealth = _id_10043( undefined, var_0 );
+            var_3 = var_5.maxhealth;
             continue;
         }
 
         if ( var_6 == "heavy" )
         {
-            var_5._id_027F = _id_1003B( undefined, var_0 );
-            var_2 = var_5._id_027F;
+            var_5.maxhealth = _id_1003B( undefined, var_0 );
+            var_2 = var_5.maxhealth;
         }
     }
 
@@ -1071,7 +1071,7 @@ _id_10079( var_0 )
             var_7 = _id_10041( var_0 );
 
             if ( isdefined( var_7 ) )
-                var_5._id_027F = int( _id_0777::_id_9192( var_2, var_3, var_7 ) );
+                var_5.maxhealth = int( scripts\engine\math::_id_9192( var_2, var_3, var_7 ) );
         }
     }
 }
@@ -1128,14 +1128,14 @@ _id_1002B( var_0 )
 
     if ( !istrue( self._id_2D65 ) )
     {
-        var_1 = _id_09B4::_id_100BF( self._id_1031C );
+        var_1 = scripts\cp_mp\vehicles\vehicle::_id_100BF( self._id_1031C );
         var_2 = var_1._id_4820;
         var_3 = _id_10039( self._id_1031C );
 
         if ( isdefined( var_3 ) && isdefined( var_2 ) )
         {
             self._id_2D65 = 1;
-            var_4 = _id_09BA::_id_10189( self, 0 );
+            var_4 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10189( self, 0 );
 
             if ( isdefined( var_4 ) )
                 _id_09A1::_id_1038E( "burningDown", var_4, self._id_1031C );
@@ -1155,7 +1155,7 @@ _id_10036( var_0 )
 
     if ( !istrue( var_0 ) )
     {
-        var_1 = _id_09BA::_id_10189( self, 0 );
+        var_1 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_10189( self, 0 );
 
         if ( isdefined( var_1 ) )
             _id_09A1::_id_10379( "burningDown", var_1, self._id_1031C );
@@ -1195,11 +1195,11 @@ _id_10076( var_0 )
             return 1;
     }
 
-    if ( isdefined( var_0._id_A90B ) && !_func_036F( var_0._id_A90B ) && isdefined( self._id_1031C ) )
+    if ( isdefined( var_0.objweapon ) && !isnullweapon( var_0.objweapon ) && isdefined( self._id_1031C ) )
     {
         var_1 = undefined;
         var_2 = self._id_1031C;
-        var_3 = var_0._id_A90B._id_0084;
+        var_3 = var_0.objweapon.basename;
         var_4 = _id_1003D();
         var_5 = var_4._id_EC59;
 
@@ -1213,7 +1213,7 @@ _id_10076( var_0 )
 
         if ( isdefined( var_6 ) )
         {
-            var_7 = var_6._id_37D9;
+            var_7 = var_6.class;
 
             if ( !isdefined( var_7 ) || var_7 == "none" )
                 return 1;
@@ -1235,7 +1235,7 @@ _id_10076( var_0 )
 
 _id_10060( var_0, var_1 )
 {
-    if ( isdefined( var_1 ) && isdefined( var_1._id_006E ) )
+    if ( isdefined( var_1 ) && isdefined( var_1.attacker ) )
     {
         var_2 = _id_1003F( self._id_1031C, undefined, 1 );
 
@@ -1255,11 +1255,11 @@ _id_10060( var_0, var_1 )
                 var_7 = var_3._id_7646;
             }
 
-            if ( isdefined( var_2._id_37D9 ) )
+            if ( isdefined( var_2.class ) )
             {
                 if ( !isdefined( var_4 ) )
                 {
-                    switch ( var_2._id_37D9 )
+                    switch ( var_2.class )
                     {
                         case "super_light":
                         case "light":
@@ -1290,9 +1290,9 @@ _id_10060( var_0, var_1 )
                 var_6 = undefined;
 
             if ( !istrue( var_1._id_6FB5 ) )
-                var_1._id_6FB5 = _id_09B4::_id_10120( self, var_1._id_006E );
+                var_1._id_6FB5 = scripts\cp_mp\vehicles\vehicle::_id_10120( self, var_1.attacker );
 
-            if ( isdefined( var_1._id_A90B ) && visionsetnight( var_1._id_A90B._id_0084 ) != "rocketlauncher" )
+            if ( isdefined( var_1.objweapon ) && weaponclass( var_1.objweapon.basename ) != "rocketlauncher" )
             {
                 if ( istrue( var_5 ) )
                     var_1._id_CBF2 = 1;
@@ -1301,14 +1301,14 @@ _id_10060( var_0, var_1 )
                     var_1._id_1FA2 = 1;
             }
 
-            var_1._id_006E thread _id_10048( var_4, var_6, var_1, self );
+            var_1.attacker thread _id_10048( var_4, var_6, var_1, self );
         }
     }
 }
 
 _id_1005E( var_0 )
 {
-    if ( isdefined( var_0 ) && isdefined( var_0._id_006E ) )
+    if ( isdefined( var_0 ) && isdefined( var_0.attacker ) )
     {
         var_1 = _id_1003F( self._id_1031C, undefined, 1 );
 
@@ -1328,11 +1328,11 @@ _id_1005E( var_0 )
                 var_6 = var_2._id_481F;
             }
 
-            if ( isdefined( var_1._id_37D9 ) )
+            if ( isdefined( var_1.class ) )
             {
                 if ( !isdefined( var_3 ) )
                 {
-                    switch ( var_1._id_37D9 )
+                    switch ( var_1.class )
                     {
                         case "super_light":
                         case "light":
@@ -1366,13 +1366,13 @@ _id_1005E( var_0 )
                 var_5 = undefined;
 
             if ( !isdefined( var_0._id_6FB5 ) )
-                var_0._id_6FB5 = _id_09B4::_id_10120( self, var_0._id_006E );
-            else if ( var_0._id_6FB5 && _id_09B4::_id_10122( self, var_0._id_006E ) )
+                var_0._id_6FB5 = scripts\cp_mp\vehicles\vehicle::_id_10120( self, var_0.attacker );
+            else if ( var_0._id_6FB5 && scripts\cp_mp\vehicles\vehicle::_id_10122( self, var_0.attacker ) )
                 var_0._id_6FB5 = 0;
-            else if ( !var_0._id_6FB5 && _id_09B4::_id_10120( self, var_0._id_006E ) )
+            else if ( !var_0._id_6FB5 && scripts\cp_mp\vehicles\vehicle::_id_10120( self, var_0.attacker ) )
                 var_0._id_6FB5 = 1;
 
-            if ( isdefined( var_0._id_A90B ) && visionsetnight( var_0._id_A90B._id_0084 ) != "rocketlauncher" )
+            if ( isdefined( var_0.objweapon ) && weaponclass( var_0.objweapon.basename ) != "rocketlauncher" )
             {
                 if ( istrue( var_4 ) )
                     var_0._id_CBF2 = 1;
@@ -1381,10 +1381,10 @@ _id_1005E( var_0 )
                     var_0._id_1FA2 = 1;
             }
 
-            if ( var_0._id_6FB5 && _id_099D::_id_8A10( "challenges", "onVehicleKilled" ) )
-                var_0._id_006E thread [[ _id_099D::_id_6D05( "challenges", "onVehicleKilled" ) ]]( self, var_0._id_006E, var_0._id_0134, var_0._id_A90B );
+            if ( var_0._id_6FB5 && scripts\cp_mp\utility\script_utility::issharedfuncdefined( "challenges", "onVehicleKilled" ) )
+                var_0.attacker thread [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "challenges", "onVehicleKilled" ) ]]( self, var_0.attacker, var_0.damage, var_0.objweapon );
 
-            var_0._id_006E _id_10047( var_3, var_5, var_0, self getentitynumber() );
+            var_0.attacker _id_10047( var_3, var_5, var_0, self getentitynumber() );
         }
     }
 }
@@ -1402,75 +1402,75 @@ _id_10047( var_0, var_1, var_2, var_3 )
 {
     self notify( "vehicle_damage_giveScoreAndXP" + var_3 );
 
-    if ( isdefined( var_0 ) && _id_099D::_id_8A10( "vehicle_damage", "giveScore" ) )
+    if ( isdefined( var_0 ) && scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_damage", "giveScore" ) )
     {
-        var_4 = _id_077B::_id_F07F( istrue( var_2._id_CBF2 ), undefined, var_2._id_A90B );
-        self [[ _id_099D::_id_6D05( "vehicle_damage", "giveScore" ) ]]( var_0, var_4, !istrue( var_2._id_6FB5 ) );
+        var_4 = scripts\engine\utility::ter_op( istrue( var_2._id_CBF2 ), undefined, var_2.objweapon );
+        self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_damage", "giveScore" ) ]]( var_0, var_4, !istrue( var_2._id_6FB5 ) );
     }
 
-    if ( isdefined( var_1 ) && _id_099D::_id_8A10( "vehicle_damage", "giveAward" ) )
+    if ( isdefined( var_1 ) && scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_damage", "giveAward" ) )
     {
-        var_4 = _id_077B::_id_F07F( istrue( var_2._id_1FA2 ), undefined, var_2._id_A90B );
-        self [[ _id_099D::_id_6D05( "vehicle_damage", "giveAward" ) ]]( var_1, var_4, !istrue( var_2._id_6FB5 ) );
+        var_4 = scripts\engine\utility::ter_op( istrue( var_2._id_1FA2 ), undefined, var_2.objweapon );
+        self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_damage", "giveAward" ) ]]( var_1, var_4, !istrue( var_2._id_6FB5 ) );
     }
 }
 
 _id_10073( var_0, var_1, var_2, var_3 )
 {
-    if ( _id_099D::_id_8A10( "vehicle_damage", "setWeaponClassModDamageForVehicle" ) )
-        [[ _id_099D::_id_6D05( "vehicle_damage", "setWeaponClassModDamageForVehicle" ) ]]( var_0, var_1, var_2, var_3 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_damage", "setWeaponClassModDamageForVehicle" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_damage", "setWeaponClassModDamageForVehicle" ) ]]( var_0, var_1, var_2, var_3 );
 }
 
 _id_1006D( var_0, var_1, var_2 )
 {
-    if ( _id_099D::_id_8A10( "vehicle_damage", "setPerkModDamage" ) )
-        [[ _id_099D::_id_6D05( "vehicle_damage", "setPerkModDamage" ) ]]( var_0, var_1, var_2 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_damage", "setPerkModDamage" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_damage", "setPerkModDamage" ) ]]( var_0, var_1, var_2 );
 }
 
 _id_10074( var_0, var_1 )
 {
-    if ( _id_099D::_id_8A10( "vehicle_damage", "setWeaponHitDamageData" ) )
-        [[ _id_099D::_id_6D05( "vehicle_damage", "setWeaponHitDamageData" ) ]]( var_0, var_1 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_damage", "setWeaponHitDamageData" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_damage", "setWeaponHitDamageData" ) ]]( var_0, var_1 );
 }
 
 _id_10071( var_0, var_1 )
 {
-    if ( _id_099D::_id_8A10( "vehicle_damage", "setVehicleHitDamageData" ) )
-        [[ _id_099D::_id_6D05( "vehicle_damage", "setVehicleHitDamageData" ) ]]( var_0, var_1 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_damage", "setVehicleHitDamageData" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_damage", "setVehicleHitDamageData" ) ]]( var_0, var_1 );
 }
 
 _id_10072( var_0, var_1, var_2 )
 {
-    if ( _id_099D::_id_8A10( "vehicle_damage", "setVehicleHitDamageDataForWeapon" ) )
-        [[ _id_099D::_id_6D05( "vehicle_damage", "setVehicleHitDamageDataForWeapon" ) ]]( var_0, var_1, var_2 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_damage", "setVehicleHitDamageDataForWeapon" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_damage", "setVehicleHitDamageDataForWeapon" ) ]]( var_0, var_1, var_2 );
 }
 
 _id_10075( var_0, var_1, var_2 )
 {
-    if ( _id_099D::_id_8A10( "vehicle_damage", "setWeaponHitDamageDataForVehicle" ) )
-        [[ _id_099D::_id_6D05( "vehicle_damage", "setWeaponHitDamageDataForVehicle" ) ]]( var_0, var_1, var_2 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_damage", "setWeaponHitDamageDataForVehicle" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_damage", "setWeaponHitDamageDataForVehicle" ) ]]( var_0, var_1, var_2 );
 }
 
 _id_1006F( var_0, var_1 )
 {
-    if ( _id_099D::_id_8A10( "vehicle_damage", "setPreModDamageCallback" ) )
-        [[ _id_099D::_id_6D05( "vehicle_damage", "setPreModDamageCallback" ) ]]( var_0, var_1 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_damage", "setPreModDamageCallback" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_damage", "setPreModDamageCallback" ) ]]( var_0, var_1 );
 }
 
 _id_1006E( var_0, var_1 )
 {
-    if ( _id_099D::_id_8A10( "vehicle_damage", "setPostModDamageCallback" ) )
-        [[ _id_099D::_id_6D05( "vehicle_damage", "setPostModDamageCallback" ) ]]( var_0, var_1 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_damage", "setPostModDamageCallback" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_damage", "setPostModDamageCallback" ) ]]( var_0, var_1 );
 }
 
 _id_1006C( var_0, var_1 )
 {
-    if ( _id_099D::_id_8A10( "vehicle_damage", "setDeathCallback" ) )
-        [[ _id_099D::_id_6D05( "vehicle_damage", "setDeathCallback" ) ]]( var_0, var_1 );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "vehicle_damage", "setDeathCallback" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "vehicle_damage", "setDeathCallback" ) ]]( var_0, var_1 );
 }
 
 _id_1004C()
 {
-    _func_01D1( "#x3840f3e4b28600993", 0 );
-    _func_01D1( "#x3a9da6be7a554bdc8", 0 );
+    setdvarifuninitialized( "#x3840f3e4b28600993", 0 );
+    setdvarifuninitialized( "#x3a9da6be7a554bdc8", 0 );
 }

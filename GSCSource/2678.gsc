@@ -9,10 +9,10 @@ _id_6FD9( var_0, var_1, var_2 )
     if ( isdefined( var_2 ) )
         var_3 = var_2;
     else
-        var_3 = _id_07E1::_id_6CEE( var_0 );
+        var_3 = scripts\mp\rank::_id_6CEE( var_0 );
 
     var_3 = _id_9FFF( var_0, var_3, var_1 );
-    _id_0A28::_id_6FD8( var_0, var_3 );
+    scripts\mp\killstreaks\killstreaks::_id_6FD8( var_0, var_3 );
     _id_4B5D( var_3, var_0 );
 }
 
@@ -26,10 +26,10 @@ _id_6FEF( var_0, var_1 )
     if ( isdefined( var_1 ) )
         var_2 = var_1;
     else
-        var_2 = _id_07E1::_id_6CEE( var_0 );
+        var_2 = scripts\mp\rank::_id_6CEE( var_0 );
 
-    thread _id_07E1::_id_6FC0( var_0, var_2 );
-    thread _id_07E1::_id_CBF3( var_0 );
+    thread scripts\mp\rank::_id_6FC0( var_0, var_2 );
+    thread scripts\mp\rank::_id_CBF3( var_0 );
 }
 
 _id_6FE6( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
@@ -37,9 +37,9 @@ _id_6FE6( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     if ( isdefined( level._id_6FE6 ) )
         thread [[ level._id_6FE6 ]]( var_0, var_1, var_2, var_3, var_4 );
 
-    var_7 = _id_0A69::_id_6A43() == "br" && !_id_07A8::_id_609F( "prematch_done" );
+    var_7 = scripts\mp\utility\game::getgametype() == "br" && !_id_07A8::_id_609F( "prematch_done" );
 
-    if ( istrue( level._id_7D18 ) && !_func_0121( var_0, "assist" ) && !var_7 )
+    if ( istrue( level._id_7D18 ) && !issubstr( var_0, "assist" ) && !var_7 )
         return;
 
     if ( istrue( game["practiceRound"] ) )
@@ -48,40 +48,40 @@ _id_6FE6( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     if ( isdefined( var_2 ) )
         var_8 = var_2;
     else
-        var_8 = _id_07E1::_id_6CEE( var_0 );
+        var_8 = scripts\mp\rank::_id_6CEE( var_0 );
 
-    _id_07AE::_id_6FB2( var_0, var_8, var_4 );
+    scripts\mp\gamescore::_id_6FB2( var_0, var_8, var_4 );
     var_8 = _id_9FFF( var_0, var_8, var_1 );
 
     if ( isdefined( var_1 ) )
     {
-        var_9 = _id_0A7F::_id_9AB4( var_1 );
-        var_10 = _func_034D( var_9 );
-        thread _id_07AC::_id_F13A( var_10, var_8, "total_score_earned" );
+        var_9 = scripts\mp\utility\weapon::_id_9AB4( var_1 );
+        var_10 = getcompleteweaponname( var_9 );
+        thread scripts\mp\gamelogic::_id_F13A( var_10, var_8, "total_score_earned" );
     }
 
     if ( isdefined( var_6 ) )
         var_6._id_0369 = var_6._id_0369 + var_8;
 
     var_11 = var_0 == "kill";
-    var_12 = _id_0A28::_id_8774( var_0 );
-    var_13 = _id_0A28::isinvehicle( var_0 );
+    var_12 = scripts\mp\killstreaks\killstreaks::_id_8774( var_0 );
+    var_13 = scripts\mp\killstreaks\killstreaks::_id_88D6( var_0 );
     var_14 = istrue( self._id_88C5 );
     var_15 = _id_8930( var_1 );
-    var_16 = scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_killstreak_to_scorestreak" );
+    var_16 = scripts\mp\utility\perk::_hasperk( "specialty_killstreak_to_scorestreak" );
 
-    if ( ( var_11 || var_13 ) && !scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_chain_killstreaks" ) )
-        self._id_0309["canKillChain"] = undefined;
+    if ( ( var_11 || var_13 ) && !scripts\mp\utility\perk::_hasperk( "specialty_chain_killstreaks" ) )
+        self.pers["canKillChain"] = undefined;
 
-    var_17 = var_13 && istrue( self._id_0309["canKillChain"] ) && istrue( var_5 );
+    var_17 = var_13 && istrue( self.pers["canKillChain"] ) && istrue( var_5 );
 
-    if ( ( var_11 || var_12 || var_17 || var_16 ) && ( !var_14 || var_17 || var_16 ) && !var_15 && _id_0A69::_id_6A43() != "br" )
+    if ( ( var_11 || var_12 || var_17 || var_16 ) && ( !var_14 || var_17 || var_16 ) && !var_15 && scripts\mp\utility\game::getgametype() != "br" )
     {
-        if ( _id_099C::_giveweapon() )
-            _id_0A28::_id_6FD8( var_0, 1, var_8 );
+        if ( scripts\cp_mp\utility\player_utility::_id_0C14() )
+            scripts\mp\killstreaks\killstreaks::_id_6FD8( var_0, 1, var_8 );
     }
 
-    _id_07F2::_id_6FDC( var_8, var_0 );
+    scripts\mp\supers::_id_6FDC( var_8, var_0 );
 
     if ( !istrue( var_3 ) )
     {
@@ -90,7 +90,7 @@ _id_6FE6( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
         if ( var_0 == "kill" && var_1 _meth_8622( "gunperk_xp", 1 ) )
             var_18 = var_18 + 20;
 
-        thread _id_07E1::_id_6FC0( var_0, var_18, var_1 );
+        thread scripts\mp\rank::_id_6FC0( var_0, var_18, var_1 );
     }
 
     thread _id_07A5::_id_8D6A( var_0, 0 );
@@ -122,7 +122,7 @@ _id_4B5D( var_0, var_1 )
 
     if ( level._id_39F9 )
     {
-        foreach ( var_3 in level._id_B758 )
+        foreach ( var_3 in level.players )
         {
             if ( var_3 _meth_81D2() )
             {
@@ -135,8 +135,8 @@ _id_4B5D( var_0, var_1 )
 
                     if ( var_5 == var_6 )
                     {
-                        var_3 thread _id_07E1::_id_CC06( var_0 );
-                        var_3 thread _id_07E1::_id_CBF3( var_1 );
+                        var_3 thread scripts\mp\rank::_id_CC06( var_0 );
+                        var_3 thread scripts\mp\rank::_id_CBF3( var_1 );
                     }
                 }
             }
@@ -147,10 +147,10 @@ _id_4B5D( var_0, var_1 )
     {
         var_8 = 0;
 
-        if ( _id_0A69::_id_8A1D() )
+        if ( scripts\mp\utility\game::_id_8A1D() )
             var_8 = var_1 == "kill";
 
-        thread _id_07E1::_id_CC06( var_0, var_8 );
+        thread scripts\mp\rank::_id_CC06( var_0, var_8 );
     }
 }
 
@@ -160,9 +160,9 @@ _id_8930( var_0 )
         return 0;
 
     if ( _func_0120( var_0 ) )
-        var_0 = _func_034C( var_0 );
+        var_0 = makeweapon( var_0 );
 
-    switch ( var_0._id_0084 )
+    switch ( var_0.basename )
     {
         case "lighttank_tur_mp":
         case "bradley_tow_proj_mp":
@@ -179,9 +179,9 @@ _id_884E( var_0 )
         return 0;
 
     if ( _func_0120( var_0 ) )
-        var_0 = _func_034C( var_0 );
+        var_0 = makeweapon( var_0 );
 
-    switch ( var_0._id_0084 )
+    switch ( var_0.basename )
     {
         case "iw8_green_beam_mp":
         case "s4_binoculars_mps":

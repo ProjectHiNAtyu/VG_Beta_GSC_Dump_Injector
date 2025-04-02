@@ -12,23 +12,23 @@ _id_C9A9( var_0, var_1, var_2, var_3, var_4, var_5 )
     var_6 = level._id_6098._id_E433["group_featured_characters_3_middle"];
 
     if ( var_2[8] != "" )
-        var_7 = _func_021A( var_2[8], "," );
+        var_7 = strtok( var_2[8], "," );
     else
         var_7 = [];
 
     var_8 = var_2[7];
-    var_9 = scripts\cp_mp\hostmigration::_id_2CEB( var_8, var_7, "none", "none" );
-    var_10 = _func_034D( var_9 );
+    var_9 = scripts\mp\class::buildweapon( var_8, var_7, "none", "none" );
+    var_10 = getcompleteweaponname( var_9 );
     var_11 = "none";
 
-    if ( _id_077B::_id_85A4( var_0, "teamMVP" ) )
+    if ( scripts\engine\utility::is_equal( var_0, "teamMVP" ) )
     {
         var_12 = var_2[9];
 
         if ( var_12 != "none" )
         {
-            var_13 = scripts\cp_mp\hostmigration::_id_2CEB( var_12, [], "none", "none" );
-            var_11 = _func_034D( var_13 );
+            var_13 = scripts\mp\class::buildweapon( var_12, [], "none", "none" );
+            var_11 = getcompleteweaponname( var_13 );
         }
     }
 
@@ -36,31 +36,31 @@ _id_C9A9( var_0, var_1, var_2, var_3, var_4, var_5 )
 
     foreach ( var_16 in level._id_EF67[var_1]["players"] )
     {
-        if ( _id_077B::_id_85A4( var_0, "teamMVP" ) )
-            var_16 _meth_82F6( "ui_wc_anim_type", 0 );
+        if ( scripts\engine\utility::is_equal( var_0, "teamMVP" ) )
+            var_16 setclientomnvar( "ui_wc_anim_type", 0 );
         else
-            var_16 _meth_82F6( "ui_wc_anim_type", 1 );
+            var_16 setclientomnvar( "ui_wc_anim_type", 1 );
 
-        var_16 _meth_82F6( "ui_wc_anim_select", var_14 );
+        var_16 setclientomnvar( "ui_wc_anim_select", var_14 );
     }
 
-    if ( _id_077B::_id_85A4( var_0, "teamMVP" ) )
+    if ( scripts\engine\utility::is_equal( var_0, "teamMVP" ) )
     {
-        var_18 = var_6._id_02EA;
-        var_19 = var_6._id_0054 + ( 0, 90, 0 );
+        var_18 = var_6.origin;
+        var_19 = var_6.angles + ( 0, 90, 0 );
         var_20 = [ var_18, var_18 ];
         var_21 = [ var_19, var_19 ];
         _id_E0F7( var_1, var_20, var_21 );
-        level thread scripts\mp\team_mvp_characters_util::_id_C9A4( level._id_BA25["podium"][var_1], var_2[4], var_6._id_02EA, var_6._id_0054 + ( 0, 90, 0 ) );
-        level thread scripts\mp\team_mvp_characters_util::spawn_props_and_animate( var_2, var_6._id_02EA, var_6._id_0054 );
+        level thread scripts\mp\team_mvp_characters_util::_id_C9A4( level._id_BA25["podium"][var_1], var_2[4], var_6.origin, var_6.angles + ( 0, 90, 0 ) );
+        level thread scripts\mp\team_mvp_characters_util::spawn_props_and_animate( var_2, var_6.origin, var_6.angles );
     }
     else
     {
-        var_20 = [ var_6._id_02EA ];
-        var_21 = [ var_6._id_0054 ];
+        var_20 = [ var_6.origin ];
+        var_21 = [ var_6.angles ];
         _id_E0F7( var_1, var_20, var_21 );
-        level thread scripts\mp\team_mvp_characters_util::_id_C9A4( level._id_BA25["podium"][var_1], var_2[4], var_6._id_02EA, var_6._id_0054 );
-        level thread scripts\mp\team_mvp_characters_util::spawn_props_and_animate( var_2, var_6._id_02EA, var_6._id_0054 );
+        level thread scripts\mp\team_mvp_characters_util::_id_C9A4( level._id_BA25["podium"][var_1], var_2[4], var_6.origin, var_6.angles );
+        level thread scripts\mp\team_mvp_characters_util::spawn_props_and_animate( var_2, var_6.origin, var_6.angles );
     }
 
     for ( var_22 = 0; var_22 < level._id_10CDD[var_1].size; var_22++ )
@@ -72,17 +72,17 @@ _id_C9A9( var_0, var_1, var_2, var_3, var_4, var_5 )
 
         var_24 = level._id_10CDD[var_1][var_22];
 
-        if ( _id_077B::_id_85A4( var_0, "teamMVP" ) )
-            var_25 = var_24 scripts\mp\team_mvp_characters_util::run_delta_motion_on_client_character( var_23, var_6._id_02EA, var_6._id_0054 + ( 0, 90, 0 ) );
+        if ( scripts\engine\utility::is_equal( var_0, "teamMVP" ) )
+            var_25 = var_24 scripts\mp\team_mvp_characters_util::run_delta_motion_on_client_character( var_23, var_6.origin, var_6.angles + ( 0, 90, 0 ) );
         else
-            var_25 = var_24 scripts\mp\team_mvp_characters_util::run_delta_motion_on_client_character( var_23, var_6._id_02EA, var_6._id_0054 );
+            var_25 = var_24 scripts\mp\team_mvp_characters_util::run_delta_motion_on_client_character( var_23, var_6.origin, var_6.angles );
 
         var_25 thread _id_07FF::_id_C9C2( "clientCharacterAnim", var_1 );
     }
 
     var_26 = var_3;
 
-    if ( _id_077B::_id_85A4( var_0, "teamMVP" ) )
+    if ( scripts\engine\utility::is_equal( var_0, "teamMVP" ) )
         var_27 = [ var_26, var_26 ];
     else
         var_27 = [ var_26 ];
@@ -114,20 +114,20 @@ _id_E0F7( var_0, var_1, var_2 )
         level._id_10CDD[var_0] = [];
 
     foreach ( var_4 in level._id_10CDD[var_0] )
-        var_4 _meth_809A();
+        var_4 delete();
 
     level._id_10CDD[var_0] = [];
 
     for ( var_6 = 0; var_6 < var_1.size; var_6++ )
     {
-        var_4 = _func_0205( "script_character", var_1[var_6], 0, 0, var_6, "MPClientCharacter" );
-        var_4._id_0054 = var_2[var_6];
+        var_4 = spawn( "script_character", var_1[var_6], 0, 0, var_6, "MPClientCharacter" );
+        var_4.angles = var_2[var_6];
         level._id_10CDD[var_0][level._id_10CDD[var_0].size] = var_4;
 
-        foreach ( var_8 in level._id_B758 )
+        foreach ( var_8 in level.players )
         {
             if ( var_0 != var_8._id_0393 )
-                var_4 _meth_847B( var_8 );
+                var_4 hidefromplayer( var_8 );
         }
     }
 }
@@ -140,7 +140,7 @@ _id_65A0( var_0, var_1, var_2, var_3 )
     {
         var_6 = var_5 == 0;
         var_7 = var_0[var_5];
-        var_8 = _func_020F();
+        var_8 = spawnstruct();
 
         if ( var_6 && getdvar( "scr_mvp_operator_override", "" ) != "" )
         {
@@ -168,8 +168,8 @@ _id_65A0( var_0, var_1, var_2, var_3 )
         }
 
         var_8._id_00DD = var_7 _meth_8586();
-        var_8._id_02BA = var_7._id_02BA;
-        var_8.vertalign = var_7 getxuid();
+        var_8.name = var_7.name;
+        var_8._id_04E0 = var_7 getxuid();
         var_8._id_397F = var_7 getentitynumber();
         var_8._id_B97E = var_4.size;
         var_4[var_4.size] = var_8;
@@ -180,8 +180,8 @@ _id_65A0( var_0, var_1, var_2, var_3 )
 
 get_customization_indicies_from_skin( var_0 )
 {
-    var_1 = stopfxontag( "operatorskins.csv", 1, var_0, 4 );
-    var_2 = stopfxontag( "operatorskins.csv", 1, var_0, 5 );
+    var_1 = _func_021D( "operatorskins.csv", 1, var_0, 4 );
+    var_2 = _func_021D( "operatorskins.csv", 1, var_0, 5 );
     var_3 = _func_0225( "mp/cac/bodies.csv", 1, var_1 );
     var_4 = _func_0225( "mp/cac/heads.csv", 1, var_2 );
     return [ var_3, var_4 ];

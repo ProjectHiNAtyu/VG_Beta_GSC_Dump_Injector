@@ -14,21 +14,21 @@ _id_BF2C()
     for (;;)
     {
         level waittill( "connected", var_0 );
-        level._id_ED17[var_0 _id_0A74::_id_6E04()] = _func_0205( "script_model", ( 0, 0, 0 ) );
+        level._id_ED17[var_0 scripts\mp\utility\player::_id_6E04()] = spawn( "script_model", ( 0, 0, 0 ) );
     }
 }
 
 _id_BEB2( var_0, var_1, var_2, var_3 )
 {
     if ( isdefined( var_2 ) )
-        level._id_ED17[var_1 _id_0A74::_id_6E04()] _id_601B();
+        level._id_ED17[var_1 scripts\mp\utility\player::_id_6E04()] _id_601B();
 
     var_4 = 0;
 
     if ( !isdefined( var_3 ) )
-        var_4 = level._id_ED17[var_1 _id_0A74::_id_6E04()] thread _id_6019( ::_id_B27A, var_0, var_1 );
+        var_4 = level._id_ED17[var_1 scripts\mp\utility\player::_id_6E04()] thread _id_6019( ::_id_B27A, var_0, var_1 );
     else
-        var_4 = level._id_ED17[var_1 _id_0A74::_id_6E04()] thread _id_601F( var_3, ::_id_B27A, var_0, var_1 );
+        var_4 = level._id_ED17[var_1 scripts\mp\utility\player::_id_6E04()] thread _id_601F( var_3, ::_id_B27A, var_0, var_1 );
 
     return var_4;
 }
@@ -37,21 +37,21 @@ _id_BEB3( var_0, var_1, var_2, var_3 )
 {
     if ( isdefined( var_2 ) )
     {
-        foreach ( var_5 in _id_0A7C::_id_6DAC( var_1, "players" ) )
-            level._id_ED17[var_5 _id_0A74::_id_6E04()] _id_601B();
+        foreach ( var_5 in scripts\mp\utility\teams::_id_6DAC( var_1, "players" ) )
+            level._id_ED17[var_5 scripts\mp\utility\player::_id_6E04()] _id_601B();
     }
 
     var_7 = 0;
 
-    foreach ( var_5 in _id_0A7C::_id_6DAC( var_1, "players" ) )
+    foreach ( var_5 in scripts\mp\utility\teams::_id_6DAC( var_1, "players" ) )
     {
         if ( !isdefined( var_3 ) )
         {
-            var_7 = level._id_ED17[var_5 _id_0A74::_id_6E04()] thread _id_6019( ::_id_B27A, var_0, var_5 );
+            var_7 = level._id_ED17[var_5 scripts\mp\utility\player::_id_6E04()] thread _id_6019( ::_id_B27A, var_0, var_5 );
             continue;
         }
 
-        var_7 = level._id_ED17[var_5 _id_0A74::_id_6E04()] thread _id_601F( var_3, ::_id_B27A, var_0, var_5 );
+        var_7 = level._id_ED17[var_5 scripts\mp\utility\player::_id_6E04()] thread _id_601F( var_3, ::_id_B27A, var_0, var_5 );
     }
 
     return var_7;
@@ -59,7 +59,7 @@ _id_BEB3( var_0, var_1, var_2, var_3 )
 
 _id_B27A( var_0, var_1, var_2 )
 {
-    var_1 _meth_8275( var_0, var_2 );
+    var_1 playlocalsound( var_0, var_2 );
     var_3 = _func_0140( var_0 );
     wait( 0.5 + var_3 / 1000.0 );
 
@@ -69,17 +69,17 @@ _id_B27A( var_0, var_1, var_2 )
 
 _id_6019( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    var_6 = _func_020F();
+    var_6 = spawnstruct();
     var_6 thread _id_601D( self, var_0, var_1, var_2, var_3, var_4, var_5 );
     return _id_6021( var_6 );
 }
 
 _id_601F( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 {
-    var_7 = _func_020F();
+    var_7 = spawnstruct();
     var_7 thread _id_601D( self, var_1, var_2, var_3, var_4, var_5, var_6 );
 
-    if ( isdefined( var_7._id_601C ) || var_7 _id_077B::_id_108A5( var_0, "function_stack_func_begun" ) != "timeout" )
+    if ( isdefined( var_7._id_601C ) || var_7 scripts\engine\utility::_id_108A5( var_0, "function_stack_func_begun" ) != "timeout" )
         return _id_6021( var_7 );
     else
     {
@@ -114,7 +114,7 @@ _id_601B()
 _id_6020( var_0 )
 {
     self endon( "death" );
-    var_0 _id_077B::_id_108C3( "function_done", "death" );
+    var_0 scripts\engine\utility::_id_108C3( "function_done", "death" );
 }
 
 _id_6021( var_0 )
@@ -127,7 +127,7 @@ _id_6021( var_0 )
     if ( !_func_011C( self ) )
         return 1;
 
-    if ( isai( self ) )
+    if ( isalive( self ) )
         return 1;
 
     return 0;
@@ -164,7 +164,7 @@ _id_601D( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
         if ( isdefined( var_0 ) && isdefined( var_0._id_6019 ) )
         {
-            var_0._id_6019 = _id_077B::_id_1B96( var_0._id_6019, self );
+            var_0._id_6019 = scripts\engine\utility::array_remove( var_0._id_6019, self );
             var_0 notify( "level_function_stack_ready" );
         }
     }
@@ -183,7 +183,7 @@ _id_601E( var_0 )
 
     if ( isdefined( var_0 ) )
     {
-        var_0._id_6019 = _id_077B::_id_1B96( var_0._id_6019, self );
+        var_0._id_6019 = scripts\engine\utility::array_remove( var_0._id_6019, self );
         var_0 notify( "level_function_stack_ready" );
     }
 }

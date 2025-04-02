@@ -5,9 +5,9 @@ _id_4C9C( var_0, var_1, var_2 )
 {
     self._id_0396 = 60;
     _id_08C8::_id_68DB();
-    self._id_1C08._id_4249 = _func_020F();
-    self._id_E05E = _id_077B::_id_E20C();
-    self._id_E05E _meth_820B( self, "tag_eye" );
+    self._id_1C08._id_4249 = spawnstruct();
+    self._id_E05E = scripts\engine\utility::spawn_tag_origin();
+    self._id_E05E linkto( self, "tag_eye" );
     self _meth_85E1( "speed" );
     self _meth_8706();
     thread _id_107FD( self._id_E05E );
@@ -21,7 +21,7 @@ _id_107FD( var_0 )
     {
         var_0 _meth_83F7();
         waitframe();
-        var_0 _meth_809A();
+        var_0 delete();
     }
 }
 
@@ -36,15 +36,15 @@ _id_A406( var_0, var_1, var_2, var_3 )
 
     if ( isdefined( self._id_017D ) )
         var_4 = self._id_017D;
-    else if ( isdefined( self._id_0B3E._id_0457 ) )
-        var_4 = self._id_0B3E._id_0457;
+    else if ( isdefined( self._id_0B3E.target ) )
+        var_4 = self._id_0B3E.target;
 
     if ( !isdefined( var_4 ) )
         return 0;
 
-    var_5 = _func_025A( var_4._id_02EA - self._id_02EA );
-    var_6 = vectordot( var_5 );
-    var_7 = _func_000B( var_6 - self._id_0054[1] );
+    var_5 = vectornormalize( var_4.origin - self.origin );
+    var_6 = _func_025C( var_5 );
+    var_7 = _func_000B( var_6 - self.angles[1] );
     var_8 = var_7 < -35 || var_7 > 35;
 
     if ( var_8 )
@@ -58,11 +58,11 @@ _id_A408( var_0, var_1, var_2, var_3 )
     if ( !isdefined( self._id_0303 ) )
         return 0;
 
-    if ( distance2dsquared( self._id_02EA, self._id_0303 ) < 4 )
+    if ( distance2dsquared( self.origin, self._id_0303 ) < 4 )
         return 0;
 
-    var_4 = vectordot( self._id_0261 );
-    var_5 = _func_000B( var_4 - self._id_0054[1] );
+    var_4 = _func_025C( self._id_0261 );
+    var_5 = _func_000B( var_4 - self.angles[1] );
     var_6 = var_5 < -46 || var_5 > 46;
 
     if ( var_6 )
@@ -103,14 +103,14 @@ _id_B30A( var_0, var_1, var_2 )
     self _meth_8018( "zonly_physics", 0 );
     var_3 = _id_0009::_id_1C34( var_0, var_1 );
     var_4 = _id_0009::_id_1C46( var_1, var_3 );
-    var_5 = self._id_0303 - self._id_02EA;
-    var_6 = vectordot( var_5 );
+    var_5 = self._id_0303 - self.origin;
+    var_6 = _func_025C( var_5 );
     var_7 = _func_00B0( var_4 );
     var_8 = _func_0077( var_4 );
-    var_9 = _func_0130( var_5 );
-    var_10 = _func_0130( var_7 ) / var_9;
+    var_9 = length( var_5 );
+    var_10 = length( var_7 ) / var_9;
     var_11 = self._id_0303;
-    var_12 = var_11 - _func_01C2( var_7, ( 0, var_6, 0 ) );
+    var_12 = var_11 - rotatevector( var_7, ( 0, var_6, 0 ) );
     var_13 = var_6 + var_8;
     var_14 = int( 1000 * _func_0079( var_4 ) - 200 );
     self _meth_83D8();
@@ -128,7 +128,7 @@ _id_B30B( var_0, var_1, var_2 )
 
 _id_3615( var_0, var_1, var_2 )
 {
-    var_3 = _func_000B( self._id_0B3E._id_47FC - self._id_0054[1] );
+    var_3 = _func_000B( self._id_0B3E._id_47FC - self.angles[1] );
     var_4 = [ "2", "3", "6", "9", "8", "7", "4", "1", "2" ];
     var_5 = _func_0321( var_3 );
     return _id_0009::_id_1C55( var_1, var_4[var_5] );
@@ -186,7 +186,7 @@ _id_B31D( var_0, var_1 )
         while ( ( !isdefined( self._id_03E1 ) || !isdefined( self._id_03E1._id_24CB ) || !self._id_03E1._id_24CB ) && !istrue( self._id_5E89 ) )
             waitframe();
 
-        self._id_E05E _meth_827B( "anml_dog_growl", "dog_growl", 1 );
+        self._id_E05E playsound( "anml_dog_growl", "dog_growl", 1 );
         self._id_E05E waittill( "dog_growl" );
 
         if ( istrue( self._id_5E89 ) )
@@ -286,7 +286,7 @@ _id_4CA3( var_0, var_1 )
 
     if ( var_0 == "sound_dogstep_run_default" )
     {
-        self _meth_827B( "dogstep_run_default" );
+        self playsound( "dogstep_run_default" );
         return;
     }
 
@@ -295,14 +295,14 @@ _id_4CA3( var_0, var_1 )
 
     if ( var_0 == "dog_melee" )
     {
-        if ( isdefined( self._id_017D ) && distance2dsquared( self._id_02EA, self._id_017D._id_02EA ) < self._id_9D82 )
+        if ( isdefined( self._id_017D ) && distance2dsquared( self.origin, self._id_017D.origin ) < self._id_9D82 )
         {
             var_2 = 50;
 
             if ( isdefined( self._id_F92D ) )
                 var_2 = self._id_F92D;
 
-            self._id_017D _meth_80B7( var_2, self geteye(), self, self, "MOD_MELEE", _func_034C( "s4_ks_dog_bite_mp" ) );
+            self._id_017D dodamage( var_2, self geteye(), self, self, "MOD_MELEE", makeweapon( "s4_ks_dog_bite_mp" ) );
         }
 
         return;
@@ -314,5 +314,5 @@ _id_4CA3( var_0, var_1 )
         return;
 
     var_4 = _func_00D6( var_0, 3 );
-    self _meth_827B( var_4 );
+    self playsound( var_4 );
 }

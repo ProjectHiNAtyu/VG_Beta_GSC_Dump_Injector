@@ -9,7 +9,7 @@ _id_811D()
     level._id_1A07 = [];
     level._id_1A08 = [];
 
-    if ( _id_0999::_id_6B0E() == "mp_junk" )
+    if ( scripts\cp_mp\utility\game_utility::_id_6B0E() == "mp_junk" )
     {
         var_0 = getentarray( "mag_up", "targetname" );
 
@@ -21,15 +21,15 @@ _id_811D()
         foreach ( var_2 in var_0 )
         {
             var_3 = var_2 getentitynumber();
-            var_4 = _func_020F();
+            var_4 = spawnstruct();
             var_4._id_047A = var_2;
             var_4._id_2271 = undefined;
             var_4._id_5508 = [];
 
-            if ( isdefined( var_2._id_0457 ) )
+            if ( isdefined( var_2.target ) )
             {
-                var_4._id_2271 = getent( var_2._id_0457, "targetname" );
-                var_4._id_2558 = var_4._id_2271._id_02EA + ( 0, 0, -175 );
+                var_4._id_2271 = getent( var_2.target, "targetname" );
+                var_4._id_2558 = var_4._id_2271.origin + ( 0, 0, -175 );
             }
 
             level._id_1A08[var_3] = var_4;
@@ -82,7 +82,7 @@ _id_10A8C( var_0 )
 
 _id_DAF2( var_0, var_1 )
 {
-    if ( !_func_0117( var_1 ) )
+    if ( !isplayer( var_1 ) )
         return 0;
 
     var_2 = var_1 getentitynumber();
@@ -127,7 +127,7 @@ _id_68AD()
 
 _id_889C()
 {
-    if ( _func_0117( self ) )
+    if ( isplayer( self ) )
     {
         if ( self _meth_8540() != ( 0, 0, 0 ) )
             return 1;

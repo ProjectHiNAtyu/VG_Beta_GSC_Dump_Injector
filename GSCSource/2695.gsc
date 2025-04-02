@@ -3,18 +3,18 @@
 
 _id_79ED()
 {
-    _id_099D::_id_C2A5( "hoopty", "spawnCallback", ::_id_79F1 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "hoopty", "spawnCallback", ::_id_79F1 );
     _id_79EE();
     _id_79EF();
     _id_0A86::_id_D41E( "hoopty", 6 );
-    _id_0A86::_id_D19F( "hoopty", scripts\cp_mp\killstreaks\airdrop::_id_79DA );
-    scripts\mp\utility\killstreak::_id_10228( "hoopty", scripts\cp_mp\killstreaks\airdrop::_id_79E0 );
+    _id_0A86::_id_D19F( "hoopty", _id_09A9::_id_79DA );
+    scripts\mp\utility\killstreak::_id_10228( "hoopty", _id_09A9::_id_79E0 );
 }
 
 _id_79EF()
 {
-    var_0 = _id_09BB::_id_10274( "hoopty", 1 );
-    var_0._id_0DD8 = _id_09BB::vehicle_spawn;
+    var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10274( "hoopty", 1 );
+    var_0._id_0DD8 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn;
 }
 
 _id_79EE()
@@ -31,9 +31,9 @@ _id_79EE()
 
 _id_79F1( var_0, var_1 )
 {
-    var_2 = scripts\cp_mp\killstreaks\airdrop::_id_79D9( var_0, var_1 );
+    var_2 = _id_09A9::_id_79D9( var_0, var_1 );
 
-    if ( isdefined( var_2 ) && _id_09BB::_id_10270() )
+    if ( isdefined( var_2 ) && scripts\cp_mp\vehicles\vehicle_spawn::_id_10270() )
         var_2._id_AA96 = ::_id_79F0;
 
     return var_2;
@@ -46,9 +46,9 @@ _id_79F0()
 
 _id_79F2()
 {
-    var_0 = _id_09BC::_id_6E22( self );
-    var_1 = _func_020F();
-    _id_09BC::_id_3D43( var_0, var_1 );
-    var_2 = _func_020F();
-    var_3 = _id_09BB::vehicle_spawn_spawnvehicle( "hoopty", var_1, var_2 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_tracking::_id_6E22( self );
+    var_1 = spawnstruct();
+    scripts\cp_mp\vehicles\vehicle_tracking::_id_3D43( var_0, var_1 );
+    var_2 = spawnstruct();
+    var_3 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028E( "hoopty", var_1, var_2 );
 }

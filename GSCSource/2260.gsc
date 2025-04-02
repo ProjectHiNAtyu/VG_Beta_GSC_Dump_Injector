@@ -4,7 +4,7 @@
 _id_87CD( var_0, var_1, var_2, var_3 )
 {
     if ( !self._id_013B )
-        return _id_077B::_id_42ED( "right_arm_upper", "right_arm_lower", "right_hand" );
+        return scripts\engine\utility::_id_42ED( "right_arm_upper", "right_arm_lower", "right_hand" );
 
     return 0;
 }
@@ -12,7 +12,7 @@ _id_87CD( var_0, var_1, var_2, var_3 )
 _id_87CE( var_0, var_1, var_2, var_3 )
 {
     if ( !self._id_013B )
-        return _id_077B::_id_42ED( "right_leg_upper", "right_foot", "right_leg_lower" );
+        return scripts\engine\utility::_id_42ED( "right_leg_upper", "right_foot", "right_leg_lower" );
 
     return 0;
 }
@@ -20,7 +20,7 @@ _id_87CE( var_0, var_1, var_2, var_3 )
 _id_87CC( var_0, var_1, var_2, var_3 )
 {
     if ( !self._id_013B )
-        return _id_077B::_id_42ED( "left_leg_upper", "left_foot", "left_leg_lower" );
+        return scripts\engine\utility::_id_42ED( "left_leg_upper", "left_foot", "left_leg_lower" );
 
     return 0;
 }
@@ -28,7 +28,7 @@ _id_87CC( var_0, var_1, var_2, var_3 )
 _id_87CA( var_0, var_1, var_2, var_3 )
 {
     if ( !self._id_013B )
-        return _id_077B::_id_42ED( "left_arm_upper", "left_arm_lower", "left_hand" );
+        return scripts\engine\utility::_id_42ED( "left_arm_upper", "left_arm_lower", "left_hand" );
 
     return 0;
 }
@@ -36,7 +36,7 @@ _id_87CA( var_0, var_1, var_2, var_3 )
 _id_87CF( var_0, var_1, var_2, var_3 )
 {
     if ( !self._id_013B )
-        return _id_077B::_id_42ED( "torso_upper", "torso_lower" );
+        return scripts\engine\utility::_id_42ED( "torso_upper", "torso_lower" );
 
     return 0;
 }
@@ -44,21 +44,21 @@ _id_87CF( var_0, var_1, var_2, var_3 )
 _id_87C9( var_0, var_1, var_2, var_3 )
 {
     if ( !self._id_013B )
-        return _id_077B::_id_42ED( "head", "neck", "helmet" );
+        return scripts\engine\utility::_id_42ED( "head", "neck", "helmet" );
 
     return 0;
 }
 
 _id_87CB( var_0, var_1, var_2, var_3 )
 {
-    return _id_077B::_id_42ED( "left_hand", "left_arm_upper", "left_arm_lower", "left_leg_upper", "left_leg_lower", "left_foot", "torso_lower" );
+    return scripts\engine\utility::_id_42ED( "left_hand", "left_arm_upper", "left_arm_lower", "left_leg_upper", "left_leg_lower", "left_foot", "torso_lower" );
 }
 
 _id_87C8( var_0, var_1, var_2, var_3 )
 {
     if ( !self._id_013B )
     {
-        if ( _id_08C8::_id_6A8C() == 1 && !_id_077B::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot", "right_leg_upper", "right_leg_lower", "right_foot" ) )
+        if ( _id_08C8::_id_6A8C() == 1 && !scripts\engine\utility::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot", "right_leg_upper", "right_leg_lower", "right_foot" ) )
             return 1;
     }
 
@@ -67,7 +67,7 @@ _id_87C8( var_0, var_1, var_2, var_3 )
 
 _id_87D0( var_0, var_1, var_2, var_3 )
 {
-    return _id_077B::_id_42ED( "right_arm_upper", "right_arm_lower", "right_hand", "left_hand", "left_arm_upper", "left_arm_lower", "left_leg_upper", "left_leg_lower", "left_foot", "right_leg_upper", "right_leg_lower", "right_foot", "torso_upper", "torso_lower" );
+    return scripts\engine\utility::_id_42ED( "right_arm_upper", "right_arm_lower", "right_hand", "left_hand", "left_arm_upper", "left_arm_lower", "left_leg_upper", "left_leg_lower", "left_foot", "right_leg_upper", "right_leg_lower", "right_foot", "torso_upper", "torso_lower" );
 }
 
 _id_7475()
@@ -88,7 +88,7 @@ _id_10823( var_0, var_1 )
     {
         self waittill( "damage" );
 
-        if ( !isai( self ) )
+        if ( !isalive( self ) )
             break;
 
         var_2 = _id_357A( var_0, var_1 );
@@ -103,23 +103,23 @@ _id_357A( var_0, var_1 )
 {
     var_2 = [];
 
-    if ( _id_077B::_id_42ED( "torso_upper", "torso_lower" ) )
+    if ( scripts\engine\utility::_id_42ED( "torso_upper", "torso_lower" ) )
         var_2[var_2.size] = _id_0009::_id_1C55( var_1, "add_torso" );
-    else if ( _id_077B::_id_42ED( "head", "helmet", "neck" ) )
+    else if ( scripts\engine\utility::_id_42ED( "head", "helmet", "neck" ) )
         var_2[var_2.size] = _id_0009::_id_1C55( var_1, "add_head" );
-    else if ( _id_077B::_id_42ED( "right_arm_upper", "right_arm_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_arm_upper", "right_arm_lower" ) )
         var_2[var_2.size] = _id_0009::_id_1C55( var_1, "add_right_arm" );
-    else if ( _id_077B::_id_42ED( "left_arm_upper", "left_arm_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_arm_upper", "left_arm_lower" ) )
         var_2[var_2.size] = _id_0009::_id_1C55( var_1, "add_left_arm" );
-    else if ( _id_077B::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot" ) )
         var_2[var_2.size] = _id_0009::_id_1C55( var_1, "add_left_leg" );
-    else if ( _id_077B::_id_42ED( "right_leg_upper", "right_leg_lower", "right_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_leg_upper", "right_leg_lower", "right_foot" ) )
         var_2[var_2.size] = _id_0009::_id_1C55( var_1, "add_right_leg" );
 
     if ( var_2.size < 2 )
         var_2[var_2.size] = _id_0009::_id_1C55( var_1, "add_default" );
 
-    return var_2[_func_01B8( var_2.size )];
+    return var_2[randomint( var_2.size )];
 }
 
 _id_35F6( var_0, var_1, var_2 )
@@ -129,10 +129,10 @@ _id_35F6( var_0, var_1, var_2 )
 
 _id_B8D5()
 {
-    if ( _id_06BB::_id_87D2( _func_034C( "iw7_sonic" ) ) && _id_06BB::_id_8AEB( self._id_013E ) )
+    if ( scripts\common\utility::_id_87D2( makeweapon( "iw7_sonic" ) ) && scripts\common\utility::_id_8AEB( self._id_013E ) )
     {
-        _func_0197( level._id_6082["soldier_shock"], self, "j_knee_ri" );
-        _func_0197( level._id_6082["soldier_shock"], self, "j_shoulder_ri" );
+        playfxontag( level._id_6082["soldier_shock"], self, "j_knee_ri" );
+        playfxontag( level._id_6082["soldier_shock"], self, "j_shoulder_ri" );
     }
 }
 
@@ -141,15 +141,15 @@ _id_B8C2( var_0, var_1, var_2 )
     self endon( "death" );
     self endon( var_1 + "_finished" );
     var_3 = _id_0009::_id_1C34( var_0, var_1 );
-    var_4 = _id_077B::_id_F07F( isdefined( self._id_51A2 ), self._id_51A2, 3.5 );
+    var_4 = scripts\engine\utility::ter_op( isdefined( self._id_51A2 ), self._id_51A2, 3.5 );
     _id_B8D5();
     self _meth_8018( "zonly_physics", 0 );
-    wait( _func_01B6( 0.3 ) );
+    wait( randomfloat( 0.3 ) );
 
     if ( self._id_1C90 == "c6" || self._id_1C90 == "c6_worker" )
     {
         thread _id_D9E1( self._id_1C90, var_1, 1, 0, 1 );
-        self _meth_827B( "generic_flashbang_c6_1" );
+        self playsound( "generic_flashbang_c6_1" );
     }
     else
         thread _id_D9E1( self._id_1C90, var_1, 1, 0 );
@@ -230,7 +230,7 @@ _id_DB8E( var_0, var_1, var_2, var_3 )
     if ( self _meth_8472() < 36 )
         return 0;
 
-    var_4 = _func_0130( self._id_04B7 );
+    var_4 = length( self._id_04B7 );
 
     if ( var_4 < 20 )
         return 0;
@@ -240,9 +240,9 @@ _id_DB8E( var_0, var_1, var_2, var_3 )
     if ( self._id_0262 > 12 )
         var_6 = self._id_0261;
     else
-        var_6 = _func_025A( self _meth_84A5( 36 ) - self._id_02EA );
+        var_6 = vectornormalize( self _meth_84A5( 36 ) - self.origin );
 
-    return _func_0257( var_6, var_5 ) < 0.5;
+    return vectordot( var_6, var_5 ) < 0.5;
 }
 
 _id_8955( var_0, var_1, var_2, var_3 )
@@ -250,12 +250,12 @@ _id_8955( var_0, var_1, var_2, var_3 )
     var_4 = "rifle";
     var_5 = self._id_013E;
 
-    if ( isdefined( var_5 ) && var_5._id_0084 != "iw8_sn_mike14" )
-        var_4 = var_5._id_00DE;
+    if ( isdefined( var_5 ) && var_5.basename != "iw8_sn_mike14" )
+        var_4 = var_5.classname;
 
     if ( var_4 == "spread" )
     {
-        if ( isdefined( self._id_0251 ) && distancesquared( self._id_0251._id_02EA, self._id_02EA ) <= 62500 )
+        if ( isdefined( self._id_0251 ) && distancesquared( self._id_0251.origin, self.origin ) <= 62500 )
             return 1;
     }
     else if ( var_4 == "sniper" || var_4 == "mg" )
@@ -270,8 +270,8 @@ _id_6BEE()
     var_1 = "rifle";
     var_2 = self._id_013E;
 
-    if ( isdefined( var_2 ) && var_2._id_0084 != "iw8_sn_mike14" )
-        var_1 = var_2._id_00DE;
+    if ( isdefined( var_2 ) && var_2.basename != "iw8_sn_mike14" )
+        var_1 = var_2.classname;
 
     if ( var_1 == "pistol" || var_1 == "smg" )
         var_0 = "_md";
@@ -279,7 +279,7 @@ _id_6BEE()
     {
         var_0 = "_md";
 
-        if ( isdefined( self._id_0251 ) && distancesquared( self._id_0251._id_02EA, self._id_02EA ) <= 62500 )
+        if ( isdefined( self._id_0251 ) && distancesquared( self._id_0251.origin, self.origin ) <= 62500 )
             var_0 = "_lg";
     }
     else if ( var_1 == "sniper" || var_1 == "mg" )
@@ -299,8 +299,8 @@ _id_6BEF()
     var_1 = "rifle";
     var_2 = self._id_013E;
 
-    if ( isdefined( var_2 ) && var_2._id_0084 != "iw8_sn_mike14" )
-        var_1 = var_2._id_00DE;
+    if ( isdefined( var_2 ) && var_2.basename != "iw8_sn_mike14" )
+        var_1 = var_2.classname;
 
     if ( var_1 == "pistol" || var_1 == "smg" )
         var_0 = "_md";
@@ -308,7 +308,7 @@ _id_6BEF()
     {
         var_0 = "_md";
 
-        if ( isdefined( self._id_0251 ) && distancesquared( self._id_0251._id_02EA, self._id_02EA ) <= 62500 )
+        if ( isdefined( self._id_0251 ) && distancesquared( self._id_0251.origin, self.origin ) <= 62500 )
             var_0 = "_lg";
     }
     else if ( var_1 == "sniper" || var_1 == "mg" )
@@ -352,37 +352,37 @@ _id_35C9( var_0, var_1, var_2 )
     var_6 = "midbody";
     var_7 = [];
 
-    if ( _id_077B::_id_42ED( "head", "helmet", "neck" ) )
+    if ( scripts\engine\utility::_id_42ED( "head", "helmet", "neck" ) )
     {
         var_5 = "head";
         var_6 = "head";
         var_7[var_7.size] = _id_0009::_id_1C55( var_1, "head" + var_3 + var_4 );
     }
-    else if ( _id_077B::_id_42ED( "torso_upper", "torso_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "torso_upper", "torso_lower" ) )
     {
         var_5 = "torso";
         var_6 = "midbody";
         var_7[var_7.size] = _id_0009::_id_1C55( var_1, "torso" + var_3 + var_4 );
     }
-    else if ( _id_077B::_id_42ED( "right_arm_upper", "right_arm_lower", "right_hand" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_arm_upper", "right_arm_lower", "right_hand" ) )
     {
         var_5 = "rarm";
         var_6 = "midbody";
         var_7[var_7.size] = _id_0009::_id_1C55( var_1, "rarm" + var_3 + var_4 );
     }
-    else if ( _id_077B::_id_42ED( "left_arm_upper", "left_arm_lower", "left_hand" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_arm_upper", "left_arm_lower", "left_hand" ) )
     {
         var_5 = "larm";
         var_6 = "midbody";
         var_7[var_7.size] = _id_0009::_id_1C55( var_1, "larm" + var_3 + var_4 );
     }
-    else if ( _id_077B::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot" ) )
     {
         var_5 = "lleg";
         var_6 = "lowerbody";
         var_7[var_7.size] = _id_0009::_id_1C55( var_1, "lleg" + var_3 + var_4 );
     }
-    else if ( _id_077B::_id_42ED( "right_leg_upper", "right_leg_lower", "right_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_leg_upper", "right_leg_lower", "right_foot" ) )
     {
         var_5 = "rleg";
         var_6 = "lowerbody";
@@ -408,7 +408,7 @@ _id_35C9( var_0, var_1, var_2 )
     self._id_1C08._id_1425 = var_8;
     self._id_1C08._id_ADD8 = var_6;
     self._id_1C08._id_ADDD = var_3;
-    return var_7[_func_01B8( var_7.size )];
+    return var_7[randomint( var_7.size )];
 }
 
 _id_35C5( var_0, var_1, var_2 )
@@ -418,67 +418,67 @@ _id_35C5( var_0, var_1, var_2 )
     var_5 = "midbody";
     var_6 = [];
 
-    if ( _id_077B::_id_42ED( "head", "helmet", "neck" ) )
+    if ( scripts\engine\utility::_id_42ED( "head", "helmet", "neck" ) )
     {
         var_4 = "head";
         var_5 = "head";
         var_6[var_6.size] = _id_0009::_id_1C55( var_1, "head" + var_3 );
     }
-    else if ( _id_077B::_id_42ED( "torso_upper" ) )
+    else if ( scripts\engine\utility::_id_42ED( "torso_upper" ) )
     {
         var_4 = "torso_upper";
         var_5 = "midbody";
         var_6[var_6.size] = _id_0009::_id_1C55( var_1, "torso_upper" + var_3 );
     }
-    else if ( _id_077B::_id_42ED( "torso_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "torso_lower" ) )
     {
         var_4 = "torso_lower";
         var_5 = "midbody";
         var_6[var_6.size] = _id_0009::_id_1C55( var_1, "torso_lower" + var_3 );
     }
-    else if ( _id_077B::_id_42ED( "right_arm_upper" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_arm_upper" ) )
     {
         var_4 = "rarm_upper";
         var_5 = "midbody";
         var_6[var_6.size] = _id_0009::_id_1C55( var_1, "rarm_upper" + var_3 );
     }
-    else if ( _id_077B::_id_42ED( "right_arm_lower", "right_hand" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_arm_lower", "right_hand" ) )
     {
         var_4 = "rarm_lower";
         var_5 = "midbody";
         var_6[var_6.size] = _id_0009::_id_1C55( var_1, "rarm_lower" + var_3 );
     }
-    else if ( _id_077B::_id_42ED( "left_arm_upper" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_arm_upper" ) )
     {
         var_4 = "larm_upper";
         var_5 = "midbody";
         var_6[var_6.size] = _id_0009::_id_1C55( var_1, "larm_upper" + var_3 );
     }
-    else if ( _id_077B::_id_42ED( "left_arm_lower", "left_hand" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_arm_lower", "left_hand" ) )
     {
         var_4 = "larm_lower";
         var_5 = "midbody";
         var_6[var_6.size] = _id_0009::_id_1C55( var_1, "larm_lower" + var_3 );
     }
-    else if ( _id_077B::_id_42ED( "left_leg_upper" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_leg_upper" ) )
     {
         var_4 = "lleg_upper";
         var_5 = "lowerbody";
         var_6[var_6.size] = _id_0009::_id_1C55( var_1, "lleg_upper" + var_3 );
     }
-    else if ( _id_077B::_id_42ED( "left_leg_lower", "left_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_leg_lower", "left_foot" ) )
     {
         var_4 = "lleg_lower";
         var_5 = "lowerbody";
         var_6[var_6.size] = _id_0009::_id_1C55( var_1, "lleg_lower" + var_3 );
     }
-    else if ( _id_077B::_id_42ED( "right_leg_upper" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_leg_upper" ) )
     {
         var_4 = "rleg_upper";
         var_5 = "lowerbody";
         var_6[var_6.size] = _id_0009::_id_1C55( var_1, "rleg_upper" + var_3 );
     }
-    else if ( _id_077B::_id_42ED( "right_leg_lower", "right_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_leg_lower", "right_foot" ) )
     {
         var_4 = "rleg_lower";
         var_5 = "lowerbody";
@@ -503,7 +503,7 @@ _id_35C5( var_0, var_1, var_2 )
 
     self._id_1C08._id_1425 = var_7;
     self._id_1C08._id_ADD8 = var_5;
-    return var_6[_func_01B8( var_6.size )];
+    return var_6[randomint( var_6.size )];
 }
 
 _id_35CA( var_0, var_1, var_2 )
@@ -525,13 +525,13 @@ _id_35C8( var_0, var_1, var_2 )
     var_6 = "midbody";
     var_7 = [];
 
-    if ( _id_077B::_id_42ED( "head", "helmet", "neck" ) )
+    if ( scripts\engine\utility::_id_42ED( "head", "helmet", "neck" ) )
     {
         var_5 = "head";
         var_6 = "head";
         var_7[var_7.size] = _id_0009::_id_1C55( var_1, "head" + var_3 + var_4 );
     }
-    else if ( _id_077B::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot", "right_leg_upper", "right_leg_lower", "right_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot", "right_leg_upper", "right_leg_lower", "right_foot" ) )
     {
         var_5 = "legs";
         var_6 = "lowerbody";
@@ -557,7 +557,7 @@ _id_35C8( var_0, var_1, var_2 )
     self._id_1C08._id_1425 = var_8;
     self._id_1C08._id_ADD8 = var_6;
     self._id_1C08._id_ADDD = var_3;
-    return var_7[_func_01B8( var_7.size )];
+    return var_7[randomint( var_7.size )];
 }
 
 _id_35C7( var_0, var_1, var_2 )
@@ -568,7 +568,7 @@ _id_35C7( var_0, var_1, var_2 )
     var_6 = "midbody";
     var_7 = [];
 
-    if ( _id_077B::_id_42ED( "head", "helmet", "neck" ) )
+    if ( scripts\engine\utility::_id_42ED( "head", "helmet", "neck" ) )
     {
         var_5 = "head";
         var_6 = "head";
@@ -594,7 +594,7 @@ _id_35C7( var_0, var_1, var_2 )
     self._id_1C08._id_1425 = var_8;
     self._id_1C08._id_ADD8 = var_6;
     self._id_1C08._id_ADDD = var_3;
-    return var_7[_func_01B8( var_7.size )];
+    return var_7[randomint( var_7.size )];
 }
 
 _id_35E9( var_0, var_1, var_2 )
@@ -605,7 +605,7 @@ _id_35E9( var_0, var_1, var_2 )
     var_5[var_5.size] = _id_0009::_id_1C55( var_1, var_4 + var_3 );
     var_6 = var_4 + var_3;
     self._id_1C08._id_1425 = var_6;
-    return var_5[_func_01B8( var_5.size )];
+    return var_5[randomint( var_5.size )];
 }
 
 _id_6BED()
@@ -613,37 +613,37 @@ _id_6BED()
     var_0 = "head";
     var_1 = "head";
 
-    if ( _id_077B::_id_42ED( "head", "helmet", "neck" ) )
+    if ( scripts\engine\utility::_id_42ED( "head", "helmet", "neck" ) )
     {
         var_0 = "head";
         var_1 = "head";
     }
-    else if ( _id_077B::_id_42ED( "torso_upper" ) )
+    else if ( scripts\engine\utility::_id_42ED( "torso_upper" ) )
     {
         var_0 = "torso_upper";
         var_1 = "midbody";
     }
-    else if ( _id_077B::_id_42ED( "torso_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "torso_lower" ) )
     {
         var_0 = "torso_lower";
         var_1 = "midbody";
     }
-    else if ( _id_077B::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot" ) )
     {
         var_0 = "l_leg";
         var_1 = "lowerbody";
     }
-    else if ( _id_077B::_id_42ED( "right_leg_upper", "right_leg_lower", "right_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_leg_upper", "right_leg_lower", "right_foot" ) )
     {
         var_0 = "r_leg";
         var_1 = "lowerbody";
     }
-    else if ( _id_077B::_id_42ED( "left_arm_upper", "left_arm_lower", "left_hand" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_arm_upper", "left_arm_lower", "left_hand" ) )
     {
         var_0 = "l_arm";
         var_1 = "lowerbody";
     }
-    else if ( _id_077B::_id_42ED( "right_arm_upper", "right_arm_lower", "right_hand" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_arm_upper", "right_arm_lower", "right_hand" ) )
     {
         var_0 = "r_arm";
         var_1 = "lowerbody";
@@ -700,12 +700,12 @@ _id_B89E( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     self _meth_8018( "gravity" );
 
     if ( !istrue( var_6 ) )
-        self _meth_8250( "face angle", self._id_0054[1] );
+        self _meth_8250( "face angle", self.angles[1] );
 
     if ( !isdefined( self._id_A50F ) )
         scripts\anim\face::_id_CB60( "pain" );
 
-    if ( _id_08CD::_id_DB6A( _id_06BB::_id_10A0B() ) )
+    if ( _id_08CD::_id_DB6A( scripts\common\utility::_id_10A0B() ) )
         _id_08CD::_id_77F2();
 
     var_7 = var_1;
@@ -767,7 +767,7 @@ _id_5AFB( var_0, var_1, var_2 )
 
     if ( isdefined( var_2 ) )
     {
-        if ( isalive( var_2 ) )
+        if ( _func_0106( var_2 ) )
             var_3 = var_2[0];
         else
             var_3 = var_2;
@@ -798,7 +798,7 @@ _id_DBFE()
         if ( self._id_0120 == "prone" )
             return 0;
 
-        if ( isdefined( self._id_0251 ) && isdefined( self._id_0251._id_045B ) && self._id_0251._id_045B == self._id_045B )
+        if ( isdefined( self._id_0251 ) && isdefined( self._id_0251.team ) && self._id_0251.team == self.team )
             return 0;
 
         if ( self._id_4307 > 0 )
@@ -857,12 +857,12 @@ _id_35F2( var_0, var_1, var_2 )
 
 _id_35F1( var_0, var_1, var_2 )
 {
-    if ( _id_077B::_id_42ED( "torso_upper" ) )
+    if ( scripts\engine\utility::_id_42ED( "torso_upper" ) )
     {
         self._id_9095 = "torso_upper";
         return _id_0009::_id_1C55( var_1, "torso_upper" );
     }
-    else if ( _id_077B::_id_42ED( "torso_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "torso_lower" ) )
     {
         self._id_9095 = "torso_lower";
         return _id_0009::_id_1C55( var_1, "torso_lower" );
@@ -889,25 +889,25 @@ _id_35F0( var_0, var_1, var_2 )
 
     var_3 = [];
 
-    if ( _id_077B::_id_42ED( "torso_upper" ) )
+    if ( scripts\engine\utility::_id_42ED( "torso_upper" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "torso_upper" );
-    else if ( _id_077B::_id_42ED( "torso_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "torso_lower" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "torso_lower" );
-    else if ( _id_077B::_id_42ED( "head", "helmet", "neck" ) )
+    else if ( scripts\engine\utility::_id_42ED( "head", "helmet", "neck" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "head" );
-    else if ( _id_077B::_id_42ED( "right_arm_upper", "right_arm_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_arm_upper", "right_arm_lower" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "right_arm" );
-    else if ( _id_077B::_id_42ED( "left_arm_upper", "left_arm_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_arm_upper", "left_arm_lower" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "left_arm" );
-    else if ( _id_077B::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "left_leg" );
-    else if ( _id_077B::_id_42ED( "right_leg_upper", "right_leg_lower", "right_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_leg_upper", "right_leg_lower", "right_foot" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "right_leg" );
 
     if ( var_3.size < 2 )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "default" );
 
-    return var_3[_func_01B8( var_3.size )];
+    return var_3[randomint( var_3.size )];
 }
 
 _id_35EC( var_0, var_1, var_2 )
@@ -925,14 +925,14 @@ _id_35EC( var_0, var_1, var_2 )
     if ( var_3.size < 2 )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "default" );
 
-    return var_3[_func_01B8( var_3.size )];
+    return var_3[randomint( var_3.size )];
 }
 
 _id_35D3( var_0, var_1, var_2 )
 {
     var_3 = [];
     var_3[var_3.size] = _id_0009::_id_1C55( var_1, "default" );
-    return var_3[_func_01B8( var_3.size )];
+    return var_3[randomint( var_3.size )];
 }
 
 _id_35EB( var_0, var_1, var_2 )
@@ -940,42 +940,42 @@ _id_35EB( var_0, var_1, var_2 )
     var_3 = [];
     var_3[var_3.size] = _id_0009::_id_1C55( var_1, "default" );
 
-    if ( _id_077B::_id_42ED( "left_hand", "left_arm_lower", "left_arm_upper" ) )
+    if ( scripts\engine\utility::_id_42ED( "left_hand", "left_arm_lower", "left_arm_upper" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "left_arm" );
 
-    if ( _id_077B::_id_42ED( "right_hand", "right_arm_lower", "right_arm_upper" ) )
+    if ( scripts\engine\utility::_id_42ED( "right_hand", "right_arm_lower", "right_arm_upper" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "right_arm" );
 
-    return var_3[_func_01B8( var_3.size )];
+    return var_3[randomint( var_3.size )];
 }
 
 _id_35EE( var_0, var_1, var_2 )
 {
     var_3 = [];
 
-    if ( _id_077B::_id_42ED( "torso_upper" ) )
+    if ( scripts\engine\utility::_id_42ED( "torso_upper" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "pistol_torso_upper" );
-    else if ( _id_077B::_id_42ED( "torso_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "torso_lower" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "pistol_torso_lower" );
-    else if ( _id_077B::_id_42ED( "neck" ) )
+    else if ( scripts\engine\utility::_id_42ED( "neck" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "pistol_neck" );
-    else if ( _id_077B::_id_42ED( "head" ) )
+    else if ( scripts\engine\utility::_id_42ED( "head" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "pistol_head" );
-    else if ( _id_077B::_id_42ED( "left_leg_upper", "right_leg_upper" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_leg_upper", "right_leg_upper" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "pistol_leg" );
-    else if ( _id_077B::_id_42ED( "left_arm_upper" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_arm_upper" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "pistol_left_arm_upper" );
-    else if ( _id_077B::_id_42ED( "left_arm_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_arm_lower" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "pistol_left_arm_lower" );
-    else if ( _id_077B::_id_42ED( "right_arm_upper" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_arm_upper" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "pistol_right_arm_upper" );
-    else if ( _id_077B::_id_42ED( "right_arm_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_arm_lower" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "pistol_right_arm_lower" );
 
     if ( var_3.size < 2 )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "pistol_default" );
 
-    return var_3[_func_01B8( var_3.size )];
+    return var_3[randomint( var_3.size )];
 }
 
 _id_35EF( var_0, var_1, var_2 )
@@ -987,7 +987,7 @@ _id_35EF( var_0, var_1, var_2 )
     var_7 = 0;
     var_8 = 0;
     var_9 = 0;
-    var_10 = _func_02A1( self._id_02EA, self _meth_8215( ( var_5, 0, 0 ) ), self, 1 );
+    var_10 = _func_02A1( self.origin, self _meth_8215( ( var_5, 0, 0 ) ), self, 1 );
 
     if ( var_10["fraction"] > 0.9 )
         var_8 = 1;
@@ -1001,7 +1001,7 @@ _id_35EF( var_0, var_1, var_2 )
         var_7 = 0;
     }
 
-    var_11 = _func_0130( self._id_04B7 );
+    var_11 = length( self._id_04B7 );
     var_12 = _id_08C8::_id_68DB();
     var_13 = _func_03A1( var_12, var_11 );
 
@@ -1024,7 +1024,7 @@ _id_35EF( var_0, var_1, var_2 )
     if ( var_6.size == 0 )
         return _id_0009::_id_1C55( var_1, "emergency_backup" );
 
-    return var_6[_func_01B8( var_6.size )];
+    return var_6[randomint( var_6.size )];
 }
 
 _id_35F4( var_0, var_1, var_2, var_3 )
@@ -1078,15 +1078,15 @@ _id_35D1( var_0, var_1, var_2 )
 {
     var_3 = [];
 
-    if ( _id_077B::_id_42ED( "torso_upper", "torso_lower" ) )
+    if ( scripts\engine\utility::_id_42ED( "torso_upper", "torso_lower" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "torso" );
-    else if ( _id_077B::_id_42ED( "head", "helmet", "neck" ) )
+    else if ( scripts\engine\utility::_id_42ED( "head", "helmet", "neck" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "head" );
 
     if ( var_3.size < 2 )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "default" );
 
-    return var_3[_func_01B8( var_3.size )];
+    return var_3[randomint( var_3.size )];
 }
 
 _id_35EA( var_0, var_1, var_2 )
@@ -1103,31 +1103,31 @@ _id_35D2( var_0, var_1, var_2 )
 {
     var_3 = [];
 
-    if ( _id_077B::_id_42ED( "torso_upper" ) )
+    if ( scripts\engine\utility::_id_42ED( "torso_upper" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "torso_upper" );
-    else if ( _id_077B::_id_42ED( "torso_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "torso_lower" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "torso_lower" );
-    else if ( _id_077B::_id_42ED( "head", "helmet", "neck" ) )
+    else if ( scripts\engine\utility::_id_42ED( "head", "helmet", "neck" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "head" );
-    else if ( _id_077B::_id_42ED( "right_arm_upper", "right_arm_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_arm_upper", "right_arm_lower" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "right_arm" );
-    else if ( _id_077B::_id_42ED( "left_arm_upper", "left_arm_lower" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_arm_upper", "left_arm_lower" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "left_arm" );
-    else if ( _id_077B::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "left_leg_upper", "left_leg_lower", "left_foot" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "left_leg" );
-    else if ( _id_077B::_id_42ED( "right_leg_upper", "right_leg_lower", "right_foot" ) )
+    else if ( scripts\engine\utility::_id_42ED( "right_leg_upper", "right_leg_lower", "right_foot" ) )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "right_leg" );
 
     if ( var_3.size < 2 )
         var_3[var_3.size] = _id_0009::_id_1C55( var_1, "default" );
 
-    return var_3[_func_01B8( var_3.size )];
+    return var_3[randomint( var_3.size )];
 }
 
 _id_35F5( var_0, var_1, var_2 )
 {
     var_3 = 3;
-    var_4 = "deaf_" + ( _func_01B8( var_3 ) + 1 );
+    var_4 = "deaf_" + ( randomint( var_3 ) + 1 );
     return _id_0009::_id_1C55( var_1, var_4 );
 }
 
@@ -1170,7 +1170,7 @@ _id_3875( var_0, var_1, var_2 )
 
 _id_F486( var_0, var_1, var_2, var_3 )
 {
-    if ( !_id_077B::_id_8848() )
+    if ( !scripts\engine\utility::_id_8848() )
         return 1;
 
     if ( gettime() > self._id_5C82 )
@@ -1289,7 +1289,7 @@ _id_B31C( var_0, var_1 )
         if ( var_4 > 0 )
             var_3 = var_6 / var_4;
 
-        var_3 = var_3 + _func_01B7( -0.2, 0.2 );
+        var_3 = var_3 + randomfloatrange( -0.2, 0.2 );
         var_3 = clamp( var_3, 0.2, 1.65 );
     }
 
@@ -1334,15 +1334,15 @@ _id_3589( var_0, var_1, var_2 )
 _id_3860( var_0, var_1, var_2 )
 {
     _id_3875( var_0, var_1, var_2 );
-    _id_06BB::_id_5C7F();
+    scripts\common\utility::_id_5C7F();
 }
 
 _id_B311( var_0, var_1, var_2 )
 {
     self endon( var_1 + "_finished" );
     var_3 = _id_0009::_id_1C34( var_0, var_1, var_2 );
-    var_4 = _func_01B7( 0.8, 1.2 );
-    self _meth_8250( "face angle", self._id_0054[1] );
+    var_4 = randomfloatrange( 0.8, 1.2 );
+    self _meth_8250( "face angle", self.angles[1] );
     self _meth_85EB( var_1, var_3, var_4 );
     _id_0009::_id_1C1D( var_0, var_1, ::_id_2D54 );
 }
@@ -1355,19 +1355,19 @@ _id_2D54( var_0 )
     switch ( var_0 )
     {
         case "burn_vfx_pain_start_head":
-            _func_0197( level._id_6082["vfx_burn_sml_head_low"], self, "j_helmet" );
+            playfxontag( level._id_6082["vfx_burn_sml_head_low"], self, "j_helmet" );
             break;
         case "burn_vfx_pain_start_arm_l":
-            _func_0197( level._id_6082["vfx_burn_sml_low"], self, "j_elbow_le" );
+            playfxontag( level._id_6082["vfx_burn_sml_low"], self, "j_elbow_le" );
             break;
         case "burn_vfx_pain_start_arm_r":
-            _func_0197( level._id_6082["vfx_burn_sml_low"], self, "j_shoulder_ri" );
+            playfxontag( level._id_6082["vfx_burn_sml_low"], self, "j_shoulder_ri" );
             break;
         case "burn_vfx_pain_start_leg_l":
-            _func_0197( level._id_6082["vfx_burn_med_low"], self, "j_knee_le" );
+            playfxontag( level._id_6082["vfx_burn_med_low"], self, "j_knee_le" );
             break;
         case "burn_vfx_pain_start_leg_r":
-            _func_0197( level._id_6082["vfx_burn_med_low"], self, "j_knee_ri" );
+            playfxontag( level._id_6082["vfx_burn_med_low"], self, "j_knee_ri" );
             break;
     }
 }
@@ -1379,7 +1379,7 @@ _id_3581( var_0, var_1, var_2 )
     if ( self._id_0120 == "prone" )
         return _id_0009::_id_1C55( var_1, "pain_burning_prone" );
 
-    var_4 = _id_077B::_id_F07F( _func_01B8( 2 ) == 1, "arm", "leg" );
+    var_4 = scripts\engine\utility::ter_op( randomint( 2 ) == 1, "arm", "leg" );
     var_3 = var_3 + "_" + self._id_2D64 + "_" + var_4;
     var_5 = _id_0009::_id_1C55( var_1, var_3 );
     return _id_08C8::_id_BC0E( var_1, var_3, var_5 );
@@ -1396,9 +1396,9 @@ _id_DB8C( var_0, var_1, var_2, var_3 )
 
     if ( isdefined( self._id_017D ) && isdefined( self._id_0251 ) && self._id_017D == self._id_0251 )
     {
-        var_5 = _func_025A( self._id_02EA - self._id_017D._id_02EA );
+        var_5 = vectornormalize( self.origin - self._id_017D.origin );
 
-        if ( _func_0257( var_5, self._id_0136 ) > 0.866 )
+        if ( vectordot( var_5, self._id_0136 ) > 0.866 )
             return 1;
     }
 
@@ -1434,7 +1434,7 @@ _id_DB8D( var_0, var_1, var_2, var_3 )
 
     self _meth_86DB();
 
-    if ( isdefined( self._id_017D ) && _func_0117( self._id_017D ) )
+    if ( isdefined( self._id_017D ) && isplayer( self._id_017D ) )
         return 1;
 
     return 0;
@@ -1469,17 +1469,17 @@ _id_ADD0( var_0, var_1, var_2 )
 
             if ( isdefined( var_9 ) )
             {
-                var_6 = _func_0148( var_6, _func_0147( 0, var_9 - 0.3 ) * var_5 );
+                var_6 = min( var_6, max( 0, var_9 - 0.3 ) * var_5 );
                 var_7 = var_9 * var_5;
             }
         }
 
-        var_6 = _func_0148( var_6, _func_0147( 0, var_5 - 0.5 ) );
+        var_6 = min( var_6, max( 0, var_5 - 0.5 ) );
     }
 
     wait( var_6 );
 
-    if ( isai( var_2 ) )
+    if ( isalive( var_2 ) )
     {
         self._id_ADD9 = self._id_0481;
         self._id_0481 = 0.1;
@@ -1491,7 +1491,7 @@ _id_B89D( var_0, var_1, var_2 )
 {
     self endon( var_1 + "_finished" );
 
-    if ( isai( self._id_017D ) && isdefined( self._id_0251 ) && self._id_017D == self._id_0251 )
+    if ( isalive( self._id_017D ) && isdefined( self._id_0251 ) && self._id_017D == self._id_0251 )
         thread _id_ADD0( var_0, var_1, self._id_017D );
 
     _id_B89E( var_0, var_1, var_2, 0, 1, undefined, 1 );
@@ -1501,7 +1501,7 @@ _id_B89C( var_0, var_1, var_2 )
 {
     self endon( var_1 + "_finished" );
 
-    if ( isai( self._id_017D ) && isdefined( self._id_0251 ) && self._id_017D == self._id_0251 )
+    if ( isalive( self._id_017D ) && isdefined( self._id_0251 ) && self._id_017D == self._id_0251 )
         thread _id_ADD0( var_0, var_1, self._id_017D );
 
     _id_B89E( var_0, var_1, var_2, 0, 1 );
@@ -1518,7 +1518,7 @@ _id_B89B( var_0, var_1, var_2 )
 {
     self endon( var_1 + "_finished" );
 
-    if ( isai( self._id_017D ) && isdefined( self._id_ADD1 ) && self._id_017D == self._id_ADD1 )
+    if ( isalive( self._id_017D ) && isdefined( self._id_ADD1 ) && self._id_017D == self._id_ADD1 )
         thread _id_ADD0( var_0, var_1, self._id_017D );
 
     self._id_ADD1 = undefined;

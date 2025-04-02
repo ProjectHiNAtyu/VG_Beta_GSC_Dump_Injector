@@ -3,10 +3,10 @@
 
 _id_6B0E()
 {
-    if ( !isdefined( level._id_9AA7 ) )
-        level._id_9AA7 = getdvar( "#x32ea5e908954bfea7" );
+    if ( !isdefined( level.mapname ) )
+        level.mapname = getdvar( "#x32ea5e908954bfea7" );
 
-    return level._id_9AA7;
+    return level.mapname;
 }
 
 _id_C25D()
@@ -21,7 +21,7 @@ _id_88E4()
 
 _id_88E3()
 {
-    return level._id_60D1 == "br" && _id_88E4();
+    return level.gametype == "br" && _id_88E4();
 }
 
 _id_C26C()
@@ -30,7 +30,7 @@ _id_C26C()
     _func_03D9( "killcam_night" );
 }
 
-_id_8926()
+isnightmap()
 {
     return istrue( level._id_A4D8 );
 }
@@ -123,15 +123,15 @@ _id_6AF8( var_0, var_1 )
                 continue;
             }
 
-            if ( level._id_9AA7 == "mp_port2_gw" && var_0 == "airstrikeheight" )
+            if ( level.mapname == "mp_port2_gw" && var_0 == "airstrikeheight" )
             {
-                if ( var_5._id_02EA == ( 34880, -26944, 3072 ) )
+                if ( var_5.origin == ( 34880, -26944, 3072 ) )
                     var_3 = var_5;
 
                 continue;
             }
 
-            var_5 _meth_809A();
+            var_5 delete();
         }
     }
     else
@@ -144,7 +144,7 @@ _id_6AF8( var_0, var_1 )
                 continue;
             }
 
-            var_5 _meth_809A();
+            var_5 delete();
         }
     }
 
@@ -157,7 +157,7 @@ _id_6AF8( var_0, var_1 )
 
 _id_6AFA( var_0, var_1 )
 {
-    var_2 = _id_077B::_id_6D7C( var_0, "targetname" );
+    var_2 = scripts\engine\utility::_id_6D7C( var_0, "targetname" );
     var_3 = undefined;
 
     if ( isdefined( _id_6AF9() ) )
@@ -189,7 +189,7 @@ _id_6AFA( var_0, var_1 )
 
 _id_6AFB( var_0, var_1 )
 {
-    var_2 = _id_077B::_id_6D7C( var_0, "targetname" );
+    var_2 = scripts\engine\utility::_id_6D7C( var_0, "targetname" );
     var_3 = [];
 
     if ( isdefined( _id_6AF9() ) )
@@ -246,7 +246,7 @@ _id_58A7( var_0, var_1, var_2, var_3 )
 
     if ( !isdefined( var_2 ) || var_2 == 0 )
     {
-        var_0 _meth_82F6( "ui_total_fade", var_4 );
+        var_0 setclientomnvar( "ui_total_fade", var_4 );
         return;
     }
 
@@ -263,7 +263,7 @@ _id_58A7( var_0, var_1, var_2, var_3 )
     while ( var_5 > 0 )
     {
         var_4 = var_4 + var_6;
-        var_0 _meth_82F6( "ui_total_fade", var_4 );
+        var_0 setclientomnvar( "ui_total_fade", var_4 );
         var_5--;
         waitframe();
     }
@@ -271,12 +271,12 @@ _id_58A7( var_0, var_1, var_2, var_3 )
 
 _id_6DCD()
 {
-    return [[ _id_099D::_id_6D05( "game_utility", "getTimeSinceGameStart" ) ]]();
+    return [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "game_utility", "getTimeSinceGameStart" ) ]]();
 }
 
 _id_E6DB()
 {
-    if ( _func_0107( self ) )
+    if ( isbot( self ) )
         return;
 
     if ( isdefined( self._id_C553 ) )
@@ -287,9 +287,9 @@ _id_E6DB()
 
     var_0 = 0;
 
-    if ( _id_099D::_id_8A10( "game", "getGameType" ) )
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "game", "getGameType" ) )
     {
-        var_1 = [[ _id_099D::_id_6D05( "game", "getGameType" ) ]]();
+        var_1 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "game", "getGameType" ) ]]();
         var_0 = _id_6937( var_1 );
     }
 
@@ -303,7 +303,7 @@ _id_E6DB()
 
 _id_E90F( var_0 )
 {
-    if ( _func_0107( self ) )
+    if ( isbot( self ) )
         return;
 
     if ( istrue( self._id_C553 ) )
@@ -314,9 +314,9 @@ _id_E90F( var_0 )
 
     var_1 = 0;
 
-    if ( _id_099D::_id_8A10( "game", "getGameType" ) )
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "game", "getGameType" ) )
     {
-        var_2 = [[ _id_099D::_id_6D05( "game", "getGameType" ) ]]();
+        var_2 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "game", "getGameType" ) ]]();
         var_1 = _id_6937( var_2 );
     }
 
@@ -324,20 +324,20 @@ _id_E90F( var_0 )
 
     if ( isdefined( var_0 ) )
     {
-        if ( level._id_EF62 )
+        if ( level.teambased )
         {
             if ( var_0 == "tie" )
                 var_3 = 3;
-            else if ( isdefined( self._id_0309["team"] ) && self._id_0309["team"] == var_0 )
+            else if ( isdefined( self.pers["team"] ) && self.pers["team"] == var_0 )
                 var_3 = 1;
-            else if ( isdefined( self._id_0309["team"] ) && self._id_0309["team"] != var_0 )
+            else if ( isdefined( self.pers["team"] ) && self.pers["team"] != var_0 )
                 var_3 = 2;
         }
         else if ( isdefined( self._id_3B5E ) )
             var_3 = 0;
-        else if ( !isdefined( self._id_F23F ) || self._id_F23F["total"] < 1 || self._id_0309["participation"] < 1 )
+        else if ( !isdefined( self._id_F23F ) || self._id_F23F["total"] < 1 || self.pers["participation"] < 1 )
             var_3 = 0;
-        else if ( !istrue( self._id_0309["hasDoneAnyCombat"] ) )
+        else if ( !istrue( self.pers["hasDoneAnyCombat"] ) )
             var_3 = 0;
         else if ( !isdefined( level._id_B159 ) )
             var_3 = 0;
@@ -345,7 +345,7 @@ _id_E90F( var_0 )
         {
             var_4 = 0;
 
-            for ( var_5 = 0; var_5 < _func_0148( level._id_B159["all"].size, 3 ); var_5++ )
+            for ( var_5 = 0; var_5 < min( level._id_B159["all"].size, 3 ); var_5++ )
             {
                 if ( level._id_B159["all"][var_5] != self )
                     continue;
@@ -363,23 +363,23 @@ _id_E90F( var_0 )
     var_6 = 0;
     var_7 = 0;
 
-    if ( isdefined( self._id_0309["scavengerPickedUp"] ) )
-        var_7 = self._id_0309["scavengerPickedUp"];
+    if ( isdefined( self.pers["scavengerPickedUp"] ) )
+        var_7 = self.pers["scavengerPickedUp"];
 
     var_8 = 0;
 
-    if ( isdefined( self._id_0309["restockCount"] ) )
-        var_8 = self._id_0309["restockCount"];
+    if ( isdefined( self.pers["restockCount"] ) )
+        var_8 = self.pers["restockCount"];
 
     var_9 = [];
 
-    if ( _id_099D::_id_8A10( "player", "lookupCurrentOperator" ) )
-        var_9[0] = self [[ _id_099D::_id_6D05( "player", "lookupCurrentOperator" ) ]]( self._id_045B );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "player", "lookupCurrentOperator" ) )
+        var_9[0] = self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "player", "lookupCurrentOperator" ) ]]( self.team );
     else
         var_9[0] = "";
 
-    if ( _id_099D::_id_8A10( "player", "lookupOtherOperator" ) )
-        var_9[1] = self [[ _id_099D::_id_6D05( "player", "lookupOtherOperator" ) ]]( self._id_045B );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "player", "lookupOtherOperator" ) )
+        var_9[1] = self [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "player", "lookupOtherOperator" ) ]]( self.team );
     else
         var_9[1] = "";
 
@@ -457,12 +457,12 @@ _id_C4DB( var_0, var_1 )
 
     foreach ( var_4 in var_2 )
     {
-        if ( isdefined( var_4._id_02AE ) && var_4._id_02AE == var_0 )
+        if ( isdefined( var_4.model ) && var_4.model == var_0 )
         {
-            if ( istrue( var_1 ) && isdefined( var_4._id_0457 ) )
-                _id_C4DA( var_4._id_0457, "targetname" );
+            if ( istrue( var_1 ) && isdefined( var_4.target ) )
+                _id_C4DA( var_4.target, "targetname" );
 
-            var_4 _meth_809A();
+            var_4 delete();
         }
     }
 }
@@ -474,7 +474,7 @@ _id_C4D9( var_0 )
     foreach ( var_3 in var_1 )
     {
         if ( isdefined( var_3._id_00E1 ) && var_3._id_00E1 == var_0 )
-            var_3 _meth_809A();
+            var_3 delete();
     }
 }
 
@@ -484,8 +484,8 @@ _id_C4D8( var_0 )
 
     foreach ( var_3 in var_1 )
     {
-        if ( isdefined( var_3._id_00DE ) && var_3._id_00DE == var_0 )
-            var_3 _meth_809A();
+        if ( isdefined( var_3.classname ) && var_3.classname == var_0 )
+            var_3 delete();
     }
 }
 
@@ -494,12 +494,12 @@ _id_C4DA( var_0, var_1 )
     var_2 = getentarray( var_0, var_1 );
 
     foreach ( var_4 in var_2 )
-        var_4 _meth_809A();
+        var_4 delete();
 }
 
 _id_8143()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     level._id_3389 = var_0;
     var_0._id_6092 = [];
     var_0._id_6092["dm"] = 6;
@@ -561,9 +561,9 @@ _id_6937( var_0 )
     if ( !isdefined( level._id_3389._id_6092 ) || !isdefined( level._id_3389._id_6092[var_0] ) )
         return 0;
 
-    if ( var_0 == "br" && isdefined( level._id_2B8F ) && isdefined( level._id_2B8F._id_02BA ) )
+    if ( var_0 == "br" && isdefined( level._id_2B8F ) && isdefined( level._id_2B8F.name ) )
     {
-        switch ( level._id_2B8F._id_02BA )
+        switch ( level._id_2B8F.name )
         {
             case "dmz":
                 return 99;
@@ -585,5 +585,5 @@ _id_6937( var_0 )
 
 _id_6095()
 {
-    [[ _id_099D::_id_6D05( "game_utility", "init" ) ]]();
+    [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "game_utility", "init" ) ]]();
 }

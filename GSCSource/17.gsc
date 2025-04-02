@@ -188,7 +188,7 @@ _id_0DE2()
     level._id_2F2A = ::_id_2F35;
     level._id_2F2B = ::_id_2F35;
     level._id_2F22 = ::_id_2F35;
-    _func_01D0( "#x3e619352055ca1c48", "dm" );
+    setdvar( "#x3e619352055ca1c48", "dm" );
     _func_0064( 0 );
 }
 

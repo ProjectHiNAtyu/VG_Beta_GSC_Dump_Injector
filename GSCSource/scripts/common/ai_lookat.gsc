@@ -3,12 +3,12 @@
 
 _id_5238( var_0, var_1 )
 {
-    _id_5237( level._id_030F, var_0, var_1 );
+    _id_5237( level.player, var_0, var_1 );
 }
 
 _id_4AA7()
 {
-    _id_4AA6( level._id_030F );
+    _id_4AA6( level.player );
 }
 
 _id_5237( var_0, var_1, var_2 )
@@ -27,7 +27,7 @@ _id_5237( var_0, var_1, var_2 )
     if ( isdefined( var_2 ) )
         self _meth_87E8( var_2 );
 
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
         self _meth_882B( 1 );
     else
         self setlookatent( var_0 );
@@ -35,22 +35,22 @@ _id_5237( var_0, var_1, var_2 )
 
 _id_4AA6( var_0 )
 {
-    if ( !isdefined( self._id_97D6 ) || !_id_077B::_id_1B78( self._id_97D6, var_0 ) )
+    if ( !isdefined( self._id_97D6 ) || !scripts\engine\utility::array_contains( self._id_97D6, var_0 ) )
         return;
 
-    var_1 = _id_077B::_id_1B85( self._id_97D6 ) == var_0;
-    self._id_97D6 = _id_077B::array_contains( self._id_97D6, var_0 );
+    var_1 = scripts\engine\utility::_id_1B85( self._id_97D6 ) == var_0;
+    self._id_97D6 = scripts\engine\utility::_id_1BA0( self._id_97D6, var_0 );
 
     if ( var_1 )
     {
-        if ( _func_0117( var_0 ) )
+        if ( isplayer( var_0 ) )
             self _meth_882B( 0 );
 
         if ( self._id_97D6.size > 0 )
         {
-            var_2 = _id_077B::_id_1B85( self._id_97D6 );
+            var_2 = scripts\engine\utility::_id_1B85( self._id_97D6 );
 
-            if ( _func_0117( var_2 ) )
+            if ( isplayer( var_2 ) )
                 self _meth_882B( 1 );
             else
                 self setlookatent( var_2 );
@@ -91,17 +91,17 @@ _id_7CB1( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
 
     for (;;)
     {
-        var_28 = distance( level._id_030F._id_02EA, self._id_02EA );
+        var_28 = distance( level.player.origin, self.origin );
         var_29 = var_13;
 
         if ( var_28 > var_4 )
             var_29 = var_12;
 
-        var_30 = anglestoforward( self._id_0054 );
-        var_31 = anglestoforward( level._id_030F._id_0054 );
-        var_32 = _func_025A( level._id_030F._id_02EA - self._id_02EA );
-        var_33 = _func_0257( var_30, var_32 ) > var_10 && var_28 < var_5;
-        var_34 = _func_0257( var_31, -1.0 * var_32 ) > var_11;
+        var_30 = anglestoforward( self.angles );
+        var_31 = anglestoforward( level.player.angles );
+        var_32 = vectornormalize( level.player.origin - self.origin );
+        var_33 = vectordot( var_30, var_32 ) > var_10 && var_28 < var_5;
+        var_34 = vectordot( var_31, -1.0 * var_32 ) > var_11;
 
         if ( var_25 == var_15 )
         {
@@ -341,12 +341,12 @@ _id_3798( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
     for (;;)
     {
-        var_15 = distance( level._id_030F._id_02EA, self._id_02EA );
-        var_16 = anglestoforward( self._id_0054 );
-        var_17 = anglestoforward( level._id_030F._id_0054 );
-        var_18 = _func_025A( level._id_030F._id_02EA - self._id_02EA );
-        var_19 = _func_0257( var_16, var_18 ) > var_5 && var_15 < var_2;
-        var_20 = _func_0257( var_17, -1.0 * var_18 ) > var_6;
+        var_15 = distance( level.player.origin, self.origin );
+        var_16 = anglestoforward( self.angles );
+        var_17 = anglestoforward( level.player.angles );
+        var_18 = vectornormalize( level.player.origin - self.origin );
+        var_19 = vectordot( var_16, var_18 ) > var_5 && var_15 < var_2;
+        var_20 = vectordot( var_17, -1.0 * var_18 ) > var_6;
         var_19 = var_19 && var_20;
 
         if ( var_12 == var_7 )

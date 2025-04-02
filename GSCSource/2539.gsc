@@ -10,7 +10,7 @@ _id_DEBB( var_0, var_1 )
         var_0 waittill( "missile_stuck", var_6, var_2, var_3, var_4, var_5 );
     else
     {
-        var_0 setorigin( self );
+        var_0 setotherent( self );
         var_0 thread _id_079A::_id_A0EC( 19, "hitequip", ::_id_DEB9, ::_id_DEB8 );
         _id_0764::_id_0FA8( var_0 );
         var_0 _id_0764::_id_D151( ::_id_DEB7 );
@@ -26,7 +26,7 @@ _id_DEAD( var_0, var_1, var_2 )
     var_1 = ( 0, 0, 1 );
     var_3 = var_0 + var_1;
     var_4 = var_3 + var_1 * 137;
-    var_5 = _func_02C4( [ "physicscontents_glass", "physicscontents_water", "physicscontents_item", "physicscontents_vehicle", "physicscontents_missileclip" ] );
+    var_5 = physics_createcontents( [ "physicscontents_glass", "physicscontents_water", "physicscontents_item", "physicscontents_vehicle", "physicscontents_missileclip" ] );
     var_6 = _func_02BC( var_3, var_4, var_5, var_2, 0, "physicsquery_closest", 1 );
 
     if ( isdefined( var_6 ) && var_6.size > 0 )
@@ -35,12 +35,12 @@ _id_DEAD( var_0, var_1, var_2 )
 
         if ( 1 )
         {
-            var_7 = _func_0257( var_4 - var_3, var_1 );
+            var_7 = vectordot( var_4 - var_3, var_1 );
 
             if ( var_7 > 0 )
             {
                 if ( var_7 >= 50 )
-                    var_7 = _func_0148( var_7 - 25, 112 );
+                    var_7 = min( var_7 - 25, 112 );
                 else
                     var_7 = var_7 / 2;
 
@@ -56,31 +56,31 @@ _id_DEAD( var_0, var_1, var_2 )
 
 _id_DEC1( var_0 )
 {
-    var_1 = _id_0A7F::_hasperk( "snapshot_grenade_mp", var_0, ( 0, 0, 0 ), 100, 1 );
+    var_1 = scripts\mp\utility\weapon::_id_0C1F( "snapshot_grenade_mp", var_0, ( 0, 0, 0 ), 100, 1 );
     var_1 _id_0765::_id_C2A7( 3, ::_id_DEB4 );
-    var_1 setorigin( self );
-    var_1 _meth_8373( "beacon", "active", 0 );
-    var_1 _meth_8373( "anims", "deploy", 0 );
+    var_1 setotherent( self );
+    var_1 setscriptablepartstate( "beacon", "active", 0 );
+    var_1 setscriptablepartstate( "anims", "deploy", 0 );
     var_1 _meth_8645();
-    var_1._id_02F2 = self;
+    var_1.owner = self;
     var_1 thread _id_079A::_id_A0EC( 19, "hitequip", ::_id_DEB9, ::_id_DEB8 );
     _id_0764::_id_0FA8( var_1 );
     var_1 _id_0764::_id_D151( ::_id_DEB7 );
     var_1 thread _id_DEBC();
     var_1 endon( "death" );
-    var_2 = _id_0A7F::_hasperk( "snapshot_grenade_danger_mp", var_1._id_02EA, ( 0, 0, 0 ), 100, 1 );
+    var_2 = scripts\mp\utility\weapon::_id_0C1F( "snapshot_grenade_danger_mp", var_1.origin, ( 0, 0, 0 ), 100, 1 );
     var_2._id_10D06 = "snapshot_grenade_danger_mp";
-    var_2 _meth_820B( var_1 );
-    var_2 _meth_847B( self );
+    var_2 linkto( var_1 );
+    var_2 hidefromplayer( self );
     var_1 thread _id_DEAF( var_2 );
-    var_3 = _func_0205( "script_model", var_1._id_02EA );
-    var_3._id_0054 = var_1._id_0054;
-    var_3 setmode( "tag_origin" );
-    var_1 _meth_820B( var_3, "tag_origin", ( 0, 0, 0 ), ( 0, 0, 0 ) );
+    var_3 = spawn( "script_model", var_1.origin );
+    var_3.angles = var_1.angles;
+    var_3 setmodel( "tag_origin" );
+    var_1 linkto( var_3, "tag_origin", ( 0, 0, 0 ), ( 0, 0, 0 ) );
     var_1 thread _id_DEB0( var_3 );
     var_4 = ( 0, 0, 1 );
     var_5 = _id_DEAD( var_0, var_4, [ var_1, var_2 ] );
-    var_6 = _func_0257( var_5 - var_0, var_4 );
+    var_6 = vectordot( var_5 - var_0, var_4 );
     var_7 = ( 0, 0, 0 );
 
     if ( var_6 > 0 )
@@ -92,24 +92,24 @@ _id_DEC1( var_0 )
         var_12 = 0.3 * var_8;
         var_13 = var_9 * 0;
         var_14 = var_9 * 0.35;
-        var_3 rotateroll( var_7, var_12, var_13, var_14 );
+        var_3 rotateto( var_7, var_12, var_13, var_14 );
         wait 0.3;
-        var_1 _meth_8373( "dust", "active", 0 );
-        var_1 _meth_8373( "anims", "idle", 0 );
-        var_3 _meth_823B( var_5, var_9, var_10, var_11 );
+        var_1 setscriptablepartstate( "dust", "active", 0 );
+        var_1 setscriptablepartstate( "anims", "idle", 0 );
+        var_3 moveto( var_5, var_9, var_10, var_11 );
         wait( var_9 );
     }
     else
     {
-        var_3._id_0054 = var_7;
+        var_3.angles = var_7;
         wait 0.3;
     }
 
     var_15 = 0.0;
     wait( var_15 );
-    var_1 _meth_8373( "detect", "active", 0 );
-    var_1 _meth_8373( "anims", "idle", 0 );
-    var_1 _meth_8373( "beacon", "neutral", 0 );
+    var_1 setscriptablepartstate( "detect", "active", 0 );
+    var_1 setscriptablepartstate( "anims", "idle", 0 );
+    var_1 setscriptablepartstate( "beacon", "neutral", 0 );
     wait 0.5;
     var_1 _id_DEB6();
     var_1 thread _id_DEB5();
@@ -117,19 +117,19 @@ _id_DEC1( var_0 )
 
 _id_DEB6()
 {
-    var_0 = self._id_02F2;
-    var_1 = self._id_02EA;
-    var_2 = self._id_0054;
+    var_0 = self.owner;
+    var_1 = self.origin;
+    var_2 = self.angles;
     var_3 = _id_DEB3( var_0, var_1 );
-    var_4 = _func_02C4( [ "physicscontents_missileclip", "physicscontents_glass", "physicscontents_water", "physicscontents_item", "physicscontents_vehicle" ] );
-    var_5 = _id_06BB::_id_B7AC( var_1, 540 );
+    var_4 = physics_createcontents( [ "physicscontents_missileclip", "physicscontents_glass", "physicscontents_water", "physicscontents_item", "physicscontents_vehicle" ] );
+    var_5 = scripts\common\utility::_id_B7AC( var_1, 540 );
 
     foreach ( var_7 in var_5 )
     {
-        if ( !_id_0A74::_id_89D3( var_7 ) )
+        if ( !scripts\mp\utility\player::isreallyalive( var_7 ) )
             continue;
 
-        if ( !_id_099C::_id_B779( var_0, var_7 ) )
+        if ( !scripts\cp_mp\utility\player_utility::_id_B779( var_0, var_7 ) )
             continue;
 
         if ( 0 )
@@ -155,8 +155,8 @@ _id_DEB3( var_0, var_1 )
 
     if ( 1 )
     {
-        var_2 = _func_020F();
-        var_2._id_02F2 = var_0;
+        var_2 = spawnstruct();
+        var_2.owner = var_0;
         var_2._id_0318 = var_1;
         var_2._id_872D = 1;
         var_2._id_EEF4 = [];
@@ -169,7 +169,7 @@ _id_DEB3( var_0, var_1 )
 
 _id_DEAE( var_0, var_1, var_2 )
 {
-    if ( var_0 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_snapshot_immunity" ) )
+    if ( var_0 scripts\mp\utility\perk::_hasperk( "specialty_snapshot_immunity" ) )
     {
         var_1 _id_079B::_id_FC44( "hittacresist" );
         return;
@@ -182,14 +182,14 @@ _id_DEAE( var_0, var_1, var_2 )
         var_3 = var_0 getentitynumber();
         var_2._id_EEF4[var_3] = var_0;
         var_2._id_532F[var_3] = gettime() + 1250;
-        var_2._id_ACD6[var_3] = _id_0A72::_id_ACBD( var_0, var_1, "snapshotgrenade", "equipment" );
-        var_0 _id_0A72::_id_0C05( "snapshotgrenade", 0 );
+        var_2._id_ACD6[var_3] = scripts\mp\utility\outline::outlineenableforplayer( var_0, var_1, "snapshotgrenade", "equipment" );
+        var_0 scripts\mp\utility\outline::_id_0C05( "snapshotgrenade", 0 );
         var_0 _id_098C::_id_9B29();
         var_2 thread _id_DEBA();
     }
 
     if ( 0 )
-        var_1 thread _id_DEB2( var_0 gettagorigin( "j_spineupper" ), var_0._id_0054, var_0 );
+        var_1 thread _id_DEB2( var_0 gettagorigin( "j_spineupper" ), var_0.angles, var_0 );
 
     var_0._id_9032 = gettime();
     var_1 _id_079A::_id_3A9F( "equip_snapshot_grenade" );
@@ -198,11 +198,11 @@ _id_DEAE( var_0, var_1, var_2 )
 
 _id_DEB5()
 {
-    self _meth_8373( "destroy", "active", 0 );
-    self _meth_8373( "beacon", "neutral", 0 );
-    self _meth_8373( "dust", "neutral", 0 );
-    self _meth_8373( "detect", "neutral", 0 );
-    self _meth_8373( "anims", "neutral", 0 );
+    self setscriptablepartstate( "destroy", "active", 0 );
+    self setscriptablepartstate( "beacon", "neutral", 0 );
+    self setscriptablepartstate( "dust", "neutral", 0 );
+    self setscriptablepartstate( "detect", "neutral", 0 );
+    self setscriptablepartstate( "anims", "neutral", 0 );
     self _meth_8645();
     thread _id_DEB4( 0.35 );
 }
@@ -213,23 +213,23 @@ _id_DEB4( var_0 )
     _id_0765::_id_47E6();
     self endon( "death" );
     self._id_57AE = 1;
-    self _meth_82F0( 0 );
+    self setcandamage( 0 );
 
     if ( isdefined( var_0 ) )
         wait( var_0 );
 
-    self _meth_809A();
+    self delete();
 }
 
 _id_DEB8( var_0 )
 {
-    var_1 = var_0._id_006E;
-    var_2 = var_0._id_A90B;
+    var_1 = var_0.attacker;
+    var_2 = var_0.objweapon;
     var_3 = var_0._id_9CBF;
-    var_4 = var_0._id_0134;
+    var_4 = var_0.damage;
     var_5 = var_0._id_7C7C;
 
-    if ( _id_077B::_id_877A( var_3 ) )
+    if ( scripts\engine\utility::_id_877A( var_3 ) )
     {
         if ( isdefined( var_2 ) )
         {
@@ -245,18 +245,18 @@ _id_DEB8( var_0 )
         }
     }
 
-    scripts\mp\weapons::_id_553D( self._id_02F2, var_1, var_2, var_3 );
+    scripts\mp\weapons::_id_553D( self.owner, var_1, var_2, var_3 );
     return var_4;
 }
 
 _id_DEB9( var_0 )
 {
-    var_1 = var_0._id_006E;
+    var_1 = var_0.attacker;
 
-    if ( isdefined( var_1 ) && _id_099C::_id_B779( self._id_02F2, var_1 ) )
+    if ( isdefined( var_1 ) && scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_1 ) )
     {
         var_1 notify( "destroyed_equipment" );
-        var_1 _id_0A28::_id_6FCD( self, var_0._id_A90B );
+        var_1 scripts\mp\killstreaks\killstreaks::_id_6FCD( self, var_0.objweapon );
     }
 
     thread _id_DEB5();
@@ -264,18 +264,18 @@ _id_DEB9( var_0 )
 
 _id_DEB7( var_0 )
 {
-    if ( !isdefined( self._id_02F2 ) )
+    if ( !isdefined( self.owner ) )
         return;
 
-    var_1 = var_0._id_006E;
+    var_1 = var_0.attacker;
 
-    if ( istrue( _id_099C::_id_B779( self._id_02F2, var_1 ) ) )
+    if ( istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_1 ) ) )
     {
         var_1 notify( "destroyed_equipment" );
-        var_1 _id_0A28::_id_6FCD( self );
+        var_1 scripts\mp\killstreaks\killstreaks::_id_6FCD( self );
     }
 
-    if ( _func_0117( var_1 ) )
+    if ( isplayer( var_1 ) )
         var_1 _id_079B::_id_FC44( "" );
 
     thread _id_DEB5();
@@ -292,9 +292,9 @@ _id_DEBC()
 
 _id_DEBD()
 {
-    self._id_02F2 endon( "disconnect" );
-    self._id_02F2 endon( "joined_team" );
-    self._id_02F2 endon( "joined_spectators" );
+    self.owner endon( "disconnect" );
+    self.owner endon( "joined_team" );
+    self.owner endon( "joined_spectators" );
     level endon( "game_ended" );
 
     for (;;)
@@ -306,22 +306,22 @@ _id_DEB0( var_0 )
     var_0 endon( "death" );
     self waittill( "death" );
     wait 1;
-    var_0 _meth_809A();
+    var_0 delete();
 }
 
 _id_DEAF( var_0 )
 {
     var_0 endon( "death" );
     self waittill( "death" );
-    var_0 _meth_809A();
+    var_0 delete();
 }
 
 _id_DEBA()
 {
     self endon( "death" );
-    self._id_02F2 endon( "death_or_disconnect" );
-    self._id_02F2 endon( "joined_team" );
-    self._id_02F2 endon( "joined_spectators" );
+    self.owner endon( "death_or_disconnect" );
+    self.owner endon( "joined_team" );
+    self.owner endon( "joined_spectators" );
     level endon( "game_ended" );
 
     if ( !istrue( self._id_872D ) )
@@ -339,12 +339,12 @@ _id_DEBA()
             var_2 = self._id_532F[var_4];
             var_3 = self._id_ACD6[var_4];
 
-            if ( !isdefined( var_1 ) || !_id_0A74::_id_89D3( var_1 ) || gettime() >= var_2 )
+            if ( !isdefined( var_1 ) || !scripts\mp\utility\player::isreallyalive( var_1 ) || gettime() >= var_2 )
             {
-                _id_0A72::_id_ACB7( var_3, var_1 );
+                scripts\mp\utility\outline::outlinedisable( var_3, var_1 );
 
                 if ( isdefined( var_1 ) )
-                    var_1 _id_0A72::_id_0C04();
+                    var_1 scripts\mp\utility\outline::_id_0C04();
 
                 self._id_EEF4[var_4] = undefined;
                 self._id_532F[var_4] = undefined;
@@ -368,9 +368,9 @@ _id_DEBE()
 
 _id_DEBF()
 {
-    self._id_02F2 endon( "death_or_disconnect" );
-    self._id_02F2 endon( "joined_team" );
-    self._id_02F2 endon( "joined_spectators" );
+    self.owner endon( "death_or_disconnect" );
+    self.owner endon( "joined_team" );
+    self.owner endon( "joined_spectators" );
     level endon( "game_ended" );
 
     for (;;)
@@ -386,28 +386,28 @@ _id_DEB1()
     {
         var_1 = self._id_EEF4[var_3];
         var_2 = self._id_ACD6[var_3];
-        _id_0A72::_id_ACB7( var_2, var_1 );
+        scripts\mp\utility\outline::outlinedisable( var_2, var_1 );
 
         if ( isdefined( var_1 ) )
-            var_1 _id_0A72::_id_0C04();
+            var_1 scripts\mp\utility\outline::_id_0C04();
     }
 }
 
 _id_DEB2( var_0, var_1, var_2 )
 {
-    var_3 = _func_0205( "script_model", var_0 );
-    var_3._id_0054 = var_1;
+    var_3 = spawn( "script_model", var_0 );
+    var_3.angles = var_1;
 
     if ( isdefined( var_2 ) && 1 )
-        var_3 _meth_820B( var_2 );
+        var_3 linkto( var_2 );
 
-    var_3 setmode( "equip_snapshot_marker_mp" );
-    var_3 setorigin( self );
-    var_3 _meth_8373( "effects", "active", 0 );
+    var_3 setmodel( "equip_snapshot_marker_mp" );
+    var_3 setotherent( self );
+    var_3 setscriptablepartstate( "effects", "active", 0 );
     var_3 _id_DEC2( self, 3000, var_2, 1250 );
 
     if ( isdefined( var_3 ) )
-        var_3 _meth_809A();
+        var_3 delete();
 }
 
 _id_DEC2( var_0, var_1, var_2, var_3 )
@@ -416,7 +416,7 @@ _id_DEC2( var_0, var_1, var_2, var_3 )
     var_0 endon( "death_or_disconnect" );
     level endon( "game_ended" );
     var_4 = gettime() + var_1;
-    var_5 = _id_077B::_id_F07F( 1, gettime() + 1250, undefined );
+    var_5 = scripts\engine\utility::ter_op( 1, gettime() + 1250, undefined );
 
     while ( var_4 > gettime() )
     {
@@ -424,17 +424,17 @@ _id_DEC2( var_0, var_1, var_2, var_3 )
         {
             if ( var_5 < gettime() )
             {
-                self _meth_8415();
+                self unlink();
                 var_5 = undefined;
             }
             else if ( !isdefined( var_2 ) )
             {
-                self _meth_8415();
+                self unlink();
                 var_5 = undefined;
             }
-            else if ( !_id_0A74::_id_89D3( var_2 ) )
+            else if ( !scripts\mp\utility\player::isreallyalive( var_2 ) )
             {
-                self _meth_8415();
+                self unlink();
                 var_5 = undefined;
             }
         }

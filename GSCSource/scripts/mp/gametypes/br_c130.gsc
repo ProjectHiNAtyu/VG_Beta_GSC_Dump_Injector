@@ -18,7 +18,7 @@ _id_99E6( var_0, var_1 )
     else
         var_4 = ( 0, 0, 0 );
 
-    if ( level._id_9AA7 == "mp_torez" )
+    if ( level.mapname == "mp_torez" )
     {
         var_2 = 165;
         var_3 = 195;
@@ -26,15 +26,15 @@ _id_99E6( var_0, var_1 )
     }
 
     var_5 = 6.28318;
-    var_6 = _func_01B7( 0, 360 );
-    var_7 = _func_01B7( var_2, var_3 );
+    var_6 = randomfloatrange( 0, 360 );
+    var_7 = randomfloatrange( var_2, var_3 );
 
     if ( isdefined( var_1 ) )
         var_8 = var_1;
     else
         var_8 = level._id_2A4D._id_29FF[0];
 
-    var_9 = _func_020F();
+    var_9 = spawnstruct();
     var_9._id_BEF0 = var_8;
     var_9._id_BFE6 = var_6;
     var_9._id_52BE = var_7;
@@ -49,15 +49,15 @@ _id_99E7( var_0 )
     var_3 = var_0._id_52BE;
     var_4 = var_0._id_336D;
     var_5 = ( var_2 + var_3 ) % 360;
-    var_6 = ( var_1 * cos( var_2 ), var_1 * _func_01FE( var_2 ), _id_076E::_id_691E() ) + var_4;
-    var_7 = ( var_1 * cos( var_5 ), var_1 * _func_01FE( var_5 ), _id_076E::_id_691E() ) + var_4;
-    var_8 = _func_025A( var_7 - var_6 );
+    var_6 = ( var_1 * cos( var_2 ), var_1 * sin( var_2 ), _id_076E::_id_691E() ) + var_4;
+    var_7 = ( var_1 * cos( var_5 ), var_1 * sin( var_5 ), _id_076E::_id_691E() ) + var_4;
+    var_8 = vectornormalize( var_7 - var_6 );
     var_7 = var_7 + var_8 * var_1;
     var_6 = var_6 - var_8 * var_1 * 2;
-    var_9 = _func_020F();
+    var_9 = spawnstruct();
     var_9._id_E712 = var_6;
     var_9._id_5320 = var_7;
-    var_9._id_175C = _func_025B( var_8 );
+    var_9._id_175C = vectortoangles( var_8 );
     return var_9;
 }
 
@@ -83,9 +83,9 @@ _id_89A3( var_0, var_1, var_2 )
     var_3 = ( var_0[0], var_0[1], 0 );
     var_4 = ( var_1[0], var_1[1], 0 );
     var_5 = ( var_2[0], var_2[1], 0 );
-    var_6 = _func_025A( var_3 - var_4 );
-    var_7 = _func_025A( var_5 - var_4 );
-    var_8 = _func_0257( var_6, var_7 );
+    var_6 = vectornormalize( var_3 - var_4 );
+    var_7 = vectornormalize( var_5 - var_4 );
+    var_8 = vectordot( var_6, var_7 );
     return var_8 > 0;
 }
 
@@ -114,7 +114,7 @@ _id_94CC( var_0, var_1, var_2, var_3 )
     {
         var_16 = _func_0213( var_13 );
         var_17 = var_12 * var_10;
-        var_18 = _id_077B::_id_DD3C( var_10 ) * var_9 * var_16;
+        var_18 = scripts\engine\utility::_id_DD3C( var_10 ) * var_9 * var_16;
         var_19 = ( var_17 + var_18 ) / var_11 + var_2[0];
         var_20 = ( var_17 - var_18 ) / var_11 + var_2[0];
         var_21 = -1 * var_12 * var_9;
@@ -127,11 +127,11 @@ _id_94CC( var_0, var_1, var_2, var_3 )
 
 _id_68EE( var_0, var_1, var_2 )
 {
-    var_3 = _id_94CC( var_0, var_1, var_2._id_02EA, var_2._id_0333 );
+    var_3 = _id_94CC( var_0, var_1, var_2.origin, var_2._id_0333 );
 
     if ( !isdefined( var_3 ) )
         return;
-    else if ( !isalive( var_3 ) )
+    else if ( !_func_0106( var_3 ) )
     {
         if ( _id_89A3( var_3, var_0, var_1 ) )
             return var_3;
@@ -195,8 +195,8 @@ _id_DEAC( var_0, var_1 )
     if ( !isdefined( level._id_ACFD ) )
         level._id_ACFD = level._id_ACFC;
 
-    var_2 = _func_02C4( [ "physicscontents_playertrigger" ] );
-    var_3 = _id_077A::_id_C045( var_0, var_1, level._id_ACFD, var_2 );
+    var_2 = physics_createcontents( [ "physicscontents_playertrigger" ] );
+    var_3 = scripts\engine\trace::_id_C045( var_0, var_1, level._id_ACFD, var_2 );
 
     if ( var_3["fraction"] < 1.0 )
         var_1 = var_3["position"];
@@ -238,7 +238,7 @@ _id_E26F()
 {
     var_0 = level._id_2A4D._id_2A54;
     var_1 = _id_6C1C();
-    var_2 = _func_01B6( 360 );
+    var_2 = randomfloat( 360 );
 
     if ( scripts\mp\gametypes\br_public::_id_8773() )
     {
@@ -249,14 +249,14 @@ _id_E26F()
     }
 
     var_3 = anglestoforward( ( 0, var_2, 0 ) );
-    var_3 = var_3 * ( var_1 * _func_01B7( -1, 1 ) );
+    var_3 = var_3 * ( var_1 * randomfloatrange( -1, 1 ) );
     var_3 = var_3 + ( 0, 0, _id_691F() );
     var_0 = var_0 + var_3;
 
     if ( !scripts\mp\gametypes\br_public::_id_8773() && !scripts\mp\gametypes\br_public::_id_87EA() )
         var_0 = _func_0093( "scr_br_c130PathCenter", var_0 );
 
-    var_4 = ( 0, _func_01B7( 0, 360 ), 0 );
+    var_4 = ( 0, randomfloatrange( 0, 360 ), 0 );
 
     if ( scripts\mp\gametypes\br_public::_id_8773() )
         var_4 = ( 0, 75, 0 );
@@ -285,14 +285,14 @@ _id_E270( var_0, var_1, var_2 )
     var_5 = _id_DEAC( var_0, var_5 );
     var_6 = var_4;
     var_7 = var_5;
-    var_3 = _func_025A( var_5 - var_4 );
+    var_3 = vectornormalize( var_5 - var_4 );
     var_4 = var_4 - var_3 * _id_6921() * 10;
     var_5 = var_5 + var_3 * 100000;
 
     if ( scripts\mp\gametypes\br_public::_id_8773() )
         var_4 = var_4 - var_3 * _id_6921() * 20;
 
-    var_8 = _func_020F();
+    var_8 = spawnstruct();
     var_8._id_E712 = var_4;
     var_8._id_5320 = var_5;
     var_8._id_E713 = var_6;
@@ -324,8 +324,8 @@ _id_D4A1( var_0, var_1 )
     if ( isdefined( var_1 ) )
         level._id_2A4D._id_2DF5 = var_1;
 
-    _func_01E4( "ui_br_altimeter_c130_height", _id_076E::_id_691E() );
-    _func_01E4( "ui_br_altimeter_sea_height", _id_076E::_id_6920() );
+    setomnvar( "ui_br_altimeter_c130_height", _id_076E::_id_691E() );
+    setomnvar( "ui_br_altimeter_sea_height", _id_076E::_id_6920() );
 }
 
 _id_FC1D( var_0 )
@@ -336,10 +336,10 @@ _id_FC1D( var_0 )
     if ( !isdefined( var_0._id_E712 ) || !isdefined( var_0._id_5320 ) || !isdefined( var_0._id_175C ) )
         return;
 
-    _func_01E4( "ui_br_c130_path_start_x", int( var_0._id_E713[0] ) );
-    _func_01E4( "ui_br_c130_path_start_y", int( var_0._id_E713[1] ) );
-    _func_01E4( "ui_br_c130_path_end_x", int( var_0._id_5321[0] ) );
-    _func_01E4( "ui_br_c130_path_end_y", int( var_0._id_5321[1] ) );
+    setomnvar( "ui_br_c130_path_start_x", int( var_0._id_E713[0] ) );
+    setomnvar( "ui_br_c130_path_start_y", int( var_0._id_E713[1] ) );
+    setomnvar( "ui_br_c130_path_end_x", int( var_0._id_5321[0] ) );
+    setomnvar( "ui_br_c130_path_end_y", int( var_0._id_5321[1] ) );
 }
 
 _id_403F()
@@ -370,7 +370,7 @@ _id_E26D( var_0 )
 _id_E33B()
 {
     if ( isdefined( level._id_7E43 ) && level._id_7E43 == "script_model" )
-        self _meth_8415();
+        self unlink();
 
     scripts\mp\gametypes\br_infils::_id_531F();
     thread _id_B74C( level._id_29CE );
@@ -383,22 +383,22 @@ _id_E33B()
 
 _id_B74C( var_0 )
 {
-    self._id_0054 = var_0._id_0054;
-    self _meth_800B( 0 );
-    self allowmelee( 0 );
+    self.angles = var_0.angles;
+    self allowcrouch( 0 );
+    self allowprone( 0 );
     thread _id_9538( var_0, 0 );
     thread _id_9539( var_0, 0 );
     self._id_2A38 = "c130";
     thread _id_AC4B( var_0 );
-    self _meth_82F6( "ui_hide_nameplate_strings", 1 );
+    self setclientomnvar( "ui_hide_nameplate_strings", 1 );
 }
 
 _id_9A09()
 {
     self endon( "disconnect" );
-    self _meth_82F6( "ui_br_show_jumpmaster_info", 1 );
-    _id_077B::_id_1087E( "death", "freefall_complete" );
-    self _meth_82F6( "ui_br_show_jumpmaster_info", 0 );
+    self setclientomnvar( "ui_br_show_jumpmaster_info", 1 );
+    scripts\engine\utility::waittill_any_2( "death", "freefall_complete" );
+    self setclientomnvar( "ui_br_show_jumpmaster_info", 0 );
 }
 
 _id_AC4B( var_0 )
@@ -407,13 +407,13 @@ _id_AC4B( var_0 )
 
     if ( isdefined( level._id_7E43 ) && level._id_7E43 == "script_model" )
     {
-        self._id_0054 = var_0._id_0054;
-        self _meth_8269( var_0, "" );
-        self _meth_8260();
+        self.angles = var_0.angles;
+        self playerlinkto( var_0, "" );
+        self playerhide();
     }
 
-    _id_0A74::_id_0D99( "", 0 );
-    self _meth_8362( var_0._id_0054 );
+    scripts\mp\utility\player::_id_0D99( "", 0 );
+    self setplayerangles( var_0.angles );
     var_1 = 1;
 
     if ( isdefined( self._id_7E49 ) )
@@ -428,19 +428,19 @@ _id_72DB( var_0, var_1, var_2, var_3, var_4 )
     if ( !isdefined( var_3 ) )
         var_3 = 1;
 
-    var_5 = _func_0205( "script_model", var_0 );
-    var_5 setmode( "veh8_mil_air_acharlie130_magma_animated" );
-    var_5 _meth_82F0( 0 );
-    var_5._id_027F = 100000;
-    var_5._id_01FF = var_5._id_027F;
+    var_5 = spawn( "script_model", var_0 );
+    var_5 setmodel( "veh8_mil_air_acharlie130_magma_animated" );
+    var_5 setcandamage( 0 );
+    var_5.maxhealth = 100000;
+    var_5.health = var_5.maxhealth;
     var_5._id_381D = 1;
     var_5._id_E712 = var_0;
-    var_5._id_49A0 = _func_025A( var_1 - var_0 );
-    var_5._id_0054 = _func_025B( var_5._id_49A0 );
-    var_5._id_82B3 = _func_0205( "script_model", var_0 );
-    var_5._id_82B3 setmode( "veh8_mil_air_acharlie130_magma_rigid" );
+    var_5._id_49A0 = vectornormalize( var_1 - var_0 );
+    var_5.angles = vectortoangles( var_5._id_49A0 );
+    var_5._id_82B3 = spawn( "script_model", var_0 );
+    var_5._id_82B3 setmodel( "veh8_mil_air_acharlie130_magma_rigid" );
     var_5._id_82B3._id_381D = 1;
-    var_5._id_82B3 _meth_820B( var_5, "", ( 0, 0, 0 ), ( 0, 0, 0 ) );
+    var_5._id_82B3 linkto( var_5, "", ( 0, 0, 0 ), ( 0, 0, 0 ) );
     var_5._id_B718 = [ ( 32, 30, -500 ), ( -32, 30, -500 ), ( 0, 30, -500 ), ( 16, 30, -500 ), ( -16, 30, -500 ) ];
     var_5._id_41C1 = 0;
 
@@ -462,32 +462,32 @@ _id_72C2( var_0, var_1 )
     self hide();
     self._id_82B3 hide();
     self waittill( "start_moving" );
-    self _meth_83C3();
-    self._id_82B3 _meth_83C3();
-    self _meth_823B( var_0, var_1 );
+    self show();
+    self._id_82B3 show();
+    self moveto( var_0, var_1 );
     thread _id_8D44( var_1, "c130" );
     thread _id_72DC();
-    self playlocalsound( "br_ac130_lp" );
+    self playloopsound( "br_ac130_lp" );
 }
 
 _id_72DC()
 {
     level endon( "game_ended" );
 
-    if ( _id_0A69::_id_6A43() == "br" )
+    if ( scripts\mp\utility\game::getgametype() == "br" )
     {
         wait 0.1;
-        self _meth_8373( "br_fx", "clouds" );
+        self setscriptablepartstate( "br_fx", "clouds" );
     }
     else
     {
-        var_0 = level._id_0BA3["vfx_snatch_ac130_clouds"];
+        var_0 = level._effect["vfx_snatch_ac130_clouds"];
 
         if ( !isdefined( var_0 ) )
             return;
 
         wait 0.1;
-        _func_0197( var_0, self, "tag_body" );
+        playfxontag( var_0, self, "tag_body" );
     }
 }
 
@@ -519,7 +519,7 @@ _id_8998( var_0, var_1 )
     if ( _id_8B01( var_0 ) )
         return 1;
 
-    var_3 = _id_07D3::_id_899E( var_0 );
+    var_3 = scripts\mp\outofbounds::_id_899E( var_0 );
 
     if ( var_3 )
         return 0;
@@ -527,7 +527,7 @@ _id_8998( var_0, var_1 )
     if ( istrue( var_1 ) )
     {
         var_4 = 16;
-        var_5 = _func_02C4( [ "physicscontents_playertrigger" ] );
+        var_5 = physics_createcontents( [ "physicscontents_playertrigger" ] );
         var_6 = _func_02BD( var_0, var_0, var_4, var_5, undefined, "physicsquery_all" );
 
         foreach ( var_8 in var_6 )
@@ -544,12 +544,12 @@ _id_8998( var_0, var_1 )
 
 _id_B184()
 {
-    var_0 = anglestoforward( self._id_0054 );
+    var_0 = anglestoforward( self.angles );
 
     for (;;)
     {
-        var_1 = _func_025A( self._id_AED4._id_E713 - self._id_02EA );
-        var_2 = _func_0257( var_0, var_1 ) < 0;
+        var_1 = vectornormalize( self._id_AED4._id_E713 - self.origin );
+        var_2 = vectordot( var_0, var_1 ) < 0;
 
         if ( var_2 )
             break;
@@ -567,7 +567,7 @@ _id_8CD3( var_0 )
     _id_B184();
     var_1 = _id_691F();
 
-    while ( !_id_8998( ( self._id_02EA[0], self._id_02EA[1], var_1 ) ) )
+    while ( !_id_8998( ( self.origin[0], self.origin[1], var_1 ) ) )
         waitframe();
 
     _func_01E5( "ui_hide_minimap", 0 );
@@ -575,9 +575,9 @@ _id_8CD3( var_0 )
 
     for (;;)
     {
-        var_2 = anglestoforward( self._id_0054 );
-        var_3 = _func_025A( self._id_AED4._id_336D - self._id_02EA );
-        var_4 = _func_0257( var_2, var_3 ) < 0;
+        var_2 = anglestoforward( self.angles );
+        var_3 = vectornormalize( self._id_AED4._id_336D - self.origin );
+        var_4 = vectordot( var_2, var_3 ) < 0;
 
         if ( var_4 )
             break;
@@ -589,13 +589,13 @@ _id_8CD3( var_0 )
 
     for (;;)
     {
-        var_2 = anglestoforward( self._id_0054 );
-        var_6 = self._id_02EA + var_2 * var_5;
+        var_2 = anglestoforward( self.angles );
+        var_6 = self.origin + var_2 * var_5;
         var_6 = ( var_6[0], var_6[1], var_1 );
 
         if ( !_id_8998( var_6 ) )
         {
-            foreach ( var_8 in level._id_B758 )
+            foreach ( var_8 in level.players )
             {
                 if ( isdefined( var_8 ) && isdefined( var_8._id_2A38 ) && var_8._id_2A38 == var_0 && !isdefined( var_8._id_8C8E ) )
                 {
@@ -619,9 +619,9 @@ _id_8D44( var_0, var_1 )
     self endon( "death" );
     wait( var_0 );
 
-    if ( isdefined( self._id_B758 ) )
+    if ( isdefined( self.players ) )
     {
-        foreach ( var_3 in self._id_B758 )
+        foreach ( var_3 in self.players )
         {
             if ( isdefined( var_3 ) && isdefined( var_3._id_2A38 ) && var_3._id_2A38 == var_1 && !isdefined( var_3._id_8C8E ) )
             {
@@ -632,7 +632,7 @@ _id_8D44( var_0, var_1 )
     }
     else
     {
-        foreach ( var_3 in level._id_B758 )
+        foreach ( var_3 in level.players )
         {
             if ( isdefined( var_3 ) && isdefined( var_3._id_2A38 ) && var_3._id_2A38 == var_1 && !isdefined( var_3._id_8C8E ) )
             {
@@ -642,18 +642,18 @@ _id_8D44( var_0, var_1 )
         }
     }
 
-    self stoplookat();
-    var_7 = level._id_0BA3["vfx_br_ac130_clouds"];
-    var_8 = level._id_0BA3["vfx_br_ac130_oneshot"];
+    self stoploopsound();
+    var_7 = level._effect["vfx_br_ac130_clouds"];
+    var_8 = level._effect["vfx_br_ac130_oneshot"];
 
-    if ( _id_0A69::_id_6A43() != "br" )
-        var_7 = level._id_0BA3["vfx_snatch_ac130_clouds"];
+    if ( scripts\mp\utility\game::getgametype() != "br" )
+        var_7 = level._effect["vfx_snatch_ac130_clouds"];
 
     if ( isdefined( var_7 ) )
-        _func_0218( var_7, self, "tag_body" );
+        stopfxontag( var_7, self, "tag_body" );
 
     if ( isdefined( var_8 ) )
-        _func_0218( var_8, self, "tag_body" );
+        stopfxontag( var_8, self, "tag_body" );
 
     wait 0.1;
 
@@ -665,7 +665,7 @@ _id_8D44( var_0, var_1 )
         {
             var_9 = 0;
 
-            foreach ( var_3 in level._id_B758 )
+            foreach ( var_3 in level.players )
             {
                 if ( isdefined( var_3._id_2A38 ) )
                 {
@@ -683,15 +683,15 @@ _id_8D44( var_0, var_1 )
     else
     {
         if ( isdefined( self._id_82B3 ) )
-            self._id_82B3 _meth_809A();
+            self._id_82B3 delete();
 
-        self _meth_809A();
+        self delete();
     }
 }
 
 _id_2EA0()
 {
-    var_0 = self._id_02EA - anglestoforward( self._id_0054 ) * 150;
+    var_0 = self.origin - anglestoforward( self.angles ) * 150;
     return var_0;
 }
 
@@ -704,7 +704,7 @@ _id_9539( var_0, var_1 )
     self waittill( "halo_kick_c130", var_2 );
 
     if ( !isdefined( var_2 ) )
-        var_2 = ( 0, var_0._id_0054[1] + 180, 0 );
+        var_2 = ( 0, var_0.angles[1] + 180, 0 );
 
     self._id_2BB0 = 1;
     thread _id_9151( var_0, var_1, var_2, 0 );
@@ -723,12 +723,12 @@ _id_9538( var_0, var_1 )
 
     for (;;)
     {
-        var_4 = _id_077B::_id_108C3( "halo_jump_c130", "halo_jump_solo_c130" );
+        var_4 = scripts\engine\utility::_id_108C3( "halo_jump_c130", "halo_jump_solo_c130" );
 
         if ( !isdefined( var_4 ) )
             var_4 = "halo_jump_c130";
 
-        var_5 = _id_0A7C::_id_6DAC( self._id_045B, "players" );
+        var_5 = scripts\mp\utility\teams::_id_6DAC( self.team, "players" );
 
         if ( !var_3 )
         {
@@ -738,7 +738,7 @@ _id_9538( var_0, var_1 )
             {
                 self._id_8C8E = "solo";
                 self notify( "halo_kick_c130" );
-                _id_077B::_id_F122( "infil_jump_done", scripts\mp\gametypes\br_public::_id_FC17, "jumpMasterState", 0 );
+                scripts\engine\utility::_id_F122( "infil_jump_done", scripts\mp\gametypes\br_public::_id_FC17, "jumpMasterState", 0 );
                 break;
             }
             else
@@ -759,7 +759,7 @@ _id_9538( var_0, var_1 )
                 {
                     self._id_8C8E = "solo";
                     self notify( "halo_kick_c130" );
-                    _id_077B::_id_F122( "infil_jump_done", scripts\mp\gametypes\br_public::_id_FC17, "jumpMasterState", 0 );
+                    scripts\engine\utility::_id_F122( "infil_jump_done", scripts\mp\gametypes\br_public::_id_FC17, "jumpMasterState", 0 );
                     break;
                 }
                 else
@@ -780,8 +780,8 @@ _id_9538( var_0, var_1 )
 
                 if ( var_7 )
                 {
-                    var_8 = level._id_E48B[self._id_045B][self._id_E493];
-                    var_5 = var_8._id_B758;
+                    var_8 = level._id_E48B[self.team][self._id_E493];
+                    var_5 = var_8.players;
                 }
 
                 foreach ( var_10 in var_5 )
@@ -792,7 +792,7 @@ _id_9538( var_0, var_1 )
                         var_10 notify( "halo_kick_c130", self getplayerangles() );
                     }
 
-                    var_10 _meth_8275( "tmp_br_infil_ac130_jumpmaster_go" );
+                    var_10 playlocalsound( "tmp_br_infil_ac130_jumpmaster_go" );
                 }
 
                 if ( var_4 != "halo_jump_solo_c130" && getdvarint( "scr_br_holdteamtojumpmaster", 0 ) )
@@ -824,10 +824,10 @@ _id_9151( var_0, var_1, var_2, var_3 )
     level endon( "game_ended" );
     self endon( "death_or_disconnect" );
     self endon( "cancel_c130" );
-    _func_01D1( "#x33b3f56f6317394d0", 1 );
+    setdvarifuninitialized( "#x33b3f56f6317394d0", 1 );
     self notify( "br_jump" );
-    self _meth_800B( 1 );
-    self allowmelee( 1 );
+    self allowcrouch( 1 );
+    self allowprone( 1 );
     self._id_B915 = undefined;
     self._id_2DE8 = undefined;
     scripts\mp\gametypes\br_public::_id_FC17( "isInInfilPlane", 0 );
@@ -835,11 +835,11 @@ _id_9151( var_0, var_1, var_2, var_3 )
     if ( isdefined( level._id_7E5E ) && isdefined( level._id_7E5E._id_B7A2 ) )
         level._id_7E5E._id_B7A2--;
 
-    self notifyonplayercommand( "halo_jump_c130", "+gostand" );
-    self notifyonplayercommand( "halo_jump_solo_c130", "+gostand" );
-    self notifyonplayercommand( "abandon_fireteam_leader", "+frag" );
-    self notifyonplayercommand( "br_pass_squad_leader", "+usereload" );
-    self notifyonplayercommand( "br_pass_squad_leader", "+activate" );
+    self _meth_824B( "halo_jump_c130", "+gostand" );
+    self _meth_824B( "halo_jump_solo_c130", "+gostand" );
+    self _meth_824B( "abandon_fireteam_leader", "+frag" );
+    self _meth_824B( "br_pass_squad_leader", "+usereload" );
+    self _meth_824B( "br_pass_squad_leader", "+activate" );
     self waittill( "infil_jump_done" );
     self _meth_8694();
     self._id_2A38 = undefined;
@@ -858,7 +858,7 @@ _id_79B8( var_0 )
 
     foreach ( var_5 in var_0 )
     {
-        if ( !isdefined( var_5 ) || !isai( var_5 ) )
+        if ( !isdefined( var_5 ) || !isalive( var_5 ) )
             continue;
 
         if ( var_5 != var_1 )
@@ -877,10 +877,10 @@ _id_79B8( var_0 )
     var_7 = 2700;
     var_8 = 999999999;
 
-    while ( !self useanimtree() && var_8 > var_7 )
+    while ( !self usebuttonpressed() && var_8 > var_7 )
     {
-        var_9 = _id_06BB::_id_71B7( var_1._id_02EA );
-        var_8 = var_1._id_02EA[2] - var_9[2];
+        var_9 = scripts\common\utility::_id_71B7( var_1.origin );
+        var_8 = var_1.origin[2] - var_9[2];
 
         if ( var_1 isskydiving() )
             break;
@@ -890,7 +890,7 @@ _id_79B8( var_0 )
 
     foreach ( var_11 in var_0 )
     {
-        if ( !isdefined( var_11 ) || !isai( var_11 ) )
+        if ( !isdefined( var_11 ) || !isalive( var_11 ) )
             continue;
 
         if ( var_11 != self && istrue( var_11._id_249E ) )
@@ -909,7 +909,7 @@ _id_10B4A( var_0 )
 {
     level endon( "game_ended" );
     self endon( "hold_teammates_complete" );
-    _id_077B::_id_1087E( "death", "disconnect" );
+    scripts\engine\utility::waittill_any_2( "death", "disconnect" );
 
     foreach ( var_2 in var_0 )
     {
@@ -928,7 +928,7 @@ _id_10B4A( var_0 )
 
 _id_D70A( var_0, var_1, var_2 )
 {
-    var_3 = _id_077B::_id_F07F( var_0 scripts\mp\gametypes\br_public::_id_8971(), 2, var_2 );
+    var_3 = scripts\engine\utility::ter_op( var_0 scripts\mp\gametypes\br_public::_id_8971(), 2, var_2 );
     var_0 scripts\mp\gametypes\br_public::_id_FC17( "jumpMasterState", var_3 );
 }
 
@@ -938,7 +938,7 @@ _id_B726()
     self endon( "death_or_disconnect" );
     self endon( "stop_push" );
     self waittill( "skydive_deployparachute" );
-    var_0 = _id_0A7C::_id_6DAC( self._id_045B, "players" );
+    var_0 = scripts\mp\utility\teams::_id_6DAC( self.team, "players" );
     _id_D70A( self, var_0, 0 );
 }
 
@@ -950,19 +950,19 @@ _id_BE4C( var_0, var_1 )
     var_2 endon( "death_or_disconnect" );
     var_2 endon( "stop_push" );
     var_2 thread _id_B726();
-    var_3 = _func_0130( var_1 );
+    var_3 = length( var_1 );
 
-    while ( !var_2 _meth_81D7() && !var_2 useanimtree() && isdefined( var_0 ) && !var_2 isskydiving() )
+    while ( !var_2 isonground() && !var_2 usebuttonpressed() && isdefined( var_0 ) && !var_2 isskydiving() )
     {
         var_4 = var_0 getplayerangles();
         var_5 = _func_01C1( ( 0, 0, 1 ), var_1, var_4[1] );
-        var_6 = var_0._id_02EA + var_5 - var_2._id_02EA;
-        var_7 = _func_0130( var_6 );
+        var_6 = var_0.origin + var_5 - var_2.origin;
+        var_7 = length( var_6 );
 
         if ( var_7 > var_3 )
         {
             var_8 = var_2 getvelocity();
-            var_2 _meth_83A7( var_6 + var_8 * 0.9 );
+            var_2 setvelocity( var_6 + var_8 * 0.9 );
         }
 
         waitframe();
@@ -970,27 +970,27 @@ _id_BE4C( var_0, var_1 )
 
     var_2 notify( "stop_push" );
     var_2._id_249E = undefined;
-    var_9 = _id_0A7C::_id_6DAC( var_2._id_045B, "players" );
+    var_9 = scripts\mp\utility\teams::_id_6DAC( var_2.team, "players" );
     _id_D70A( var_2, var_9, 0 );
 }
 
 _id_AE05( var_0, var_1, var_2, var_3 )
 {
-    self _meth_82F6( "ui_br_infiled", 1 );
-    self _meth_82F6( "ui_hide_nameplate_strings", 0 );
-    self _meth_8415();
+    self setclientomnvar( "ui_br_infiled", 1 );
+    self setclientomnvar( "ui_hide_nameplate_strings", 0 );
+    self unlink();
 
     if ( isdefined( self._id_2A5C ) )
-        self._id_2A5C _meth_809A();
+        self._id_2A5C delete();
 
     thread _id_7E50( var_0 );
     waitframe();
-    self _meth_8498( 1 );
+    self playershow( 1 );
 
     if ( isdefined( var_2 ) )
-        self _meth_8362( var_2 );
+        self setplayerangles( var_2 );
 
-    if ( _id_0A69::_id_6A43() == "br" )
+    if ( scripts\mp\utility\game::getgametype() == "br" )
     {
         self._id_2A3E = undefined;
         scripts\mp\gametypes\br_analytics::_id_2AC3( self );
@@ -999,7 +999,7 @@ _id_AE05( var_0, var_1, var_2, var_3 )
     var_4 = ( 0, 0, 0 );
 
     if ( var_3 )
-        var_4 = anglestoforward( var_0._id_0054 ) * _id_6921();
+        var_4 = anglestoforward( var_0.angles ) * _id_6921();
 
     self._id_7D0B = gettime() + 5000;
     self _meth_86B0( 0 );
@@ -1012,11 +1012,11 @@ _id_7E50( var_0 )
     var_1 = self;
 
     if ( isdefined( var_0 ) )
-        var_0 _meth_827E( "br_ac130_flyby", var_1 );
+        var_0 playsoundtoplayer( "br_ac130_flyby", var_1 );
 
     var_1 _meth_867D( "mp_br_infil_music", 0.0 );
     var_2 = game["music"]["br_plane_jump"].size - 1;
-    var_3 = _func_01B8( var_2 );
+    var_3 = randomint( var_2 );
     var_1 _meth_84A8( game["music"]["br_plane_jump"][var_3] );
     var_1._id_8C7B = 1;
     wait 1.0;
@@ -1046,10 +1046,10 @@ _id_10973()
 
         if ( _id_8998( var_0 ) )
         {
-            foreach ( var_2 in level._id_B758 )
+            foreach ( var_2 in level.players )
             {
-                if ( _func_0117( var_2 ) )
-                    var_2 _meth_8275( "scr_br_infil_ac130_klaxon" );
+                if ( isplayer( var_2 ) )
+                    var_2 playlocalsound( "scr_br_infil_ac130_klaxon" );
             }
 
             wait 1.0;

@@ -19,7 +19,7 @@ _id_3C43( var_0, var_1, var_2, var_3, var_4, var_5 )
     if ( !isdefined( var_4 ) || !var_4 )
         thread _id_10BDA( var_2 );
 
-    if ( isai( var_0 ) && !istrue( var_0._id_5080 ) )
+    if ( isalive( var_0 ) && !istrue( var_0._id_5080 ) )
         _id_E68E( var_0, var_1._id_EA0F, var_2, var_5 );
     else
     {
@@ -39,13 +39,13 @@ _id_10BD8( var_0, var_1 )
     {
         self waittill( "player_killstreak_death", var_2, var_3, var_4, var_5, var_6, var_7 );
 
-        if ( var_3 != self && _func_0117( var_3 ) )
+        if ( var_3 != self && isplayer( var_3 ) )
         {
             var_3 _id_0A76::_id_6FE6( "destroyed_" + var_1 );
-            thread _id_07BA::_id_EF8A( "callout_destroyed_" + var_1, var_3 );
-            var_8 = _func_0378( var_7 );
+            thread scripts\mp\hud_util::_id_EF8A( "callout_destroyed_" + var_1, var_3 );
+            var_8 = makeweaponfromstring( var_7 );
             thread _id_0793::_id_8DBF( var_1, self, self, var_3, var_4, var_6, var_8, "destroyed_" + var_1 );
-            thread _id_0A64::_id_9120( var_1 + "_destroyed", undefined, undefined, self._id_02EA );
+            thread _id_0A64::_id_9120( var_1 + "_destroyed", undefined, undefined, self.origin );
         }
 
         self notify( var_0, 1 );
@@ -76,13 +76,13 @@ _id_10BDA( var_0 )
     {
         var_2 = 0;
 
-        while ( self useanimtree() )
+        while ( self usebuttonpressed() )
         {
             var_2 = var_2 + var_1;
 
             if ( var_2 > 0.75 )
             {
-                self._id_B6EE = self._id_02EA;
+                self._id_B6EE = self.origin;
                 self notify( var_0 );
                 return;
             }
@@ -113,7 +113,7 @@ _id_10BDB( var_0 )
 
 _id_10BDC( var_0 )
 {
-    _id_077B::_id_1087E( var_0, "level_game_ended" );
+    scripts\engine\utility::waittill_any_2( var_0, "level_game_ended" );
     _id_E901();
 }
 
@@ -125,7 +125,7 @@ _id_10B62()
 
 _id_E68E( var_0, var_1, var_2, var_3 )
 {
-    if ( isdefined( self ) && isai( var_0 ) )
+    if ( isdefined( self ) && isalive( var_0 ) )
     {
         self _meth_850D( var_0 );
 
@@ -146,7 +146,7 @@ _id_E901()
             self visionsetmissilecamforplayer( "", 0 );
         }
 
-        self._id_EA0B notify( "killstreak_finished_with_deploy_weapon" );
+        self.streakinfo notify( "killstreak_finished_with_deploy_weapon" );
         self._id_B74B = undefined;
         self._id_0F2D = undefined;
     }
@@ -155,7 +155,7 @@ _id_E901()
 _id_3900( var_0 )
 {
     _id_09C8::_id_C466( var_0._id_9648 );
-    scripts\cp_mp\hostmigration::_id_9607();
+    scripts\mp\class::_id_9607();
 }
 
 _id_C0B5( var_0 )
@@ -169,7 +169,7 @@ _id_C0B5( var_0 )
             break;
     }
 
-    scripts\cp_mp\hostmigration::_id_963C( var_0 );
+    scripts\mp\class::_id_963C( var_0 );
 
     if ( isdefined( var_1 ) )
         self [[ var_1 ]]();

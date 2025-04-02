@@ -22,7 +22,7 @@ _id_9818( var_0, var_1, var_2 )
     var_3 = "loop_end";
     var_4 = 2;
 
-    if ( isalive( var_2 ) )
+    if ( _func_0106( var_2 ) )
     {
         if ( var_2.size > 0 )
             var_4 = var_2[0];
@@ -55,8 +55,8 @@ _id_10816( var_0, var_1 )
 {
     self endon( var_1 + "_finished" );
     self waittill( "path_set" );
-    var_2 = self._id_02EA + self._id_0261 * self._id_0262;
-    var_3 = [ 0, var_2, 1, self._id_02EA, self._id_0262 ];
+    var_2 = self.origin + self._id_0261 * self._id_0262;
+    var_3 = [ 0, var_2, 1, self.origin, self._id_0262 ];
     _id_0009::_id_1C2B( var_0, "sharp_turn", var_3 );
     thread _id_10816( var_0, var_1 );
 }
@@ -91,9 +91,9 @@ _id_8830( var_0 )
     if ( !isdefined( var_0 ) )
         var_0 = 0.5;
 
-    var_1 = anglestoforward( self._id_0054 );
-    var_2 = _func_025A( self._id_017D._id_02EA - self._id_02EA );
-    var_3 = _func_0257( var_1, var_2 );
+    var_1 = anglestoforward( self.angles );
+    var_2 = vectornormalize( self._id_017D.origin - self.origin );
+    var_3 = vectordot( var_1, var_2 );
 
     if ( var_3 < var_0 )
         return 0;
@@ -143,7 +143,7 @@ _id_871E()
     if ( !isdefined( var_2 ) )
         return 0;
 
-    var_3 = _func_025B( var_2 - var_1 );
+    var_3 = vectortoangles( var_2 - var_1 );
     var_4 = _func_0438( var_0[1] - var_3[1] );
 
     if ( var_4 > anim._id_1336 )
@@ -209,7 +209,7 @@ _id_18AB( var_0, var_1, var_2, var_3 )
 {
     _id_18A9( var_0, var_1, var_2, var_3 );
 
-    if ( isdefined( self ) && isai( self ) )
+    if ( isdefined( self ) && isalive( self ) )
     {
         _id_3133();
         self notify( "AnimscriptMP_Complete" );
@@ -371,13 +371,13 @@ _id_189E( var_0, var_1, var_2 )
     }
     else
     {
-        var_5 = var_1._id_02EA;
-        var_6 = var_1._id_0054;
+        var_5 = var_1.origin;
+        var_6 = var_1.angles;
     }
 
     var_7 = getstartorigin( var_5, var_6, var_4 );
     var_8 = _func_00D2( var_5, var_6, var_4 );
-    self _meth_80BE();
+    self dontinterpolate();
     self _meth_80F9( var_7, var_8, 9999999, 0 );
 
     for (;;)
@@ -404,13 +404,13 @@ _id_18A2( var_0, var_1, var_2, var_3, var_4 )
     }
     else
     {
-        var_7 = var_1._id_02EA;
-        var_8 = var_1._id_0054;
+        var_7 = var_1.origin;
+        var_8 = var_1.angles;
     }
 
     var_9 = getstartorigin( var_7, var_8, var_6 );
     var_10 = _func_00D2( var_7, var_8, var_6 );
-    self _meth_80BE();
+    self dontinterpolate();
     self _meth_80F9( var_9, var_10, 9999999, 0 );
     self _meth_85EB( var_4, var_5 );
 
@@ -432,8 +432,8 @@ _id_18A0( var_0, var_1, var_2, var_3 )
     var_6 = _func_00B0( var_5 );
     var_7 = _func_0078( var_5 );
     var_8 = _func_0047( var_2, _func_00FF( var_7 ) );
-    var_9 = var_1 - _func_01C2( var_6, var_8 );
-    self _meth_80BE();
+    var_9 = var_1 - rotatevector( var_6, var_8 );
+    self dontinterpolate();
     self _meth_80F9( var_9, var_8, 9999999, 0 );
     self _meth_85EB( "animscripted", var_4 );
 

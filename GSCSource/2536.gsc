@@ -3,7 +3,7 @@
 
 _id_A059()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     level._id_A019 = var_0;
     var_0._id_9C83 = getdvarint( "scr_molotovMaxPools", 100 );
     var_0._id_9C44 = getdvarint( "scr_molotovMaxCastsPerFrame", 8 );
@@ -25,7 +25,7 @@ _id_A05A()
 
     if ( !isdefined( var_1 ) )
     {
-        var_1 = _func_020F();
+        var_1 = spawnstruct();
         var_0._id_32E5 = var_1;
     }
 
@@ -73,7 +73,7 @@ _id_A05B()
 
     if ( !isdefined( var_1 ) )
     {
-        var_1 = _func_020F();
+        var_1 = spawnstruct();
         var_0._id_B9CB = var_1;
     }
 
@@ -158,7 +158,7 @@ _id_A085( var_0 )
     var_5 = ( gettime() - var_2 ) / 1000;
     var_6 = var_3 + ( 0, 0, -800 * var_5 );
 
-    if ( isdefined( var_4 ) && _func_0117( var_4 ) )
+    if ( isdefined( var_4 ) && isplayer( var_4 ) )
         thread _id_A07C( var_0, var_4, var_1, var_6 );
     else
         thread _id_A07B( var_0, var_4, var_1, var_6 );
@@ -167,21 +167,21 @@ _id_A085( var_0 )
 _id_A07B( var_0, var_1, var_2, var_3 )
 {
     var_4 = undefined;
-    var_5 = _func_025A( var_3 );
-    var_6 = anglestoup( var_0._id_0054 );
+    var_5 = vectornormalize( var_3 );
+    var_6 = anglestoup( var_0.angles );
     var_7 = anglestoright( var_2 );
 
-    if ( abs( _func_0257( var_5, var_6 ) ) >= 0.9848 )
+    if ( abs( vectordot( var_5, var_6 ) ) >= 0.9848 )
         var_4 = _id_A068( var_6, var_7 );
     else
         var_4 = _id_A067( var_6, var_5 );
 
-    var_0._id_0054 = var_4;
+    var_0.angles = var_4;
     var_0 notify( "death" );
     var_0._id_57AE = 1;
-    var_0 _meth_8373( "effects", "explode", 0 );
+    var_0 setscriptablepartstate( "effects", "explode", 0 );
     var_0 _meth_8645();
-    _id_A074( var_0, var_0._id_02EA, var_4, var_1, var_3, gettime() );
+    _id_A074( var_0, var_0.origin, var_4, var_1, var_3, gettime() );
 }
 
 _id_A07C( var_0, var_1, var_2, var_3 )
@@ -189,10 +189,10 @@ _id_A07C( var_0, var_1, var_2, var_3 )
     scripts\mp\weapons::_id_715F( var_0, var_1 );
     var_1 thread _id_A024( 6, self, var_0, var_0 );
     var_0._id_57AE = 1;
-    var_0 _meth_8373( "effects", "explode", 0 );
+    var_0 setscriptablepartstate( "effects", "explode", 0 );
     var_0 _meth_8645();
     var_3 = var_3 * ( 0, 0, 1 );
-    var_4 = var_0._id_02EA;
+    var_4 = var_0.origin;
     var_5 = ( 0, 0, -1 );
     var_6 = var_4 + var_5 * 128;
     var_7 = _id_A04D();
@@ -204,7 +204,7 @@ _id_A07C( var_0, var_1, var_2, var_3 )
         var_9 = var_8[0]["normal"];
         var_10 = var_8[0]["entity"];
         var_6 = var_6 - var_9 * 1;
-        var_11 = _func_0257( var_6 - var_4, var_5 );
+        var_11 = vectordot( var_6 - var_4, var_5 );
         var_12 = _func_0213( 2 * var_11 / 800 );
         var_13 = var_9;
         var_14 = anglestoright( var_2 );
@@ -217,7 +217,7 @@ _id_A07C( var_0, var_1, var_2, var_3 )
     waitframe();
 
     if ( isdefined( var_0 ) )
-        var_0 _meth_809A();
+        var_0 delete();
 }
 
 _id_A08D( var_0 )
@@ -231,12 +231,12 @@ _id_A08D( var_0 )
 
 _id_A074( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    var_6 = var_0._id_02F2;
+    var_6 = var_0.owner;
 
     if ( !istrue( level._id_432C ) )
     {
-        var_7 = _id_077B::_id_F07F( level._id_B758.size > 15, 10, 20 );
-        _id_07EE::_id_110C( var_1 - ( 0, 0, 128 ), 225, 256, var_6._id_045B, var_7, var_6, 1 );
+        var_7 = scripts\engine\utility::ter_op( level.players.size > 15, 10, 20 );
+        _id_07EE::_id_110C( var_1 - ( 0, 0, 128 ), 225, 256, var_6.team, var_7, var_6, 1 );
     }
 
     var_8 = anglestoup( var_2 );
@@ -253,7 +253,7 @@ _id_A074( var_0, var_1, var_2, var_3, var_4, var_5 )
     var_14 thread _id_A02B();
     var_15 = _id_A053();
     var_16 = 0;
-    var_17 = _func_0257( _func_025A( var_4 ), -1 * var_8 );
+    var_17 = vectordot( vectornormalize( var_4 ), -1 * var_8 );
 
     if ( var_17 < 0.96593 )
         var_16 = 1;
@@ -299,7 +299,7 @@ _id_A074( var_0, var_1, var_2, var_3, var_4, var_5 )
     var_20 = _id_A04E( var_19 );
     var_21 = _id_A054( var_19 );
     var_31 = _func_01C1( var_30, var_28, var_24 );
-    var_32 = _func_025A( _func_0256( var_31, var_30 ) );
+    var_32 = vectornormalize( _func_0256( var_31, var_30 ) );
     var_33 = _func_0256( var_32, var_28 );
     var_34 = _func_0017( var_31, var_32, var_33 );
     var_27 = ::_id_A021;
@@ -312,7 +312,7 @@ _id_A074( var_0, var_1, var_2, var_3, var_4, var_5 )
     var_20 = _id_A04E( var_19 );
     var_21 = _id_A054( var_19 );
     var_31 = _func_01C1( var_30, var_28, -1 * var_24 );
-    var_32 = _func_025A( _func_0256( var_31, var_30 ) );
+    var_32 = vectornormalize( _func_0256( var_31, var_30 ) );
     var_33 = _func_0256( var_32, var_28 );
     var_34 = _func_0017( var_31, var_32, var_33 );
     var_27 = ::_id_A021;
@@ -325,7 +325,7 @@ _id_A074( var_0, var_1, var_2, var_3, var_4, var_5 )
     var_20 = _id_A04E( var_19 );
     var_21 = _id_A054( var_19 );
     var_31 = _func_01C1( var_30, var_28, var_25 );
-    var_32 = _func_025A( _func_0256( var_31, var_30 ) );
+    var_32 = vectornormalize( _func_0256( var_31, var_30 ) );
     var_33 = _func_0256( var_32, var_28 );
     var_34 = _func_0017( var_31, var_32, var_33 );
     var_27 = ::_id_A021;
@@ -338,7 +338,7 @@ _id_A074( var_0, var_1, var_2, var_3, var_4, var_5 )
     var_20 = _id_A04E( var_19 );
     var_21 = _id_A054( var_19 );
     var_31 = _func_01C1( var_30, var_28, -1 * var_25 );
-    var_32 = _func_025A( _func_0256( var_31, var_30 ) );
+    var_32 = vectornormalize( _func_0256( var_31, var_30 ) );
     var_33 = _func_0256( var_32, var_28 );
     var_34 = _func_0017( var_31, var_32, var_33 );
     var_27 = ::_id_A021;
@@ -356,7 +356,7 @@ _id_A074( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_A029()
 {
-    self._id_2D6F _id_077B::_id_108F3( "entitydeleted", 6.75 );
+    self._id_2D6F scripts\engine\utility::_id_108F3( "entitydeleted", 6.75 );
 
     for (;;)
     {
@@ -386,9 +386,9 @@ _id_A029()
 
 _id_A038( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _func_020F();
-    var_4._id_02F2 = var_0;
-    var_4._id_045B = var_0._id_045B;
+    var_4 = spawnstruct();
+    var_4.owner = var_0;
+    var_4.team = var_0.team;
     var_4._id_7D3C = var_1;
     var_4._id_2D6F = var_2;
     var_4._id_2D5F = var_3;
@@ -397,7 +397,7 @@ _id_A038( var_0, var_1, var_2, var_3 )
     var_4._id_32F4 = 0;
     var_4._id_32F3 = 0;
     var_4._id_5F1F = gettime();
-    var_4._id_32E4 = _func_02C4( [ "physicscontents_missileclip", "physicscontents_glass", "physicscontents_water", "physicscontents_item", "physicscontents_vehicle" ] );
+    var_4._id_32E4 = physics_createcontents( [ "physicscontents_missileclip", "physicscontents_glass", "physicscontents_water", "physicscontents_item", "physicscontents_vehicle" ] );
     var_2._id_D9AB = var_4;
     return var_4;
 }
@@ -437,7 +437,7 @@ _id_A03C()
     var_1 = var_0._id_F62F[self._id_7C71];
 
     if ( !isdefined( var_1 ) )
-        var_0._id_B9CD = _id_077B::_id_1B96( var_0._id_B9CD, self._id_7C71 );
+        var_0._id_B9CD = scripts\engine\utility::array_remove( var_0._id_B9CD, self._id_7C71 );
 
     self notify( "death" );
     self _meth_86BB();
@@ -450,9 +450,9 @@ _id_A03D()
     var_1 = var_0._id_CF19[self._id_7C71];
 
     if ( !isdefined( var_1 ) )
-        var_0._id_B9CD = _id_077B::_id_1B96( var_0._id_B9CD, self._id_7C71 );
+        var_0._id_B9CD = scripts\engine\utility::array_remove( var_0._id_B9CD, self._id_7C71 );
 
-    self _meth_809A();
+    self delete();
 }
 
 _id_A039( var_0 )
@@ -506,7 +506,7 @@ _id_A03B( var_0, var_1 )
         {
             var_2._id_CF19[var_0] = undefined;
             var_2._id_F62F[var_0] = undefined;
-            var_2._id_B9CD = _id_077B::_id_1B96( var_2._id_B9CD, var_0 );
+            var_2._id_B9CD = scripts\engine\utility::array_remove( var_2._id_B9CD, var_0 );
             var_3 thread _id_A064();
             return;
         }
@@ -604,7 +604,7 @@ _id_A07A()
 
 _id_A035( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
 {
-    var_10 = _func_020F();
+    var_10 = spawnstruct();
     var_10._id_D9AB = var_0;
     var_10._id_32E5 = var_1;
     var_10._id_B9CB = var_2;
@@ -679,7 +679,7 @@ _id_A076()
 
             if ( !isdefined( self._id_8AE8 ) )
             {
-                var_2 = _func_0257( anglestoup( self._id_32E3 ), ( 0, 0, 1 ) );
+                var_2 = vectordot( anglestoup( self._id_32E3 ), ( 0, 0, 1 ) );
                 self._id_8AE8 = var_2 > -0.81915 && var_2 <= 0.5;
 
                 if ( isdefined( self._id_32E5._id_5BAE ) )
@@ -722,7 +722,7 @@ _id_A076()
                         if ( isdefined( self._id_32E5._id_5BAE ) )
                         {
                             var_10 = var_4 - self._id_32F1;
-                            var_11 = _func_0257( var_10, self._id_32E7 );
+                            var_11 = vectordot( var_10, self._id_32E7 );
                             self._id_32E5._id_5BAE = self._id_32E5._id_5BAE - var_11;
 
                             if ( self._id_32E5._id_5BAE > self._id_32E5._id_5BB0 )
@@ -751,7 +751,7 @@ _id_A076()
                         if ( isdefined( self._id_32E5._id_5BAE ) )
                         {
                             var_10 = self._id_32E9 - self._id_32F1;
-                            var_11 = _func_0257( var_10, self._id_32E7 );
+                            var_11 = vectordot( var_10, self._id_32E7 );
                             self._id_32E5._id_5BAE = self._id_32E5._id_5BAE - var_11;
 
                             if ( self._id_32E5._id_5BAE <= self._id_32E5._id_5BB0 )
@@ -769,7 +769,7 @@ _id_A076()
                         var_7 = _id_A068( var_5, anglestoright( self._id_32E3 ) );
                         var_12 = _id_A01E( var_4, var_7, var_6 );
                         var_12 thread _id_A065();
-                        var_13 = _func_0257( anglestoup( self._id_32E3 ), var_5 );
+                        var_13 = vectordot( anglestoup( self._id_32E3 ), var_5 );
 
                         if ( var_13 < 0.9848 )
                         {
@@ -903,7 +903,7 @@ _id_A036( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
 {
     var_10 = _func_03C0( "equip_molotov_pool_mp_p", var_0, var_1 );
     var_10._id_EA90 = var_2;
-    var_10._id_02F2 = var_3;
+    var_10.owner = var_3;
     var_10._id_2D6F = var_4;
     var_10._id_2D5F = var_5;
     var_10._id_E72A = var_6;
@@ -913,8 +913,8 @@ _id_A036( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
 
     if ( isdefined( var_2 ) )
     {
-        var_11 = _func_01C3( var_0 - var_2._id_02EA, var_2._id_0054 );
-        var_12 = _func_0047( _func_00FF( var_2._id_0054 ), var_1 );
+        var_11 = _func_01C3( var_0 - var_2.origin, var_2.angles );
+        var_12 = _func_0047( _func_00FF( var_2.angles ), var_1 );
         var_10 _meth_8743( var_2, var_11, var_12 );
     }
 
@@ -926,7 +926,7 @@ _id_A01E( var_0, var_1, var_2 )
 {
     var_3 = self._id_B9CB._id_F8DF;
     var_4 = anglestoup( var_1 );
-    var_5 = _func_0257( var_4, ( 0, 0, 1 ) );
+    var_5 = vectordot( var_4, ( 0, 0, 1 ) );
 
     if ( var_5 <= -0.81915 )
         var_3 = var_3 | 128;
@@ -936,7 +936,7 @@ _id_A01E( var_0, var_1, var_2 )
         var_3 = var_3 | 32;
 
     var_6 = self._id_BC0F + self._id_B9CB._id_E695;
-    var_7 = _id_A036( var_0, var_1, var_2, self._id_D9AB._id_02F2, self._id_D9AB._id_2D6F, self._id_D9AB._id_2D5F, var_6, self._id_B9CB, var_3 );
+    var_7 = _id_A036( var_0, var_1, var_2, self._id_D9AB.owner, self._id_D9AB._id_2D6F, self._id_D9AB._id_2D5F, var_6, self._id_B9CB, var_3 );
     self._id_BC0F = var_6;
     self._id_5506[self._id_5506.size] = var_7;
     var_7._id_7C71 = _id_A056();
@@ -963,8 +963,8 @@ _id_A065()
 
 _id_A089()
 {
-    self._id_02F2 endon( "disconnect" );
-    self._id_02F2 endon( "joined_team" );
+    self.owner endon( "disconnect" );
+    self.owner endon( "joined_team" );
 
     if ( isdefined( self._id_EA90 ) )
         self._id_EA90 endon( "death" );
@@ -973,7 +973,7 @@ _id_A089()
     self._id_047A = _id_A037( self._id_B9CB._id_F62D, self._id_B9CB._id_F623, self._id_B9CB._id_F62A );
     self._id_B9CE = self._id_B9CE | 1;
     _id_A066();
-    var_0 = _func_01B7( 6.5, 6.75 );
+    var_0 = randomfloatrange( 6.5, 6.75 );
     wait( var_0 );
 }
 
@@ -1011,8 +1011,8 @@ _id_A086()
 
 _id_A087()
 {
-    self._id_02F2 endon( "disconnect" );
-    self._id_02F2 endon( "joined_team" );
+    self.owner endon( "disconnect" );
+    self.owner endon( "joined_team" );
 
     if ( isdefined( self._id_EA90 ) )
         self._id_EA90 endon( "death" );
@@ -1022,23 +1022,23 @@ _id_A087()
 
 _id_A037( var_0, var_1, var_2 )
 {
-    var_3 = self._id_02EA - anglestoup( self._id_0054 ) * var_2;
-    var_4 = _func_0205( "trigger_rotatable_radius", var_3, 0, var_0, var_1 );
-    var_4._id_0054 = self._id_0054;
+    var_3 = self.origin - anglestoup( self.angles ) * var_2;
+    var_4 = spawn( "trigger_rotatable_radius", var_3, 0, var_0, var_1 );
+    var_4.angles = self.angles;
     var_4._id_7C71 = self._id_7C71;
 
     if ( isdefined( self._id_EA90 ) )
     {
         var_4 _meth_80DB();
-        var_4 _meth_820B( self._id_EA90 );
+        var_4 linkto( self._id_EA90 );
     }
 
     var_4 hide();
-    var_5 = _func_020F();
+    var_5 = spawnstruct();
     var_5._id_047A = var_4;
-    var_5._id_006E = self._id_02F2;
-    var_5._id_7E78 = self._id_2D6F;
-    var_5._id_8D49 = self._id_2D6F;
+    var_5.attacker = self.owner;
+    var_5.inflictor = self._id_2D6F;
+    var_5.killcament = self._id_2D6F;
     var_5._id_2D5F = self._id_2D5F;
     var_5._id_B7AD = [];
     var_4._id_EA67 = var_5;
@@ -1051,26 +1051,26 @@ _id_A037( var_0, var_1, var_2 )
 
 _id_A08B()
 {
-    if ( isdefined( self._id_7E78 ) )
-        self._id_7E78 endon( "death" );
+    if ( isdefined( self.inflictor ) )
+        self.inflictor endon( "death" );
 
     self._id_047A endon( "death" );
-    self._id_006E endon( "disconnect" );
-    self._id_006E endon( "joined_team" );
+    self.attacker endon( "disconnect" );
+    self.attacker endon( "joined_team" );
 
     for (;;)
     {
         self._id_047A waittill( "trigger", var_0 );
 
-        if ( !_func_0117( var_0 ) )
+        if ( !isplayer( var_0 ) )
             continue;
 
-        if ( !_id_0A74::_id_89D3( var_0 ) )
+        if ( !scripts\mp\utility\player::isreallyalive( var_0 ) )
             continue;
 
-        var_1 = _id_077B::_id_F07F( isdefined( var_0._id_02F2 ), var_0._id_02F2, var_0 );
+        var_1 = scripts\engine\utility::ter_op( isdefined( var_0.owner ), var_0.owner, var_0 );
 
-        if ( var_1 != self._id_006E && !istrue( _id_099C::_id_B779( var_1, self._id_006E ) ) )
+        if ( var_1 != self.attacker && !istrue( scripts\cp_mp\utility\player_utility::_id_B779( var_1, self.attacker ) ) )
             continue;
 
         var_2 = var_0 getentitynumber();
@@ -1079,7 +1079,7 @@ _id_A08B()
             continue;
 
         self._id_B7AD[var_2] = var_0;
-        var_0 _id_A077( self._id_006E, self._id_7E78, self._id_8D49, self._id_2D5F );
+        var_0 _id_A077( self.attacker, self.inflictor, self.killcament, self._id_2D5F );
     }
 }
 
@@ -1094,7 +1094,7 @@ _id_A08C()
             if ( !isdefined( var_1 ) )
                 continue;
 
-            if ( !_id_0A74::_id_89D3( var_1 ) )
+            if ( !scripts\mp\utility\player::isreallyalive( var_1 ) )
                 continue;
 
             if ( var_1 _meth_81EF( self._id_047A ) )
@@ -1125,8 +1125,8 @@ _id_A031()
 _id_A032()
 {
     self._id_047A endon( "death" );
-    self._id_006E endon( "disconnect" );
-    self._id_006E endon( "joined_team" );
+    self.attacker endon( "disconnect" );
+    self.attacker endon( "joined_team" );
 
     for (;;)
         waitframe();
@@ -1136,7 +1136,7 @@ _id_A066()
 {
     var_0 = _id_A055();
     var_1 = var_0._id_CF21[self._id_B9CE];
-    self _meth_8373( "effects", var_1, 0 );
+    self setscriptablepartstate( "effects", var_1, 0 );
 }
 
 _id_A020( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
@@ -1209,26 +1209,26 @@ _id_A06F( var_0, var_1 )
     var_3 = anglestoup( var_0 );
     var_4 = undefined;
     var_2 = _func_01C1( var_3, var_2, var_1 );
-    var_4 = _func_025A( _func_0256( var_2, var_3 ) );
+    var_4 = vectornormalize( _func_0256( var_2, var_3 ) );
     var_3 = _func_0256( var_4, var_2 );
     return _func_0017( var_2, var_4, var_3 );
 }
 
 _id_A05E( var_0 )
 {
-    var_1 = _func_01B7( 50, 75 );
+    var_1 = randomfloatrange( 50, 75 );
     return _id_A06F( var_0, var_1 );
 }
 
 _id_A06E( var_0 )
 {
-    var_1 = -1 * _func_01B7( 50, 75 );
+    var_1 = -1 * randomfloatrange( 50, 75 );
     return _id_A06F( var_0, var_1 );
 }
 
 _id_A07E( var_0 )
 {
-    var_1 = _func_01B7( -60, 60 );
+    var_1 = randomfloatrange( -60, 60 );
     return _id_A06F( var_0, var_1 );
 }
 
@@ -1236,14 +1236,14 @@ _id_A02B()
 {
     self endon( "death" );
     wait 20;
-    self _meth_809A();
+    self delete();
 }
 
 _id_A02F( var_0 )
 {
     var_0 endon( "death" );
-    _id_077B::_id_1087E( "disconnect", "joined_team" );
-    var_0 _meth_809A();
+    scripts\engine\utility::waittill_any_2( "disconnect", "joined_team" );
+    var_0 delete();
 }
 
 _id_A052()
@@ -1270,14 +1270,14 @@ _id_A056()
     var_0 = _id_A052();
     var_1 = var_0._id_F950;
     var_0._id_F950++;
-    var_0._id_B9CD = _id_077B::_id_1B63( var_0._id_B9CD, var_1 );
+    var_0._id_B9CD = scripts\engine\utility::array_add( var_0._id_B9CD, var_1 );
     return var_1;
 }
 
 _id_A04E( var_0 )
 {
     var_1 = _id_A051();
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
     var_2._id_4B81 = var_1._id_4B81[var_0];
     var_2._id_4B80 = var_1._id_4B80[var_0];
     var_2._id_4B9E = var_1._id_4B9E[var_0];
@@ -1302,7 +1302,7 @@ _id_A04E( var_0 )
 _id_A054( var_0 )
 {
     var_1 = _id_A055();
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
     var_2._id_F8DF = var_0;
     var_2._id_F62D = var_1._id_F62D[var_0];
     var_2._id_F623 = var_1._id_F623[var_0];
@@ -1348,19 +1348,19 @@ _id_A050( var_0, var_1, var_2 )
 
 _id_A04D()
 {
-    return _func_02C4( [ "physicscontents_missileclip", "physicscontents_glass", "physicscontents_water", "physicscontents_item", "physicscontents_vehicle" ] );
+    return physics_createcontents( [ "physicscontents_missileclip", "physicscontents_glass", "physicscontents_water", "physicscontents_item", "physicscontents_vehicle" ] );
 }
 
 _id_A068( var_0, var_1 )
 {
-    var_2 = _func_025A( _func_0256( var_0, var_1 ) );
+    var_2 = vectornormalize( _func_0256( var_0, var_1 ) );
     var_1 = _func_0256( var_2, var_0 );
     return _func_0017( var_2, var_1, var_0 );
 }
 
 _id_A067( var_0, var_1 )
 {
-    var_2 = _func_025A( _func_0256( var_1, var_0 ) );
+    var_2 = vectornormalize( _func_0256( var_1, var_0 ) );
     var_1 = _func_0256( var_0, var_2 );
     return _func_0017( var_1, var_2, var_0 );
 }
@@ -1378,7 +1378,7 @@ _id_A077( var_0, var_1, var_2, var_3 )
         var_3 = _id_A053();
 
     var_5 = _id_A04C( var_0, var_1, var_2, var_4, var_3, 1 );
-    _id_0A74::_id_39FC( "fire", -1 );
+    scripts\mp\utility\player::_id_39FC( "fire", -1 );
     var_6 = 0;
 
     if ( var_5._id_010E <= 0 )
@@ -1436,7 +1436,7 @@ _id_A033( var_0 )
             self._id_2D67._id_E06D[var_2._id_7C71] = undefined;
     }
 
-    _id_0A74::_id_39FC( "fire", 0 );
+    scripts\mp\utility\player::_id_39FC( "fire", 0 );
     self._id_2D67 = undefined;
 }
 
@@ -1484,17 +1484,17 @@ _id_A084()
                 var_5 = 10;
 
             var_6 = undefined;
-            var_7 = var_3._id_006E._id_02EA;
+            var_7 = var_3.attacker.origin;
 
-            if ( isdefined( var_3._id_7E78 ) )
+            if ( isdefined( var_3.inflictor ) )
             {
-                var_6 = var_3._id_7E78;
-                var_7 = var_3._id_7E78._id_02EA;
+                var_6 = var_3.inflictor;
+                var_7 = var_3.inflictor.origin;
             }
 
             if ( var_0._id_F27C <= 0 )
             {
-                self _meth_80B7( var_5, var_7, var_3._id_006E, var_6, "MOD_FIRE", "s4_molotov_mp" );
+                self dodamage( var_5, var_7, var_3.attacker, var_6, "MOD_FIRE", "s4_molotov_mp" );
                 var_0._id_5BAC = 1;
                 var_0._id_F27C = 0.25;
             }
@@ -1502,8 +1502,8 @@ _id_A084()
             {
                 if ( !var_0._id_5BAC )
                 {
-                    self _meth_80B7( var_5, var_7, var_3._id_006E, var_6, "MOD_FIRE", "s4_molotov_mp" );
-                    thread _id_A040( var_3._id_006E, var_6 );
+                    self dodamage( var_5, var_7, var_3.attacker, var_6, "MOD_FIRE", "s4_molotov_mp" );
+                    thread _id_A040( var_3.attacker, var_6 );
                     var_0._id_5BAC = 1;
                 }
 
@@ -1536,7 +1536,7 @@ _id_A040( var_0, var_1 )
 
     for (;;)
     {
-        var_3 = _id_077B::waittill_any_return( "molotov_trigger_final_tick", "molotov_update_time" );
+        var_3 = scripts\engine\utility::_id_10895( "molotov_trigger_final_tick", "molotov_update_time" );
 
         if ( var_3 == "molotov_update_time" )
         {
@@ -1553,7 +1553,7 @@ _id_A040( var_0, var_1 )
             while ( var_2 >= 0 )
             {
                 if ( var_2 == 0 )
-                    self _meth_80B7( 10, var_0._id_02EA, var_0, var_1, "MOD_FIRE", "s4_molotov_mp" );
+                    self dodamage( 10, var_0.origin, var_0, var_1, "MOD_FIRE", "s4_molotov_mp" );
 
                 var_2 = var_2 - 0.05;
                 wait 0.05;
@@ -1576,7 +1576,7 @@ _id_A04B( var_0 )
 
     if ( !isdefined( var_1 ) && istrue( var_0 ) )
     {
-        var_1 = _func_020F();
+        var_1 = spawnstruct();
         var_1._id_F220 = 0;
         var_1._id_F21B = 0;
         var_1._id_F27C = 0.25;
@@ -1598,11 +1598,11 @@ _id_A04C( var_0, var_1, var_2, var_3, var_4, var_5 )
     {
         if ( istrue( var_5 ) )
         {
-            var_6 = _func_020F();
-            var_6._id_006E = var_0;
-            var_6._id_7E78 = var_1;
+            var_6 = spawnstruct();
+            var_6.attacker = var_0;
+            var_6.inflictor = var_1;
             var_6._id_755A = isdefined( var_1 );
-            var_6._id_8D49 = var_2;
+            var_6.killcament = var_2;
             var_6._id_7E83 = var_3;
             var_6._id_7C71 = var_4;
             var_6._id_010E = 0;
@@ -1615,19 +1615,19 @@ _id_A04C( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_A027()
 {
-    if ( !isdefined( self._id_006E ) )
+    if ( !isdefined( self.attacker ) )
         return 0;
 
     if ( !isdefined( self._id_7E83._id_103C0 ) )
         return 0;
 
-    if ( !_id_0A74::_id_89D3( self._id_7E83._id_103C0 ) )
+    if ( !scripts\mp\utility\player::isreallyalive( self._id_7E83._id_103C0 ) )
         return 0;
 
-    if ( self._id_006E != self._id_7E83._id_103C0 && !istrue( _id_099C::_id_B779( self._id_006E, self._id_7E83._id_103C0 ) ) )
+    if ( self.attacker != self._id_7E83._id_103C0 && !istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.attacker, self._id_7E83._id_103C0 ) ) )
         return 0;
 
-    if ( self._id_755A && !isdefined( self._id_7E78 ) )
+    if ( self._id_755A && !isdefined( self.inflictor ) )
         return 0;
 
     if ( self._id_010E <= 0 )
@@ -1692,9 +1692,9 @@ _id_A088()
     for (;;)
     {
         var_1 = 0;
-        var_2 = self _meth_8570();
+        var_2 = self getheldoffhand();
 
-        if ( !_func_036F( var_2 ) && var_2._id_0084 == "s4_molotov_mp" )
+        if ( !isnullweapon( var_2 ) && var_2.basename == "s4_molotov_mp" )
             var_1 = 1;
 
         if ( var_1 && !var_0 )
@@ -1712,11 +1712,11 @@ _id_A01A()
     self endon( "death_or_disconnect" );
     self endon( "molotov_end_fx" );
     self._id_B852 = 1;
-    self _meth_8373( "equipMtovFXWorld", "neutral", 0 );
-    self _meth_8373( "equipMtovFXView", "active", 0 );
+    self setscriptablepartstate( "equipMtovFXWorld", "neutral", 0 );
+    self setscriptablepartstate( "equipMtovFXView", "active", 0 );
     var_0 = 0.4;
     wait( var_0 );
-    self _meth_8373( "equipMtovFXWorld", "active", 0 );
+    self setscriptablepartstate( "equipMtovFXWorld", "active", 0 );
 }
 
 _id_A03E()
@@ -1725,8 +1725,8 @@ _id_A03E()
 
     if ( istrue( self._id_B852 ) )
     {
-        self _meth_8373( "equipMtovFXWorld", "neutral", 0 );
-        self _meth_8373( "equipMtovFXView", "neutral", 0 );
+        self setscriptablepartstate( "equipMtovFXWorld", "neutral", 0 );
+        self setscriptablepartstate( "equipMtovFXView", "neutral", 0 );
     }
 
     self._id_B852 = undefined;

@@ -20,7 +20,7 @@ _id_6589()
 
     foreach ( var_6 in var_4 )
     {
-        if ( isdefined( var_6 ) && var_6._id_00DE == "grenade" )
+        if ( isdefined( var_6 ) && var_6.classname == "grenade" )
             var_0[var_0.size] = var_6;
     }
 
@@ -32,7 +32,7 @@ _id_6771( var_0, var_1, var_2, var_3, var_4, var_5 )
     var_0 endon( "death" );
 
     if ( !isdefined( var_5 ) )
-        var_5 = _func_020F();
+        var_5 = spawnstruct();
 
     if ( !isdefined( var_5._id_3BC7 ) )
         var_5._id_3BC7 = _id_64AD();
@@ -44,7 +44,7 @@ _id_6771( var_0, var_1, var_2, var_3, var_4, var_5 )
         var_5._id_1728 = 1;
 
     if ( !isdefined( var_5._id_7D10 ) )
-        var_5._id_7D10 = [ var_0, var_0._id_02F2 ];
+        var_5._id_7D10 = [ var_0, var_0.owner ];
 
     if ( !isdefined( var_5._id_7CE4 ) )
         var_5._id_7D00 = 1;
@@ -57,12 +57,12 @@ _id_6771( var_0, var_1, var_2, var_3, var_4, var_5 )
 
     var_6 = var_5._id_9C9A / var_5._id_4BA2;
     var_7[0] = 0;
-    var_8[0] = var_0._id_02EA;
+    var_8[0] = var_0.origin;
     var_9 = var_5._id_4BA2;
     var_10 = anglestoforward( var_1 );
     var_11 = ( 0, 0, 1 );
     var_12 = var_10 * var_2 + var_11 * var_3;
-    var_13 = var_11 * _func_0257( var_11, var_12 );
+    var_13 = var_11 * vectordot( var_11, var_12 );
     var_14 = var_12 - var_13;
 
     for ( var_15 = 1; var_15 < var_5._id_4BA2; var_15++ )
@@ -84,10 +84,10 @@ _id_6771( var_0, var_1, var_2, var_3, var_4, var_5 )
             var_5._id_4804 = var_22[0]["entity"];
             var_5._id_4805 = 1;
             var_23 = var_21 - var_17;
-            var_24 = _func_0130( var_23 );
+            var_24 = length( var_23 );
             var_25 = var_23 / var_24;
             var_26 = var_17 - var_5._id_4802;
-            var_27 = _func_0257( var_25, var_26 );
+            var_27 = vectordot( var_25, var_26 );
             var_28 = clamp( var_27 / var_24, 0, 1 );
             var_5._id_4808 = var_16 + var_6 * var_28;
             break;
@@ -110,9 +110,9 @@ _id_64AD( var_0 )
     var_1 = undefined;
 
     if ( istrue( var_0 ) )
-        var_1 = _func_02C4( [ "physicscontents_missileclip", "physicscontents_item", "physicscontents_vehicle", "physicscontents_glass", "physicscontents_water", "physicscontents_characterproxy" ] );
+        var_1 = physics_createcontents( [ "physicscontents_missileclip", "physicscontents_item", "physicscontents_vehicle", "physicscontents_glass", "physicscontents_water", "physicscontents_characterproxy" ] );
     else
-        var_1 = _func_02C4( [ "physicscontents_missileclip", "physicscontents_item", "physicscontents_vehicle", "physicscontents_glass", "physicscontents_water" ] );
+        var_1 = physics_createcontents( [ "physicscontents_missileclip", "physicscontents_item", "physicscontents_vehicle", "physicscontents_glass", "physicscontents_water" ] );
 
     return var_1;
 }
@@ -121,8 +121,8 @@ _id_B185( var_0, var_1 )
 {
     self endon( "death_or_disconnect" );
     var_0 endon( "death" );
-    var_0._id_C2F1 = var_0._id_02EA;
-    var_0._id_C2F6 = self._id_02EA;
+    var_0._id_C2F1 = var_0.origin;
+    var_0._id_C2F6 = self.origin;
     var_0._id_C2F5 = self geteye();
     var_0._id_C2F4 = self _meth_8597();
 
@@ -175,15 +175,15 @@ _id_B185( var_0, var_1 )
             var_6 = 0;
     }
     else
-        var_7 = _id_B18B( var_0._id_0054, var_1 );
+        var_7 = _id_B18B( var_0.angles, var_1 );
 
     if ( istrue( var_6 ) )
     {
-        if ( isdefined( var_4 ) && _func_0257( var_4, ( 0, 0, 1 ) ) < var_1._id_B1C3 )
+        if ( isdefined( var_4 ) && vectordot( var_4, ( 0, 0, 1 ) ) < var_1._id_B1C3 )
             var_2 = 1;
         else
         {
-            var_13 = _func_0257( var_0._id_C2F6 - var_3, ( 0, 0, 1 ) );
+            var_13 = vectordot( var_0._id_C2F6 - var_3, ( 0, 0, 1 ) );
 
             if ( var_13 > 0 )
             {
@@ -192,11 +192,11 @@ _id_B185( var_0, var_1 )
             }
             else
             {
-                var_14 = _func_0257( var_0._id_C2F5 - var_0._id_C2F6, ( 0, 0, 1 ) );
+                var_14 = vectordot( var_0._id_C2F5 - var_0._id_C2F6, ( 0, 0, 1 ) );
 
                 if ( var_14 > var_1._id_B1C2 )
                 {
-                    var_15 = _func_0257( var_0._id_C2F5 - var_3, ( 0, 0, 1 ) );
+                    var_15 = vectordot( var_0._id_C2F5 - var_3, ( 0, 0, 1 ) );
 
                     if ( var_15 >= 0 )
                     {
@@ -229,7 +229,7 @@ _id_B185( var_0, var_1 )
             var_3 = var_12[0]["position"];
             var_4 = var_12[0]["normal"];
 
-            if ( isdefined( var_4 ) && _func_0257( var_4, ( 0, 0, 1 ) ) < var_1._id_B1C3 )
+            if ( isdefined( var_4 ) && vectordot( var_4, ( 0, 0, 1 ) ) < var_1._id_B1C3 )
                 return 0;
 
             var_16 = var_0._id_C2F4 * ( 0, 1, 0 );
@@ -244,9 +244,9 @@ _id_B185( var_0, var_1 )
 
             var_3 = var_3 + anglestoup( var_7 ) * var_1._id_B1C5;
             var_5 = var_12[0]["entity"];
-            var_0 _meth_80BE();
-            var_0._id_02EA = var_3;
-            var_0._id_0054 = var_7;
+            var_0 dontinterpolate();
+            var_0.origin = var_3;
+            var_0.angles = var_7;
         }
         else
             return 0;
@@ -267,13 +267,13 @@ _id_B185( var_0, var_1 )
         }
 
         var_3 = var_3 + anglestoup( var_7 ) * var_1._id_B1C5;
-        var_0 _meth_80BE();
-        var_0._id_02EA = var_3;
-        var_0._id_0054 = var_7;
+        var_0 dontinterpolate();
+        var_0.origin = var_3;
+        var_0.angles = var_7;
     }
 
     if ( isdefined( var_5 ) )
-        var_0 _meth_820B( var_5 );
+        var_0 linkto( var_5 );
 
     return 1;
 }
@@ -293,8 +293,8 @@ _id_B1B1( var_0, var_1 )
 {
     var_1 endon( "end_race" );
     var_0 waittill( "missile_stuck", var_2 );
-    var_1._id_A697 = var_0._id_02EA;
-    var_1._id_A684 = var_0._id_0054;
+    var_1._id_A697 = var_0.origin;
+    var_1._id_A684 = var_0.angles;
     var_1._id_A68E = var_2;
     var_1._id_A690 = 1;
     var_1 notify( "start_race" );
@@ -322,7 +322,7 @@ _id_B18B( var_0, var_1 )
 {
     var_2 = 0;
     var_3 = var_0[1];
-    var_4 = _id_077B::_id_F07F( var_1._id_B1BF != 0, var_0[2], 0 );
+    var_4 = scripts\engine\utility::ter_op( var_1._id_B1BF != 0, var_0[2], 0 );
 
     if ( var_4 != 0 )
     {

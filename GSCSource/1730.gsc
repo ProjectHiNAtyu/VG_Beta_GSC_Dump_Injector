@@ -13,7 +13,7 @@ _id_70C4( var_0 )
     else
         var_0._id_759C = 1;
 
-    var_0 _id_077B::_id_036D();
+    var_0 scripts\engine\utility::_id_036D();
     var_0 notify( "start_vehiclepath" );
 
     if ( var_0 _id_06C0::_id_887D() )
@@ -33,10 +33,10 @@ _id_0D94( var_0, var_1, var_2 )
 _id_F5E6( var_0 )
 {
     if ( isdefined( var_0._id_CD3C ) )
-        _id_077B::_id_5BFB( var_0._id_CD3C );
+        scripts\engine\utility::_id_5BFB( var_0._id_CD3C );
 
     if ( isdefined( var_0._id_CD39 ) )
-        _id_077B::_id_5BE4( var_0._id_CD39 );
+        scripts\engine\utility::_id_5BE4( var_0._id_CD39 );
 
     if ( isdefined( var_0._id_CE1B ) )
     {
@@ -49,22 +49,22 @@ _id_F5E6( var_0 )
         var_1 = var_0._id_CD27;
 
         if ( isdefined( var_1 ) )
-            level _id_077B::_id_46C3( var_1, _id_077B::_id_579A, var_0._id_0371 );
+            level scripts\engine\utility::_id_46C3( var_1, scripts\engine\utility::_id_579A, var_0._id_0371 );
         else
-            level _id_077B::_id_579A( var_0._id_0371 );
+            level scripts\engine\utility::_id_579A( var_0._id_0371 );
     }
 
     if ( isdefined( var_0._id_CD3C ) )
-        _id_077B::_id_5BFB( var_0._id_CD3C );
+        scripts\engine\utility::_id_5BFB( var_0._id_CD3C );
 
     if ( isdefined( var_0._id_CD23 ) )
-        _id_077B::_id_5454( var_0._id_CD23 );
+        scripts\engine\utility::_id_5454( var_0._id_CD23 );
 
     if ( isdefined( var_0._id_CD22 ) )
-        _id_077B::_id_5450( var_0._id_CD22 );
+        scripts\engine\utility::_id_5450( var_0._id_CD22 );
 
     if ( isdefined( var_0._id_CD39 ) )
-        _id_077B::_id_5BE4( var_0._id_CD39 );
+        scripts\engine\utility::_id_5BE4( var_0._id_CD39 );
 
     if ( isdefined( var_0._id_0375 ) )
     {
@@ -72,7 +72,7 @@ _id_F5E6( var_0 )
         {
             _id_06C0::_id_10083();
             _id_4721();
-            self _meth_809A();
+            self delete();
             return;
         }
         else if ( var_0._id_0375 == "engineoff" )
@@ -100,23 +100,23 @@ _id_4721()
             if ( isdefined( var_1._id_9916 ) )
                 var_1 _id_069C::_id_E8B6();
 
-            if ( !_id_06BB::_id_8A2C() && _func_0104( var_1 ) )
+            if ( !scripts\common\utility::_id_8A2C() && isai( var_1 ) )
             {
                 var_1 _meth_81F9();
                 continue;
             }
 
-            var_1 _meth_809A();
+            var_1 delete();
         }
     }
 }
 
 _id_88E6( var_0 )
 {
-    if ( !isdefined( var_0._id_0457 ) )
+    if ( !isdefined( var_0.target ) )
         return 1;
 
-    if ( !isdefined( _func_00E5( var_0._id_0457, "targetname" ) ) && !isdefined( _id_06C0::_id_67FD( var_0._id_0457 ) ) )
+    if ( !isdefined( _func_00E5( var_0.target, "targetname" ) ) && !isdefined( _id_06C0::_id_67FD( var_0.target ) ) )
         return 1;
 
     return 0;
@@ -157,8 +157,8 @@ _id_10247()
 
     var_0 = undefined;
 
-    if ( isdefined( self._id_41B7._id_0457 ) )
-        var_0 = _id_06C0::_id_67FD( self._id_41B7._id_0457 );
+    if ( isdefined( self._id_41B7.target ) )
+        var_0 = _id_06C0::_id_67FD( self._id_41B7.target );
 
     if ( !isdefined( var_0 ) )
         return;
@@ -170,17 +170,17 @@ _id_6626( var_0 )
 {
     var_1 = _id_06C0::_id_6499;
 
-    if ( _id_06C0::_id_887D() && isdefined( var_0._id_0457 ) )
+    if ( _id_06C0::_id_887D() && isdefined( var_0.target ) )
     {
-        if ( isdefined( _id_06C0::_id_6497( var_0._id_0457 ) ) )
+        if ( isdefined( _id_06C0::_id_6497( var_0.target ) ) )
             var_1 = _id_06C0::_id_6497;
 
-        if ( isdefined( _id_06C0::_id_6498( var_0._id_0457 ) ) )
+        if ( isdefined( _id_06C0::_id_6498( var_0.target ) ) )
             var_1 = _id_06C0::_id_6498;
     }
-    else if ( !_id_06BB::_id_8A2C() && isdefined( var_0._id_0457 ) )
+    else if ( !scripts\common\utility::_id_8A2C() && isdefined( var_0.target ) )
     {
-        if ( isdefined( _id_06C0::_id_6498( var_0._id_0457 ) ) )
+        if ( isdefined( _id_06C0::_id_6498( var_0.target ) ) )
             var_1 = _id_06C0::_id_6498;
     }
 
@@ -196,18 +196,18 @@ _id_EA79( var_0, var_1, var_2 )
 
     if ( isdefined( var_1._id_03C7 ) && var_1._id_03C7 >= 0 )
     {
-        self _meth_843F( var_0._id_02EA, int( var_1._id_03C7 ) );
+        self _meth_843F( var_0.origin, int( var_1._id_03C7 ) );
 
-        while ( distancesquared( self._id_02EA, var_0._id_02EA ) > var_2 )
+        while ( distancesquared( self.origin, var_0.origin ) > var_2 )
         {
             wait 0.1;
 
-            if ( _id_06BB::_id_87BA() )
-                self vehicle_setspeed( var_1._id_03C7, 15, 15 );
+            if ( scripts\common\utility::_id_87BA() )
+                self _meth_8437( var_1._id_03C7, 15, 15 );
         }
     }
     else if ( isdefined( var_1._id_03C7 ) && var_1._id_03C7 < 0 )
-        self vehicle_setspeed( 0, 15, 15 );
+        self _meth_8437( 0, 15, 15 );
 }
 
 _id_A551( var_0, var_1, var_2 )
@@ -226,43 +226,43 @@ _id_A551( var_0, var_1, var_2 )
         return;
     }
 
-    var_0 _id_077B::_id_545A( var_3 );
-    var_0 _id_077B::_id_5450( var_3, 1 );
+    var_0 scripts\engine\utility::_id_545A( var_3 );
+    var_0 scripts\engine\utility::_id_5450( var_3, 1 );
     var_0 notify( "processed_node" + var_3 );
 }
 
 _id_A566( var_0, var_1, var_2 )
 {
-    for ( var_3 = 0; isdefined( var_1 ) && var_3 < 3; var_1 = [[ var_2 ]]( var_1._id_0457 ) )
+    for ( var_3 = 0; isdefined( var_1 ) && var_3 < 3; var_1 = [[ var_2 ]]( var_1.target ) )
     {
         var_3++;
         thread _id_A547( var_0, var_1 );
 
-        if ( !isdefined( var_1._id_0457 ) )
+        if ( !isdefined( var_1.target ) )
             return;
     }
 }
 
 _id_A547( var_0, var_1 )
 {
-    if ( var_1 _id_077B::_id_5452( var_0 ) )
+    if ( var_1 scripts\engine\utility::_id_5452( var_0 ) )
         return;
 
-    var_1 _id_077B::_id_5453( var_0 );
+    var_1 scripts\engine\utility::_id_5453( var_0 );
     thread _id_A548( var_1, var_0 );
     var_1 endon( "processed_node" + var_0 );
     self endon( "death" );
     self endon( "newpath" );
     self endon( "node_wait_terminated" );
     var_1 waittillmatch( "trigger", self );
-    var_1 _id_077B::_id_5454( var_0 );
+    var_1 scripts\engine\utility::_id_5454( var_0 );
 }
 
 _id_A548( var_0, var_1 )
 {
     var_0 endon( "processed_node" + var_1 );
-    _id_077B::_id_1087F( "death", "newpath", "node_wait_terminated" );
-    var_0 _id_077B::_id_5450( var_1, 1 );
+    scripts\engine\utility::_id_1087F( "death", "newpath", "node_wait_terminated" );
+    var_0 scripts\engine\utility::_id_5450( var_1, 1 );
 }
 
 _id_1022C( var_0 )
@@ -350,26 +350,26 @@ _id_1022C( var_0 )
             if ( isdefined( var_4._id_CCE9 ) )
                 var_8 = var_4._id_CCE9;
 
-            self _meth_8436( var_4._id_CE4A, var_7, var_8 );
+            self vehicle_setspeed( var_4._id_CE4A, var_7, var_8 );
         }
 
-        if ( isdefined( var_4._id_CD24 ) && !_id_077B::_id_544E( var_4._id_CD24 ) )
+        if ( isdefined( var_4._id_CD24 ) && !scripts\engine\utility::_id_544E( var_4._id_CD24 ) )
         {
             if ( isdefined( var_4._id_CCE9 ) )
                 var_8 = var_4._id_CCE9;
-            else if ( isdefined( var_4._id_0457 ) )
+            else if ( isdefined( var_4.target ) )
             {
-                var_9 = [[ var_5 ]]( var_4._id_0457 );
-                var_10 = distance( var_4._id_02EA, var_9._id_02EA ) * 0.0568182;
+                var_9 = [[ var_5 ]]( var_4.target );
+                var_10 = distance( var_4.origin, var_9.origin ) * 0.0568182;
                 var_11 = self _meth_842D();
-                var_8 = spawnstruct( var_11 ) / ( 2 * var_10 );
+                var_8 = _func_0214( var_11 ) / ( 2 * var_10 );
             }
             else
                 var_8 = 20;
 
-            self _meth_8436( 0, var_8, var_8 );
+            self vehicle_setspeed( 0, var_8, var_8 );
             childthread _id_10158();
-            _id_077B::_id_5456( var_4._id_CD24 );
+            scripts\engine\utility::_id_5456( var_4._id_CD24 );
 
             if ( !isdefined( self ) )
                 return;
@@ -390,13 +390,13 @@ _id_1022C( var_0 )
             if ( isdefined( var_4._id_CCE9 ) )
                 var_8 = var_4._id_CCE9;
 
-            self _meth_8436( 0, var_8 );
+            self vehicle_setspeed( 0, var_8 );
             childthread _id_10158();
 
-            if ( isdefined( var_4._id_0457 ) )
-                childthread _id_AD5B( [[ var_5 ]]( var_4._id_0457 ) );
+            if ( isdefined( var_4.target ) )
+                childthread _id_AD5B( [[ var_5 ]]( var_4.target ) );
 
-            var_4 _id_077B::_id_036D();
+            var_4 scripts\engine\utility::_id_036D();
             self notify( "delay_passed" );
             var_7 = 60;
 
@@ -411,7 +411,7 @@ _id_1022C( var_0 )
         {
             var_12 = 0;
 
-            if ( !_id_077B::_id_5BE0( var_4._id_CD3E ) || isdefined( var_4._id_CCF2 ) )
+            if ( !scripts\engine\utility::_id_5BE0( var_4._id_CD3E ) || isdefined( var_4._id_CCF2 ) )
             {
                 var_12 = 1;
                 var_7 = 5;
@@ -426,11 +426,11 @@ _id_1022C( var_0 )
                 _id_0D96( "script_flag_wait_" + var_4._id_CD3E, var_7, var_8 );
                 childthread _id_10158();
 
-                if ( isdefined( var_4._id_0457 ) )
-                    childthread _id_AD5B( [[ var_5 ]]( var_4._id_0457 ) );
+                if ( isdefined( var_4.target ) )
+                    childthread _id_AD5B( [[ var_5 ]]( var_4.target ) );
             }
 
-            _id_077B::_id_5C04( var_4._id_CD3E );
+            scripts\engine\utility::_id_5C04( var_4._id_CD3E );
 
             if ( !isdefined( self ) )
                 return;
@@ -470,14 +470,14 @@ _id_1022C( var_0 )
             thread _id_06C1::_id_948C( var_4._id_CEA0 );
 
         if ( isdefined( var_4._id_CD46 ) )
-            thread _id_077B::_id_CD54( "forcecolor_riders", var_4._id_CD46 );
+            thread scripts\engine\utility::_id_CD54( "forcecolor_riders", var_4._id_CD46 );
 
         var_3 = var_4;
 
-        if ( !isdefined( var_4._id_0457 ) )
+        if ( !isdefined( var_4.target ) )
             break;
 
-        var_4 = [[ var_5 ]]( var_4._id_0457 );
+        var_4 = [[ var_5 ]]( var_4.target );
 
         if ( !isdefined( var_4 ) )
         {
@@ -493,7 +493,7 @@ _id_1022C( var_0 )
         _id_06C0::_id_10083();
         _id_4721();
         self notify( "delete" );
-        self _meth_809A();
+        self delete();
     }
 }
 
@@ -545,8 +545,8 @@ _id_1022B( var_0, var_1, var_2 )
 
     if ( isdefined( var_2 ) )
     {
-        var_5 = _func_020F();
-        var_5._id_02EA = _id_1059( self._id_02EA, var_2 );
+        var_5 = spawnstruct();
+        var_5.origin = _id_1059( self.origin, var_2 );
         _id_7742( var_5, undefined );
     }
 
@@ -563,8 +563,8 @@ _id_1022B( var_0, var_1, var_2 )
         {
             var_9 = 0;
 
-            if ( isdefined( var_7._id_0457 ) )
-                var_9 = isdefined( [[ var_8 ]]( var_7._id_0457 ) );
+            if ( isdefined( var_7.target ) )
+                var_9 = isdefined( [[ var_8 ]]( var_7.target ) );
 
             thread _id_06C0::_id_1012C( var_7._id_CE98, var_9 );
         }
@@ -579,10 +579,10 @@ _id_1022B( var_0, var_1, var_2 )
 
         if ( isdefined( var_7._id_CD74 ) )
         {
-            self setyawspeed( var_7._id_CD74 );
+            self _meth_83BB( var_7._id_CD74 );
 
             if ( var_7._id_CD74 == "faster" )
-                self _meth_834A( 25, 50 );
+                self setmaxpitchroll( 25, 50 );
         }
 
         _id_F5E6( var_7 );
@@ -604,7 +604,7 @@ _id_1022B( var_0, var_1, var_2 )
 
         if ( isdefined( var_7._id_CD3E ) )
         {
-            _id_077B::_id_5C04( var_7._id_CD3E );
+            scripts\engine\utility::_id_5C04( var_7._id_CD3E );
 
             if ( isdefined( var_7._id_CCF2 ) )
                 wait( var_7._id_CCF2 );
@@ -625,14 +625,14 @@ _id_1022B( var_0, var_1, var_2 )
             thread _id_06C1::_id_948C( var_7._id_CEA0 );
 
         if ( isdefined( var_7._id_CD46 ) )
-            thread _id_077B::_id_CD54( "forcecolor_riders", var_7._id_CD46 );
+            thread scripts\engine\utility::_id_CD54( "forcecolor_riders", var_7._id_CD46 );
 
         var_6 = var_7;
 
-        if ( !isdefined( var_7._id_0457 ) )
+        if ( !isdefined( var_7.target ) )
             break;
 
-        var_7 = [[ var_8 ]]( var_7._id_0457 );
+        var_7 = [[ var_8 ]]( var_7.target );
 
         if ( !isdefined( var_7 ) )
         {
@@ -646,7 +646,7 @@ _id_1022B( var_0, var_1, var_2 )
     if ( isdefined( self._id_CEA1 ) )
     {
         _id_4721();
-        self _meth_809A();
+        self delete();
     }
 }
 
@@ -660,7 +660,7 @@ _id_7742( var_0, var_1, var_2 )
 
         if ( isdefined( var_0._id_CD8D ) )
         {
-            _id_077B::_id_5454( "landed" );
+            scripts\engine\utility::_id_5454( "landed" );
 
             if ( isdefined( self._id_F96D ) )
                 var_3 = self._id_F96D;
@@ -669,8 +669,8 @@ _id_7742( var_0, var_1, var_2 )
             var_3 = self._id_F96B;
         else if ( isdefined( var_0._id_CE98 ) && isdefined( self._id_F96C ) )
         {
-            var_4 = _id_06BB::_id_71B7( var_0._id_02EA );
-            var_3 = var_0._id_02EA[2] - var_4[2];
+            var_4 = scripts\common\utility::_id_71B7( var_0.origin );
+            var_3 = var_0.origin[2] - var_4[2];
 
             if ( var_3 >= self._id_F96C )
                 var_3 = self._id_F96C;
@@ -681,16 +681,16 @@ _id_7742( var_0, var_1, var_2 )
         var_0._id_0333 = 2;
 
         if ( isdefined( var_0._id_718C ) )
-            var_0._id_02EA = var_0._id_718C + ( 0, 0, var_3 );
+            var_0.origin = var_0._id_718C + ( 0, 0, var_3 );
         else
         {
-            var_5 = _id_06BB::_id_71B7( var_0._id_02EA ) + ( 0, 0, var_3 );
+            var_5 = scripts\common\utility::_id_71B7( var_0.origin ) + ( 0, 0, var_3 );
 
-            if ( var_5[2] > var_0._id_02EA[2] - 2000 )
-                var_0._id_02EA = _id_06BB::_id_71B7( var_0._id_02EA ) + ( 0, 0, var_3 );
+            if ( var_5[2] > var_0.origin[2] - 2000 )
+                var_0.origin = scripts\common\utility::_id_71B7( var_0.origin ) + ( 0, 0, var_3 );
         }
 
-        self sethintstring( 0, 0, 0 );
+        self _meth_832C( 0, 0, 0 );
     }
 
     if ( isdefined( var_1 ) )
@@ -710,19 +710,19 @@ _id_7742( var_0, var_1, var_2 )
 
     var_10 = isdefined( var_0._id_CE62 ) && var_0._id_CE62;
     var_11 = isdefined( var_0._id_CE98 );
-    var_12 = isdefined( var_0._id_CD3E ) && !_id_077B::_id_5BE0( var_0._id_CD3E );
-    var_13 = !isdefined( var_0._id_0457 );
+    var_12 = isdefined( var_0._id_CD3E ) && !scripts\engine\utility::_id_5BE0( var_0._id_CD3E );
+    var_13 = !isdefined( var_0.target );
     var_14 = isdefined( var_0._id_036D );
 
-    if ( isdefined( var_0._id_0054 ) )
-        var_15 = var_0._id_0054[1];
+    if ( isdefined( var_0.angles ) )
+        var_15 = var_0.angles[1];
     else
         var_15 = 0;
 
-    if ( self._id_01FF <= 0 )
+    if ( self.health <= 0 )
         return;
 
-    var_16 = var_0._id_02EA;
+    var_16 = var_0.origin;
 
     if ( isdefined( var_2 ) )
         var_16 = _id_1059( var_16, var_2 );
@@ -734,8 +734,8 @@ _id_7742( var_0, var_1, var_2 )
 
     if ( isdefined( var_0._id_0333 ) )
     {
-        self _meth_8356( var_0._id_0333 );
-        _id_077B::_id_1087E( "near_goal", "goal" );
+        self setneargoalnotifydist( var_0._id_0333 );
+        scripts\engine\utility::waittill_any_2( "near_goal", "goal" );
     }
     else
         self waittill( "goal" );
@@ -752,17 +752,17 @@ _id_7742( var_0, var_1, var_2 )
         thread [[ level._id_776A ]]( var_0 );
     }
 
-    var_0 _id_077B::_id_036D();
+    var_0 scripts\engine\utility::_id_036D();
 
     if ( isdefined( self._id_AEB6 ) )
-        _id_077B::_id_4773( var_0 );
+        scripts\engine\utility::_id_4773( var_0 );
 
     self notify( "continuepath" );
 }
 
 _id_662B()
 {
-    var_0 = _id_077B::_id_6D7C( self._id_0457, "targetname" );
+    var_0 = scripts\engine\utility::_id_6D7C( self.target, "targetname" );
 
     if ( var_0.size == 1 )
         return var_0[0];
@@ -789,13 +789,13 @@ _id_6BB0( var_0 )
             return;
     }
 
-    if ( isdefined( self._id_0457 ) )
+    if ( isdefined( self.target ) )
     {
-        var_1 = _func_00E5( self._id_0457, "targetname" );
+        var_1 = _func_00E5( self.target, "targetname" );
 
         if ( !isdefined( var_1 ) )
         {
-            var_3 = getentarray( self._id_0457, "targetname" );
+            var_3 = getentarray( self.target, "targetname" );
 
             foreach ( var_5 in var_3 )
             {
@@ -809,17 +809,17 @@ _id_6BB0( var_0 )
 
         if ( !isdefined( var_1 ) )
         {
-            if ( _id_06BB::_id_87BA() )
+            if ( scripts\common\utility::_id_87BA() )
                 var_1 = _id_662B();
             else
-                var_1 = _id_077B::_id_6D7A( self._id_0457, "targetname" );
+                var_1 = scripts\engine\utility::_id_6D7A( self.target, "targetname" );
         }
     }
 
     if ( !isdefined( var_1 ) )
     {
         if ( _id_06C0::_id_887D() )
-            self _meth_8436( 60, 20, 10 );
+            self vehicle_setspeed( 60, 20, 10 );
 
         return;
     }
@@ -828,13 +828,13 @@ _id_6BB0( var_0 )
 
     if ( !_id_06C0::_id_887D() && !_func_02D9( var_1 ) )
     {
-        self._id_02EA = var_1._id_02EA;
+        self.origin = var_1.origin;
 
         if ( !isdefined( var_0 ) )
-            self attach( var_1 );
+            self _meth_801F( var_1 );
     }
     else if ( isdefined( self._id_03C7 ) )
-        self vehicle_setspeed( self._id_03C7, 20 );
+        self _meth_8437( self._id_03C7, 20 );
     else if ( isdefined( var_1._id_03C7 ) )
     {
         var_7 = 20;
@@ -847,10 +847,10 @@ _id_6BB0( var_0 )
             var_7 = var_1._id_CCE9;
 
         var_9 = float( var_1._id_03C7 );
-        self vehicle_setspeed( var_9, var_7, var_8 );
+        self _meth_8437( var_9, var_7, var_8 );
     }
     else
-        self _meth_8436( 60, 20, 10 );
+        self vehicle_setspeed( 60, 20, 10 );
 
     thread _id_0D94( undefined, _id_06C0::_id_887D() );
 }
@@ -872,11 +872,11 @@ _id_0D96( var_0, var_1, var_2 )
         self._id_102A0 = [];
 
     if ( isdefined( var_1 ) && isdefined( var_2 ) )
-        self _meth_8436( 0, var_1, var_2 );
+        self vehicle_setspeed( 0, var_1, var_2 );
     else if ( isdefined( var_1 ) )
-        self _meth_8436( 0, var_1 );
+        self vehicle_setspeed( 0, var_1 );
     else
-        self _meth_8436( 0 );
+        self vehicle_setspeed( 0 );
 
     if ( isdefined( var_1 ) )
         self._id_102A0[var_0] = var_1;
@@ -893,7 +893,7 @@ _id_F970( var_0 )
 {
     self endon( "death" );
 
-    if ( isdefined( self._id_544E["prep_unload"] ) && _id_077B::_id_544E( "prep_unload" ) )
+    if ( isdefined( self._id_544E["prep_unload"] ) && scripts\engine\utility::_id_544E( "prep_unload" ) )
         return;
 
     if ( !isdefined( var_0._id_CD3E ) && !isdefined( var_0._id_036D ) )
@@ -905,21 +905,21 @@ _id_F970( var_0 )
     {
         foreach ( var_3 in self._id_C828 )
         {
-            if ( _func_0104( var_3 ) )
-                var_3 thread _id_077B::_id_CD54( "go_to_node", var_1 );
+            if ( isai( var_3 ) )
+                var_3 thread scripts\engine\utility::_id_CD54( "go_to_node", var_1 );
         }
     }
 
     if ( _id_06C0::_id_887D() )
     {
-        self sethintstring( 0, 0, 0 );
+        self _meth_832C( 0, 0, 0 );
         _id_06C0::_id_10924( var_0 );
     }
 
     if ( isdefined( var_0._id_0375 ) )
     {
         if ( var_0._id_0375 == "wait_for_flag" )
-            _id_077B::_id_5C04( var_0._id_CD38 );
+            scripts\engine\utility::_id_5C04( var_0._id_CD38 );
     }
 
     if ( isdefined( var_0._id_CE98 ) )

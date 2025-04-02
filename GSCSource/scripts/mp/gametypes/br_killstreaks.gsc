@@ -17,18 +17,18 @@ _id_EDC4( var_0 )
 
 _id_B6F0( var_0 )
 {
-    self._id_2BB4 = _id_07BA::_id_3FAD( "default", 0.75 );
-    self._id_2BB4 _id_07BA::_id_D675( "CENTER", "BOTTOM LEFT", 270, -70 );
+    self._id_2BB4 = scripts\mp\hud_util::createfontstring( "default", 0.75 );
+    self._id_2BB4 scripts\mp\hud_util::setpoint( "CENTER", "BOTTOM LEFT", 270, -70 );
     self._id_2BB4._id_024D = &"MP_BR_ACTIVATE_KILLSTREAK";
     var_1 = game["killstreakTable"]._id_EC71[var_0]["hudIcon"];
-    self._id_2BB3 = _id_07BA::_id_3FD6( var_1, 30, 30 );
-    self._id_2BB3 _id_07BA::_id_D675( "CENTER", "BOTTOM LEFT", 270, -45 );
+    self._id_2BB3 = scripts\mp\hud_util::_id_3FD6( var_1, 30, 30 );
+    self._id_2BB3 scripts\mp\hud_util::setpoint( "CENTER", "BOTTOM LEFT", 270, -45 );
 }
 
 _id_B6AB()
 {
     self giveweapon( "super_default_mp" );
-    self _meth_83B5( "super_default_mp", 1 );
+    self setweaponammoclip( "super_default_mp", 1 );
     self _meth_84E8( "super_default_mp" );
 }
 
@@ -48,42 +48,42 @@ _id_B6BA( var_0 )
             return;
         }
         else
-            self _meth_83B5( "super_default_mp", 1 );
+            self setweaponammoclip( "super_default_mp", 1 );
     }
 }
 
 _id_B7F1()
 {
-    if ( !isai( self ) )
+    if ( !isalive( self ) )
         return 0;
 
-    var_0 = _id_0A28::_id_4035( self._id_2BB2 );
-    var_1 = _id_0A28::_id_F627( var_0 );
+    var_0 = scripts\mp\killstreaks\killstreaks::_id_4035( self._id_2BB2 );
+    var_1 = scripts\mp\killstreaks\killstreaks::_id_F627( var_0 );
     return istrue( var_1 );
 }
 
 _id_B74F()
 {
-    self takeallweapons( "super_default_mp" );
+    self takeweapon( "super_default_mp" );
     self._id_2BB2 = undefined;
 
     if ( isdefined( self._id_2BB4 ) )
-        self._id_2BB4 delete();
+        self._id_2BB4 destroy();
 
     if ( isdefined( self._id_2BB3 ) )
-        self._id_2BB3 delete();
+        self._id_2BB3 destroy();
 }
 
 _id_4323( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _id_06BB::_id_B7A3( var_0, var_1 );
+    var_4 = scripts\common\utility::_id_B7A3( var_0, var_1 );
 
     if ( !isdefined( var_3 ) )
         var_3 = 1;
 
     foreach ( var_6 in var_4 )
     {
-        if ( isdefined( var_6 ) && _id_0A74::_id_89D3( var_6 ) && var_6._id_045B != self._id_045B )
+        if ( isdefined( var_6 ) && scripts\mp\utility\player::isreallyalive( var_6 ) && var_6.team != self.team )
             _id_4322( var_6, var_2, var_3 );
     }
 }
@@ -115,7 +115,7 @@ _id_4322( var_0, var_1, var_2, var_3 )
 
     if ( var_1 > 0 )
     {
-        var_0 _meth_82F6( "ui_br_danger_warning", var_1 );
+        var_0 setclientomnvar( "ui_br_danger_warning", var_1 );
         _id_4324( var_0, var_3 );
     }
 }
@@ -144,7 +144,7 @@ _id_10ABF( var_0, var_1, var_2, var_3 )
         wait( var_3 );
 
     if ( isdefined( var_0 ) )
-        var_0 _meth_82F6( "ui_br_danger_warning", 0 );
+        var_0 setclientomnvar( "ui_br_danger_warning", 0 );
 
     level notify( "danger_notify_finished_" + var_1 );
 }

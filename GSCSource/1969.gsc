@@ -3,35 +3,35 @@
 
 _id_7021( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_5 = _id_077B::_id_6D7C( var_0, "targetname" );
+    var_5 = scripts\engine\utility::_id_6D7C( var_0, "targetname" );
 
     if ( var_5.size <= 0 )
         return;
 
     if ( !isdefined( var_2 ) )
-        var_2 = _func_01B7( -20, -15 );
+        var_2 = randomfloatrange( -20, -15 );
 
     if ( !isdefined( var_3 ) )
         var_3 = var_1;
 
     foreach ( var_7 in var_5 )
     {
-        if ( !isdefined( level._id_0BA3 ) )
-            level._id_0BA3 = [];
+        if ( !isdefined( level._effect ) )
+            level._effect = [];
 
-        if ( !isdefined( level._id_0BA3[var_3] ) )
-            level._id_0BA3[var_3] = _func_0139( var_1 );
+        if ( !isdefined( level._effect[var_3] ) )
+            level._effect[var_3] = loadfx( var_1 );
 
-        if ( !isdefined( var_7._id_0054 ) )
-            var_7._id_0054 = ( 0, 0, 0 );
+        if ( !isdefined( var_7.angles ) )
+            var_7.angles = ( 0, 0, 0 );
 
-        var_8 = _id_077B::_id_4005( var_3 );
-        var_8._id_FF25["origin"] = var_7._id_02EA;
-        var_8._id_FF25["angles"] = var_7._id_0054;
-        var_8._id_FF25["fxid"] = var_3;
-        var_8._id_FF25["delay"] = var_2;
+        var_8 = scripts\engine\utility::_id_4005( var_3 );
+        var_8.v["origin"] = var_7.origin;
+        var_8.v["angles"] = var_7.angles;
+        var_8.v["fxid"] = var_3;
+        var_8.v["delay"] = var_2;
 
         if ( isdefined( var_4 ) )
-            var_8._id_FF25["soundalias"] = var_4;
+            var_8.v["soundalias"] = var_4;
     }
 }

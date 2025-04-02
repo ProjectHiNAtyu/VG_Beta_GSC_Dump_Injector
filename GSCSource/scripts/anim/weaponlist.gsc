@@ -3,7 +3,7 @@
 
 _id_FF04()
 {
-    return weaponfiretime( self._id_04CE ) || _func_02EC( self._id_04CE ) || visionsetnaked( self._id_04CE ) > 0;
+    return weaponfiretime( self._id_04CE ) || _func_02EC( self._id_04CE ) || _func_0268( self._id_04CE ) > 0;
 }
 
 _id_FF1A()
@@ -38,7 +38,7 @@ _id_DA18( var_0 )
 {
     if ( !_id_FF04() || isdefined( var_0 ) && var_0 == 1 )
     {
-        var_1 = 0.5 + _func_01B6( 1 );
+        var_1 = 0.5 + randomfloat( 1 );
         return weaponburstcount( self._id_04CE ) * var_1;
     }
     else
@@ -47,18 +47,18 @@ _id_DA18( var_0 )
 
 _id_C186()
 {
-    if ( _func_036F( self._id_04CE ) )
+    if ( isnullweapon( self._id_04CE ) )
     {
         self._id_00C4 = 0;
         return 0;
     }
 
     if ( !isdefined( self._id_00C4 ) )
-        self._id_00C4 = visionsetthermal( self._id_04CE );
+        self._id_00C4 = weaponclipsize( self._id_04CE );
     else
-        self._id_00C4 = visionsetthermal( self._id_04CE );
+        self._id_00C4 = weaponclipsize( self._id_04CE );
 
-    var_0 = self._id_04CE._id_00DE;
+    var_0 = self._id_04CE.classname;
 
     if ( isdefined( self._id_10D1D[var_0] ) )
         self._id_10D1D[var_0]._id_57F1 = int( ( self._id_10D1D[var_0]._id_3DCB - 1 ) * self._id_04CE._id_00E0 );
@@ -71,43 +71,43 @@ _id_C186()
 
 _id_D8BD( var_0 )
 {
-    if ( _id_06BB::_id_8703( var_0 ) )
+    if ( scripts\common\utility::_id_8703( var_0 ) )
     {
-        self._id_10D1D[var_0] = _func_020F();
-        self._id_10D1D[var_0]._id_3DCB = _id_06BB::_id_6838( var_0, 12 );
+        self._id_10D1D[var_0] = spawnstruct();
+        self._id_10D1D[var_0]._id_3DCB = scripts\common\utility::_id_6838( var_0, 12 );
         self._id_10D1D[var_0]._id_57F1 = int( ( self._id_10D1D[var_0]._id_3DCB - 1 ) * self._id_04CE._id_00E0 );
-        self._id_10D1D[var_0]._id_9F2C = _id_06BB::_id_6838( var_0, 8 );
-        self._id_10D1D[var_0].maxrank = _id_06BB::_id_6838( var_0, 9 );
-        self._id_10D1D[var_0].mintimebetweenpeekslostenemy = _id_06BB::_id_6838( var_0, 27 );
-        self._id_10D1D[var_0].maxtimebetweenpeekslostenemy = _id_06BB::_id_6838( var_0, 28 );
-        self._id_10D1D[var_0]._id_9EE5 = _id_06BB::_id_6838( var_0, 4 );
-        self._id_10D1D[var_0]._id_9C56 = _id_06BB::_id_6838( var_0, 5 );
-        self._id_10D1D[var_0]._id_9F31 = _id_06BB::_id_6838( var_0, 6 );
-        self._id_10D1D[var_0]._id_9CA7 = _id_06BB::_id_6838( var_0, 7 );
-        self._id_10D1D[var_0]._id_9E98 = _id_06BB::_id_6838( var_0, 2 );
-        self._id_10D1D[var_0]._id_9C42 = _id_06BB::_id_6838( var_0, 3 );
-        self._id_10D1D[var_0].minpercentcliptofire = _id_06BB::_id_6838( var_0, 10 );
-        self._id_10D1D[var_0].maxpercentcliptofire = _id_06BB::_id_6838( var_0, 11 );
-        self._id_10D1D[var_0]._id_9F16 = _id_06BB::_id_6838( var_0, 14 );
-        self._id_10D1D[var_0]._id_9C74 = _id_06BB::_id_6838( var_0, 15 );
-        self._id_10D1D[var_0]._id_9F29 = _id_06BB::_id_6838( var_0, 16 );
-        self._id_10D1D[var_0]._id_9C95 = _id_06BB::_id_6838( var_0, 17 );
-        self._id_10D1D[var_0]._id_EBA7 = _id_06BB::_id_6838( var_0, 18 );
-        self._id_10D1D[var_0]._id_EBA6 = _id_06BB::_id_6838( var_0, 19 );
-        self._id_10D1D[var_0]._id_EBA8 = _id_06BB::_id_6838( var_0, 20 );
-        self._id_10D1D[var_0]._id_EBA9 = _id_06BB::_id_6838( var_0, 21 );
-        self._id_10D1D[var_0]._id_9F21 = _id_06BB::_id_6838( var_0, 22 );
-        self._id_10D1D[var_0]._id_9C86 = _id_06BB::_id_6838( var_0, 23 );
-        self._id_10D1D[var_0]._id_9C91 = _id_06BB::_id_6838( var_0, 24 );
-        self._id_10D1D[var_0]._id_AC37 = _id_06BB::_id_6838( var_0, 13 );
-        self._id_10D1D[var_0]._id_39B9 = _id_06BB::_id_6838( var_0, 25 );
-        self._id_10D1D[var_0]._id_39BA = _id_06BB::_id_6838( var_0, 26 );
+        self._id_10D1D[var_0]._id_9F2C = scripts\common\utility::_id_6838( var_0, 8 );
+        self._id_10D1D[var_0].maxrank = scripts\common\utility::_id_6838( var_0, 9 );
+        self._id_10D1D[var_0].mintimebetweenpeekslostenemy = scripts\common\utility::_id_6838( var_0, 27 );
+        self._id_10D1D[var_0].maxtimebetweenpeekslostenemy = scripts\common\utility::_id_6838( var_0, 28 );
+        self._id_10D1D[var_0]._id_9EE5 = scripts\common\utility::_id_6838( var_0, 4 );
+        self._id_10D1D[var_0]._id_9C56 = scripts\common\utility::_id_6838( var_0, 5 );
+        self._id_10D1D[var_0]._id_9F31 = scripts\common\utility::_id_6838( var_0, 6 );
+        self._id_10D1D[var_0]._id_9CA7 = scripts\common\utility::_id_6838( var_0, 7 );
+        self._id_10D1D[var_0]._id_9E98 = scripts\common\utility::_id_6838( var_0, 2 );
+        self._id_10D1D[var_0]._id_9C42 = scripts\common\utility::_id_6838( var_0, 3 );
+        self._id_10D1D[var_0].minpercentcliptofire = scripts\common\utility::_id_6838( var_0, 10 );
+        self._id_10D1D[var_0].maxpercentcliptofire = scripts\common\utility::_id_6838( var_0, 11 );
+        self._id_10D1D[var_0]._id_9F16 = scripts\common\utility::_id_6838( var_0, 14 );
+        self._id_10D1D[var_0]._id_9C74 = scripts\common\utility::_id_6838( var_0, 15 );
+        self._id_10D1D[var_0]._id_9F29 = scripts\common\utility::_id_6838( var_0, 16 );
+        self._id_10D1D[var_0]._id_9C95 = scripts\common\utility::_id_6838( var_0, 17 );
+        self._id_10D1D[var_0]._id_EBA7 = scripts\common\utility::_id_6838( var_0, 18 );
+        self._id_10D1D[var_0]._id_EBA6 = scripts\common\utility::_id_6838( var_0, 19 );
+        self._id_10D1D[var_0]._id_EBA8 = scripts\common\utility::_id_6838( var_0, 20 );
+        self._id_10D1D[var_0]._id_EBA9 = scripts\common\utility::_id_6838( var_0, 21 );
+        self._id_10D1D[var_0]._id_9F21 = scripts\common\utility::_id_6838( var_0, 22 );
+        self._id_10D1D[var_0]._id_9C86 = scripts\common\utility::_id_6838( var_0, 23 );
+        self._id_10D1D[var_0]._id_9C91 = scripts\common\utility::_id_6838( var_0, 24 );
+        self._id_10D1D[var_0]._id_AC37 = scripts\common\utility::_id_6838( var_0, 13 );
+        self._id_10D1D[var_0]._id_39B9 = scripts\common\utility::_id_6838( var_0, 25 );
+        self._id_10D1D[var_0]._id_39BA = scripts\common\utility::_id_6838( var_0, 26 );
     }
 }
 
 _id_6970()
 {
-    var_0 = self._id_04CE._id_00DE;
+    var_0 = self._id_04CE.classname;
 
     if ( isdefined( self._id_10D1D[var_0] ) )
         return int( self._id_10D1D[var_0]._id_3DCB * self._id_04CE._id_00E0 % self._id_04CE._id_00E0 );
@@ -119,7 +119,7 @@ _id_6909()
 {
     var_0 = 10000;
     var_1 = 15000;
-    var_2 = self._id_04CE._id_00DE;
+    var_2 = self._id_04CE.classname;
 
     if ( isdefined( self._id_10D1D[var_2] ) )
     {
@@ -132,7 +132,7 @@ _id_6909()
         }
     }
 
-    var_3 = _func_01B7( var_0, var_1 );
+    var_3 = randomfloatrange( var_0, var_1 );
     return var_3;
 }
 
@@ -147,7 +147,7 @@ _id_1054( var_0, var_1, var_2, var_3, var_4 )
     if ( !isdefined( var_4 ) )
         var_4 = "rifle";
 
-    var_0 = _func_0243( var_0 );
+    var_0 = tolower( var_0 );
     anim._id_13D6[var_0]["type"] = var_1;
     anim._id_13D6[var_0]["time"] = var_2;
     anim._id_13D6[var_0]["clipsize"] = var_3;
@@ -156,5 +156,5 @@ _id_1054( var_0, var_1, var_2, var_3, var_4 )
 
 _id_1158( var_0 )
 {
-    anim._id_13D6[_func_0243( var_0 )]["type"] = "turret";
+    anim._id_13D6[tolower( var_0 )]["type"] = "turret";
 }

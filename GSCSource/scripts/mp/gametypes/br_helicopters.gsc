@@ -6,29 +6,29 @@ _id_D870( var_0 )
     level endon( "game_ended" );
     var_0 endon( "disconnect" );
     var_0 notify( "cancel_heli" );
-    var_1 = _func_0205( "script_model", ( 0, 0, 0 ) );
-    var_1 setmode( "tag_origin" );
+    var_1 = spawn( "script_model", ( 0, 0, 0 ) );
+    var_1 setmodel( "tag_origin" );
     self._id_B6FB = var_1;
-    self._id_B7CD = var_0._id_02EA;
+    self._id_B7CD = var_0.origin;
 
     if ( istrue( var_0._id_8769 ) )
         level._id_2611 = self._id_B7CD;
 
-    var_1 playlocalsound( "veh_apache_killstreak_amb_lr" );
-    var_1 _meth_820B( self, "tag_origin", self._id_B718[self._id_B7B3.size], ( 0, 90, 0 ) );
-    var_0 _meth_8382( "stand" );
-    var_0 _meth_82F0( 0 );
+    var_1 playloopsound( "veh_apache_killstreak_amb_lr" );
+    var_1 linkto( self, "tag_origin", self._id_B718[self._id_B7B3.size], ( 0, 90, 0 ) );
+    var_0 setstance( "stand" );
+    var_0 setcandamage( 0 );
     var_0 _meth_8062();
-    var_0 playerlinktoblend( var_1, "tag_player", 1.0, 40, 40, -5, 70, 0 );
+    var_0 playerlinktodelta( var_1, "tag_player", 1.0, 40, 40, -5, 70, 0 );
     _id_07A8::_id_60A3( "prematch_done" );
-    var_0 _meth_824A( "halo_jump_c130", "+gostand" );
+    var_0 notifyonplayercommand( "halo_jump_c130", "+gostand" );
     var_0 thread scripts\mp\gametypes\br_c130::_id_9538( self, 1 );
     var_0 thread scripts\mp\gametypes\br_c130::_id_9539( self, 1 );
 }
 
 _id_E33D( var_0 )
 {
-    var_0._id_0054 = self._id_0054;
+    var_0.angles = self.angles;
     var_0 thread scripts\mp\gametypes\br_c130::_id_9538( self, 1 );
     var_0 thread scripts\mp\gametypes\br_c130::_id_9539( self, 1 );
     var_0._id_2A38 = "heli";
@@ -41,24 +41,24 @@ _id_AC4B( var_0 )
     var_2 = ( -5, 0, 0 );
     var_3 = anglestoforward( var_2 ) * var_1 * -1;
     var_0._id_2AA6 = var_3 + ( 150, 150, 0 );
-    self._id_0054 = var_0._id_0054;
-    self _meth_8269( var_0, "tag_origin" );
-    self _meth_8260();
-    _id_0A74::_id_0D99( "", 0 );
+    self.angles = var_0.angles;
+    self playerlinkto( var_0, "tag_origin" );
+    self playerhide();
+    scripts\mp\utility\player::_id_0D99( "", 0 );
 
     if ( isdefined( self._id_2A5C ) )
-        self._id_2A5C _meth_809A();
+        self._id_2A5C delete();
 
-    var_4 = _func_0205( "script_model", var_0._id_02EA );
-    var_4 setmode( "tag_player" );
-    var_4 _meth_820B( var_0, "tag_origin", ( 0, 0, 50 ), ( 0, 0, 0 ) );
+    var_4 = spawn( "script_model", var_0.origin );
+    var_4 setmodel( "tag_player" );
+    var_4 linkto( var_0, "tag_origin", ( 0, 0, 50 ), ( 0, 0, 0 ) );
     self._id_2A5C = var_4;
     self _meth_8695( "camera_custom_orbit_2" );
 }
 
 _id_5E7D()
 {
-    foreach ( var_1 in level._id_B758 )
+    foreach ( var_1 in level.players )
     {
         var_1 notify( "halo_jump" );
         var_1 notify( "halo_kick_c130" );
@@ -69,17 +69,17 @@ _id_8C89( var_0, var_1 )
 {
     level endon( "game_ended" );
     self endon( "br_jump" );
-    _id_06BB::_id_152C( 0 );
-    _id_0A74::_id_5245( 0 );
-    _id_06BB::allow_equipment( 0 );
-    _id_06BB::_id_1562( 0 );
-    self _meth_824A( "halo_jump", "+gostand" );
+    scripts\common\utility::_id_152C( 0 );
+    scripts\mp\utility\player::_id_5245( 0 );
+    scripts\common\utility::allow_equipment( 0 );
+    scripts\common\utility::_id_1562( 0 );
+    self notifyonplayercommand( "halo_jump", "+gostand" );
     self waittill( "halo_jump" );
     var_2 = self getplayerangles();
     var_3 = var_0 _id_6A1E();
-    var_4 = _func_0301( var_0._id_0054 );
-    var_5 = var_3._id_02EA + var_4 * 200;
-    var_6 = _func_02C4( [ "physicscontents_glass", "physicscontents_water", "physicscontents_playerclip", "physicscontents_vehicleclip" ] );
+    var_4 = anglestoleft( var_0.angles );
+    var_5 = var_3.origin + var_4 * 200;
+    var_6 = physics_createcontents( [ "physicscontents_glass", "physicscontents_water", "physicscontents_playerclip", "physicscontents_vehicleclip" ] );
     var_7 = ( 0, 0, 0 );
     var_8 = _func_02BC( var_5, var_5 + ( 0, 0, -20000 ), var_6, undefined, 0, "physicsquery_closest", 1 );
 
@@ -91,25 +91,25 @@ _id_8C89( var_0, var_1 )
     else
         iprintln( "ERROR NOTHING BELOW TO CAST ON" );
 
-    self _meth_8415();
-    var_10 = _func_0205( "script_model", self._id_02EA );
-    var_10._id_0054 = self._id_0054;
-    var_10 setmode( "tag_origin" );
-    self _meth_8269( var_10 );
-    var_10 _meth_823B( var_7 + ( 0, 0, 24 ), var_1, 0, 1.0 );
-    self _meth_8269( var_10 );
-    var_11 = _func_0205( "script_model", self._id_02EA + ( 0, 0, 300 ) );
-    var_11 setmode( "ctl_parachute_player" );
-    var_11 _meth_824C();
+    self unlink();
+    var_10 = spawn( "script_model", self.origin );
+    var_10.angles = self.angles;
+    var_10 setmodel( "tag_origin" );
+    self playerlinkto( var_10 );
+    var_10 moveto( var_7 + ( 0, 0, 24 ), var_1, 0, 1.0 );
+    self playerlinkto( var_10 );
+    var_11 = spawn( "script_model", self.origin + ( 0, 0, 300 ) );
+    var_11 setmodel( "ctl_parachute_player" );
+    var_11 notsolid();
     childthread _id_AE29( var_11 );
     wait( var_1 - 0.333 );
-    self _meth_8415();
-    var_0._id_B7B3 = _id_077B::_id_1B96( var_0._id_B7B3, self );
-    self _meth_82F0( 1 );
-    _id_06BB::_id_1562( 1 );
-    _id_06BB::allow_equipment( 1 );
-    _id_0A74::_id_5245( 1 );
-    _id_06BB::_id_152C( 1 );
+    self unlink();
+    var_0._id_B7B3 = scripts\engine\utility::array_remove( var_0._id_B7B3, self );
+    self setcandamage( 1 );
+    scripts\common\utility::_id_1562( 1 );
+    scripts\common\utility::allow_equipment( 1 );
+    scripts\mp\utility\player::_id_5245( 1 );
+    scripts\common\utility::_id_152C( 1 );
 
     if ( isdefined( var_0 ) )
         var_0 _id_8C83();
@@ -119,16 +119,16 @@ _id_AE29( var_0 )
 {
     for (;;)
     {
-        if ( self _meth_81D7() || !isai( self ) )
+        if ( self isonground() || !isalive( self ) )
         {
             self._id_2A1E = ( 0, 0, 0 );
-            var_0 _meth_809A();
+            var_0 delete();
             break;
         }
         else
         {
-            var_0._id_0054 = self._id_0054;
-            var_0._id_02EA = self._id_02EA + ( 0, 0, 360 );
+            var_0.angles = self.angles;
+            var_0.origin = self.origin + ( 0, 0, 360 );
         }
 
         waitframe();
@@ -143,16 +143,16 @@ _id_E2F7( var_0, var_1 )
     var_5 = "veh8_mil_air_blima_gunner_streak_proto";
     var_6 = 1500;
     var_7 = _func_0211( var_5, "br_spawn_heli_" + var_0, var_4, var_1, ( 0, -90, 0 ) );
-    var_7._id_EA0B = var_3;
-    var_7 _meth_8436( 30, 15, 5 );
-    var_7 _meth_824C( 0 );
-    var_7 _meth_82F0( 0 );
-    var_7 _meth_8373( "engine", "on" );
-    var_7 playlocalsound( "lbravo_engine_high" );
-    var_7._id_01FF = var_6;
+    var_7.streakinfo = var_3;
+    var_7 vehicle_setspeed( 30, 15, 5 );
+    var_7 notsolid( 0 );
+    var_7 setcandamage( 0 );
+    var_7 setscriptablepartstate( "engine", "on" );
+    var_7 playloopsound( "lbravo_engine_high" );
+    var_7.health = var_6;
     var_7._id_EEF2 = level._id_9A95;
     var_7._id_EE9F = undefined;
-    var_7._id_045B = "allies";
+    var_7.team = "allies";
     var_7._id_5080 = 0;
     var_7._id_9155 = 0;
     var_7._id_BECC = 0;
@@ -185,7 +185,7 @@ _id_6A1E()
 
 _id_2EA0()
 {
-    var_0 = self._id_02EA - anglestoforward( self._id_0054 ) * 150;
+    var_0 = self.origin - anglestoforward( self.angles ) * 150;
     return var_0;
 }
 
@@ -197,9 +197,9 @@ _id_77AA()
 
     for ( var_0 = 0; var_0 < 10; var_0++ )
     {
-        var_1 = _func_020F();
-        var_1._id_02EA = self._id_02EA;
-        var_1._id_0054 = self._id_0054;
+        var_1 = spawnstruct();
+        var_1.origin = self.origin;
+        var_1.angles = self.angles;
         self._id_F445[var_0] = var_1;
     }
 
@@ -207,13 +207,13 @@ _id_77AA()
     {
         for ( var_0 = 9; var_0 > 0; var_0-- )
         {
-            self._id_F445[var_0]._id_02EA = self._id_F445[var_0 - 1]._id_02EA;
-            self._id_F445[var_0]._id_0054 = self._id_F445[var_0 - 1]._id_0054;
+            self._id_F445[var_0].origin = self._id_F445[var_0 - 1].origin;
+            self._id_F445[var_0].angles = self._id_F445[var_0 - 1].angles;
             self._id_8C8B[var_0] = self._id_8C8B[var_0 - 1];
         }
 
-        self._id_F445[0]._id_02EA = self._id_02EA;
-        self._id_F445[0]._id_0054 = self._id_0054;
+        self._id_F445[0].origin = self.origin;
+        self._id_F445[0].angles = self.angles;
         self._id_8C8B[0] = 0;
         wait 1.0;
     }
@@ -221,7 +221,7 @@ _id_77AA()
 
 _id_5934()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     var_0._id_1F5C = 1;
     var_0._id_5B50 = "offhand_fired";
     var_0._id_8862 = 1;
@@ -233,7 +233,7 @@ _id_5934()
     var_0.streakname = undefined;
     var_0._id_04A4 = -1;
     var_0._id_04D6 = "ks_gesture_generic_mp";
-    var_0._id_A90B = _func_034C( var_0._id_04D6 );
+    var_0.objweapon = makeweapon( var_0._id_04D6 );
     var_0._id_799A = 0;
     return var_0;
 }
@@ -250,7 +250,7 @@ _id_E02E( var_0, var_1 )
 
 _id_6B61( var_0 )
 {
-    if ( level._id_EF62 )
+    if ( level.teambased )
     {
         foreach ( var_2 in level._id_2A32 )
         {
@@ -269,7 +269,7 @@ _id_6B61( var_0 )
     }
     else
     {
-        var_6 = _id_077B::_id_1BAE( level._id_2A32, ::_id_E02E );
+        var_6 = scripts\engine\utility::_id_1BAE( level._id_2A32, ::_id_E02E );
 
         foreach ( var_8 in var_6 )
         {
@@ -301,20 +301,20 @@ _id_5752()
     self notify( "begin_exit" );
     self._id_9155 = 1;
     var_0 = getent( "airstrikeheight", "targetname" );
-    var_1 = var_0._id_02EA[2];
+    var_1 = var_0.origin[2];
     var_2 = ( level._id_2A4D._id_2A52[0] + level._id_2A4D._id_2A52[1] ) * 0.5;
-    var_3 = self._id_02EA - var_2;
+    var_3 = self.origin - var_2;
     var_3 = ( var_3[0], var_3[1], 0 );
-    var_4 = _func_025A( var_3 );
-    var_5 = self._id_02EA + var_4 * 10000 + ( 0, 0, 1 ) * var_1;
+    var_4 = vectornormalize( var_3 );
+    var_5 = self.origin + var_4 * 10000 + ( 0, 0, 1 ) * var_1;
     var_6 = 150;
     var_7 = 50;
     var_8 = 350;
-    self _meth_8436( var_6, var_7, var_7 );
-    self _meth_83A3( var_5, 0 );
-    self _meth_8356( var_8 );
+    self vehicle_setspeed( var_6, var_7, var_7 );
+    self setvehgoalpos( var_5, 0 );
+    self setneargoalnotifydist( var_8 );
     self waittill( "near_goal" );
-    self _meth_809A();
+    self delete();
 }
 
 _id_8C83()

@@ -7,10 +7,10 @@ _id_D5DD( var_0, var_1, var_2 )
 
     if ( var_3 != "cp_survival" && var_3 != "cp_wave_sv" && var_3 != "cp_specops" )
     {
-        self _meth_82F6( "ui_lower_message", var_0 );
+        self setclientomnvar( "ui_lower_message", var_0 );
 
         if ( isdefined( var_1 ) )
-            self _meth_82F6( "ui_lower_message_time", var_1 );
+            self setclientomnvar( "ui_lower_message_time", var_1 );
 
         if ( isdefined( var_2 ) )
             thread _id_393D( var_2 );
@@ -26,7 +26,7 @@ _id_393D( var_0 )
     var_1 = getdvar( "#x331ad30ad2d23d0a1" );
 
     if ( var_1 != "cp_survival" && var_1 != "cp_wave_sv" && var_1 != "cp_specops" )
-        self _meth_82F6( "ui_lower_message", 0 );
+        self setclientomnvar( "ui_lower_message", 0 );
 }
 
 _id_D5DE( var_0, var_1, var_2 )
@@ -36,7 +36,7 @@ _id_D5DE( var_0, var_1, var_2 )
 
 _id_6B09( var_0 )
 {
-    var_1 = stopfxontag( "mp/hints.csv", 1, var_0, 0 );
+    var_1 = _func_021D( "mp/hints.csv", 1, var_0, 0 );
     return int( var_1 );
 }
 
@@ -107,7 +107,7 @@ _id_10BE( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
 
     foreach ( var_12 in self._id_98AF )
     {
-        if ( var_12._id_02BA == var_0 )
+        if ( var_12.name == var_0 )
         {
             if ( var_12._id_F0E5 == var_1 && var_12._id_BD19 == var_3 )
                 return;
@@ -119,11 +119,11 @@ _id_10BE( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
 
     if ( !isdefined( var_10 ) )
     {
-        var_10 = _func_020F();
+        var_10 = spawnstruct();
         self._id_98AF[self._id_98AF.size] = var_10;
     }
 
-    var_10._id_02BA = var_0;
+    var_10.name = var_0;
     var_10._id_F0E5 = var_1;
     var_10._id_F1E5 = var_2;
     var_10._id_112B = gettime();
@@ -133,7 +133,7 @@ _id_10BE( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
     var_10._id_58A4 = var_6;
     var_10._id_58A5 = var_7;
     var_10._id_0204 = var_8;
-    var_10._id_0205 = var_9;
+    var_10.hidewheninmenu = var_9;
     _id_E034();
 }
 
@@ -143,7 +143,7 @@ _id_C4D4( var_0 )
     {
         for ( var_1 = self._id_98AF.size; var_1 > 0; var_1-- )
         {
-            if ( self._id_98AF[var_1 - 1]._id_02BA != var_0 )
+            if ( self._id_98AF[var_1 - 1].name != var_0 )
                 continue;
 
             var_2 = self._id_98AF[var_1 - 1];
@@ -180,39 +180,39 @@ _id_FCB5()
     {
         if ( isdefined( self._id_98AD ) && isdefined( self._id_98B4 ) )
         {
-            self._id_98AD._id_0047 = 0;
-            self._id_98B4._id_0047 = 0;
+            self._id_98AD.alpha = 0;
+            self._id_98B4.alpha = 0;
         }
     }
     else
     {
-        self._id_98AD _meth_838E( var_0._id_F0E5 );
-        self._id_98AD._id_0047 = 0.85;
-        self._id_98B4._id_0047 = 1;
+        self._id_98AD settext( var_0._id_F0E5 );
+        self._id_98AD.alpha = 0.85;
+        self._id_98B4.alpha = 1;
         self._id_98AD._id_0204 = var_0._id_0204;
-        self._id_98AD._id_0205 = var_0._id_0205;
+        self._id_98AD.hidewheninmenu = var_0.hidewheninmenu;
 
         if ( var_0._id_DB54 )
         {
-            self._id_98AD fadeovertime( _func_0148( var_0._id_58A5, 60 ) );
-            self._id_98AD._id_0047 = var_0._id_58A4;
+            self._id_98AD fadeovertime( min( var_0._id_58A5, 60 ) );
+            self._id_98AD.alpha = var_0._id_58A4;
         }
 
         if ( var_0._id_F1E5 > 0 && var_0._id_DCEF )
-            self._id_98B4 _meth_8390( _func_0147( var_0._id_F1E5 - ( gettime() - var_0._id_112B ) / 1000, 0.1 ) );
+            self._id_98B4 _meth_8390( max( var_0._id_F1E5 - ( gettime() - var_0._id_112B ) / 1000, 0.1 ) );
         else
         {
             if ( var_0._id_F1E5 > 0 && !var_0._id_DCEF )
             {
-                self._id_98B4 _meth_838E( "" );
-                self._id_98AD fadeovertime( _func_0148( var_0._id_F1E5, 60 ) );
-                self._id_98AD._id_0047 = 0;
+                self._id_98B4 settext( "" );
+                self._id_98AD fadeovertime( min( var_0._id_F1E5, 60 ) );
+                self._id_98AD.alpha = 0;
                 thread _id_393E( var_0 );
                 thread _id_38F7( var_0 );
                 return;
             }
 
-            self._id_98B4 _meth_838E( "" );
+            self._id_98B4 settext( "" );
         }
     }
 }
@@ -224,12 +224,12 @@ _id_393E( var_0 )
     self endon( "disconnect" );
     level endon( "game_ended" );
     self waittill( "death" );
-    _id_3934( var_0._id_02BA );
+    _id_3934( var_0.name );
 }
 
 _id_38F7( var_0 )
 {
     wait( var_0._id_F1E5 );
-    _id_3934( var_0._id_02BA );
+    _id_3934( var_0.name );
     self notify( "message_cleared" );
 }

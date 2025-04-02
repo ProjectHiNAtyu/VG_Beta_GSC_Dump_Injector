@@ -183,7 +183,7 @@ _id_C92E( var_0, var_1, var_2 )
 
 _id_EA5C( var_0 )
 {
-    var_1 = _func_021A( var_0, "." );
+    var_1 = strtok( var_0, "." );
     var_2 = int( var_1[0] );
 
     if ( isdefined( var_1[1] ) )
@@ -223,7 +223,7 @@ _id_46A6( var_0 )
     wait( var_0 );
 
     if ( isdefined( self ) )
-        self _meth_809A();
+        self delete();
 }
 
 _id_C940( var_0 )
@@ -253,7 +253,7 @@ _id_2C7A( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
     if ( !isdefined( self._id_2C78[var_0] ) )
         self._id_2C78[var_0] = [];
 
-    var_10 = _func_020F();
+    var_10 = spawnstruct();
     var_10._id_AE2D = var_1;
     var_10._id_AE2E = var_2;
     var_10._id_AE2F = var_3;
@@ -269,7 +269,7 @@ _id_2C7A( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
     {
         var_10 = self._id_2C78[var_0][0];
         self notify( var_0, var_10._id_AE2D, var_10._id_AE2E, var_10._id_AE2F, var_10._id_AE30, var_10._id_AE31, var_10._id_AE32, var_10._id_AE33, var_10._id_AE34 );
-        self._id_2C78[var_0] = _id_077B::_id_1B9C( self._id_2C78[var_0], 0 );
+        self._id_2C78[var_0] = scripts\engine\utility::array_remove_index( self._id_2C78[var_0], 0 );
         waitframe();
     }
 }
@@ -285,7 +285,7 @@ _id_46BA( var_0, var_1, var_2 )
 {
     self endon( "disconnect" );
     wait( var_0 );
-    self _meth_82F6( var_1, var_2 );
+    self setclientomnvar( var_1, var_2 );
 }
 
 _id_EA60( var_0, var_1 )
@@ -318,7 +318,7 @@ _id_FFE1( var_0, var_1 )
 
 _id_7634( var_0 )
 {
-    var_1 = _func_020F();
+    var_1 = spawnstruct();
     var_1._id_A78C = 0;
     var_1._id_FF66 = [];
 

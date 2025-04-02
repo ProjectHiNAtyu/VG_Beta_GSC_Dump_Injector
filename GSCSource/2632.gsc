@@ -3,8 +3,8 @@
 
 _id_EB12()
 {
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_quieter" );
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_no_battle_chatter" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_quieter" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_no_battle_chatter" );
     self._id_4380 = 0;
     _id_079B::_id_7B50( "scout" );
     thread _id_EB18();
@@ -13,39 +13,39 @@ _id_EB12()
 
 _id_EB14( var_0 )
 {
-    scripts\mp\tac_ops\hostage_utility::_id_C4EF( "specialty_quieter" );
-    scripts\mp\tac_ops\hostage_utility::_id_C4EF( "specialty_no_battle_chatter" );
+    scripts\mp\utility\perk::removeperk( "specialty_quieter" );
+    scripts\mp\utility\perk::removeperk( "specialty_no_battle_chatter" );
     _id_0793::_id_AAD4( "super_deadsilence", self._id_4380 );
 
-    if ( _id_0A69::_id_6A43() != "infect" )
+    if ( scripts\mp\utility\game::getgametype() != "infect" )
         _id_0780::_id_9751( self, level._id_EB28._id_E76A["super_deadsilence"]._id_7C71, self._id_4380, istrue( var_0 ) );
 
     thread _id_EB13();
 
-    if ( _id_099D::_id_8A10( "br", "superSlotCleanUp" ) )
-        [[ _id_099D::_id_6D05( "br", "superSlotCleanUp" ) ]]( self );
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "br", "superSlotCleanUp" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "br", "superSlotCleanUp" ) ]]( self );
 
     return 0;
 }
 
 _id_EB15()
 {
-    if ( _id_0A69::_id_6A43() != "infect" )
+    if ( scripts\mp\utility\game::getgametype() != "infect" )
     {
         _id_0A7B::_id_7D93( "deadSilenceKills", 1 );
-        _id_07F2::_id_3A9C( "super_deadsilence" );
+        scripts\mp\supers::_id_3A9C( "super_deadsilence" );
         self._id_4380++;
-        var_0 = _id_07F2::_id_695E( "super_deadsilence" );
+        var_0 = scripts\mp\supers::_id_695E( "super_deadsilence" );
 
         if ( self._id_4380 > var_0 )
         {
             var_1 = self._id_4380 - var_0;
-            _id_07F2::_id_3A9D( "super_deadsilence", var_1 );
+            scripts\mp\supers::_id_3A9D( "super_deadsilence", var_1 );
         }
     }
 
-    self _meth_8275( "deadsilence_start" );
-    _id_07F2::_id_C63D();
+    self playlocalsound( "deadsilence_start" );
+    scripts\mp\supers::_id_C63D();
     thread _id_19AC();
 }
 
@@ -58,7 +58,7 @@ _id_EB13()
 _id_EB17( var_0 )
 {
     self._id_4381 = var_0;
-    self _meth_82F6( "ui_deadsilence_overlay", var_0 );
+    self setclientomnvar( "ui_deadsilence_overlay", var_0 );
 }
 
 _id_19AC()
@@ -74,7 +74,7 @@ _id_19AC()
         var_0 = 15;
 
     var_1 = var_0 - 2;
-    _id_077B::_id_108AC( var_1, "super_use_finished" );
+    scripts\engine\utility::_id_108AC( var_1, "super_use_finished" );
     self _meth_8576( "default_2seconds" );
 }
 
@@ -84,6 +84,6 @@ _id_EB18()
     self endon( "super_use_finished" );
     self notify( "superDeadsilence_watchForGameEnded" );
     self endon( "superDeadsilence_watchForGameEnded" );
-    level _id_077B::_id_1087E( "game_ended", "prematch_cleanup" );
-    thread _id_07F2::_id_EB4D();
+    level scripts\engine\utility::waittill_any_2( "game_ended", "prematch_cleanup" );
+    thread scripts\mp\supers::_id_EB4D();
 }

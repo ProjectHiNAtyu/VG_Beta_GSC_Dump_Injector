@@ -12,20 +12,20 @@ _id_8145()
     if ( !isdefined( level._id_2A4D ) )
         return;
 
-    level._id_29F5 = _func_020F();
+    level._id_29F5 = spawnstruct();
     level._id_29F5._id_9A93 = level._id_2A4D._id_2A52;
 
-    if ( level._id_9AA7 == "mp_quarry2" || level._id_9AA7 == "mp_prison" || level._id_9AA7 == "mp_lumber" )
+    if ( level.mapname == "mp_quarry2" || level.mapname == "mp_prison" || level.mapname == "mp_lumber" )
         level._id_29F5._id_430F = [ 9, 9, 9, 9, 9 ];
     else
         level._id_29F5._id_430F = [ 9, 9, 9, 9, 9, 9, 9, 9 ];
 
     var_0 = _func_0093( "br_final_circle_override", ( 0, 0, 0 ) );
 
-    if ( _func_0130( var_0 ) > 0 )
+    if ( length( var_0 ) > 0 )
         level._id_29F5._id_2A1F = var_0;
 
-    _func_01E4( "ui_br_minimap_radius", level._id_2A4D._id_29FE[0] );
+    setomnvar( "ui_br_minimap_radius", level._id_2A4D._id_29FE[0] );
     level._id_29F5._id_370B = -1;
     _id_0C74();
 }
@@ -33,7 +33,7 @@ _id_8145()
 _id_6CE3()
 {
     if ( isdefined( level._id_29F5 ) && isdefined( level._id_29F5._id_CABD ) )
-        return ( level._id_29F5._id_CABD._id_02EA[0], level._id_29F5._id_CABD._id_02EA[1], 0 );
+        return ( level._id_29F5._id_CABD.origin[0], level._id_29F5._id_CABD.origin[1], 0 );
     else
         return ( 0, 0, 0 );
 }
@@ -41,7 +41,7 @@ _id_6CE3()
 _id_6CE4()
 {
     if ( isdefined( level._id_29F5 ) && isdefined( level._id_29F5._id_CABD ) )
-        return level._id_29F5._id_CABD._id_02EA[2];
+        return level._id_29F5._id_CABD.origin[2];
     else
         return 0;
 }
@@ -49,7 +49,7 @@ _id_6CE4()
 _id_69A6()
 {
     if ( isdefined( level._id_29F5 ) && isdefined( level._id_29F5._id_431C ) )
-        return ( level._id_29F5._id_431C._id_02EA[0], level._id_29F5._id_431C._id_02EA[1], 0 );
+        return ( level._id_29F5._id_431C.origin[0], level._id_29F5._id_431C.origin[1], 0 );
     else
         return ( 0, 0, 0 );
 }
@@ -57,7 +57,7 @@ _id_69A6()
 _id_69A7()
 {
     if ( isdefined( level._id_29F5 ) && isdefined( level._id_29F5._id_431C ) )
-        return level._id_29F5._id_431C._id_02EA[2];
+        return level._id_29F5._id_431C.origin[2];
     else
         return 0;
 }
@@ -84,12 +84,12 @@ _id_6B6E()
 
 _id_31AB()
 {
-    return isdefined( level._id_29F5._id_CABD ) && !istrue( level._id_29F5._id_CABD._id_7866 );
+    return isdefined( level._id_29F5._id_CABD ) && !istrue( level._id_29F5._id_CABD.hidden );
 }
 
 _id_31A5()
 {
-    return isdefined( level._id_29F5._id_431C ) && !istrue( level._id_29F5._id_431C._id_7866 );
+    return isdefined( level._id_29F5._id_431C ) && !istrue( level._id_29F5._id_431C.hidden );
 }
 
 _id_B65E()
@@ -106,16 +106,16 @@ _id_F752()
 {
     var_0 = self;
 
-    if ( !isai( var_0 ) )
+    if ( !isalive( var_0 ) )
         return;
 
     if ( isdefined( var_0._id_2B20 ) && gettime() < var_0._id_2B20 )
         return;
 
-    var_0._id_2B20 = gettime() + _func_01B9( 5000, 7000 );
+    var_0._id_2B20 = gettime() + randomintrange( 5000, 7000 );
 
-    if ( !_func_0104( var_0 ) )
-        var_0 _meth_8275( "gas_player_cough" );
+    if ( !isai( var_0 ) )
+        var_0 playlocalsound( "gas_player_cough" );
 
     var_1 = "allies_male_cough";
     var_2 = scripts\mp\gametypes\br_public::_id_2B95( var_0 );
@@ -133,7 +133,7 @@ _id_F752()
     else
         var_1 = "allies_male_cough";
 
-    var_4 = _func_01B8( game["dialogue"][var_1].size );
+    var_4 = randomint( game["dialogue"][var_1].size );
     var_5 = game["dialogue"][var_1][var_4];
     var_0 _meth_827D( var_5 );
 }
@@ -166,12 +166,12 @@ _id_3705()
                 var_3 = _id_69A6();
                 var_4 = _id_69A7();
 
-                foreach ( var_6 in level._id_B758 )
+                foreach ( var_6 in level.players )
                 {
-                    if ( !isdefined( var_6 ) || !isdefined( var_6._id_02EA ) )
+                    if ( !isdefined( var_6 ) || !isdefined( var_6.origin ) )
                         continue;
 
-                    if ( distance2dsquared( var_3, var_6._id_02EA ) > var_4 * var_4 )
+                    if ( distance2dsquared( var_3, var_6.origin ) > var_4 * var_4 )
                     {
                         if ( _id_3140( var_6 ) )
                         {
@@ -186,7 +186,7 @@ _id_3705()
                             }
                             else
                             {
-                                var_6 _meth_80B7( var_2, var_6._id_02EA, var_6, undefined, "MOD_TRIGGER_HURT", "danger_circle_br" );
+                                var_6 dodamage( var_2, var_6.origin, var_6, undefined, "MOD_TRIGGER_HURT", "danger_circle_br" );
 
                                 if ( var_6 scripts\mp\gametypes\br_public::_id_751E() )
                                     var_6 scripts\mp\gametypes\br_public::_id_42C1( var_2 );
@@ -252,29 +252,29 @@ _id_FC8A( var_0 )
 _id_E732( var_0, var_1, var_2 )
 {
     level endon( "game_ended" );
-    _func_01E4( "ui_hardpoint_timer", gettime() + int( var_0 * 1000 ) );
+    setomnvar( "ui_hardpoint_timer", gettime() + int( var_0 * 1000 ) );
 
     if ( !var_1 )
     {
-        foreach ( var_4 in level._id_B758 )
+        foreach ( var_4 in level.players )
         {
-            if ( !_func_0107( var_4 ) && !var_4 scripts\mp\gametypes\br_public::_id_8976() )
+            if ( !isbot( var_4 ) && !var_4 scripts\mp\gametypes\br_public::_id_8976() )
             {
                 if ( istrue( var_2 ) )
                 {
-                    var_4 thread _id_07B9::_id_DCE0( "br_final_circle" );
+                    var_4 thread scripts\mp\hud_message::showsplash( "br_final_circle" );
                     continue;
                 }
 
-                var_4 thread _id_07B9::_id_DCE0( "br_new_circle" );
+                var_4 thread scripts\mp\hud_message::showsplash( "br_new_circle" );
             }
         }
     }
 
     if ( istrue( var_2 ) )
-        _func_01E4( "ui_br_circle_state", 3 );
+        setomnvar( "ui_br_circle_state", 3 );
     else
-        _func_01E4( "ui_br_circle_state", 0 );
+        setomnvar( "ui_br_circle_state", 0 );
 
     var_6 = [ 60, 30, 20, 10, 0 ];
     var_7 = var_6.size - 1;
@@ -299,61 +299,61 @@ _id_E732( var_0, var_1, var_2 )
             thread _id_07CF::_id_29F6( var_1, var_2 );
 
         if ( var_8 == 3 )
-            _func_01E4( "ui_br_circle_state", 2 );
+            setomnvar( "ui_br_circle_state", 2 );
 
         wait( var_6[var_8] - var_6[var_8 + 1] );
     }
 
-    foreach ( var_4 in level._id_B758 )
+    foreach ( var_4 in level.players )
     {
-        if ( !_func_0107( var_4 ) && !var_4 scripts\mp\gametypes\br_public::_id_8976() )
+        if ( !isbot( var_4 ) && !var_4 scripts\mp\gametypes\br_public::_id_8976() )
         {
-            var_4 thread _id_07B9::_id_DCE0( "br_circle_moving" );
-            var_4 _meth_8275( "br_circle_closing" );
+            var_4 thread scripts\mp\hud_message::showsplash( "br_circle_moving" );
+            var_4 playlocalsound( "br_circle_closing" );
         }
     }
 
-    _func_01E4( "ui_br_circle_state", 1 );
+    setomnvar( "ui_br_circle_state", 1 );
 }
 
 _id_0BFE()
 {
     var_0 = self;
-    var_0 _meth_82F6( "ui_br_circle0_start_time", 0 );
+    var_0 setclientomnvar( "ui_br_circle0_start_time", 0 );
 }
 
 _id_D67D( var_0 )
 {
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
-        if ( !_func_0107( var_2 ) )
+        if ( !isbot( var_2 ) )
         {
-            var_2 _meth_82F6( "ui_br_circle0_start_entity", var_0 );
-            var_2 _meth_82F6( "ui_br_circle0_end_entity", var_0 );
+            var_2 setclientomnvar( "ui_br_circle0_start_entity", var_0 );
+            var_2 setclientomnvar( "ui_br_circle0_end_entity", var_0 );
         }
     }
 }
 
 _id_D6E2( var_0, var_1, var_2, var_3 )
 {
-    foreach ( var_5 in level._id_B758 )
+    foreach ( var_5 in level.players )
     {
-        if ( !_func_0107( var_5 ) )
+        if ( !isbot( var_5 ) )
         {
             var_6 = _id_0CA8( var_5, var_0 );
-            var_5 _meth_82F6( "ui_br_circle0_start_time", gettime() );
-            var_5 _meth_82F6( "ui_br_circle0_duration", var_6 );
-            var_5 _meth_82F6( "ui_br_circle0_start_entity", var_1 );
-            var_5 _meth_82F6( "ui_br_circle0_end_entity", var_1 );
+            var_5 setclientomnvar( "ui_br_circle0_start_time", gettime() );
+            var_5 setclientomnvar( "ui_br_circle0_duration", var_6 );
+            var_5 setclientomnvar( "ui_br_circle0_start_entity", var_1 );
+            var_5 setclientomnvar( "ui_br_circle0_end_entity", var_1 );
 
             if ( istrue( var_3 ) )
                 var_5 _id_0BFE();
 
             var_6 = _id_0B87( var_5, var_0 );
-            var_5 _meth_82F6( "ui_br_circle1_start_time", gettime() );
-            var_5 _meth_82F6( "ui_br_circle1_duration", var_6 );
-            var_5 _meth_82F6( "ui_br_circle1_start_entity", var_2 );
-            var_5 _meth_82F6( "ui_br_circle1_end_entity", var_2 );
+            var_5 setclientomnvar( "ui_br_circle1_start_time", gettime() );
+            var_5 setclientomnvar( "ui_br_circle1_duration", var_6 );
+            var_5 setclientomnvar( "ui_br_circle1_start_entity", var_2 );
+            var_5 setclientomnvar( "ui_br_circle1_end_entity", var_2 );
         }
     }
 
@@ -362,24 +362,24 @@ _id_D6E2( var_0, var_1, var_2, var_3 )
 
 _id_D4C9( var_0, var_1, var_2, var_3 )
 {
-    foreach ( var_5 in level._id_B758 )
+    foreach ( var_5 in level.players )
     {
-        if ( !_func_0107( var_5 ) )
+        if ( !isbot( var_5 ) )
         {
             var_6 = _id_0CA8( var_5, var_0 );
-            var_5 _meth_82F6( "ui_br_circle0_start_time", gettime() );
-            var_5 _meth_82F6( "ui_br_circle0_duration", var_6 );
-            var_5 _meth_82F6( "ui_br_circle0_start_entity", var_1 );
-            var_5 _meth_82F6( "ui_br_circle0_end_entity", var_1 );
+            var_5 setclientomnvar( "ui_br_circle0_start_time", gettime() );
+            var_5 setclientomnvar( "ui_br_circle0_duration", var_6 );
+            var_5 setclientomnvar( "ui_br_circle0_start_entity", var_1 );
+            var_5 setclientomnvar( "ui_br_circle0_end_entity", var_1 );
 
             if ( istrue( var_3 ) )
                 var_5 _id_0BFE();
 
             var_6 = _id_0B87( var_5, var_0 );
-            var_5 _meth_82F6( "ui_br_circle1_start_time", gettime() );
-            var_5 _meth_82F6( "ui_br_circle1_duration", var_6 );
-            var_5 _meth_82F6( "ui_br_circle1_start_entity", var_2 );
-            var_5 _meth_82F6( "ui_br_circle1_end_entity", var_1 );
+            var_5 setclientomnvar( "ui_br_circle1_start_time", gettime() );
+            var_5 setclientomnvar( "ui_br_circle1_duration", var_6 );
+            var_5 setclientomnvar( "ui_br_circle1_start_entity", var_2 );
+            var_5 setclientomnvar( "ui_br_circle1_end_entity", var_1 );
         }
     }
 
@@ -395,14 +395,14 @@ _id_FC2A( var_0, var_1, var_2 )
     {
         level waittill( "update_circle_hide" );
 
-        foreach ( var_4 in level._id_B758 )
+        foreach ( var_4 in level.players )
         {
-            if ( !_func_0107( var_4 ) )
+            if ( !isbot( var_4 ) )
             {
                 var_5 = _id_0CA8( var_4, var_0 );
-                var_4 _meth_82F6( "ui_br_circle0_duration", var_5 );
+                var_4 setclientomnvar( "ui_br_circle0_duration", var_5 );
                 var_5 = _id_0B87( var_4, var_0 );
-                var_4 _meth_82F6( "ui_br_circle1_duration", var_5 );
+                var_4 setclientomnvar( "ui_br_circle1_duration", var_5 );
             }
         }
     }
@@ -476,7 +476,7 @@ _id_6CA7( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 
         var_14 = level._id_2A4D._id_29F9[0] - var_0;
         var_14 = ( var_14[0], var_14[1], 0 );
-        var_15 = _func_025B( var_14 )[1];
+        var_15 = vectortoangles( var_14 )[1];
         var_16 = ( 1.0 - var_10 / var_8 ) * 180;
         var_11 = var_15 - var_16;
         var_12 = var_15 + var_16;
@@ -509,21 +509,21 @@ _id_6CA8( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     if ( !isdefined( var_7 ) )
         var_7 = 360;
 
-    var_10 = spawnstruct( var_1 * var_8 );
-    var_11 = spawnstruct( var_1 * var_9 );
+    var_10 = _func_0214( var_1 * var_8 );
+    var_11 = _func_0214( var_1 * var_9 );
     var_12 = undefined;
 
     if ( var_10 == var_11 )
         var_12 = _func_0213( var_10 );
     else
-        var_12 = _func_0213( _func_01B7( var_10, var_11 ) );
+        var_12 = _func_0213( randomfloatrange( var_10, var_11 ) );
 
-    var_13 = var_6 + _func_01B6( var_7 - var_6 );
-    var_14 = ( var_12 * cos( var_13 ), var_12 * _func_01FE( var_13 ), 0 );
+    var_13 = var_6 + randomfloat( var_7 - var_6 );
+    var_14 = ( var_12 * cos( var_13 ), var_12 * sin( var_13 ), 0 );
     var_15 = var_0 + var_14;
 
     if ( var_4 )
-        var_15 = _id_077B::_id_4FE0( ( var_0[0], var_0[1], 4000 ) + var_14 );
+        var_15 = scripts\engine\utility::_id_4FE0( ( var_0[0], var_0[1], 4000 ) + var_14 );
 
     if ( var_5 && _func_03D7() )
         var_15 = _func_02A6( var_15 );
@@ -543,7 +543,7 @@ _id_899B( var_0 )
     if ( !isdefined( level._id_29F5._id_431C ) )
         return 0;
 
-    var_1 = ( level._id_29F5._id_431C._id_02EA[0], level._id_29F5._id_431C._id_02EA[1], 0 );
+    var_1 = ( level._id_29F5._id_431C.origin[0], level._id_29F5._id_431C.origin[1], 0 );
     var_2 = level._id_2A4D._id_29FF[level._id_29F5._id_370B + 1];
     var_3 = distance2dsquared( var_0, var_1 );
 
@@ -575,12 +575,12 @@ _id_431D()
 
     for (;;)
     {
-        self _meth_83C3();
+        self show();
 
-        foreach ( var_1 in level._id_B758 )
+        foreach ( var_1 in level.players )
         {
             if ( !var_1 _id_B65E() )
-                self _meth_847B( var_1 );
+                self hidefromplayer( var_1 );
         }
 
         level waittill( "update_circle_hide" );
@@ -597,7 +597,7 @@ _id_0C16( var_0 )
 
     foreach ( var_2 in level._id_29EF )
     {
-        var_3 = distance2dsquared( var_0, var_2._id_02EA );
+        var_3 = distance2dsquared( var_0, var_2.origin );
 
         if ( var_3 < var_2._id_BF35 )
             return 1;
@@ -618,10 +618,10 @@ _id_0C74( var_0, var_1 )
     var_5[1] = level._id_29F5._id_9A93[0][1] - var_4;
     var_5[2] = level._id_29F5._id_9A93[1][0] + var_4;
     var_5[3] = level._id_29F5._id_9A93[1][1] + var_4;
-    var_6 = _func_0148( var_5[0], var_5[2] );
-    var_7 = _func_0147( var_5[0], var_5[2] );
-    var_8 = _func_0148( var_5[1], var_5[3] );
-    var_9 = _func_0147( var_5[1], var_5[3] );
+    var_6 = min( var_5[0], var_5[2] );
+    var_7 = max( var_5[0], var_5[2] );
+    var_8 = min( var_5[1], var_5[3] );
+    var_9 = max( var_5[1], var_5[3] );
     var_10 = var_2[0];
     var_11 = var_2[1];
 
@@ -642,8 +642,8 @@ _id_0C74( var_0, var_1 )
 
         for ( var_15 = 0; var_15 < var_14; var_15++ )
         {
-            var_12 = _func_01B7( var_6, var_7 );
-            var_13 = _func_01B7( var_8, var_9 );
+            var_12 = randomfloatrange( var_6, var_7 );
+            var_13 = randomfloatrange( var_8, var_9 );
 
             if ( scripts\mp\gametypes\br_c130::_id_8998( ( var_12, var_13, 0 ), 1 ) && !_id_0C16( ( var_12, var_13, 0 ) ) )
             {
@@ -660,7 +660,7 @@ _id_0C74( var_0, var_1 )
     }
 
     var_16 = level._id_2A4D._id_29FF.size - 1;
-    level._id_2A4D._id_29F9[var_16] = _id_077B::_id_4FE0( ( var_10, var_11, 4000 ) );
+    level._id_2A4D._id_29F9[var_16] = scripts\engine\utility::_id_4FE0( ( var_10, var_11, 4000 ) );
 
     if ( istrue( var_1 ) )
         return;
@@ -678,12 +678,12 @@ _id_0C74( var_0, var_1 )
         var_22 = level._id_2A4D._id_29FF[var_20];
         var_23 = 0.0;
         var_24 = 1.0 - level._id_2A4D._id_29FF[var_20 + 1] / var_22;
-        var_25 = var_23 + _func_01B6( var_24 - var_23 );
+        var_25 = var_23 + randomfloat( var_24 - var_23 );
         var_26 = level._id_2A4D._id_29FA[var_20];
         var_27 = level._id_2A4D._id_29FF[var_20 + 1];
         var_28 = var_22 - var_27;
         var_29 = var_28 / var_26;
-        var_30 = _func_0147( 0, var_17 - var_29 );
+        var_30 = max( 0, var_17 - var_29 );
         var_31 = var_30 * var_26;
         var_32 = var_31 / var_22;
         var_33 = var_25 > var_32;
@@ -697,7 +697,7 @@ _id_0C74( var_0, var_1 )
         if ( var_20 )
         {
             if ( var_18 && var_33 )
-                var_25 = var_23 + _func_01B6( var_32 - var_23 );
+                var_25 = var_23 + randomfloat( var_32 - var_23 );
 
             level._id_2A4D._id_29F9[var_20] = _id_6CA7( var_21, var_22, var_25, var_25, 1, var_19, 1 );
             continue;
@@ -711,15 +711,15 @@ _id_CA1C( var_0 )
 {
     level endon( "game_ended" );
     level endon( "br_ending_start" );
-    level._id_29F5._id_CABD = _func_0205( "script_model", ( level._id_2A4D._id_29F9[1][0], level._id_2A4D._id_29F9[1][1], level._id_2A4D._id_29FF[1] ) );
-    level._id_29F5._id_CABD._id_7866 = 0;
-    level._id_29F5._id_CABE = _func_0205( "script_model", level._id_29F5._id_CABD._id_02EA );
-    level._id_29F5._id_CABE._id_7866 = 0;
+    level._id_29F5._id_CABD = spawn( "script_model", ( level._id_2A4D._id_29F9[1][0], level._id_2A4D._id_29F9[1][1], level._id_2A4D._id_29FF[1] ) );
+    level._id_29F5._id_CABD.hidden = 0;
+    level._id_29F5._id_CABE = spawn( "script_model", level._id_29F5._id_CABD.origin );
+    level._id_29F5._id_CABE.hidden = 0;
     level._id_29F5._id_431C = _func_0206( level._id_2A4D._id_29F9[0][0], level._id_2A4D._id_29F9[0][1], level._id_2A4D._id_29FF[0] );
-    level._id_29F5._id_431C._id_7866 = 0;
+    level._id_29F5._id_431C.hidden = 0;
     level._id_29F5._id_431C thread _id_431D();
-    level._id_29F5._id_431F = _func_0205( "script_model", level._id_29F5._id_431C._id_02EA );
-    level._id_29F5._id_431F._id_7866 = 0;
+    level._id_29F5._id_431F = spawn( "script_model", level._id_29F5._id_431C.origin );
+    level._id_29F5._id_431F.hidden = 0;
     _id_D67D( level._id_29F5._id_CABD );
     _id_78D7();
 
@@ -774,8 +774,8 @@ _id_6B3F( var_0 )
     {
         var_2 = level._id_29F5._id_370B;
         var_3 = level._id_29F5._id_E72A;
-        var_4 = level._id_29F5._id_431C._id_02EA[2];
-        var_5 = level._id_29F5._id_431C._id_02EA;
+        var_4 = level._id_29F5._id_431C.origin[2];
+        var_5 = level._id_29F5._id_431C.origin;
     }
     else
     {
@@ -863,7 +863,7 @@ _id_6B3F( var_0 )
     else if ( var_37 < 0 )
         var_38 = var_36;
     else
-        var_38 = _func_0148( var_36, var_37 );
+        var_38 = min( var_36, var_37 );
 
     var_1 = var_1 + var_38;
     return var_1;
@@ -874,24 +874,24 @@ _id_78D7()
     if ( !isdefined( level._id_29F5 ) || !isdefined( level._id_29F5._id_431F ) )
         return;
 
-    level._id_29F5._id_431F._id_7866++;
-    level._id_29F5._id_431C._id_7866++;
+    level._id_29F5._id_431F.hidden++;
+    level._id_29F5._id_431C.hidden++;
     level notify( "update_circle_hide" );
 }
 
 _id_78FA()
 {
-    level._id_29F5._id_CABE._id_7866++;
-    level._id_29F5._id_CABD._id_7866++;
+    level._id_29F5._id_CABE.hidden++;
+    level._id_29F5._id_CABD.hidden++;
     level notify( "update_circle_hide" );
 }
 
 _id_DC92()
 {
-    var_0 = level._id_29F5._id_431C._id_7866 || level._id_29F5._id_431C._id_7866;
-    level._id_29F5._id_431F._id_7866--;
-    level._id_29F5._id_431C._id_7866--;
-    var_1 = level._id_29F5._id_431F._id_7866 || level._id_29F5._id_431C._id_7866;
+    var_0 = level._id_29F5._id_431C.hidden || level._id_29F5._id_431C.hidden;
+    level._id_29F5._id_431F.hidden--;
+    level._id_29F5._id_431C.hidden--;
+    var_1 = level._id_29F5._id_431F.hidden || level._id_29F5._id_431C.hidden;
 
     if ( var_0 && !var_1 )
         level notify( "update_circle_hide" );
@@ -899,10 +899,10 @@ _id_DC92()
 
 _id_DCDE()
 {
-    var_0 = level._id_29F5._id_CABE._id_7866 || level._id_29F5._id_CABD._id_7866;
-    level._id_29F5._id_CABE._id_7866--;
-    level._id_29F5._id_CABD._id_7866--;
-    var_1 = level._id_29F5._id_CABE._id_7866 || level._id_29F5._id_CABD._id_7866;
+    var_0 = level._id_29F5._id_CABE.hidden || level._id_29F5._id_CABD.hidden;
+    level._id_29F5._id_CABE.hidden--;
+    level._id_29F5._id_CABD.hidden--;
+    var_1 = level._id_29F5._id_CABE.hidden || level._id_29F5._id_CABD.hidden;
 
     if ( var_0 && !var_1 )
         level notify( "update_circle_hide" );
@@ -920,12 +920,12 @@ _id_3710( var_0 )
     var_3 = level._id_2A4D._id_29FB[var_0];
     var_4 = level._id_2A4D._id_29FA[var_0];
     var_5 = level._id_2A4D._id_29FF[var_0 + 1];
-    _func_01E4( "ui_br_circle_num", var_0 + 1 );
+    setomnvar( "ui_br_circle_num", var_0 + 1 );
     thread scripts\mp\gametypes\br_gulag::_id_3710( var_0 );
     level thread _id_2A4C( var_0 );
     var_6 = level._id_2A4D._id_29F9[var_0 + 1];
     level._id_29F5._id_336F = var_6;
-    level._id_29F5._id_CABD._id_02EA = ( level._id_29F5._id_336F[0], level._id_29F5._id_336F[1], var_5 );
+    level._id_29F5._id_CABD.origin = ( level._id_29F5._id_336F[0], level._id_29F5._id_336F[1], var_5 );
     level._id_C690 = _id_61F5( var_6, var_5 );
     _id_3872();
     _id_61F4( var_6, var_5 );
@@ -934,7 +934,7 @@ _id_3710( var_0 )
     if ( var_7 > 0 )
     {
         _id_78D7();
-        _id_077B::_id_46C3( var_7, ::_id_DC92 );
+        scripts\engine\utility::_id_46C3( var_7, ::_id_DC92 );
     }
 
     var_8 = level._id_2A4D._id_2A02[var_0];
@@ -942,12 +942,12 @@ _id_3710( var_0 )
     if ( var_8 > 0 )
     {
         _id_78FA();
-        _id_077B::_id_46C3( var_8, ::_id_DCDE );
+        scripts\engine\utility::_id_46C3( var_8, ::_id_DCDE );
     }
 
     level thread _id_E732( var_3, var_1, var_2 );
-    level._id_29F5._id_CABE._id_02EA = level._id_29F5._id_CABD._id_02EA;
-    level._id_29F5._id_431F._id_02EA = _id_69A6() + ( 0, 0, _id_69A7() );
+    level._id_29F5._id_CABE.origin = level._id_29F5._id_CABD.origin;
+    level._id_29F5._id_431F.origin = _id_69A6() + ( 0, 0, _id_69A7() );
     _id_D6E2( var_3, level._id_29F5._id_CABE, level._id_29F5._id_431F, var_2 );
     level thread _id_0CAE( var_3 );
 
@@ -966,7 +966,7 @@ _id_3710( var_0 )
     if ( scripts\mp\gametypes\br_public::_id_8773() )
         level._id_3703 = 1;
 
-    _func_01E4( "ui_hardpoint_timer", gettime() + int( var_4 * 1000 ) );
+    setomnvar( "ui_hardpoint_timer", gettime() + int( var_4 * 1000 ) );
 
     if ( var_2 )
         scripts\mp\gametypes\br_public::_id_2BB6( "final_circle", 1 );
@@ -974,8 +974,8 @@ _id_3710( var_0 )
         scripts\mp\gametypes\br_public::_id_2BB6( "circle_closing", 1 );
 
     thread _id_2B1F( var_0 );
-    level._id_29F5._id_CABE._id_02EA = level._id_29F5._id_CABD._id_02EA;
-    level._id_29F5._id_431F._id_02EA = _id_69A6() + ( 0, 0, _id_69A7() );
+    level._id_29F5._id_CABE.origin = level._id_29F5._id_CABD.origin;
+    level._id_29F5._id_431F.origin = _id_69A6() + ( 0, 0, _id_69A7() );
     _id_D4C9( int( var_4 ), level._id_29F5._id_CABD, level._id_29F5._id_431F, var_2 );
     level._id_29F5._id_431C _meth_86DA( level._id_29F5._id_336F[0], level._id_29F5._id_336F[1], var_5, var_4 );
     thread _id_07CF::_id_2A0C( var_1, var_2 );
@@ -984,8 +984,8 @@ _id_3710( var_0 )
 
     if ( var_9 > 0 && var_0 < var_9 )
     {
-        _id_07E1::_id_108A( 1.2, "cirlceMult_" + _id_077B::_id_EA4F( var_0 ) );
-        _id_07FD::_id_115F( 1.2, "cirlceMult_" + _id_077B::_id_EA4F( var_0 ) );
+        scripts\mp\rank::_id_108A( 1.2, "cirlceMult_" + scripts\engine\utility::_id_EA4F( var_0 ) );
+        _id_07FD::_id_115F( 1.2, "cirlceMult_" + scripts\engine\utility::_id_EA4F( var_0 ) );
     }
 
     if ( scripts\mp\gametypes\br_public::_id_8773() )
@@ -1016,14 +1016,14 @@ _id_2A4C( var_0 )
         for ( var_9 = 0; var_9 < var_6; var_9++ )
         {
             var_8 = var_8 - var_7;
-            _func_01E4( "ui_br_minimap_radius", var_8 );
+            setomnvar( "ui_br_minimap_radius", var_8 );
             wait( var_4 );
         }
 
-        _func_01E4( "ui_br_minimap_radius", level._id_2A4D._id_29FE[var_0] );
+        setomnvar( "ui_br_minimap_radius", level._id_2A4D._id_29FE[var_0] );
     }
     else
-        _func_01E4( "ui_br_minimap_radius", level._id_2A4D._id_29FE[var_0] );
+        setomnvar( "ui_br_minimap_radius", level._id_2A4D._id_29FE[var_0] );
 }
 
 _id_0CAE( var_0 )
@@ -1034,7 +1034,7 @@ _id_0CAE( var_0 )
         return;
 
     var_1 = var_0 - scripts\mp\gametypes\br_nuke::_id_690E() - 2.0;
-    var_1 = _func_0147( 0.05, var_1 );
+    var_1 = max( 0.05, var_1 );
     wait( var_1 );
     var_2 = _id_69A6();
     var_3 = _id_69A7();
@@ -1042,14 +1042,14 @@ _id_0CAE( var_0 )
     var_5 = getdvarint( "scr_br_nukeAngleDelta", 5 );
     var_6 = 360 / var_4;
     var_7 = [];
-    var_8 = _func_01B8( 360 );
+    var_8 = randomint( 360 );
 
     for ( var_9 = 0; var_9 < var_4; var_9++ )
     {
-        var_10 = int( var_8 + var_6 * var_9 ) % 360 + _func_01B9( -1 * var_5, var_5 );
+        var_10 = int( var_8 + var_6 * var_9 ) % 360 + randomintrange( -1 * var_5, var_5 );
         var_11 = anglestoforward( ( 0, var_10, 0 ) );
-        var_12 = var_2 + var_11 * _func_01B7( var_3 + 8000, var_3 + 12000 );
-        var_12 = _id_077B::_id_4FE0( var_12 + ( 0, 0, 10000 ) );
+        var_12 = var_2 + var_11 * randomfloatrange( var_3 + 8000, var_3 + 12000 );
+        var_12 = scripts\engine\utility::_id_4FE0( var_12 + ( 0, 0, 10000 ) );
         var_7[var_7.size] = var_12;
     }
 
@@ -1064,14 +1064,14 @@ _id_3873( var_0, var_1 )
     {
         foreach ( var_6, var_4 in level._id_C7E7 )
         {
-            if ( isdefined( var_4 ) && distance2dsquared( var_0, var_4._id_047A._id_02EA ) > var_2 )
+            if ( isdefined( var_4 ) && distance2dsquared( var_0, var_4._id_047A.origin ) > var_2 )
             {
-                var_5 = _id_61F5( var_4._id_047A._id_02EA, var_1 );
+                var_5 = _id_61F5( var_4._id_047A.origin, var_1 );
 
                 if ( isdefined( var_5 ) && var_5.size > 0 )
-                    var_4._id_103C0 scripts\mp\movers::_id_C310( var_5[0]._id_02EA );
+                    var_4._id_103C0 _id_07F6::_id_C310( var_5[0].origin );
                 else
-                    var_4._id_103C0 scripts\mp\movers::_id_C528( var_6 );
+                    var_4._id_103C0 _id_07F6::_id_C528( var_6 );
             }
         }
     }
@@ -1081,7 +1081,7 @@ _id_61F5( var_0, var_1 )
 {
     if ( isdefined( level._id_C690 ) )
     {
-        var_2 = _id_077B::_id_634A( var_0, level._id_C690, undefined, undefined, var_1 );
+        var_2 = scripts\engine\utility::_id_634A( var_0, level._id_C690, undefined, undefined, var_1 );
         return var_2;
     }
 
@@ -1094,7 +1094,7 @@ _id_61F4( var_0, var_1 )
 
     foreach ( var_4 in level._id_2A6F._id_3E79 )
     {
-        if ( isdefined( var_4 ) && distance2dsquared( var_0, var_4._id_02EA ) > var_2 )
+        if ( isdefined( var_4 ) && distance2dsquared( var_0, var_4.origin ) > var_2 )
             level._id_2A6F._id_AC9A[level._id_2A6F._id_AC9A.size] = var_4;
     }
 }
@@ -1104,7 +1104,7 @@ _id_3872()
     foreach ( var_1 in level._id_2A6F._id_AC9A )
     {
         if ( isdefined( var_1 ) && var_1._id_4122 == 0 )
-            var_1 thread _id_0980::_id_4822();
+            var_1 thread scripts\cp_mp\killstreaks\airdrop::_id_4822();
     }
 
     level._id_2A6F._id_AC9A = [];
@@ -1224,30 +1224,30 @@ _id_4E63( var_0 )
         return;
 
     var_3 = _func_01FF( var_0["alivePlayers"], var_1 );
-    var_4 = distance2dsquared( var_1, var_3[0]._id_02EA );
+    var_4 = distance2dsquared( var_1, var_3[0].origin );
 
     if ( var_4 > var_2 * var_2 )
     {
         if ( var_4 > var_2 * var_2 * 4 )
-            level thread _id_0789::_id_F756( var_3[0], "obj_sitrep_circle_outfar" );
+            level thread scripts\mp\battlechatter_mp::_id_F756( var_3[0], "obj_sitrep_circle_outfar" );
         else
-            level thread _id_0789::_id_F756( var_3[0], "obj_sitrep_circle_out" );
+            level thread scripts\mp\battlechatter_mp::_id_F756( var_3[0], "obj_sitrep_circle_out" );
     }
     else
     {
-        var_5 = distance2dsquared( var_1, var_3[var_3.size - 1]._id_02EA );
+        var_5 = distance2dsquared( var_1, var_3[var_3.size - 1].origin );
 
         if ( var_5 > var_2 * var_2 )
-            level thread _id_0789::_id_F756( var_3[0], "obj_sitrep_circle_mixed" );
+            level thread scripts\mp\battlechatter_mp::_id_F756( var_3[0], "obj_sitrep_circle_mixed" );
         else
-            level thread _id_0789::_id_F756( var_3[0], "obj_sitrep_circle_in" );
+            level thread scripts\mp\battlechatter_mp::_id_F756( var_3[0], "obj_sitrep_circle_in" );
     }
 }
 
 _id_3FDD( var_0, var_1 )
 {
-    var_2 = _func_020F();
-    var_2._id_02EA = var_0;
+    var_2 = spawnstruct();
+    var_2.origin = var_0;
     var_2._id_0333 = var_1;
     var_2._id_BF35 = var_1 * var_1;
     return var_2;

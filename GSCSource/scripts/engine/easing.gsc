@@ -98,7 +98,7 @@ ease_origin( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 {
     var_8 = undefined;
     var_9 = ::_set_origin;
-    var_10 = self._id_02EA;
+    var_10 = self.origin;
 
     if ( istrue( var_4 ) )
         var_9 = ::_add_origin;
@@ -128,11 +128,11 @@ ease_angles( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     {
         var_9 = var_9[var_3];
 
-        if ( _func_02DA( var_0 ) )
+        if ( isvector( var_0 ) )
             var_0 = var_0[var_3];
 
         if ( !var_4 )
-            var_0 = _func_000B( var_0 - self._id_0054[var_3] );
+            var_0 = _func_000B( var_0 - self.angles[var_3] );
 
         var_11 = undefined;
 
@@ -159,7 +159,7 @@ ease_angles( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
         var_3 = -1;
 
         if ( !var_4 )
-            var_0 = _func_000B( var_0 - self._id_0054 );
+            var_0 = _func_000B( var_0 - self.angles );
     }
 
     thread ease_callback( var_9, var_0, var_1, ::_add_angles, var_2, var_10, var_8, var_5, var_6, var_7, var_3 );
@@ -197,9 +197,9 @@ ease_angles_to_face_ent( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
     else
         var_5 = -1;
 
-    var_13 = _func_020F();
+    var_13 = spawnstruct();
     var_13._id_E62D = var_0;
-    var_13._id_E5A4 = self._id_0054;
+    var_13._id_E5A4 = self.angles;
     var_13._id_0400 = var_2;
     thread ease_callback_dynamic_target( var_10, var_1, ::_get_angles_to_ent, var_3, ::_add_angles, var_4, var_11, var_9, var_6, var_7, var_8, var_5, var_13 );
 }
@@ -209,7 +209,7 @@ ease_callback( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     if ( !isdefined( var_4 ) )
         var_4 = "linear";
 
-    if ( !isalive( var_5 ) )
+    if ( !_func_0106( var_5 ) )
     {
         if ( isdefined( var_5 ) )
             var_5 = [ var_5 ];
@@ -222,7 +222,7 @@ ease_callback( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
 
     if ( isdefined( var_6 ) )
     {
-        if ( isalive( var_6 ) )
+        if ( _func_0106( var_6 ) )
         {
             foreach ( var_16 in var_6 )
                 self endon( var_16 );
@@ -231,7 +231,7 @@ ease_callback( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
             self endon( var_6 );
     }
 
-    if ( !isalive( var_9 ) )
+    if ( !_func_0106( var_9 ) )
     {
         if ( isdefined( var_9 ) )
             var_9 = [ var_9 ];
@@ -245,7 +245,7 @@ ease_callback( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     if ( isdefined( var_8 ) )
         var_8 = int( var_8 );
 
-    var_18 = _func_020F();
+    var_18 = spawnstruct();
     var_18.start_value = var_0;
     var_18.target_value = var_1;
     var_18.cur_value = var_0;
@@ -254,7 +254,7 @@ ease_callback( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
 
     for ( var_20 = 0.0; var_20 < var_2; var_20 = var_20 + level._id_5F1B )
     {
-        var_18.pct = _func_0148( 1.0, var_20 / var_2 );
+        var_18.pct = min( 1.0, var_20 / var_2 );
         var_19 = var_18.cur_value;
 
         switch ( var_9.size )
@@ -298,7 +298,7 @@ ease_callback( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
 
     if ( isdefined( self ) )
     {
-        var_21 = _func_020F();
+        var_21 = spawnstruct();
         var_21.start_value = var_0;
         var_21.target_value = var_1;
         var_21._id_F1E5 = var_2;
@@ -313,7 +313,7 @@ ease_callback_dynamic_target( var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
     if ( !isdefined( var_5 ) )
         var_5 = "linear";
 
-    if ( !isalive( var_6 ) )
+    if ( !_func_0106( var_6 ) )
     {
         if ( isdefined( var_6 ) )
             var_6 = [ var_6 ];
@@ -326,7 +326,7 @@ ease_callback_dynamic_target( var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
 
     if ( isdefined( var_7 ) )
     {
-        if ( isalive( var_7 ) )
+        if ( _func_0106( var_7 ) )
         {
             foreach ( var_17 in var_7 )
                 self endon( var_17 );
@@ -338,7 +338,7 @@ ease_callback_dynamic_target( var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
     if ( isdefined( var_1 ) && _func_02DB( var_1 ) )
         var_1 endon( "death" );
 
-    if ( !isalive( var_10 ) )
+    if ( !_func_0106( var_10 ) )
     {
         if ( isdefined( var_10 ) )
             var_10 = [ var_10 ];
@@ -346,7 +346,7 @@ ease_callback_dynamic_target( var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
             var_10 = [];
     }
 
-    var_19 = _func_020F();
+    var_19 = spawnstruct();
     var_19.start_value = var_0;
     var_19.target_value = var_0;
     var_19.cur_value = var_0;
@@ -356,7 +356,7 @@ ease_callback_dynamic_target( var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
     for ( var_21 = 0.0; var_21 < var_3; var_21 = var_21 + level._id_5F1B )
     {
         var_19.target_value = self [[ var_2 ]]( var_1, var_19, var_11, var_12 );
-        var_19.pct = _func_0148( 1.0, var_21 / var_3 );
+        var_19.pct = min( 1.0, var_21 / var_3 );
         var_20 = var_19.cur_value;
 
         switch ( var_10.size )
@@ -401,7 +401,7 @@ ease_callback_dynamic_target( var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
 
     if ( isdefined( self ) )
     {
-        var_22 = _func_020F();
+        var_22 = spawnstruct();
         var_22.start_value = var_0;
         var_22.target_value = var_19.target_value;
         var_22._id_F1E5 = var_3;
@@ -414,9 +414,9 @@ ease_callback_dynamic_target( var_0, var_1, var_2, var_3, var_4, var_5, var_6, v
 _set_dvar( var_0, var_1, var_2 )
 {
     if ( istrue( var_2 ) )
-        _func_01EA( var_1, var_0.cur_value );
+        setsaveddvar( var_1, var_0.cur_value );
     else
-        _func_01D0( var_1, var_0.cur_value );
+        setdvar( var_1, var_0.cur_value );
 }
 
 _set_origin( var_0, var_1, var_2 )
@@ -424,16 +424,16 @@ _set_origin( var_0, var_1, var_2 )
     switch ( var_1 )
     {
         case 0:
-            self._id_02EA = ( var_0.cur_value, self._id_02EA[1], self._id_02EA[2] );
+            self.origin = ( var_0.cur_value, self.origin[1], self.origin[2] );
             break;
         case 1:
-            self._id_02EA = ( self._id_02EA[0], var_0.cur_value, self._id_02EA[2] );
+            self.origin = ( self.origin[0], var_0.cur_value, self.origin[2] );
             break;
         case 2:
-            self._id_02EA = ( self._id_02EA[0], self._id_02EA[1], var_0.cur_value );
+            self.origin = ( self.origin[0], self.origin[1], var_0.cur_value );
             break;
         default:
-            self._id_02EA = var_0.cur_value;
+            self.origin = var_0.cur_value;
             break;
     }
 }
@@ -443,16 +443,16 @@ _add_origin( var_0, var_1, var_2 )
     switch ( var_1 )
     {
         case 0:
-            self._id_02EA = self._id_02EA + ( var_0.delta, 0, 0 );
+            self.origin = self.origin + ( var_0.delta, 0, 0 );
             break;
         case 1:
-            self._id_02EA = self._id_02EA + ( 0, var_0.delta, 0 );
+            self.origin = self.origin + ( 0, var_0.delta, 0 );
             break;
         case 2:
-            self._id_02EA = self._id_02EA + ( 0, 0, var_0.delta );
+            self.origin = self.origin + ( 0, 0, var_0.delta );
             break;
         default:
-            self._id_02EA = self._id_02EA + var_0.delta;
+            self.origin = self.origin + var_0.delta;
             break;
     }
 }
@@ -462,27 +462,27 @@ _add_angles( var_0, var_1, var_2 )
     switch ( var_1 )
     {
         case 0:
-            self._id_0054 = self._id_0054 + ( var_0.delta, 0, 0 );
+            self.angles = self.angles + ( var_0.delta, 0, 0 );
             break;
         case 1:
-            self._id_0054 = self._id_0054 + ( 0, var_0.delta, 0 );
+            self.angles = self.angles + ( 0, var_0.delta, 0 );
             break;
         case 2:
-            self._id_0054 = self._id_0054 + ( 0, 0, var_0.delta );
+            self.angles = self.angles + ( 0, 0, var_0.delta );
             break;
         default:
-            self._id_0054 = self._id_0054 + var_0.delta;
+            self.angles = self.angles + var_0.delta;
             break;
     }
 
     if ( var_0.ease_finished )
-        self._id_0054 = _func_000B( self._id_0054 );
+        self.angles = _func_000B( self.angles );
 }
 
 _get_angles_to_ent( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _id_077B::_id_F07F( isdefined( var_3._id_0400 ), var_0 gettagorigin( var_3._id_0400 ), var_0._id_02EA );
-    var_5 = _func_000B( _func_025B( var_4 - var_3._id_E62D ) - var_3._id_E5A4 );
+    var_4 = scripts\engine\utility::ter_op( isdefined( var_3._id_0400 ), var_0 gettagorigin( var_3._id_0400 ), var_0.origin );
+    var_5 = _func_000B( vectortoangles( var_4 - var_3._id_E62D ) - var_3._id_E5A4 );
 
     if ( var_2 > -1 )
         var_5 = var_5[var_2];

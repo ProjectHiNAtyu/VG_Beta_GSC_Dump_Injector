@@ -5,13 +5,13 @@ _id_3EC7()
 {
     level endon( "game_ended" );
     _id_81B8();
-    _id_077B::_id_5BF1( "file_opened" );
+    scripts\engine\utility::_id_5BF1( "file_opened" );
 }
 
 _id_81B8()
 {
-    var_0 = _func_020F();
-    var_0._id_F3B7 = _id_077A::_id_3F4E( 1 );
+    var_0 = spawnstruct();
+    var_0._id_F3B7 = scripts\engine\trace::_id_3F4E( 1 );
     var_0._id_1448 = [];
     var_0._id_9A88 = 1;
     level._id_AEB8 = var_0;
@@ -102,8 +102,8 @@ _id_C5C1()
     var_0._id_9C10 = 16384;
     var_0._id_FF2F = 64;
     var_0._id_4150 = undefined;
-    var_0._id_04DE = 1;
-    var_0._id_04E1 = 1;
+    var_0.x = 1;
+    var_0.y = 1;
     var_0._id_04E3 = 1;
     var_0._id_9C2E = undefined;
     var_0._id_9C2F = undefined;
@@ -164,10 +164,10 @@ _id_C9ED( var_0 )
     level endon( "stop_creating_nodes" );
     _id_C5C2();
     var_1 = _id_44A3();
-    var_1._id_030F = var_0;
+    var_1.player = var_0;
     _id_ABDF();
-    var_0 _meth_824A( "use", "+usereload" );
-    var_0 _meth_824A( "use", "+activate" );
+    var_0 notifyonplayercommand( "use", "+usereload" );
+    var_0 notifyonplayercommand( "use", "+activate" );
 
     for (;;)
     {
@@ -185,10 +185,10 @@ _id_B13E( var_0 )
     level endon( "stop_creating_nodes" );
     _id_C5C3();
     var_1 = _id_44A3();
-    var_1._id_030F = var_0;
+    var_1.player = var_0;
     _id_ABDF();
-    var_0 _meth_824A( "use", "+usereload" );
-    var_0 _meth_824A( "use", "+activate" );
+    var_0 notifyonplayercommand( "use", "+usereload" );
+    var_0 notifyonplayercommand( "use", "+activate" );
 
     for (;;)
     {
@@ -202,28 +202,28 @@ _id_B13E( var_0 )
 _id_4650()
 {
     var_0 = _id_44A3();
-    var_1 = var_0._id_030F;
+    var_1 = var_0.player;
     _id_ABDF();
-    var_0._id_E6C1 = var_1._id_02EA;
+    var_0._id_E6C1 = var_1.origin;
     var_2 = anglestoforward( var_1 getplayerangles() );
-    var_3 = _id_3F2E( var_0._id_030F geteye(), var_0._id_030F geteye() + var_2 * 10000 );
+    var_3 = _id_3F2E( var_0.player geteye(), var_0.player geteye() + var_2 * 10000 );
 
     if ( isdefined( var_3["position"] ) && isdefined( var_3["fraction"] ) && var_3["fraction"] < 1 )
     {
-        var_4 = _id_077B::_id_4FE0( var_3["position"] + -1 * ( var_2 * 32 ), 96, -300 ) + ( 0, 0, 16 );
-        var_0._id_04DE = var_4[0];
-        var_0._id_04E1 = var_4[1];
+        var_4 = scripts\engine\utility::_id_4FE0( var_3["position"] + -1 * ( var_2 * 32 ), 96, -300 ) + ( 0, 0, 16 );
+        var_0.x = var_4[0];
+        var_0.y = var_4[1];
         var_0._id_04E3 = var_4[2];
-        var_0._id_02EA = var_4;
+        var_0.origin = var_4;
         var_0._id_716C = var_4;
 
         if ( _id_FF38() )
         {
             var_0._id_A550 = "script_struct";
             var_0._id_F360++;
-            var_0._id_0054 = ( 0, 0, 0 );
+            var_0.angles = ( 0, 0, 0 );
             _id_10FBD();
-            var_0._id_00DE = "node_exposed";
+            var_0.classname = "node_exposed";
             _id_3EAC();
         }
     }
@@ -232,25 +232,25 @@ _id_4650()
 _id_464F()
 {
     var_0 = _id_44A3();
-    var_1 = var_0._id_030F;
+    var_1 = var_0.player;
     _id_ABDF();
-    var_0._id_E6C1 = var_1._id_02EA;
+    var_0._id_E6C1 = var_1.origin;
     var_2 = anglestoforward( var_1 getplayerangles() );
-    var_3 = _id_3F2E( var_0._id_030F geteye(), var_0._id_030F geteye() + var_2 * 10000 );
+    var_3 = _id_3F2E( var_0.player geteye(), var_0.player geteye() + var_2 * 10000 );
 
     if ( isdefined( var_3["position"] ) && isdefined( var_3["fraction"] ) && var_3["fraction"] < 1 )
     {
-        var_4 = _id_077B::_id_4FE0( var_3["position"] + -1 * ( var_2 * 32 ), 24, -300 ) + ( 0, 0, 16 );
-        var_0._id_04DE = var_4[0];
-        var_0._id_04E1 = var_4[1];
+        var_4 = scripts\engine\utility::_id_4FE0( var_3["position"] + -1 * ( var_2 * 32 ), 24, -300 ) + ( 0, 0, 16 );
+        var_0.x = var_4[0];
+        var_0.y = var_4[1];
         var_0._id_04E3 = var_4[2];
-        var_0._id_02EA = var_4;
+        var_0.origin = var_4;
         var_0._id_716C = var_4;
 
         if ( _id_FF38() )
         {
-            var_0._id_0054 = ( 0, 0, 0 );
-            var_0._id_00DE = "node_exposed";
+            var_0.angles = ( 0, 0, 0 );
+            var_0.classname = "node_exposed";
             _id_3EC8();
         }
     }
@@ -264,17 +264,17 @@ _id_B140( var_0 )
     var_0 endon( "disconnect" );
     level endon( "stop_creating_nodes" );
     var_1 = _id_44A3();
-    var_1._id_030F = var_0;
-    var_0 _meth_824A( "use", "+usereload" );
-    var_0 _meth_824A( "use", "+activate" );
+    var_1.player = var_0;
+    var_0 notifyonplayercommand( "use", "+usereload" );
+    var_0 notifyonplayercommand( "use", "+activate" );
     _id_C5C2();
     var_1 childthread _id_3EAA();
 
     for (;;)
     {
         var_0 waittill( "use" );
-        var_1._id_04DE = 0;
-        var_1._id_04E1 = 0;
+        var_1.x = 0;
+        var_1.y = 0;
         var_1._id_04E3 = 0;
         var_1._id_7DAC = 1;
         var_1._id_7DAF = 1;
@@ -301,20 +301,20 @@ _id_B140( var_0 )
 _id_3EAA()
 {
     var_0 = _id_44A3();
-    var_0._id_030F _meth_824A( "up", "+actionslot 1" );
-    var_0._id_030F _meth_824A( "down", "+actionslot 2" );
-    var_0._id_030F _meth_824A( "right", "+actionslot 4" );
-    var_0._id_030F _meth_824A( "rb", "+frag" );
-    var_0._id_030F _meth_824A( "lb", "+smoke" );
-    var_0._id_030F _meth_824A( "a", "+gostand" );
-    var_0._id_030F _meth_824A( "left", "+actionslot 3" );
-    var_0._id_030F _meth_824A( "dpad_left_release", "-actionslot 3" );
-    var_0._id_030F _meth_824A( "dpad_left_press", "+actionslot 3" );
+    var_0.player notifyonplayercommand( "up", "+actionslot 1" );
+    var_0.player notifyonplayercommand( "down", "+actionslot 2" );
+    var_0.player notifyonplayercommand( "right", "+actionslot 4" );
+    var_0.player notifyonplayercommand( "rb", "+frag" );
+    var_0.player notifyonplayercommand( "lb", "+smoke" );
+    var_0.player notifyonplayercommand( "a", "+gostand" );
+    var_0.player notifyonplayercommand( "left", "+actionslot 3" );
+    var_0.player notifyonplayercommand( "dpad_left_release", "-actionslot 3" );
+    var_0.player notifyonplayercommand( "dpad_left_press", "+actionslot 3" );
     var_0 childthread _id_3EB9();
 
     for (;;)
     {
-        var_1 = var_0._id_030F _id_077B::_id_10890( [ "up", "a", "down", "left", "rb", "lb", "right", "dpad_left_release", "dpad_left_press" ] );
+        var_1 = var_0.player scripts\engine\utility::_id_10890( [ "up", "a", "down", "left", "rb", "lb", "right", "dpad_left_release", "dpad_left_press" ] );
 
         if ( var_0._id_294A )
         {
@@ -325,7 +325,7 @@ _id_3EAA()
         switch ( var_1 )
         {
             case "right":
-                while ( var_0._id_030F _meth_805D( "DPAD_RIGHT" ) )
+                while ( var_0.player _meth_805D( "DPAD_RIGHT" ) )
                 {
                     var_0._id_295F = var_0._id_295F + var_0._id_10FE2;
                     wait 0.1;
@@ -335,7 +335,7 @@ _id_3EAA()
             case "dpad_left_press":
             case "dpad_left_release":
             case "left":
-                var_0._id_295F = int( _func_0147( var_0._id_295F - var_0._id_10FE2, var_0._id_2960 ) );
+                var_0._id_295F = int( max( var_0._id_295F - var_0._id_10FE2, var_0._id_2960 ) );
                 wait 0.1;
                 break;
             case "a":
@@ -346,7 +346,7 @@ _id_3EAA()
 
                 break;
             case "up":
-                while ( var_0._id_030F _meth_805D( "DPAD_UP" ) )
+                while ( var_0.player _meth_805D( "DPAD_UP" ) )
                 {
                     var_0._id_295D = var_0._id_295D + var_0._id_10FCE;
                     wait 0.1;
@@ -354,15 +354,15 @@ _id_3EAA()
 
                 break;
             case "down":
-                while ( var_0._id_030F _meth_805D( "DPAD_DOWN" ) )
+                while ( var_0.player _meth_805D( "DPAD_DOWN" ) )
                 {
-                    var_0._id_295D = int( _func_0147( var_0._id_295D - var_0._id_10FCE, var_0._id_295E ) );
+                    var_0._id_295D = int( max( var_0._id_295D - var_0._id_10FCE, var_0._id_295E ) );
                     wait 0.1;
                 }
 
                 break;
             case "rb":
-                while ( var_0._id_030F _meth_805D( "BUTTON_RSHLDR" ) )
+                while ( var_0.player _meth_805D( "BUTTON_RSHLDR" ) )
                 {
                     var_0._id_2961 = var_0._id_2961 + var_0._id_10FFB;
                     wait 0.1;
@@ -370,9 +370,9 @@ _id_3EAA()
 
                 break;
             case "lb":
-                while ( var_0._id_030F _meth_805D( "BUTTON_LSHLDR" ) )
+                while ( var_0.player _meth_805D( "BUTTON_LSHLDR" ) )
                 {
-                    var_0._id_2961 = int( _func_0147( var_0._id_2961 - var_0._id_10FFB, var_0._id_2962 ) );
+                    var_0._id_2961 = int( max( var_0._id_2961 - var_0._id_10FFB, var_0._id_2962 ) );
                     wait 0.1;
                 }
 
@@ -400,9 +400,9 @@ _id_DC65()
 _id_3EB9()
 {
     var_0 = _id_44A3();
-    var_1 = var_0._id_030F;
-    var_2 = var_1._id_02EA + anglestoforward( var_1._id_0054 ) * 500;
-    var_3 = var_1._id_0054;
+    var_1 = var_0.player;
+    var_2 = var_1.origin + anglestoforward( var_1.angles ) * 500;
+    var_3 = var_1.angles;
     var_4 = var_2;
     var_5 = var_3;
 
@@ -455,8 +455,8 @@ _id_3EB9()
         }
         else
         {
-            var_2 = var_1._id_02EA + anglestoforward( var_1._id_0054 ) * 500;
-            var_3 = var_1._id_0054;
+            var_2 = var_1.origin + anglestoforward( var_1.angles ) * 500;
+            var_3 = var_1.angles;
         }
 
         var_4 = var_2;
@@ -475,16 +475,16 @@ _id_B141( var_0 )
     var_0 endon( "disconnect" );
     level endon( "stop_creating_nodes" );
     var_1 = _id_44A3();
-    var_1._id_030F = var_0;
-    var_0 _meth_824A( "use", "+usereload" );
-    var_0 _meth_824A( "use", "+activate" );
+    var_1.player = var_0;
+    var_0 notifyonplayercommand( "use", "+usereload" );
+    var_0 notifyonplayercommand( "use", "+activate" );
 
     for (;;)
     {
         _id_C5C4();
         var_0 waittill( "use" );
         _id_ABDF();
-        var_1._id_E6C1 = var_0._id_02EA;
+        var_1._id_E6C1 = var_0.origin;
         _id_3EC9();
     }
 }
@@ -496,8 +496,8 @@ _id_B13F( var_0 )
     level endon( "game_ended" );
     var_0 endon( "disconnect" );
     var_1 = _id_44A3();
-    var_1._id_030F = var_0;
-    var_1._id_E6C1 = var_0._id_02EA;
+    var_1.player = var_0;
+    var_1._id_E6C1 = var_0.origin;
     _id_C5C1();
     _id_ABDF();
     var_1._id_0DD1 = "starting";
@@ -528,14 +528,14 @@ _id_3811()
 
         for (;;)
         {
-            var_5 = _func_021E( var_3, var_4, 0 );
+            var_5 = tablelookupbyrow( var_3, var_4, 0 );
 
             if ( var_5 == "" )
                 break;
 
-            var_6 = _func_021A( _func_021E( var_3, var_4, 2 ), " " );
+            var_6 = strtok( tablelookupbyrow( var_3, var_4, 2 ), " " );
             var_7 = ( float( var_6[0] ), float( var_6[1] ), float( var_6[2] ) );
-            var_8 = _func_021A( _func_021E( var_3, var_4, 3 ), " " );
+            var_8 = strtok( tablelookupbyrow( var_3, var_4, 3 ), " " );
             var_9 = ( float( var_8[0] ), float( var_8[1] ), float( var_8[2] ) );
             var_10 = 16;
             var_11 = getdvarint( "scr_cover_node_clean_radius" );
@@ -544,22 +544,22 @@ _id_3811()
                 var_10 = var_11;
 
             var_12 = var_10 * var_10;
-            var_0._id_02EA = var_7;
-            var_0._id_0054 = var_9;
-            var_13 = _func_021A( _func_021E( var_3, var_4, 4 ), " " );
+            var_0.origin = var_7;
+            var_0.angles = var_9;
+            var_13 = strtok( tablelookupbyrow( var_3, var_4, 4 ), " " );
             var_13 = ( float( var_13[0] ), float( var_13[1] ), float( var_13[2] ) );
-            var_14 = _func_021A( _func_021E( var_3, var_4, 5 ), " " );
+            var_14 = strtok( tablelookupbyrow( var_3, var_4, 5 ), " " );
             var_14 = ( float( var_14[0] ), float( var_14[1] ), float( var_14[2] ) );
             var_0 _id_F4A3( var_13, var_14 );
-            var_15 = getgroundposition( var_0._id_02EA, 1 );
-            var_0._id_02EA = var_15;
+            var_15 = getgroundposition( var_0.origin, 1 );
+            var_0.origin = var_15;
 
             if ( isdefined( var_5 ) )
             {
                 if ( _id_A54C() )
                 {
-                    var_0._id_02EA = var_7;
-                    var_0._id_0054 = var_9;
+                    var_0.origin = var_7;
+                    var_0.angles = var_9;
                     var_0._id_A550 = var_5;
                     _id_10FBD();
                 }
@@ -575,10 +575,10 @@ _id_3811()
         while ( var_2.size > 1 )
         {
             var_17 = var_2[0];
-            var_2 = _id_077B::_id_1B9C( var_2, 0, 0 );
-            var_15 = getgroundposition( var_17._id_02EA, 16 );
-            var_0._id_02EA = var_15;
-            var_0._id_0054 = var_17._id_0054;
+            var_2 = scripts\engine\utility::array_remove_index( var_2, 0, 0 );
+            var_15 = getgroundposition( var_17.origin, 16 );
+            var_0.origin = var_15;
+            var_0.angles = var_17.angles;
 
             if ( _id_A54C( 1 ) )
             {
@@ -616,8 +616,8 @@ _id_3811()
                 }
 
                 var_18 = [];
-                var_19 = _func_00B4( var_0._id_02EA, 16, 0, 32 );
-                var_2 = _id_077B::_id_1B97( var_2, var_19 );
+                var_19 = _func_00B4( var_0.origin, 16, 0, 32 );
+                var_2 = scripts\engine\utility::_id_1B97( var_2, var_19 );
             }
 
             var_16++;
@@ -639,29 +639,29 @@ _id_F4A3( var_0, var_1 )
     else
         var_2 = ( 0, 0, 0 );
 
-    if ( isdefined( self._id_0054 ) )
-        var_3 = self._id_0054;
+    if ( isdefined( self.angles ) )
+        var_3 = self.angles;
     else
         var_3 = ( 0, 0, 0 );
 
-    var_4 = self._id_02EA;
+    var_4 = self.origin;
     var_5 = anglestoforward( var_3 );
-    self._id_02EA = var_0 + _func_01C2( var_4, var_2 );
-    var_6 = _func_025B( _func_01C2( var_5, var_2 ) );
-    self._id_0054 = var_6;
+    self.origin = var_0 + rotatevector( var_4, var_2 );
+    var_6 = vectortoangles( rotatevector( var_5, var_2 ) );
+    self.angles = var_6;
 }
 
 _id_A54C( var_0 )
 {
     var_1 = _id_44A3();
 
-    if ( distancesquared( _func_02A6( var_1._id_02EA ), var_1._id_02EA ) >= 1024 )
+    if ( distancesquared( _func_02A6( var_1.origin ), var_1.origin ) >= 1024 )
         return 0;
-    else if ( !_id_30D4( var_1._id_02EA ) )
+    else if ( !_id_30D4( var_1.origin ) )
         return 0;
     else if ( !istrue( var_0 ) )
     {
-        var_2 = _func_00B4( var_1._id_02EA, 16, 0, 64 );
+        var_2 = _func_00B4( var_1.origin, 16, 0, 64 );
 
         if ( var_2.size < 1 )
         {
@@ -691,7 +691,7 @@ _id_C43B( var_0 )
 
     var_3 = var_1 * var_1;
     var_4 = _id_44A3();
-    var_4._id_030F = var_0;
+    var_4.player = var_0;
     _id_C5C1();
     _id_ABDF();
     var_4._id_0DD1 = "starting";
@@ -712,17 +712,17 @@ _id_C43B( var_0 )
                 if ( !isdefined( var_10 ) )
                     continue;
 
-                if ( var_10._id_02EA == var_7._id_02EA )
+                if ( var_10.origin == var_7.origin )
                     continue;
 
-                var_11 = var_7._id_02EA;
-                var_12 = distancesquared( var_11, var_10._id_02EA );
+                var_11 = var_7.origin;
+                var_12 = distancesquared( var_11, var_10.origin );
 
                 if ( var_12 <= var_3 )
                 {
                     if ( var_7._id_048F == var_10._id_048F )
                     {
-                        if ( var_7._id_0054 == var_10._id_0054 )
+                        if ( var_7.angles == var_10.angles )
                         {
                             var_8 = 1;
                             break;
@@ -737,8 +737,8 @@ _id_C43B( var_0 )
 
                 if ( isdefined( var_4._id_A550 ) )
                 {
-                    var_4._id_02EA = var_7._id_02EA;
-                    var_4._id_0054 = var_7._id_0054;
+                    var_4.origin = var_7.origin;
+                    var_4.angles = var_7.angles;
                     _id_10FBD();
                 }
                 else
@@ -768,14 +768,14 @@ _id_DD45()
 
             if ( isdefined( var_5 ) )
             {
-                if ( var_0._id_02EA == var_5._id_02EA )
+                if ( var_0.origin == var_5.origin )
                     return 0;
 
-                var_6 = distancesquared( var_5._id_02EA, var_0._id_02EA );
+                var_6 = distancesquared( var_5.origin, var_0.origin );
 
                 if ( var_6 <= var_2 )
                 {
-                    if ( var_5._id_0054 == var_0._id_0054 )
+                    if ( var_5.angles == var_0.angles )
                         return 0;
                 }
             }
@@ -790,14 +790,14 @@ _id_DD45()
 
         if ( isdefined( var_5 ) )
         {
-            if ( var_0._id_02EA == var_5._id_02EA )
+            if ( var_0.origin == var_5.origin )
                 return 0;
 
-            var_6 = distancesquared( var_0._id_02EA, var_5._id_02EA );
+            var_6 = distancesquared( var_0.origin, var_5.origin );
 
             if ( var_6 <= var_2 )
             {
-                if ( var_5._id_0054 == var_0._id_0054 )
+                if ( var_5.angles == var_0.angles )
                     return 0;
             }
         }
@@ -839,15 +839,15 @@ _id_39A1()
 {
     var_0 = _id_44A3();
 
-    if ( _id_077B::_id_5BE0( "file_opened" ) )
+    if ( scripts\engine\utility::_id_5BE0( "file_opened" ) )
     {
-        _id_077B::_id_5BE4( "file_opened" );
+        scripts\engine\utility::_id_5BE4( "file_opened" );
         var_1 = var_0._id_5A10;
         var_2 = _id_66D2();
         var_3 = _id_64A1();
         var_4 = "/map_source/" + var_1;
         var_5 = 1;
-        _id_077B::_id_5A12( var_4, var_5 );
+        scripts\engine\utility::_id_5A12( var_4, var_5 );
         level notify( "stop_creating_nodes" );
     }
 
@@ -874,10 +874,10 @@ _id_3ECB()
 
             if ( _id_1069E() )
             {
-                var_0._id_0054 = ( 0, 0, 0 );
+                var_0.angles = ( 0, 0, 0 );
                 var_0._id_A550 = "script_struct";
-                var_0._id_02EA = var_0._id_716C;
-                var_0._id_00DE = "node_exposed";
+                var_0.origin = var_0._id_716C;
+                var_0.classname = "node_exposed";
                 _id_1069A();
             }
         }
@@ -901,12 +901,12 @@ _id_1069A()
 
     if ( istrue( var_0._id_3EEA ) && istrue( var_0._id_DA7B ) )
     {
-        var_2 = _id_077B::_id_4FE0( var_0._id_716C, 16, -300 ) + ( 0, 0, 16 );
-        var_0._id_02EA = var_2;
+        var_2 = scripts\engine\utility::_id_4FE0( var_0._id_716C, 16, -300 ) + ( 0, 0, 16 );
+        var_0.origin = var_2;
 
         if ( _id_30D4( var_2 ) && !_id_F3BA() )
         {
-            var_0._id_0054 = ( 0, 0, 0 );
+            var_0.angles = ( 0, 0, 0 );
 
             if ( !_id_DD45() )
                 return;
@@ -942,8 +942,8 @@ _id_3EC9()
 
                 if ( _id_FF38() )
                 {
-                    var_0._id_0054 = ( 0, 0, 0 );
-                    var_0._id_00DE = "node_exposed";
+                    var_0.angles = ( 0, 0, 0 );
+                    var_0.classname = "node_exposed";
                     _id_3EC8();
                 }
             }
@@ -962,15 +962,15 @@ _id_3EFF()
     else if ( var_0._id_7DAF )
     {
         var_0._id_7DAC = 1;
-        var_0._id_04DE = 0;
+        var_0.x = 0;
         _id_1069C();
     }
     else
     {
         var_0._id_7DAC = 1;
         var_0._id_7DAF = 1;
-        var_0._id_04DE = 0;
-        var_0._id_04E1 = 0;
+        var_0.x = 0;
+        var_0.y = 0;
         _id_1069D();
     }
 
@@ -991,7 +991,7 @@ _id_3EFE()
         var_1++;
 
         if ( _id_7DAD() )
-            var_0._id_04E1 = 1;
+            var_0.y = 1;
         else
             var_1++;
     }
@@ -1018,13 +1018,13 @@ _id_3F00()
 
         if ( isdefined( var_0._id_9C2F ) )
         {
-            if ( var_0._id_04E1 > var_0._id_9C2F )
+            if ( var_0.y > var_0._id_9C2F )
                 var_1++;
         }
 
         if ( isdefined( var_0._id_9C2E ) )
         {
-            if ( var_0._id_04DE > var_0._id_9C2E )
+            if ( var_0.x > var_0._id_9C2E )
                 var_1++;
         }
 
@@ -1053,9 +1053,9 @@ incrankxp()
 
     if ( isdefined( var_0._id_9C2F ) )
     {
-        if ( var_0._id_04E1 < var_0._id_9C2F )
+        if ( var_0.y < var_0._id_9C2F )
         {
-            var_0._id_04E1++;
+            var_0.y++;
             return 1;
         }
         else
@@ -1063,7 +1063,7 @@ incrankxp()
     }
     else
     {
-        var_0._id_04E1++;
+        var_0.y++;
         return 1;
     }
 }
@@ -1074,9 +1074,9 @@ _id_7DAE()
 
     if ( isdefined( var_0._id_9C2E ) )
     {
-        if ( var_0._id_04DE < var_0._id_9C2E )
+        if ( var_0.x < var_0._id_9C2E )
         {
-            var_0._id_04DE++;
+            var_0.x++;
             return 1;
         }
         else
@@ -1084,7 +1084,7 @@ _id_7DAE()
     }
     else
     {
-        var_0._id_04DE++;
+        var_0.x++;
         return 1;
     }
 }
@@ -1097,9 +1097,9 @@ _id_7DAD()
     {
         if ( isdefined( var_0._id_9C2E ) )
         {
-            if ( var_0._id_04DE < var_0._id_9C2E )
+            if ( var_0.x < var_0._id_9C2E )
             {
-                var_0._id_04DE++;
+                var_0.x++;
                 return 1;
             }
             else
@@ -1107,7 +1107,7 @@ _id_7DAD()
         }
         else
         {
-            var_0._id_04DE++;
+            var_0.x++;
             return 1;
         }
     }
@@ -1121,9 +1121,9 @@ _id_1069B()
 
     if ( isdefined( var_0._id_9C2E ) )
     {
-        if ( var_0._id_04DE < var_0._id_9C2E )
+        if ( var_0.x < var_0._id_9C2E )
         {
-            var_0._id_04DE++;
+            var_0.x++;
             return 1;
         }
         else
@@ -1135,7 +1135,7 @@ _id_1069B()
     }
     else
     {
-        var_0._id_04DE++;
+        var_0.x++;
         return 1;
     }
 }
@@ -1148,9 +1148,9 @@ _id_7DB0()
     {
         if ( isdefined( var_0._id_9C2F ) )
         {
-            if ( var_0._id_04E1 < var_0._id_9C2F )
+            if ( var_0.y < var_0._id_9C2F )
             {
-                var_0._id_04E1++;
+                var_0.y++;
                 return 1;
             }
             else
@@ -1158,7 +1158,7 @@ _id_7DB0()
         }
         else
         {
-            var_0._id_04E1++;
+            var_0.y++;
             return 1;
         }
     }
@@ -1172,9 +1172,9 @@ _id_1069C()
 
     if ( isdefined( var_0._id_9C2F ) )
     {
-        if ( var_0._id_04E1 < var_0._id_9C2F )
+        if ( var_0.y < var_0._id_9C2F )
         {
-            var_0._id_04E1++;
+            var_0.y++;
             return 1;
         }
         else
@@ -1186,7 +1186,7 @@ _id_1069C()
     }
     else
     {
-        var_0._id_04E1++;
+        var_0.y++;
         return 1;
     }
 }
@@ -1219,8 +1219,8 @@ _id_65C3()
 {
     var_0 = _id_44A3();
     var_1 = var_0._id_E6C1;
-    var_2 = var_0._id_04DE;
-    var_3 = var_0._id_04E1;
+    var_2 = var_0.x;
+    var_3 = var_0.y;
     var_4 = var_0._id_04E3;
 
     if ( var_0._id_49A3[var_0._id_AC64] )
@@ -1259,8 +1259,8 @@ _id_65C8()
 {
     var_0 = _id_44A3();
     var_1 = var_0._id_E6C1;
-    var_2 = var_0._id_04DE;
-    var_3 = var_0._id_04E1;
+    var_2 = var_0.x;
+    var_3 = var_0.y;
     var_4 = var_0._id_04E3;
     var_5 = var_0._id_2946;
     var_6 = anglestoforward( var_5 );
@@ -1306,10 +1306,10 @@ _id_1069E()
 
     if ( distancesquared( var_1, var_0._id_716C ) <= var_0._id_9C10 )
     {
-        var_0._id_716C = _id_077B::_id_4FE0( var_1, 96, -300 );
-        var_0._id_02EA = var_0._id_716C + ( 0, 0, 16 );
-        var_0._id_8F66 = var_0._id_04DE;
-        var_0._id_8F67 = var_0._id_04E1;
+        var_0._id_716C = scripts\engine\utility::_id_4FE0( var_1, 96, -300 );
+        var_0.origin = var_0._id_716C + ( 0, 0, 16 );
+        var_0._id_8F66 = var_0.x;
+        var_0._id_8F67 = var_0.y;
         return 1;
     }
     else
@@ -1323,10 +1323,10 @@ _id_FF38()
 
     if ( distancesquared( var_1, var_0._id_716C ) <= var_0._id_9C10 )
     {
-        var_0._id_716C = _id_077B::_id_4FE0( var_1, 96, -300 ) + ( 0, 0, 16 );
-        var_0._id_02EA = var_0._id_716C;
-        var_0._id_8F66 = var_0._id_04DE;
-        var_0._id_8F67 = var_0._id_04E1;
+        var_0._id_716C = scripts\engine\utility::_id_4FE0( var_1, 96, -300 ) + ( 0, 0, 16 );
+        var_0.origin = var_0._id_716C;
+        var_0._id_8F66 = var_0.x;
+        var_0._id_8F67 = var_0.y;
         var_0._id_10FCC = 0;
         var_0._id_10FE0 = 0;
         return 1;
@@ -1335,10 +1335,10 @@ _id_FF38()
     {
         var_0._id_49A1++;
 
-        if ( var_0._id_8F66 != var_0._id_04DE )
+        if ( var_0._id_8F66 != var_0.x )
             var_0._id_10FCC++;
 
-        if ( var_0._id_8F67 != var_0._id_04E1 )
+        if ( var_0._id_8F67 != var_0.y )
             var_0._id_10FE0++;
 
         return 0;
@@ -1370,12 +1370,12 @@ _id_3EC8()
 
     if ( istrue( var_0._id_3EEA ) && istrue( var_0._id_DA7B ) )
     {
-        var_2 = _id_077B::_id_4FE0( var_0._id_716C, 16, -300 ) + ( 0, 0, 16 );
-        var_0._id_02EA = var_2;
+        var_2 = scripts\engine\utility::_id_4FE0( var_0._id_716C, 16, -300 ) + ( 0, 0, 16 );
+        var_0.origin = var_2;
 
         if ( _id_30D4( var_2 ) && !_id_F3BA() )
         {
-            var_0._id_0054 = ( 0, 0, 0 );
+            var_0.angles = ( 0, 0, 0 );
 
             if ( !_id_DD45() )
                 return;
@@ -1392,7 +1392,7 @@ _id_10699()
     var_1 = var_0._id_716C;
     var_2 = var_0._id_A53E * var_0._id_A540;
     var_3 = cos( var_2 ) * var_0._id_A53F;
-    var_4 = _func_01FE( var_2 ) * var_0._id_A53F;
+    var_4 = sin( var_2 ) * var_0._id_A53F;
     var_5 = var_1[0] + var_3;
     var_6 = var_1[1] + var_4;
     var_7 = var_1[2];
@@ -1405,9 +1405,9 @@ _id_10699()
 
         if ( isdefined( var_9["normal"] ) )
         {
-            var_10 = _func_0257( var_9["normal"], ( 0, 0, 1 ) );
-            var_0._id_02EA = var_9["position"];
-            var_0._id_0054 = ( 0, _id_0777::_id_10FA0( 0, 359, 180 + _func_025B( var_9["normal"] )[1] ), 0 );
+            var_10 = vectordot( var_9["normal"], ( 0, 0, 1 ) );
+            var_0.origin = var_9["position"];
+            var_0.angles = ( 0, scripts\engine\math::_id_10FA0( 0, 359, 180 + vectortoangles( var_9["normal"] )[1] ), 0 );
 
             if ( -0.1 > var_10 || var_10 > 0.1 )
                 return;
@@ -1418,8 +1418,8 @@ _id_10699()
         if ( distancesquared( var_9["position"], var_11 ) <= var_0._id_9C10 )
         {
             var_0._id_DA7B = 0;
-            var_0._id_02EA = _id_077B::_id_4FE0( var_11, 96, -300 ) + ( 0, 0, 16 );
-            var_0._id_0054 = ( 0, _id_0777::_id_10FA0( 0, 359, 180 + _func_025B( var_9["normal"] )[1] ), 0 );
+            var_0.origin = scripts\engine\utility::_id_4FE0( var_11, 96, -300 ) + ( 0, 0, 16 );
+            var_0.angles = ( 0, scripts\engine\math::_id_10FA0( 0, 359, 180 + vectortoangles( var_9["normal"] )[1] ), 0 );
             _id_C554();
         }
     }
@@ -1431,7 +1431,7 @@ _id_3EAC()
     var_1 = var_0._id_716C;
     var_2 = var_0._id_A53E * var_0._id_A540;
     var_3 = cos( var_2 ) * var_0._id_A53F;
-    var_4 = _func_01FE( var_2 ) * var_0._id_A53F;
+    var_4 = sin( var_2 ) * var_0._id_A53F;
     var_5 = var_1[0] + var_3;
     var_6 = var_1[1] + var_4;
     var_7 = var_1[2];
@@ -1440,7 +1440,7 @@ _id_3EAC()
 
     if ( isdefined( var_9["normal"] ) )
     {
-        var_10 = _func_0257( var_9["normal"], ( 0, 0, 1 ) );
+        var_10 = vectordot( var_9["normal"], ( 0, 0, 1 ) );
 
         if ( -0.1 > var_10 || var_10 > 0.1 )
             return;
@@ -1452,8 +1452,8 @@ _id_3EAC()
     {
         var_0._id_DA7B = 0;
         var_0._id_A550 = "script_struct";
-        var_0._id_02EA = _id_077B::_id_4FE0( var_11, 12, -300 ) + ( 0, 0, 16 );
-        var_0._id_0054 = ( 0, _id_0777::_id_10FA0( 0, 359, 180 + _func_025B( var_9["normal"] )[1] ), 0 );
+        var_0.origin = scripts\engine\utility::_id_4FE0( var_11, 12, -300 ) + ( 0, 0, 16 );
+        var_0.angles = ( 0, scripts\engine\math::_id_10FA0( 0, 359, 180 + vectortoangles( var_9["normal"] )[1] ), 0 );
         _id_10FBD();
         var_0._id_F360++;
         _id_C554();
@@ -1461,8 +1461,8 @@ _id_3EAC()
     else
     {
         var_0._id_A550 = "script_struct";
-        var_0._id_0054 = ( 0, 0, 0 );
-        var_0._id_02EA = var_9["position"];
+        var_0.angles = ( 0, 0, 0 );
+        var_0.origin = var_9["position"];
         _id_10FBD();
     }
 }
@@ -1473,7 +1473,7 @@ _id_3EAB()
     var_1 = var_0._id_716C;
     var_2 = var_0._id_A53E * var_0._id_A540;
     var_3 = cos( var_2 ) * var_0._id_A53F;
-    var_4 = _func_01FE( var_2 ) * var_0._id_A53F;
+    var_4 = sin( var_2 ) * var_0._id_A53F;
     var_5 = var_1[0] + var_3;
     var_6 = var_1[1] + var_4;
     var_7 = var_1[2];
@@ -1486,7 +1486,7 @@ _id_3EAB()
 
         if ( isdefined( var_9["normal"] ) )
         {
-            var_10 = _func_0257( var_9["normal"], ( 0, 0, 1 ) );
+            var_10 = vectordot( var_9["normal"], ( 0, 0, 1 ) );
 
             if ( -0.1 > var_10 || var_10 > 0.1 )
                 return;
@@ -1496,8 +1496,8 @@ _id_3EAB()
 
         if ( distancesquared( var_9["position"], var_11 ) <= var_0._id_9C10 )
         {
-            var_0._id_02EA = _id_077B::_id_4FE0( var_11, 12, -300 ) + ( 0, 0, 16 );
-            var_0._id_0054 = ( 0, _id_0777::_id_10FA0( 0, 359, 180 + _func_025B( var_9["normal"] )[1] ), 0 );
+            var_0.origin = scripts\engine\utility::_id_4FE0( var_11, 12, -300 ) + ( 0, 0, 16 );
+            var_0.angles = ( 0, scripts\engine\math::_id_10FA0( 0, 359, 180 + vectortoangles( var_9["normal"] )[1] ), 0 );
             _id_C554();
         }
     }
@@ -1508,7 +1508,7 @@ _id_3F2E( var_0, var_1, var_2 )
     var_3 = _id_44A3();
     _id_1DDB();
     var_3._id_F3CD++;
-    var_4 = _id_077A::_id_C042( var_0, var_1, level._id_B758, var_3._id_F3B7 );
+    var_4 = scripts\engine\trace::ray_trace( var_0, var_1, level.players, var_3._id_F3B7 );
 
     if ( var_3._id_CB2E )
     {
@@ -1524,7 +1524,7 @@ _id_3F2E( var_0, var_1, var_2 )
         }
     }
 
-    return _id_077A::_id_C042( var_0, var_1, level._id_B758, var_3._id_F3B7 );
+    return scripts\engine\trace::ray_trace( var_0, var_1, level.players, var_3._id_F3B7 );
 }
 
 _id_4449( var_0 )
@@ -1562,10 +1562,10 @@ _id_C554()
 
     level notify( "reposition_cover_node" );
     var_0 = _id_44A3();
-    var_1 = var_0._id_02EA;
-    var_2 = var_0._id_0054;
+    var_1 = var_0.origin;
+    var_2 = var_0.angles;
     var_3 = anglestoright( var_2 );
-    var_4 = _func_0301( var_2 );
+    var_4 = anglestoleft( var_2 );
     var_5 = anglestoforward( var_2 );
     var_6 = -1 * anglestoforward( var_2 );
     var_7 = anglestoup( var_2 );
@@ -1603,7 +1603,7 @@ _id_C554()
 
             if ( !_id_30D4( var_16 ) )
             {
-                var_8 = _id_077B::_id_1B96( var_8, var_15 );
+                var_8 = scripts\engine\utility::array_remove( var_8, var_15 );
                 continue;
             }
 
@@ -1619,7 +1619,7 @@ _id_C554()
 
                     if ( !_id_30D4( var_19 ) )
                     {
-                        var_8 = _id_077B::_id_1B96( var_8, var_15 );
+                        var_8 = scripts\engine\utility::array_remove( var_8, var_15 );
                         continue;
                     }
 
@@ -1632,7 +1632,7 @@ _id_C554()
 
                         if ( _id_B9F8( var_20["position"] ) )
                         {
-                            var_8 = _id_077B::_id_1B96( var_8, var_15 );
+                            var_8 = scripts\engine\utility::array_remove( var_8, var_15 );
                             break;
                         }
 
@@ -1643,13 +1643,13 @@ _id_C554()
                                 if ( _id_50E1( var_19, var_15, var_5 ) )
                                 {
                                     var_0._id_5EF3 = 1;
-                                    var_9 = _id_077B::_id_4FE0( var_20["position"], 12, -300 );
-                                    var_8 = _id_077B::_id_1B96( var_8, var_15 );
+                                    var_9 = scripts\engine\utility::_id_4FE0( var_20["position"], 12, -300 );
+                                    var_8 = scripts\engine\utility::array_remove( var_8, var_15 );
                                     break;
                                 }
                                 else
                                 {
-                                    var_8 = _id_077B::_id_1B96( var_8, var_15 );
+                                    var_8 = scripts\engine\utility::array_remove( var_8, var_15 );
                                     break;
                                 }
                             }
@@ -1659,12 +1659,12 @@ _id_C554()
                             if ( _id_50E1( var_19, var_15, var_5 ) )
                             {
                                 var_0._id_5EF5 = 1;
-                                var_10 = _id_077B::_id_4FE0( var_20["position"], 12, -300 );
-                                var_8 = _id_077B::_id_1B96( var_8, var_15 );
+                                var_10 = scripts\engine\utility::_id_4FE0( var_20["position"], 12, -300 );
+                                var_8 = scripts\engine\utility::array_remove( var_8, var_15 );
                                 continue;
                             }
 
-                            var_8 = _id_077B::_id_1B96( var_8, var_15 );
+                            var_8 = scripts\engine\utility::array_remove( var_8, var_15 );
                             break;
                         }
                     }
@@ -1679,7 +1679,7 @@ _id_C554()
             {
                 var_0._id_5EF7 = 1;
                 var_0._id_DA7B = 0;
-                var_11 = _id_077B::_id_4FE0( var_17["position"], 12, -300 );
+                var_11 = scripts\engine\utility::_id_4FE0( var_17["position"], 12, -300 );
             }
         }
     }
@@ -1688,11 +1688,11 @@ _id_C554()
 
     if ( isdefined( var_9 ) && var_0._id_5EF3 )
     {
-        var_22 = _id_077B::_id_4FE0( var_9 + var_6 * 17 + -1 * ( var_4 * 16 ), 16, -300 ) + ( 0, 0, 16 );
+        var_22 = scripts\engine\utility::_id_4FE0( var_9 + var_6 * 17 + -1 * ( var_4 * 16 ), 16, -300 ) + ( 0, 0, 16 );
 
         if ( _id_30D4( var_22 ) && !_id_F3BA() )
         {
-            var_0._id_02EA = var_22;
+            var_0.origin = var_22;
             var_16 = var_22 + var_7 * 24;
             var_20 = _id_3F2E( var_16, var_16 + var_5 * var_0._id_FF2F, ( 1, 1, 0 ) );
 
@@ -1707,11 +1707,11 @@ _id_C554()
 
     if ( isdefined( var_10 ) && var_0._id_5EF5 )
     {
-        var_22 = _id_077B::_id_4FE0( var_10 + var_6 * 17 + -1 * ( var_3 * 16 ), 16, -300 ) + ( 0, 0, 16 );
+        var_22 = scripts\engine\utility::_id_4FE0( var_10 + var_6 * 17 + -1 * ( var_3 * 16 ), 16, -300 ) + ( 0, 0, 16 );
 
         if ( _id_30D4( var_22 ) && !_id_F3BA() )
         {
-            var_0._id_02EA = var_22;
+            var_0.origin = var_22;
             var_16 = var_22 + var_7 * 24;
             var_20 = _id_3F2E( var_16, var_16 + var_5 * 64, ( 1, 1, 0 ) );
 
@@ -1726,11 +1726,11 @@ _id_C554()
 
     if ( isdefined( var_11 ) && var_0._id_5EF7 && !var_0._id_5EF5 && !var_0._id_5EF3 )
     {
-        var_22 = _id_077B::_id_4FE0( var_11 + var_6 * 17, 16, -300 ) + ( 0, 0, 16 );
+        var_22 = scripts\engine\utility::_id_4FE0( var_11 + var_6 * 17, 16, -300 ) + ( 0, 0, 16 );
 
         if ( _id_30D4( var_22 ) && !_id_F3BA() )
         {
-            var_0._id_02EA = var_22;
+            var_0.origin = var_22;
             var_0._id_A550 = "node_cover_crouch";
             _id_C9DF();
         }
@@ -1746,15 +1746,15 @@ _id_DD4A()
 
     level notify( "reposition_cover_node" );
     var_0 = _id_44A3();
-    var_1 = var_0._id_02EA;
-    var_2 = var_0._id_0054;
+    var_1 = var_0.origin;
+    var_2 = var_0.angles;
     var_3 = anglestoright( var_2 );
-    var_4 = _func_0301( var_2 );
+    var_4 = anglestoleft( var_2 );
     var_5 = anglestoforward( var_2 );
     var_6 = -1 * anglestoforward( var_2 );
     var_7 = anglestoup( var_2 );
 
-    if ( _id_077B::_id_85A4( var_0._id_A550, "node_cover_left" ) )
+    if ( scripts\engine\utility::is_equal( var_0._id_A550, "node_cover_left" ) )
         var_8 = [ var_4 ];
     else
         var_8 = [ var_3 ];
@@ -1784,7 +1784,7 @@ _id_DD4A()
 
             if ( !_id_30D4( var_16 ) )
             {
-                var_8 = _id_077B::_id_1B96( var_8, var_15 );
+                var_8 = scripts\engine\utility::array_remove( var_8, var_15 );
                 continue;
             }
 
@@ -1800,7 +1800,7 @@ _id_DD4A()
 
                     if ( !_id_30D4( var_19 ) )
                     {
-                        var_8 = _id_077B::_id_1B96( var_8, var_15 );
+                        var_8 = scripts\engine\utility::array_remove( var_8, var_15 );
                         continue;
                     }
 
@@ -1818,13 +1818,13 @@ _id_DD4A()
                                 if ( _id_50E1( var_19, var_15, var_5 ) )
                                 {
                                     var_0._id_5EF3 = 1;
-                                    var_9 = _id_077B::_id_4FE0( var_20["position"], 12, -300 );
-                                    var_8 = _id_077B::_id_1B96( var_8, var_15 );
+                                    var_9 = scripts\engine\utility::_id_4FE0( var_20["position"], 12, -300 );
+                                    var_8 = scripts\engine\utility::array_remove( var_8, var_15 );
                                     break;
                                 }
                                 else
                                 {
-                                    var_8 = _id_077B::_id_1B96( var_8, var_15 );
+                                    var_8 = scripts\engine\utility::array_remove( var_8, var_15 );
                                     break;
                                 }
                             }
@@ -1834,12 +1834,12 @@ _id_DD4A()
                             if ( _id_50E1( var_19, var_15, var_5 ) )
                             {
                                 var_0._id_5EF5 = 1;
-                                var_10 = _id_077B::_id_4FE0( var_20["position"], 12, -300 );
-                                var_8 = _id_077B::_id_1B96( var_8, var_15 );
+                                var_10 = scripts\engine\utility::_id_4FE0( var_20["position"], 12, -300 );
+                                var_8 = scripts\engine\utility::array_remove( var_8, var_15 );
                                 continue;
                             }
 
-                            var_8 = _id_077B::_id_1B96( var_8, var_15 );
+                            var_8 = scripts\engine\utility::array_remove( var_8, var_15 );
                             break;
                         }
                     }
@@ -1854,7 +1854,7 @@ _id_DD4A()
             {
                 var_0._id_5EF7 = 1;
                 var_0._id_DA7B = 0;
-                var_11 = _id_077B::_id_4FE0( var_17["position"], 12, -300 );
+                var_11 = scripts\engine\utility::_id_4FE0( var_17["position"], 12, -300 );
             }
         }
     }
@@ -1863,11 +1863,11 @@ _id_DD4A()
 
     if ( isdefined( var_9 ) && var_0._id_5EF3 )
     {
-        var_22 = _id_077B::_id_4FE0( var_9 + var_6 * 17 + -1 * ( var_4 * 16 ), 16, -300 ) + ( 0, 0, 16 );
+        var_22 = scripts\engine\utility::_id_4FE0( var_9 + var_6 * 17 + -1 * ( var_4 * 16 ), 16, -300 ) + ( 0, 0, 16 );
 
         if ( _id_30D4( var_22 ) && !_id_F3BA() )
         {
-            var_0._id_02EA = var_22;
+            var_0.origin = var_22;
             var_16 = var_22 + var_7 * 24;
             var_20 = _id_3F2E( var_16, var_16 + var_5 * var_0._id_FF2F, ( 1, 1, 0 ) );
 
@@ -1882,11 +1882,11 @@ _id_DD4A()
 
     if ( isdefined( var_10 ) && var_0._id_5EF5 )
     {
-        var_22 = _id_077B::_id_4FE0( var_10 + var_6 * 17 + -1 * ( var_3 * 16 ), 16, -300 ) + ( 0, 0, 16 );
+        var_22 = scripts\engine\utility::_id_4FE0( var_10 + var_6 * 17 + -1 * ( var_3 * 16 ), 16, -300 ) + ( 0, 0, 16 );
 
         if ( _id_30D4( var_22 ) && !_id_F3BA() )
         {
-            var_0._id_02EA = var_22;
+            var_0.origin = var_22;
             var_16 = var_22 + var_7 * 24;
             var_20 = _id_3F2E( var_16, var_16 + var_5 * 64, ( 1, 1, 0 ) );
 
@@ -1901,11 +1901,11 @@ _id_DD4A()
 
     if ( isdefined( var_11 ) && var_0._id_5EF7 && !var_0._id_5EF5 && !var_0._id_5EF3 )
     {
-        var_22 = _id_077B::_id_4FE0( var_11 + var_6 * 17, 16, -300 ) + ( 0, 0, 16 );
+        var_22 = scripts\engine\utility::_id_4FE0( var_11 + var_6 * 17, 16, -300 ) + ( 0, 0, 16 );
 
         if ( _id_30D4( var_22 ) && !_id_F3BA() )
         {
-            var_0._id_02EA = var_22;
+            var_0.origin = var_22;
             var_0._id_A550 = "node_cover_crouch";
             _id_C9DF();
         }
@@ -2052,18 +2052,18 @@ _id_ABDF()
 {
     var_0 = _id_44A3();
 
-    if ( !_id_077B::_id_5BE0( "file_opened" ) )
+    if ( !scripts\engine\utility::_id_5BE0( "file_opened" ) )
     {
-        _id_077B::_id_5BFB( "file_opened" );
+        scripts\engine\utility::_id_5BFB( "file_opened" );
         var_0._id_0DD1 = "adding_nodes_to_map";
-        _id_077B::_id_5A13();
+        scripts\engine\utility::_id_5A13();
         var_1 = "\t";
         var_2 = 0;
-        _id_077B::_id_5A11( "iwmap 11" );
-        _id_077B::_id_5A11( var_1 + "entity " + var_2 );
-        _id_077B::_id_5A11( "{" );
-        _id_077B::_id_5A11( var_1 + "\"classname\" \"worldspawn\"" );
-        _id_077B::_id_5A11( "}" );
+        scripts\engine\utility::_id_5A11( "iwmap 11" );
+        scripts\engine\utility::_id_5A11( var_1 + "entity " + var_2 );
+        scripts\engine\utility::_id_5A11( "{" );
+        scripts\engine\utility::_id_5A11( var_1 + "\"classname\" \"worldspawn\"" );
+        scripts\engine\utility::_id_5A11( "}" );
     }
 }
 
@@ -2079,7 +2079,7 @@ _id_4EDC( var_0, var_1 )
     for (;;)
     {
         var_0 notify( "reset_wall_lines" );
-        var_3 = _id_077B::_id_634A( var_0._id_02EA, var_1, undefined, 50 );
+        var_3 = scripts\engine\utility::_id_634A( var_0.origin, var_1, undefined, 50 );
 
         foreach ( var_5 in var_3 )
         {
@@ -2096,11 +2096,11 @@ _id_C9DF()
     level endon( "get_nav_start_points" );
     var_0 = _id_44A3();
 
-    if ( !_id_B9F8( var_0._id_02EA ) )
+    if ( !_id_B9F8( var_0.origin ) )
     {
-        var_1 = _func_020F();
-        var_1._id_0054 = var_0._id_0054;
-        var_1._id_02EA = var_0._id_02EA;
+        var_1 = spawnstruct();
+        var_1.angles = var_0.angles;
+        var_1.origin = var_0.origin;
         var_0._id_1448[var_0._id_1448.size] = var_1;
 
         if ( getdvarint( "#x3ac309f16acd50acb", 0 ) )
@@ -2130,10 +2130,10 @@ _id_B9F8( var_0 )
         {
             var_4 = var_2[var_3];
 
-            if ( var_4._id_02EA == var_0 )
+            if ( var_4.origin == var_0 )
                 return 1;
 
-            var_5 = distancesquared( var_0, var_4._id_02EA );
+            var_5 = distancesquared( var_0, var_4.origin );
 
             if ( var_5 <= 576 )
                 return 1;
@@ -2146,10 +2146,10 @@ _id_B9F8( var_0 )
     {
         var_7 = var_6[var_3];
 
-        if ( var_7._id_02EA == var_0 )
+        if ( var_7.origin == var_0 )
             return 1;
 
-        var_5 = distancesquared( var_0, var_7._id_02EA );
+        var_5 = distancesquared( var_0, var_7.origin );
 
         if ( var_5 <= 256 )
             return 1;
@@ -2170,21 +2170,21 @@ _id_10FBD()
 {
     var_0 = _id_44A3();
     var_1 = "\t";
-    _id_077B::_id_5A11( "entity " + var_0._id_9A88 );
-    _id_077B::_id_5A11( "{" );
-    _id_077B::_id_5A11( var_1 + "\"origin\" \"" + var_0._id_02EA[0] + " " + var_0._id_02EA[1] + " " + var_0._id_02EA[2] + "\"" );
+    scripts\engine\utility::_id_5A11( "entity " + var_0._id_9A88 );
+    scripts\engine\utility::_id_5A11( "{" );
+    scripts\engine\utility::_id_5A11( var_1 + "\"origin\" \"" + var_0.origin[0] + " " + var_0.origin[1] + " " + var_0.origin[2] + "\"" );
 
     if ( isdefined( var_0._id_A550 ) )
-        _id_077B::_id_5A11( var_1 + "\"classname\" \"" + var_0._id_A550 + "\"" );
+        scripts\engine\utility::_id_5A11( var_1 + "\"classname\" \"" + var_0._id_A550 + "\"" );
     else
-        _id_077B::_id_5A11( var_1 + "\"classname\" \"node_cover_left\"" );
+        scripts\engine\utility::_id_5A11( var_1 + "\"classname\" \"node_cover_left\"" );
 
-    if ( isdefined( var_0._id_0054 ) )
-        _id_077B::_id_5A11( var_1 + "\"angles\" \"" + var_0._id_0054[0] + " " + var_0._id_0054[1] + " " + var_0._id_0054[2] + "\"" );
+    if ( isdefined( var_0.angles ) )
+        scripts\engine\utility::_id_5A11( var_1 + "\"angles\" \"" + var_0.angles[0] + " " + var_0.angles[1] + " " + var_0.angles[2] + "\"" );
     else
-        _id_077B::_id_5A11( var_1 + "\"angles\" \"0 0 0\"" );
+        scripts\engine\utility::_id_5A11( var_1 + "\"angles\" \"0 0 0\"" );
 
-    _id_077B::_id_5A11( "}" );
+    scripts\engine\utility::_id_5A11( "}" );
     var_0._id_9A88++;
 }
 
@@ -2195,7 +2195,7 @@ _id_4EFA( var_0, var_1, var_2, var_3, var_4 )
 
     if ( isdefined( var_4 ) )
     {
-        if ( isalive( var_4 ) )
+        if ( _func_0106( var_4 ) )
         {
             foreach ( var_7 in var_4 )
                 self endon( var_7 );
@@ -2218,13 +2218,13 @@ _id_1081( var_0 )
     level endon( "game_ended" );
     wait 5;
     var_1 = "";
-    var_2 = _func_021A( var_0, "/" );
+    var_2 = strtok( var_0, "/" );
     var_3 = " ";
     var_4 = 0;
 
     foreach ( var_6 in var_2 )
     {
-        var_7 = _func_021A( var_6, " " );
+        var_7 = strtok( var_6, " " );
         var_8 = 1;
         var_9 = var_7.size;
 
@@ -2247,5 +2247,5 @@ _id_1081( var_0 )
 
 _id_30D4( var_0 )
 {
-    return _id_077A::_id_31F5( var_0 + ( 0, 0, 32 ), var_0, 16, 32 );
+    return scripts\engine\trace::_id_31F5( var_0 + ( 0, 0, 32 ), var_0, 16, 32 );
 }

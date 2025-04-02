@@ -3,7 +3,7 @@
 
 _id_89EF( var_0 )
 {
-    if ( _func_036D( var_0 ) && _func_036F( var_0 ) )
+    if ( isweapon( var_0 ) && isnullweapon( var_0 ) )
         return 0;
 
     if ( _func_0120( var_0 ) && var_0 == "none" )
@@ -110,7 +110,7 @@ _id_C873( var_0 )
         var_2 = "j_shield_ri";
     }
 
-    self moveovertime( var_3, var_1, var_2 );
+    self _meth_8239( var_3, var_1, var_2 );
 
     if ( var_0 )
     {

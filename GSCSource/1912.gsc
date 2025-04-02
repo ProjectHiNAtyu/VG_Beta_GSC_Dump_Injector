@@ -6,7 +6,7 @@ _id_CF07( var_0 )
     if ( !isdefined( level._id_CEF9 ) )
         level._id_CEF9 = [];
 
-    level._id_CEF9 = _id_077B::_id_1B63( level._id_CEF9, var_0 );
+    level._id_CEF9 = scripts\engine\utility::array_add( level._id_CEF9, var_0 );
 }
 
 _id_CEEA()
@@ -23,7 +23,7 @@ _id_CEBC( var_0 )
     if ( !isdefined( level._id_CF05 ) )
         level._id_CF05 = [];
 
-    level._id_CF05 = _id_077B::_id_1B63( level._id_CF05, var_0 );
+    level._id_CF05 = scripts\engine\utility::array_add( level._id_CF05, var_0 );
 }
 
 _id_CEEC()
@@ -40,7 +40,7 @@ _id_CEBE( var_0 )
     if ( !isdefined( level._id_CF0E ) )
         level._id_CF0E = [];
 
-    level._id_CF0E = _id_077B::_id_1B63( level._id_CF0E, var_0 );
+    level._id_CF0E = scripts\engine\utility::array_add( level._id_CF0E, var_0 );
 }
 
 _id_CEBF( var_0, var_1 )
@@ -59,7 +59,7 @@ _id_CEB9( var_0 )
     if ( !isdefined( level._id_CEC1 ) )
         level._id_CEC1 = [];
 
-    level._id_CEC1 = _id_077B::_id_1B63( level._id_CEC1, var_0 );
+    level._id_CEC1 = scripts\engine\utility::array_add( level._id_CEC1, var_0 );
 }
 
 _id_CEEE( var_0, var_1, var_2, var_3, var_4, var_5 )
@@ -93,7 +93,7 @@ _id_CEBD( var_0 )
     if ( !isdefined( level._id_CF0B ) )
         level._id_CF0B = [];
 
-    level._id_CF0B = _id_077B::_id_1B63( level._id_CF0B, var_0 );
+    level._id_CF0B = scripts\engine\utility::array_add( level._id_CF0B, var_0 );
 }
 
 _id_CEED( var_0, var_1, var_2, var_3 )
@@ -145,14 +145,14 @@ _id_CEBA( var_0 )
     if ( !isdefined( level._id_CECB ) )
         level._id_CECB = [];
 
-    level._id_CECB = _id_077B::_id_1B63( level._id_CECB, var_0 );
+    level._id_CECB = scripts\engine\utility::array_add( level._id_CECB, var_0 );
 }
 
 _id_CEE9( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14 )
 {
     if ( isdefined( level._id_CECB ) )
     {
-        if ( isdefined( var_7 ) || isdefined( var_11 ) && !_func_02DA( var_11 ) || isdefined( var_10 ) && !_func_036D( var_10 ) )
+        if ( isdefined( var_7 ) || isdefined( var_11 ) && !isvector( var_11 ) || isdefined( var_10 ) && !isweapon( var_10 ) )
         {
             var_14 = var_11;
             var_13 = undefined;

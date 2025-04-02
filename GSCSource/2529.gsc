@@ -4,7 +4,7 @@
 _id_59FB()
 {
     level._id_5A00 = [];
-    level._id_0BA3["field_mic_destroyed"] = _func_0139( "vfx/s4/equipment/vfx_field_mic_damaged.vfx" );
+    level._effect["field_mic_destroyed"] = loadfx( "vfx/s4/equipment/vfx_field_mic_damaged.vfx" );
 }
 
 _id_59F5()
@@ -28,23 +28,23 @@ _id_59F5()
 _id_59F6( var_0 )
 {
     var_0 field_mic_give_to_owner( self );
-    var_1 = self._id_02EA;
-    var_2 = _func_0205( "script_model", var_1 );
+    var_1 = self.origin;
+    var_2 = spawn( "script_model", var_1 );
     var_0._id_5A02 = var_2;
-    var_0._id_5A02._id_02F2 = self;
-    var_0._id_5A02._id_045B = self._id_045B;
-    var_0._id_5A02 setorigin( self );
+    var_0._id_5A02.owner = self;
+    var_0._id_5A02.team = self.team;
+    var_0._id_5A02 setotherent( self );
     thread _id_0823::field_mic_plant( var_2 );
     var_0 _meth_86FB( "equipment" );
 
-    if ( level._id_EF62 )
-        var_0 _meth_8703( self._id_045B );
+    if ( level.teambased )
+        var_0 _meth_8703( self.team );
     else
         var_0 _meth_8703( self );
 
-    var_0._id_02F2 = self;
+    var_0.owner = self;
     var_0._id_75CE = var_0 thread _id_0766::_id_D587( 0, 4 );
-    var_0 thread scripts\engine\utility::_id_C330( ::_id_59F8, 1, 1 );
+    var_0 thread _id_07A4::_id_C330( ::_id_59F8, 1, 1 );
     var_0 thread _id_59F7( self );
     var_0._id_5A02 _id_59FE();
 }
@@ -72,45 +72,45 @@ _id_59F7( var_0 )
 
 _id_59FC( var_0 )
 {
-    var_1 = var_0._id_A90B;
+    var_1 = var_0.objweapon;
     var_2 = var_0._id_9CBF;
-    return _id_079A::_id_744C( var_1, var_2, var_0._id_0134 );
+    return _id_079A::_id_744C( var_1, var_2, var_0.damage );
 }
 
 _id_59FA( var_0 )
 {
-    var_1 = var_0._id_006E;
+    var_1 = var_0.attacker;
 
-    if ( isdefined( self._id_02F2 ) && istrue( _id_099C::_id_B779( self._id_02F2, var_1 ) ) )
+    if ( isdefined( self.owner ) && istrue( scripts\cp_mp\utility\player_utility::_id_B779( self.owner, var_1 ) ) )
     {
-        var_1 _id_0789::_id_553B( self );
-        var_2 = self._id_02F2 getentitynumber();
+        var_1 scripts\mp\battlechatter_mp::_id_553B( self );
+        var_2 = self.owner getentitynumber();
 
         if ( level._id_5A00[var_2].size > 1 )
-            self._id_02F2 thread _id_0A64::_id_9120( "fm_destroyed_m" );
+            self.owner thread _id_0A64::_id_9120( "fm_destroyed_m" );
         else
-            self._id_02F2 thread _id_0A64::_id_9120( "fm_destroyed_s" );
+            self.owner thread _id_0A64::_id_9120( "fm_destroyed_s" );
     }
 
-    _func_0196( level._id_0BA3["field_mic_destroyed"], self._id_02EA );
-    earthquake( 0.5, 1, self._id_02EA, 512 );
+    playfx( level._effect["field_mic_destroyed"], self.origin );
+    earthquake( 0.5, 1, self.origin, 512 );
     _id_59F8();
 }
 
 _id_59F8()
 {
-    field_mic_remove_from_owner( self._id_02F2 );
+    field_mic_remove_from_owner( self.owner );
     _id_098C::_id_7803();
     _id_0766::_id_D586( self._id_75CE );
 
     if ( isdefined( self._id_FE8E ) )
-        self._id_FE8E _meth_809A();
+        self._id_FE8E delete();
 
     if ( isdefined( self._id_B798 ) )
-        self._id_B798 _meth_809A();
+        self._id_B798 delete();
 
     if ( isdefined( self._id_CC47 ) )
-        self._id_CC47 _meth_809A();
+        self._id_CC47 delete();
 
     if ( isdefined( self._id_5403 ) )
         _id_07D0::_id_C78C( self._id_5403 );
@@ -121,11 +121,11 @@ _id_59F8()
             var_1 notify( "death" );
     }
 
-    self _meth_8373( "hacked", "neutral", 0 );
-    self _meth_8373( "hack_usable", "off" );
+    self setscriptablepartstate( "hacked", "neutral", 0 );
+    self setscriptablepartstate( "hack_usable", "off" );
     self._id_5A02 notify( "mic_destroyed" );
     thread _id_0823::field_mic_explode( self );
-    self _meth_809A();
+    self delete();
 }
 
 _id_59FE()
@@ -133,17 +133,17 @@ _id_59FE()
     self endon( "mic_destroyed" );
     self endon( "death" );
     self endon( "leaving" );
-    self._id_02F2 endon( "disconnect" );
+    self.owner endon( "disconnect" );
     var_0 = 700;
 
-    if ( _id_0999::_id_88E4() )
+    if ( scripts\cp_mp\utility\game_utility::_id_88E4() )
         var_0 = 700;
 
     var_1 = 0;
 
     for (;;)
     {
-        _func_024C( self._id_02EA, self._id_02F2, var_0, 3000 );
+        _func_024C( self.origin, self.owner, var_0, 3000 );
         wait 3;
     }
 }
@@ -151,9 +151,9 @@ _id_59FE()
 _id_59FD( var_0 )
 {
     field_mic_remove_from_owner( var_0 );
-    field_mic_give_to_owner( self._id_02F2 );
-    self._id_5A02._id_02F2 = self._id_02F2;
-    self _meth_8373( "hacked", "active", 0 );
+    field_mic_give_to_owner( self.owner );
+    self._id_5A02.owner = self.owner;
+    self setscriptablepartstate( "hacked", "active", 0 );
 }
 
 field_mic_remove_from_owner( var_0 )

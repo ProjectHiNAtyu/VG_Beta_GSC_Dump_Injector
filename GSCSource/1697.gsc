@@ -3,13 +3,13 @@
 
 _id_804D()
 {
-    self._id_03F2 = _func_020F();
+    self._id_03F2 = spawnstruct();
     self._id_03F2._id_1DB6 = [];
     self._id_03F2._id_1DB7 = [];
     self._id_03F2._id_1DAE = [];
     self._id_EBBA = [];
     self._id_03F2.calloutpinned = 1;
-    _id_077B::_id_5453( "pause_suppression" );
+    scripts\engine\utility::_id_5453( "pause_suppression" );
     thread _id_2D18();
     self._id_81D6 = self._id_A24C;
 }
@@ -22,7 +22,7 @@ _id_EBC5()
 
 _id_6819( var_0 )
 {
-    var_1 = var_0._id_0084;
+    var_1 = var_0.basename;
 
     switch ( var_1 )
     {
@@ -65,15 +65,15 @@ _id_2D18()
         if ( istrue( self._id_88C5 ) )
             continue;
 
-        if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_dauntless" ) )
+        if ( scripts\mp\utility\perk::_hasperk( "specialty_dauntless" ) )
             continue;
 
         if ( var_1 <= 64 )
         {
             if ( isdefined( var_4 ) )
-                var_5 = visionsetnight( var_4 );
+                var_5 = weaponclass( var_4 );
             else
-                var_5 = visionsetnight( var_0._id_0122 );
+                var_5 = weaponclass( var_0._id_0122 );
 
             var_6 = _id_6819( var_4 );
             _id_FBD1( var_1, var_6, var_5, var_0, var_4 );
@@ -83,20 +83,20 @@ _id_2D18()
             self._id_A24C = self._id_81D6 - self._id_03F2._id_004F * _id_6C49() * var_8;
             scripts\mp\weapons::_id_FCCA();
 
-            if ( var_0 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_piercing_vision" ) && !scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_low_profile" ) )
+            if ( var_0 scripts\mp\utility\perk::_hasperk( "specialty_piercing_vision" ) && !scripts\mp\utility\perk::_hasperk( "specialty_low_profile" ) )
             {
                 var_9 = var_0 getentitynumber();
 
                 if ( !isdefined( self._id_EBBA[var_9] ) )
                 {
-                    var_10 = _func_020F();
-                    var_10._id_02F2 = self;
+                    var_10 = spawnstruct();
+                    var_10.owner = self;
                     var_10._id_872D = 1;
-                    var_10._id_006E = var_0;
-                    var_10._id_ACD2 = _id_0A72::_id_ACBD( self, var_0, "suppression_overlay", "level_script" );
+                    var_10.attacker = var_0;
+                    var_10._id_ACD2 = scripts\mp\utility\outline::outlineenableforplayer( self, var_0, "suppression_overlay", "level_script" );
                     self._id_EBB9[var_9] = var_10._id_ACD2;
                     _id_098C::_id_9B29();
-                    level thread _id_0789::_id_F756( var_0, "piercing_vision" );
+                    level thread scripts\mp\battlechatter_mp::_id_F756( var_0, "piercing_vision" );
                     var_10 thread _id_EBB4();
                 }
             }
@@ -107,15 +107,15 @@ _id_2D18()
 _id_EBBC( var_0, var_1, var_2, var_3 )
 {
     if ( isdefined( var_1 ) )
-        var_4 = visionsetnight( var_1 );
+        var_4 = weaponclass( var_1 );
     else
-        var_4 = visionsetnight( var_0._id_0122 );
+        var_4 = weaponclass( var_0._id_0122 );
 
     var_5 = undefined;
 
     if ( _func_010E( var_2 ) && isdefined( var_3 ) )
     {
-        var_6 = distance( var_3._id_02EA, self._id_02EA );
+        var_6 = distance( var_3.origin, self.origin );
         _id_FBD1( var_6, var_5, var_4, var_0, var_1 );
     }
     else
@@ -126,20 +126,20 @@ _id_EBBC( var_0, var_1, var_2, var_3 )
     self._id_A24C = self._id_81D6 - self._id_03F2._id_004F * _id_6C49() * var_8;
     scripts\mp\weapons::_id_FCCA();
 
-    if ( var_0 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_piercing_vision" ) && !scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_low_profile" ) && self._id_03F2._id_1DB6[var_7] >= 0.45 )
+    if ( var_0 scripts\mp\utility\perk::_hasperk( "specialty_piercing_vision" ) && !scripts\mp\utility\perk::_hasperk( "specialty_low_profile" ) && self._id_03F2._id_1DB6[var_7] >= 0.45 )
     {
         var_9 = var_0 getentitynumber();
 
         if ( !isdefined( self._id_EBBA[var_9] ) )
         {
-            var_10 = _func_020F();
-            var_10._id_02F2 = self;
+            var_10 = spawnstruct();
+            var_10.owner = self;
             var_10._id_872D = 1;
-            var_10._id_006E = var_0;
-            var_10._id_ACD2 = _id_0A72::_id_ACBD( self, var_0, "suppression_overlay", "level_script" );
+            var_10.attacker = var_0;
+            var_10._id_ACD2 = scripts\mp\utility\outline::outlineenableforplayer( self, var_0, "suppression_overlay", "level_script" );
             self._id_EBB9[var_9] = var_10._id_ACD2;
             _id_098C::_id_9B29();
-            level thread _id_0789::_id_F756( var_0, "piercing_vision" );
+            level thread scripts\mp\battlechatter_mp::_id_F756( var_0, "piercing_vision" );
             var_10 thread _id_EBB4();
         }
     }
@@ -150,15 +150,15 @@ _id_6C49()
     var_0 = 0.3;
     var_1 = self getstance();
 
-    if ( self _meth_81E6() )
+    if ( self issprintsliding() )
         var_0 = 0;
     else if ( self getstance() == "stand" )
     {
-        if ( self player_recoilscaleon() > 0.3 )
+        if ( self playerads() > 0.3 )
             var_0 = 0.1;
         else if ( self _meth_86CC() )
             var_0 = 0.1;
-        else if ( self _meth_81E4() )
+        else if ( self issprinting() )
             var_0 = 0.2;
         else
             var_0 = 0.3;
@@ -171,7 +171,7 @@ _id_6C49()
         var_0 = 0;
 
     var_2 = _func_0447( self getcurrentweapon() );
-    var_3 = ( _func_0147( var_2, 0.6 ) - 0.6 ) * 2.5;
+    var_3 = ( max( var_2, 0.6 ) - 0.6 ) * 2.5;
     var_0 = var_0 * var_3;
     return var_0;
 }
@@ -187,10 +187,10 @@ _id_DB22( var_0, var_1 )
     if ( !isdefined( var_1 ) )
         return 0;
 
-    if ( !isai( var_1 ) )
+    if ( !isalive( var_1 ) )
         return 0;
 
-    if ( isdefined( var_1._id_045B ) && isdefined( self._id_045B ) && var_1._id_045B == self._id_045B )
+    if ( isdefined( var_1.team ) && isdefined( self.team ) && var_1.team == self.team )
         return 0;
 
     return 1;
@@ -200,8 +200,8 @@ _id_FBD1( var_0, var_1, var_2, var_3, var_4 )
 {
     var_5 = 1;
     var_6 = 0.05;
-    var_7 = _id_0777::_id_A5B2( 14, 64, var_0 );
-    var_8 = _id_0777::_id_5878( var_5, var_6, var_7 );
+    var_7 = scripts\engine\math::_id_A5B2( 14, 64, var_0 );
+    var_8 = scripts\engine\math::_id_5878( var_5, var_6, var_7 );
     var_9 = var_3 getentitynumber();
 
     if ( !isdefined( var_4 ) )
@@ -222,29 +222,29 @@ _id_FBD1( var_0, var_1, var_2, var_3, var_4 )
     if ( !isdefined( var_11 ) )
         var_11 = 1;
 
-    if ( var_4._id_0084 == "s4_sh_bromeo5_mp" && var_4 _meth_8622( "bar_xs_sawed_bromeo5" ) )
+    if ( var_4.basename == "s4_sh_bromeo5_mp" && var_4 _meth_8622( "bar_xs_sawed_bromeo5" ) )
         var_11 = var_11 * 1.5;
 
-    if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_van_lightweight" ) )
+    if ( scripts\mp\utility\perk::_hasperk( "specialty_van_lightweight" ) )
         var_12 = 1.3;
     else
         var_12 = 1;
 
     var_13 = var_8 * var_11 * var_10 / 100 * var_12;
     var_14 = self._id_03F2._id_004F + var_13;
-    self._id_03F2._id_004F = _id_077B::_id_F07F( var_14 <= 1, var_14, 1 );
+    self._id_03F2._id_004F = scripts\engine\utility::ter_op( var_14 <= 1, var_14, 1 );
     self._id_03F3 = self._id_03F2._id_004F;
 
     if ( self._id_03F3 >= 1 )
     {
         if ( self._id_03F2.calloutpinned )
         {
-            level thread _id_0789::_id_F756( self, "flavor_suppressed" );
+            level thread scripts\mp\battlechatter_mp::_id_F756( self, "flavor_suppressed" );
             self._id_03F2.calloutpinned = 0;
         }
     }
 
-    var_15 = _id_5ABB( var_4._id_0084 );
+    var_15 = _id_5ABB( var_4.basename );
     self._id_03F2._id_C148 = var_15;
 
     if ( getdvarint( "scr_suppression_effect", 0 ) )
@@ -265,7 +265,7 @@ _id_FBD1( var_0, var_1, var_2, var_3, var_4 )
     if ( !isdefined( self._id_03F2._id_1DAE[var_9] ) )
         self._id_03F2._id_1DAE[var_9] = var_3;
 
-    self._id_03F2._id_1DB6[var_9] = _func_0148( self._id_03F2._id_1DB6[var_9], 1 );
+    self._id_03F2._id_1DB6[var_9] = min( self._id_03F2._id_1DB6[var_9], 1 );
 
     if ( getdvarint( "scr_suppression_debug", 0 ) )
         iprintlnbold( "Current Suppression: " + _func_0431( self._id_03F2._id_004F, 0.1 ) );
@@ -282,8 +282,8 @@ _id_5ABA( var_0 )
 
     for (;;)
     {
-        var_2 = _func_021E( "mp/suppressionWeaponClasses.csv", var_1, 0 );
-        var_3 = _func_021E( "mp/suppressionWeaponClasses.csv", var_1, 1 );
+        var_2 = tablelookupbyrow( "mp/suppressionWeaponClasses.csv", var_1, 0 );
+        var_3 = tablelookupbyrow( "mp/suppressionWeaponClasses.csv", var_1, 1 );
 
         if ( !isdefined( var_2 ) || var_2 == "" )
             break;
@@ -306,8 +306,8 @@ _id_5A97( var_0 )
 
     for (;;)
     {
-        var_2 = _func_021E( "mp/suppressionWeaponCaliber.csv", var_1, 0 );
-        var_3 = _func_021E( "mp/suppressionWeaponCaliber.csv", var_1, 1 );
+        var_2 = tablelookupbyrow( "mp/suppressionWeaponCaliber.csv", var_1, 0 );
+        var_3 = tablelookupbyrow( "mp/suppressionWeaponCaliber.csv", var_1, 1 );
 
         if ( !isdefined( var_2 ) || var_2 == "" )
             break;
@@ -330,8 +330,8 @@ _id_5AB9( var_0 )
 
     for (;;)
     {
-        var_2 = _func_021E( "mp/suppressionWeaponCategory.csv", var_1, 0 );
-        var_3 = _func_021E( "mp/suppressionWeaponCategory.csv", var_1, 1 );
+        var_2 = tablelookupbyrow( "mp/suppressionWeaponCategory.csv", var_1, 0 );
+        var_3 = tablelookupbyrow( "mp/suppressionWeaponCategory.csv", var_1, 1 );
 
         if ( !isdefined( var_2 ) || var_2 == "" )
             break;
@@ -355,8 +355,8 @@ _id_5ABB( var_0 )
 
     for (;;)
     {
-        var_4 = _func_021E( "mp/suppressionWeaponCategoryMods.csv", var_3, 0 );
-        var_5 = 0.05 / float( _func_021E( "mp/suppressionWeaponCategoryMods.csv", var_3, 1 ) );
+        var_4 = tablelookupbyrow( "mp/suppressionWeaponCategoryMods.csv", var_3, 0 );
+        var_5 = 0.05 / float( tablelookupbyrow( "mp/suppressionWeaponCategoryMods.csv", var_3, 1 ) );
 
         if ( !isdefined( var_4 ) || var_4 == "" )
             break;
@@ -380,21 +380,21 @@ _id_EBB1()
 
     for (;;)
     {
-        if ( getdvarint( "scr_suppression_debug_no_decay" ) || !_id_077B::_id_85A4( self._id_0392, "playing" ) || !isai( self ) )
+        if ( getdvarint( "scr_suppression_debug_no_decay" ) || !scripts\engine\utility::is_equal( self.sessionstate, "playing" ) || !isalive( self ) )
         {
             waitframe();
             continue;
         }
 
-        if ( !_func_0107( self ) && ( !_func_011C( self ) && isdefined( self ) ) || isai( self ) )
-            _id_077B::_id_545B( "pause_suppression" );
+        if ( !isbot( self ) && ( !_func_011C( self ) && isdefined( self ) ) || isalive( self ) )
+            scripts\engine\utility::_id_545B( "pause_suppression" );
 
         if ( isdefined( self._id_03F2._id_004F ) && self._id_03F2._id_004F > 0 )
         {
             if ( gettime() - self._id_03F2._id_90B8 > self._id_03F2._id_3CE2 )
             {
                 var_0 = self._id_03F2._id_004F - self._id_03F2._id_C148;
-                self._id_03F2._id_004F = _id_077B::_id_F07F( var_0 >= 0, var_0, 0 );
+                self._id_03F2._id_004F = scripts\engine\utility::ter_op( var_0 >= 0, var_0, 0 );
                 self._id_03F3 = self._id_03F2._id_004F;
                 self._id_03F2.calloutpinned = 1;
 
@@ -430,7 +430,7 @@ _id_EBB3()
     if ( !isdefined( self._id_03F2._id_3CE2 ) || gettime() - self._id_03F2._id_90B8 > 250 )
         self._id_03F2._id_3CE2 = 150;
     else
-        self._id_03F2._id_3CE2 = _func_0148( self._id_03F2._id_3CE2 + 150, 100 );
+        self._id_03F2._id_3CE2 = min( self._id_03F2._id_3CE2 + 150, 100 );
 }
 
 _id_EBAE()
@@ -439,7 +439,7 @@ _id_EBAE()
 
     for (;;)
     {
-        _id_077B::_id_1087E( "death", "suppression_clear" );
+        scripts\engine\utility::waittill_any_2( "death", "suppression_clear" );
 
         foreach ( var_4, var_1 in self._id_03F2._id_1DB7 )
         {
@@ -457,9 +457,9 @@ _id_EBAE()
 _id_EBB4()
 {
     self endon( "death" );
-    self._id_02F2 endon( "death_or_disconnect" );
-    self._id_02F2 endon( "joined_team" );
-    self._id_02F2 endon( "joined_spectators" );
+    self.owner endon( "death_or_disconnect" );
+    self.owner endon( "joined_team" );
+    self.owner endon( "joined_spectators" );
     level endon( "game_ended" );
 
     if ( !istrue( self._id_872D ) )
@@ -469,27 +469,27 @@ _id_EBB4()
     self endon( "update" );
     thread _id_EBB6();
 
-    while ( isdefined( self._id_006E ) )
+    while ( isdefined( self.attacker ) )
     {
         var_0 = self._id_ACD2;
-        var_1 = self._id_006E;
+        var_1 = self.attacker;
         var_2 = var_1 getentitynumber();
 
-        if ( !isdefined( var_1 ) || !_id_0A74::_id_89D3( var_1 ) || !_id_0A74::_id_89D3( self._id_02F2 ) )
+        if ( !isdefined( var_1 ) || !scripts\mp\utility\player::isreallyalive( var_1 ) || !scripts\mp\utility\player::isreallyalive( self.owner ) )
         {
-            if ( isdefined( self._id_02F2 ) )
-                self._id_02F2 _id_0A72::_id_0C04();
+            if ( isdefined( self.owner ) )
+                self.owner scripts\mp\utility\outline::_id_0C04();
 
-            _id_0A72::_id_ACB7( var_0, self._id_02F2 );
+            scripts\mp\utility\outline::outlinedisable( var_0, self.owner );
             self._id_ACD2 = undefined;
-            self._id_006E = undefined;
-            self._id_02F2._id_EBB9[var_2] = undefined;
+            self.attacker = undefined;
+            self.owner._id_EBB9[var_2] = undefined;
         }
 
-        var_3 = self._id_02F2._id_03F2._id_1DB6[var_2];
+        var_3 = self.owner._id_03F2._id_1DB6[var_2];
 
         if ( isdefined( var_3 ) )
-            self._id_02F2 _meth_8800( var_3 );
+            self.owner _meth_8800( var_3 );
 
         waitframe();
     }
@@ -507,9 +507,9 @@ _id_EBB6()
 
 _id_EBB7()
 {
-    self._id_02F2 endon( "death_or_disconnect" );
-    self._id_02F2 endon( "joined_team" );
-    self._id_02F2 endon( "joined_spectators" );
+    self.owner endon( "death_or_disconnect" );
+    self.owner endon( "joined_team" );
+    self.owner endon( "joined_spectators" );
     level endon( "game_ended" );
 
     for (;;)
@@ -525,19 +525,19 @@ _id_EBAF()
     if ( !isdefined( var_0 ) )
         return;
 
-    var_1 = self._id_006E;
+    var_1 = self.attacker;
     var_2 = var_1 getentitynumber();
-    _id_0A72::_id_ACB7( var_0, self._id_02F2 );
-    self._id_02F2._id_EBB9[var_2] = undefined;
+    scripts\mp\utility\outline::outlinedisable( var_0, self.owner );
+    self.owner._id_EBB9[var_2] = undefined;
 
-    foreach ( var_4 in self._id_02F2._id_EBB9 )
+    foreach ( var_4 in self.owner._id_EBB9 )
     {
         if ( isdefined( var_4 ) )
             return;
     }
 
-    if ( isdefined( self._id_02F2 ) )
-        self._id_02F2 _id_0A72::_id_0C04();
+    if ( isdefined( self.owner ) )
+        self.owner scripts\mp\utility\outline::_id_0C04();
 }
 
 _id_FD4C()
@@ -548,40 +548,40 @@ _id_FD4C()
 
     if ( !isdefined( self._id_EBBB ) )
     {
-        self._id_EBBB = _func_0152( self );
-        self._id_EBBB._id_04DE = 0;
-        self._id_EBBB._id_04E1 = 0;
-        self._id_EBBB _meth_8378( "overlay_healer", 640, 480 );
-        self._id_EBBB._id_003A = "left";
-        self._id_EBBB.alignx = "top";
-        self._id_EBBB._id_020C = "fullscreen";
-        self._id_EBBB._id_04B8 = "fullscreen";
-        self._id_EBBB._id_0047 = 0;
+        self._id_EBBB = newclienthudelem( self );
+        self._id_EBBB.x = 0;
+        self._id_EBBB.y = 0;
+        self._id_EBBB setshader( "overlay_healer", 640, 480 );
+        self._id_EBBB.alignx = "left";
+        self._id_EBBB.aligny = "top";
+        self._id_EBBB.horzalign = "fullscreen";
+        self._id_EBBB.vertalign = "fullscreen";
+        self._id_EBBB.alpha = 0;
     }
 
-    self._id_EBBB._id_0047 = self._id_03F2._id_004F * var_2 + var_0;
+    self._id_EBBB.alpha = self._id_03F2._id_004F * var_2 + var_0;
 }
 
 _id_5898( var_0, var_1 )
 {
     self fadeovertime( var_0 );
-    self._id_0047 = var_1;
+    self.alpha = var_1;
     wait( var_0 );
 }
 
 _id_58A1( var_0, var_1 )
 {
     self fadeovertime( var_0 );
-    self._id_0047 = var_1;
+    self.alpha = var_1;
     wait( var_0 );
 }
 
 _id_EBB5()
 {
-    _id_077B::_id_10886( self, "death_or_disconnect", level, "game_ended", self, "joined_team", self, "joined_spectators" );
+    scripts\engine\utility::_id_10886( self, "death_or_disconnect", level, "game_ended", self, "joined_team", self, "joined_spectators" );
 
     if ( isdefined( self._id_EBBB ) )
-        self._id_EBBB._id_0047 = 0;
+        self._id_EBBB.alpha = 0;
 }
 
 _id_EBB0()
@@ -593,17 +593,17 @@ _id_EBB0()
     {
         var_4 = self._id_03F2._id_1DAE[var_6];
 
-        if ( isdefined( var_4 ) && var_4 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_disable" ) && var_0 < var_1 && self._id_03F2._id_1DB6[var_6] == self._id_03F2._id_004F )
+        if ( isdefined( var_4 ) && var_4 scripts\mp\utility\perk::_hasperk( "specialty_disable" ) && var_0 < var_1 && self._id_03F2._id_1DB6[var_6] == self._id_03F2._id_004F )
         {
             var_0 = var_1;
             continue;
         }
 
-        if ( isdefined( var_4 ) && var_4 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_disable" ) && var_0 < var_1 )
+        if ( isdefined( var_4 ) && var_4 scripts\mp\utility\perk::_hasperk( "specialty_disable" ) && var_0 < var_1 )
         {
             var_5 = self._id_03F2._id_1DB6[var_6] / self._id_03F2._id_004F * 0.25;
             var_0 = var_0 + var_5;
-            var_0 = _func_0148( var_0, var_1 );
+            var_0 = min( var_0, var_1 );
         }
     }
 

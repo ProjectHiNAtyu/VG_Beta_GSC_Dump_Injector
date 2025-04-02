@@ -88,9 +88,9 @@ _id_0B45( var_0, var_1, var_2, var_3 )
     if ( !isdefined( level._id_469C[var_0] ) )
         level._id_469C[var_0] = [];
 
-    var_4 = _func_020F();
+    var_4 = spawnstruct();
     var_4._id_048F = var_0;
-    var_4._id_02EA = var_1;
+    var_4.origin = var_1;
     var_4._id_5449 = var_2;
     var_4._id_432F = var_3;
     var_4._id_E744 = 0;
@@ -117,7 +117,7 @@ _id_2AE3( var_0, var_1, var_2 )
 
 _id_2AE6()
 {
-    if ( _id_0A69::_id_6A43() != "br" )
+    if ( scripts\mp\utility\game::getgametype() != "br" )
         return 0;
 
     return 1;
@@ -128,7 +128,7 @@ _id_2ACB( var_0, var_1 )
     if ( !_id_2AE6() )
         return;
 
-    var_2 = var_1._id_0084;
+    var_2 = var_1.basename;
     var_3 = _id_0B47( var_0 );
     var_3[var_3.size] = "item_name";
     var_3[var_3.size] = var_2;
@@ -140,27 +140,27 @@ _id_2AC5( var_0, var_1, var_2, var_3 )
     if ( !_id_2AE6() )
         return;
 
-    if ( var_0._id_00DE != "worldspawn" && var_0._id_00DE != "script_vehicle" && var_0._id_00DE != "script_model" && var_0._id_00DE != "misc_turret" && var_0._id_00DE != "trigger_hurt" && !_func_0117( var_0 ) )
+    if ( var_0.classname != "worldspawn" && var_0.classname != "script_vehicle" && var_0.classname != "script_model" && var_0.classname != "misc_turret" && var_0.classname != "trigger_hurt" && !isplayer( var_0 ) )
     {
-        var_4 = "attacker.classname: " + var_0._id_00DE;
+        var_4 = "attacker.classname: " + var_0.classname;
         _id_0A78::_id_479A( var_4 );
     }
 
-    if ( var_0._id_00DE == "worldspawn" || var_0._id_00DE == "script_vehicle" || var_0._id_00DE == "script_model" || var_0._id_00DE == "misc_turret" || var_0._id_00DE == "trigger_hurt" )
+    if ( var_0.classname == "worldspawn" || var_0.classname == "script_vehicle" || var_0.classname == "script_model" || var_0.classname == "misc_turret" || var_0.classname == "trigger_hurt" )
     {
         var_5 = "world";
         var_0 = var_1;
     }
     else if ( isdefined( var_2 ) )
-        var_5 = var_2._id_0084;
+        var_5 = var_2.basename;
     else
     {
         var_6 = var_0 getcurrentweapon();
-        var_5 = var_6._id_0084;
+        var_5 = var_6.basename;
     }
 
     var_7 = var_1 getcurrentweapon();
-    var_8 = var_7._id_0084;
+    var_8 = var_7.basename;
     var_9 = [];
     var_9[var_9.size] = "victim";
     var_9[var_9.size] = var_1;
@@ -176,7 +176,7 @@ _id_2AC5( var_0, var_1, var_2, var_3 )
     if ( !isdefined( var_14 ) )
         var_15 = "none";
     else
-        var_15 = stopfxontag( "mp/brmissions.csv", 0, var_14, 1 );
+        var_15 = _func_021D( "mp/brmissions.csv", 0, var_14, 1 );
 
     var_9[var_9.size] = "attacker_active_mission";
     var_9[var_9.size] = var_15;
@@ -192,13 +192,13 @@ _id_2AC5( var_0, var_1, var_2, var_3 )
     if ( !isdefined( var_14 ) )
         var_15 = "NONE";
     else
-        var_15 = stopfxontag( "mp/brmissions.csv", 0, var_14, 1 );
+        var_15 = _func_021D( "mp/brmissions.csv", 0, var_14, 1 );
 
     var_9[var_9.size] = "victim_active_mission";
     var_9[var_9.size] = var_15;
     var_9[var_9.size] = "death_type";
     var_9[var_9.size] = var_3;
-    var_19 = _id_0A7C::_id_6A3A( var_1._id_045B, 1 );
+    var_19 = scripts\mp\utility\teams::_id_6A3A( var_1.team, 1 );
     var_20 = 2147483647;
 
     foreach ( var_22 in var_19 )
@@ -206,7 +206,7 @@ _id_2AC5( var_0, var_1, var_2, var_3 )
         if ( var_22 == var_1 )
             continue;
 
-        var_23 = distance( var_1._id_02EA, var_22._id_02EA );
+        var_23 = distance( var_1.origin, var_22.origin );
 
         if ( var_23 < var_20 || var_20 == 2147483647 )
             var_20 = var_23;
@@ -217,7 +217,7 @@ _id_2AC5( var_0, var_1, var_2, var_3 )
     var_0 _meth_870C( "dlog_event_br_down", var_9 );
 
     if ( _id_0B44() )
-        _id_0B43( "down", var_1._id_02EA, _id_0BD4( var_3 ), var_5 );
+        _id_0B43( "down", var_1.origin, _id_0BD4( var_3 ), var_5 );
 }
 
 _id_2AE0( var_0, var_1 )
@@ -241,7 +241,7 @@ _id_2AE0( var_0, var_1 )
     var_0 _meth_870C( "dlog_event_br_revive", var_2 );
 
     if ( _id_0B44() )
-        _id_0B43( "revive", var_1._id_02EA );
+        _id_0B43( "revive", var_1.origin );
 }
 
 _id_2AE2( var_0 )
@@ -253,7 +253,7 @@ _id_2AE2( var_0 )
     var_0 _meth_870C( "dlog_event_br_selfrevive", var_1 );
 
     if ( _id_0B44() )
-        _id_0B43( "selfRevive", var_0._id_02EA );
+        _id_0B43( "selfRevive", var_0.origin );
 }
 
 _id_2AE1( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10 )
@@ -316,7 +316,7 @@ _id_2AE1( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_0 _meth_870C( "dlog_event_br_secondwind", var_11 );
 
     if ( _id_0B44() )
-        _id_0B43( "secondWind", var_0._id_02EA );
+        _id_0B43( "secondWind", var_0.origin );
 }
 
 _id_2AC1()
@@ -345,7 +345,7 @@ _id_2AD5( var_0 )
     var_0 _meth_870C( "dlog_event_br_deploy_land", var_1 );
 
     if ( _id_0B44() )
-        _id_0B43( "land", var_0._id_02EA );
+        _id_0B43( "land", var_0.origin );
 }
 
 _id_2ADB( var_0 )
@@ -550,11 +550,11 @@ _id_2AC9( var_0 )
 
     foreach ( var_8 in var_0 )
     {
-        if ( !isdefined( var_1[var_8._id_045B] ) )
-            var_1[var_8._id_045B] = 0;
+        if ( !isdefined( var_1[var_8.team] ) )
+            var_1[var_8.team] = 0;
 
         var_2 = var_2 + var_8._id_B943;
-        var_1[var_8._id_045B] = var_1[var_8._id_045B] + var_8._id_B943;
+        var_1[var_8.team] = var_1[var_8.team] + var_8._id_B943;
 
         if ( var_8._id_B943 > var_3 )
             var_3 = var_8._id_B943;
@@ -562,11 +562,11 @@ _id_2AC9( var_0 )
         if ( var_8._id_B943 < var_4 )
             var_4 = var_8._id_B943;
 
-        if ( var_1[var_8._id_045B] > var_5 )
-            var_5 = var_1[var_8._id_045B];
+        if ( var_1[var_8.team] > var_5 )
+            var_5 = var_1[var_8.team];
 
-        if ( var_1[var_8._id_045B] < var_6 )
-            var_6 = var_1[var_8._id_045B];
+        if ( var_1[var_8.team] < var_6 )
+            var_6 = var_1[var_8.team];
     }
 
     var_10 = int( _id_CAC1( var_2, var_0.size ) );
@@ -656,7 +656,7 @@ _id_2AD1( var_0, var_1 )
     var_2[var_2.size] = "has_gasmask";
     var_2[var_2.size] = isdefined( var_0._id_61B5 ) && var_0._id_61B5 == 1;
     var_2[var_2.size] = "armor_plates";
-    var_2[var_2.size] = _id_CABA( var_0 scripts\engine\trace::_id_69F6( "health" ) );
+    var_2[var_2.size] = _id_CABA( var_0 scripts\mp\equipment::_id_69F6( "health" ) );
     var_2[var_2.size] = "plunder_total";
     var_2[var_2.size] = _id_CABA( var_0._id_B943 );
     var_2[var_2.size] = "plunder_banked";
@@ -736,7 +736,7 @@ _id_2AD3( var_0, var_1, var_2, var_3 )
     var_0 _meth_870C( "dlog_event_br_kiosk_purchase_item", var_4 );
 
     if ( _id_0B44() )
-        _id_0B43( "purchase", var_0._id_02EA, var_0 getentitynumber(), var_3 );
+        _id_0B43( "purchase", var_0.origin, var_0 getentitynumber(), var_3 );
 }
 
 _id_2AD2( var_0, var_1, var_2 )
@@ -759,7 +759,7 @@ _id_2AD2( var_0, var_1, var_2 )
     var_3[var_3.size] = "kiosk_menu_owner_kiosk";
 
     if ( isdefined( var_0._id_2A45 ) )
-        var_3[var_3.size] = var_0._id_2A45.health;
+        var_3[var_3.size] = var_0._id_2A45._id_0219;
     else
         var_3[var_3.size] = -1;
 
@@ -864,7 +864,7 @@ _id_2AE7( var_0, var_1 )
         return;
 
     if ( _id_0B44() && isdefined( level._id_BB96 ) )
-        _id_0B45( "vehicle", var_0._id_02EA, var_0, var_1 );
+        _id_0B45( "vehicle", var_0.origin, var_0, var_1 );
 }
 
 _id_2ACF( var_0, var_1, var_2, var_3 )
@@ -888,10 +888,10 @@ _id_2AE4( var_0 )
     if ( !_id_2AE6() )
         return;
 
-    _func_03BA( "dlog_event_br_mission_spawn", [ "id", _id_077B::_id_F07F( isdefined( var_0.health ), "" + var_0.health, "invalid" ), "type", var_0._id_EC8A, "origin_x", var_0._id_02EA[0], "origin_y", var_0._id_02EA[1], "origin_z", var_0._id_02EA[2] ] );
+    _func_03BA( "dlog_event_br_mission_spawn", [ "id", scripts\engine\utility::ter_op( isdefined( var_0._id_0219 ), "" + var_0._id_0219, "invalid" ), "type", var_0._id_EC8A, "origin_x", var_0.origin[0], "origin_y", var_0.origin[1], "origin_z", var_0.origin[2] ] );
 
-    if ( _id_0B44() && isdefined( var_0.health ) )
-        _id_0B45( "mission", var_0._id_02EA, "" + var_0.health, var_0._id_EC8A );
+    if ( _id_0B44() && isdefined( var_0._id_0219 ) )
+        _id_0B45( "mission", var_0.origin, "" + var_0._id_0219, var_0._id_EC8A );
 }
 
 _id_2AD0( var_0 )
@@ -899,7 +899,7 @@ _id_2AD0( var_0 )
     if ( !_id_2AE6() )
         return;
 
-    _func_03BA( "dlog_event_br_mission_invalid", [ "id", _id_077B::_id_F07F( isdefined( var_0.health ), "" + var_0.health, "invalid" ), "type", var_0._id_EC8A, "origin_x", var_0._id_02EA[0], "origin_y", var_0._id_02EA[1], "origin_z", var_0._id_02EA[2] ] );
+    _func_03BA( "dlog_event_br_mission_invalid", [ "id", scripts\engine\utility::ter_op( isdefined( var_0._id_0219 ), "" + var_0._id_0219, "invalid" ), "type", var_0._id_EC8A, "origin_x", var_0.origin[0], "origin_y", var_0.origin[1], "origin_z", var_0.origin[2] ] );
 }
 
 _id_2AD9( var_0, var_1 )
@@ -908,13 +908,13 @@ _id_2AD9( var_0, var_1 )
         return;
 
     var_2 = [];
-    var_3 = _id_0A7C::_id_6A3A( var_1._id_045B, 1 );
+    var_3 = scripts\mp\utility\teams::_id_6A3A( var_1.team, 1 );
     var_2 = _id_0B49( var_2, var_3 );
     var_2[var_2.size] = "id";
-    var_2[var_2.size] = _id_077B::_id_F07F( isdefined( var_0._id_9F83 ), var_0._id_9F83, "invalid" );
+    var_2[var_2.size] = scripts\engine\utility::ter_op( isdefined( var_0._id_9F83 ), var_0._id_9F83, "invalid" );
 
     if ( isdefined( level._id_29F5 ) )
-        var_4 = _id_077B::_id_6AA8( level._id_29F5._id_370B );
+        var_4 = scripts\engine\utility::_id_6AA8( level._id_29F5._id_370B );
     else
         var_4 = -1;
 
@@ -933,7 +933,7 @@ _id_2AD8( var_0, var_1, var_2, var_3 )
     if ( !_id_2AE6() )
         return;
 
-    _func_03BA( "dlog_event_br_mission_end", [ "id", _id_077B::_id_F07F( isdefined( var_0._id_9F83 ), var_0._id_9F83, "invalid" ), "result", _id_077B::_id_F07F( isdefined( var_0._id_034B ), var_0._id_034B, "unknown" ), "reward_tier", var_1, "xp", _id_077B::_id_F07F( isdefined( var_2["xp"] ), var_2["xp"], 0 ), "weapon_xp", _id_077B::_id_F07F( isdefined( var_2["weapon_xp"] ), var_2["weapon_xp"], 0 ), "plunder", _id_077B::_id_F07F( isdefined( var_2["plunder"] ), var_2["plunder"], 0 ), "num_teammates_awarded", _id_077B::_id_F07F( isdefined( var_3 ), var_3, 0 ), "type", var_0._id_BE9F ] );
+    _func_03BA( "dlog_event_br_mission_end", [ "id", scripts\engine\utility::ter_op( isdefined( var_0._id_9F83 ), var_0._id_9F83, "invalid" ), "result", scripts\engine\utility::ter_op( isdefined( var_0._id_034B ), var_0._id_034B, "unknown" ), "reward_tier", var_1, "xp", scripts\engine\utility::ter_op( isdefined( var_2["xp"] ), var_2["xp"], 0 ), "weapon_xp", scripts\engine\utility::ter_op( isdefined( var_2["weapon_xp"] ), var_2["weapon_xp"], 0 ), "plunder", scripts\engine\utility::ter_op( isdefined( var_2["plunder"] ), var_2["plunder"], 0 ), "num_teammates_awarded", scripts\engine\utility::ter_op( isdefined( var_3 ), var_3, 0 ), "type", var_0._id_BE9F ] );
 
     if ( _id_0B44() && isdefined( var_0._id_9F83 ) )
     {
@@ -962,7 +962,7 @@ _id_0B47( var_0, var_1 )
     var_2 = _id_0B48( var_2, var_0, var_1 );
 
     if ( isdefined( level._id_29F5 ) )
-        var_3 = _id_077B::_id_6AA8( level._id_29F5._id_370B );
+        var_3 = scripts\engine\utility::_id_6AA8( level._id_29F5._id_370B );
     else
         var_3 = -1;
 
@@ -977,15 +977,15 @@ _id_0B48( var_0, var_1, var_2 )
         var_2 = "player";
 
     var_0[var_0.size] = var_2 + "_x";
-    var_0[var_0.size] = var_1._id_02EA[0];
+    var_0[var_0.size] = var_1.origin[0];
     var_0[var_0.size] = var_2 + "_y";
-    var_0[var_0.size] = var_1._id_02EA[1];
+    var_0[var_0.size] = var_1.origin[1];
     var_0[var_0.size] = var_2 + "_z";
-    var_0[var_0.size] = var_1._id_02EA[2];
+    var_0[var_0.size] = var_1.origin[2];
     var_0[var_0.size] = var_2 + "_pitch";
-    var_0[var_0.size] = _id_077B::_id_6C3A( var_1 );
+    var_0[var_0.size] = scripts\engine\utility::_id_6C3A( var_1 );
     var_0[var_0.size] = var_2 + "_yaw";
-    var_0[var_0.size] = _id_077B::_id_6C53( var_1 );
+    var_0[var_0.size] = scripts\engine\utility::_id_6C53( var_1 );
     return var_0;
 }
 
@@ -997,15 +997,15 @@ _id_0B49( var_0, var_1 )
     foreach ( var_4 in var_1 )
     {
         var_2[var_2.size] = "x";
-        var_2[var_2.size] = var_4._id_02EA[0];
+        var_2[var_2.size] = var_4.origin[0];
         var_2[var_2.size] = "y";
-        var_2[var_2.size] = var_4._id_02EA[1];
+        var_2[var_2.size] = var_4.origin[1];
         var_2[var_2.size] = "z";
-        var_2[var_2.size] = var_4._id_02EA[2];
+        var_2[var_2.size] = var_4.origin[2];
         var_2[var_2.size] = "pitch";
-        var_2[var_2.size] = _id_077B::_id_6C3A( var_4 );
+        var_2[var_2.size] = scripts\engine\utility::_id_6C3A( var_4 );
         var_2[var_2.size] = "yaw";
-        var_2[var_2.size] = _id_077B::_id_6C53( var_4 );
+        var_2[var_2.size] = scripts\engine\utility::_id_6C53( var_4 );
     }
 
     var_0[var_0.size] = var_2;
@@ -1023,7 +1023,7 @@ _id_CABB( var_0 )
 _id_CABC( var_0 )
 {
     if ( isdefined( var_0 ) )
-        return var_0._id_0084;
+        return var_0.basename;
     else
         return "empty";
 }
@@ -1058,7 +1058,7 @@ _id_2ACA()
                     continue;
                 }
 
-                if ( distancesquared( var_1._id_02EA, var_1._id_5449._id_02EA ) > spawnstruct( 1000 ) )
+                if ( distancesquared( var_1.origin, var_1._id_5449.origin ) > _func_0214( 1000 ) )
                     var_1._id_E744 = 1;
             }
         }
@@ -1069,11 +1069,11 @@ _id_2ACA()
             {
                 if ( istrue( var_4._id_10415 ) )
                 {
-                    _func_03FA( var_4._id_02EA, "kiosk", 1, 0, "" );
+                    _func_03FA( var_4.origin, "kiosk", 1, 0, "" );
                     continue;
                 }
 
-                _func_03FA( var_4._id_02EA, "kiosk", 0, 0, "" );
+                _func_03FA( var_4.origin, "kiosk", 0, 0, "" );
             }
         }
 
@@ -1096,7 +1096,7 @@ _id_2ACA()
         foreach ( var_14 in level._id_469C )
         {
             foreach ( var_16 in var_14 )
-                _func_03FA( var_16._id_02EA, var_16._id_048F, var_16._id_E744, var_16._id_F1E5, var_16._id_432F );
+                _func_03FA( var_16.origin, var_16._id_048F, var_16._id_E744, var_16._id_F1E5, var_16._id_432F );
         }
 
         _func_03FB();
@@ -1118,7 +1118,7 @@ _id_8142()
 
     foreach ( var_1 in level._id_EF86 )
     {
-        var_2 = _func_020F();
+        var_2 = spawnstruct();
         var_2._id_E06D = [];
         var_2._id_F373 = [];
 
@@ -1137,11 +1137,11 @@ _id_8142()
 
 _id_C13B()
 {
-    for ( var_0 = 60.0; !istrue( level._id_609B ); var_0 = _func_0147( 60.0 - var_12, 0 ) )
+    for ( var_0 = 60.0; !istrue( level._id_609B ); var_0 = max( 60.0 - var_12, 0 ) )
     {
-        level _id_077B::_id_108F3( "game_ended", var_0 );
+        level scripts\engine\utility::_id_108F3( "game_ended", var_0 );
         var_1 = gettime();
-        var_2 = _id_07AE::_id_6DBB();
+        var_2 = scripts\mp\gamescore::_id_6DBB();
 
         foreach ( var_4 in level._id_EF86 )
         {
@@ -1176,7 +1176,7 @@ _id_C13B()
     }
 
     var_5 = _id_07C5::_id_6DC6( gettime() );
-    var_2 = _id_07AE::_id_6DBB();
+    var_2 = scripts\mp\gamescore::_id_6DBB();
 
     foreach ( var_4 in level._id_EF86 )
     {
@@ -1203,10 +1203,10 @@ _id_C13B()
 
 _id_F3F4( var_0, var_1, var_2 )
 {
-    if ( !isdefined( level._id_32E0 ) || !isdefined( var_0 ) || !isdefined( var_0._id_045B ) )
+    if ( !isdefined( level._id_32E0 ) || !isdefined( var_0 ) || !isdefined( var_0.team ) )
         return;
 
-    var_3 = var_0._id_045B;
+    var_3 = var_0.team;
     level._id_32E0[var_3]._id_E06D[var_1] = level._id_32E0[var_3]._id_E06D[var_1] + var_2;
 }
 
@@ -1218,32 +1218,32 @@ _id_AB27()
 _id_0C5A()
 {
     waittillframeend;
-    var_0 = level._id_2B8F._id_02BA;
-    var_1 = _id_077B::_id_6AA8( level._id_9C97 );
-    var_2 = _id_077B::_id_6AA8( level._id_B758.size );
-    var_3 = _id_077B::_id_6AA8( level._id_EFB0.size );
+    var_0 = level._id_2B8F.name;
+    var_1 = scripts\engine\utility::_id_6AA8( level._id_9C97 );
+    var_2 = scripts\engine\utility::_id_6AA8( level.players.size );
+    var_3 = scripts\engine\utility::_id_6AA8( level._id_EFB0.size );
     var_4 = 0;
 
-    foreach ( var_6 in level._id_B758 )
+    foreach ( var_6 in level.players )
     {
-        if ( _func_0107( var_6 ) || var_6 _meth_878C() )
+        if ( isbot( var_6 ) || var_6 _meth_878C() )
             continue;
 
         var_4++;
     }
 
     if ( isdefined( level._id_29EA ) )
-        var_8 = _id_077B::_id_6AA8( level._id_29EA._id_EF9A );
+        var_8 = scripts\engine\utility::_id_6AA8( level._id_29EA._id_EF9A );
     else
         var_8 = 0;
 
-    var_9 = _id_077B::_id_6AA8( level._id_FE74 );
+    var_9 = scripts\engine\utility::_id_6AA8( level._id_FE74 );
 
     if ( isdefined( level._id_7245 ) )
     {
-        var_10 = _id_077B::_id_6AA8( level._id_7245._id_9CA0 );
-        var_11 = _id_077B::_id_6AA8( level._id_7245._id_A75A );
-        var_12 = _id_077B::_id_6AA8( level._id_7245._id_E31A );
+        var_10 = scripts\engine\utility::_id_6AA8( level._id_7245._id_9CA0 );
+        var_11 = scripts\engine\utility::_id_6AA8( level._id_7245._id_A75A );
+        var_12 = scripts\engine\utility::_id_6AA8( level._id_7245._id_E31A );
     }
     else
     {

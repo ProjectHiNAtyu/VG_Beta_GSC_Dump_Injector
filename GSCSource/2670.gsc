@@ -24,12 +24,12 @@ _id_AB5A( var_0 )
 {
     var_0 notify( "onPlayerJoinTeamNoSpectator" );
 
-    if ( var_0._id_0392 == "spectator" )
+    if ( var_0.sessionstate == "spectator" )
     {
         var_0 endon( "death_or_disconnect" );
         var_0 endon( "onPlayerJoinTeamNoSpectator" );
 
-        while ( var_0._id_0392 == "spectator" )
+        while ( var_0.sessionstate == "spectator" )
             waitframe();
     }
 

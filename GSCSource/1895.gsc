@@ -3,10 +3,10 @@
 
 _id_0BE9( var_0 )
 {
-    if ( _func_0107( self ) )
+    if ( isbot( self ) )
         return;
 
-    _bullet_trace();
+    _id_0B75();
     var_1 = _id_56DB( var_0 );
 
     if ( isdefined( var_1 ) )
@@ -19,11 +19,11 @@ _id_0BE9( var_0 )
 
     self._id_56E5 = var_0;
 
-    if ( _id_099D::_id_8A10( "game", "lpcFeatureGated" ) && ![[ _id_099D::_id_6D05( "game", "lpcFeatureGated" ) ]]() )
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "game", "lpcFeatureGated" ) && ![[ scripts\cp_mp\utility\script_utility::getsharedfunc( "game", "lpcFeatureGated" ) ]]() )
         thread _id_10B85();
 }
 
-_bullet_trace()
+_id_0B75()
 {
     if ( isdefined( self._id_56E5 ) )
     {
@@ -31,7 +31,7 @@ _bullet_trace()
         var_0 = _id_56DB( self._id_56E5 );
 
         if ( isdefined( var_0 ) && self hasweapon( var_0 ) )
-            self takeallweapons( var_0 );
+            self takeweapon( var_0 );
 
         self._id_56E5 = undefined;
     }
@@ -44,15 +44,15 @@ _id_7541()
 
 _id_56DD( var_0 )
 {
-    level._id_56D2 = _func_020F();
+    level._id_56D2 = spawnstruct();
     level._id_522E = ::_id_522F;
     level._id_4A90 = ::_id_4A91;
     level._id_5230 = ::_id_5231;
     level._id_4A92 = ::_id_4A93;
     _id_56DE( istrue( var_0 ) );
 
-    if ( _id_099D::_id_8A10( "execution", "init" ) )
-        [[ _id_099D::_id_6D05( "execution", "init" ) ]]();
+    if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "execution", "init" ) )
+        [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "execution", "init" ) ]]();
 }
 
 _id_522F()
@@ -83,30 +83,30 @@ _id_56DE( var_0 )
 
     for (;;)
     {
-        var_2 = _func_021E( "mp_cp/executiontable.csv", var_1, 1 );
+        var_2 = tablelookupbyrow( "mp_cp/executiontable.csv", var_1, 1 );
 
         if ( !isdefined( var_2 ) || var_2 == "" )
             break;
 
-        var_3 = _func_0243( var_2 );
-        var_4 = _func_020F();
+        var_3 = tolower( var_2 );
+        var_4 = spawnstruct();
         var_4._id_C17B = var_3;
-        var_5 = _func_021E( "mp_cp/executiontable.csv", var_1, 0 );
+        var_5 = tablelookupbyrow( "mp_cp/executiontable.csv", var_1, 0 );
         var_4._id_7C71 = int( var_5 );
-        var_6 = _func_021E( "mp_cp/executiontable.csv", var_1, 12 );
+        var_6 = tablelookupbyrow( "mp_cp/executiontable.csv", var_1, 12 );
 
         if ( var_6 != "none" )
             var_4._id_56D2 = var_6;
 
         if ( !var_0 )
         {
-            var_7 = _func_021E( "mp_cp/executiontable.csv", var_1, 13 );
+            var_7 = tablelookupbyrow( "mp_cp/executiontable.csv", var_1, 13 );
 
             if ( var_7 != "none" )
             {
-                var_4._id_BDAF = _func_034C( var_7 );
+                var_4._id_BDAF = makeweapon( var_7 );
 
-                if ( _func_036F( var_4._id_BDAF ) )
+                if ( isnullweapon( var_4._id_BDAF ) )
                 {
                     var_1++;
                     continue;
@@ -114,9 +114,9 @@ _id_56DE( var_0 )
             }
         }
 
-        var_4._id_1DB9 = _func_021E( "mp_cp/executiontable.csv", var_1, 19 );
-        var_4._id_103C9 = _func_021E( "mp_cp/executiontable.csv", var_1, 20 );
-        var_4._id_10DB1 = _func_021E( "mp_cp/executiontable.csv", var_1, 21 );
+        var_4._id_1DB9 = tablelookupbyrow( "mp_cp/executiontable.csv", var_1, 19 );
+        var_4._id_103C9 = tablelookupbyrow( "mp_cp/executiontable.csv", var_1, 20 );
+        var_4._id_10DB1 = tablelookupbyrow( "mp_cp/executiontable.csv", var_1, 21 );
         level._id_56D2._id_EC59[var_3] = var_4;
         level._id_56D2._id_7CBC[var_4._id_7C71] = var_4._id_C17B;
         var_1++;
@@ -163,19 +163,19 @@ _id_56D9( var_0 )
 
 _id_56D4()
 {
-    if ( self isonground() )
+    if ( self isonladder() )
     {
         if ( !istrue( self._id_8E78 ) )
         {
-            _id_06BB::_id_1514( 0 );
-            _id_06BB::_id_1515( 0 );
+            scripts\common\utility::_id_1514( 0 );
+            scripts\common\utility::_id_1515( 0 );
             self._id_8E78 = 1;
         }
     }
     else if ( istrue( self._id_8E78 ) )
     {
-        _id_06BB::_id_1514( 1 );
-        _id_06BB::_id_1515( 1 );
+        scripts\common\utility::_id_1514( 1 );
+        scripts\common\utility::_id_1515( 1 );
         self._id_8E78 = undefined;
     }
 }

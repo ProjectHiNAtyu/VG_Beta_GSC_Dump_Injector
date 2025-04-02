@@ -16,14 +16,14 @@ _id_99EA( var_0 )
     _id_0A64::_id_9120( var_0 );
     _id_D4E1( "kill" );
     self._id_3E37 = 1;
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_fastreload" );
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_quickdraw" );
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_fastoffhand" );
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_fastsprintrecovery" );
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_marathon" );
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_quickswap" );
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_stalker" );
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( "specialty_sprintfire" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_fastreload" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_quickdraw" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_fastoffhand" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_fastsprintrecovery" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_marathon" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_quickswap" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_stalker" );
+    scripts\mp\utility\perk::_id_6FA5( "specialty_sprintfire" );
     self._id_A24C = 1.2;
     scripts\mp\weapons::_id_FCCA();
 }
@@ -33,25 +33,25 @@ _id_AA7E( var_0, var_1, var_2 )
     if ( isdefined( var_0 ) )
         var_0 thread _id_3856();
 
-    self _meth_82F6( "ui_cranked_bomb_timer_final_seconds", 0 );
+    self setclientomnvar( "ui_cranked_bomb_timer_final_seconds", 0 );
 
     if ( isdefined( var_1._id_3E37 ) )
     {
         var_3 = "kill_cranked";
-        var_1 thread _id_07E1::_id_CBF3( "kill_cranked" );
-        var_1 thread _id_07E1::_id_CBF3( "time_added" );
+        var_1 thread scripts\mp\rank::_id_CBF3( "kill_cranked" );
+        var_1 thread scripts\mp\rank::_id_CBF3( "time_added" );
         var_1 thread _id_AA81( var_3 );
 
-        if ( !istrue( _id_0999::_id_89D2() ) )
-            var_1 _meth_827E( "mp_cranked_splash", var_1 );
+        if ( !istrue( scripts\cp_mp\utility\game_utility::_id_89D2() ) )
+            var_1 playsoundtoplayer( "mp_cranked_splash", var_1 );
     }
-    else if ( _id_0A74::_id_89D3( var_1 ) )
+    else if ( scripts\mp\utility\player::isreallyalive( var_1 ) )
     {
         var_1 _id_99EA( "begin_cranked" );
-        var_1 thread _id_07E1::_id_CBF3( "begin_cranked" );
+        var_1 thread scripts\mp\rank::_id_CBF3( "begin_cranked" );
 
-        if ( !istrue( _id_0999::_id_89D2() ) )
-            var_1 _meth_827E( "mp_cranked_start_splash", var_1 );
+        if ( !istrue( scripts\cp_mp\utility\game_utility::_id_89D2() ) )
+            var_1 playsoundtoplayer( "mp_cranked_start_splash", var_1 );
     }
 
     if ( isdefined( var_0 ) && isdefined( var_0._id_1DB6 ) && !isdefined( level._id_1D04 ) )
@@ -71,11 +71,11 @@ _id_AA7E( var_0, var_1, var_2 )
                 continue;
 
             var_5 thread _id_AA7F( "assist_cranked" );
-            var_5 thread _id_07E1::_id_CBF3( "assist_cranked" );
-            var_5 thread _id_07E1::_id_CBF3( "time_added" );
+            var_5 thread scripts\mp\rank::_id_CBF3( "assist_cranked" );
+            var_5 thread scripts\mp\rank::_id_CBF3( "time_added" );
 
-            if ( !istrue( _id_0999::_id_89D2() ) )
-                var_5 _meth_827E( "mp_cranked_splash", var_5 );
+            if ( !istrue( scripts\cp_mp\utility\game_utility::_id_89D2() ) )
+                var_5 playsoundtoplayer( "mp_cranked_splash", var_5 );
         }
     }
 }
@@ -90,8 +90,8 @@ _id_AA80( var_0 )
 
 _id_3856()
 {
-    self _meth_82F6( "ui_cranked_bomb_timer_final_seconds", 0 );
-    self _meth_82F6( "ui_cranked_bomb_timer_end_milliseconds", 0 );
+    self setclientomnvar( "ui_cranked_bomb_timer_final_seconds", 0 );
+    self setclientomnvar( "ui_cranked_bomb_timer_end_milliseconds", 0 );
     self._id_3E37 = undefined;
     self._id_3E38 = undefined;
     thread _id_10871();
@@ -108,7 +108,7 @@ _id_AA81( var_0 )
     level endon( "game_ended" );
     self endon( "disconnect" );
 
-    while ( !isdefined( self._id_0309 ) )
+    while ( !isdefined( self.pers ) )
         waitframe();
 
     _id_D4E1( "kill" );
@@ -126,7 +126,7 @@ _id_D4E1( var_0 )
     var_1 = level._id_3E39;
     var_2 = 0;
 
-    if ( _id_0A69::_id_6A43() == "conf" || _id_0A69::_id_6A43() == "grind" )
+    if ( scripts\mp\utility\game::getgametype() == "conf" || scripts\mp\utility\game::getgametype() == "grind" )
         var_2 = 1;
 
     if ( var_0 == "hit" )
@@ -139,16 +139,16 @@ _id_D4E1( var_0 )
     else if ( var_0 == "assist" )
     {
         if ( var_2 )
-            var_1 = int( _func_0148( ( self._id_3E38 - gettime() ) / 1000 + level._id_3E39 * 0.25, level._id_3E39 ) );
+            var_1 = int( min( ( self._id_3E38 - gettime() ) / 1000 + level._id_3E39 * 0.25, level._id_3E39 ) );
         else
-            var_1 = int( _func_0148( ( self._id_3E38 - gettime() ) / 1000 + level._id_3E39 * 0.5, level._id_3E39 ) );
+            var_1 = int( min( ( self._id_3E38 - gettime() ) / 1000 + level._id_3E39 * 0.5, level._id_3E39 ) );
     }
     else if ( var_0 == "friendly_tag" )
-        var_1 = int( _func_0148( ( self._id_3E38 - gettime() ) / 1000 + level._id_3E39 * 0.25, level._id_3E39 ) );
+        var_1 = int( min( ( self._id_3E38 - gettime() ) / 1000 + level._id_3E39 * 0.25, level._id_3E39 ) );
     else if ( var_2 )
     {
         if ( isdefined( self._id_3E37 ) && self._id_3E37 && isdefined( self._id_3E38 ) )
-            var_1 = int( _func_0148( ( self._id_3E38 - gettime() ) / 1000 + level._id_3E39 * 0.5, level._id_3E39 ) );
+            var_1 = int( min( ( self._id_3E38 - gettime() ) / 1000 + level._id_3E39 * 0.5, level._id_3E39 ) );
         else
             var_1 = int( var_1 * 0.5 );
     }
@@ -156,7 +156,7 @@ _id_D4E1( var_0 )
         var_1 = level._id_3E39;
 
     var_3 = var_1 * 1000 + gettime();
-    self _meth_82F6( "ui_cranked_bomb_timer_end_milliseconds", var_3 );
+    self setclientomnvar( "ui_cranked_bomb_timer_end_milliseconds", var_3 );
     self._id_3E38 = var_3;
     thread _id_10AB5();
     thread _id_10AB2( var_1 );
@@ -171,15 +171,15 @@ _id_10AB5()
     self endon( "death_or_disconnect" );
     self endon( "stop_cranked" );
     level waittill( "host_migration_begin" );
-    var_0 = _id_07B7::_id_10956();
+    var_0 = scripts\mp\hostmigration::_id_10956();
 
     if ( self._id_3E38 + var_0 < 5 )
-        self _meth_82F6( "ui_cranked_bomb_timer_final_seconds", 1 );
+        self setclientomnvar( "ui_cranked_bomb_timer_final_seconds", 1 );
 
     if ( var_0 > 0 )
-        self _meth_82F6( "ui_cranked_bomb_timer_end_milliseconds", self._id_3E38 + var_0 );
+        self setclientomnvar( "ui_cranked_bomb_timer_end_milliseconds", self._id_3E38 + var_0 );
     else
-        self _meth_82F6( "ui_cranked_bomb_timer_end_milliseconds", self._id_3E38 );
+        self setclientomnvar( "ui_cranked_bomb_timer_end_milliseconds", self._id_3E38 );
 }
 
 _id_10AB3()
@@ -193,7 +193,7 @@ _id_10AB3()
     {
         if ( game["state"] == "postgame" || level._id_609B )
         {
-            self _meth_82F6( "ui_cranked_bomb_timer_end_milliseconds", 0 );
+            self setclientomnvar( "ui_cranked_bomb_timer_end_milliseconds", 0 );
             break;
         }
 
@@ -213,29 +213,29 @@ _id_10AB2( var_0 )
 
     if ( var_2 > 0 )
     {
-        _id_07B7::_id_1084C( var_2 );
-        _id_07B7::_id_1084C( 1.0 );
+        scripts\mp\hostmigration::_id_1084C( var_2 );
+        scripts\mp\hostmigration::_id_1084C( 1.0 );
     }
 
-    self _meth_82F6( "ui_cranked_bomb_timer_final_seconds", 1 );
+    self setclientomnvar( "ui_cranked_bomb_timer_final_seconds", 1 );
 
     while ( var_1 > 0 )
     {
-        self _meth_827E( "ui_mp_cranked_timer", self );
-        _id_07B7::_id_1084C( 1.0 );
+        self playsoundtoplayer( "ui_mp_cranked_timer", self );
+        scripts\mp\hostmigration::_id_1084C( 1.0 );
         var_1--;
     }
 
-    if ( isdefined( self ) && _id_0A74::_id_89D3( self ) && _id_0A69::_id_6A43() != "tdef" )
+    if ( isdefined( self ) && scripts\mp\utility\player::isreallyalive( self ) && scripts\mp\utility\game::getgametype() != "tdef" )
     {
-        self _meth_827B( "vest_expl_trans" );
-        var_3 = self._id_02EA + ( 0, 0, 32 );
-        _func_0196( level._id_0BA3["cranked_explode"], var_3 );
+        self playsound( "vest_expl_trans" );
+        var_3 = self.origin + ( 0, 0, 32 );
+        playfx( level._effect["cranked_explode"], var_3 );
         _id_0A62::_id_0D61();
-        self _meth_8287( var_3, 256, 200, 100, self, "MOD_EXPLOSIVE", "bomb_site_mp" );
-        self _meth_82F6( "ui_cranked_bomb_timer_end_milliseconds", 0 );
+        self radiusdamage( var_3, 256, 200, 100, self, "MOD_EXPLOSIVE", "bomb_site_mp" );
+        self setclientomnvar( "ui_cranked_bomb_timer_end_milliseconds", 0 );
 
-        if ( _id_099C::_giveweapon() )
-            self _meth_80B7( self._id_027F, var_3, self, undefined, "MOD_EXPLOSIVE", "bomb_site_mp" );
+        if ( scripts\cp_mp\utility\player_utility::_id_0C14() )
+            self dodamage( self.maxhealth, var_3, self, undefined, "MOD_EXPLOSIVE", "bomb_site_mp" );
     }
 }

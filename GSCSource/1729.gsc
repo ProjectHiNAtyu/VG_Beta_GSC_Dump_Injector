@@ -3,8 +3,8 @@
 
 _id_948C( var_0, var_1 )
 {
-    var_2 = _func_021A( var_0, " " );
-    _id_077B::_id_1B8F( var_2, ::_id_948E, var_1 );
+    var_2 = strtok( var_0, " " );
+    scripts\engine\utility::_id_1B8F( var_2, ::_id_948E, var_1 );
 }
 
 _id_71FA( var_0, var_1, var_2 )
@@ -35,7 +35,7 @@ _id_9485()
     if ( !isdefined( level._id_6068 ) )
         level._id_6068 = 0;
 
-    level._id_6068 = level._id_6068 + _func_01B7( 0.2, 0.4 );
+    level._id_6068 = level._id_6068 + randomfloatrange( 0.2, 0.4 );
 
     if ( level._id_6068 > 2 )
         level._id_6068 = 0;
@@ -51,7 +51,7 @@ _id_9489( var_0, var_1, var_2 )
     if ( isdefined( var_2 ) )
         var_1 = var_2;
     else if ( !isdefined( var_1 ) )
-        var_1 = self._id_00DE;
+        var_1 = self.classname;
 
     if ( !isdefined( var_0 ) )
         var_0 = "all";
@@ -81,10 +81,10 @@ _id_9489( var_0, var_1, var_2 )
         if ( isdefined( var_10._id_F844 ) )
         {
             if ( self._id_9E55[var_10._id_F844] tagexists( var_10._id_0400 ) )
-                _func_0218( var_10._id_50E6, self._id_9E55[var_10._id_F844], var_10._id_0400 );
+                stopfxontag( var_10._id_50E6, self._id_9E55[var_10._id_F844], var_10._id_0400 );
         }
         else if ( self tagexists( var_10._id_0400 ) )
-            _func_0218( var_10._id_50E6, self, var_10._id_0400 );
+            stopfxontag( var_10._id_50E6, self, var_10._id_0400 );
 
         var_4++;
 
@@ -113,7 +113,7 @@ _id_948E( var_0, var_1 )
         var_0 = "all";
 
     if ( !isdefined( var_1 ) )
-        var_1 = self._id_00DE;
+        var_1 = self.classname;
 
     if ( !isdefined( level._id_FFF1._id_F075._id_10132 ) )
         return;
@@ -179,13 +179,13 @@ _id_DD56( var_0, var_1, var_2 )
         break;
     }
 
-    _func_0197( var_2._id_50E6, self, var_2._id_0400 );
+    playfxontag( var_2._id_50E6, self, var_2._id_0400 );
 }
 
 _id_9488( var_0, var_1, var_2 )
 {
-    var_3 = _func_021A( var_0, " ", var_1 );
-    _id_077B::_id_1B8F( var_3, ::_id_9489, var_1, var_2 );
+    var_3 = strtok( var_0, " ", var_1 );
+    scripts\engine\utility::_id_1B8F( var_3, ::_id_9489, var_1, var_2 );
 }
 
 _id_F995()
@@ -200,7 +200,7 @@ _id_F995()
 _id_D2A2( var_0, var_1 )
 {
     self._id_75E9 = var_0;
-    var_0 _meth_820B( self, self._id_75F2, self._id_75EC, self._id_75EB );
+    var_0 linkto( self, self._id_75F2, self._id_75EC, self._id_75EB );
     var_0 _meth_8337( 1 );
     var_0 _meth_833A( 500 );
     var_0 _meth_833F( "forceshadowon" );
@@ -226,10 +226,10 @@ _id_D2A2( var_0, var_1 )
     if ( isdefined( self._id_4550 ) )
     {
         if ( isdefined( self._id_75EA ) )
-            _func_0197( self._id_4550, self, self._id_75EA );
+            playfxontag( self._id_4550, self, self._id_75EA );
 
         if ( isdefined( self._id_75ED ) )
-            _func_0197( self._id_4550, self, self._id_75ED );
+            playfxontag( self._id_4550, self, self._id_75ED );
     }
 }
 
@@ -248,8 +248,8 @@ toggle_optimized_headlight_ent( var_0, var_1 )
     if ( var_0 )
     {
         self._id_75E9 _meth_8337( 1 );
-        _func_0197( self._id_4550, self, self._id_75EA );
-        _func_0197( self._id_4550, self, self._id_75ED );
+        playfxontag( self._id_4550, self, self._id_75EA );
+        playfxontag( self._id_4550, self, self._id_75ED );
     }
     else
     {
@@ -261,7 +261,7 @@ toggle_optimized_headlight_ent( var_0, var_1 )
 
 _id_D2A3( var_0 )
 {
-    var_0 _meth_820B( self, self._id_ED79, self._id_ED78, self._id_ED77 );
+    var_0 linkto( self, self._id_ED79, self._id_ED78, self._id_ED77 );
     var_0 _meth_8333( ( 1, 0, 0 ) );
     var_0 _meth_8337( 0 );
     var_0 _meth_833A( 150 );
@@ -276,7 +276,7 @@ _id_D233( var_0 )
 {
     self endon( "death" );
 
-    if ( self._id_75EE == self._id_75EF || isdefined( self._id_01FF ) && self._id_01FF <= 0 )
+    if ( self._id_75EE == self._id_75EF || isdefined( self.health ) && self.health <= 0 )
     {
         self._id_75EE = self._id_75F0;
         self._id_75E9 _meth_8337( 0 );
@@ -287,14 +287,14 @@ _id_D233( var_0 )
         self._id_75EE = self._id_75EF;
 
         if ( isdefined( self._id_75ED ) && var_0 == self._id_75ED )
-            self._id_75E9 _meth_820B( self, self._id_75EA, ( 0, 0, 0 ), ( 20, 0, 0 ) );
+            self._id_75E9 linkto( self, self._id_75EA, ( 0, 0, 0 ), ( 20, 0, 0 ) );
         else if ( isdefined( self._id_75EA ) && var_0 == self._id_75EA )
-            self._id_75E9 _meth_820B( self, self._id_75ED, ( 0, 0, 0 ), ( 20, 0, 0 ) );
+            self._id_75E9 linkto( self, self._id_75ED, ( 0, 0, 0 ), ( 20, 0, 0 ) );
 
         self._id_75E9 _meth_8337( 0.1 );
     }
 
-    if ( isdefined( self._id_01FF ) && self._id_01FF > 0 && isdefined( self._id_4550 ) )
+    if ( isdefined( self.health ) && self.health > 0 && isdefined( self._id_4550 ) )
     {
         if ( var_0 == self._id_75ED )
             kick( self._id_4550, self, self._id_75ED );

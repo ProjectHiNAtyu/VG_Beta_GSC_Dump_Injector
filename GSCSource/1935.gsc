@@ -5,16 +5,16 @@ _id_BD5D( var_0, var_1, var_2 )
 {
     if ( var_1 >= 0 && isdefined( level._id_2FD7._id_33D1 ) )
     {
-        var_3 = level._id_2FD7._id_33D1[var_1]._id_02EA;
-        var_4 = level._id_2FD7._id_33D1[var_1]._id_0054;
+        var_3 = level._id_2FD7._id_33D1[var_1].origin;
+        var_4 = level._id_2FD7._id_33D1[var_1].angles;
 
         if ( isdefined( level._id_AD35 ) )
             var_1 = level._id_AD35 - 1;
     }
     else
     {
-        var_3 = level._id_33D7._id_02EA;
-        var_4 = level._id_33D7._id_0054;
+        var_3 = level._id_33D7.origin;
+        var_4 = level._id_33D7.angles;
         var_1 = 0;
     }
 
@@ -292,11 +292,11 @@ _id_BD5D( var_0, var_1, var_2 )
 
     for ( var_29 = 0; var_29 < var_5.size; var_29++ )
     {
-        var_32 = _func_0205( "script_model", var_3 );
-        var_32 setmode( var_5[var_29] );
-        var_32._id_0054 = var_4 + var_31;
-        var_32 _meth_824C();
-        var_32 _meth_80BE();
+        var_32 = spawn( "script_model", var_3 );
+        var_32 setmodel( var_5[var_29] );
+        var_32.angles = var_4 + var_31;
+        var_32 notsolid();
+        var_32 dontinterpolate();
         var_32 _meth_82CB( var_6[var_29] );
 
         if ( !isdefined( level._id_2BFE ) )
@@ -304,19 +304,19 @@ _id_BD5D( var_0, var_1, var_2 )
 
         level._id_2BFE[var_1][var_29] = var_32;
 
-        if ( !( isdefined( var_8[var_29] ) && isalive( var_8[var_29] ) ) )
+        if ( !( isdefined( var_8[var_29] ) && _func_0106( var_8[var_29] ) ) )
             continue;
 
         level._id_2BFF[var_1] = [];
 
         for ( var_33 = 0; var_33 < var_8[var_29].size; var_33++ )
         {
-            var_34 = _func_0205( "script_model", var_3 );
-            var_34 setmode( var_8[var_29][var_33] );
-            var_34._id_0054 = var_4 + var_31;
-            var_34 _meth_824C();
-            var_34 _meth_80BE();
-            var_34 _meth_820B( var_32, var_9[var_29][var_33], ( 0, 0, 0 ), ( 0, 0, 0 ) );
+            var_34 = spawn( "script_model", var_3 );
+            var_34 setmodel( var_8[var_29][var_33] );
+            var_34.angles = var_4 + var_31;
+            var_34 notsolid();
+            var_34 dontinterpolate();
+            var_34 linkto( var_32, var_9[var_29][var_33], ( 0, 0, 0 ), ( 0, 0, 0 ) );
             level._id_2BFF[var_1][var_33] = var_34;
         }
     }
@@ -324,7 +324,7 @@ _id_BD5D( var_0, var_1, var_2 )
     var_35 = 0;
 
     for ( var_29 = 0; var_29 < var_7.size; var_29++ )
-        var_35 = _func_0147( var_35, var_7[var_29] );
+        var_35 = max( var_35, var_7[var_29] );
 
     for ( var_29 = 0; var_29 < var_10.size; var_29++ )
         thread _id_4C4F( var_2, var_1, var_10[var_29], var_11[var_29], var_12[var_29] );
@@ -354,15 +354,15 @@ _id_BD5D( var_0, var_1, var_2 )
 
     for ( var_29 = 0; var_29 < var_25.size; var_29++ )
     {
-        var_37 = anglestoforward( level._id_2FD7._id_2289._id_0054 );
-        var_38 = _func_025A( ( var_37[0], var_37[1], 0 ) );
+        var_37 = anglestoforward( level._id_2FD7._id_2289.angles );
+        var_38 = vectornormalize( ( var_37[0], var_37[1], 0 ) );
         var_39 = _func_0256( var_38, ( 0, 0, 1 ) );
         var_40 = var_38 * var_25[var_29][1];
         var_41 = var_39 * var_25[var_29][0];
         var_42 = var_40 + var_41;
 
         if ( var_2 != 0 )
-            var_43 = level._id_2FD7._id_33D1[0]._id_02EA;
+            var_43 = level._id_2FD7._id_33D1[0].origin;
         else
             var_43 = var_3;
 
@@ -378,11 +378,11 @@ _id_4E5D( var_0, var_1, var_2, var_3 )
     self endon( "cancel_taunt_cleanup" );
     wait( var_1 );
     var_4 = var_3 + var_2;
-    var_5 = _func_0207( level._id_0BA3[var_0], var_4 );
+    var_5 = spawnfx( level._effect[var_0], var_4 );
 
     if ( isdefined( var_5 ) )
     {
-        _func_024B( var_5 );
+        triggerfx( var_5 );
         var_5 thread _id_46AA( 12.0 );
     }
 }
@@ -393,7 +393,7 @@ _id_46AA( var_0 )
     wait( var_0 );
 
     if ( isdefined( self ) )
-        self _meth_809A();
+        self delete();
 }
 
 _id_4C47( var_0, var_1 )
@@ -409,14 +409,14 @@ _id_B359( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
     self endon( "cancel_taunt_cleanup" );
     wait( var_0 );
-    var_6 = _func_030D( level._id_0BA3[var_2], var_5, var_3, var_5, var_4 );
+    var_6 = _func_030D( level._effect[var_2], var_5, var_3, var_5, var_4 );
     thread _id_384F( var_6, var_1 );
 }
 
 _id_384F( var_0, var_1 )
 {
     _id_108F3( "cancel_taunt_cleanup", var_1 );
-    var_0 _meth_809A();
+    var_0 delete();
 }
 
 _id_108F3( var_0, var_1 )
@@ -429,23 +429,23 @@ _id_4C4B( var_0, var_1 )
 {
     self endon( "cancel_taunt_cleanup" );
 
-    if ( !isdefined( level._id_B758 ) )
+    if ( !isdefined( level.players ) )
         return;
 
     wait( var_0 );
 
-    foreach ( var_3 in level._id_B758 )
+    foreach ( var_3 in level.players )
     {
-        if ( _func_0107( var_3 ) )
+        if ( isbot( var_3 ) )
             continue;
 
         if ( var_1 )
         {
-            var_3 _meth_849F( 0.5, 0.65, var_3._id_02EA, 1000 );
+            var_3 earthquakeforplayer( 0.5, 0.65, var_3.origin, 1000 );
             continue;
         }
 
-        var_3 _meth_849F( 0.15, 0.25, var_3._id_02EA, 1000 );
+        var_3 earthquakeforplayer( 0.15, 0.25, var_3.origin, 1000 );
     }
 }
 
@@ -454,9 +454,9 @@ _id_4E50( var_0 )
     self endon( "cancel_taunt_cleanup" );
     wait( var_0 );
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
-        if ( _func_0107( var_2 ) )
+        if ( isbot( var_2 ) )
             continue;
     }
 }
@@ -484,23 +484,23 @@ _id_4C4F( var_0, var_1, var_2, var_3, var_4 )
     if ( !isdefined( var_5 ) )
         return;
 
-    var_5 _meth_8373( var_2, var_3, 0 );
+    var_5 setscriptablepartstate( var_2, var_3, 0 );
 }
 
 _id_952C( var_0, var_1 )
 {
     self waittill( "cancel_taunt_cleanup" );
     var_2 = _id_6C27( var_0 );
-    var_2 _meth_8373( var_1, "offImmediate", 0 );
+    var_2 setscriptablepartstate( var_1, "offImmediate", 0 );
 }
 
 _id_C68F()
 {
-    var_0 = level._id_33D7._id_0054;
-    var_1 = level._id_33D7._id_02EA;
-    level._id_33D7 _meth_809A();
-    level._id_33D7 = _func_0205( "script_character", var_1, 0, 0, 1, "MPClientCharacter" );
-    level._id_33D7._id_0054 = var_0;
+    var_0 = level._id_33D7.angles;
+    var_1 = level._id_33D7.origin;
+    level._id_33D7 delete();
+    level._id_33D7 = spawn( "script_character", var_1, 0, 0, 1, "MPClientCharacter" );
+    level._id_33D7.angles = var_0;
     _id_474A( 0 );
 
     if ( isdefined( level._id_8F54 ) )
@@ -519,7 +519,7 @@ _id_C68F()
 
 _id_EF2A( var_0 )
 {
-    return isdefined( level._id_2BFE ) && isalive( level._id_2BFE ) && isdefined( level._id_2BFE[var_0] ) && level._id_2BFE[var_0].size > 0;
+    return isdefined( level._id_2BFE ) && _func_0106( level._id_2BFE ) && isdefined( level._id_2BFE[var_0] ) && level._id_2BFE[var_0].size > 0;
 }
 
 _id_385D( var_0, var_1, var_2 )
@@ -539,20 +539,20 @@ _id_474A( var_0 )
             if ( isdefined( level._id_2BFE[var_0][var_1] ) )
             {
                 level._id_2BFE[var_0][var_1] _meth_82C9();
-                level._id_2BFE[var_0][var_1] _meth_809A();
+                level._id_2BFE[var_0][var_1] delete();
             }
         }
 
         level._id_2BFE[var_0] = [];
 
-        if ( isdefined( level._id_2BFF[var_0] ) && isalive( level._id_2BFF[var_0] ) )
+        if ( isdefined( level._id_2BFF[var_0] ) && _func_0106( level._id_2BFF[var_0] ) )
         {
             for ( var_1 = 0; var_1 < level._id_2BFF[var_0].size; var_1++ )
             {
                 if ( isdefined( level._id_2BFF[var_0][var_1] ) )
                 {
                     level._id_2BFF[var_0][var_1] _meth_82C9();
-                    level._id_2BFF[var_0][var_1] _meth_809A();
+                    level._id_2BFF[var_0][var_1] delete();
                 }
             }
 
@@ -595,7 +595,7 @@ _id_BD73( var_0 )
     }
     else if ( _func_0200( var_0 + "_quiet" ) )
     {
-        if ( !_id_1B78( level._id_EF2D, var_0 ) )
+        if ( !array_contains( level._id_EF2D, var_0 ) )
         {
             _id_B389( var_0 + "_quiet" );
             level._id_EF2D[level._id_EF2D.size] = var_0;
@@ -606,19 +606,19 @@ _id_BD73( var_0 )
 
 _id_B389( var_0 )
 {
-    if ( isdefined( level._id_B758 ) )
+    if ( isdefined( level.players ) )
     {
-        foreach ( var_2 in level._id_B758 )
+        foreach ( var_2 in level.players )
         {
-            if ( !_func_0107( var_2 ) )
-                var_2 _meth_8275( var_0 );
+            if ( !isbot( var_2 ) )
+                var_2 playlocalsound( var_0 );
         }
     }
     else
-        self _meth_8275( var_0 );
+        self playlocalsound( var_0 );
 }
 
-_id_1B78( var_0, var_1 )
+array_contains( var_0, var_1 )
 {
     if ( var_0.size <= 0 )
         return 0;

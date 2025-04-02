@@ -10,7 +10,7 @@ _id_0CD0( var_0, var_1, var_2, var_3, var_4 )
 
     if ( var_1 != "top" )
     {
-        if ( !_id_06BB::_id_869C() )
+        if ( !scripts\common\utility::_id_869C() )
             return 0;
     }
 
@@ -36,9 +36,9 @@ _id_0CD0( var_0, var_1, var_2, var_3, var_4 )
     self._id_D9DD = var_5;
 
     if ( isdefined( var_3 ) )
-        self _meth_83BC( var_0, var_2, var_3 );
+        self shellshock( var_0, var_2, var_3 );
     else
-        self _meth_83BC( var_0, var_2 );
+        self shellshock( var_0, var_2 );
 
     thread _id_D9BE( var_2 );
 }
@@ -62,12 +62,12 @@ _id_524B()
 
 _id_4AC3()
 {
-    _id_0D60( _id_099C::_giveweapon() );
+    _id_0D60( scripts\cp_mp\utility\player_utility::_id_0C14() );
 }
 
 _id_D9BD( var_0, var_1, var_2, var_3, var_4 )
 {
-    playfxontag( "artillery_rumble", var_0 );
+    playrumbleonposition( "artillery_rumble", var_0 );
 
     if ( !isdefined( var_1 ) )
         var_1 = 0.7;
@@ -84,7 +84,7 @@ _id_D9BD( var_0, var_1, var_2, var_3, var_4 )
 
 _id_D9C5( var_0, var_1, var_2 )
 {
-    var_3 = _id_06BB::_id_B7AC( var_0, var_1 );
+    var_3 = scripts\common\utility::_id_B7AC( var_0, var_1 );
 
     foreach ( var_5 in var_3 )
     {
@@ -93,19 +93,19 @@ _id_D9C5( var_0, var_1, var_2 )
 
         if ( isdefined( var_2 ) )
         {
-            if ( isalive( var_2 ) )
+            if ( _func_0106( var_2 ) )
             {
-                if ( _id_077B::_id_1B78( var_2, var_5 ) )
+                if ( scripts\engine\utility::array_contains( var_2, var_5 ) )
                     continue;
             }
             else if ( var_5 == var_2 )
                 continue;
         }
 
-        if ( var_5 _id_099C::_id_8AB5() )
+        if ( var_5 scripts\cp_mp\utility\player_utility::_id_8AB5() )
             continue;
 
-        var_5 _meth_82F6( "ui_hud_shake", 1 );
+        var_5 setclientomnvar( "ui_hud_shake", 1 );
     }
 }
 
@@ -152,8 +152,8 @@ _id_D9C0( var_0, var_1 )
     switch ( var_0 )
     {
         case "flash_grenade_mp":
-            if ( _id_099D::_id_8A10( "shellshock", "flashInterruptDelayFunc" ) )
-                var_2 = [[ _id_099D::_id_6D05( "shellshock", "flashInterruptDelayFunc" ) ]]( var_1 );
+            if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "shellshock", "flashInterruptDelayFunc" ) )
+                var_2 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "shellshock", "flashInterruptDelayFunc" ) ]]( var_1 );
 
             break;
         default:
@@ -169,18 +169,18 @@ _id_D9C6( var_0, var_1 )
     switch ( var_0 )
     {
         case "s4_stun_gbr_n69_mp":
-            if ( _id_099D::_id_8A10( "shellshock", "concussionInterruptDelayFunc" ) )
-                var_2 = [[ _id_099D::_id_6D05( "shellshock", "concussionInterruptDelayFunc" ) ]]( var_1 );
+            if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "shellshock", "concussionInterruptDelayFunc" ) )
+                var_2 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "shellshock", "concussionInterruptDelayFunc" ) ]]( var_1 );
 
             break;
         case "mild_concussion_grenade_mp":
-            if ( _id_099D::_id_8A10( "shellshock", "concussionInterruptDelayFunc" ) )
-                var_2 = [[ _id_099D::_id_6D05( "shellshock", "concussionInterruptDelayFunc" ) ]]( var_1 );
+            if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "shellshock", "concussionInterruptDelayFunc" ) )
+                var_2 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "shellshock", "concussionInterruptDelayFunc" ) ]]( var_1 );
 
             break;
         case "weak_concussion_grenade_mp":
-            if ( _id_099D::_id_8A10( "shellshock", "concussionInterruptDelayFunc" ) )
-                var_2 = [[ _id_099D::_id_6D05( "shellshock", "concussionInterruptDelayFunc" ) ]]( var_1 );
+            if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "shellshock", "concussionInterruptDelayFunc" ) )
+                var_2 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "shellshock", "concussionInterruptDelayFunc" ) ]]( var_1 );
 
             break;
         default:
@@ -197,8 +197,8 @@ _id_D9C1( var_0, var_1 )
     {
         case "gas_grenade_light_mp":
         case "gas_grenade_heavy_mp":
-            if ( _id_099D::_id_8A10( "shellshock", "gasInterruptDelayFunc" ) )
-                var_2 = [[ _id_099D::_id_6D05( "shellshock", "gasInterruptDelayFunc" ) ]]( var_1 );
+            if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "shellshock", "gasInterruptDelayFunc" ) )
+                var_2 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "shellshock", "gasInterruptDelayFunc" ) ]]( var_1 );
 
             break;
         default:
@@ -215,8 +215,8 @@ _id_D9BF( var_0, var_1 )
     switch ( var_0 )
     {
         case "last_stand_mp":
-            if ( _id_099D::_id_8A10( "shellshock", "lastStandInterruptDelayFunc" ) )
-                var_2 = [[ _id_099D::_id_6D05( "shellshock", "lastStandInterruptDelayFunc" ) ]]( var_1 );
+            if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "shellshock", "lastStandInterruptDelayFunc" ) )
+                var_2 = [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "shellshock", "lastStandInterruptDelayFunc" ) ]]( var_1 );
 
             break;
         default:

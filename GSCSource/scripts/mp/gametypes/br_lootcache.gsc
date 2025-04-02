@@ -32,8 +32,8 @@ _id_9882( var_0, var_1, var_2, var_3, var_4, var_5 )
         else
             var_6 = 115;
 
-        var_6 = var_6 + _func_01B7( -10, 10 );
-        var_7 = 35 + var_1 / 2 * 25 + _func_01B7( -5, 5 );
+        var_6 = var_6 + randomfloatrange( -10, 10 );
+        var_7 = 35 + var_1 / 2 * 25 + randomfloatrange( -5, 5 );
         [var_9, var_10, var_11] = scripts\mp\gametypes\br_pickups::_id_6AAE( var_1, var_2, var_3, undefined, var_6, var_7 );
     }
     else
@@ -49,7 +49,7 @@ _id_9882( var_0, var_1, var_2, var_3, var_4, var_5 )
     var_16 = level._id_2A6F._id_2A3F[var_0];
 
     if ( var_5 )
-        _func_019D( var_9, "br_legendary_loot_drop" );
+        playsoundatpos( var_9, "br_legendary_loot_drop" );
 
     return var_15;
 }
@@ -67,13 +67,13 @@ _id_9852( var_0 )
 
             if ( isdefined( var_5 ) && var_5 == 4 && var_2 == 0 )
             {
-                var_1[var_1.size] = _id_9882( var_4, self._id_8B20, self._id_02EA, self._id_0054, 1, 1 );
+                var_1[var_1.size] = _id_9882( var_4, self._id_8B20, self.origin, self.angles, 1, 1 );
                 self._id_8B20++;
                 var_2 = 1;
             }
             else
             {
-                var_1[var_1.size] = _id_9882( var_4, self._id_8B20, self._id_02EA, self._id_0054, 1, 0 );
+                var_1[var_1.size] = _id_9882( var_4, self._id_8B20, self.origin, self.angles, 1, 0 );
                 self._id_8B20++;
             }
         }
@@ -86,12 +86,12 @@ _id_9853( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
     if ( var_2 == "closed" && !isdefined( var_0._id_0186 ) )
     {
-        var_0 _meth_8373( var_1, "opening" );
+        var_0 setscriptablepartstate( var_1, "opening" );
         var_0._id_8B20 = 0;
         var_6 = [];
         var_7 = _func_0402( var_0 );
 
-        if ( isdefined( var_7 ) && var_3 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_br_extra_killstreak_chance" ) )
+        if ( isdefined( var_7 ) && var_3 scripts\mp\utility\perk::_hasperk( "specialty_br_extra_killstreak_chance" ) )
             var_7 = _id_9869( var_7, var_3 );
 
         if ( isdefined( var_7 ) )
@@ -100,7 +100,7 @@ _id_9853( var_0, var_1, var_2, var_3, var_4, var_5 )
             {
                 if ( _id_07A8::_id_609F( "placement_updates_allowed" ) )
                 {
-                    var_8 = game["teamPlacements"][var_3._id_045B];
+                    var_8 = game["teamPlacements"][var_3.team];
 
                     if ( !isdefined( level._id_4BB2 ) )
                         scripts\mp\gametypes\br_gametype_dmz::_id_2ECA();
@@ -156,7 +156,7 @@ _id_9853( var_0, var_1, var_2, var_3, var_4, var_5 )
             var_3._id_9851++;
 
         var_3 _id_0A7B::_id_D544( var_3._id_9851 );
-        level notify( "lootcache_opened_kill_callout" + var_0._id_02EA );
+        level notify( "lootcache_opened_kill_callout" + var_0.origin );
     }
 }
 
@@ -166,14 +166,14 @@ _id_9867( var_0, var_1 )
 
     foreach ( var_4 in var_1 )
     {
-        if ( _func_0121( var_4, "brloot_plunder" ) )
+        if ( issubstr( var_4, "brloot_plunder" ) )
         {
             if ( var_0._id_048F == "br_loot_cache_lege" )
             {
-                if ( var_4 != "brloot_plunder_cash_legendary_1" && _id_077B::_id_3A02() )
+                if ( var_4 != "brloot_plunder_cash_legendary_1" && scripts\engine\utility::cointoss() )
                     var_4 = "brloot_plunder_cash_legendary_1";
             }
-            else if ( var_4 != "brloot_plunder_cash_epic_2" && _id_077B::_id_3A02() )
+            else if ( var_4 != "brloot_plunder_cash_epic_2" && scripts\engine\utility::cointoss() )
                 var_4 = "brloot_plunder_cash_epic_2";
         }
 
@@ -189,14 +189,14 @@ _id_9868( var_0, var_1 )
 
     foreach ( var_4 in var_1 )
     {
-        if ( _func_0121( var_4, "brloot_plunder" ) )
+        if ( issubstr( var_4, "brloot_plunder" ) )
         {
             if ( var_0._id_048F == "br_loot_cache_lege" )
             {
-                if ( ( var_4 == "brloot_plunder_cash_epic_2" || var_4 == "brloot_plunder_cash_legendary_1" ) && _id_077B::_id_3A02() )
+                if ( ( var_4 == "brloot_plunder_cash_epic_2" || var_4 == "brloot_plunder_cash_legendary_1" ) && scripts\engine\utility::cointoss() )
                     var_4 = "brloot_plunder_cash_epic_1";
             }
-            else if ( ( var_4 == "brloot_plunder_cash_epic_2" || var_4 == "brloot_plunder_cash_epic_1" ) && _id_077B::_id_3A02() )
+            else if ( ( var_4 == "brloot_plunder_cash_epic_2" || var_4 == "brloot_plunder_cash_epic_1" ) && scripts\engine\utility::cointoss() )
                 var_4 = "brloot_plunder_cash_rare_2";
         }
 
@@ -232,13 +232,13 @@ _id_357C( var_0, var_1, var_2, var_3 )
 
             if ( isdefined( var_9 ) && var_9 == 4 && var_5 == 0 )
             {
-                var_4[var_4.size] = _id_9882( var_8, self._id_8B20, self._id_02EA, self._id_0054, undefined, 1 );
+                var_4[var_4.size] = _id_9882( var_8, self._id_8B20, self.origin, self.angles, undefined, 1 );
                 self._id_8B20++;
                 var_5 = 1;
             }
             else
             {
-                var_4[var_4.size] = _id_9882( var_8, self._id_8B20, self._id_02EA, self._id_0054, undefined, 0 );
+                var_4[var_4.size] = _id_9882( var_8, self._id_8B20, self.origin, self.angles, undefined, 0 );
                 self._id_8B20++;
             }
         }
@@ -256,7 +256,7 @@ _id_9869( var_0, var_1 )
 
     foreach ( var_5, var_4 in var_0 )
     {
-        if ( _func_0121( var_4, "killstreak" ) )
+        if ( issubstr( var_4, "killstreak" ) )
         {
             var_2 = 1;
             break;
@@ -267,9 +267,9 @@ _id_9869( var_0, var_1 )
     {
         var_6 = var_1._id_8D56 * 0;
 
-        if ( _func_01B8( 100 ) < var_1._id_2BB1 + var_6 )
+        if ( randomint( 100 ) < var_1._id_2BB1 + var_6 )
         {
-            var_0[var_0.size] = _id_077B::_id_BFC7( level._id_2A6F._id_2A44 );
+            var_0[var_0.size] = scripts\engine\utility::random( level._id_2A6F._id_2A44 );
             var_1._id_2BB1 = 10;
         }
         else

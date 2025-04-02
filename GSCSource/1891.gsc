@@ -9,12 +9,12 @@ _id_816A( var_0 )
 _id_E905( var_0 )
 {
     self endon( "disconnect" );
-    _id_077B::_id_1087E( "end_dragBreath", "death" );
+    scripts\engine\utility::waittill_any_2( "end_dragBreath", "death" );
 }
 
 _id_E297()
 {
-    var_0 = _func_020F();
+    var_0 = spawnstruct();
     var_0._id_A443 = [];
     var_0._id_799E = [];
     var_0._id_2D69 = "";
@@ -26,7 +26,7 @@ _id_D528( var_0, var_1, var_2 )
     foreach ( var_4 in var_0 )
     {
         if ( _id_8A11( var_4 ) )
-            var_0 = _id_077B::_id_1B96( var_0, var_4 );
+            var_0 = scripts\engine\utility::array_remove( var_0, var_4 );
     }
 
     if ( var_0.size == 0 )
@@ -52,14 +52,14 @@ _id_2D68( var_0, var_1, var_2 )
     self endon( "disconnect" );
     self endon( "newBurningParts" );
     self endon( "stop_dragonsbreathDamage" );
-    var_0 = _id_077B::_id_1B99( var_0 );
+    var_0 = scripts\engine\utility::_id_1B99( var_0 );
 
     foreach ( var_4 in var_0 )
     {
         if ( isdefined( self._id_4EC0._id_799E[var_4] ) )
         {
             self._id_4EC0._id_799E[var_4] = self._id_4EC0._id_799E[var_4] + 0.5;
-            self._id_4EC0._id_799E[var_4] = _func_0148( self._id_4EC0._id_799E[var_4], 4.0 );
+            self._id_4EC0._id_799E[var_4] = min( self._id_4EC0._id_799E[var_4], 4.0 );
             continue;
         }
 
@@ -72,7 +72,7 @@ _id_2D68( var_0, var_1, var_2 )
     {
         wait 0.2;
 
-        if ( !isai( self ) || self._id_4EC0._id_799E.size == 0 )
+        if ( !isalive( self ) || self._id_4EC0._id_799E.size == 0 )
             _id_E906();
 
         var_6 = 0;
@@ -83,7 +83,7 @@ _id_2D68( var_0, var_1, var_2 )
 
             if ( self._id_4EC0._id_799E[var_9] <= 0 )
             {
-                self._id_4EC0._id_799E = _id_077B::_id_1B9E( self._id_4EC0._id_799E, var_9 );
+                self._id_4EC0._id_799E = scripts\engine\utility::_id_1B9E( self._id_4EC0._id_799E, var_9 );
                 var_6 = 1;
             }
         }
@@ -95,19 +95,19 @@ _id_D49E( var_0, var_1 )
     for (;;)
     {
         wait 0.25;
-        var_2 = _id_0777::_id_A5B2( 5, 1, self._id_4EC0._id_799E.size );
-        var_3 = _id_0777::_id_5878( 40, 54, var_2 );
+        var_2 = scripts\engine\math::_id_A5B2( 5, 1, self._id_4EC0._id_799E.size );
+        var_3 = scripts\engine\math::_id_5878( 40, 54, var_2 );
         var_4 = int( var_3 * 0.25 );
 
-        if ( var_1 _meth_8622( "ammo_incendiary" ) && visionsetnight( var_1 ) != "spread" )
+        if ( var_1 _meth_8622( "ammo_incendiary" ) && weaponclass( var_1 ) != "spread" )
         {
             var_4 = int( 3.0 );
 
-            if ( _func_0273( var_1 ) && _func_0121( var_1._id_0084, "s4_mr_" ) )
+            if ( _func_0273( var_1 ) && issubstr( var_1.basename, "s4_mr_" ) )
                 var_4 = var_4 - 1;
         }
 
-        self _meth_80B7( var_4, self._id_02EA, var_0, var_0, "MOD_FIRE", var_1, "torso_upper" );
+        self dodamage( var_4, self.origin, var_0, var_0, "MOD_FIRE", var_1, "torso_upper" );
     }
 }
 

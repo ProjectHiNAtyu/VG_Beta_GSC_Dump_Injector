@@ -22,21 +22,21 @@ _id_242E()
 
     foreach ( var_3 in var_0 )
     {
-        if ( !_func_0121( var_3._id_00DE, "trigger_multiple_bcs" ) )
+        if ( !issubstr( var_3.classname, "trigger_multiple_bcs" ) )
             continue;
 
-        if ( isdefined( level._id_9AA7 ) && level._id_9AA7 == "mp_crash2" && var_3._id_00DE == "trigger_multiple_bcs_dronecrash" )
+        if ( isdefined( level.mapname ) && level.mapname == "mp_crash2" && var_3.classname == "trigger_multiple_bcs_dronecrash" )
             continue;
 
         var_1[var_1.size] = var_3;
 
-        if ( !isdefined( level._id_241D[var_3._id_00DE] ) )
+        if ( !isdefined( level._id_241D[var_3.classname] ) )
             continue;
 
-        var_4 = _id_AE5E( level._id_241D[var_3._id_00DE] );
+        var_4 = _id_AE5E( level._id_241D[var_3.classname] );
 
         if ( var_4.size > 1 )
-            var_4 = _id_077B::_id_1B94( var_4 );
+            var_4 = scripts\engine\utility::_id_1B94( var_4 );
 
         var_3._id_96BF = var_4;
 
@@ -49,7 +49,7 @@ _id_242E()
 
 _id_AE5E( var_0 )
 {
-    var_1 = _func_021A( var_0, " " );
+    var_1 = strtok( var_0, " " );
     return var_1;
 }
 
@@ -79,7 +79,7 @@ _id_0F76( var_0, var_1 )
 
 _id_241E()
 {
-    if ( _id_06BB::_id_8A2C() )
+    if ( scripts\common\utility::_id_8A2C() )
     {
         _id_E071();
         _id_E079();

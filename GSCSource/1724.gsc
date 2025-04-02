@@ -53,29 +53,29 @@ _id_BB85()
     _id_457B( "show_hit_marker", 1 );
     _id_C1B3( "disable_gestures", 1, "$self", ::_id_D1C7, "$value" );
     _id_457B( "disable_gestures", 0 );
-    _id_C1B3( "allow_jump", 1, "$self", ::allowfire, "$value" );
+    _id_C1B3( "allow_jump", 1, "$self", ::allowjump, "$value" );
     _id_457B( "allow_jump", 1 );
-    _id_C1B3( "allow_double_jump", 1, "$self", ::_meth_8476, "$value" );
+    _id_C1B3( "allow_double_jump", 1, "$self", ::allowdoublejump, "$value" );
     _id_457B( "allow_double_jump", 1 );
-    _id_C1B3( "allow_crouch", 1, "$self", ::_meth_800B, "$value" );
+    _id_C1B3( "allow_crouch", 1, "$self", ::allowcrouch, "$value" );
     _id_457B( "allow_crouch", 1 );
-    _id_C1B3( "allow_prone", 1, "$self", ::allowmelee, "$value" );
+    _id_C1B3( "allow_prone", 1, "$self", ::allowprone, "$value" );
     _id_457B( "allow_prone", 1 );
-    _id_C1B3( "allow_melee", 1, "$self", ::allowlean, "$value" );
+    _id_C1B3( "allow_melee", 1, "$self", ::allowmelee, "$value" );
     _id_457B( "allow_melee", 1 );
     _id_C1B3( "allow_melee_victim", 1, "$self", ::_id_152D, "$value" );
     _id_457B( "allow_melee_victim", 1 );
-    _id_C1B3( "allow_mantle", 1, "$self", ::allowmountside, "$value" );
+    _id_C1B3( "allow_mantle", 1, "$self", ::allowmantle, "$value" );
     _id_457B( "allow_mantle", 1 );
-    _id_C1B3( "allow_sprint", 1, "$self", ::_meth_8013, "$value" );
+    _id_C1B3( "allow_sprint", 1, "$self", ::allowsprint, "$value" );
     _id_457B( "allow_sprint", 1 );
     _id_C1B3( "allow_ads", 1, "$self", ::allowads, "$value" );
     _id_457B( "allow_ads", 1 );
-    _id_C1B3( "allow_stand", 1, "$self", ::allowsprint, "$value" );
+    _id_C1B3( "allow_stand", 1, "$self", ::allowstand, "$value" );
     _id_457B( "allow_stand", 1 );
-    _id_C1B3( "allow_movement", 1, "$self", ::allowdoublejump, "$value" );
+    _id_C1B3( "allow_movement", 1, "$self", ::allowmovement, "$value" );
     _id_457B( "allow_movement", 1 );
-    _id_C1B3( "move_speed_scale", 1, "$self", ::_meth_8353, "$value" );
+    _id_C1B3( "move_speed_scale", 1, "$self", ::setmovespeedscale, "$value" );
     _id_457B( "move_speed_scale", 1 );
     _id_C1B3( "goalradius", 2048, "$self", ::_id_D225, "$value" );
     _id_457B( "goalradius", 2048 );
@@ -94,16 +94,16 @@ _id_C1B3( var_0, var_1, var_2, var_3, var_4 )
 
     var_5 = getarraykeys( level._id_FF6C );
 
-    if ( _id_077B::_id_1B78( var_5, var_0 ) )
+    if ( scripts\engine\utility::array_contains( var_5, var_0 ) )
         return;
 
-    if ( isdefined( var_4 ) && !isalive( var_4 ) )
+    if ( isdefined( var_4 ) && !_func_0106( var_4 ) )
         var_4 = [ var_4 ];
 
     if ( !isdefined( var_4 ) )
         var_4 = [];
 
-    var_6 = _func_020F();
+    var_6 = spawnstruct();
     var_6._id_E9E2 = var_0;
     var_6._id_2EEE = var_2;
     var_6._id_5FF7 = var_3;
@@ -121,7 +121,7 @@ _id_454B( var_0, var_1, var_2, var_3 )
 {
     if ( _id_1CC3( var_0 ) )
     {
-        if ( isdefined( var_3 ) && !isalive( var_3 ) )
+        if ( isdefined( var_3 ) && !_func_0106( var_3 ) )
             var_3 = [ var_3 ];
 
         if ( !isdefined( var_3 ) )
@@ -148,8 +148,8 @@ _id_94D1( var_0, var_1, var_2 )
     if ( _id_1CC3( var_0 ) )
     {
         var_3 = level._id_FF6C[var_0];
-        var_4 = _func_020F();
-        var_4._id_02BA = var_1;
+        var_4 = spawnstruct();
+        var_4.name = var_1;
         var_4._id_5FF7 = var_2;
         var_3._id_94FA[var_1] = var_4;
     }
@@ -166,10 +166,10 @@ _id_D11E( var_0, var_1, var_2 )
         _id_0CB7( var_1, var_2 );
     }
 
-    if ( isalive( level._id_FF6C[var_1]._id_94FA ) )
+    if ( _func_0106( level._id_FF6C[var_1]._id_94FA ) )
     {
         foreach ( var_4 in level._id_FF6C[var_1]._id_94FA )
-            _id_D11E( var_0, var_4._id_02BA, [[ var_4._id_5FF7 ]]( var_2 ) );
+            _id_D11E( var_0, var_4.name, [[ var_4._id_5FF7 ]]( var_2 ) );
     }
 }
 
@@ -198,10 +198,10 @@ _id_C5EB( var_0, var_1 )
             _id_0CB5( var_1 );
     }
 
-    if ( isalive( level._id_FF6C[var_1]._id_94FA ) )
+    if ( _func_0106( level._id_FF6C[var_1]._id_94FA ) )
     {
         foreach ( var_4 in level._id_FF6C[var_1]._id_94FA )
-            _id_C5EB( var_0, var_4._id_02BA );
+            _id_C5EB( var_0, var_4.name );
     }
 }
 
@@ -243,10 +243,10 @@ _id_0C7D( var_0, var_1, var_2 )
     if ( !isdefined( self._id_FF6C[var_1] ) )
         self._id_FF6C[var_1] = [];
 
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
     var_3._id_E9E0 = var_0;
     var_3._id_04A3 = var_2;
-    self._id_FF6C[var_1] = _id_077B::array_add( self._id_FF6C[var_1], var_3, 0 );
+    self._id_FF6C[var_1] = scripts\engine\utility::_id_1B8B( self._id_FF6C[var_1], var_3, 0 );
 }
 
 _id_0C8F( var_0, var_1 )
@@ -262,7 +262,7 @@ _id_0C8F( var_0, var_1 )
         {
             if ( self._id_FF6C[var_1][var_2]._id_E9E0 == var_0 )
             {
-                self._id_FF6C[var_1] = _id_077B::_id_1B9C( self._id_FF6C[var_1], var_2 );
+                self._id_FF6C[var_1] = scripts\engine\utility::array_remove_index( self._id_FF6C[var_1], var_2 );
                 break;
             }
         }
@@ -276,7 +276,7 @@ _id_0C8F( var_0, var_1 )
         }
     }
 
-    return _id_077B::_id_F07F( isdefined( var_2 ), var_2, -1 );
+    return scripts\engine\utility::ter_op( isdefined( var_2 ), var_2, -1 );
 }
 
 _id_0CB7( var_0, var_1 )
@@ -285,8 +285,8 @@ _id_0CB7( var_0, var_1 )
 
     if ( isdefined( var_2 ) && isdefined( var_2._id_5FF7 ) )
     {
-        var_3 = _id_077B::_id_F07F( _func_0120( var_2._id_2EEE ) && var_2._id_2EEE == "$self", self, var_2._id_2EEE );
-        _id_077B::_id_DD54( var_3, var_2._id_5FF7, _id_0C93( var_2._id_0DBC, var_1 ) );
+        var_3 = scripts\engine\utility::ter_op( _func_0120( var_2._id_2EEE ) && var_2._id_2EEE == "$self", self, var_2._id_2EEE );
+        scripts\engine\utility::_id_DD54( var_3, var_2._id_5FF7, _id_0C93( var_2._id_0DBC, var_1 ) );
     }
     else
         _id_0BEE( var_0, var_1 );
@@ -300,8 +300,8 @@ _id_0CB5( var_0 )
     {
         if ( _func_03A7( var_1._id_457B ) )
         {
-            var_2 = _id_077B::_id_F07F( _func_0120( var_1._id_4541 ) && var_1._id_4541 == "$self", self, var_1._id_4541 );
-            var_3 = _id_077B::_id_DD54( var_2, var_1._id_457B, _id_0C93( var_1._id_453F ) );
+            var_2 = scripts\engine\utility::ter_op( _func_0120( var_1._id_4541 ) && var_1._id_4541 == "$self", self, var_1._id_4541 );
+            var_3 = scripts\engine\utility::_id_DD54( var_2, var_1._id_457B, _id_0C93( var_1._id_453F ) );
         }
         else
             var_3 = var_1._id_457B;
@@ -333,7 +333,7 @@ _id_D3C6( var_0 )
     if ( !isdefined( var_0 ) )
         var_0 = 1;
 
-    if ( _func_0117( self ) )
+    if ( isplayer( self ) )
         return;
 
     self._id_0456 = var_0;
@@ -342,7 +342,7 @@ _id_D3C6( var_0 )
 
 _id_4574()
 {
-    return _func_011C( self ) || _id_06BD::_id_8ADC();
+    return _func_011C( self ) || scripts\common\vehicle::_id_8ADC();
 }
 
 _id_D136( var_0 )
@@ -355,7 +355,7 @@ _id_D136( var_0 )
 
 _id_453D()
 {
-    return _func_011C( self ) || _id_06BD::_id_8ADC();
+    return _func_011C( self ) || scripts\common\vehicle::_id_8ADC();
 }
 
 _id_D278( var_0 )
@@ -378,12 +378,12 @@ _id_993D( var_0 )
 
 _id_993E( var_0 )
 {
-    return _id_077B::_id_F07F( var_0, 0.1, 1 );
+    return scripts\engine\utility::ter_op( var_0, 0.1, 1 );
 }
 
 _id_FF3D()
 {
-    if ( _func_0117( self ) )
+    if ( isplayer( self ) )
         return !self _meth_854D();
     else
         return self._id_0456;
@@ -400,7 +400,7 @@ _id_D1CE( var_0 )
         var_0 = 1;
 
     if ( var_0 != 0 )
-        self disableweaponpickup( _id_077B::_id_F07F( _func_02B2( var_0 ) && var_0 == 2, 1, 0 ) );
+        self disableweapons( scripts\engine\utility::ter_op( _func_02B2( var_0 ) && var_0 == 2, 1, 0 ) );
     else
         self enableweapons();
 }
@@ -411,7 +411,7 @@ _id_D1CA( var_0 )
         var_0 = 1;
 
     if ( var_0 )
-        self disableweapons();
+        self disableweaponswitch();
     else
         self enableweaponswitch();
 }
@@ -427,9 +427,9 @@ _id_D1CD( var_0 )
         var_0 = 1;
 
     if ( var_0 )
-        self _meth_84B0( 0 );
+        self allowreload( 0 );
     else
-        self _meth_84B0( 1 );
+        self allowreload( 1 );
 }
 
 _id_D1CC( var_0 )
@@ -438,7 +438,7 @@ _id_D1CC( var_0 )
         var_0 = 1;
 
     if ( var_0 )
-        self disableusability();
+        self disableweaponpickup();
     else
         self enableweaponpickup();
 }
@@ -449,7 +449,7 @@ _id_D1C8( var_0 )
         var_0 = 1;
 
     if ( var_0 )
-        self _meth_80AB();
+        self disableoffhandweapons();
     else
         self enableoffhandweapons();
 }
@@ -464,7 +464,7 @@ _id_D1C4( var_0 )
     if ( !isdefined( var_0 ) )
         var_0 = 1;
 
-    _func_01EA( "aim_assist_script_disable", var_0 );
+    setsaveddvar( "aim_assist_script_disable", var_0 );
 }
 
 _id_D1C9( var_0 )
@@ -473,7 +473,7 @@ _id_D1C9( var_0 )
         var_0 = 1;
 
     if ( var_0 )
-        self _meth_80AF();
+        self disableusability();
     else
         self enableusability();
 }
@@ -510,7 +510,7 @@ _id_D1C7( var_0 )
     if ( !isdefined( var_0 ) )
         var_0 = 1;
 
-    if ( _func_0117( self ) )
+    if ( isplayer( self ) )
         self._id_4A99 = var_0;
 }
 
@@ -527,7 +527,7 @@ _id_D239( var_0 )
             self hide();
     }
     else
-        self _meth_83C3();
+        self show();
 }
 
 _id_D236( var_0 )
@@ -580,7 +580,7 @@ _id_D395( var_0 )
     if ( !isdefined( var_0 ) )
         var_0 = 1;
 
-    self._id_DDA2 = _id_077B::_id_F07F( var_0, 1, 0 );
+    self._id_DDA2 = scripts\engine\utility::ter_op( var_0, 1, 0 );
 }
 
 _id_D396( var_0 )
@@ -588,7 +588,7 @@ _id_D396( var_0 )
     if ( !isdefined( var_0 ) )
         var_0 = 1;
 
-    self._id_DDC3 = _id_077B::_id_F07F( var_0, 1, undefined );
+    self._id_DDC3 = scripts\engine\utility::ter_op( var_0, 1, undefined );
 }
 
 _id_D20B( var_0 )
@@ -603,7 +603,7 @@ set_hud_visible( var_0 )
     else
         var_0 = 1;
 
-    self _meth_82F6( "ui_hide_hud", var_0 );
+    self setclientomnvar( "ui_hide_hud", var_0 );
 }
 
 _id_152D( var_0 )
@@ -611,7 +611,7 @@ _id_152D( var_0 )
     if ( !isdefined( var_0 ) )
         var_0 = 1;
 
-    self._id_3125 = _id_077B::_id_F07F( var_0, 1, 0 );
+    self._id_3125 = scripts\engine\utility::ter_op( var_0, 1, 0 );
 }
 
 _id_5F3B( var_0, var_1 )

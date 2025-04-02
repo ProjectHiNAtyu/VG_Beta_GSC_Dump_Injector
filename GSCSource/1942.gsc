@@ -31,7 +31,7 @@ _id_7D79( var_0, var_1 )
 
 _id_D4CC( var_0, var_1 )
 {
-    if ( !_func_0117( self ) )
+    if ( !isplayer( self ) )
         return;
 
     _id_814A( var_0 );
@@ -41,7 +41,7 @@ _id_D4CC( var_0, var_1 )
 
 _id_D4CA( var_0, var_1, var_2 )
 {
-    if ( !_func_0117( self ) )
+    if ( !isplayer( self ) )
         return;
 
     _id_8149( var_0, var_1 );
@@ -73,7 +73,7 @@ _id_7D7F( var_0, var_1 )
 
 _id_D5D7( var_0, var_1 )
 {
-    if ( !_func_0117( self ) )
+    if ( !isplayer( self ) )
         return;
 
     _id_81F7( var_0 );
@@ -158,12 +158,12 @@ _id_2E8A()
 
 _id_2E99( var_0 )
 {
-    return _id_4BA1( self._id_0309["kills"], var_0 );
+    return _id_4BA1( self.pers["kills"], var_0 );
 }
 
 _id_2E8F( var_0 )
 {
-    return _id_4BA1( self._id_0309["damage"], var_0 );
+    return _id_4BA1( self.pers["damage"], var_0 );
 }
 
 _id_4BA1( var_0, var_1 )
@@ -179,34 +179,34 @@ _id_CB33()
     game["codcasterClientStatsSaveBetweenRounds"] = [];
     game["localCodcasterClientStatsSaveBetweenRounds"] = [];
 
-    foreach ( var_1 in level._id_B758 )
+    foreach ( var_1 in level.players )
     {
-        game["codcasterClientStatsSaveBetweenRounds"][var_1._id_02BA] = var_1._id_39F8;
-        game["localCodcasterClientStatsSaveBetweenRounds"][var_1._id_02BA] = var_1._id_96B1;
+        game["codcasterClientStatsSaveBetweenRounds"][var_1.name] = var_1._id_39F8;
+        game["localCodcasterClientStatsSaveBetweenRounds"][var_1.name] = var_1._id_96B1;
     }
 }
 
 _id_C75C()
 {
-    if ( !_func_0117( self ) )
+    if ( !isplayer( self ) )
         return;
 
     if ( !isdefined( game["codcasterClientStatsSaveBetweenRounds"] ) || !isdefined( game["localCodcasterClientStatsSaveBetweenRounds"] ) )
         return;
 
-    if ( isdefined( game["codcasterClientStatsSaveBetweenRounds"][self._id_02BA] ) )
-        self._id_39F8 = game["codcasterClientStatsSaveBetweenRounds"][self._id_02BA];
+    if ( isdefined( game["codcasterClientStatsSaveBetweenRounds"][self.name] ) )
+        self._id_39F8 = game["codcasterClientStatsSaveBetweenRounds"][self.name];
     else
         self._id_39F8 = [];
 
-    if ( isdefined( game["localCodcasterClientStatsSaveBetweenRounds"][self._id_02BA] ) )
-        self._id_96B1 = game["localCodcasterClientStatsSaveBetweenRounds"][self._id_02BA];
+    if ( isdefined( game["localCodcasterClientStatsSaveBetweenRounds"][self.name] ) )
+        self._id_96B1 = game["localCodcasterClientStatsSaveBetweenRounds"][self.name];
     else
         self._id_96B1 = [];
 
     foreach ( var_5, var_1 in self._id_39F8 )
     {
-        if ( !isalive( self._id_39F8[var_5] ) )
+        if ( !_func_0106( self._id_39F8[var_5] ) )
         {
             _id_D4CC( var_5, var_1 );
             continue;
@@ -225,7 +225,7 @@ _id_A59F()
     self notify( "stop_non_traded_kill_watcher" );
     self endon( "stop_non_traded_kill_watcher" );
 
-    if ( !_func_0117( self ) )
+    if ( !isplayer( self ) )
         return;
 
     for (;;)
@@ -236,9 +236,9 @@ _id_A59F()
         {
             var_0 = gettime();
             var_1 = self._id_8DD8[0];
-            self._id_8DD8 = _id_077B::_id_1B9C( self._id_8DD8, 0, 0 );
+            self._id_8DD8 = scripts\engine\utility::array_remove_index( self._id_8DD8, 0, 0 );
             var_2 = 5000 - ( var_0 - var_1 );
-            _id_077B::_id_107AC( var_2 );
+            scripts\engine\utility::_id_107AC( var_2 );
             _id_7D79( 20, 1 );
         }
     }

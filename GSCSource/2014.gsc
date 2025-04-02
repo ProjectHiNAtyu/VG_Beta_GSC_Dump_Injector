@@ -34,8 +34,8 @@ _id_B6F6( var_0 )
 
 _id_E069( var_0 )
 {
-    _id_077B::_id_1087E( "death", "leftTrigger" );
-    self stoplookat();
+    scripts\engine\utility::waittill_any_2( "death", "leftTrigger" );
+    self stoploopsound();
 }
 
 _id_BF0F()
@@ -54,36 +54,36 @@ _id_BF0F()
         {
             case 1:
                 self._id_BF11 = "item_geigercouner_level2";
-                self playlocalsound( self._id_BF11 );
-                self _meth_844B( 1, self._id_02EA );
+                self playloopsound( self._id_BF11 );
+                self _meth_844B( 1, self.origin );
                 break;
             case 3:
                 self._id_BF11 = "item_geigercouner_level3";
-                self stoplookat();
-                self playlocalsound( self._id_BF11 );
-                self _meth_844B( 3, self._id_02EA );
+                self stoploopsound();
+                self playloopsound( self._id_BF11 );
+                self _meth_844B( 3, self.origin );
                 _id_4E4A( 15 );
                 break;
             case 4:
                 self._id_BF11 = "item_geigercouner_level3";
-                self stoplookat();
-                self playlocalsound( self._id_BF11 );
-                self _meth_844B( 15, self._id_02EA );
+                self stoploopsound();
+                self playloopsound( self._id_BF11 );
+                self _meth_844B( 15, self.origin );
                 thread _id_2510();
                 _id_4E4A( 25 );
                 break;
             case 6:
                 self._id_BF11 = "item_geigercouner_level4";
-                self stoplookat();
-                self playlocalsound( self._id_BF11 );
-                self _meth_844B( 75, self._id_02EA );
+                self stoploopsound();
+                self playloopsound( self._id_BF11 );
+                self _meth_844B( 75, self.origin );
                 _id_4E4A( 45 );
                 break;
             case 8:
                 self._id_BF11 = "item_geigercouner_level4";
-                self stoplookat();
-                self playlocalsound( self._id_BF11 );
-                self _meth_844B( 127, self._id_02EA );
+                self stoploopsound();
+                self playloopsound( self._id_BF11 );
+                self _meth_844B( 127, self.origin );
                 _id_4E4A( 175 );
                 break;
         }
@@ -102,15 +102,15 @@ _id_2510()
 
     if ( !isdefined( self._id_BF10 ) )
     {
-        self._id_BF10 = _func_0152( self );
-        self._id_BF10._id_04DE = 0;
-        self._id_BF10._id_04E1 = 0;
-        self._id_BF10 _meth_8378( "black", 640, 480 );
-        self._id_BF10._id_003A = "left";
-        self._id_BF10.alignx = "top";
-        self._id_BF10._id_020C = "fullscreen";
-        self._id_BF10._id_04B8 = "fullscreen";
-        self._id_BF10._id_0047 = 0;
+        self._id_BF10 = newclienthudelem( self );
+        self._id_BF10.x = 0;
+        self._id_BF10.y = 0;
+        self._id_BF10 setshader( "black", 640, 480 );
+        self._id_BF10.alignx = "left";
+        self._id_BF10.aligny = "top";
+        self._id_BF10.horzalign = "fullscreen";
+        self._id_BF10.vertalign = "fullscreen";
+        self._id_BF10.alpha = 0;
     }
 
     var_0 = 1;
@@ -151,7 +151,7 @@ _id_2510()
         if ( var_6 == 1 )
             break;
 
-        if ( self._id_BF10._id_0047 != 0 )
+        if ( self._id_BF10.alpha != 0 )
             self._id_BF10 _id_589B( 1, 0 );
 
         wait 0.05;
@@ -162,19 +162,19 @@ _id_2510()
 
 _id_4E4A( var_0 )
 {
-    self thread [[ level._id_2F26 ]]( self, self, var_0, 0, "MOD_SUICIDE", "claymore_mp", self._id_02EA, ( 0, 0, 0 ) - self._id_02EA, "none", 0 );
+    self thread [[ level._id_2F26 ]]( self, self, var_0, 0, "MOD_SUICIDE", "claymore_mp", self.origin, ( 0, 0, 0 ) - self.origin, "none", 0 );
 }
 
 _id_5895( var_0, var_1 )
 {
     self fadeovertime( var_0 );
-    self._id_0047 = var_1;
+    self.alpha = var_1;
     wait( var_0 );
 }
 
 _id_589B( var_0, var_1 )
 {
     self fadeovertime( var_0 );
-    self._id_0047 = var_1;
+    self.alpha = var_1;
     wait( var_0 );
 }

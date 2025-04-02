@@ -5,7 +5,7 @@ _id_6D9B( var_0 )
 {
     var_1 = self _meth_8176() + ( 0, 0, -3 );
     var_2 = ( var_1[0] - var_0[0], var_1[1] - var_0[1], var_1[2] - var_0[2] );
-    var_2 = _func_025A( var_2 );
+    var_2 = vectornormalize( var_2 );
     var_3 = var_2[2] * -1;
     return var_3;
 }
@@ -24,17 +24,17 @@ _id_6CCC()
 _id_6918()
 {
     if ( scripts\anim\utility_common::_id_8ABB() )
-        return _func_01B7( 0.15, 0.55 );
+        return randomfloatrange( 0.15, 0.55 );
     else if ( scripts\anim\utility_common::_id_10D10() )
-        return _func_01B7( 1.0, 1.7 );
+        return randomfloatrange( 1.0, 1.7 );
     else if ( scripts\anim\utility_common::_id_10CF7() )
         return _id_08C8::_id_714E();
     else if ( scripts\anim\utility_common::_id_874C() )
         return _id_08C8::_id_6D1A();
     else if ( self._id_599A )
-        return _func_01B7( 0.1, 0.35 );
+        return randomfloatrange( 0.1, 0.35 );
     else
-        return _func_01B7( 0.2, 0.4 );
+        return randomfloatrange( 0.2, 0.4 );
 }
 
 _id_DA38()
@@ -54,7 +54,7 @@ _id_D839( var_0 )
 {
     self _meth_82D8( %exposed_aiming, 1, 0.2 );
 
-    if ( _id_077B::_id_0F4F() )
+    if ( scripts\engine\utility::_id_0F4F() )
         self _meth_831A( "exposed_aim", scripts\anim\utility::_id_184A( "straight_level" ), 1, var_0 );
     else
         self _meth_82DF( scripts\anim\utility::_id_184A( "straight_level" ), 1, var_0 );
@@ -68,7 +68,7 @@ _id_D839( var_0 )
 
 _id_8A1F()
 {
-    if ( visionsetnaked( self._id_04CE ) > 0 )
+    if ( _func_0268( self._id_04CE ) > 0 )
         return 0;
     else if ( weaponfiretime( self._id_04CE ) || _func_02EC( self._id_04CE ) )
         return 0;
@@ -86,7 +86,7 @@ _id_DA58( var_0 )
     self endon( "shotgun_pump_sound_end" );
     thread _id_E939( 2.0 );
     self waittillmatch( var_0, "rechamber" );
-    self _meth_827B( "ai_shotgun_pump" );
+    self playsound( "ai_shotgun_pump" );
     self notify( "shotgun_pump_sound_end" );
 }
 
@@ -142,13 +142,13 @@ _id_6A5D( var_0 )
 
 _id_F18F()
 {
-    for ( var_0 = 0; var_0 < level._id_B758.size; var_0++ )
+    for ( var_0 = 0; var_0 < level.players.size; var_0++ )
     {
-        if ( level._id_B758[var_0]._id_A775 == 0 )
+        if ( level.players[var_0]._id_A775 == 0 )
         {
-            level._id_B758[var_0]._id_7167["frag"] = 0;
-            level._id_B758[var_0]._id_7167["flash_grenade"] = 0;
-            level._id_B758[var_0]._id_7167["seeker"] = 0;
+            level.players[var_0]._id_7167["frag"] = 0;
+            level.players[var_0]._id_7167["flash_grenade"] = 0;
+            level.players[var_0]._id_7167["seeker"] = 0;
         }
     }
 
@@ -157,18 +157,18 @@ _id_F18F()
 
 _id_D451( var_0 )
 {
-    self._id_0F1A = _func_020F();
+    self._id_0F1A = spawnstruct();
 
-    if ( _func_0117( var_0 ) )
+    if ( isplayer( var_0 ) )
     {
         self._id_0F1A._id_8988 = 1;
-        self._id_0F1A._id_030F = var_0;
-        self._id_0F1A._id_F259 = self._id_01F1._id_0084;
+        self._id_0F1A.player = var_0;
+        self._id_0F1A._id_F259 = self._id_01F1.basename;
     }
     else
     {
         self._id_0F1A._id_8988 = 0;
-        self._id_0F1A._id_F259 = "AI_" + self._id_01F1._id_0084;
+        self._id_0F1A._id_F259 = "AI_" + self._id_01F1.basename;
     }
 }
 
@@ -181,14 +181,14 @@ _id_D570( var_0, var_1 )
 {
     if ( var_0._id_8988 )
     {
-        var_2 = var_0._id_030F;
+        var_2 = var_0.player;
         var_3 = var_2._id_7167[var_0._id_F259];
-        var_2._id_7167[var_0._id_F259] = _func_0147( var_1, var_3 );
+        var_2._id_7167[var_0._id_F259] = max( var_1, var_3 );
     }
     else
     {
         var_3 = anim._id_7167[var_0._id_F259];
-        anim._id_7167[var_0._id_F259] = _func_0147( var_1, var_3 );
+        anim._id_7167[var_0._id_F259] = max( var_1, var_3 );
     }
 }
 
@@ -198,11 +198,11 @@ _id_69BC()
 
     if ( _id_FF15() )
     {
-        var_1 = self._id_0F1A._id_030F;
-        var_0 = gettime() + var_1._id_7218._id_B6AE + _func_01B8( var_1._id_7218._id_B6AF );
+        var_1 = self._id_0F1A.player;
+        var_0 = gettime() + var_1._id_7218._id_B6AE + randomint( var_1._id_7218._id_B6AF );
     }
     else
-        var_0 = gettime() + 30000 + _func_01B8( 30000 );
+        var_0 = gettime() + 30000 + randomint( 30000 );
 
     return var_0;
 }
@@ -210,14 +210,14 @@ _id_69BC()
 _id_6A5E( var_0 )
 {
     if ( var_0._id_8988 )
-        return var_0._id_030F._id_7167[var_0._id_F259];
+        return var_0.player._id_7167[var_0._id_F259];
     else
         return anim._id_7167[var_0._id_F259];
 }
 
 _id_9CB7( var_0 )
 {
-    if ( _id_077B::_id_B401() )
+    if ( scripts\engine\utility::_id_B401() )
         return 0;
 
     if ( !var_0._id_7218._id_4E75 )
@@ -244,7 +244,7 @@ _id_A35E()
 
 _id_7140( var_0 )
 {
-    if ( _id_077B::_id_B401() )
+    if ( scripts\engine\utility::_id_B401() )
         return 0;
 
     if ( self._id_CD4A == 1 )
@@ -266,7 +266,7 @@ _id_F743( var_0, var_1, var_2, var_3 )
 {
     if ( !self _meth_81C2( var_0, var_1 ) )
         return 0;
-    else if ( distancesquared( self._id_02EA, var_1 ) < 40000 )
+    else if ( distancesquared( self.origin, var_1 ) < 40000 )
         return 0;
 
     var_4 = _func_0193( var_1 + ( 0, 0, 1 ), var_1 + ( 0, 0, -500 ) );
@@ -297,7 +297,7 @@ _id_4CAE( var_0, var_1, var_2, var_3 )
     if ( !self._id_0062 )
         self _meth_8250( "face direction", var_1 );
 
-    scripts\anim\battlechatter_wrapper::_id_564C( self._id_01F1._id_0084 );
+    scripts\anim\battlechatter_wrapper::_id_564C( self._id_01F1.basename );
     self notify( "stop_aiming_at_enemy" );
     self _meth_8319( "throwanim", var_0, %body, _id_599D(), 0.1, 1 );
     thread scripts\anim\notetracks::_id_4D44( "throwanim", "killanimscript" );
@@ -319,7 +319,7 @@ _id_4CAE( var_0, var_1, var_2, var_3 )
 
         if ( var_6 == "end" )
         {
-            self._id_0F1A._id_030F._id_A775--;
+            self._id_0F1A.player._id_A775--;
             self notify( "dont_reduce_giptp_on_killanimscript" );
             return 0;
         }
@@ -328,7 +328,7 @@ _id_4CAE( var_0, var_1, var_2, var_3 )
     self notify( "dont_reduce_giptp_on_killanimscript" );
 
     if ( _id_FF15() )
-        thread _id_10B70( self._id_0F1A._id_030F, var_2 );
+        thread _id_10B70( self._id_0F1A.player, var_2 );
 
     self _meth_840C();
 
@@ -337,16 +337,16 @@ _id_4CAE( var_0, var_1, var_2, var_3 )
 
     if ( var_3 && self._id_0F1A._id_8988 )
     {
-        var_13 = self._id_0F1A._id_030F;
+        var_13 = self._id_0F1A.player;
 
         if ( var_13._id_A775 > 1 || gettime() - var_13._id_8FC6 < 2000 )
-            var_13._id_7167["double_grenade"] = gettime() + _func_0148( 5000, var_13._id_7218._id_B687 );
+            var_13._id_7167["double_grenade"] = gettime() + min( 5000, var_13._id_7218._id_B687 );
     }
 
     self notify( "stop grenade check" );
 
     if ( var_5 != "none" )
-        self destroy( var_4, var_5 );
+        self detach( var_4, var_5 );
     else
     {
 
@@ -373,16 +373,16 @@ _id_10B70( var_0, var_1 )
 _id_10B71( var_0 )
 {
     var_1 = self._id_0F1A;
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
     var_2 thread _id_10B72( 5 );
     var_2 endon( "watchGrenadeTowardsPlayerTimeout" );
-    var_3 = self._id_01F1._id_0084;
+    var_3 = self._id_01F1.basename;
     var_4 = _id_6A5B();
 
     if ( !isdefined( var_4 ) )
         return;
 
-    _id_D570( var_1, _func_0148( gettime() + 5000, var_0 ) );
+    _id_D570( var_1, min( gettime() + 5000, var_0 ) );
     var_5 = 62500;
     var_6 = 160000;
 
@@ -392,8 +392,8 @@ _id_10B71( var_0 )
         var_6 = 1690000;
     }
 
-    var_7 = level._id_B758;
-    var_8 = var_4._id_02EA;
+    var_7 = level.players;
+    var_8 = var_4.origin;
 
     for (;;)
     {
@@ -402,14 +402,14 @@ _id_10B71( var_0 )
         if ( !isdefined( var_4 ) )
             break;
 
-        if ( distancesquared( var_4._id_02EA, var_8 ) < 400 )
+        if ( distancesquared( var_4.origin, var_8 ) < 400 )
         {
             var_9 = [];
 
             for ( var_10 = 0; var_10 < var_7.size; var_10++ )
             {
                 var_11 = var_7[var_10];
-                var_12 = distancesquared( var_4._id_02EA, var_11._id_02EA );
+                var_12 = distancesquared( var_4.origin, var_11.origin );
 
                 if ( var_12 < var_5 )
                 {
@@ -427,7 +427,7 @@ _id_10B71( var_0 )
                 break;
         }
 
-        var_8 = var_4._id_02EA;
+        var_8 = var_4.origin;
     }
 }
 
@@ -441,7 +441,7 @@ _id_714D( var_0, var_1 )
 
     var_2._id_8FC6 = gettime();
     var_3 = var_2._id_7167[var_0._id_F259];
-    var_2._id_7167[var_0._id_F259] = _func_0147( var_1, var_3 );
+    var_2._id_7167[var_0._id_F259] = max( var_1, var_3 );
 }
 
 _id_6A5B()
@@ -459,7 +459,7 @@ _id_10B72( var_0 )
 
 _id_1D61( var_0, var_1 )
 {
-    self _meth_801E( var_0, var_1 );
+    self attach( var_0, var_1 );
     thread _id_486B( var_0, var_1 );
     return var_1;
 }
@@ -478,14 +478,14 @@ _id_486B( var_0, var_1 )
         self._id_AA1C = undefined;
     }
 
-    self destroy( var_0, var_1 );
+    self detach( var_0, var_1 );
 }
 
 _id_A971( var_0 )
 {
-    var_1 = anglestoforward( self._id_0054 );
-    var_2 = anglestoright( self._id_0054 );
-    var_3 = anglestoup( self._id_0054 );
+    var_1 = anglestoforward( self.angles );
+    var_2 = anglestoright( self.angles );
+    var_3 = anglestoup( self.angles );
     var_1 = var_1 * var_0[0];
     var_2 = var_2 * var_0[1];
     var_3 = var_3 * var_0[2];
@@ -496,7 +496,7 @@ _id_714F( var_0, var_1 )
 {
     level notify( "armoffset" );
     level endon( "armoffset" );
-    var_0 = self._id_02EA + _id_A971( var_0 );
+    var_0 = self.origin + _id_A971( var_0 );
 
     for (;;)
         wait 0.05;
@@ -504,13 +504,13 @@ _id_714F( var_0, var_1 )
 
 _id_6A58()
 {
-    var_0 = _func_01B6( 360 );
-    var_1 = _func_01B7( 30, 75 );
-    var_2 = _func_01FE( var_1 );
+    var_0 = randomfloat( 360 );
+    var_1 = randomfloatrange( 30, 75 );
+    var_2 = sin( var_1 );
     var_3 = cos( var_1 );
     var_4 = cos( var_0 ) * var_3;
-    var_5 = _func_01FE( var_0 ) * var_3;
-    var_6 = _func_01B7( 100, 200 );
+    var_5 = sin( var_0 ) * var_3;
+    var_6 = randomfloatrange( 100, 200 );
     var_7 = ( var_4, var_5, var_2 ) * var_6;
     return var_7;
 }
@@ -527,19 +527,19 @@ _id_500F()
 
 _id_DB6B()
 {
-    if ( level._id_11B1[self._id_045B] > 0 && level._id_11B1[self._id_045B] < level._id_11B2 )
+    if ( level._id_11B1[self.team] > 0 && level._id_11B1[self.team] < level._id_11B2 )
     {
-        if ( gettime() - level._id_8F70[self._id_045B] > 4000 )
+        if ( gettime() - level._id_8F70[self.team] > 4000 )
             return 0;
 
-        var_0 = level._id_8F6D[self._id_045B];
+        var_0 = level._id_8F6D[self.team];
 
         if ( var_0 == self )
             return 0;
 
-        var_1 = isdefined( var_0 ) && distancesquared( self._id_02EA, var_0._id_02EA ) < 65536;
+        var_1 = isdefined( var_0 ) && distancesquared( self.origin, var_0.origin ) < 65536;
 
-        if ( ( var_1 || distancesquared( self._id_02EA, level._id_8F6F[self._id_045B] ) < 65536 ) && ( !isdefined( self._id_017D ) || distancesquared( self._id_017D._id_02EA, level._id_8F6E[self._id_045B] ) < 262144 ) )
+        if ( ( var_1 || distancesquared( self.origin, level._id_8F6F[self.team] ) < 65536 ) && ( !isdefined( self._id_017D ) || distancesquared( self._id_017D.origin, level._id_8F6E[self.team] ) < 262144 ) )
             return 1;
     }
 
@@ -548,24 +548,24 @@ _id_DB6B()
 
 _id_34B8()
 {
-    if ( !isdefined( level._id_8F70[self._id_045B] ) )
+    if ( !isdefined( level._id_8F70[self.team] ) )
         return 0;
 
     if ( _id_DB6B() )
         return 1;
 
-    if ( gettime() - level._id_8F70[self._id_045B] < level._id_11B3 )
+    if ( gettime() - level._id_8F70[self.team] < level._id_11B3 )
         return 0;
 
     if ( !_func_011C( self._id_017D ) )
         return 0;
 
-    if ( level._id_11B1[self._id_045B] )
-        level._id_11B1[self._id_045B] = 0;
+    if ( level._id_11B1[self.team] )
+        level._id_11B1[self.team] = 0;
 
     var_0 = isdefined( self._id_119C ) && self._id_119C;
 
-    if ( !var_0 && _func_0072( self._id_045B ) < _func_0072( self._id_017D._id_045B ) )
+    if ( !var_0 && _func_0072( self.team ) < _func_0072( self._id_017D.team ) )
         return 0;
 
     return 1;
@@ -582,7 +582,7 @@ _id_F755( var_0 )
     if ( self._id_0102 == "ambush" || self._id_0102 == "ambush_nodes_only" )
         return 0;
 
-    if ( !self _meth_81C5( self._id_017D._id_02EA ) )
+    if ( !self _meth_81C5( self._id_017D.origin ) )
         return 0;
 
     if ( scripts\anim\utility_common::_id_88FD() )
@@ -596,21 +596,21 @@ _id_F755( var_0 )
 
     self _meth_80EF( var_0 );
 
-    if ( self radiusdamage() )
+    if ( self _meth_8288() )
     {
         self._id_0244 = 0;
         self._id_0242 = 0;
         self._id_0DB6._id_993F = 1;
 
-        if ( level._id_11B1[self._id_045B] == 0 )
+        if ( level._id_11B1[self.team] == 0 )
         {
-            level._id_8F70[self._id_045B] = gettime();
-            level._id_8F6D[self._id_045B] = self;
+            level._id_8F70[self.team] = gettime();
+            level._id_8F6D[self.team] = self;
         }
 
-        level._id_8F6F[self._id_045B] = self._id_02EA;
-        level._id_8F6E[self._id_045B] = self._id_017D._id_02EA;
-        level._id_11B1[self._id_045B]++;
+        level._id_8F6F[self.team] = self.origin;
+        level._id_8F6E[self.team] = self._id_017D.origin;
+        level._id_11B1[self.team]++;
         return 1;
     }
 
@@ -623,8 +623,8 @@ _id_6C0E( var_0 )
         return 0;
 
     var_1 = var_0 - self _meth_8176();
-    var_1 = _func_025A( var_1 );
-    var_2 = _func_025B( var_1 )[0];
+    var_1 = vectornormalize( var_1 );
+    var_2 = vectortoangles( var_1 )[0];
     return _func_000B( var_2 );
 }
 
@@ -655,10 +655,10 @@ _id_10967()
         self waittill( "reload" );
         var_0 = self getcurrentweapon();
 
-        if ( _func_036F( var_0 ) )
+        if ( isnullweapon( var_0 ) )
             break;
 
-        if ( self getcurrentweaponclipammo() >= visionsetthermal( var_0 ) )
+        if ( self getcurrentweaponclipammo() >= weaponclipsize( var_0 ) )
             break;
     }
 
@@ -674,10 +674,10 @@ _id_F208( var_0, var_1 )
 
 _id_34EE()
 {
-    var_0 = self._id_017D._id_02EA - self._id_02EA;
+    var_0 = self._id_017D.origin - self.origin;
     var_1 = _func_0133( ( var_0[0], var_0[1], 0 ) );
 
-    if ( self._id_01F1._id_0084 == "flash_grenade" )
+    if ( self._id_01F1.basename == "flash_grenade" )
         return var_1 < 589824;
 
     return var_1 >= 40000 && var_1 <= 1562500;
@@ -705,7 +705,7 @@ _id_A0FC()
         if ( isdefined( self._id_CD7E ) && self._id_CD7E != 0 )
             continue;
 
-        if ( isdefined( self._id_045B ) && isdefined( var_4 ) && self._id_045B == var_4 )
+        if ( isdefined( self.team ) && isdefined( var_4 ) && self.team == var_4 )
         {
             var_0 = 3 * ( var_0 - 0.75 );
 
@@ -751,7 +751,7 @@ _id_5C7E( var_0 )
     var_1 = gettime() + var_0 * 1000.0;
 
     if ( isdefined( self._id_5C82 ) )
-        self._id_5C82 = _func_0147( self._id_5C82, var_1 );
+        self._id_5C82 = max( self._id_5C82, var_1 );
     else
     {
         self._id_5C82 = var_1;
@@ -770,29 +770,29 @@ _id_599D()
 
 _id_BFEB()
 {
-    return _func_01B7( 1, 1.2 );
+    return randomfloatrange( 1, 1.2 );
 }
 
 _id_B5B5()
 {
     var_0 = self geteye();
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
     {
         if ( !self _meth_8066( var_2 ) )
             continue;
 
         var_3 = var_2 geteye();
-        var_4 = _func_025B( var_0 - var_3 );
+        var_4 = vectortoangles( var_0 - var_3 );
         var_5 = anglestoforward( var_4 );
         var_6 = var_2 getplayerangles();
         var_7 = anglestoforward( var_6 );
-        var_8 = _func_0257( var_5, var_7 );
+        var_8 = vectordot( var_5, var_7 );
 
         if ( var_8 < 0.805 )
             continue;
 
-        if ( _id_077B::_id_3A02() && var_8 >= 0.996 )
+        if ( scripts\engine\utility::cointoss() && var_8 >= 0.996 )
             continue;
 
         return 1;

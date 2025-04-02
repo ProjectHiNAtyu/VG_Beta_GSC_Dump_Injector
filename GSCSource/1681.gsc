@@ -4,7 +4,7 @@
 _id_F189( var_0 )
 {
     _id_0694::_id_23D1( 1, self._id_017D );
-    self._id_2C38._id_82E3[var_0] = _func_020F();
+    self._id_2C38._id_82E3[var_0] = spawnstruct();
     self._id_2C38._id_82E3[var_0]._id_F221 = gettime() + 4000;
 }
 
@@ -35,7 +35,7 @@ _id_F18C( var_0 )
 
     if ( !istrue( self._id_2C38._id_82E3[var_0]._id_E699 ) )
     {
-        var_2 = _id_077B::_id_6E83( var_1._id_02EA );
+        var_2 = scripts\engine\utility::_id_6E83( var_1.origin );
 
         if ( abs( var_2 ) > 90 )
             return anim._id_58C3;
@@ -60,7 +60,7 @@ _id_31CF( var_0 )
     if ( isdefined( self._id_0303 ) || self._id_0062 )
         return anim._id_58C3;
 
-    if ( _func_036F( self._id_01F1 ) )
+    if ( isnullweapon( self._id_01F1 ) )
         return anim._id_58C3;
 
     if ( isdefined( self._id_017D ) && isdefined( self._id_017D._id_4D85 ) && self._id_017D._id_4D85 )
@@ -69,15 +69,15 @@ _id_31CF( var_0 )
     if ( istrue( self._id_016C ) )
         return anim._id_58C3;
 
-    if ( _id_077B::_id_0F4F() )
+    if ( scripts\engine\utility::_id_0F4F() )
         return anim._id_58C3;
 
     if ( scripts\anim\utility_common::_id_FF0D() )
         return anim._id_58C3;
 
-    if ( isdefined( anim._id_F18E ) && isai( level._id_030F ) )
+    if ( isdefined( anim._id_F18E ) && isalive( level.player ) )
     {
-        if ( _id_7166( level._id_030F, 200 ) )
+        if ( _id_7166( level.player, 200 ) )
             return anim._id_EAC8;
     }
 
@@ -99,7 +99,7 @@ _id_7152( var_0, var_1 )
 
 _id_7166( var_0, var_1 )
 {
-    var_2 = var_0._id_02EA;
+    var_2 = var_0.origin;
 
     if ( !self _meth_8066( var_0 ) )
     {
@@ -111,7 +111,7 @@ _id_7166( var_0, var_1 )
     else if ( !isdefined( var_1 ) )
         var_1 = 100;
 
-    if ( distancesquared( self._id_02EA, var_2 ) < var_1 * var_1 )
+    if ( distancesquared( self.origin, var_2 ) < var_1 * var_1 )
         return 0;
 
     _id_D451( var_0 );
@@ -119,12 +119,12 @@ _id_7166( var_0, var_1 )
     if ( !_id_7140( var_0 ) )
         return 0;
 
-    var_3 = _id_077B::_id_6E83( var_2 );
+    var_3 = scripts\engine\utility::_id_6E83( var_2 );
 
     if ( abs( var_3 ) > 60 )
         return 0;
 
-    if ( self._id_04CE._id_0084 == "mg42" || self._id_01ED <= 0 )
+    if ( self._id_04CE.basename == "mg42" || self._id_01ED <= 0 )
         return 0;
 
     if ( isdefined( self._id_017D ) && var_0 == self._id_017D )
@@ -132,7 +132,7 @@ _id_7166( var_0, var_1 )
         if ( !_id_34EE() )
             return 0;
 
-        if ( !_id_7152( var_0, var_0._id_02EA ) )
+        if ( !_id_7152( var_0, var_0.origin ) )
             return 0;
 
         if ( scripts\anim\utility_common::_id_31A7() )
@@ -152,10 +152,10 @@ _id_A35E()
 
 _id_34EE()
 {
-    var_0 = self._id_017D._id_02EA - self._id_02EA;
+    var_0 = self._id_017D.origin - self.origin;
     var_1 = _func_0133( ( var_0[0], var_0[1], 0 ) );
 
-    if ( self._id_01F1._id_0084 == "flash_grenade" )
+    if ( self._id_01F1.basename == "flash_grenade" )
         return var_1 < 589824;
 
     return var_1 >= 40000 && var_1 <= 1562500;
@@ -166,7 +166,7 @@ _id_7140( var_0 )
     if ( isdefined( self._id_5D72 ) )
         return [[ self._id_5D72 ]]( var_0 );
 
-    if ( _id_077B::_id_B401() )
+    if ( scripts\engine\utility::_id_B401() )
         return 0;
 
     if ( isdefined( self._id_CD4A ) && self._id_CD4A == 1 )
@@ -183,24 +183,24 @@ _id_7140( var_0 )
 
 _id_D451( var_0 )
 {
-    self._id_0F1A = _func_020F();
+    self._id_0F1A = spawnstruct();
 
-    if ( _func_0117( var_0 ) && isdefined( var_0._id_7167 ) )
+    if ( isplayer( var_0 ) && isdefined( var_0._id_7167 ) )
     {
         self._id_0F1A._id_8988 = 1;
-        self._id_0F1A._id_030F = var_0;
-        self._id_0F1A._id_F259 = self._id_01F1._id_0084;
+        self._id_0F1A.player = var_0;
+        self._id_0F1A._id_F259 = self._id_01F1.basename;
     }
     else
     {
         self._id_0F1A._id_8988 = 0;
-        self._id_0F1A._id_F259 = "AI_" + self._id_01F1._id_0084;
+        self._id_0F1A._id_F259 = "AI_" + self._id_01F1.basename;
     }
 }
 
 _id_9CB7( var_0 )
 {
-    if ( _id_077B::_id_B401() )
+    if ( scripts\engine\utility::_id_B401() )
         return 0;
 
     if ( !var_0._id_7218._id_4E75 )
@@ -223,7 +223,7 @@ _id_9CB7( var_0 )
 _id_6A5E( var_0 )
 {
     if ( var_0._id_8988 )
-        return var_0._id_030F._id_7167[var_0._id_F259];
+        return var_0.player._id_7167[var_0._id_F259];
     else
         return anim._id_7167[var_0._id_F259];
 }

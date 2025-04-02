@@ -6,7 +6,7 @@ _id_D666( var_0, var_1, var_2, var_3, var_4, var_5 )
     if ( !_id_1AE2() )
         return;
 
-    if ( _func_0104( self ) )
+    if ( isai( self ) )
         return;
 
     var_6 = _id_07DA::_id_6C46( var_1, var_2, var_3, var_4, var_5 );
@@ -24,7 +24,7 @@ _id_D668( var_0, var_1, var_2, var_3, var_4, var_5 )
     if ( !_id_1AE2() )
         return;
 
-    if ( _func_0104( self ) )
+    if ( isai( self ) )
         return;
 
     var_6 = [ var_1 ];
@@ -44,10 +44,10 @@ _id_D668( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_1141( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    if ( _id_0A69::_id_CA3E() || !_id_1AE2() )
+    if ( scripts\mp\utility\game::_id_CA3E() || !_id_1AE2() )
         return;
 
-    if ( _func_0104( self ) )
+    if ( isai( self ) )
         return;
 
     if ( istrue( game["practiceRound"] ) )
@@ -71,7 +71,7 @@ _id_1143( var_0, var_1, var_2, var_3, var_4, var_5 )
     if ( !_id_1AE2() )
         return;
 
-    if ( _func_0104( self ) )
+    if ( isai( self ) )
         return;
 
     if ( !isdefined( var_0 ) )
@@ -92,7 +92,7 @@ _id_6C45( var_0, var_1, var_2, var_3, var_4 )
     if ( !_id_1AE2() )
         return undefined;
 
-    if ( _func_0104( self ) )
+    if ( isai( self ) )
         return 0;
 
     var_5 = _id_07DA::_id_6C46( var_0, var_1, var_2, var_3, var_4 );

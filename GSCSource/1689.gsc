@@ -15,7 +15,7 @@ _id_B8FE( var_0, var_1, var_2 )
         var_5 = self._id_F4C6;
 
     if ( isdefined( var_5._id_F4D8 ) )
-        var_5._id_F4D7 = var_5._id_02EA[2] + var_5._id_F4D8;
+        var_5._id_F4D7 = var_5.origin[2] + var_5._id_F4D8;
 
     var_6 = self _meth_815F();
 
@@ -30,8 +30,8 @@ _id_B8FE( var_0, var_1, var_2 )
     self._id_F4EE = var_5;
     self._id_F4E4 = var_6;
     self _meth_8018( "noclip" );
-    self._id_F4F0 = self._id_02EA[2];
-    self _meth_8250( "face angle", self._id_0054[1] );
+    self._id_F4F0 = self.origin[2];
+    self _meth_8250( "face angle", self.angles[1] );
     _id_0009::_id_1C66( var_0, var_1, var_4 );
     self._id_F4F3 = var_4;
     self._id_F4DD = _id_0009::_id_1C36();
@@ -79,7 +79,7 @@ _id_B8FC( var_0, var_1, var_2 )
             var_6 = self._id_F4C3;
 
         if ( isdefined( var_6 ) )
-            self _meth_80F9( var_6._id_02EA, self._id_0054 );
+            self _meth_80F9( var_6.origin, self.angles );
 
         _id_08DA::_id_F09C( var_0, var_1 );
         return;
@@ -99,7 +99,7 @@ _id_B8FC( var_0, var_1, var_2 )
         var_3 = self._id_F4C6;
 
     if ( isdefined( var_3._id_F4D8 ) )
-        var_3._id_F4D7 = var_3._id_02EA[2] + var_3._id_F4D8;
+        var_3._id_F4D7 = var_3.origin[2] + var_3._id_F4D8;
 
     var_6 = self _meth_815F();
 
@@ -114,8 +114,8 @@ _id_B8FC( var_0, var_1, var_2 )
     self._id_F4EE = var_3;
     self._id_F4E4 = var_6;
     self _meth_8018( "noclip" );
-    self._id_F4F0 = self._id_02EA[2];
-    self _meth_8250( "face angle", self._id_0054[1] );
+    self._id_F4F0 = self.origin[2];
+    self _meth_8250( "face angle", self.angles[1] );
     var_8 = _id_08C8::_id_DC09( var_5 );
     var_9 = _id_DC08( var_5 );
 
@@ -124,7 +124,7 @@ _id_B8FC( var_0, var_1, var_2 )
     else
     {
         var_10 = _id_08C8::_id_7489;
-        self _meth_8250( "face angle", var_3._id_0054[1] );
+        self _meth_8250( "face angle", var_3.angles[1] );
 
         if ( !_func_0011( var_5, "traverse_align" ) )
             _id_08C8::_id_7485();
@@ -143,7 +143,7 @@ _id_B8FC( var_0, var_1, var_2 )
     else
         self _meth_85EB( var_1, var_4 );
 
-    if ( var_9 && !_func_0102( self ) && ( !isdefined( self._id_F4DE ) || isdefined( self._id_F4DE._id_4C1D ) && !self._id_F4DE._id_4C1D ) )
+    if ( var_9 && !isagent( self ) && ( !isdefined( self._id_F4DE ) || isdefined( self._id_F4DE._id_4C1D ) && !self._id_F4DE._id_4C1D ) )
     {
         var_11 = _func_00BB( var_5, "warp_arrival_end" )[0];
         self _meth_82E6( var_5, var_11 );
@@ -223,7 +223,7 @@ _id_DB42( var_0, var_1, var_2, var_3 )
     if ( !self._id_F4CC )
         return 0;
 
-    var_4 = distance2d( _id_08C8::_id_6871( self._id_F4C6 ), self._id_02EA );
+    var_4 = distance2d( _id_08C8::_id_6871( self._id_F4C6 ), self.origin );
     var_5 = anim._id_F4CE._id_1BDD[self._id_F4DE._id_F4F2][self._id_F4DE._id_141E]._id_F4A5;
     var_6 = _func_0131( var_5 );
     var_7 = var_4 - var_6;
@@ -231,7 +231,7 @@ _id_DB42( var_0, var_1, var_2, var_3 )
     if ( var_7 > 10 )
         return 0;
 
-    var_8 = abs( _func_000B( self._id_0054[1] - self._id_F4C6._id_0054[1] ) );
+    var_8 = abs( _func_000B( self.angles[1] - self._id_F4C6.angles[1] ) );
 
     if ( var_4 < 20 && var_8 < 30 )
         return 0;
@@ -247,7 +247,7 @@ _id_DB0F( var_0, var_1, var_2, var_3 )
     if ( !_id_EB9D( self._id_F4C6._id_005C ) )
         return 0;
 
-    var_4 = distance2d( self._id_02EA, self._id_F4C6._id_02EA );
+    var_4 = distance2d( self.origin, self._id_F4C6.origin );
 
     if ( var_4 > _id_6DDC() )
         return 0;
@@ -262,10 +262,10 @@ _id_DBEB( var_0, var_1, var_2, var_3 )
 
     var_4 = _id_08C8::_id_6871( self._id_F4C6 );
 
-    if ( !self _meth_822B( self._id_02EA, var_4 ) )
+    if ( !self _meth_822B( self.origin, var_4 ) )
         return 0;
 
-    var_5 = distance2d( var_4, self._id_02EA );
+    var_5 = distance2d( var_4, self.origin );
 
     if ( var_5 < 4 )
         self._id_F4DE._id_4C1D = 0;
@@ -295,13 +295,13 @@ _id_2EA1( var_0, var_1, var_2 )
     if ( isdefined( self._id_F4DE ) && self._id_F4DE._id_02CD == self._id_F4C6 )
         return;
 
-    self._id_F4DE = _func_020F();
+    self._id_F4DE = spawnstruct();
     self._id_F4DE._id_F4F2 = self._id_F4C6._id_005C;
     self._id_F4DE._id_02CD = self._id_F4C6;
     var_3 = [];
     var_3["height"] = self._id_F4C6._id_F4D8;
     var_3["drop_height"] = self._id_F4C6._id_F4D6;
-    var_3["arrival_yaw"] = _func_000B( self._id_F4C6._id_0054[1] - self._id_0054[1] );
+    var_3["arrival_yaw"] = _func_000B( self._id_F4C6.angles[1] - self.angles[1] );
     var_3["speed"] = self _meth_8649();
 
     if ( self._id_F4DE._id_F4F2 == "traverse_warp_across" || self._id_F4DE._id_F4F2 == "traverse_warp_jump_across" )
@@ -331,7 +331,7 @@ _id_2EA1( var_0, var_1, var_2 )
 
     if ( !isdefined( anim._id_F4CE ) )
     {
-        anim._id_F4CE = _func_020F();
+        anim._id_F4CE = spawnstruct();
         anim._id_F4CE._id_1BDD = [];
     }
 
@@ -354,7 +354,7 @@ _id_2EA1( var_0, var_1, var_2 )
         else
             var_15 = _func_00B0( var_11, 0, var_13 );
 
-        anim._id_F4CE._id_1BDD[self._id_F4DE._id_F4F2][var_5] = _func_020F();
+        anim._id_F4CE._id_1BDD[self._id_F4DE._id_F4F2][var_5] = spawnstruct();
         anim._id_F4CE._id_1BDD[self._id_F4DE._id_F4F2][var_5]._id_1BEE = var_11;
         anim._id_F4CE._id_1BDD[self._id_F4DE._id_F4F2][var_5]._id_F4A5 = var_15;
         anim._id_F4CE._id_1BDD[self._id_F4DE._id_F4F2][var_5]._id_109FE = var_12;
@@ -385,7 +385,7 @@ _id_F4E0( var_0, var_1, var_2 )
     {
         var_4 = _id_D8B1( var_0, var_1, var_2 );
         _id_2EA1( var_0, var_1, var_2 );
-        var_5 = distance2d( _id_08C8::_id_6871( self._id_F4C6 ), self._id_02EA );
+        var_5 = distance2d( _id_08C8::_id_6871( self._id_F4C6 ), self.origin );
 
         if ( var_5 < 4 )
             self._id_F4DE._id_4C1D = 0;

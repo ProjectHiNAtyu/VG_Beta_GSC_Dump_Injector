@@ -3,23 +3,23 @@
 
 _id_1005D()
 {
-    _id_099D::_id_C2A5( "vehicle_damage", "setWeaponClassModDamageForVehicle", _id_0A86::_id_D438 );
-    _id_099D::_id_C2A5( "vehicle_damage", "setPerkModDamage", _id_0A86::_id_D2FD );
-    _id_099D::_id_C2A5( "vehicle_damage", "setWeaponHitDamageData", _id_0A86::_id_D439 );
-    _id_099D::_id_C2A5( "vehicle_damage", "setWeaponHitDamageDataForVehicle", _id_0A86::_id_D43A );
-    _id_099D::_id_C2A5( "vehicle_damage", "setVehicleHitDamageData", _id_0A86::_id_D41E );
-    _id_099D::_id_C2A5( "vehicle_damage", "setVehicleHitDamageDataForWeapon", _id_0A86::_id_D41F );
-    _id_099D::_id_C2A5( "vehicle_damage", "setPreModDamageCallback", _id_0A86::_id_D352 );
-    _id_099D::_id_C2A5( "vehicle_damage", "setPostModDamageCallback", _id_0A86::_id_D34F );
-    _id_099D::_id_C2A5( "vehicle_damage", "setDeathCallback", _id_0A86::_id_D19F );
-    _id_099D::_id_C2A5( "vehicle_damage", "giveScore", ::_id_10046 );
-    _id_099D::_id_C2A5( "vehicle_damage", "giveAward", ::_id_10045 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_damage", "setWeaponClassModDamageForVehicle", _id_0A86::_id_D438 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_damage", "setPerkModDamage", _id_0A86::_id_D2FD );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_damage", "setWeaponHitDamageData", _id_0A86::_id_D439 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_damage", "setWeaponHitDamageDataForVehicle", _id_0A86::_id_D43A );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_damage", "setVehicleHitDamageData", _id_0A86::_id_D41E );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_damage", "setVehicleHitDamageDataForWeapon", _id_0A86::_id_D41F );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_damage", "setPreModDamageCallback", _id_0A86::_id_D352 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_damage", "setPostModDamageCallback", _id_0A86::_id_D34F );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_damage", "setDeathCallback", _id_0A86::_id_D19F );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_damage", "giveScore", ::_id_10046 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "vehicle_damage", "giveAward", ::_id_10045 );
 }
 
 _id_10046( var_0, var_1, var_2 )
 {
     if ( istrue( var_2 ) )
-        _id_07E1::_id_CBF3( var_0 );
+        scripts\mp\rank::_id_CBF3( var_0 );
     else
         _id_0A76::_id_6FE6( var_0, var_1 );
 }

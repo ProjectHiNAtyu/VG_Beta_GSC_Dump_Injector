@@ -6,7 +6,7 @@ _id_5FE7()
     _id_5FE8();
     _id_5FE9();
     game["dialog"]["plunder_extract_fail_fulton"] = "plunder_plunder_extract_fail_fulton";
-    level._id_0BA3["vfx_fulton_explode"] = _func_0139( "vfx/iw8_br/gameplay/vfx_br_money_fulton_destr.vfx" );
+    level._effect["vfx_fulton_explode"] = loadfx( "vfx/iw8_br/gameplay/vfx_br_money_fulton_destr.vfx" );
 }
 
 _id_5FE8()
@@ -41,11 +41,11 @@ _id_5FE9()
 
 _id_5FDF( var_0 )
 {
-    var_1 = _func_0205( "script_model", var_0._id_02EA );
-    var_1 setmode( "military_skyhook_far_mp" );
-    var_1._id_0054 = var_0._id_0054;
-    var_1._id_02F2 = self;
-    var_1._id_045B = self._id_045B;
+    var_1 = spawn( "script_model", var_0.origin );
+    var_1 setmodel( "military_skyhook_far_mp" );
+    var_1.angles = var_0.angles;
+    var_1.owner = self;
+    var_1.team = self.team;
     var_1._id_1887 = "fulton";
     var_1 _id_069D::_id_D46E();
     self._id_5FDD = var_1;
@@ -55,10 +55,10 @@ _id_5FDF( var_0 )
 _id_5FE1( var_0 )
 {
     var_1 = scripts\mp\gametypes\br_plunder::_id_B921( "equip_mp_fulton" );
-    thread scripts\mp\gametypes\br::_id_EFAA( "br_fulton_balloon_shot_down", self._id_02F2, self._id_045B );
+    thread scripts\mp\gametypes\br::_id_EFAA( "br_fulton_balloon_shot_down", self.owner, self.team );
     scripts\mp\gametypes\br_plunder::_id_54ED( var_1._id_5031 );
-    _func_0196( _id_077B::_id_6A40( "vfx_fulton_explode" ), self._id_02EA, anglestoforward( self._id_0054 ) );
-    _func_019D( self._id_02EA, "br_fulton_extract_exp" );
+    playfx( scripts\engine\utility::getfx( "vfx_fulton_explode" ), self.origin, anglestoforward( self.angles ) );
+    playsoundatpos( self.origin, "br_fulton_extract_exp" );
     thread _id_5FE0();
 }
 
@@ -66,24 +66,24 @@ _id_5FE0()
 {
     self notify( "death" );
 
-    if ( isdefined( self._id_02F2 ) )
-        self._id_02F2._id_5FDD = undefined;
+    if ( isdefined( self.owner ) )
+        self.owner._id_5FDD = undefined;
 
     self hide();
     _id_079A::_id_A0ED();
-    self _meth_8373( "fulton_use_cache", "unusable", 0 );
-    self _meth_8373( "fulton_use_extract", "unusable", 0 );
-    self _meth_8373( "effects", "neutral", 0 );
+    self setscriptablepartstate( "fulton_use_cache", "unusable", 0 );
+    self setscriptablepartstate( "fulton_use_extract", "unusable", 0 );
+    self setscriptablepartstate( "effects", "neutral", 0 );
     scripts\mp\gametypes\br_plunder::_id_B91D( self );
     self _meth_83EB();
 
     if ( isdefined( self._id_CBC3 ) )
-        self._id_CBC3 _meth_809A();
+        self._id_CBC3 delete();
 
     waitframe();
 
     if ( isdefined( self ) )
-        self _meth_809A();
+        self delete();
 }
 
 _id_5FF5( var_0 )
@@ -97,61 +97,61 @@ _id_5FF5( var_0 )
 
     if ( isdefined( var_1 ) )
     {
-        self _meth_8275( "br_pickup_deny" );
-        _id_07B9::_id_DC9F( "MP/CASH_BALLOON_CANNOT_PLACE" );
+        self playlocalsound( "br_pickup_deny" );
+        scripts\mp\hud_message::_id_DC9F( "MP/CASH_BALLOON_CANNOT_PLACE" );
 
         if ( isdefined( self._id_EB06 ) )
             _id_5FF0();
 
-        var_0 _meth_809A();
+        var_0 delete();
         return;
     }
 
     if ( !_id_5FDE( var_0 ) )
     {
-        self _meth_8275( "br_pickup_deny" );
-        _id_07B9::_id_DC9F( "MP/CASH_BALLOON_BLOCKED" );
+        self playlocalsound( "br_pickup_deny" );
+        scripts\mp\hud_message::_id_DC9F( "MP/CASH_BALLOON_BLOCKED" );
 
         if ( isdefined( self._id_EB06 ) )
             _id_5FF0();
 
-        var_0 _meth_809A();
+        var_0 delete();
         return;
     }
     else if ( 1 && isdefined( self._id_5FDD ) )
     {
-        self _meth_8275( "br_pickup_deny" );
-        _id_07B9::_id_DC9F( "MP/CASH_BALLOON_TOO_MANY" );
+        self playlocalsound( "br_pickup_deny" );
+        scripts\mp\hud_message::_id_DC9F( "MP/CASH_BALLOON_TOO_MANY" );
 
         if ( isdefined( self._id_EB06 ) )
             _id_5FF0();
 
-        var_0 _meth_809A();
+        var_0 delete();
         return;
     }
 
     if ( isdefined( self._id_EB06 ) )
-        _id_07F2::_id_EB4D( undefined, undefined, undefined, 1 );
+        scripts\mp\supers::_id_EB4D( undefined, undefined, undefined, 1 );
 
     thread _id_5FDF( var_0 );
 
     if ( isdefined( var_0 ) )
-        var_0 _meth_809A();
+        var_0 delete();
 }
 
 _id_5FEF()
 {
     self endon( "death" );
     self endon( "start_extract" );
-    _func_019D( self._id_02EA, "fulton_bag_drop" );
-    thread scripts\mp\gametypes\br::_id_EFAA( "br_fulton_device_placed", self._id_02F2, self._id_045B );
-    var_0 = _id_0A7C::_id_6A3A( self._id_045B );
+    playsoundatpos( self.origin, "fulton_bag_drop" );
+    thread scripts\mp\gametypes\br::_id_EFAA( "br_fulton_device_placed", self.owner, self.team );
+    var_0 = scripts\mp\utility\teams::_id_6A3A( self.team );
     scripts\mp\gametypes\br_plunder::_id_B92A( self, "equip_mp_fulton" );
     thread scripts\mp\gametypes\br_plunder::_id_B937( self, var_0 );
     scripts\mp\gametypes\br_plunder::_id_B93D( self, var_0 );
-    var_1 = _func_0205( "script_model", self._id_02EA );
-    var_1 setmode( "tag_origin" );
-    var_1._id_0054 = self._id_0054 * ( 0, 1, 0 );
+    var_1 = spawn( "script_model", self.origin );
+    var_1 setmodel( "tag_origin" );
+    var_1.angles = self.angles * ( 0, 1, 0 );
     var_1._id_5FDD = self;
     self._id_CBC3 = var_1;
     _id_5FED();
@@ -163,7 +163,7 @@ _id_5FEF()
 
 _id_5FED()
 {
-    self _meth_8373( "effects", "fillUp", 0 );
+    self setscriptablepartstate( "effects", "fillUp", 0 );
     self._id_CBC3 _id_069D::_id_181D( self, "fulton_open" );
     childthread _id_5FEE();
 }
@@ -176,21 +176,21 @@ _id_5FEE()
 
 _id_5FE5( var_0 )
 {
-    var_1 = var_0._id_0134;
+    var_1 = var_0.damage;
 
-    if ( !istrue( _id_099C::_id_B779( var_0._id_006E, self._id_02F2 ) ) )
+    if ( !istrue( scripts\cp_mp\utility\player_utility::_id_B779( var_0.attacker, self.owner ) ) )
         var_1 = 0;
     else
     {
-        var_1 = _id_079A::_id_7476( var_0._id_A90B, var_0._id_9CBF, var_0._id_0134 );
+        var_1 = _id_079A::_id_7476( var_0.objweapon, var_0._id_9CBF, var_0.damage );
         var_2 = undefined;
 
         if ( var_0._id_9CBF == "MOD_MELEE" )
-            var_1 = int( _func_0037( self._id_027F / 6 ) );
+            var_1 = int( _func_0037( self.maxhealth / 6 ) );
         else if ( _func_010E( var_0._id_9CBF ) )
         {
-            if ( var_0._id_0134 >= 50 )
-                var_1 = int( _func_0037( self._id_027F / 2 ) );
+            if ( var_0.damage >= 50 )
+                var_1 = int( _func_0037( self.maxhealth / 2 ) );
         }
     }
 
@@ -210,8 +210,8 @@ _id_5FF4( var_0, var_1, var_2 )
 
 _id_5FF2( var_0, var_1 )
 {
-    if ( isdefined( var_0._id_02F2 ) )
-        var_0._id_02F2._id_5FDD = undefined;
+    if ( isdefined( var_0.owner ) )
+        var_0.owner._id_5FDD = undefined;
 
     scripts\mp\gametypes\br_plunder::_id_B930( var_0 );
 }
@@ -223,7 +223,7 @@ _id_5FF3( var_0 )
     var_2 = undefined;
     var_0 _id_079A::_id_A0ED();
     var_2 = scripts\mp\gametypes\br_plunder::_id_54EC();
-    thread scripts\mp\gametypes\br::_id_EFAA( "br_fulton_balloon_successfully_away", self._id_02F2, self._id_045B );
+    thread scripts\mp\gametypes\br::_id_EFAA( "br_fulton_balloon_successfully_away", self.owner, self.team );
     self notify( "fulton_takeoff" );
     self _meth_827D( "br_fulton_balloon_away" );
     self._id_CBC3 _id_069D::_id_181D( self, "fulton_takeoff" );
@@ -232,7 +232,7 @@ _id_5FF3( var_0 )
 
 _id_5FF1( var_0 )
 {
-    thread scripts\mp\gametypes\br::_id_EFAA( "br_fulton_balloon_full", var_0._id_02F2, var_0._id_045B );
+    thread scripts\mp\gametypes\br::_id_EFAA( "br_fulton_balloon_full", var_0.owner, var_0.team );
 }
 
 _id_5FDE( var_0 )
@@ -242,21 +242,21 @@ _id_5FDE( var_0 )
 
     var_1 = 25;
     var_2 = _id_076E::_id_691E();
-    var_3 = var_0._id_02EA + ( 0, 0, var_1 + 1 );
-    var_4 = ( var_0._id_02EA[0], var_0._id_02EA[1], var_2 );
-    var_5 = _id_077A::_id_3EC3( 0, 1, 1, 1, 1, 1, 0 );
-    var_6 = _id_077A::_id_E406( var_3, var_4, var_1, var_0, var_5 );
+    var_3 = var_0.origin + ( 0, 0, var_1 + 1 );
+    var_4 = ( var_0.origin[0], var_0.origin[1], var_2 );
+    var_5 = scripts\engine\trace::_id_3EC3( 0, 1, 1, 1, 1, 1, 0 );
+    var_6 = scripts\engine\trace::_id_E406( var_3, var_4, var_1, var_0, var_5 );
     return var_6["fraction"] == 1.0;
 }
 
 _id_5FF0()
 {
-    self _meth_83B5( self._id_EB06._id_E768._id_04CE, 1 );
+    self setweaponammoclip( self._id_EB06._id_E768._id_04CE, 1 );
     self notify( "super_use_finished_lb" );
     self notify( "super_use_finished" );
-    var_0 = _id_07F2::_id_698D();
-    _id_07F2::_id_D6F0( 0 );
-    _id_07F2::_id_D6EE( 0 );
+    var_0 = scripts\mp\supers::getcurrentsuper();
+    scripts\mp\supers::_id_D6F0( 0 );
+    scripts\mp\supers::_id_D6EE( 0 );
     var_0._id_10A1B = 1;
-    _id_07F2::_id_D6ED( _id_07F2::_id_6D85() );
+    scripts\mp\supers::_id_D6ED( scripts\mp\supers::_id_6D85() );
 }

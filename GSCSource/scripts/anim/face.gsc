@@ -35,7 +35,7 @@ _id_CB60( var_0 )
             break;
     }
 
-    if ( isdefined( var_1 ) && _func_01B8( 100 ) > var_1 )
+    if ( isdefined( var_1 ) && randomint( 100 ) > var_1 )
         return;
 
     var_3 = undefined;
@@ -123,7 +123,7 @@ _id_CB62( var_0, var_1 )
 
 _id_B820( var_0, var_1 )
 {
-    if ( _func_0104( self ) )
+    if ( isai( self ) )
     {
         self._id_0DB6._id_586D = 1;
         self._id_0DB6._id_5870 = 1;
@@ -143,14 +143,14 @@ _id_B820( var_0, var_1 )
 
 _id_B81F( var_0, var_1, var_2 )
 {
-    if ( _func_0104( self ) )
+    if ( isai( self ) )
         self [[ anim._id_2F2C["PlaySoundAtViewHeight"] ]]( var_0, var_1, var_2 );
     else if ( isdefined( var_1 ) && isdefined( var_2 ) )
-        self _meth_827B( var_0, var_1, var_2 );
+        self playsound( var_0, var_1, var_2 );
     else if ( isdefined( var_1 ) )
-        self _meth_827B( var_0, var_1 );
+        self playsound( var_0, var_1 );
     else
-        self _meth_827B( var_0 );
+        self playsound( var_0 );
 }
 
 _id_10801( var_0 )
@@ -198,7 +198,7 @@ _id_B821( var_0, var_1, var_2 )
         if ( isdefined( var_2 ) && var_2 >= 0 && var_2 < anim._id_5869[var_1].size )
             var_3 = var_2;
         else
-            var_3 = _func_01B8( anim._id_5869[var_1].size );
+            var_3 = randomint( anim._id_5869[var_1].size );
 
         var_4 = anim._id_5869[var_1][var_3];
         self _meth_82DA( var_4 );

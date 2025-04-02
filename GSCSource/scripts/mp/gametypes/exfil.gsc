@@ -3,7 +3,7 @@
 
 _id_5704()
 {
-    level._id_0BA3["vfx_smk_signal"] = _func_0139( "vfx/_requests/mp_gameplay/vfx_smk_signal" );
+    level._effect["vfx_smk_signal"] = loadfx( "vfx/_requests/mp_gameplay/vfx_smk_signal" );
 }
 
 _id_AAC5( var_0, var_1, var_2, var_3 )
@@ -21,12 +21,12 @@ _id_AAC5( var_0, var_1, var_2, var_3 )
         thread _id_C463();
 
     level._id_7D18 = 1;
-    _id_07AC::_id_C725();
+    scripts\mp\gamelogic::resumetimer();
     level._id_E72A = gettime();
     level._id_4AEC = 0;
     level._id_F25B = 0;
     var_4 = level._id_56F9 + level._id_5700;
-    var_5 = "scr_" + _id_0A69::_id_6A43() + "_timelimit";
+    var_5 = "scr_" + scripts\mp\utility\game::getgametype() + "_timelimit";
     level._id_10AD2[var_5]._id_04A3 = var_4;
     level._id_AD57[var_5] = var_4;
     _id_CA28( var_0, var_3 );
@@ -46,10 +46,10 @@ _id_C463()
 
 _id_CA28( var_0, var_1 )
 {
-    level thread _id_07B9::_id_A6A3( "callout_exfil_winners", "callout_exfil_losers", var_0 );
+    level thread scripts\mp\hud_message::_id_A6A3( "callout_exfil_winners", "callout_exfil_losers", var_0 );
     level thread _id_E2DF( var_0 );
     level thread _id_E2DE( var_0 );
-    _id_0A64::_id_911F( "enemy_exfil", _id_0A69::_id_6BC3( var_0 )[0], "status" );
+    _id_0A64::_id_911F( "enemy_exfil", scripts\mp\utility\game::_id_6BC3( var_0 )[0], "status" );
     _id_0A64::_id_911F( "friendly_exfil", var_0, "status" );
     level._id_F217 = 0;
     wait 1;
@@ -58,11 +58,11 @@ _id_CA28( var_0, var_1 )
 
 _id_E2DE( var_0 )
 {
-    var_1 = "scr_" + _id_0A69::_id_6A43() + "_numlives";
+    var_1 = "scr_" + scripts\mp\utility\game::getgametype() + "_numlives";
     level._id_10AD2[var_1]._id_04A3 = 1;
     level._id_AD57[var_1] = 1;
     level notify( "extract_players_spawned" );
-    level thread _id_07B9::_id_FCBD( var_0, 8, 7 );
+    level thread scripts\mp\hud_message::_id_FCBD( var_0, 8, 7 );
 }
 
 _id_DDAD()
@@ -70,17 +70,17 @@ _id_DDAD()
     self notify( "abort_killcam" );
     self._id_3137 = 1;
     waitframe();
-    thread _id_07D9::_id_E334( 0, 1 );
+    thread scripts\mp\playerlogic::_id_E334( 0, 1 );
 
-    if ( _id_0A69::_id_8A7C() && isdefined( level._id_C7E7[self._id_723F] ) )
-        level._id_C7E7[self._id_723F]._id_103C0 thread scripts\mp\movers::_id_C528( level._id_C7E7[self._id_723F]._id_103C0._id_723F );
+    if ( scripts\mp\utility\game::_id_8A7C() && isdefined( level._id_C7E7[self._id_723F] ) )
+        level._id_C7E7[self._id_723F]._id_103C0 thread _id_07F6::_id_C528( level._id_C7E7[self._id_723F]._id_103C0._id_723F );
 }
 
 _id_E2DF( var_0 )
 {
     level endon( "game_ended" );
     self endon( "death" );
-    var_1 = _id_0A69::_id_6BC3( var_0 )[0];
+    var_1 = scripts\mp\utility\game::_id_6BC3( var_0 )[0];
 
     if ( !isdefined( level._id_5702 ) )
     {
@@ -106,35 +106,35 @@ _id_E2DF( var_0 )
         }
     }
 
-    level._id_5701 = _func_0205( "script_model", level._id_5702._id_02EA );
-    level._id_5701._id_0054 = ( 0, 270, 0 );
-    level._id_5701._id_045B = var_1;
+    level._id_5701 = spawn( "script_model", level._id_5702.origin );
+    level._id_5701.angles = ( 0, 270, 0 );
+    level._id_5701.team = var_1;
     level._id_5701._id_10418 = "any";
     level._id_5701._id_AD9B = var_1;
     level._id_5701._id_048F = "";
-    var_8 = level._id_5702._id_02EA;
-    var_9 = _id_077A::_id_3EC3( 0, 1, 1, 0, 0, 1, 1 );
+    var_8 = level._id_5702.origin;
+    var_9 = scripts\engine\trace::_id_3EC3( 0, 1, 1, 0, 0, 1, 1 );
     var_10 = [];
-    var_11 = _id_077A::_id_C042( level._id_5701._id_02EA + ( 0, 0, 20 ), level._id_5701._id_02EA - ( 0, 0, 4000 ), var_10, var_9, 0 );
+    var_11 = scripts\engine\trace::ray_trace( level._id_5701.origin + ( 0, 0, 20 ), level._id_5701.origin - ( 0, 0, 4000 ), var_10, var_9, 0 );
 
-    if ( _func_0117( var_11["entity"] ) )
+    if ( isplayer( var_11["entity"] ) )
         var_11["entity"] = undefined;
 
     if ( isdefined( var_11 ) )
     {
-        var_12 = _func_01B6( 360 );
+        var_12 = randomfloat( 360 );
         var_13 = var_11["position"];
 
         if ( isdefined( self._id_1042B ) )
             var_13 = var_13 + self._id_1042B;
 
-        var_14 = ( cos( var_12 ), _func_01FE( var_12 ), 0 );
-        var_14 = _func_025A( var_14 - var_11["normal"] * _func_0257( var_14, var_11["normal"] ) );
-        var_15 = _func_025B( var_14 );
-        level._id_5701._id_02EA = var_13;
-        level._id_5701 setmode( "cop_marker_scriptable" );
-        level._id_5701 _meth_8373( "marker", "red" );
-        level._id_5701 playlocalsound( "mp_flare_burn_lp" );
+        var_14 = ( cos( var_12 ), sin( var_12 ), 0 );
+        var_14 = vectornormalize( var_14 - var_11["normal"] * vectordot( var_14, var_11["normal"] ) );
+        var_15 = vectortoangles( var_14 );
+        level._id_5701.origin = var_13;
+        level._id_5701 setmodel( "cop_marker_scriptable" );
+        level._id_5701 setscriptablepartstate( "marker", "red" );
+        level._id_5701 playloopsound( "mp_flare_burn_lp" );
     }
 
     level._id_5702 thread _id_7072( self );
@@ -143,7 +143,7 @@ _id_E2DF( var_0 )
     if ( level._id_5708 != -1 )
     {
         var_16 = "current";
-        _id_07D0::_id_A854( level._id_5708, var_16, level._id_5702._id_02EA + ( 0, 0, 60 ) );
+        _id_07D0::_id_A854( level._id_5708, var_16, level._id_5702.origin + ( 0, 0, 60 ) );
         _id_07D0::_id_A89E( level._id_5708, 1 );
         _id_07D0::_id_A89F( level._id_5708, 1 );
         _id_07D0::_id_A88F( level._id_5708 );
@@ -154,7 +154,7 @@ _id_E2DF( var_0 )
     _func_016F( level._id_5708, 1 );
     level thread _id_10B0E( var_0 );
     waitframe();
-    _func_0197( level._id_0BA3["vfx_smk_signal"], level._id_5701, "tag_origin" );
+    playfxontag( level._effect["vfx_smk_signal"], level._id_5701, "tag_origin" );
 }
 
 _id_7072( var_0 )
@@ -168,7 +168,7 @@ _id_7072( var_0 )
     {
         self waittill( "trigger", var_0 );
 
-        if ( var_0._id_045B == level._id_5701._id_045B && !istrue( var_0._id_57F7 ) )
+        if ( var_0.team == level._id_5701.team && !istrue( var_0._id_57F7 ) )
             level thread _id_AAC7( var_0 );
     }
 }
@@ -199,17 +199,17 @@ _id_CA29( var_0 )
     {
         if ( var_4 != 0 )
         {
-            var_5 = _func_0148( var_4 / var_3, 1 );
+            var_5 = min( var_4 / var_3, 1 );
             _id_07D0::_id_A8A3( self._id_5708, undefined );
             _id_07D0::_id_A8B1( self._id_5708, 1 );
             _id_07D0::_id_A8A1( self._id_5708, var_5 );
-            var_4 = _func_0148( var_4 + var_2, var_3 );
+            var_4 = min( var_4 + var_2, var_3 );
         }
 
         waitframe();
     }
 
-    _id_0A64::_id_911F( "exfilarrive_enemy", _id_0A69::_id_6BC3( var_0 )[0], "status" );
+    _id_0A64::_id_911F( "exfilarrive_enemy", scripts\mp\utility\game::_id_6BC3( var_0 )[0], "status" );
     _id_0A64::_id_911F( "exfilarrive_friendly", var_0, "status" );
 }
 
@@ -227,32 +227,32 @@ _id_CA2A( var_0 )
     while ( level._id_56F8 )
     {
         var_5 = var_4 / var_3;
-        _id_07D0::_id_A8A3( self._id_5708, _id_0A69::_id_6BC3( var_0 )[0] );
+        _id_07D0::_id_A8A3( self._id_5708, scripts\mp\utility\game::_id_6BC3( var_0 )[0] );
         _id_07D0::_id_A8B1( self._id_5708, 1 );
         _id_07D0::_id_A8A1( self._id_5708, var_5 );
-        var_4 = _func_0147( var_4 - var_2, 1 );
+        var_4 = max( var_4 - var_2, 1 );
         waitframe();
     }
 
-    _id_0A64::_id_911F( "exfilend_enemy", _id_0A69::_id_6BC3( var_0 )[0], "status" );
+    _id_0A64::_id_911F( "exfilend_enemy", scripts\mp\utility\game::_id_6BC3( var_0 )[0], "status" );
     _id_0A64::_id_911F( "exfilend_friendly", var_0, "status" );
 }
 
 _id_EC36( var_0, var_1 )
 {
     level waittill( "extract_players_spawned" );
-    var_2 = _id_0A69::_id_6BC3( var_0 )[0];
+    var_2 = scripts\mp\utility\game::_id_6BC3( var_0 )[0];
 
     if ( var_2 != "tie" )
     {
-        foreach ( var_4 in level._id_B758 )
+        foreach ( var_4 in level.players )
         {
-            if ( var_4._id_045B == var_2 )
+            if ( var_4.team == var_2 )
             {
-                var_4 switchtoweaponimmediate();
-                var_4 _id_099A::_id_0BEB( var_1, undefined, undefined, 1 );
+                var_4 takeallweapons();
+                var_4 scripts\cp_mp\utility\inventory_utility::_giveweapon( var_1, undefined, undefined, 1 );
                 var_4 thread _id_EC35( var_1 );
-                var_4 scripts\engine\trace::_id_6F76( "equip_throwing_knife", "primary" );
+                var_4 scripts\mp\equipment::_id_6F76( "equip_throwing_knife", "primary" );
             }
         }
     }
@@ -263,7 +263,7 @@ _id_EC35( var_0 )
     self endon( "death_or_disconnect" );
     self endon( "end_switchToFists" );
 
-    while ( _id_099A::_id_4D21( var_0, 1 ) == 0 )
+    while ( scripts\cp_mp\utility\inventory_utility::_id_4D21( var_0, 1 ) == 0 )
         waitframe();
 }
 
@@ -281,18 +281,18 @@ _id_AAC7( var_0 )
     var_0._id_57F7 = 1;
     var_0._id_E352 = 1;
     var_0 _id_07C1::_id_D5D5( var_0, 1000, undefined, 0 );
-    var_0 scripts\mp\gamescore::_id_C22D( "exfil_success", [ "usability", "offhand_weapons", "killstreaks", "supers", "gesture", "weapon", "weapon_switch" ] );
-    var_0 scripts\mp\gamescore::_id_156E( "exfil_success", 0 );
-    var_0 thread _id_07B9::_id_DCE0( "callout_exfil_success" );
+    var_0 scripts\mp\playeractions::_id_C22D( "exfil_success", [ "usability", "offhand_weapons", "killstreaks", "supers", "gesture", "weapon", "weapon_switch" ] );
+    var_0 scripts\mp\playeractions::_id_156E( "exfil_success", 0 );
+    var_0 thread scripts\mp\hud_message::showsplash( "callout_exfil_success" );
 
-    while ( !var_0 _meth_81D7() )
+    while ( !var_0 isonground() )
         waitframe();
 
-    var_0 allowdoublejump( 0 );
-    var_1 = _func_0205( "script_origin", var_0._id_02EA );
-    var_1 setmode( "tag_origin" );
-    var_0 _meth_8269( var_1 );
-    var_1 _meth_823B( var_1._id_02EA + ( 0, 0, 10000 ), 5, 2, 2 );
+    var_0 allowmovement( 0 );
+    var_1 = spawn( "script_origin", var_0.origin );
+    var_1 setmodel( "tag_origin" );
+    var_0 playerlinkto( var_1 );
+    var_1 moveto( var_1.origin + ( 0, 0, 10000 ), 5, 2, 2 );
 }
 
 _id_E944( var_0 )
@@ -303,26 +303,26 @@ _id_E944( var_0 )
 
 _id_1CF4( var_0, var_1, var_2 )
 {
-    wait( var_1 + _func_01B8( 10 ) );
-    var_3 = level._id_B758[0] scripts\mp\gametypes\br_extract_chopper::_id_E2E0( self, self._id_02EA, var_0, 10 + var_1 );
-    var_3 playlocalsound( "br_exfil_lbravo_engine_temp" );
+    wait( var_1 + randomint( 10 ) );
+    var_3 = level.players[0] scripts\mp\gametypes\br_extract_chopper::_id_E2E0( self, self.origin, var_0, 10 + var_1 );
+    var_3 playloopsound( "br_exfil_lbravo_engine_temp" );
     var_4 = getent( "clip64x64x256", "targetname" );
-    var_5 = _func_0205( "script_model", var_3 gettagorigin( "tag_origin" ) );
-    var_5 _meth_80BE();
-    var_5._id_0054 = ( -90, 0, 0 );
-    var_5 _meth_808C( var_4 );
-    var_6 = anglestoforward( var_3._id_0054 * ( 1, 0, 0 ) );
-    var_7 = _func_025A( var_6 ) * 85;
-    var_5 _meth_820B( var_3, "tag_origin", var_7 + ( 0, 0, -60 ), var_5._id_0054 );
+    var_5 = spawn( "script_model", var_3 gettagorigin( "tag_origin" ) );
+    var_5 dontinterpolate();
+    var_5.angles = ( -90, 0, 0 );
+    var_5 clonebrushmodeltoscriptmodel( var_4 );
+    var_6 = anglestoforward( var_3.angles * ( 1, 0, 0 ) );
+    var_7 = vectornormalize( var_6 ) * 85;
+    var_5 linkto( var_3, "tag_origin", var_7 + ( 0, 0, -60 ), var_5.angles );
     var_3._id_3A44 = var_5;
-    var_3 sethintstring( 5, 10, 5 );
+    var_3 _meth_832C( 5, 10, 5 );
     self._id_368C[self._id_368C.size] = var_3;
     var_3._id_5829 = self;
 
     if ( !isdefined( var_2 ) )
-        var_2 = self._id_045B;
+        var_2 = self.team;
 
-    var_3._id_045B = var_2;
+    var_3.team = var_2;
     var_3._id_570A = 6;
     var_3._id_AE8A[0] = self;
     var_3._id_AE8A[1] = self;
@@ -330,7 +330,7 @@ _id_1CF4( var_0, var_1, var_2 )
     var_3._id_AE8A[3] = self;
     var_3._id_AE8A[4] = self;
     var_3._id_AE8A[5] = self;
-    self._id_411F = self._id_02EA;
+    self._id_411F = self.origin;
     self._id_A96B = ( 0, 0, 30 );
     var_3 _id_80D4();
     thread _id_2C82( var_3 );
@@ -342,7 +342,7 @@ _id_1CF4( var_0, var_1, var_2 )
 _id_3FAA()
 {
     wait 1;
-    _func_0197( _id_077B::_id_6A40( "vfx_smk_signal_gr" ), self._id_103BC, "tag_origin" );
+    playfxontag( scripts\engine\utility::getfx( "vfx_smk_signal_gr" ), self._id_103BC, "tag_origin" );
 }
 
 _id_5709( var_0, var_1, var_2, var_3 )
@@ -386,7 +386,7 @@ _id_56FC( var_0, var_1, var_2, var_3 )
     wait( var_4 );
 
     foreach ( var_6 in self._id_0F56 )
-        var_6 _meth_809A();
+        var_6 delete();
 
     self._id_0F56 = undefined;
 }
@@ -405,24 +405,24 @@ _id_E2DD( var_0, var_1, var_2 )
 
 _id_56F4( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_5 = _func_0205( "script_model", ( 0, 0, 0 ) );
-    var_5 setmode( var_2 );
+    var_5 = spawn( "script_model", ( 0, 0, 0 ) );
+    var_5 setmodel( var_2 );
 
     if ( isdefined( var_3 ) )
     {
-        var_6 = _func_0205( "script_model", ( 0, 0, 0 ) );
-        var_6 setmode( var_3 );
-        var_6 _meth_820B( var_5, "j_spine4", ( 0, 0, 0 ), ( 0, 0, 0 ) );
+        var_6 = spawn( "script_model", ( 0, 0, 0 ) );
+        var_6 setmodel( var_3 );
+        var_6 linkto( var_5, "j_spine4", ( 0, 0, 0 ), ( 0, 0, 0 ) );
         var_5._id_75BF = var_6;
-        var_5 thread _id_077B::_id_470D( var_6 );
+        var_5 thread scripts\engine\utility::_id_470D( var_6 );
     }
 
     if ( isdefined( var_4 ) )
     {
-        var_7 = _func_0205( "script_model", ( 0, 0, 0 ) );
-        var_7 setmode( var_4 );
-        var_7 _meth_820B( var_5, "j_gun", ( 0, 0, 0 ), ( 0, 0, 0 ) );
-        var_5 thread _id_077B::_id_470D( var_7 );
+        var_7 = spawn( "script_model", ( 0, 0, 0 ) );
+        var_7 setmodel( var_4 );
+        var_7 linkto( var_5, "j_gun", ( 0, 0, 0 ), ( 0, 0, 0 ) );
+        var_5 thread scripts\engine\utility::_id_470D( var_7 );
         var_5._id_04CE = var_7;
     }
 
@@ -431,8 +431,8 @@ _id_56F4( var_0, var_1, var_2, var_3, var_4 )
 
     if ( isdefined( var_1 ) )
     {
-        thread _id_077B::_id_470D( var_5 );
-        var_5 _meth_820B( self, var_1, ( 0, 0, 0 ), ( 0, 0, 0 ) );
+        thread scripts\engine\utility::_id_470D( var_5 );
+        var_5 linkto( self, var_1, ( 0, 0, 0 ), ( 0, 0, 0 ) );
     }
 
     return var_5;
@@ -440,10 +440,10 @@ _id_56F4( var_0, var_1, var_2, var_3, var_4 )
 
 _id_2C82( var_0 )
 {
-    level _id_077B::_id_108B2( "exfil_continue_game_end", "exfil_on_nuke_arrival" );
+    level scripts\engine\utility::_id_108B2( "exfil_continue_game_end", "exfil_on_nuke_arrival" );
     _id_07D0::_id_C78C( self._id_5701._id_5708 );
     thread _id_5E90( var_0 );
-    var_0 thread _id_5705( var_0._id_02EA );
+    var_0 thread _id_5705( var_0.origin );
 }
 
 _id_5E90( var_0 )
@@ -456,7 +456,7 @@ _id_5E90( var_0 )
     {
         self waittill( "trigger", var_1 );
 
-        if ( var_1._id_045B == self._id_5701._id_045B && !istrue( var_1._id_57F7 ) )
+        if ( var_1.team == self._id_5701.team && !istrue( var_1._id_57F7 ) )
         {
             var_1 thread _id_B646( var_0 );
             var_0._id_570A--;
@@ -487,7 +487,7 @@ _id_570E( var_0, var_1, var_2 )
 
 _id_10829( var_0 )
 {
-    var_1 = level._id_EF67[var_0._id_045B]["players"];
+    var_1 = level._id_EF67[var_0.team]["players"];
 
     foreach ( var_3 in var_1 )
     {
@@ -507,7 +507,7 @@ _id_10829( var_0 )
 _id_4AB6( var_0, var_1, var_2 )
 {
     foreach ( var_4 in self._id_837C )
-        var_4 disableoffhandweapons( var_0 );
+        var_4 disableplayeruse( var_0 );
 
     if ( isdefined( var_2 ) )
         var_0 thread _id_5232( var_1, self, var_2 );
@@ -515,17 +515,17 @@ _id_4AB6( var_0, var_1, var_2 )
 
 _id_5232( var_0, var_1, var_2 )
 {
-    var_3 = _func_0205( "script_model", self._id_02EA );
-    var_3 setmode( "tag_origin" );
-    var_3 _meth_820B( self );
-    var_3 _meth_832B( &"MP/HOLD_TO_GET_OFF_CHOPPER" );
-    var_3 _meth_8305( "HINT_NOICON" );
+    var_3 = spawn( "script_model", self.origin );
+    var_3 setmodel( "tag_origin" );
+    var_3 linkto( self );
+    var_3 sethintstring( &"MP/HOLD_TO_GET_OFF_CHOPPER" );
+    var_3 setcursorhint( "HINT_NOICON" );
     var_3 _meth_84D3( 200 );
-    var_3 setusefov( 90 );
-    var_3 _meth_84CE( 200 );
-    var_3 _meth_84D4( 360 );
+    var_3 sethintdisplayfov( 90 );
+    var_3 setuserange( 200 );
+    var_3 setusefov( 360 );
     var_3 _meth_84D8( "hide" );
-    var_3 setuserange( "duration_short" );
+    var_3 setuseholdduration( "duration_short" );
     var_3 thread _id_56EC( var_1, self, var_0, var_2 );
     var_1._id_5766 = var_3;
 }
@@ -537,18 +537,18 @@ _id_56EC( var_0, var_1, var_2, var_3 )
     for (;;)
     {
         self waittill( "trigger", var_1 );
-        self _meth_8225();
+        self makeunusable();
         var_1 _meth_8653();
         var_0 _id_0781::_id_17D5( var_1, var_1._id_B591, "lbravo_exfil_loop_exit", "origin_animate_jnt" );
-        var_1._id_B591 _meth_8415();
-        var_1 _meth_8415();
-        var_3 _id_99CA( var_0._id_045B );
+        var_1._id_B591 unlink();
+        var_1 unlink();
+        var_3 _id_99CA( var_0.team );
 
         foreach ( var_5 in var_0._id_837C )
             var_5 _meth_80E0( var_1 );
 
         var_0 notify( "unloaded" );
-        self _meth_809A();
+        self delete();
     }
 }
 
@@ -558,13 +558,13 @@ _id_B6FC( var_0, var_1, var_2 )
     var_0._id_57F7 = 1;
     var_0._id_E352 = 1;
     var_0 _id_07C1::_id_D5D5( var_0, 1000, undefined, 0 );
-    var_0 thread _id_07B9::_id_DCE0( "callout_exfil_success" );
+    var_0 thread scripts\mp\hud_message::showsplash( "callout_exfil_success" );
 
-    while ( !var_0 _meth_81D7() )
+    while ( !var_0 isonground() )
         waitframe();
 
-    var_0 allowdoublejump( 0 );
-    var_0 _meth_8269( var_1, "tag_passenger" + var_2, 1.0, 180, -180, 180, 180, 0 );
+    var_0 allowmovement( 0 );
+    var_0 playerlinkto( var_1, "tag_passenger" + var_2, 1.0, 180, -180, 180, 180, 0 );
 }
 
 _id_B646( var_0, var_1 )
@@ -589,7 +589,7 @@ _id_B646( var_0, var_1 )
     }
 
     thread _id_09F8::_id_7E36( "slot_" + var_1, "viewhands_base_iw8" );
-    self._id_B591 _meth_820B( var_0, "origin_animate_jnt", ( 0, 0, 0 ), ( 0, 0, 0 ) );
+    self._id_B591 linkto( var_0, "origin_animate_jnt", ( 0, 0, 0 ), ( 0, 0, 0 ) );
 
     switch ( var_1 )
     {
@@ -634,23 +634,23 @@ _id_C822( var_0 )
 _id_5705( var_0, var_1 )
 {
     if ( isdefined( self._id_5766 ) )
-        self._id_5766 _meth_8225();
+        self._id_5766 makeunusable();
 
     thread scripts\mp\gametypes\br_extract_chopper::_id_957B();
-    _id_B34A( self._id_045B, "extract_littlebird_leaving_a_friendly", 10 );
+    _id_B34A( self.team, "extract_littlebird_leaving_a_friendly", 10 );
     thread _id_4C61();
 
     if ( isdefined( level._id_AAC2 ) )
         self [[ level._id_AAC2 ]]( var_0 );
 
     if ( isdefined( var_1 ) )
-        _id_10866( self._id_045B );
+        _id_10866( self.team );
 }
 
 _id_10866( var_0 )
 {
     wait 5;
-    thread _id_07AC::_id_52D7( var_0, game["end_reason"]["objective_completed"] );
+    thread scripts\mp\gamelogic::_id_52D7( var_0, game["end_reason"]["objective_completed"] );
 }
 
 _id_4C61()
@@ -660,7 +660,7 @@ _id_4C61()
     for ( var_0 = 0; var_0 < self._id_AE8A.size; var_0++ )
     {
         if ( self._id_AE8A[var_0] != self._id_5829 )
-            self._id_AE8A[var_0] thread _id_07B9::_id_DCE0( "callout_exfil_success" );
+            self._id_AE8A[var_0] thread scripts\mp\hud_message::showsplash( "callout_exfil_success" );
     }
 }
 
@@ -683,17 +683,17 @@ _id_80D4( var_0 )
 
 _id_3EE7( var_0, var_1, var_2, var_3 )
 {
-    var_4 = _func_0205( "script_model", var_0 );
-    var_4 setmode( "tag_origin" );
-    var_4 _meth_820B( self );
-    var_4 _meth_832B( var_1 );
-    var_4 _meth_8305( "HINT_BUTTON" );
+    var_4 = spawn( "script_model", var_0 );
+    var_4 setmodel( "tag_origin" );
+    var_4 linkto( self );
+    var_4 sethintstring( var_1 );
+    var_4 setcursorhint( "HINT_BUTTON" );
     var_4 _meth_84D3( 200 );
+    var_4 sethintdisplayfov( 90 );
+    var_4 setuserange( 72 );
     var_4 setusefov( 90 );
-    var_4 _meth_84CE( 72 );
-    var_4 _meth_84D4( 90 );
     var_4 _meth_84D8( "hide" );
-    var_4 setuserange( "duration_short" );
+    var_4 setuseholdduration( "duration_short" );
     var_4 thread _id_56F7( self, var_2, var_3 );
     self._id_837C[self._id_837C.size] = var_4;
 }
@@ -703,25 +703,25 @@ _id_56F7( var_0, var_1, var_2 )
     if ( isdefined( var_2 ) )
         _id_99C9( var_2 );
     else
-        _id_99CA( var_0._id_045B );
+        _id_99CA( var_0.team );
 
     for (;;)
     {
         self waittill( "trigger", var_2 );
-        self _meth_8225();
+        self makeunusable();
         var_0 _id_570E( var_2, var_1, self );
     }
 }
 
 _id_99CA( var_0 )
 {
-    self makeunusable();
+    self makeuseable();
     thread _id_0D7E( var_0 );
 }
 
 _id_99C9( var_0 )
 {
-    self makeunusable();
+    self makeuseable();
     thread _id_0D7D( var_0 );
 }
 
@@ -731,17 +731,17 @@ _id_0D7E( var_0 )
 
     for (;;)
     {
-        foreach ( var_2 in level._id_B758 )
+        foreach ( var_2 in level.players )
         {
-            if ( var_2._id_045B == var_0 )
+            if ( var_2.team == var_0 )
             {
-                self _meth_83CA( var_2 );
+                self showtoplayer( var_2 );
                 self _meth_80E0( var_2 );
                 continue;
             }
 
-            self disableoffhandweapons( var_2 );
-            self _meth_847B( var_2 );
+            self disableplayeruse( var_2 );
+            self hidefromplayer( var_2 );
         }
 
         level waittill( "joined_team" );
@@ -754,17 +754,17 @@ _id_0D7D( var_0 )
 
     for (;;)
     {
-        foreach ( var_2 in level._id_B758 )
+        foreach ( var_2 in level.players )
         {
             if ( var_2 == var_0 )
             {
-                self _meth_83CA( var_2 );
+                self showtoplayer( var_2 );
                 self _meth_80E0( var_2 );
                 continue;
             }
 
-            self disableoffhandweapons( var_2 );
-            self _meth_847B( var_2 );
+            self disableplayeruse( var_2 );
+            self hidefromplayer( var_2 );
         }
 
         level waittill( "joined_team" );
@@ -779,9 +779,9 @@ _id_B34A( var_0, var_1, var_2 )
 
     if ( _func_0200( var_4 ) )
     {
-        foreach ( var_6 in level._id_B758 )
+        foreach ( var_6 in level.players )
         {
-            if ( var_6._id_045B == var_0 )
+            if ( var_6.team == var_0 )
                 var_6 _meth_8286( var_4, var_1, 2 );
         }
     }
@@ -796,8 +796,8 @@ _id_106B1()
 
 _id_3AB7( var_0, var_1, var_2 )
 {
-    foreach ( var_4 in self._id_7E09._id_B758 )
-        self _meth_827E( var_0, var_4 );
+    foreach ( var_4 in self._id_7E09.players )
+        self playsoundtoplayer( var_0, var_4 );
 }
 
 _id_CDB2()

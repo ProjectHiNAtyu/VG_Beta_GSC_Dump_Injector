@@ -3,7 +3,7 @@
 
 _id_F0F4()
 {
-    level._id_0BA3["thermite_burst"] = _func_0139( "vfx/s4/equipment/vfx_thermite_burn_new.vfx" );
+    level._effect["thermite_burst"] = loadfx( "vfx/s4/equipment/vfx_thermite_burn_new.vfx" );
 }
 
 _id_F0F8( var_0, var_1 )
@@ -11,14 +11,14 @@ _id_F0F8( var_0, var_1 )
     if ( isdefined( var_1 ) )
     {
         var_2 = var_0;
-        var_0 = _id_0A7F::_hasperk( "s4_thermite_mp", var_2._id_02EA, ( 0, 0, 0 ) );
-        scripts\mp\weapons::_id_714B( var_0, _func_034C( "s4_thermite_mp" ) );
+        var_0 = scripts\mp\utility\weapon::_id_0C1F( "s4_thermite_mp", var_2.origin, ( 0, 0, 0 ) );
+        scripts\mp\weapons::_id_714B( var_0, makeweapon( "s4_thermite_mp" ) );
         var_0.givesuper = var_2;
-        var_0._id_0054 = var_2._id_0054;
+        var_0.angles = var_2.angles;
         var_0._id_6FF8 = self getcurrentweapon();
-        var_0 _meth_820B( var_2 );
+        var_0 linkto( var_2 );
         var_0._id_57AE = 1;
-        var_0 _meth_8373( "visibility", "hide", 0 );
+        var_0 setscriptablepartstate( "visibility", "hide", 0 );
     }
 
     var_0 thread _id_F0F9();
@@ -41,28 +41,28 @@ _id_F0FB( var_0 )
         }
 
         if ( isdefined( self.givesuper ) )
-            self.givesuper _meth_809A();
+            self.givesuper delete();
     }
     else
         self waittill( "missile_stuck", var_1 );
 
-    self._id_02F2 endon( "disconnect" );
-    self._id_02F2 endon( "joined_team" );
-    self._id_02F2 endon( "joined_spectators" );
+    self.owner endon( "disconnect" );
+    self.owner endon( "joined_team" );
+    self.owner endon( "joined_spectators" );
 
     if ( !istrue( var_0 ) )
     {
-        if ( isdefined( var_1 ) && _func_0117( var_1 ) )
+        if ( isdefined( var_1 ) && isplayer( var_1 ) )
             thread scripts\mp\weapons::_id_715F( self, var_1 );
     }
 
     thread _id_F0FC();
-    _func_0196( level._id_0BA3["thermite_burst"], self._id_02EA );
-    self _meth_8373( "effects", "impact", 0 );
+    playfx( level._effect["thermite_burst"], self.origin );
+    self setscriptablepartstate( "effects", "impact", 0 );
     _id_F0F3( "s4_thermite_mp" );
 
     if ( !istrue( level._id_432C ) )
-        self._id_4328 = _id_07EE::_id_110C( self._id_02EA, 175, 175, self._id_02F2._id_045B, 100, self._id_02F2, 1, self, 1 );
+        self._id_4328 = _id_07EE::_id_110C( self.origin, 175, 175, self.owner.team, 100, self.owner, 1, self, 1 );
 
     wait 0.5;
     var_3 = 1;
@@ -71,7 +71,7 @@ _id_F0FB( var_0 )
     {
         var_4 = var_3 + 1;
 
-        if ( _id_077B::_id_9FB1( var_4, 2 ) > 0 )
+        if ( scripts\engine\utility::_id_9FB1( var_4, 2 ) > 0 )
             _id_F0F3( "s4_thermite_mp" );
         else
             _id_F0F3( "s4_thermite_mp" );
@@ -86,30 +86,30 @@ _id_F0FB( var_0 )
 _id_F0FA()
 {
     self.givesuper endon( "death" );
-    self._id_02F2 endon( "disconnect" );
-    self._id_02F2 endon( "joined_team" );
-    self._id_02F2 endon( "joined_spectators" );
+    self.owner endon( "disconnect" );
+    self.owner endon( "joined_team" );
+    self.owner endon( "joined_spectators" );
     self.givesuper waittill( "missile_stuck", var_0, var_1, var_2, var_3, var_4, var_5 );
 
     if ( isdefined( var_0 ) )
     {
-        if ( _func_0117( var_0 ) || _func_0102( var_0 ) )
+        if ( isplayer( var_0 ) || isagent( var_0 ) )
         {
-            if ( var_0 _id_099C::_giveweapon() )
+            if ( var_0 scripts\cp_mp\utility\player_utility::_id_0C14() )
             {
-                if ( _func_0117( var_0 ) )
+                if ( isplayer( var_0 ) )
                     thread scripts\mp\weapons::_id_715F( self, var_0 );
 
                 if ( isdefined( var_1 ) )
-                    self _meth_820B( var_0, var_1 );
+                    self linkto( var_0, var_1 );
                 else
-                    self _meth_820B( var_0, "j_spine4", ( 0, 0, 0 ) );
+                    self linkto( var_0, "j_spine4", ( 0, 0, 0 ) );
             }
         }
         else if ( isdefined( var_1 ) )
-            self _meth_820B( var_0, var_1 );
+            self linkto( var_0, var_1 );
         else
-            self _meth_820B( var_0 );
+            self linkto( var_0 );
     }
 
     return 1;
@@ -123,7 +123,7 @@ _id_F0FC()
     while ( isdefined( var_0 ) )
         self waittill( "missile_stuck", var_0 );
 
-    self._id_20C5 = _func_02AD( self._id_02EA, ( 100, 100, 100 ), ( 0, 0, 0 ) );
+    self._id_20C5 = _func_02AD( self.origin, ( 100, 100, 100 ), ( 0, 0, 0 ) );
 }
 
 _id_F0F3( var_0 )
@@ -144,16 +144,16 @@ _id_F0F3( var_0 )
 
     if ( isdefined( var_5 ) )
     {
-        if ( _func_0117( var_5 ) && var_5 _id_099C::_giveweapon() )
+        if ( isplayer( var_5 ) && var_5 scripts\cp_mp\utility\player_utility::_id_0C14() )
         {
-            var_5 _meth_80B7( var_2, self._id_02EA, self._id_02F2, self, var_4, var_0 );
+            var_5 dodamage( var_2, self.origin, self.owner, self, var_4, var_0 );
             var_5 _id_0996::_id_1079( "thermiteStuck", 0, 0, ::_id_F0F0 );
         }
         else
             var_5 = undefined;
     }
 
-    self _meth_8287( self._id_02EA, var_1, var_2, var_3, self._id_02F2, var_4, var_0 );
+    self radiusdamage( self.origin, var_1, var_2, var_3, self.owner, var_4, var_0 );
 
     if ( isdefined( var_5 ) )
         var_5 _id_0996::_id_C47C( "thermiteStuck", 0 );
@@ -176,14 +176,14 @@ _id_F0F0( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 _id_F0F9()
 {
     self endon( "death" );
-    self._id_02F2 _id_077B::_id_1087F( "joined_team", "joined_spectators", "disconnect" );
+    self.owner scripts\engine\utility::_id_1087F( "joined_team", "joined_spectators", "disconnect" );
     thread _id_F0F2();
 }
 
 _id_F0F2()
 {
     thread _id_F0F1( 5 );
-    self _meth_8373( "effects", "burnEnd", 0 );
+    self setscriptablepartstate( "effects", "burnEnd", 0 );
 }
 
 _id_F0F1( var_0 )
@@ -208,7 +208,7 @@ _id_F0F1( var_0 )
     if ( isdefined( var_0 ) )
         wait( var_0 );
 
-    self _meth_809A();
+    self delete();
 }
 
 _id_F0F7( var_0 )

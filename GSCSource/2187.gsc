@@ -11,7 +11,7 @@ _id_F14E( var_0 )
     {
         level notify( "threat_sight_disabled" );
 
-        foreach ( var_3 in level._id_B758 )
+        foreach ( var_3 in level.players )
             var_3._id_03E1._id_F159 = undefined;
     }
     else if ( var_0 && !var_1 )
@@ -21,20 +21,20 @@ _id_F14E( var_0 )
 
     foreach ( var_7 in var_5 )
     {
-        if ( isai( var_7 ) && isdefined( var_7._id_03E1 ) && isdefined( var_7._id_03E1._id_F156 ) )
+        if ( isalive( var_7 ) && isdefined( var_7._id_03E1 ) && isdefined( var_7._id_03E1._id_F156 ) )
             var_7 _id_F14F( var_7._id_03E1._id_F156 );
     }
 }
 
 _id_F14C( var_0 )
 {
-    _func_01D1( "#x3b1758e8692735e30", 0.4 );
-    _func_01D1( "#x3f9279508b424e95c", 0.5 );
+    setdvarifuninitialized( "#x3b1758e8692735e30", 0.4 );
+    setdvarifuninitialized( "#x3f9279508b424e95c", 0.5 );
 
     if ( var_0 && ( !isdefined( level._id_03E1._id_F142 ) || !level._id_03E1._id_F142 ) )
         return;
 
-    _func_01EA( "ai_threatsight", var_0 );
+    setsaveddvar( "ai_threatsight", var_0 );
     level thread _id_F14D( var_0 );
 }
 
@@ -47,9 +47,9 @@ _id_F14D( var_0 )
         wait 1.0;
 
     if ( getdvarint( "ai_threatUseDisplay", 0 ) )
-        _func_01EA( "ai_threatsightDisplay", var_0 );
+        setsaveddvar( "ai_threatsightDisplay", var_0 );
 
-    _func_01D0( "scr_ai_threatsightaudio", var_0 );
+    setdvar( "scr_ai_threatsightaudio", var_0 );
 }
 
 _id_F142()
@@ -107,7 +107,7 @@ _id_F14F( var_0 )
             break;
     }
 
-    foreach ( var_2 in level._id_B758 )
+    foreach ( var_2 in level.players )
         var_2 _id_F148( self, var_0 );
 
     _id_F150( var_0 );
@@ -127,11 +127,11 @@ _id_F146()
 
     for (;;)
     {
-        level _id_077B::_id_5C04( "stealth_enabled" );
-        level _id_077B::_id_5C10( "stealth_spotted" );
-        wait( _func_01B7( 0.4, 0.6 ) );
+        level scripts\engine\utility::_id_5C04( "stealth_enabled" );
+        level scripts\engine\utility::_id_5C10( "stealth_spotted" );
+        wait( randomfloatrange( 0.4, 0.6 ) );
 
-        foreach ( var_1 in level._id_B758 )
+        foreach ( var_1 in level.players )
         {
             if ( isdefined( var_1._id_7CF5 ) )
                 continue;
@@ -140,7 +140,7 @@ _id_F146()
                 continue;
 
             if ( self _meth_8066( var_1 ) )
-                self _meth_8522( "sight", var_1, var_1._id_02EA );
+                self _meth_8522( "sight", var_1, var_1.origin );
         }
     }
 }
@@ -212,12 +212,12 @@ _id_F151( var_0 )
     if ( self [[ self._id_5D79 ]]() )
     {
         self _meth_812E( var_0 );
-        self _meth_8522( "combat", var_0, var_0._id_02EA );
+        self _meth_8522( "combat", var_0, var_0.origin );
         return;
     }
 
     var_0._id_03E1._id_F157[var_1] = self;
-    self _meth_8522( "sight", var_0, var_0._id_02EA );
+    self _meth_8522( "sight", var_0, var_0.origin );
     var_2 = var_0 getentitynumber();
 
     if ( !isdefined( self._id_03E1._id_F141 ) )
@@ -233,7 +233,7 @@ _id_F151( var_0 )
     var_3 = var_3 * 1000;
     var_4 = gettime();
 
-    if ( _id_06BB::_id_8A2C() )
+    if ( scripts\common\utility::_id_8A2C() )
         self._id_03E1._id_C073 = var_4 + var_3;
 
     var_5 = var_4;
@@ -288,10 +288,10 @@ _id_F144( var_0, var_1 )
         self._id_03E1._id_5E51 = [];
 
     if ( isdefined( self._id_03E1._id_5E51[var_3] ) )
-        self._id_03E1._id_5E51[var_3]._id_5264 = _func_0147( self._id_03E1._id_5E51[var_3]._id_5264, var_2 );
+        self._id_03E1._id_5E51[var_3]._id_5264 = max( self._id_03E1._id_5E51[var_3]._id_5264, var_2 );
     else
     {
-        self._id_03E1._id_5E51[var_3] = _func_020F();
+        self._id_03E1._id_5E51[var_3] = spawnstruct();
         self._id_03E1._id_5E51[var_3]._id_5264 = var_2;
     }
 
@@ -323,8 +323,8 @@ _id_F145()
             {
                 var_7 = self _meth_8514( var_6._id_5449 );
 
-                if ( _func_0117( var_6._id_5449 ) )
-                    var_6._id_5449 thread _id_F14B( 1, _func_0147( var_6._id_5449._id_03E1._id_9C98, var_7 ) );
+                if ( isplayer( var_6._id_5449 ) )
+                    var_6._id_5449 thread _id_F14B( 1, max( var_6._id_5449._id_03E1._id_9C98, var_7 ) );
 
                 if ( var_7 + var_4 < getdvarfloat( "#x3f9279508b424e95c" ) )
                 {
@@ -333,7 +333,7 @@ _id_F145()
 
                     if ( getdvarfloat( "#x3f9279508b424e95c" ) >= 1.0 && var_7 >= 1.0 && !var_1 )
                     {
-                        self _meth_8522( "sight", var_6._id_5449, var_6._id_5449._id_02EA );
+                        self _meth_8522( "sight", var_6._id_5449, var_6._id_5449.origin );
                         var_1 = 1;
                     }
                     else if ( var_7 < 0.75 && var_1 )
@@ -375,11 +375,11 @@ _id_F149()
 
         foreach ( var_11, var_6 in self._id_03E1._id_F13F )
         {
-            if ( !isai( var_6 ) )
+            if ( !isalive( var_6 ) )
                 continue;
 
             var_7 = var_6 getentitynumber();
-            self._id_03E1._id_9C38 = _func_0147( self._id_03E1._id_9C38, var_6._id_0038 );
+            self._id_03E1._id_9C38 = max( self._id_03E1._id_9C38, var_6._id_0038 );
 
             if ( getdvarint( "ai_threatsight", 1 ) )
             {
@@ -392,9 +392,9 @@ _id_F149()
                 if ( var_9 )
                     var_0 = gettime();
 
-                if ( var_9 && _func_0117( self ) && var_8 > 0.09 && _id_B507( var_6 ) )
+                if ( var_9 && isplayer( self ) && var_8 > 0.09 && _id_B507( var_6 ) )
                 {
-                    var_6 _meth_8522( "sight", self, self._id_02EA );
+                    var_6 _meth_8522( "sight", self, self.origin );
                     var_1 = 1;
                 }
                 else if ( var_8 >= 1.0 )
@@ -406,7 +406,7 @@ _id_F149()
                 }
 
                 var_10 = self._id_03E1._id_9C98;
-                self._id_03E1._id_9C98 = _func_0147( self._id_03E1._id_9C98, var_6 _meth_8514( self ) );
+                self._id_03E1._id_9C98 = max( self._id_03E1._id_9C98, var_6 _meth_8514( self ) );
 
                 if ( self._id_03E1._id_9C98 > 0.05 )
                 {
@@ -431,28 +431,28 @@ _id_F149()
 
 _id_B507( var_0 )
 {
-    return self _meth_81E4() && _id_077B::_id_10E74( self._id_02EA, self._id_0054, var_0._id_02EA, cos( 20 ) );
+    return self issprinting() && scripts\engine\utility::_id_10E74( self.origin, self.angles, var_0.origin, cos( 20 ) );
 }
 
 _id_F143( var_0, var_1 )
 {
     self notify( "threat_sight_fake" );
     self endon( "threat_sight_fake" );
-    _func_01EA( "ai_threatsightFakeThreat", var_1 );
-    _func_01EA( "ai_threatsightFakeX", var_0[0] );
-    _func_01EA( "ai_threatsightFakeY", var_0[1] );
-    _func_01EA( "ai_threatsightFakeZ", var_0[2] );
+    setsaveddvar( "ai_threatsightFakeThreat", var_1 );
+    setsaveddvar( "ai_threatsightFakeX", var_0[0] );
+    setsaveddvar( "ai_threatsightFakeY", var_0[1] );
+    setsaveddvar( "ai_threatsightFakeZ", var_0[2] );
 
     if ( !isdefined( self._id_03E1._id_9C98 ) )
         self._id_03E1._id_9C98 = 0;
 
     while ( var_1 > 0 )
     {
-        thread _id_F14B( 1, _func_0147( self._id_03E1._id_9C98, var_1 ) );
+        thread _id_F14B( 1, max( self._id_03E1._id_9C98, var_1 ) );
         wait 0.05;
     }
 
-    thread _id_F14B( 0, _func_0147( self._id_03E1._id_9C98, var_1 ) );
+    thread _id_F14B( 0, max( self._id_03E1._id_9C98, var_1 ) );
 }
 
 _id_F14B( var_0, var_1, var_2 )

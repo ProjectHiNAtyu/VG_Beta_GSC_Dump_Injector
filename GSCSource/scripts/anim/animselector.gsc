@@ -5,7 +5,7 @@ _id_68A9()
 {
     var_0 = [];
 
-    if ( _id_06BB::_id_87BA() )
+    if ( scripts\common\utility::_id_87BA() )
     {
         var_0["traverse_warp_up"] = [ [ 0, "animselectortables/soldier_traverse_warp_up.csv" ], [ 1, "animselectortables/civilian_traverse_warp_up.csv" ], [ 2, "animselectortables/bomber_traverse_warp_up.csv" ] ];
         var_0["traverse_warp_down"] = [ [ 0, "animselectortables/soldier_traverse_warp_down.csv" ], [ 1, "animselectortables/civilian_traverse_warp_down.csv" ], [ 2, "animselectortables/bomber_traverse_warp_down.csv" ] ];
@@ -27,7 +27,7 @@ _id_68A9()
     return var_0;
 }
 
-_id_021D()
+init()
 {
     anim._id_18B0 = [];
     anim._id_18B0["min_height"] = [ "height", 1 ];
@@ -49,7 +49,7 @@ _id_021D()
     {
         foreach ( var_12, var_4 in var_2 )
         {
-            anim._id_18AF[var_13][var_12] = _func_020F();
+            anim._id_18AF[var_13][var_12] = spawnstruct();
             anim._id_18AF[var_13][var_12]._id_1423 = [];
             anim._id_18AF[var_13][var_12]._id_59D5 = [];
             anim._id_18AF[var_13][var_12]._id_FF6C = [];
@@ -58,7 +58,7 @@ _id_021D()
 
             for ( var_6 = 0; var_6 < var_5; var_6++ )
             {
-                var_7 = _func_021E( var_4[1], var_6 + 1, 0 );
+                var_7 = tablelookupbyrow( var_4[1], var_6 + 1, 0 );
                 anim._id_18AF[var_13][var_12]._id_1423[var_6] = var_7;
             }
 
@@ -66,7 +66,7 @@ _id_021D()
 
             for ( var_6 = 0; var_6 < 50; var_6++ )
             {
-                var_9 = _func_021E( var_4[1], 0, var_6 + 1 );
+                var_9 = tablelookupbyrow( var_4[1], 0, var_6 + 1 );
 
                 if ( var_9 == "__END__" || var_9 == "" )
                 {
@@ -83,7 +83,7 @@ _id_021D()
                 {
                     var_7 = anim._id_18AF[var_13][var_12]._id_1423[var_6];
                     var_9 = anim._id_18AF[var_13][var_12]._id_59D5[var_10];
-                    var_11 = _func_021E( var_4[1], var_6 + 1, var_10 + 1 );
+                    var_11 = tablelookupbyrow( var_4[1], var_6 + 1, var_10 + 1 );
 
                     if ( var_11 == "" )
                         var_11 = undefined;
@@ -120,7 +120,7 @@ _id_D044( var_0, var_1, var_2 )
 
     foreach ( var_5 in var_3._id_1423 )
     {
-        if ( _func_0104( self ) && !_id_0009::_id_1C4A( var_0, var_5 ) )
+        if ( isai( self ) && !_id_0009::_id_1C4A( var_0, var_5 ) )
             continue;
 
         var_6 = 1;

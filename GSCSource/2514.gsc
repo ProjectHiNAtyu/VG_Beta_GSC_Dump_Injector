@@ -69,8 +69,8 @@ _id_10C30( var_0 )
     for (;;)
     {
         self waittill( "weapon_fired", var_1 );
-        var_2 = _func_020F();
-        var_2._id_106B5 = self._id_02EA;
+        var_2 = spawnstruct();
+        var_2._id_106B5 = self.origin;
         var_2._id_FFD2 = self _meth_8597();
         self._id_DA5D[self._id_DA5D.size] = var_2;
     }
@@ -78,7 +78,7 @@ _id_10C30( var_0 )
 
 _id_9797( var_0 )
 {
-    var_1 = level._id_B758;
+    var_1 = level.players;
     var_2 = [];
     var_3 = gettime();
     var_4 = "";
@@ -99,11 +99,11 @@ _id_9797( var_0 )
 
         var_10 = var_1[var_9];
 
-        if ( isdefined( var_10 ) && _id_0A74::_id_89D3( var_10 ) )
+        if ( isdefined( var_10 ) && scripts\mp\utility\player::isreallyalive( var_10 ) )
         {
-            var_4 = var_4 + ( "T " + var_10 getentitynumber() + " " + var_10._id_045B + " " );
-            var_11 = int( var_10._id_02EA[0] ) + "," + int( var_10._id_02EA[1] ) + "," + int( var_10._id_02EA[2] );
-            var_12 = int( var_10._id_0054[0] ) + "," + int( var_10._id_0054[1] ) + "," + int( var_10._id_0054[2] );
+            var_4 = var_4 + ( "T " + var_10 getentitynumber() + " " + var_10.team + " " );
+            var_11 = int( var_10.origin[0] ) + "," + int( var_10.origin[1] ) + "," + int( var_10.origin[2] );
+            var_12 = int( var_10.angles[0] ) + "," + int( var_10.angles[1] ) + "," + int( var_10.angles[2] );
             var_2[var_2.size] = "P " + var_3 + " " + var_10 getentitynumber() + " " + var_11 + " " + var_12 + " ";
 
             if ( isdefined( var_10._id_7998 ) )

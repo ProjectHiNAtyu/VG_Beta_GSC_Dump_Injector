@@ -36,7 +36,7 @@ _id_0D21( var_0 )
 
 _id_2F23( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10 )
 {
-    foreach ( var_12 in level._id_B758 )
+    foreach ( var_12 in level.players )
     {
         if ( _func_011E() == 1 )
         {
@@ -44,7 +44,7 @@ _id_2F23( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
                 continue;
         }
 
-        if ( isdefined( var_0 ) == 1 && isdefined( var_12._id_0309["team"] ) == 1 && var_12._id_0309["team"] != var_0 )
+        if ( isdefined( var_0 ) == 1 && isdefined( var_12.pers["team"] ) == 1 && var_12.pers["team"] != var_0 )
             continue;
 
         var_12 _id_0827::_id_2F21( var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10 );

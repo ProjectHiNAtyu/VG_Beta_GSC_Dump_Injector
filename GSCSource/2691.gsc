@@ -3,22 +3,22 @@
 
 _id_2BF2()
 {
-    _id_099D::_id_C2A5( "bronco_sfps_mp", "spawnCallback", ::_id_2BF6 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "bronco_sfps_mp", "spawnCallback", ::_id_2BF6 );
     _id_2BF4();
     _id_2BF3();
     scripts\mp\utility\killstreak::_id_10228( "bronco_sfps_mp", _id_09A6::_id_2BE7 );
 
     if ( istrue( level._id_DCED ) )
-        _id_099D::_id_C2A5( "bronco_sfps_mp", "endEnterInternal", ::_id_2BF1 );
+        scripts\cp_mp\utility\script_utility::registersharedfunc( "bronco_sfps_mp", "endEnterInternal", ::_id_2BF1 );
 }
 
 _id_2BF4()
 {
-    var_0 = _id_09BB::_id_10274( "bronco_sfps_mp", 1 );
-    var_0._id_0DD8 = _id_09BB::vehicle_spawn;
+    var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10274( "bronco_sfps_mp", 1 );
+    var_0._id_0DD8 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn;
     var_0._id_0DD9 = 60;
 
-    if ( _id_0A69::_id_6A43() == "arm" )
+    if ( scripts\mp\utility\game::getgametype() == "arm" )
         var_0._id_C691 = 30;
 }
 
@@ -38,7 +38,7 @@ _id_2BF6( var_0, var_1 )
 {
     var_2 = _id_09A6::_id_2BDF( var_0, var_1 );
 
-    if ( isdefined( var_2 ) && _id_09BB::_id_10270() )
+    if ( isdefined( var_2 ) && scripts\cp_mp\vehicles\vehicle_spawn::_id_10270() )
         var_2._id_AA96 = ::_id_2BF5;
 
     return var_2;
@@ -51,31 +51,31 @@ _id_2BF5()
 
 _id_2BF7()
 {
-    var_0 = _id_09BC::_id_6E22( self );
-    var_1 = _func_020F();
-    _id_09BC::_id_3D43( var_0, var_1 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_tracking::_id_6E22( self );
+    var_1 = spawnstruct();
+    scripts\cp_mp\vehicles\vehicle_tracking::_id_3D43( var_0, var_1 );
     var_1._id_C17B = var_0._id_C17B;
     var_1._id_BFB7 = var_0._id_BFB7;
-    var_2 = _func_020F();
-    var_3 = _id_09BB::vehicle_spawn_spawnvehicle( "bronco_sfps_mp", var_1, var_2 );
+    var_2 = spawnstruct();
+    var_3 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028E( "bronco_sfps_mp", var_1, var_2 );
 
     if ( isdefined( var_3 ) )
     {
         if ( isdefined( var_1._id_C17B ) && istrue( level._id_FEAD ) && level._id_FEAD != 2 )
         {
             var_3._id_C17B = var_1._id_C17B;
-            var_3._id_027F = int( _func_0147( var_3._id_027F, var_1._id_BFB7 ) );
-            var_3._id_01FF = var_3._id_027F;
+            var_3.maxhealth = int( max( var_3.maxhealth, var_1._id_BFB7 ) );
+            var_3.health = var_3.maxhealth;
             _id_07DF::_id_BFB9( var_3 );
         }
 
         if ( istrue( level._id_DCED ) )
-            scripts\mp\gametypes\arm::_id_10027( var_3, var_3._id_045B );
+            scripts\mp\gametypes\arm::_id_10027( var_3, var_3.team );
     }
 }
 
 _id_2BF1( var_0, var_1, var_2, var_3, var_4 )
 {
     if ( istrue( level._id_DCED ) )
-        var_0 scripts\mp\gametypes\arm::_id_10232( var_3._id_045B );
+        var_0 scripts\mp\gametypes\arm::_id_10232( var_3.team );
 }

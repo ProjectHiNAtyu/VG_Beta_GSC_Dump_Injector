@@ -3,7 +3,7 @@
 
 _id_757D( var_0 )
 {
-    return var_0._id_9355 != _id_099B::_id_6988();
+    return var_0._id_9355 != scripts\cp_mp\utility\killstreak_utility::_id_6988();
 }
 
 _id_112C( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
@@ -90,8 +90,8 @@ _id_112C( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
         self _meth_86FB( "killstreak" );
     }
 
-    if ( level._id_EF62 )
-        self _meth_8703( var_2._id_045B );
+    if ( level.teambased )
+        self _meth_8703( var_2.team );
     else
         self _meth_8703( var_2 );
 
@@ -100,14 +100,14 @@ _id_112C( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
         var_8 = undefined;
         var_9 = undefined;
 
-        if ( level._id_EF62 )
+        if ( level.teambased )
         {
-            if ( _id_099B::_id_89EE( var_0 ) )
+            if ( scripts\cp_mp\utility\killstreak_utility::_id_89EE( var_0 ) )
             {
-                foreach ( var_11 in level._id_B758 )
+                foreach ( var_11 in level.players )
                 {
-                    if ( var_11._id_045B == self._id_045B && var_11 != self._id_02F2 )
-                        var_8 = _id_0A72::_id_ACBD( self, var_11, "outline_nodepth_cyan", "lowest" );
+                    if ( var_11.team == self.team && var_11 != self.owner )
+                        var_8 = scripts\mp\utility\outline::outlineenableforplayer( self, var_11, "outline_nodepth_cyan", "lowest" );
 
                     if ( isdefined( var_8 ) )
                         thread _id_C4ED( var_8, var_6 );
@@ -116,10 +116,10 @@ _id_112C( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
                 var_9 = 1;
             }
             else
-                var_8 = _id_0A72::_id_ACBF( self, var_2._id_045B, "outline_nodepth_cyan", "lowest" );
+                var_8 = scripts\mp\utility\outline::_id_ACBF( self, var_2.team, "outline_nodepth_cyan", "lowest" );
         }
         else
-            var_8 = _id_0A72::_id_ACBD( self, var_2, "outline_nodepth_cyan", "lowest" );
+            var_8 = scripts\mp\utility\outline::outlineenableforplayer( self, var_2, "outline_nodepth_cyan", "lowest" );
 
         if ( !istrue( var_9 ) )
             thread _id_C4ED( var_8, var_6 );
@@ -129,12 +129,12 @@ _id_112C( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
     {
         var_13 = 0;
 
-        if ( var_2 _id_0A74::_id_8AB5() )
+        if ( var_2 scripts\mp\utility\player::_id_8AB5() )
             var_13 = 1;
 
         var_14 = undefined;
 
-        if ( level._id_EF62 )
+        if ( level.teambased )
             var_14 = thread _id_0766::_id_D587( 0, var_5, 1, 10000, undefined, undefined, 1, var_13 );
         else
         {
@@ -150,11 +150,11 @@ _id_112C( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
 _id_6868()
 {
-    if ( !isdefined( self._id_0309["nextActiveID"] ) )
-        self._id_0309["nextActiveID"] = 0;
+    if ( !isdefined( self.pers["nextActiveID"] ) )
+        self.pers["nextActiveID"] = 0;
 
-    var_0 = self._id_0309["nextActiveID"];
-    self._id_0309["nextActiveID"]++;
+    var_0 = self.pers["nextActiveID"];
+    self.pers["nextActiveID"]++;
     return var_0;
 }
 
@@ -165,8 +165,8 @@ _id_C4ED( var_0, var_1 )
     if ( isdefined( var_1 ) )
         var_2[var_2.size] = var_1;
 
-    _id_077B::_id_10891( var_2 );
-    _id_0A72::_id_ACB7( var_0, self );
+    scripts\engine\utility::_id_10891( var_2 );
+    scripts\mp\utility\outline::outlinedisable( var_0, self );
 }
 
 _id_C523( var_0, var_1 )
@@ -176,7 +176,7 @@ _id_C523( var_0, var_1 )
     if ( isdefined( var_1 ) )
         var_2[var_2.size] = var_1;
 
-    _id_077B::_id_10891( var_2 );
+    scripts\engine\utility::_id_10891( var_2 );
     _id_0766::_id_D586( var_0 );
 }
 
@@ -212,10 +212,10 @@ _id_1152( var_0 )
     if ( !isdefined( level._id_F8F5 ) )
         level._id_F8F5 = [];
 
-    if ( level._id_EF62 )
-        level._id_F8F5[self._id_045B][level._id_F8F5[self._id_045B].size] = self;
+    if ( level.teambased )
+        level._id_F8F5[self.team][level._id_F8F5[self.team].size] = self;
     else
-        level._id_F8F5[self._id_02F2._id_723F + "_" + gettime()] = self;
+        level._id_F8F5[self.owner._id_723F + "_" + gettime()] = self;
 }
 
 _id_C4B4( var_0 )
@@ -223,18 +223,18 @@ _id_C4B4( var_0 )
     self waittill( "death" );
 
     if ( isdefined( self._id_F8FC ) )
-        self._id_F8FC _meth_809A();
+        self._id_F8FC delete();
 
-    if ( level._id_EF62 )
+    if ( level.teambased )
     {
-        var_1 = self._id_045B;
-        level._id_F8F5[var_1] = _id_077B::_id_1BA9( level._id_F8F5[var_1] );
+        var_1 = self.team;
+        level._id_F8F5[var_1] = scripts\engine\utility::_id_1BA9( level._id_F8F5[var_1] );
     }
     else
-        level._id_F8F5 = _id_077B::_id_1BA9( level._id_F8F5 );
+        level._id_F8F5 = scripts\engine\utility::_id_1BA9( level._id_F8F5 );
 
     if ( isdefined( self ) )
-        self _meth_809A();
+        self delete();
 
     _id_C494( var_0 );
 }
@@ -300,7 +300,7 @@ _id_1151( var_0 )
 
 _id_C4B3( var_0 )
 {
-    _id_077B::_id_1087E( "death", "carried" );
+    scripts\engine\utility::waittill_any_2( "death", "carried" );
     level._id_F894[var_0] = undefined;
     _id_C494( var_0 );
 }
@@ -315,7 +315,7 @@ _id_1130( var_0 )
 
 _id_C498( var_0 )
 {
-    _id_077B::_id_1087E( "death", "carried" );
+    scripts\engine\utility::waittill_any_2( "death", "carried" );
     level._id_47C5[var_0] = undefined;
     _id_C494( var_0 );
 }
@@ -382,18 +382,18 @@ _id_C4A4( var_0 )
 
 _id_D5C5( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 {
-    self makeunusable();
-    self _meth_8305( "HINT_NOICON" );
+    self makeuseable();
+    self setcursorhint( "HINT_NOICON" );
     self _meth_84D8( "show" );
-    self _meth_832B( var_1 );
-    self setusefov( var_2 );
-    self _meth_84D4( var_3 );
+    self sethintstring( var_1 );
+    self sethintdisplayfov( var_2 );
+    self setusefov( var_3 );
     self _meth_84D3( var_4 );
-    self _meth_84CE( var_5 );
+    self setuserange( var_5 );
     self _meth_83A0( 1 );
     level thread _id_19BC( self );
 
-    foreach ( var_9 in level._id_B758 )
+    foreach ( var_9 in level.players )
     {
         if ( var_9 == var_0 && !istrue( var_7 ) )
         {
@@ -401,7 +401,7 @@ _id_D5C5( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
             continue;
         }
 
-        self disableoffhandweapons( var_9 );
+        self disableplayeruse( var_9 );
     }
 }
 
@@ -413,25 +413,25 @@ _id_19BC( var_0 )
     for (;;)
     {
         level waittill( "connected", var_1 );
-        var_0 disableoffhandweapons( var_1 );
+        var_0 disableplayeruse( var_1 );
     }
 }
 
 _id_19B2( var_0, var_1 )
 {
-    var_2 = self._id_045B;
-    var_3 = self._id_02F2;
+    var_2 = self.team;
+    var_3 = self.owner;
     var_4 = undefined;
     var_5 = undefined;
 
-    if ( !var_0 _id_099C::_giveweapon() || var_0._id_045B == "spectator" || var_0._id_045B == "follower" )
+    if ( !var_0 scripts\cp_mp\utility\player_utility::_id_0C14() || var_0.team == "spectator" || var_0.team == "follower" )
         return;
 
     if ( var_0 == var_3 )
         var_4 = "outlinefill_depth_cyan";
     else if ( var_0 != var_3 )
     {
-        if ( level._id_EF62 && var_0._id_045B != var_2 || !level._id_EF62 )
+        if ( level.teambased && var_0.team != var_2 || !level.teambased )
         {
             var_4 = "outlinefill_depth_orange";
             var_5 = 1;
@@ -444,11 +444,11 @@ _id_19B2( var_0, var_1 )
     {
         if ( istrue( var_5 ) )
         {
-            if ( var_0 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_noplayertarget" ) )
+            if ( var_0 scripts\mp\utility\perk::_hasperk( "specialty_noplayertarget" ) )
                 return;
         }
 
-        var_6 = _id_0A72::_id_ACBD( var_0, self._id_02F2, var_4, "killstreak" );
+        var_6 = scripts\mp\utility\outline::outlineenableforplayer( var_0, self.owner, var_4, "killstreak" );
         thread _id_10BBD( var_6, var_0, var_1 );
         thread _id_10BBE( var_6, var_0, var_1 );
     }
@@ -459,7 +459,7 @@ _id_10BBD( var_0, var_1, var_2 )
     var_1 endon( "death_or_disconnect" );
     level endon( "game_ended" );
     self waittill( var_2 );
-    _id_0A72::_id_ACB7( var_0, var_1 );
+    scripts\mp\utility\outline::outlinedisable( var_0, var_1 );
 }
 
 _id_10BBE( var_0, var_1, var_2 )
@@ -467,7 +467,7 @@ _id_10BBE( var_0, var_1, var_2 )
     self endon( var_2 );
     level endon( "game_ended" );
     var_1 waittill( "death_or_disconnect" );
-    _id_0A72::_id_ACB7( var_0, var_1 );
+    scripts\mp\utility\outline::outlinedisable( var_0, var_1 );
 }
 
 _id_6B47( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
@@ -479,7 +479,7 @@ _id_6B47( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
 
     if ( istrue( var_10 ) )
     {
-        var_12 = _id_0A7F::_id_6E4C( var_1 );
+        var_12 = scripts\mp\utility\weapon::_id_6E4C( var_1 );
 
         foreach ( var_14 in var_12 )
         {
@@ -495,7 +495,7 @@ _id_6B47( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
 
     if ( var_2 != "MOD_MELEE" )
     {
-        switch ( var_1._id_0084 )
+        switch ( var_1.basename )
         {
             case "s4_v2_mp":
             case "cruise_proj_mp":
@@ -576,12 +576,12 @@ _id_6B47( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9 )
 
     var_17 = 0;
 
-    if ( isdefined( var_0 ) && isdefined( self._id_02F2 ) && !var_17 )
+    if ( isdefined( var_0 ) && isdefined( self.owner ) && !var_17 )
     {
-        if ( isdefined( var_0._id_02F2 ) )
-            var_0 = var_0._id_02F2;
+        if ( isdefined( var_0.owner ) )
+            var_0 = var_0.owner;
 
-        if ( var_0 == self._id_02F2 && !istrue( self._id_8D76 ) )
+        if ( var_0 == self.owner && !istrue( self._id_8D76 ) )
             var_3 = _func_0037( var_3 / 2 );
     }
 
@@ -594,15 +594,15 @@ _id_8827( var_0 )
     var_2 = 0;
 
     if ( _func_0120( var_0 ) )
-        var_2 = _func_0121( var_0, "alt_" );
-    else if ( _func_036D( var_0 ) )
+        var_2 = issubstr( var_0, "alt_" );
+    else if ( isweapon( var_0 ) )
         var_2 = var_0._id_022A;
 
     var_3 = 0;
 
     if ( istrue( var_2 ) )
     {
-        var_4 = _id_0A7F::_id_6E4C( var_0 );
+        var_4 = scripts\mp\utility\weapon::_id_6E4C( var_0 );
 
         foreach ( var_6 in var_4 )
         {
@@ -614,7 +614,7 @@ _id_8827( var_0 )
         }
     }
 
-    var_8 = _id_0A7F::_id_6E4D( var_0 );
+    var_8 = scripts\mp\utility\weapon::_id_6E4D( var_0 );
 
     switch ( var_8 )
     {
@@ -638,7 +638,7 @@ _id_8827( var_0 )
 
 _id_A737( var_0 )
 {
-    return isdefined( var_0 ) && var_0 == self._id_02F2;
+    return isdefined( var_0 ) && var_0 == self.owner;
 }
 
 _id_4C35( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
@@ -654,7 +654,7 @@ _id_4C35( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
     if ( isdefined( var_3 ) && getdvarint( "scr_damage_ally_killstreak", 0 ) == 0 )
     {
-        if ( level._id_EF62 )
+        if ( level.teambased )
         {
             if ( !_id_0A67::_id_8AD5( var_1, var_3, self ) )
                 return;
@@ -663,13 +663,13 @@ _id_4C35( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
             return;
     }
 
-    if ( _func_0102( self ) )
-        self _meth_80B7( var_0, var_4, var_1, var_2, var_5, var_6 );
-    else if ( _id_09B4::_id_8ADC() )
-        self _meth_80B7( var_0, var_4, var_1, var_2, var_5, var_6 );
+    if ( isagent( self ) )
+        self dodamage( var_0, var_4, var_1, var_2, var_5, var_6 );
+    else if ( scripts\cp_mp\vehicles\vehicle::_id_8ADC() )
+        self dodamage( var_0, var_4, var_1, var_2, var_5, var_6 );
     else
     {
-        var_15 = _func_0378( var_6 );
+        var_15 = makeweaponfromstring( var_6 );
         self notify( "damage", var_0, var_1, var_7, var_8, var_5, var_11, var_12, var_13, var_14, var_15, var_4, var_9, var_10, var_2 );
     }
 }
@@ -684,17 +684,17 @@ _id_B378( var_0, var_1 )
     if ( !isdefined( var_1 ) )
         var_1 = ( 0, 0, 0 );
 
-    var_2 = _id_077B::_id_6A40( "dlight_large" );
+    var_2 = scripts\engine\utility::getfx( "dlight_large" );
 
     if ( istrue( self._id_8723 ) )
-        var_2 = _id_077B::_id_6A40( "dlight_small" );
+        var_2 = scripts\engine\utility::getfx( "dlight_small" );
 
-    self._id_6069 = _func_0205( "script_model", self._id_02EA );
-    self._id_6069 setmode( "tag_origin" );
-    self._id_6069 _meth_820B( self, "tag_origin", var_0, var_1 );
+    self._id_6069 = spawn( "script_model", self.origin );
+    self._id_6069 setmodel( "tag_origin" );
+    self._id_6069 linkto( self, "tag_origin", var_0, var_1 );
     self._id_6069 thread _id_475B( self );
     wait 0.1;
-    _func_0197( var_2, self._id_6069, "tag_origin" );
+    playfxontag( var_2, self._id_6069, "tag_origin" );
 }
 
 _id_475B( var_0 )
@@ -703,7 +703,7 @@ _id_475B( var_0 )
     var_0 waittill( "death" );
 
     if ( isdefined( self ) )
-        self _meth_809A();
+        self delete();
 }
 
 _id_871A( var_0 )
@@ -722,8 +722,8 @@ _id_6C35( var_0 )
 {
     var_1 = "NONE";
 
-    if ( isdefined( var_0._id_02F2 ) && isdefined( var_0._id_02F2._id_419B ) )
-        var_1 = var_0._id_02F2._id_419B;
+    if ( isdefined( var_0.owner ) && isdefined( var_0.owner._id_419B ) )
+        var_1 = var_0.owner._id_419B;
 
     return var_1;
 }
@@ -762,8 +762,8 @@ _id_10B80( var_0, var_1, var_2 )
     var_7 = var_6 + var_5;
     var_5 = var_5 / 1000;
 
-    if ( isdefined( self._id_EA0F ) && _id_099B::_id_89EE( self._id_EA0F ) )
-        self._id_02F2 _meth_82F6( "ui_killstreak_countdown", var_7 );
+    if ( isdefined( self._id_EA0F ) && scripts\cp_mp\utility\killstreak_utility::_id_89EE( self._id_EA0F ) )
+        self.owner setclientomnvar( "ui_killstreak_countdown", var_7 );
 
     self [[ var_2 ]]( var_5 );
 }
@@ -772,9 +772,9 @@ _id_69E1( var_0 )
 {
     var_1 = [];
 
-    foreach ( var_3 in level._id_B758 )
+    foreach ( var_3 in level.players )
     {
-        if ( var_0 _id_0A74::_id_8803( var_3 ) )
+        if ( var_0 scripts\mp\utility\player::_id_8803( var_3 ) )
             var_1[var_1.size] = var_3;
     }
 
@@ -794,20 +794,20 @@ _id_0B3D( var_0, var_1, var_2, var_3 )
     self endon( "stop_location_selection" );
     thread _id_5327();
 
-    if ( isdefined( var_0 ) && self._id_045B != "spectator" && self._id_045B != "follower" )
+    if ( isdefined( var_0 ) && self.team != "spectator" && self.team != "follower" )
     {
-        if ( isdefined( self.streakinfo ) )
-            self.streakinfo delete();
+        if ( isdefined( self._id_EA0E ) )
+            self._id_EA0E destroy();
 
         if ( self _meth_81E1() )
         {
-            self.streakinfo = _id_07BA::_id_3FAD( "default", 1.3 );
-            self.streakinfo _id_07BA::_id_D675( "CENTER", "CENTER", 0, -98 );
+            self._id_EA0E = scripts\mp\hud_util::createfontstring( "default", 1.3 );
+            self._id_EA0E scripts\mp\hud_util::setpoint( "CENTER", "CENTER", 0, -98 );
         }
         else
         {
-            self.streakinfo = _id_07BA::_id_3FAD( "default", 1.6 );
-            self.streakinfo _id_07BA::_id_D675( "CENTER", "CENTER", 0, -190 );
+            self._id_EA0E = scripts\mp\hud_util::createfontstring( "default", 1.6 );
+            self._id_EA0E scripts\mp\hud_util::setpoint( "CENTER", "CENTER", 0, -190 );
         }
     }
 }
@@ -823,8 +823,8 @@ _id_E911( var_0, var_1 )
         self _meth_80E7();
         self._id_D05C = undefined;
 
-        if ( isdefined( self.streakinfo ) )
-            self.streakinfo delete();
+        if ( isdefined( self._id_EA0E ) )
+            self._id_EA0E destroy();
     }
 
     self notify( "stop_location_selection", var_1 );
@@ -846,18 +846,18 @@ _id_5327()
 
 _id_EA13( var_0 )
 {
-    var_1 = _id_0A28::_id_2E9F( var_0 );
-    var_2 = _id_0A28::_id_6B72();
-    var_3 = _id_0A28::_id_2E9F( var_2 );
+    var_1 = scripts\mp\killstreaks\killstreaks::_id_2E9F( var_0 );
+    var_2 = scripts\mp\killstreaks\killstreaks::_id_6B72();
+    var_3 = scripts\mp\killstreaks\killstreaks::_id_2E9F( var_2 );
     return var_1 < var_3;
 }
 
 _id_E9FB( var_0, var_1 )
 {
     var_2 = 0;
-    var_3 = _id_077A::_id_3EC3( 0, 1, 0, 1, 1, 0 );
+    var_3 = scripts\engine\trace::_id_3EC3( 0, 1, 0, 1, 1, 0 );
 
-    if ( !_id_077A::_id_C047( var_0, var_0 + ( 0, 0, 10000 ), var_1, var_3 ) )
+    if ( !scripts\engine\trace::ray_trace_passed( var_0, var_0 + ( 0, 0, 10000 ), var_1, var_3 ) )
         var_2 = 1;
 
     return var_2;
@@ -865,35 +865,35 @@ _id_E9FB( var_0, var_1 )
 
 _id_FF58( var_0, var_1 )
 {
-    if ( ( !self _meth_81D7() || self _meth_8497() ) && _id_099B::_id_89EE( var_0 ) )
+    if ( ( !self isonground() || self _meth_8497() ) && scripts\cp_mp\utility\killstreak_utility::_id_89EE( var_0 ) )
     {
-        _id_07B9::_id_DC9F( "KILLSTREAKS/UNAVAILABLE" );
+        scripts\mp\hud_message::_id_DC9F( "KILLSTREAKS/UNAVAILABLE" );
         return 0;
     }
 
     if ( isdefined( self._id_D05C ) )
         return 0;
 
-    if ( _id_0A69::_id_8722() )
+    if ( scripts\mp\utility\game::_id_8722() )
     {
         if ( _id_884B( var_0 ) )
         {
             if ( !( isdefined( var_1 ) && var_1 ) )
-                _id_07B9::_id_DC9F( "KILLSTREAKS/UNAVAILABLE_WHEN_AA" );
+                scripts\mp\hud_message::_id_DC9F( "KILLSTREAKS/UNAVAILABLE_WHEN_AA" );
 
             return 0;
         }
     }
 
-    if ( self _meth_81F3() && ( _id_099B::_id_89EE( var_0 ) || _id_878E( var_0 ) || _id_8A9E( var_0 ) ) )
+    if ( self _meth_81F3() && ( scripts\cp_mp\utility\killstreak_utility::_id_89EE( var_0 ) || _id_878E( var_0 ) || _id_8A9E( var_0 ) ) )
     {
         if ( !( isdefined( var_1 ) && var_1 ) )
-            _id_07B9::_id_DC9F( "KILLSTREAKS/UNAVAILABLE_USING_TURRET" );
+            scripts\mp\hud_message::_id_DC9F( "KILLSTREAKS/UNAVAILABLE_USING_TURRET" );
 
         return 0;
     }
 
-    if ( !_id_06BB::_id_8702() )
+    if ( !scripts\common\utility::_id_8702() )
         return 0;
 
     if ( isdefined( level._id_3797 ) && _id_884B( var_0 ) )
@@ -909,7 +909,7 @@ _id_FF58( var_0, var_1 )
     if ( isdefined( var_0 ) && var_0 == "sentry_shock" && _id_0784::_id_889C() )
     {
         if ( !( isdefined( var_1 ) && var_1 ) )
-            _id_07B9::_id_DC9F( "KILLSTREAKS/UNAVAILABLE" );
+            scripts\mp\hud_message::_id_DC9F( "KILLSTREAKS/UNAVAILABLE" );
 
         return 0;
     }
@@ -1165,9 +1165,9 @@ _id_6AC6( var_0 )
 {
     var_1 = "kills";
 
-    if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_killstreak_to_scorestreak" ) && var_0 != "nuke" )
+    if ( scripts\mp\utility\perk::_hasperk( "specialty_killstreak_to_scorestreak" ) && var_0 != "nuke" )
         var_1 = "scoreCost";
-    else if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_support_killstreaks" ) )
+    else if ( scripts\mp\utility\perk::_hasperk( "specialty_support_killstreaks" ) )
         var_1 = "supportCost";
 
     return level._id_8DBC._id_EA15._id_EC71[var_0][var_1];
@@ -1185,7 +1185,7 @@ _id_6ABD( var_0 )
     if ( var_1 != "" )
         return var_1;
 
-    var_2 = _func_021A( var_0, "_" );
+    var_2 = strtok( var_0, "_" );
 
     foreach ( var_4 in var_2 )
     {
@@ -1353,7 +1353,7 @@ _id_87A6()
 {
     var_0 = 0;
 
-    if ( isdefined( self._id_B74B ) && isai( self._id_B74B ) )
+    if ( isdefined( self._id_B74B ) && isalive( self._id_B74B ) )
         var_0 = 1;
 
     return var_0;
@@ -1361,10 +1361,10 @@ _id_87A6()
 
 _id_8D85( var_0 )
 {
-    if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_explosivebullets" ) )
+    if ( scripts\mp\utility\perk::_hasperk( "specialty_explosivebullets" ) )
         return 0;
 
-    return !_id_0A7F::_id_88DC( var_0._id_0084 ) && !_id_0A76::_id_8930( var_0 );
+    return !scripts\mp\utility\weapon::_id_88DC( var_0.basename ) && !_id_0A76::_id_8930( var_0 );
 }
 
 _id_88CF( var_0 )
@@ -1414,10 +1414,10 @@ _id_8D9E( var_0, var_1, var_2, var_3, var_4 )
     self._id_482A = var_4;
     self _meth_86FB( "killstreak" );
 
-    if ( level._id_EF62 )
-        self _meth_8703( self._id_045B );
+    if ( level.teambased )
+        self _meth_8703( self.team );
     else
-        self _meth_8703( self._id_02F2 );
+        self _meth_8703( self.owner );
 
     _id_09B6::_id_10035( self );
     _id_0A86::_id_67F8( var_0, 1 );
@@ -1436,15 +1436,15 @@ _id_8DAA()
 
 _id_8DA0( var_0 )
 {
-    var_1 = var_0._id_0134;
-    var_2 = var_0._id_006E;
+    var_1 = var_0.damage;
+    var_2 = var_0.attacker;
 
     if ( !istrue( self._id_8D76 ) )
     {
-        if ( isdefined( var_2 ) && isdefined( self._id_02F2 ) && var_2 == self._id_02F2 )
+        if ( isdefined( var_2 ) && isdefined( self.owner ) && var_2 == self.owner )
             var_1 = int( _func_0037( var_1 * 0.5 ) );
 
-        var_0._id_0134 = var_1;
+        var_0.damage = var_1;
     }
 
     var_3 = 1;
@@ -1458,7 +1458,7 @@ _id_8DA0( var_0 )
 
 _id_8D9F( var_0 )
 {
-    _id_0A28::_id_8DBD( var_0._id_006E, var_0._id_A90B, self, var_0._id_9CBF, var_0._id_0134 );
+    scripts\mp\killstreaks\killstreaks::_id_8DBD( var_0.attacker, var_0.objweapon, self, var_0._id_9CBF, var_0.damage );
     var_1 = 1;
     var_2 = self._id_8E37;
 
@@ -1470,7 +1470,7 @@ _id_8D9F( var_0 )
 
 _id_8D98( var_0 )
 {
-    _id_079A::_id_AB05( self._id_EA0F, var_0._id_006E, var_0._id_A90B, var_0._id_9CBF, var_0._id_0134, self._id_CC09, self._id_1068D, self._id_482A );
+    _id_079A::_id_AB05( self._id_EA0F, var_0.attacker, var_0.objweapon, var_0._id_9CBF, var_0.damage, self._id_CC09, self._id_1068D, self._id_482A );
     var_1 = 1;
     var_2 = self._id_8E35;
 
@@ -1503,7 +1503,7 @@ _id_8DA6( var_0, var_1 )
 
 _id_6AC8( var_0 )
 {
-    var_1 = var_0._id_0084;
+    var_1 = var_0.basename;
 
     if ( isdefined( level._id_8DD5[var_1] ) )
         return level._id_8DD5[var_1];

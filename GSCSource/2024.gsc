@@ -15,7 +15,7 @@ _id_CFE7( var_0 )
 _id_F403( var_0 )
 {
     level endon( "game_ended" );
-    self _meth_82F0( 1 );
+    self setcandamage( 1 );
     self._id_5EF0 = [];
 
     for (;;)
@@ -27,9 +27,9 @@ _id_F403( var_0 )
             if ( var_5 == "MOD_EXPLOSIVE" || var_5 == "MOD_GRENADE_SPLASH" )
                 continue;
         }
-        else if ( isdefined( var_14._id_EA0B ) && _id_0A6F::_id_88CF( var_14._id_EA0B._id_EA0F ) )
+        else if ( isdefined( var_14.streakinfo ) && _id_0A6F::_id_88CF( var_14.streakinfo._id_EA0F ) )
         {
-            self._id_01FF = 5;
+            self.health = 5;
             continue;
         }
 
@@ -45,11 +45,11 @@ _id_F403( var_0 )
             iprintln( "Secret objects found: " + var_2._id_7868 + " of " + var_0 );
         }
 
-        if ( self._id_01FF <= 0 )
+        if ( self.health <= 0 )
             break;
     }
 
-    self _meth_809A();
+    self delete();
 }
 
 _id_CFE8()

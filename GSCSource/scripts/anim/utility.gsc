@@ -67,7 +67,7 @@ _id_88A1( var_0 )
 _id_FC93()
 {
     if ( isdefined( self._id_017D ) )
-        self._id_0DB6._id_3A8A = gettime() + anim._id_3A91 + _func_01B8( anim._id_3A92 );
+        self._id_0DB6._id_3A8A = gettime() + anim._id_3A91 + randomint( anim._id_3A92 );
 }
 
 _id_A683( var_0, var_1, var_2 )
@@ -104,7 +104,7 @@ _id_DCBB( var_0 )
     if ( !isdefined( self._id_017D ) )
         return;
 
-    if ( self._id_017D._id_045B == "allies" )
+    if ( self._id_017D.team == "allies" )
         var_1 = ( 0.4, 0.7, 1 );
     else
         var_1 = ( 1, 0.7, 0.4 );
@@ -142,11 +142,11 @@ _id_44CB( var_0, var_1, var_2 )
     self endon( "death" );
     self notify( "stop debug " + var_0 );
     self endon( "stop debug " + var_0 );
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
     var_3 thread _id_44E4();
     var_3 endon( "timeout" );
 
-    if ( self._id_017D._id_045B == "allies" )
+    if ( self._id_017D.team == "allies" )
         var_4 = ( 0.4, 0.7, 1 );
     else
         var_4 = ( 1, 0.7, 0.4 );
@@ -179,8 +179,8 @@ _id_449C( var_0, var_1 )
     else
         var_3 = "long burst";
 
-    thread _id_44CC( self._id_02EA + ( 0, 0, 42 ), var_3, 1.5 );
-    thread _id_44CA( self._id_02EA + ( 0, 0, 60 ), "Suppressing" );
+    thread _id_44CC( self.origin + ( 0, 0, 42 ), var_3, 1.5 );
+    thread _id_44CA( self.origin + ( 0, 0, 60 ), "Suppressing" );
 }
 
 _id_BD12()
@@ -221,13 +221,13 @@ _id_DA1F( var_0 )
     self notify( "shooting" );
 
     if ( scripts\anim\utility_common::_id_874C() && istrue( self._id_0B3E._id_03A7 ) && isdefined( self._id_0B3E._id_03A1 ) )
-        self shellshock( 1, self._id_0B3E._id_03A1, 1, 0, 1 );
+        self _meth_83BD( 1, self._id_0B3E._id_03A1, 1, 0, 1 );
     else
     {
-        if ( _func_0102( self ) )
+        if ( isagent( self ) )
             var_0 = 1;
 
-        self shellshock( 1, undefined, var_0 );
+        self _meth_83BD( 1, undefined, var_0 );
     }
 }
 
@@ -247,7 +247,7 @@ _id_DA2E( var_0, var_1 )
     self notify( "shooting" );
 
     if ( scripts\anim\utility_common::_id_874C() )
-        self shellshock( 1, var_0, 1, 1, 1 );
+        self _meth_83BD( 1, var_0, 1, 1, 1 );
     else
     {
         var_2 = 0;
@@ -256,37 +256,37 @@ _id_DA2E( var_0, var_1 )
             var_2 = 1;
 
         var_3 = _func_002D( self _meth_815C(), var_0, 4 );
-        self shellshock( 1, var_3, var_1, var_2 );
+        self _meth_83BD( 1, var_3, var_1, var_2 );
     }
 }
 
 _id_F191()
 {
-    var_0 = _func_0205( "script_model", ( 0, 0, 0 ) );
-    var_0 setmode( "temp" );
-    var_0._id_02EA = self gettagorigin( "tag_weapon_right" ) + ( 50, 50, 0 );
-    var_0._id_0054 = self gettagangles( "tag_weapon_right" );
-    var_1 = anglestoright( var_0._id_0054 );
+    var_0 = spawn( "script_model", ( 0, 0, 0 ) );
+    var_0 setmodel( "temp" );
+    var_0.origin = self gettagorigin( "tag_weapon_right" ) + ( 50, 50, 0 );
+    var_0.angles = self gettagangles( "tag_weapon_right" );
+    var_1 = anglestoright( var_0.angles );
     var_1 = var_1 * 15;
-    var_2 = anglestoforward( var_0._id_0054 );
+    var_2 = anglestoforward( var_0.angles );
     var_2 = var_2 * 15;
     var_0 _meth_8237( ( 0, 50, 150 ), 100 );
-    var_3 = "weapon_" + _func_034D( self._id_04CE );
-    var_4 = _func_0205( var_3, var_0._id_02EA );
-    var_4._id_0054 = self gettagangles( "tag_weapon_right" );
-    var_4 _meth_820B( var_0 );
-    var_5 = var_0._id_02EA;
+    var_3 = "weapon_" + getcompleteweaponname( self._id_04CE );
+    var_4 = spawn( var_3, var_0.origin );
+    var_4.angles = self gettagangles( "tag_weapon_right" );
+    var_4 linkto( var_0 );
+    var_5 = var_0.origin;
 
-    while ( isdefined( var_4 ) && isdefined( var_4._id_02EA ) )
+    while ( isdefined( var_4 ) && isdefined( var_4.origin ) )
     {
         var_6 = var_5;
-        var_7 = var_0._id_02EA;
-        var_8 = _func_025B( var_7 - var_6 );
+        var_7 = var_0.origin;
+        var_8 = vectortoangles( var_7 - var_6 );
         var_2 = anglestoforward( var_8 );
         var_2 = var_2 * 4;
-        var_9 = _id_077A::_id_0B4C( var_7, var_7 + var_2, 1, var_4 );
+        var_9 = scripts\engine\trace::_bullet_trace( var_7, var_7 + var_2, 1, var_4 );
 
-        if ( isai( var_9["entity"] ) && var_9["entity"] == self )
+        if ( isalive( var_9["entity"] ) && var_9["entity"] == self )
         {
             wait 0.05;
             continue;
@@ -295,14 +295,14 @@ _id_F191()
         if ( var_9["fraction"] < 1.0 )
             break;
 
-        var_5 = var_0._id_02EA;
+        var_5 = var_0.origin;
         wait 0.05;
     }
 
-    if ( isdefined( var_4 ) && isdefined( var_4._id_02EA ) )
-        var_4 _meth_8415();
+    if ( isdefined( var_4 ) && isdefined( var_4.origin ) )
+        var_4 unlink();
 
-    var_0 _meth_809A();
+    var_0 delete();
 }
 
 _id_B00B()
@@ -324,8 +324,8 @@ _id_B00B()
             if ( isdefined( self._id_88A5 ) && self._id_88A5 == 1 )
                 continue;
 
-            _func_0197( level._id_0BA3["cold_breath"], self, var_0 );
-            wait( 2.5 + _func_01B6( 3 ) );
+            playfxontag( level._effect["cold_breath"], self, var_0 );
+            wait( 2.5 + randomfloat( 3 ) );
             continue;
         }
 
@@ -353,7 +353,7 @@ _id_DCBC( var_0, var_1, var_2 )
 _id_1779( var_0, var_1 )
 {
     var_2 = var_0.size;
-    var_3 = _func_01B8( var_2 );
+    var_3 = randomint( var_2 );
 
     if ( var_2 == 1 )
         return var_0[0];
@@ -364,7 +364,7 @@ _id_1779( var_0, var_1 )
     for ( var_6 = 0; var_6 < var_2; var_6++ )
         var_5 = var_5 + var_1[var_6];
 
-    var_7 = _func_01B6( var_5 );
+    var_7 = randomfloat( var_5 );
     var_8 = 0;
 
     for ( var_6 = 0; var_6 < var_2; var_6++ )
@@ -389,7 +389,7 @@ _id_31CF()
     if ( self._id_CD4A )
         return 1;
 
-    return _func_0117( self._id_017D );
+    return isplayer( self._id_017D );
 }
 
 _id_FF06()
@@ -399,7 +399,7 @@ _id_FF06()
 
 _id_BFE3( var_0 )
 {
-    var_1 = _func_01B8( var_0.size );
+    var_1 = randomint( var_0.size );
 
     if ( var_0.size > 1 )
     {
@@ -408,7 +408,7 @@ _id_BFE3( var_0 )
         for ( var_3 = 0; var_3 < var_0.size; var_3++ )
             var_2 = var_2 + var_0[var_3];
 
-        var_4 = _func_01B6( var_2 );
+        var_4 = randomfloat( var_2 );
         var_2 = 0;
 
         for ( var_3 = 0; var_3 < var_0.size; var_3++ )
@@ -432,7 +432,7 @@ _id_D55B( var_0, var_1, var_2 )
         anim._id_AC42 = [];
 
     anim._id_AC42[var_1] = 1;
-    level._id_0BA3["step_" + var_1][var_0] = var_2;
+    level._effect["step_" + var_1][var_0] = var_2;
 }
 
 _id_D55C( var_0, var_1, var_2 )
@@ -441,7 +441,7 @@ _id_D55C( var_0, var_1, var_2 )
         anim._id_AC44 = [];
 
     anim._id_AC44[var_1] = 1;
-    level._id_0BA3["step_small_" + var_1][var_0] = var_2;
+    level._effect["step_small_" + var_1][var_0] = var_2;
 }
 
 _id_D55A( var_0, var_1, var_2 )
@@ -453,7 +453,7 @@ _id_D55A( var_0, var_1, var_2 )
         anim._id_5CE0 = 0;
 
     anim._id_AC3F[var_1] = 1;
-    level._id_0BA3["footprint_" + var_1][var_0] = var_2;
+    level._effect["footprint_" + var_1][var_0] = var_2;
 }
 
 _id_FA91( var_0 )
@@ -461,7 +461,7 @@ _id_FA91( var_0 )
     if ( isdefined( anim._id_AC42 ) )
         anim._id_AC42[var_0] = undefined;
 
-    level._id_0BA3["step_" + var_0] = undefined;
+    level._effect["step_" + var_0] = undefined;
 }
 
 _id_FA92( var_0 )
@@ -469,7 +469,7 @@ _id_FA92( var_0 )
     if ( isdefined( anim._id_AC44 ) )
         anim._id_AC44[var_0] = undefined;
 
-    level._id_0BA3["step_small_" + var_0] = undefined;
+    level._effect["step_small_" + var_0] = undefined;
 }
 
 _id_FA90( var_0 )
@@ -477,7 +477,7 @@ _id_FA90( var_0 )
     if ( isdefined( anim._id_AC3F ) )
         anim._id_AC3F[var_0] = undefined;
 
-    level._id_0BA3["footprint_" + var_0] = undefined;
+    level._effect["footprint_" + var_0] = undefined;
 }
 
 _id_D604( var_0, var_1, var_2, var_3, var_4, var_5 )
@@ -488,7 +488,7 @@ _id_D604( var_0, var_1, var_2, var_3, var_4, var_5 )
     if ( !isdefined( level._id_0C45 ) )
         level._id_0C45 = [];
 
-    level._id_0C45[var_0][var_2] = _func_020F();
+    level._id_0C45[var_0][var_2] = spawnstruct();
     level._id_0C45[var_0][var_2]._id_0400 = var_1;
     level._id_0C45[var_0][var_2]._id_603C = var_3;
     _id_D605( var_0, var_2, var_4, var_5 );
@@ -506,7 +506,7 @@ _id_D605( var_0, var_1, var_2, var_3 )
         var_4 = level._id_0C45[var_0][var_1];
     else
     {
-        var_4 = _func_020F();
+        var_4 = spawnstruct();
         level._id_0C45[var_0][var_1] = var_4;
     }
 
@@ -569,7 +569,7 @@ _id_184B( var_0 )
 
 _id_184C( var_0 )
 {
-    var_1 = _func_01B8( self._id_0DB6._id_1B62[var_0].size );
+    var_1 = randomint( self._id_0DB6._id_1B62[var_0].size );
     return self._id_0DB6._id_1B62[var_0][var_1];
 }
 
@@ -684,9 +684,9 @@ _id_6873()
 
 _id_12FD( var_0 )
 {
-    var_1 = _func_034D( var_0 );
+    var_1 = getcompleteweaponname( var_0 );
 
-    if ( isdefined( self._id_04D5[var_1] ) )
+    if ( isdefined( self.weaponinfo[var_1] ) )
         return 1;
 
     return 0;
@@ -701,19 +701,19 @@ _id_68A5( var_0 )
 _id_BF43( var_0 )
 {
     self endon( "killanimscript" );
-    var_1 = self._id_02EA;
+    var_1 = self.origin;
     var_2 = ( 0, 0, 0 );
 
     for (;;)
     {
         wait 0.05;
-        var_3 = distance( self._id_02EA, var_1 );
-        var_1 = self._id_02EA;
+        var_3 = distance( self.origin, var_1 );
+        var_1 = self.origin;
 
-        if ( self._id_01FF == 1 )
+        if ( self.health == 1 )
         {
             self._id_0DB6._id_A554 = 1;
-            self _meth_83E4();
+            self startragdoll();
             self _meth_8076( var_0, 0.1 );
             wait 0.05;
             _func_0190( var_1, 600, 0, var_3 * 0.1 );
@@ -740,7 +740,7 @@ _id_87BC()
 
 _id_BFFE()
 {
-    self._id_0DB6._id_7CB6 = _func_01B8( 2 );
+    self._id_0DB6._id_7CB6 = randomint( 2 );
 }
 
 _id_6CA2( var_0, var_1 )

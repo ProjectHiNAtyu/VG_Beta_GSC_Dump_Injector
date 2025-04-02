@@ -6,7 +6,7 @@ _id_1797( var_0, var_1, var_2 )
     var_3 = _id_6337( var_2 );
     var_4 = var_3["origin"];
     var_5 = var_3["angles"];
-    _id_077B::_id_1B8F( var_0, ::_id_1799, var_1, var_4, var_5 );
+    scripts\engine\utility::_id_1B8F( var_0, ::_id_1799, var_1, var_4, var_5 );
 }
 
 _id_17A5( var_0, var_1, var_2 )
@@ -57,7 +57,7 @@ _id_1799( var_0, var_1, var_2, var_3, var_4 )
 
     var_6 = 0;
 
-    if ( isalive( level._id_CC24[var_5][var_1] ) )
+    if ( _func_0106( level._id_CC24[var_5][var_1] ) )
     {
         var_7 = level._id_CC24[var_5][var_1][0];
         var_6 = 1;
@@ -67,16 +67,16 @@ _id_1799( var_0, var_1, var_2, var_3, var_4 )
 
     var_0 _id_D3B0( var_1, var_2, var_3, var_5, var_6 );
 
-    if ( _func_0104( var_0 ) )
+    if ( isai( var_0 ) )
         var_0 [[ anim._id_2F2C["AIAnimFirstFrame"] ]]( var_7, var_5 );
     else
     {
         var_0 _meth_83EB();
         var_0 _meth_82DA( var_7, 1, 0, 0 );
 
-        if ( !_id_06BB::_id_8A2C() )
+        if ( !scripts\common\utility::_id_8A2C() )
         {
-            if ( !_func_0117( var_0 ) && isdefined( level._id_CC25[var_5] ) && isdefined( level._id_CC25[var_5][var_1] ) )
+            if ( !isplayer( var_0 ) && isdefined( level._id_CC25[var_5] ) && isdefined( level._id_CC25[var_5][var_1] ) )
                 var_0 call [[ level._id_5FF7["scriptModelPlayAnim"] ]]( level._id_CC25[var_5][var_1], undefined, 0, 0, "none" );
         }
     }
@@ -106,7 +106,7 @@ _id_1830( var_0, var_1, var_2 )
     var_3 = _id_6337( var_2 );
     var_4 = var_3["origin"];
     var_5 = var_3["angles"];
-    _id_077B::_id_1BBA( var_0, ::_id_D3B0, var_1, var_4, var_5 );
+    scripts\engine\utility::_id_1BBA( var_0, ::_id_D3B0, var_1, var_4, var_5 );
 }
 
 _id_1831( var_0, var_1, var_2 )
@@ -120,9 +120,9 @@ _id_17C1( var_0, var_1, var_2 )
     var_3 = [];
     var_3[0] = var_0;
     _id_1797( var_3, var_1, var_2 );
-    var_4 = var_0 _id_077B::_id_68A0( var_1 );
+    var_4 = var_0 scripts\engine\utility::_id_68A0( var_1 );
 
-    if ( isalive( var_4 ) )
+    if ( _func_0106( var_4 ) )
         var_4 = var_4[0];
 
     if ( var_0 _meth_82EA( var_4 ) )
@@ -132,9 +132,9 @@ _id_17C1( var_0, var_1, var_2 )
 
     var_5 = _func_00B0( var_4 );
     var_6 = _func_0078( var_4 );
-    var_7 = _func_01C2( var_5, var_0._id_0054 );
-    var_8 = var_0._id_02EA + var_7;
-    var_9 = _func_0047( var_0._id_0054, var_6 );
+    var_7 = rotatevector( var_5, var_0.angles );
+    var_8 = var_0.origin + var_7;
+    var_9 = _func_0047( var_0.angles, var_6 );
     var_0 [[ anim._id_2F2C["TeleportEnt"] ]]( var_8, var_9 );
 }
 
@@ -236,7 +236,7 @@ _id_181A( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
             var_25 = 1;
 
         if ( isdefined( level._id_CC26[var_30] ) && isdefined( level._id_CC26[var_30][var_1] ) )
-            var_9 _meth_827B( level._id_CC26[var_30][var_1] );
+            var_9 playsound( level._id_CC26[var_30][var_1] );
 
         if ( var_25 )
         {
@@ -270,27 +270,27 @@ _id_181A( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
         if ( var_23 )
             var_9 thread _id_B1CE( var_9, var_19 );
 
-        if ( !_func_0117( var_9 ) && isdefined( level._id_CC25[var_30] ) && isdefined( level._id_CC25[var_30][var_1] ) )
-            var_9 _id_077B::_id_D06D( "scriptModelPlayAnim", level._id_CC25[var_30][var_1] );
+        if ( !isplayer( var_9 ) && isdefined( level._id_CC25[var_30] ) && isdefined( level._id_CC25[var_30][var_1] ) )
+            var_9 scripts\engine\utility::_id_D06D( "scriptModelPlayAnim", level._id_CC25[var_30][var_1] );
     }
 
     if ( isdefined( var_14 ) )
     {
-        var_33 = _func_020F();
+        var_33 = spawnstruct();
         var_33 thread _id_178A( var_0[var_14], var_1 );
         var_33 thread _id_1778( var_0[var_14], var_1, var_15, var_3 );
         var_33 waittill( var_1 );
     }
     else if ( isdefined( var_17 ) )
     {
-        var_33 = _func_020F();
+        var_33 = spawnstruct();
         var_33 thread _id_178A( var_0[var_17], var_1 );
         var_33 thread _id_1795( var_0[var_17], var_1, var_18 );
         var_33 waittill( var_1 );
     }
     else if ( isdefined( var_16 ) )
     {
-        var_33 = _func_020F();
+        var_33 = spawnstruct();
         var_33 thread _id_178A( var_0[var_16], var_1 );
         var_33 thread _id_178B( var_0[var_16], var_1 );
         var_33 waittill( var_1 );
@@ -419,13 +419,13 @@ _id_17C9( var_0, var_1, var_2, var_3 )
     var_14 = 0;
     var_15 = isdefined( level._id_CC24[var_11][var_1 + "_nags"] );
 
-    if ( var_15 && _id_06BB::_id_8A2C() )
+    if ( var_15 && scripts\common\utility::_id_8A2C() )
     {
         var_16 = 0;
 
         foreach ( var_18, var_5 in var_0 )
         {
-            if ( _func_0104( var_5["guy"] ) )
+            if ( isai( var_5["guy"] ) )
                 var_16++;
         }
 
@@ -442,8 +442,8 @@ _id_17C9( var_0, var_1, var_2, var_3 )
 
     if ( var_15 )
     {
-        _func_01D1( "#x395ac93d24fb09a42", 0 );
-        var_20 = _func_020F();
+        setdvarifuninitialized( "#x395ac93d24fb09a42", 0 );
+        var_20 = spawnstruct();
         var_20._id_8F2B = gettime();
         var_20._id_A387 = level._id_CC24[var_11][var_1 + "_nags"];
         var_20._id_41B6 = 0;
@@ -527,7 +527,7 @@ _id_17C9( var_0, var_1, var_2, var_3 )
             }
 
             if ( isdefined( level._id_CC26[var_41] ) && isdefined( level._id_CC26[var_41][var_12 + var_1] ) )
-                var_6 _meth_827B( level._id_CC26[var_41][var_12 + var_1] );
+                var_6 playsound( level._id_CC26[var_41][var_12 + var_1] );
 
             if ( isdefined( level._id_CC24[var_41] ) && isdefined( level._id_CC24[var_41][var_1] ) && self [[ anim._id_2F2C["ShouldDoAnim"] ]]() )
                 var_37 = 1;
@@ -609,14 +609,14 @@ _id_1812( var_0, var_1, var_2 )
 
 _id_1811( var_0, var_1, var_2 )
 {
-    _id_077B::_id_1BBA( var_0, ::_id_180B, var_1, var_2 );
+    scripts\engine\utility::_id_1BBA( var_0, ::_id_180B, var_1, var_2 );
 }
 
 _id_180B( var_0, var_1 )
 {
-    var_2 = _id_077B::_id_68A0( var_0 );
+    var_2 = scripts\engine\utility::_id_68A0( var_0 );
 
-    if ( isalive( var_2 ) )
+    if ( _func_0106( var_2 ) )
         var_2 = var_2[0];
 
     self _meth_82E6( var_2, var_1 );
@@ -652,11 +652,11 @@ _id_17CF( var_0, var_1, var_2, var_3, var_4, var_5 )
         var_11 = getstartorigin( var_7, var_8, level._id_CC24[var_10._id_1887][var_1] );
         var_12 = _func_00D2( var_7, var_8, level._id_CC24[var_10._id_1887][var_1] );
 
-        if ( _func_0104( var_10 ) )
+        if ( isai( var_10 ) )
             continue;
 
-        var_10 _meth_823B( var_11, var_3, var_4, var_5 );
-        var_10 rotateroll( var_12, var_3, var_4, var_5 );
+        var_10 moveto( var_11, var_3, var_4, var_5 );
+        var_10 rotateto( var_12, var_3, var_4, var_5 );
     }
 }
 
@@ -703,34 +703,34 @@ _id_1828( var_0, var_1, var_2, var_3 )
     var_6 = var_4["angles"];
     var_7 = getstartorigin( var_5, var_6, level._id_CC24[var_1][var_2] );
     var_8 = getstartorigin( var_5, var_6, level._id_CC24[var_1][var_2] );
-    var_9 = _func_0205( "script_model", var_7 );
-    var_9 setmode( var_0 );
-    var_9._id_0054 = var_8;
+    var_9 = spawn( "script_model", var_7 );
+    var_9 setmodel( var_0 );
+    var_9.angles = var_8;
     return var_9;
 }
 
 _id_1829( var_0, var_1 )
 {
-    self _meth_801E( var_0, var_1 );
+    self attach( var_0, var_1 );
 }
 
 _id_17C3( var_0, var_1 )
 {
     var_2 = self gettagorigin( var_1 );
-    var_3 = _func_0205( "script_model", var_2 );
-    var_3 setmode( var_0 );
-    var_3 _meth_820B( self, var_1, ( 0, 0, 0 ), ( 0, 0, 0 ) );
+    var_3 = spawn( "script_model", var_2 );
+    var_3 setmodel( var_0 );
+    var_3 linkto( self, var_1, ( 0, 0, 0 ), ( 0, 0, 0 ) );
     return var_3;
 }
 
 _id_C4E0( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_5 = level._id_CC36[var_0][var_2][var_1];
     var_2 = _id_64A6( var_2 );
     var_6 = -1;
 
-    if ( !isdefined( var_5 ) || !isalive( var_5 ) || var_5.size < 1 )
+    if ( !isdefined( var_5 ) || !_func_0106( var_5 ) || var_5.size < 1 )
         return;
 
     for ( var_7 = 0; var_7 < var_5.size; var_7++ )
@@ -751,30 +751,30 @@ _id_C4E0( var_0, var_1, var_2, var_3, var_4 )
     if ( var_5.size == 1 )
         var_5 = [];
     else
-        var_5 = _id_077B::_id_1B9C( var_5, var_6 );
+        var_5 = scripts\engine\utility::array_remove_index( var_5, var_6 );
 
     level._id_CC36[var_0][var_2][var_1] = var_5;
 }
 
 _id_10CC( var_0, var_1, var_2, var_3 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_3 = _id_64A6( var_3 );
     var_4 = _id_0FD1( var_0, var_1, var_3 );
     var_5 = [];
     var_5["flag"] = var_2;
     level._id_CC36[var_0][var_3][var_1][var_4] = var_5;
 
-    if ( _id_06BB::_id_8A2C() )
+    if ( scripts\common\utility::_id_8A2C() )
     {
         if ( !isdefined( level._id_5BE0 ) || !isdefined( level._id_5BE0[var_2] ) )
-            _id_077B::_id_5BF1( var_2 );
+            scripts\engine\utility::_id_5BF1( var_2 );
     }
 }
 
 _id_10CD( var_0, var_1, var_2, var_3 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_3 = _id_64A6( var_3 );
     var_4 = _id_0FD1( var_0, var_1, var_3 );
     var_5 = [];
@@ -782,12 +782,12 @@ _id_10CD( var_0, var_1, var_2, var_3 )
     level._id_CC36[var_0][var_3][var_1][var_4] = var_5;
 
     if ( !isdefined( level._id_5BE0 ) || !isdefined( level._id_5BE0[var_2] ) )
-        _id_077B::_id_5BF1( var_2 );
+        scripts\engine\utility::_id_5BF1( var_2 );
 }
 
 _id_10CB( var_0, var_1, var_2, var_3 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_2 = _id_64A6( var_2 );
     var_4 = _id_0FD1( var_0, var_1, var_2 );
     level._id_CC36[var_0][var_2][var_1][var_4] = [];
@@ -796,14 +796,14 @@ _id_10CB( var_0, var_1, var_2, var_3 )
 
 _id_0FD1( var_0, var_1, var_2 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     _id_0FD2( var_0, var_1, var_2 );
     return level._id_CC36[var_0][var_2][var_1].size;
 }
 
 _id_0FD2( var_0, var_1, var_2 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
 
     if ( !isdefined( level._id_CC36 ) )
         level._id_CC36 = [];
@@ -820,7 +820,7 @@ _id_0FD2( var_0, var_1, var_2 )
 
 _id_10D3( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_2 = _id_64A6( var_2 );
     var_6 = _id_0FD1( var_0, var_1, var_2 );
     level._id_CC36[var_0][var_2][var_1][var_6] = [];
@@ -841,7 +841,7 @@ _id_A5D6( var_0, var_1, var_2, var_3 )
 
 _id_10D2( var_0, var_1, var_2, var_3 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_2 = _id_64A6( var_2 );
     var_4 = _id_0FD1( var_0, var_1, var_2 );
     level._id_CC36[var_0][var_2][var_1][var_4] = [];
@@ -866,7 +866,7 @@ _id_10DC( var_0, var_1, var_2 )
 
 _id_10D1( var_0, var_1, var_2, var_3 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_2 = _id_64A6( var_2 );
     var_4 = _id_0FD1( var_0, var_1, var_2 );
     level._id_CC36[var_0][var_2][var_1][var_4] = [];
@@ -875,7 +875,7 @@ _id_10D1( var_0, var_1, var_2, var_3 )
 
 _id_10C5( var_0, var_1, var_2, var_3 )
 {
-    var_2 = _func_0243( var_2 );
+    var_2 = tolower( var_2 );
     var_1 = _id_64A6( var_1 );
     var_4 = _id_0FD1( var_0, var_2, var_1 );
     var_5 = [];
@@ -886,7 +886,7 @@ _id_10C5( var_0, var_1, var_2, var_3 )
 
 _id_10C6( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_4 = _id_64A6( var_4 );
     var_5 = _id_0FD1( var_0, var_1, var_4 );
     var_6 = [];
@@ -897,7 +897,7 @@ _id_10C6( var_0, var_1, var_2, var_3, var_4 )
 
 _id_10C9( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_4 = _id_64A6( var_4 );
     var_5 = _id_0FD1( var_0, var_1, var_4 );
     var_6 = [];
@@ -908,7 +908,7 @@ _id_10C9( var_0, var_1, var_2, var_3, var_4 )
 
 _id_10CA( var_0, var_1, var_2, var_3 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_2 = _id_64A6( var_2 );
     var_4 = _id_0FD1( var_0, var_1, var_2 );
     var_5 = [];
@@ -923,7 +923,7 @@ _id_10CA( var_0, var_1, var_2, var_3 )
 
 _id_10C7( var_0, var_1, var_2, var_3 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_2 = _id_64A6( var_2 );
     var_4 = _id_0FD1( var_0, var_1, var_2 );
     var_5 = [];
@@ -938,7 +938,7 @@ _id_10C7( var_0, var_1, var_2, var_3 )
 
 _id_10C8( var_0, var_1, var_2, var_3 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_3 = _id_64A6( var_3 );
     var_4 = _id_0FD1( var_0, var_1, var_3 );
     var_5 = [];
@@ -948,8 +948,8 @@ _id_10C8( var_0, var_1, var_2, var_3 )
 
 _id_10D4( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    _id_077B::_id_6A40( var_3 );
-    var_1 = _func_0243( var_1 );
+    scripts\engine\utility::getfx( var_3 );
+    var_1 = tolower( var_1 );
     var_2 = _id_64A6( var_2 );
     var_6 = _id_0FD1( var_0, var_1, var_2 );
     var_7 = [];
@@ -964,8 +964,8 @@ _id_10D4( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_10D5( var_0, var_1, var_2, var_3, var_4 )
 {
-    _id_077B::_id_6A40( var_3 );
-    var_1 = _func_0243( var_1 );
+    scripts\engine\utility::getfx( var_3 );
+    var_1 = tolower( var_1 );
     var_2 = _id_64A6( var_2 );
     var_5 = _id_0FD1( var_0, var_1, var_2 );
     var_6 = [];
@@ -976,7 +976,7 @@ _id_10D5( var_0, var_1, var_2, var_3, var_4 )
 
 _id_10CF( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_3 = _id_64A6( var_3 );
     var_5 = _id_0FD1( var_0, var_1, var_3 );
     var_6 = [];
@@ -987,7 +987,7 @@ _id_10CF( var_0, var_1, var_2, var_3, var_4 )
 
 _id_10CE( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_3 = _id_64A6( var_3 );
     var_5 = _id_0FD1( var_0, var_1, var_3 );
     var_6 = [];
@@ -999,21 +999,21 @@ _id_10CE( var_0, var_1, var_2, var_3, var_4 )
 _id_A5D8( var_0, var_1, var_2 )
 {
     var_3 = _id_641D();
-    _id_077B::_id_0FB3( var_1, var_1 );
+    scripts\engine\utility::_id_0FB3( var_1, var_1 );
     _id_10D6( var_3._id_1887, var_0, var_3._id_18B1, var_1, var_2 );
 }
 
 _id_A5D7( var_0, var_1, var_2 )
 {
     var_3 = _id_641D();
-    _id_077B::_id_0FB3( var_1, var_1 );
+    scripts\engine\utility::_id_0FB3( var_1, var_1 );
     _id_10D5( var_3._id_1887, var_0, var_3._id_18B1, var_1, var_2 );
 }
 
 _id_10D6( var_0, var_1, var_2, var_3, var_4 )
 {
-    _id_077B::_id_6A40( var_3 );
-    var_1 = _func_0243( var_1 );
+    scripts\engine\utility::getfx( var_3 );
+    var_1 = tolower( var_1 );
     var_2 = _id_64A6( var_2 );
     var_5 = _id_0FD1( var_0, var_1, var_2 );
     var_6 = [];
@@ -1026,13 +1026,13 @@ _id_A5D9( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
     var_6 = _id_641D();
 
-    if ( var_0 != "start" && !_func_0011( var_6 _id_077B::_id_68A0( var_6._id_180C ), var_0 ) )
+    if ( var_0 != "start" && !_func_0011( var_6 scripts\engine\utility::_id_68A0( var_6._id_180C ), var_0 ) )
         return;
 
-    _id_077B::_id_0FB3( var_3, var_3 );
+    scripts\engine\utility::_id_0FB3( var_3, var_3 );
 
     if ( isdefined( var_4 ) )
-        _id_077B::_id_0FB3( var_4, var_4 );
+        scripts\engine\utility::_id_0FB3( var_4, var_4 );
 
     _id_10D7( var_6._id_1887, var_0, var_1, var_6._id_180C, var_2, var_3, var_4, var_5 );
 }
@@ -1041,10 +1041,10 @@ _id_A5D5( var_0, var_1, var_2 )
 {
     var_3 = _id_641D();
 
-    if ( var_0 != "start" && !_func_0011( var_3 _id_077B::_id_68A0( var_3._id_180C ), var_0 ) )
+    if ( var_0 != "start" && !_func_0011( var_3 scripts\engine\utility::_id_68A0( var_3._id_180C ), var_0 ) )
         return;
 
-    _id_077B::_id_0FB3( var_2, var_2 );
+    scripts\engine\utility::_id_0FB3( var_2, var_2 );
     _id_10D4( var_3._id_1887, var_0, var_3._id_180C, var_2, var_1, 1 );
 }
 
@@ -1056,8 +1056,8 @@ _id_641D()
 
 _id_10D7( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 {
-    _id_077B::_id_6A40( var_5 );
-    var_1 = _func_0243( var_1 );
+    scripts\engine\utility::getfx( var_5 );
+    var_1 = tolower( var_1 );
     var_3 = _id_64A6( var_3 );
     var_8 = _id_0FD1( var_0, var_1, var_3 );
     var_9 = [];
@@ -1080,7 +1080,7 @@ _id_10D7( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
 
 _id_10D0( var_0, var_1, var_2, var_3 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_3 = _id_64A6( var_3 );
     var_4 = _id_0FD1( var_0, var_1, var_3 );
     var_5 = [];
@@ -1090,7 +1090,7 @@ _id_10D0( var_0, var_1, var_2, var_3 )
 
 _id_D46E()
 {
-    self _meth_841D( level._id_CC27[self._id_1887] );
+    self useanimtree( level._id_CC27[self._id_1887] );
 }
 
 _id_8114()
@@ -1142,8 +1142,8 @@ _id_8114()
 
     thread _id_BB55();
     thread _id_BB57();
-    _id_077B::_id_3F13( "moreThanThreeHack", 3 );
-    _id_077B::_id_3F13( "trace_part_for_efx", 12 );
+    scripts\engine\utility::_id_3F13( "moreThanThreeHack", 3 );
+    scripts\engine\utility::_id_3F13( "trace_part_for_efx", 12 );
     _id_7ED4();
 }
 
@@ -1158,15 +1158,15 @@ _id_BB55()
 
     for ( var_1 = 0; var_1 < var_0.size; var_1++ )
     {
-        if ( isalive( level._id_CC35[var_0[var_1]] ) )
+        if ( _func_0106( level._id_CC35[var_0[var_1]] ) )
         {
             for ( var_2 = 0; var_2 < level._id_CC35[var_0[var_1]].size; var_2++ )
-                _func_01A8( level._id_CC35[var_0[var_1]][var_2] );
+                precachemodel( level._id_CC35[var_0[var_1]][var_2] );
 
             continue;
         }
 
-        _func_01A8( level._id_CC35[var_0[var_1]] );
+        precachemodel( level._id_CC35[var_0[var_1]] );
     }
 }
 
@@ -1186,7 +1186,7 @@ _id_BB57()
         if ( isdefined( level._id_CC3D[var_0[var_1]][1] ) )
             var_2 = level._id_CC3D[var_0[var_1]][1];
 
-        _id_06BB::_id_99BF( level._id_CC3D[var_0[var_1]][0], var_2, 1, 1 );
+        scripts\common\utility::_id_99BF( level._id_CC3D[var_0[var_1]][0], var_2, 1, 1 );
     }
 }
 
@@ -1290,7 +1290,7 @@ _id_1778( var_0, var_1, var_2, var_3 )
 
     if ( var_3 > 0 && var_2 > 0 )
     {
-        var_0 _id_077B::_id_108E2( "single anim", "end", var_2 );
+        var_0 scripts\engine\utility::_id_108E2( "single anim", "end", var_2 );
         var_0 _meth_83EB();
     }
     else
@@ -1302,7 +1302,7 @@ _id_1778( var_0, var_1, var_2, var_3 )
 _id_1845( var_0, var_1 )
 {
     var_2 = level._id_CC24[var_0][var_1].size;
-    var_3 = _func_01B8( var_2 );
+    var_3 = randomint( var_2 );
 
     if ( isdefined( level._id_CC24[var_0][var_1 + "weight"] ) )
         var_3 = _id_6841( var_0, var_1, var_2 );
@@ -1333,7 +1333,7 @@ _id_6841( var_0, var_1, var_2 )
 
         if ( var_4 == var_2 )
         {
-            var_7 = _func_01B6( var_5 );
+            var_7 = randomfloat( var_5 );
             var_5 = 0;
 
             for ( var_6 = 0; var_6 < var_2; var_6++ )
@@ -1375,8 +1375,8 @@ _id_6337( var_0 )
     }
     else
     {
-        var_1 = self._id_02EA;
-        var_2 = self._id_0054;
+        var_1 = self.origin;
+        var_2 = self.angles;
 
         if ( !isdefined( var_2 ) )
             var_2 = ( 0, 0, 0 );
@@ -1496,7 +1496,7 @@ _id_1CC1( var_0, var_1 )
     }
 
     var_16 = getarraykeys( level._id_CC24 );
-    var_16 = _id_077B::_id_1B72( var_16, getarraykeys( level._id_CC39 ) );
+    var_16 = scripts\engine\utility::_id_1B72( var_16, getarraykeys( level._id_CC39 ) );
 
     foreach ( var_18 in var_16 )
     {
@@ -1530,7 +1530,7 @@ guy_pre_anim_func()
     if ( isdefined( self._id_00E1 ) && self._id_00E1 == "misc_turret" )
     {
         self _meth_8845( 1 );
-        self _meth_841D( #animtree );
+        self useanimtree( #animtree );
         self.revert_to_code_animtree_when_done = 1;
     }
 }
@@ -1564,7 +1564,7 @@ guy_post_anim_func_watcher( var_0, var_1 )
 
     for (;;)
     {
-        var_3 = _id_077B::_id_108A2( var_0, var_1, "stopanimscripted" );
+        var_3 = scripts\engine\utility::_id_108A2( var_0, var_1, "stopanimscripted" );
 
         if ( !isdefined( var_3 ) )
         {
@@ -1579,7 +1579,7 @@ guy_post_anim_func_watcher( var_0, var_1 )
 
         if ( isdefined( var_3[0] ) )
         {
-            if ( isalive( var_3[0] ) )
+            if ( _func_0106( var_3[0] ) )
                 var_4 = var_3[0][0];
             else
                 var_4 = var_3[0];

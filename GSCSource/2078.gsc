@@ -5,7 +5,7 @@ _id_DEE9()
 {
     if ( !isdefined( level._id_0CD7 ) )
     {
-        level._id_0CD7 = _func_020F();
+        level._id_0CD7 = spawnstruct();
         level._id_0CD7._id_869B = 1;
         level._id_0CD7._id_0B4F = [];
         level._id_0CD7._id_0C4E = [];
@@ -22,7 +22,7 @@ _id_DEE9()
     }
 
     if ( !isdefined( level._id_1E4A ) )
-        level._id_1E4A = _func_020F();
+        level._id_1E4A = spawnstruct();
 
     _id_DECB();
 }
@@ -154,7 +154,7 @@ _id_DF1F( var_0, var_1, var_2 )
     if ( _id_0827::_id_DEC8( !isdefined( var_0 ), "snd_stop_alias with undefined soundalias" ) )
         return 0;
 
-    var_0 = _func_0243( var_0 );
+    var_0 = tolower( var_0 );
     var_3 = _id_DEDE( var_1 );
     var_4 = 0;
 
@@ -163,7 +163,7 @@ _id_DF1F( var_0, var_1, var_2 )
         if ( !isdefined( var_6._id_E05B ) )
             continue;
 
-        if ( _func_0121( _func_0243( var_6._id_E05B ), var_0 ) )
+        if ( issubstr( tolower( var_6._id_E05B ), var_0 ) )
         {
             _id_DF1E( var_6, var_2 );
             var_4 = int( var_4 + 1 );
@@ -224,7 +224,7 @@ _id_DF39( var_0 )
     {
         var_3 = 0;
         var_4 = _id_0827::_id_1BCB( var_0 );
-        var_4 = _id_077B::_id_1BA9( var_4 );
+        var_4 = scripts\engine\utility::_id_1BA9( var_4 );
 
         foreach ( var_6 in var_4 )
         {
@@ -263,18 +263,18 @@ _id_DEDE( var_0 )
     {
         if ( !isdefined( var_3 ) )
         {
-            var_1 = _id_077B::_id_1B72( var_1, level._id_0CD7._id_0C4E );
+            var_1 = scripts\engine\utility::_id_1B72( var_1, level._id_0CD7._id_0C4E );
             continue;
         }
 
         if ( var_3 == level )
         {
-            var_1 = _id_077B::_id_1B72( var_1, level._id_0CD7._id_0D76 );
+            var_1 = scripts\engine\utility::_id_1B72( var_1, level._id_0CD7._id_0D76 );
             continue;
         }
 
         if ( isdefined( var_3._id_0D49 ) )
-            var_1 = _id_077B::_id_1B72( var_1, var_3._id_0D49 );
+            var_1 = scripts\engine\utility::_id_1B72( var_1, var_3._id_0D49 );
     }
 
     return var_1;
@@ -287,13 +287,13 @@ _id_DEDC( var_0, var_1 )
 
     var_2 = [];
 
-    if ( isalive( var_0 ) )
+    if ( _func_0106( var_0 ) )
     {
         foreach ( var_4 in var_0 )
-            var_2[var_2.size] = _func_0243( var_4 );
+            var_2[var_2.size] = tolower( var_4 );
     }
     else if ( _func_0120( var_0 ) )
-        var_2 = [ _func_0243( var_0 ) ];
+        var_2 = [ tolower( var_0 ) ];
 
     var_6 = _id_DEDE( var_1 );
     var_7 = [];
@@ -305,7 +305,7 @@ _id_DEDC( var_0, var_1 )
 
         foreach ( var_4 in var_2 )
         {
-            if ( _func_0121( _func_0243( var_9._id_E05B ), var_4 ) )
+            if ( issubstr( tolower( var_9._id_E05B ), var_4 ) )
                 var_7[var_7.size] = var_9;
         }
     }
@@ -315,7 +315,7 @@ _id_DEDC( var_0, var_1 )
 
 _id_DEF9( var_0 )
 {
-    var_0 = _id_077B::_id_FF6A( var_0, 1 );
+    var_0 = scripts\engine\utility::_id_FF6A( var_0, 1 );
 
     if ( !isdefined( level._id_0CD7._id_5D92 ) )
     {
@@ -384,7 +384,7 @@ _id_DF34()
 
 _id_DF35( var_0 )
 {
-    var_0 = _id_077B::_id_FF6A( var_0, _id_DF33() );
+    var_0 = scripts\engine\utility::_id_FF6A( var_0, _id_DF33() );
     level._id_0CD7._id_0B8B = _id_DF36( var_0 );
 }
 
@@ -470,9 +470,9 @@ _id_0D01( var_0, var_1, var_2, var_3 )
         if ( isdefined( var_1 ) )
             var_4 = var_1;
 
-        var_0 _meth_820B( var_2, var_3, var_4, var_5 );
+        var_0 linkto( var_2, var_3, var_4, var_5 );
 
-        if ( !isalive( var_2._id_0D49 ) )
+        if ( !_func_0106( var_2._id_0D49 ) )
             var_2._id_0D49 = [];
 
         var_2._id_0D49[var_0._id_E063] = var_0;
@@ -494,7 +494,7 @@ _id_0CFF( var_0, var_1, var_2, var_3 )
     else if ( isdefined( var_2 ) && isdefined( var_3 ) )
         var_5 = var_2 gettagorigin( var_3 );
     else if ( isdefined( var_2 ) )
-        var_5 = var_2._id_02EA;
+        var_5 = var_2.origin;
     else if ( !isdefined( var_2 ) && !isdefined( var_1 ) )
     {
         var_6 = ( 0, 0, -32768 );
@@ -507,13 +507,13 @@ _id_0CFF( var_0, var_1, var_2, var_3 )
 
     if ( isdefined( var_2 ) )
     {
-        var_4 = _func_0205( "script_model", var_5 );
+        var_4 = spawn( "script_model", var_5 );
 
         if ( _func_02DB( var_4 ) )
-            var_4 setmode( "tag_origin" );
+            var_4 setmodel( "tag_origin" );
     }
     else
-        var_4 = _func_0205( "script_origin", var_5 );
+        var_4 = spawn( "script_origin", var_5 );
 
     if ( _func_02DB( var_4 ) )
     {
@@ -531,7 +531,7 @@ _id_0D00( var_0 )
     if ( _id_0827::_id_DEC8( !isdefined( var_0 ) || _func_0451( var_0 ), "snd: free on deleted entity!" ) )
         return;
 
-    if ( isdefined( var_0._id_E064 ) && isalive( var_0._id_E064._id_0D49 ) )
+    if ( isdefined( var_0._id_E064 ) && _func_0106( var_0._id_E064._id_0D49 ) )
     {
         var_1 = var_0._id_E064;
         var_2 = isdefined( var_1._id_0D49[var_0._id_E063] );
@@ -547,7 +547,7 @@ _id_0D00( var_0 )
         level._id_0CD7._id_0D76[var_0._id_E063] = undefined;
 
     waittillframeend;
-    var_0 _meth_809A();
+    var_0 delete();
     return;
 }
 
@@ -573,14 +573,14 @@ _id_0D02( var_0, var_1, var_2, var_3 )
         wait( var_3 );
 
     if ( _func_0202( var_1 ) == 1 )
-        var_4 playlocalsound( var_1 );
+        var_4 playloopsound( var_1 );
     else
     {
         var_7 = "sounddone";
 
-        if ( _id_06BB::_id_8A2C() )
+        if ( scripts\common\utility::_id_8A2C() )
         {
-            var_4 _meth_827B( var_1, var_7 );
+            var_4 playsound( var_1, var_7 );
             var_8 = 0;
 
             if ( var_8 )
@@ -596,7 +596,7 @@ _id_0D02( var_0, var_1, var_2, var_3 )
                 var_4 [[ level._id_0CD7._id_5D93 ]]( var_1 );
             }
             else
-                var_4 _meth_827B( var_1 );
+                var_4 playsound( var_1 );
 
             var_4 thread _id_0D04( var_1, var_7 );
         }
@@ -614,12 +614,12 @@ _id_0D03( var_0, var_1 )
         return;
 
     var_3 = var_2._id_E05B;
-    var_1 = _id_077B::_id_FF6A( var_1, 0.0 );
+    var_1 = scripts\engine\utility::_id_FF6A( var_1, 0.0 );
 
     if ( _func_0120( var_3 ) )
     {
         if ( istrue( _func_0202( var_3 ) ) )
-            var_2 stoplookat();
+            var_2 stoploopsound();
         else
             var_2 _meth_83F7();
 
@@ -710,7 +710,7 @@ _id_0D40( var_0 )
     var_2 = undefined;
     var_3 = undefined;
 
-    if ( isalive( var_0 ) )
+    if ( _func_0106( var_0 ) )
     {
         var_4 = var_0;
         var_2 = undefined;
@@ -750,7 +750,7 @@ _id_0D41( var_0 )
         {
             var_4 = var_3 _id_0827::_id_6D97( "j_head" );
 
-            if ( var_3._id_02AE != "" && var_4 != "" )
+            if ( var_3.model != "" && var_4 != "" )
             {
                 var_1[var_1.size] = [ var_3, var_4 ];
                 continue;
@@ -759,7 +759,7 @@ _id_0D41( var_0 )
             var_1[var_1.size] = var_3;
         }
     }
-    else if ( isalive( var_0 ) )
+    else if ( _func_0106( var_0 ) )
     {
         if ( _id_0827::_id_DEC8( var_0.size == 0, "snd: zero-sized array used for targ" ) )
             return undefined;
@@ -767,7 +767,7 @@ _id_0D41( var_0 )
         {
             if ( _func_02DB( var_0[0] ) && _func_0120( var_0[1] ) )
                 var_1 = [ var_0 ];
-            else if ( _func_02DB( var_0[0] ) && _func_02DA( var_0[1] ) )
+            else if ( _func_02DB( var_0[0] ) && isvector( var_0[1] ) )
                 var_1 = [ var_0 ];
             else if ( _func_02DB( var_0[0] ) && !isdefined( var_0[1] ) )
                 var_1 = [ var_0[0] ];
@@ -775,7 +775,7 @@ _id_0D41( var_0 )
             {
                 var_6 = _id_0827::_id_6DA2( var_0[0] );
                 var_7 = _id_0827::_id_6DA2( var_0[1] );
-                var_1 = _id_077B::_id_1B72( var_6, var_7 );
+                var_1 = scripts\engine\utility::_id_1B72( var_6, var_7 );
             }
             else
                 var_1 = var_0;
@@ -786,7 +786,7 @@ _id_0D41( var_0 )
 
             foreach ( var_14, var_9 in var_0 )
             {
-                if ( _func_02DB( var_9 ) || _func_02D9( var_9 ) && isdefined( var_9._id_02EA ) || _func_02DA( var_9 ) || isalive( var_9 ) )
+                if ( _func_02DB( var_9 ) || _func_02D9( var_9 ) && isdefined( var_9.origin ) || isvector( var_9 ) || _func_0106( var_9 ) )
                 {
                     var_1[var_1.size] = var_9;
                     continue;
@@ -819,7 +819,7 @@ _id_0D42( var_0, var_1, var_2, var_3 )
         return undefined;
 
     level._id_0CD7._id_0B4F["stop"] = ::_id_DF1E;
-    var_0 = _id_077B::_id_FF6A( var_0, level._id_0CD7._id_0B8B );
+    var_0 = scripts\engine\utility::_id_FF6A( var_0, level._id_0CD7._id_0B8B );
     var_4 = [];
     var_5 = [];
     var_6 = _id_0D40( var_1 );
@@ -862,9 +862,9 @@ _id_0D42( var_0, var_1, var_2, var_3 )
         var_18 = _func_02DB( var_13 );
         var_19 = _func_0451( var_13 );
         var_20 = _func_02D9( var_13 );
-        var_21 = _func_02DA( var_13 );
+        var_21 = isvector( var_13 );
         var_22 = _func_0120( var_13 );
-        var_23 = isalive( var_13 );
+        var_23 = _func_0106( var_13 );
 
         if ( var_18 )
         {
@@ -875,10 +875,10 @@ _id_0D42( var_0, var_1, var_2, var_3 )
             continue;
         else if ( var_20 )
         {
-            if ( _id_0827::_id_DEC8( !isdefined( var_13._id_02EA ), "snd: sound alias '" + var_1 + "' played on struct with no origin!" ) )
+            if ( _id_0827::_id_DEC8( !isdefined( var_13.origin ), "snd: sound alias '" + var_1 + "' played on struct with no origin!" ) )
                 continue;
             else
-                var_16 = var_13._id_02EA;
+                var_16 = var_13.origin;
         }
         else if ( var_21 )
             var_16 = var_13;
@@ -886,7 +886,7 @@ _id_0D42( var_0, var_1, var_2, var_3 )
         {
 
         }
-        else if ( isalive( var_13 ) )
+        else if ( _func_0106( var_13 ) )
         {
             if ( !isdefined( var_13[0] ) || _func_0451( var_13[0] ) )
                 continue;
@@ -896,7 +896,7 @@ _id_0D42( var_0, var_1, var_2, var_3 )
                 var_15 = var_13[1];
                 var_16 = ( 0, 0, 0 );
             }
-            else if ( _func_02DB( var_13[0] ) && _func_02DA( var_13[1] ) )
+            else if ( _func_02DB( var_13[0] ) && isvector( var_13[1] ) )
             {
                 var_14 = var_13[0];
                 var_16 = var_13[1];
@@ -983,15 +983,15 @@ _id_0D44( var_0, var_1 )
         var_0._id_E068 = undefined;
         var_0._id_E05B = undefined;
         var_0._id_E064 = undefined;
-        var_0._id_02EA = undefined;
-        var_0._id_0054 = undefined;
+        var_0.origin = undefined;
+        var_0.angles = undefined;
         return;
     }
 
     var_0 endon( "death" );
     var_2 = var_0._id_E068;
     var_3 = var_0._id_E05B;
-    var_4 = _id_077B::_id_F07F( _func_0120( var_3 ), _func_0202( var_3 ), undefined );
+    var_4 = scripts\engine\utility::ter_op( _func_0120( var_3 ), _func_0202( var_3 ), undefined );
 
     if ( istrue( var_4 ) && !isdefined( var_1 ) )
         var_1 = float( level._id_0CD7._id_0B8A );
@@ -1023,7 +1023,7 @@ _id_0D44( var_0, var_1 )
 _id_0D45( var_0, var_1, var_2, var_3 )
 {
     var_0 endon( "death" );
-    var_1 _id_077B::_id_1087F( "death", "deleted", var_2 );
+    var_1 scripts\engine\utility::_id_1087F( "death", "deleted", var_2 );
     _id_0D44( var_0, var_3 );
 }
 
@@ -1041,7 +1041,7 @@ _id_0D43( var_0, var_1, var_2 )
 
     var_0 endon( "death" );
     var_0 endon( "stopfade" );
-    var_2 = _id_077B::_id_FF6A( var_2, 0.0 );
+    var_2 = scripts\engine\utility::_id_FF6A( var_2, 0.0 );
     _id_DF18( var_0, 0.0, 0.0 );
 
     if ( var_2 > 0.0 )
@@ -1056,9 +1056,9 @@ _id_0CFB( var_0 )
 
     if ( _id_0827::_id_8983( var_0 ) )
         var_1 = var_0 _id_0827::_id_6C50();
-    else if ( !_func_0451( var_0 ) && isdefined( var_0._id_02EA ) )
-        var_1 = var_0._id_02EA;
-    else if ( _func_02DA( var_0 ) == 1 )
+    else if ( !_func_0451( var_0 ) && isdefined( var_0.origin ) )
+        var_1 = var_0.origin;
+    else if ( isvector( var_0 ) == 1 )
         var_1 = var_0;
     else
     {
@@ -1070,10 +1070,10 @@ _id_0CFB( var_0 )
 
 _id_0CFA( var_0 )
 {
-    var_1 = _func_01B7( -180.0, 180.0 );
+    var_1 = randomfloatrange( -180.0, 180.0 );
     var_2 = 0;
 
-    if ( isalive( var_0 ) )
+    if ( _func_0106( var_0 ) )
     {
         if ( var_0.size == 1 )
             var_0 = var_0[0];
@@ -1100,7 +1100,7 @@ _id_0CFA( var_0 )
         var_5 = abs( var_0 );
         var_6 = -1.0 * var_5;
         var_7 = var_5;
-        var_2 = _func_01B7( var_6, var_7 );
+        var_2 = randomfloatrange( var_6, var_7 );
     }
 
     return [ var_1, var_2 ];
@@ -1118,11 +1118,11 @@ _id_0CFC( var_0, var_1, var_2, var_3, var_4 )
     var_10 = var_4 * var_9;
     var_11 = _id_0CFB( var_0 );
 
-    while ( _func_02DB( self ) && isdefined( var_0 ) && isdefined( var_0._id_02EA ) )
+    while ( _func_02DB( self ) && isdefined( var_0 ) && isdefined( var_0.origin ) )
     {
         var_11 = _id_0CFB( var_0 );
         var_12 = _id_0827::_id_AC4A( var_11, var_1, var_2, var_3 );
-        self _meth_823B( var_12, var_9, 0.0, 0.0 );
+        self moveto( var_12, var_9, 0.0, 0.0 );
         var_2 = var_2 + var_10;
         wait( var_9 );
     }
@@ -1143,8 +1143,8 @@ _id_0CFD( var_0 )
     var_0._id_E068 = undefined;
     var_0._id_E05B = undefined;
     var_0._id_E064 = undefined;
-    var_0._id_02EA = undefined;
-    var_0._id_0054 = undefined;
+    var_0.origin = undefined;
+    var_0.angles = undefined;
     var_0 = undefined;
 }
 
@@ -1153,18 +1153,18 @@ _id_0CF9( var_0, var_1, var_2, var_3, var_4, var_5 )
     self endon( "snd_emitter_stop" );
     level endon( "snd_emitter_stop" );
 
-    if ( _func_02DA( var_1 ) )
+    if ( isvector( var_1 ) )
         var_1 = self;
 
     var_6 = undefined;
     var_7 = undefined;
-    var_8 = _id_0827::_id_C011( _id_077B::_id_FF6A( var_3, 0 ) );
+    var_8 = _id_0827::_id_C011( scripts\engine\utility::_id_FF6A( var_3, 0 ) );
     var_9 = _id_0CFA( var_4 );
     var_10 = var_9[0];
     var_11 = var_9[1];
-    var_12 = _id_0827::_id_C011( _id_077B::_id_FF6A( var_5, 0 ) );
+    var_12 = _id_0827::_id_C011( scripts\engine\utility::_id_FF6A( var_5, 0 ) );
 
-    if ( isalive( var_2 ) && var_2.size >= 4 )
+    if ( _func_0106( var_2 ) && var_2.size >= 4 )
     {
         var_13 = [ var_2[0], var_2[1] ];
         var_14 = _id_0827::_id_C011( var_13, 0.05 );
@@ -1188,11 +1188,11 @@ _id_0CF9( var_0, var_1, var_2, var_3, var_4, var_5 )
         if ( !isdefined( var_1 ) )
             break;
 
-        var_8 = _id_0827::_id_C011( _id_077B::_id_FF6A( var_3, 0 ) );
+        var_8 = _id_0827::_id_C011( scripts\engine\utility::_id_FF6A( var_3, 0 ) );
         var_9 = _id_0CFA( var_4 );
         var_10 = var_9[0];
         var_11 = var_9[1];
-        var_12 = _id_0827::_id_C011( _id_077B::_id_FF6A( var_5, 0 ) );
+        var_12 = _id_0827::_id_C011( scripts\engine\utility::_id_FF6A( var_5, 0 ) );
         var_6 = _id_0CFB( var_1 );
         var_7 = _id_0827::_id_AC4A( var_6, var_8, var_10, var_12 );
         var_15 = _id_DF05( var_0, var_7 );
@@ -1221,17 +1221,17 @@ _id_DEDA( var_0, var_1, var_2, var_3, var_4, var_5 )
         level._id_0CD7._id_0BA8 = [];
     }
 
-    if ( isalive( var_7 ) == 0 )
+    if ( _func_0106( var_7 ) == 0 )
         var_7 = [ var_1 ];
 
     foreach ( var_11 in var_7 )
     {
         var_12 = _func_02DB( var_11 );
-        var_13 = _func_02DA( var_11 );
+        var_13 = isvector( var_11 );
 
         if ( var_12 || var_13 )
         {
-            var_14 = _func_020F();
+            var_14 = spawnstruct();
             var_14._id_E068 = "emitter";
             var_14._id_E05B = var_0;
             var_14._id_E390 = var_2;
@@ -1247,8 +1247,8 @@ _id_DEDA( var_0, var_1, var_2, var_3, var_4, var_5 )
 
             if ( var_13 )
             {
-                var_14._id_02EA = var_11;
-                var_14._id_0054 = ( 0, 0, 0 );
+                var_14.origin = var_11;
+                var_14.angles = ( 0, 0, 0 );
             }
 
             var_14 thread _id_0CF9( var_0, var_11, var_2, var_3, var_4, var_5 );
@@ -1265,7 +1265,7 @@ _id_DEDA( var_0, var_1, var_2, var_3, var_4, var_5 )
 
 _id_0D22( var_0, var_1, var_2, var_3, var_4 )
 {
-    if ( _id_077B::_id_857F() )
+    if ( scripts\engine\utility::_id_857F() )
         return;
 
     var_5 = [ self, var_1 ];
@@ -1287,9 +1287,9 @@ _id_0D20( var_0, var_1 )
 
 _id_0D1E( var_0, var_1, var_2 )
 {
-    var_2 = _id_077B::_id_FF6A( var_2, 0 );
+    var_2 = scripts\engine\utility::_id_FF6A( var_2, 0 );
 
-    if ( _id_077B::_id_857F() )
+    if ( scripts\engine\utility::_id_857F() )
         return;
 
     var_3 = [ self, "j_head" ];
@@ -1315,7 +1315,7 @@ _id_0D0B( var_0 )
     if ( var_1 == "ps_" )
     {
         var_2 = _func_00D6( var_0, 3 );
-        var_3 = _func_021A( var_2, "," );
+        var_3 = strtok( var_2, "," );
 
         if ( var_3.size < 2 )
             thread _id_0D22( var_2, undefined, 1 );
@@ -1368,7 +1368,7 @@ _id_8096( var_0, var_1 )
                 var_6 = 1.0 - cos( var_5 * 90 );
                 break;
             case "easeout":
-                var_6 = _func_01FE( var_5 * 90 );
+                var_6 = sin( var_5 * 90 );
                 break;
             case "easeinout":
                 var_6 = 3 * playrumbleonposition( var_5, 2 ) - 2 * playrumbleonposition( var_5, 3 );
@@ -1420,7 +1420,7 @@ _id_8096( var_0, var_1 )
 
 _id_DECB( var_0 )
 {
-    var_0 = _id_077B::_id_FF6A( var_0, 11 );
+    var_0 = scripts\engine\utility::_id_FF6A( var_0, 11 );
     level._id_0B25 = [];
     level._id_0B25["linear"] = _id_8096( "linear", var_0 );
     level._id_0B25["sine"] = _id_8096( "sine", var_0 );
@@ -1531,8 +1531,8 @@ _id_0D12( var_0 )
 
     if ( isdefined( self._id_0B2E ) == 0 || self._id_0B2E.size == 0 )
     {
-        level._id_0B2D = _id_077B::_id_1B96( level._id_0B2D, self );
-        level._id_0B2D = _id_077B::_id_1BA9( level._id_0B2D );
+        level._id_0B2D = scripts\engine\utility::array_remove( level._id_0B2D, self );
+        level._id_0B2D = scripts\engine\utility::_id_1BA9( level._id_0B2D );
         self._id_0B2E = undefined;
         self._id_0B2F = undefined;
         self notify( "param_stop" );
@@ -1542,7 +1542,7 @@ _id_0D12( var_0 )
 _id_0D16()
 {
     self endon( "param_stop" );
-    _id_077B::_id_1087E( "death", "disconnect" );
+    scripts\engine\utility::waittill_any_2( "death", "disconnect" );
     _id_0D12();
 }
 
@@ -1607,9 +1607,9 @@ _id_0D13( var_0 )
         self._id_0B2E = [];
 
     if ( isdefined( self._id_0B2E[var_0] ) == 0 )
-        self._id_0B2E[var_0] = _func_020F();
+        self._id_0B2E[var_0] = spawnstruct();
 
-    if ( _id_077B::_id_1B78( level._id_0B2D, self ) == 0 )
+    if ( scripts\engine\utility::array_contains( level._id_0B2D, self ) == 0 )
         level._id_0B2D[level._id_0B2D.size] = self;
 }
 
@@ -1634,7 +1634,7 @@ _id_DF03( var_0, var_1, var_2 )
     if ( isdefined( self._id_0B2E[var_0]._id_FEB2 ) == 0 )
         self._id_0B2E[var_0]._id_FEB2 = [];
 
-    if ( _id_077B::_id_1B78( self._id_0B2E[var_0]._id_FEB2, var_2 ) == 0 )
+    if ( scripts\engine\utility::array_contains( self._id_0B2E[var_0]._id_FEB2, var_2 ) == 0 )
     {
         var_4 = self._id_0B2E[var_0]._id_FEB2.size;
         self._id_0B2E[var_0]._id_FEB2[var_4] = var_2;
@@ -1686,7 +1686,7 @@ _id_DEFC( var_0 )
 
 _id_DEFB( var_0 )
 {
-    if ( isdefined( self._id_0B2E ) && isalive( self._id_0B2E ) && isdefined( self._id_0B2E[var_0] ) )
+    if ( isdefined( self._id_0B2E ) && _func_0106( self._id_0B2E ) && isdefined( self._id_0B2E[var_0] ) )
         return 1;
 
     return 0;
@@ -1694,7 +1694,7 @@ _id_DEFB( var_0 )
 
 _id_DEFD( var_0 )
 {
-    if ( isdefined( self._id_0B2E ) && isalive( self._id_0B2E ) )
+    if ( isdefined( self._id_0B2E ) && _func_0106( self._id_0B2E ) )
     {
         foreach ( var_2 in self._id_0B2E )
         {
@@ -1714,19 +1714,19 @@ _id_DF02( var_0 )
         return self._id_AC6D;
 
     if ( isdefined( self._id_AC69 ) == 0 )
-        self._id_AC69 = self._id_02EA;
+        self._id_AC69 = self.origin;
 
-    var_2 = self._id_02EA - self._id_AC69;
+    var_2 = self.origin - self._id_AC69;
     self._id_AC6D = var_2;
     self._id_AC6E = var_1;
-    self._id_AC69 = self._id_02EA;
+    self._id_AC69 = self.origin;
     return self._id_AC6D;
 }
 
 _id_DF01( var_0 )
 {
     var_1 = _id_DF02();
-    var_2 = _func_0130( var_1 );
+    var_2 = length( var_1 );
     self._id_AC6C = _id_0827::_id_DE5D( var_2, self._id_AC6C, 0.05 );
     return self._id_AC6C;
 }
@@ -1738,11 +1738,11 @@ _id_DF00( var_0 )
     if ( isdefined( self._id_1761 ) && self._id_1761 == var_1 )
         return self._id_0B20;
 
-    var_2 = self._id_0054;
+    var_2 = self.angles;
 
     if ( _id_0827::_id_8983( self ) )
         var_2 = _id_0827::_id_6C4E();
-    else if ( isdefined( self._id_02AE ) )
+    else if ( isdefined( self.model ) )
     {
         var_3 = 0;
 
@@ -1779,7 +1779,7 @@ _id_DEFF( var_0 )
 
 _id_0D32( var_0, var_1, var_2 )
 {
-    var_0._id_DEC5 = _id_DF05( var_0._id_E05B, var_0._id_0457 );
+    var_0._id_DEC5 = _id_DF05( var_0._id_E05B, var_0.target );
     _id_DF18( var_0._id_DEC5, var_1, 0.0 );
     _id_DF17( var_0._id_DEC5, var_2, 0.0 );
 }
@@ -1788,8 +1788,8 @@ _id_0D33( var_0, var_1, var_2 )
 {
     if ( isdefined( var_0 ) && isdefined( var_0._id_DEC5 ) )
     {
-        var_1 = _id_077B::_id_FF6A( var_1, 0.0 );
-        var_2 = _id_077B::_id_FF6A( var_2, "easeinout" );
+        var_1 = scripts\engine\utility::_id_FF6A( var_1, 0.0 );
+        var_2 = scripts\engine\utility::_id_FF6A( var_2, "easeinout" );
 
         if ( isdefined( var_1 ) == 1 && var_1 > 0.0 )
         {
@@ -1875,7 +1875,7 @@ _id_0D31( var_0, var_1, var_2, var_3 )
     var_4 = undefined;
     var_5 = _func_0202( var_1 );
 
-    if ( !isalive( var_0 ) )
+    if ( !_func_0106( var_0 ) )
         var_4 = var_0;
     else if ( var_0.size > 0 )
         var_4 = var_0[0];
@@ -1889,20 +1889,20 @@ _id_0D31( var_0, var_1, var_2, var_3 )
     if ( _id_0827::_id_DEC8( !istrue( var_5 ), "snd_speed: alias " + _id_0827::_id_EA59( var_1, "'" ) + " is not looping!" ) )
         return;
 
-    if ( _id_0827::_id_DEC8( !isalive( var_2 ), "snd_speed: pitchDict is not an array!" ) )
+    if ( _id_0827::_id_DEC8( !_func_0106( var_2 ), "snd_speed: pitchDict is not an array!" ) )
         return;
 
-    if ( _id_0827::_id_DEC8( !isalive( var_3 ), "snd_speed: volumeDict is not an array!" ) )
+    if ( _id_0827::_id_DEC8( !_func_0106( var_3 ), "snd_speed: volumeDict is not an array!" ) )
         return;
 
-    var_6 = _func_020F();
+    var_6 = spawnstruct();
     var_6._id_E05B = var_1;
-    var_6._id_0457 = var_0;
+    var_6.target = var_0;
     var_6._id_B12A = var_2;
     var_6._id_106A2 = var_3;
-    var_6._id_B12A["curve"] = _id_077B::_id_FF6A( var_6._id_B12A["curve"], [ "linear" ] );
-    var_6._id_106A2["curve"] = _id_077B::_id_FF6A( var_6._id_106A2["curve"], [ "xfade" ] );
-    var_4._id_0D4D = _id_077B::_id_FF6A( var_4._id_0D4D, [] );
+    var_6._id_B12A["curve"] = scripts\engine\utility::_id_FF6A( var_6._id_B12A["curve"], [ "linear" ] );
+    var_6._id_106A2["curve"] = scripts\engine\utility::_id_FF6A( var_6._id_106A2["curve"], [ "xfade" ] );
+    var_4._id_0D4D = scripts\engine\utility::_id_FF6A( var_4._id_0D4D, [] );
     var_4._id_0D4D[var_4._id_0D4D.size] = var_6;
     var_4._id_AC6C = 0.0;
     var_4 _id_DEFA( "speed", undefined, ::_id_DF01, ::_id_0D19, ::_id_0D1D, var_6 );
@@ -1910,11 +1910,11 @@ _id_0D31( var_0, var_1, var_2, var_3 )
 
 _id_DF1C( var_0, var_1, var_2 )
 {
-    var_1 = _id_077B::_id_FF6A( var_1, 0.05 );
-    var_2 = _id_077B::_id_FF6A( var_2, "easeinout" );
+    var_1 = scripts\engine\utility::_id_FF6A( var_1, 0.05 );
+    var_2 = scripts\engine\utility::_id_FF6A( var_2, "easeinout" );
     var_3 = undefined;
 
-    if ( !isalive( var_0 ) )
+    if ( !_func_0106( var_0 ) )
         var_3 = var_0;
     else if ( var_0.size > 0 )
         var_3 = var_0[0];
@@ -1935,28 +1935,28 @@ _id_DF1B( var_0, var_1, var_2, var_3 )
 
 _id_DED2( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 {
-    var_2 = _id_077B::_id_FF6A( var_2, 1.0 );
-    var_5 = _id_077B::_id_FF6A( var_5, 1.0 );
-    var_6 = _id_077B::_id_FF6A( var_6, 343.3 );
+    var_2 = scripts\engine\utility::_id_FF6A( var_2, 1.0 );
+    var_5 = scripts\engine\utility::_id_FF6A( var_5, 1.0 );
+    var_6 = scripts\engine\utility::_id_FF6A( var_6, 343.3 );
 
     if ( var_2 == 0.0 && var_5 == 0.0 || var_6 == 0.0 )
         return [ 0.0, 0.0, 0.0 ];
 
     var_7 = _id_0827::_id_9DDA( var_6 );
     var_8 = var_0 - var_3;
-    var_9 = _func_0130( var_8 );
+    var_9 = length( var_8 );
     var_10 = 0.0;
     var_11 = 0.0;
 
     if ( var_2 > 0 && var_1 != ( 0, 0, 0 ) )
     {
-        var_10 = _func_0257( var_1, var_8 ) / var_9;
+        var_10 = vectordot( var_1, var_8 ) / var_9;
         var_10 = var_10 * var_2;
     }
 
     if ( var_5 > 0 && var_4 != ( 0, 0, 0 ) )
     {
-        var_11 = _func_0257( var_4, var_8 ) / var_9;
+        var_11 = vectordot( var_4, var_8 ) / var_9;
         var_11 = var_11 * var_5;
     }
 
@@ -1974,7 +1974,7 @@ _id_0D1C( var_0 )
     var_1 = _func_0450( level._id_0B2D );
     var_2 = 0;
     var_3 = [];
-    var_1 = _id_077B::_id_1B96( var_1, self );
+    var_1 = scripts\engine\utility::array_remove( var_1, self );
 
     foreach ( var_5 in var_1 )
     {
@@ -2001,7 +2001,7 @@ _id_0D18( var_0, var_1 )
     if ( !_id_0827::_id_8983( var_2 ) )
         return;
 
-    var_3 = self._id_02EA;
+    var_3 = self.origin;
     var_4 = var_0;
     var_5 = self._id_0B2B._id_CB69;
     var_6 = var_2 _id_0827::_id_6C50();
@@ -2026,12 +2026,12 @@ _id_0D18( var_0, var_1 )
 
 _id_0CF0( var_0, var_1, var_2, var_3 )
 {
-    var_1 = _id_077B::_id_FF6A( var_1, 1.0 );
-    var_2 = _id_077B::_id_FF6A( var_2, 1.0 );
-    var_3 = _id_077B::_id_FF6A( var_3, 1.0 );
+    var_1 = scripts\engine\utility::_id_FF6A( var_1, 1.0 );
+    var_2 = scripts\engine\utility::_id_FF6A( var_2, 1.0 );
+    var_3 = scripts\engine\utility::_id_FF6A( var_3, 1.0 );
 
     if ( isdefined( var_0._id_0B2B ) == 0 )
-        var_0._id_0B2B = _func_020F();
+        var_0._id_0B2B = spawnstruct();
 
     if ( var_3 > 0.0 )
         var_0 _id_DEFA( "doppler", undefined, ::_id_DF02 );
@@ -2039,7 +2039,7 @@ _id_0CF0( var_0, var_1, var_2, var_3 )
     if ( _func_0451( self ) )
         return;
 
-    self._id_0B2B = _func_020F();
+    self._id_0B2B = spawnstruct();
     self._id_0B2B._id_CB69 = var_1;
     self._id_0B2B._id_B12E = var_2;
     self._id_0B2B._id_B77C = var_3;
@@ -2088,7 +2088,7 @@ _id_0D34( var_0, var_1 )
 {
     level notify( "snd_stop_start" );
     level endon( "snd_stop_start" );
-    var_1 = _id_077B::_id_FF6A( var_1, 1 );
+    var_1 = scripts\engine\utility::_id_FF6A( var_1, 1 );
     _id_0827::_id_1081B();
 
     for (;;)
@@ -2119,7 +2119,7 @@ _id_0D34( var_0, var_1 )
             var_3[var_2] = 1;
         }
 
-        level _id_077B::_id_1087E( "start_point_changed", "save_restore" );
+        level scripts\engine\utility::waittill_any_2( "start_point_changed", "save_restore" );
         waittillframeend;
     }
 }
@@ -2172,7 +2172,7 @@ _id_0D3E( var_0 )
 
         if ( var_4 )
         {
-            var_3._id_0D3F = _id_077B::_id_FF6A( var_3._id_0D3F, var_1 );
+            var_3._id_0D3F = scripts\engine\utility::_id_FF6A( var_3._id_0D3F, var_1 );
 
             if ( var_2 != level )
                 var_3._id_0D3F[var_3._id_0D3F.size] = var_2;
@@ -2196,7 +2196,7 @@ _id_0D3E( var_0 )
                 continue;
 
             if ( var_2 != level )
-                var_3._id_0D3F = _id_077B::_id_1B96( var_3._id_0D3F, var_2 );
+                var_3._id_0D3F = scripts\engine\utility::array_remove( var_3._id_0D3F, var_2 );
 
             if ( var_3._id_0D3B == var_2 )
             {
@@ -2246,8 +2246,8 @@ _id_0D3E( var_0 )
 
 _id_DF32( var_0, var_1, var_2 )
 {
-    var_1 = _id_077B::_id_FF6A( var_1, "ambient_package" );
-    var_2 = _id_077B::_id_FF6A( var_2, "targetname" );
+    var_1 = scripts\engine\utility::_id_FF6A( var_1, "ambient_package" );
+    var_2 = scripts\engine\utility::_id_FF6A( var_2, "targetname" );
     var_3 = [ level ];
     var_4 = undefined;
 
@@ -2256,8 +2256,8 @@ _id_DF32( var_0, var_1, var_2 )
     else if ( istrue( level._id_0CD7._id_8559 ) )
         var_4 = getentarray( 0, var_1, var_2 );
 
-    if ( isalive( var_4 ) )
-        var_3 = _id_077B::_id_1B72( var_3, var_4 );
+    if ( _func_0106( var_4 ) )
+        var_3 = scripts\engine\utility::_id_1B72( var_3, var_4 );
 
     foreach ( var_6 in _id_0827::_id_1BCB( var_3 ) )
         var_6 thread _id_0D3E( var_0 );
@@ -2268,8 +2268,8 @@ _id_DF32( var_0, var_1, var_2 )
 _id_DED9( var_0, var_1 )
 {
     var_2 = _func_0120( var_0 );
-    var_3 = isalive( var_1 ) && var_1.size > 0 && isalive( var_1[0] );
-    var_4 = isalive( var_1 ) && var_1.size >= 3 && _func_0120( var_1[0] );
+    var_3 = _func_0106( var_1 ) && var_1.size > 0 && _func_0106( var_1[0] );
+    var_4 = _func_0106( var_1 ) && var_1.size >= 3 && _func_0120( var_1[0] );
     var_5 = _func_0120( var_1 );
     var_6 = var_2 && ( var_3 || var_4 || var_5 );
 
@@ -2294,12 +2294,12 @@ _id_0C8C( var_0 )
     if ( _func_0120( var_0 ) )
     {
         var_1 = level._id_0CD7._id_0BA6[var_0];
-        var_2 = isalive( var_1 );
+        var_2 = _func_0106( var_1 );
         var_3 = _func_0120( var_1 );
 
         if ( var_2 )
             return var_0;
-        else if ( var_3 && isalive( level._id_0CD7._id_0BA6[var_1] ) )
+        else if ( var_3 && _func_0106( level._id_0CD7._id_0BA6[var_1] ) )
             return var_1;
     }
 
@@ -2308,13 +2308,13 @@ _id_0C8C( var_0 )
 
 _id_0BCD( var_0 )
 {
-    if ( isalive( var_0 ) )
+    if ( _func_0106( var_0 ) )
         return var_0;
     else if ( _func_0120( var_0 ) )
     {
         var_0 = _id_0C8C( var_0 );
         var_1 = level._id_0CD7._id_0BA6[var_0];
-        var_2 = isalive( var_1 );
+        var_2 = _func_0106( var_1 );
 
         if ( var_2 )
             return var_1;
@@ -2330,7 +2330,7 @@ _id_DF16( var_0, var_1 )
     if ( _id_0827::_id_DEC8( !var_2, "snd: set_element invalid player" ) )
         return;
 
-    var_3 = isalive( var_1 );
+    var_3 = _func_0106( var_1 );
     var_4 = _func_0120( var_1 );
     var_5 = !isdefined( var_1 );
     var_6 = var_3 || var_4 || var_5;
@@ -2351,7 +2351,7 @@ _id_DF16( var_0, var_1 )
             return;
     }
 
-    if ( var_2 && isalive( var_0._id_0CFE ) )
+    if ( var_2 && _func_0106( var_0._id_0CFE ) )
     {
         _id_DF1E( var_0._id_0CFE );
         var_0._id_0CFE = undefined;
@@ -2364,7 +2364,7 @@ _id_DF16( var_0, var_1 )
     }
 
     var_10 = _id_0BCD( var_1 );
-    var_11 = isalive( var_10 );
+    var_11 = _func_0106( var_10 );
 
     if ( _id_0827::_id_DEC8( !var_11, "snd: set_element unexpected" ) )
         return;
@@ -2374,7 +2374,7 @@ _id_DF16( var_0, var_1 )
     foreach ( var_13 in var_10 )
     {
         var_14 = var_13[0];
-        var_15 = _id_077B::_id_FF6A( var_13[1], var_0 );
+        var_15 = scripts\engine\utility::_id_FF6A( var_13[1], var_0 );
         var_16 = var_13[2];
         var_17 = var_13[3];
         var_18 = var_13[4];
@@ -2396,7 +2396,7 @@ _id_0D09( var_0, var_1, var_2, var_3 )
     {
         var_4 = var_1 _id_0827::_id_6C50();
         var_5 = _func_019F( var_2, var_3, var_4 );
-        var_0._id_02EA = var_5;
+        var_0.origin = var_5;
         waitframe();
     }
 }
@@ -2409,10 +2409,10 @@ _id_DEED( var_0, var_1, var_2, var_3 )
     if ( _id_0827::_id_DEC8( !_id_0827::_id_8983( var_1 ), "snd_line_attach with invalid player" ) )
         return;
 
-    if ( _id_0827::_id_DEC8( !_func_02DA( var_2 ), "snd_line_attach with invalid start position" ) )
+    if ( _id_0827::_id_DEC8( !isvector( var_2 ), "snd_line_attach with invalid start position" ) )
         return;
 
-    if ( _id_0827::_id_DEC8( !_func_02DA( var_3 ), "snd_line_attach with invalid end position" ) )
+    if ( _id_0827::_id_DEC8( !isvector( var_3 ), "snd_line_attach with invalid end position" ) )
         return;
 
     var_0 thread _id_0D09( var_0, var_1, var_2, var_3 );
@@ -2430,11 +2430,11 @@ _snd_transient_init()
 {
     _id_DF3A();
 
-    if ( !isalive( level._id_0CD7._transient_banks ) )
+    if ( !_func_0106( level._id_0CD7._transient_banks ) )
         level._id_0CD7._transient_banks = [];
 
     if ( !_func_02DB( level._id_0CD7._transient_bank_ent ) )
-        level._id_0CD7._transient_bank_ent = _func_0205( "sound_transient_soundbanks", ( 0, 0, 0 ) );
+        level._id_0CD7._transient_bank_ent = spawn( "sound_transient_soundbanks", ( 0, 0, 0 ) );
 }
 
 snd_transient_is_loaded( var_0 )

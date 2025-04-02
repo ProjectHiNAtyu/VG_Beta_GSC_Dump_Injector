@@ -3,9 +3,9 @@
 
 _id_CA44()
 {
-    _func_01A8( "mw_scale_soldier" );
-    _func_01A8( "mw_test_soldier" );
-    _func_01A8( "mw_dist_soldier" );
+    precachemodel( "mw_scale_soldier" );
+    precachemodel( "mw_test_soldier" );
+    precachemodel( "mw_dist_soldier" );
     wait 5.0;
 
     for (;;)
@@ -18,7 +18,7 @@ _id_CA44()
             while ( getdvarint( "scr_rangeFinder", 0 ) == 1 )
                 wait 0.01;
 
-            var_0 _meth_809A();
+            var_0 delete();
             level notify( "rangeFinder_end" );
         }
 
@@ -28,7 +28,7 @@ _id_CA44()
 
 _id_3F82()
 {
-    var_0 = _func_0205( "script_origin", level._id_B758[0]._id_02EA );
+    var_0 = spawn( "script_origin", level.players[0].origin );
     var_0 thread _id_A11E();
     var_0 thread _id_9A0B();
     return var_0;
@@ -44,12 +44,12 @@ _id_A11E()
     {
         if ( getdvarint( "scr_rangeFinder", 0 ) == 1 )
         {
-            if ( level._id_B758[0] useanimtree() )
+            if ( level.players[0] usebuttonpressed() )
             {
-                self._id_B15E = _id_077B::_id_F07F( self._id_B15E == "player", "stationary", "player" );
-                level._id_B758[0] notify( "changed_placementMode" );
+                self._id_B15E = scripts\engine\utility::ter_op( self._id_B15E == "player", "stationary", "player" );
+                level.players[0] notify( "changed_placementMode" );
 
-                while ( level._id_B758[0] useanimtree() )
+                while ( level.players[0] usebuttonpressed() )
                     waitframe();
             }
         }
@@ -66,7 +66,7 @@ _id_9A0B()
 
     for (;;)
     {
-        level._id_B758[0] waittill( "changed_placementMode" );
+        level.players[0] waittill( "changed_placementMode" );
 
         if ( self._id_B15E == "player" )
         {
@@ -82,29 +82,29 @@ _id_9A0B()
 
 _id_DFEA()
 {
-    level._id_B758[0] endon( "changed_placementMode" );
+    level.players[0] endon( "changed_placementMode" );
     level endon( "rangeFinder_end" );
 
     for (;;)
     {
-        self._id_0054 = ( 0, 90 + level._id_B758[0]._id_0054[1], 0 );
-        var_0 = anglestoforward( level._id_B758[0]._id_0054 ) * 40;
-        self._id_02EA = level._id_B758[0]._id_02EA - var_0;
+        self.angles = ( 0, 90 + level.players[0].angles[1], 0 );
+        var_0 = anglestoforward( level.players[0].angles ) * 40;
+        self.origin = level.players[0].origin - var_0;
         wait 0.01;
     }
 }
 
 _id_10C0( var_0 )
 {
-    var_1 = _func_0205( "script_model", var_0._id_02EA );
-    var_1._id_0054 = var_0._id_0054;
-    var_1 setmode( "mw_dist_soldier" );
-    var_1 _meth_820B( var_0 );
+    var_1 = spawn( "script_model", var_0.origin );
+    var_1.angles = var_0.angles;
+    var_1 setmodel( "mw_dist_soldier" );
+    var_1 linkto( var_0 );
     var_1 thread _id_10BEE();
 }
 
 _id_10BEE()
 {
     level waittill( "rangeFinder_end" );
-    self _meth_809A();
+    self delete();
 }

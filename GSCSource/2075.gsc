@@ -29,7 +29,7 @@ _id_0BE5()
     if ( isdefined( level._id_89BC ) == 1 && level._id_89BC == 1 && isdefined( level._id_BF4E ) == 1 )
         var_0[var_0.size] = "soundtables/mp_raid_defaults.csv";
 
-    if ( _id_06BB::_id_8A2C() == 1 )
+    if ( scripts\common\utility::_id_8A2C() == 1 )
         var_0[var_0.size] = "soundtables/sp_defaults.csv";
     else
         var_0[var_0.size] = "soundtables/mp_defaults.csv";
@@ -85,10 +85,10 @@ _id_DF23( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
     if ( isdefined( var_5 ) == 0 )
     {
-        if ( _id_06BB::_id_8A2C() == 1 )
-            var_5 = [ level._id_030F ];
-        else if ( isdefined( level._id_B758 ) == 1 )
-            var_5 = level._id_B758;
+        if ( scripts\common\utility::_id_8A2C() == 1 )
+            var_5 = [ level.player ];
+        else if ( isdefined( level.players ) == 1 )
+            var_5 = level.players;
     }
 
     foreach ( var_7 in var_5 )
@@ -104,12 +104,12 @@ _id_66B3( var_0, var_1, var_2 )
         level._id_0B1D = [];
 
     if ( !isdefined( level._id_0B1D[var_1] ) )
-        level._id_0B1D[var_1] = _id_077B::_id_1B94( getarraykeys( var_0 ) );
+        level._id_0B1D[var_1] = scripts\engine\utility::_id_1B94( getarraykeys( var_0 ) );
 
     if ( level._id_0B1D[var_1].size <= var_2 )
     {
-        var_3 = _id_077B::_id_1B94( _id_077B::_id_1B97( getarraykeys( var_0 ), level._id_0B1D[var_1] ) );
-        level._id_0B1D[var_1] = _id_077B::_id_1B72( var_3, level._id_0B1D[var_1] );
+        var_3 = scripts\engine\utility::_id_1B94( scripts\engine\utility::_id_1B97( getarraykeys( var_0 ), level._id_0B1D[var_1] ) );
+        level._id_0B1D[var_1] = scripts\engine\utility::_id_1B72( var_3, level._id_0B1D[var_1] );
     }
 
     var_4 = level._id_0B1D[var_1][level._id_0B1D[var_1].size - 1];
@@ -119,8 +119,8 @@ _id_66B3( var_0, var_1, var_2 )
 
 _id_CA96( var_0, var_1 )
 {
-    var_2 = self._id_02EA;
-    var_3 = self._id_0054;
+    var_2 = self.origin;
+    var_3 = self.angles;
     var_4 = "r";
     var_5 = "default";
 
@@ -134,7 +134,7 @@ _id_CA96( var_0, var_1 )
     else
         var_6 = var_6 + "walk_";
 
-    if ( _func_0117( self ) == 1 )
+    if ( isplayer( self ) == 1 )
         var_6 = var_6 + "plr_";
     else
     {
@@ -151,7 +151,7 @@ _id_CA96( var_0, var_1 )
             var_2 = self gettagorigin( var_7 );
     }
 
-    var_9 = _id_077A::_id_0B4C( var_2 + ( 0, 0, 0 ), var_2 + ( 0, 0, -64 ), 0, undefined );
+    var_9 = scripts\engine\trace::_bullet_trace( var_2 + ( 0, 0, 0 ), var_2 + ( 0, 0, -64 ), 0, undefined );
 
     if ( var_9["fraction"] < 1 && var_9["fraction"] > 0 && var_9["surfacetype"] != "none" )
     {
@@ -159,7 +159,7 @@ _id_CA96( var_0, var_1 )
         var_2 = var_9["position"];
         var_10 = var_6 + var_5;
 
-        if ( _func_0117( self ) == 1 )
+        if ( isplayer( self ) == 1 )
             var_10 = var_10 + ( "_" + var_4 );
 
         if ( _func_0200( var_10 ) == 0 )
@@ -168,7 +168,7 @@ _id_CA96( var_0, var_1 )
 
     var_6 = var_6 + var_5;
 
-    if ( _func_0117( self ) == 1 )
+    if ( isplayer( self ) == 1 )
         var_6 = var_6 + ( "_" + var_4 );
 
     if ( _func_0200( var_6 ) == 0 )
@@ -291,14 +291,14 @@ _id_0D10( var_0, var_1, var_2, var_3, var_4, var_5, var_6 )
 
 _id_0D0F( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
-    var_6 = var_0._id_02EA;
+    var_6 = var_0.origin;
 
-    if ( _func_0117( var_0 ) || _func_0104( var_0 ) )
+    if ( isplayer( var_0 ) || isai( var_0 ) )
         var_6 = var_0 geteye();
 
     var_6 = var_6 + var_1;
     var_7 = _id_0827::_id_AC4A( var_6, var_2, var_3, var_4 );
-    var_8 = _id_077A::_id_C042( var_6, var_7, level._id_B758, var_5, 1, 1 );
+    var_8 = scripts\engine\trace::ray_trace( var_6, var_7, level.players, var_5, 1, 1 );
     var_8["traceStart"] = var_6;
     var_8["traceEnd"] = var_7;
     var_8["azimuth"] = _id_0827::_id_5BC9( var_3 );
@@ -407,7 +407,7 @@ _id_0D14( var_0 )
         var_41 = var_17["fraction"];
         var_42 = var_17["surfacetype"];
 
-        if ( _func_0120( var_42 ) == 1 && _func_0121( var_42, "surftype_" ) )
+        if ( _func_0120( var_42 ) == 1 && issubstr( var_42, "surftype_" ) )
             var_42 = _func_00D6( var_42, 9 );
 
         var_43 = _id_0827::_id_8ADA( var_39, -90, 45 );
@@ -468,7 +468,7 @@ _id_0D14( var_0 )
         if ( _func_0120( var_17["surfacetype"] ) == 1 )
             var_49 = var_17["surfacetype"];
 
-        if ( _func_0121( var_49, "surftype_" ) )
+        if ( issubstr( var_49, "surftype_" ) )
             var_49 = _func_00D6( var_49, 9 );
 
         var_47[var_47.size] = var_49;
@@ -518,7 +518,7 @@ _id_0D14( var_0 )
 
     self._id_0C62._id_4B70 = var_32;
     self._id_0C62._id_4B73 = var_33;
-    _id_0D11( self._id_0C62._id_00FF, self._id_0C62._id_47DB, var_4, var_5, self._id_0C62._id_A96A );
+    _id_0D11( self._id_0C62.color, self._id_0C62._id_47DB, var_4, var_5, self._id_0C62._id_A96A );
     _id_0D10( 160, 160, 2.0, ( 1, 1, 1 ), var_4, var_5, self._id_0C62._id_A96A );
     return self._id_0C62._id_DE5B;
 }
@@ -527,7 +527,7 @@ _id_0D17( var_0, var_1 )
 {
     var_2 = self;
 
-    if ( _func_0117( var_2 ) == 0 )
+    if ( isplayer( var_2 ) == 0 )
         return;
 
     var_3 = var_0 * var_2._id_0C62._id_F3C5;
@@ -547,42 +547,42 @@ _id_0D1B( var_0 )
 {
     var_1 = self;
 
-    if ( _func_0117( var_1 ) == 1 )
+    if ( isplayer( var_1 ) == 1 )
         var_1 _meth_8077( 0.1 );
 }
 
 _id_DEC6( var_0, var_1, var_2, var_3, var_4 )
 {
-    var_0 = _id_077B::_id_FF6A( var_0, level._id_B758 );
-    var_1 = _id_077B::_id_FF6A( var_1, ( 0, 1, 0 ) );
-    var_2 = _id_077B::_id_FF6A( var_2, 0 );
-    var_3 = _id_077B::_id_FF6A( var_3, 0.5 );
-    var_4 = _id_077B::_id_FF6A( var_4, ( 0, 0, 0 ) );
+    var_0 = scripts\engine\utility::_id_FF6A( var_0, level.players );
+    var_1 = scripts\engine\utility::_id_FF6A( var_1, ( 0, 1, 0 ) );
+    var_2 = scripts\engine\utility::_id_FF6A( var_2, 0 );
+    var_3 = scripts\engine\utility::_id_FF6A( var_3, 0.5 );
+    var_4 = scripts\engine\utility::_id_FF6A( var_4, ( 0, 0, 0 ) );
     var_3 = int( 20.0 * var_3 );
-    _func_01D1( "#x3d243c3b041021387", "48" );
-    _func_01D1( "#x3fd8cbc078936ec04", "0" );
-    _func_01D1( "#x31da00120110265ed", "0.6" );
-    _func_01D1( "#x34febcc862d33da4c", "180" );
-    _func_01D1( "#x3d61fcb6ccf49acdf", "0" );
-    _func_01D1( "#x374533d9d9a17e041", "180" );
-    _func_01D1( "#x36a537bd8724886d5", "240" );
-    _func_01D1( "#x38534f303eb878bdc", "0" );
-    _func_01D1( "#x33fde70e540beccc9", "480" );
-    _func_01D1( "#x3e97d85cf1e482819", "0.1" );
-    _func_01D1( "#x3ff653689b0151fcd", "2" );
-    _func_01D1( "#x3bf95b63104aeaae5", "2400" );
+    setdvarifuninitialized( "#x3d243c3b041021387", "48" );
+    setdvarifuninitialized( "#x3fd8cbc078936ec04", "0" );
+    setdvarifuninitialized( "#x31da00120110265ed", "0.6" );
+    setdvarifuninitialized( "#x34febcc862d33da4c", "180" );
+    setdvarifuninitialized( "#x3d61fcb6ccf49acdf", "0" );
+    setdvarifuninitialized( "#x374533d9d9a17e041", "180" );
+    setdvarifuninitialized( "#x36a537bd8724886d5", "240" );
+    setdvarifuninitialized( "#x38534f303eb878bdc", "0" );
+    setdvarifuninitialized( "#x33fde70e540beccc9", "480" );
+    setdvarifuninitialized( "#x3e97d85cf1e482819", "0.1" );
+    setdvarifuninitialized( "#x3ff653689b0151fcd", "2" );
+    setdvarifuninitialized( "#x3bf95b63104aeaae5", "2400" );
 
     foreach ( var_6 in _id_0827::_id_1BCB( var_0 ) )
     {
         if ( var_6 _id_081E::_id_DEFB( "autozone" ) == 1 )
             var_6 _id_081E::_id_DF04( "autozone" );
 
-        var_6._id_0C62 = _func_020F();
+        var_6._id_0C62 = spawnstruct();
         var_6._id_0C62._id_3D79 = 0;
         var_6._id_0C62._id_5121 = 0;
         var_6._id_0C62._id_19D6 = ( 0, 0, 0 );
         var_6._id_0C62._id_3BCC = "";
-        var_6._id_0C62._id_00FF = var_1;
+        var_6._id_0C62.color = var_1;
         var_6._id_0C62._id_47DB = var_2;
         var_6._id_0C62._id_5070 = var_3;
         var_6._id_0C62._id_A96A = var_4;
@@ -591,7 +591,7 @@ _id_DEC6( var_0, var_1, var_2, var_3, var_4 )
         var_6._id_0C62._id_F3C2 = [];
         var_6._id_0C62._id_DE5A = 0;
         var_6._id_0C62._id_DE5B = 0;
-        var_6._id_0C62._id_F3C3 = _func_02C4( [ "physicscontents_soundclip", "physicscontents_glass", "physicscontents_water" ] );
+        var_6._id_0C62._id_F3C3 = physics_createcontents( [ "physicscontents_soundclip", "physicscontents_glass", "physicscontents_water" ] );
         var_6 _id_081E::_id_DEFA( "autozone", undefined, ::_id_0D14, ::_id_0D17, ::_id_0D1B, var_6 );
     }
 }

@@ -12,22 +12,22 @@ _id_9053()
 
     for (;;)
     {
-        if ( self._id_9051 && ( !istrue( self._id_82AC ) || istrue( self._id_EA8E ) || istrue( _id_07D9::_id_68EB() ) ) )
+        if ( self._id_9051 && ( !istrue( self._id_82AC ) || istrue( self._id_EA8E ) || istrue( scripts\mp\playerlogic::_id_68EB() ) ) )
         {
-            var_0 = _id_07F2::_id_698D()._id_E768._id_04CE;
+            var_0 = scripts\mp\supers::getcurrentsuper()._id_E768._id_04CE;
             self _meth_84E9();
 
             if ( isdefined( var_0 ) )
-                _id_099A::_id_0D6A( var_0 );
+                scripts\cp_mp\utility\inventory_utility::_takeweapon( var_0 );
 
             self._id_9051 = 0;
         }
-        else if ( !self._id_9051 && istrue( self._id_82AC ) && !istrue( self._id_EA8E ) && !istrue( _id_07D9::_id_68EB() ) )
+        else if ( !self._id_9051 && istrue( self._id_82AC ) && !istrue( self._id_EA8E ) && !istrue( scripts\mp\playerlogic::_id_68EB() ) )
         {
-            var_0 = _id_07F2::_id_698D()._id_E768._id_04CE;
-            _id_099A::_id_0BEB( var_0 );
-            var_1 = _id_077B::_id_F07F( _id_07F2::_id_8A61(), 1, 0 );
-            self _meth_83B5( var_0, var_1 );
+            var_0 = scripts\mp\supers::getcurrentsuper()._id_E768._id_04CE;
+            scripts\cp_mp\utility\inventory_utility::_giveweapon( var_0 );
+            var_1 = scripts\engine\utility::ter_op( scripts\mp\supers::_id_8A61(), 1, 0 );
+            self setweaponammoclip( var_0, var_1 );
             self _meth_84E8( var_0 );
             self._id_9051 = 1;
         }
@@ -57,11 +57,11 @@ _id_9057()
 
 _id_9052()
 {
-    var_0 = _id_07F2::_id_698D()._id_E768._id_04CE;
+    var_0 = scripts\mp\supers::getcurrentsuper()._id_E768._id_04CE;
     self _meth_84E9();
 
     if ( isdefined( var_0 ) )
-        _id_099A::_id_0D6A( var_0 );
+        scripts\cp_mp\utility\inventory_utility::_takeweapon( var_0 );
 
     self._id_9051 = 0;
 }
@@ -78,23 +78,23 @@ _id_9055()
     level endon( "game_ended" );
     self endon( "disconnect" );
     self endon( "last_stand_finished" );
-    _id_077B::_id_46C3( 0.05, ::_id_904F );
+    scripts\engine\utility::_id_46C3( 0.05, ::_id_904F );
     self._id_9059 = 1;
     self notify( "last_stand_heal_active" );
     self notify( "handle_revive_message" );
-    _id_06BB::_id_1531( 0 );
+    scripts\common\utility::_id_1531( 0 );
     wait 0.45;
-    self _meth_8275( "laststand_heal_start" );
+    self playlocalsound( "laststand_heal_start" );
     self notify( "force_regeneration" );
 
-    while ( self._id_01FF < self._id_027F )
+    while ( self.health < self.maxhealth )
         waitframe();
 
-    _id_06BB::_id_1531( 1 );
-    _id_07F2::_id_EB4D( undefined, undefined, undefined, 1 );
-    self _meth_8275( "laststand_heal_done" );
+    scripts\common\utility::_id_1531( 1 );
+    scripts\mp\supers::_id_EB4D( undefined, undefined, undefined, 1 );
+    self playlocalsound( "laststand_heal_done" );
     self notify( "last_stand_heal_success" );
-    level thread _id_0789::_id_F756( self, "use_self_revive" );
+    level thread scripts\mp\battlechatter_mp::_id_F756( self, "use_self_revive" );
 }
 
 _id_904F()
@@ -105,8 +105,8 @@ _id_904F()
 
     for (;;)
     {
-        _id_07F2::_id_C170( 5, 0, 1 );
-        var_0 = _id_07F2::_id_698D();
+        scripts\mp\supers::_id_C170( 5, 0, 1 );
+        var_0 = scripts\mp\supers::getcurrentsuper();
 
         if ( var_0._id_FEA1 <= 0 )
             return;
@@ -117,7 +117,7 @@ _id_9054()
 {
     level endon( "game_ended" );
     self endon( "disconnect" );
-    _id_077B::_id_1089D( "death", "last_stand_finished" );
+    scripts\engine\utility::_id_1089D( "death", "last_stand_finished" );
     self._id_9059 = 0;
 }
 

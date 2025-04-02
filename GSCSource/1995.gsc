@@ -28,7 +28,7 @@ _id_C613()
     self _meth_83EE( "maaws_reticle_locked" );
 
     if ( isdefined( self._id_9F5F ) )
-        _id_09A2::_id_C4D3( self._id_9F5F, self );
+        scripts\cp_mp\utility\weapon_utility::_id_C4D3( self._id_9F5F, self );
 
     _id_C615();
 }
@@ -55,13 +55,13 @@ _id_982B()
     for (;;)
     {
         if ( isdefined( level._id_361F ) && isdefined( level._id_361F._id_7297 ) && isdefined( self._id_9F5F ) && self._id_9F5F == level._id_361F._id_7297 )
-            level._id_7300 _meth_8275( "maaws_incoming_lp" );
+            level._id_7300 playlocalsound( "maaws_incoming_lp" );
 
         if ( isdefined( level._id_7300 ) && isdefined( self._id_9F5F ) && self._id_9F5F == level._id_72AB._id_B17B )
-            level._id_7300 _meth_8275( "maaws_incoming_lp" );
+            level._id_7300 playlocalsound( "maaws_incoming_lp" );
 
-        self _meth_8275( "maaws_reticle_tracking" );
-        self _meth_8278( "ac130_25mm_fire" );
+        self playlocalsound( "maaws_reticle_tracking" );
+        self playrumbleonentity( "ac130_25mm_fire" );
         wait 0.6;
     }
 }
@@ -70,17 +70,17 @@ _id_982A()
 {
     self endon( "death_or_disconnect" );
     self endon( "stop_javelin_locked_feedback" );
-    self _meth_8275( "maaws_reticle_locked" );
+    self playlocalsound( "maaws_reticle_locked" );
 
     for (;;)
     {
         if ( isdefined( level._id_361F ) && isdefined( level._id_361F._id_7297 ) && isdefined( self._id_9F5F ) && self._id_9F5F == level._id_361F._id_7297 )
-            level._id_7300 _meth_8275( "maaws_incoming_lp" );
+            level._id_7300 playlocalsound( "maaws_incoming_lp" );
 
         if ( isdefined( level._id_7300 ) && isdefined( self._id_9F5F ) && self._id_9F5F == level._id_72AB._id_B17B )
-            level._id_7300 _meth_8275( "maaws_incoming_lp" );
+            level._id_7300 playlocalsound( "maaws_incoming_lp" );
 
-        self _meth_8278( "ac130_25mm_fire" );
+        self playrumbleonentity( "ac130_25mm_fire" );
         wait 0.25;
     }
 }
@@ -114,7 +114,7 @@ _id_9F60()
     var_0 = getdvarint( "scr_maxMissileLockOnRange", 625000000 );
     var_1 = 0;
 
-    if ( self player_recoilscaleon() < 0.95 )
+    if ( self playerads() < 0.95 )
     {
         _id_C613();
         return;
@@ -132,7 +132,7 @@ _id_9F60()
         if ( var_2.size == 0 )
             return;
 
-        var_2 = _func_01FF( var_2, self._id_02EA );
+        var_2 = _func_01FF( var_2, self.origin );
         var_3 = undefined;
         var_4 = 0;
 
@@ -148,7 +148,7 @@ _id_9F60()
 
             if ( var_3 _id_E864() )
             {
-                if ( distancesquared( var_6._id_02EA, self._id_02EA ) > var_0 )
+                if ( distancesquared( var_6.origin, self.origin ) > var_0 )
                     break;
 
                 var_4 = 1;
@@ -164,13 +164,13 @@ _id_9F60()
         if ( !var_3 _id_E863() )
             return;
 
-        self._id_9F5F = var_3._id_0457;
+        self._id_9F5F = var_3.target;
         self._id_9F5C = gettime();
         self._id_9F5E = 1;
         self._id_9F5D = 0;
 
         if ( isdefined( self._id_9F5F ) )
-            _id_09A2::_id_10BC( self._id_9F5F, self );
+            scripts\cp_mp\utility\weapon_utility::_id_10BC( self._id_9F5F, self );
 
         thread _id_982B();
     }
@@ -183,7 +183,7 @@ _id_9F60()
             return;
         }
 
-        if ( !var_1 && ( self._id_9F5F _id_09B4::_id_8ADC() && _id_09B4::_id_10122( self._id_9F5F, self ) ) )
+        if ( !var_1 && ( self._id_9F5F scripts\cp_mp\vehicles\vehicle::_id_8ADC() && scripts\cp_mp\vehicles\vehicle::_id_10122( self._id_9F5F, self ) ) )
         {
             _id_C613();
             return;
@@ -207,7 +207,7 @@ _id_9F60()
 
         var_8 = gettime() - self._id_9F5C;
 
-        if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_fasterlockon" ) )
+        if ( scripts\mp\utility\perk::_hasperk( "specialty_fasterlockon" ) )
         {
             if ( var_8 < 250.0 )
                 return;
@@ -222,8 +222,8 @@ _id_9F60()
 
         if ( isdefined( level._id_0F23 ) )
         {
-            if ( _id_077B::_id_1B78( level._id_0F23, self._id_9F5F ) )
-                thread _id_0789::_id_8DC3( self._id_9F5F._id_EA0F );
+            if ( scripts\engine\utility::array_contains( level._id_0F23, self._id_9F5F ) )
+                thread scripts\mp\battlechatter_mp::_id_8DC3( self._id_9F5F._id_EA0F );
         }
 
         self._id_9F5E = 2;
@@ -237,7 +237,7 @@ _id_9F60()
             return;
         }
 
-        if ( !var_1 && ( self._id_9F5F _id_09B4::_id_8ADC() && _id_09B4::_id_10122( self._id_9F5F, self ) ) )
+        if ( !var_1 && ( self._id_9F5F scripts\cp_mp\vehicles\vehicle::_id_8ADC() && scripts\cp_mp\vehicles\vehicle::_id_10122( self._id_9F5F, self ) ) )
         {
             _id_C613();
             return;
@@ -264,7 +264,7 @@ _id_9F60()
 
 _id_9F61()
 {
-    if ( !_func_0117( self ) )
+    if ( !isplayer( self ) )
         return;
 
     self endon( "death_or_disconnect" );
@@ -283,7 +283,7 @@ _id_9F5B( var_0 )
 {
     var_1 = undefined;
 
-    if ( isdefined( var_0._id_0457 ) && isdefined( var_0._id_0457._id_1031C ) && var_0._id_0457._id_1031C == "light_tank" )
+    if ( isdefined( var_0.target ) && isdefined( var_0.target._id_1031C ) && var_0.target._id_1031C == "light_tank" )
         var_1 = ( 0, 0, 75 );
     else if ( isdefined( var_0._id_82AE ) )
     {
@@ -293,7 +293,7 @@ _id_9F5B( var_0 )
     else
         var_1 = ( 0, 0, 0 );
 
-    self visionsetthermalforplayer( self._id_9F5F, var_1 );
+    self _meth_8457( self._id_9F5F, var_1 );
 }
 
 _id_1093( var_0 )
@@ -303,10 +303,10 @@ _id_1093( var_0 )
 
     var_1 = var_0;
 
-    if ( isdefined( var_0._id_02F2 ) && !_id_0A6F::_id_8978( var_0 ) )
-        var_1 = var_0._id_02F2;
+    if ( isdefined( var_0.owner ) && !_id_0A6F::_id_8978( var_0 ) )
+        var_1 = var_0.owner;
 
-    if ( !isdefined( var_1 ) || !_func_0117( var_1 ) )
+    if ( !isdefined( var_1 ) || !isplayer( var_1 ) )
         return;
 }
 
@@ -319,21 +319,21 @@ _id_C4C3( var_0 )
 
     if ( !_id_0A6F::_id_8978( var_0 ) )
     {
-        if ( !isdefined( var_0._id_02F2 ) )
+        if ( !isdefined( var_0.owner ) )
             return;
 
-        var_1 = var_0._id_02F2;
+        var_1 = var_0.owner;
     }
 
-    if ( !isdefined( var_1 ) || !_func_0117( var_1 ) )
+    if ( !isdefined( var_1 ) || !isplayer( var_1 ) )
         return;
 }
 
 _id_E85E( var_0, var_1 )
 {
-    var_2 = _func_020F();
-    var_2._id_030F = var_0;
-    var_2._id_0457 = var_1;
+    var_2 = spawnstruct();
+    var_2.player = var_0;
+    var_2.target = var_1;
     var_2._id_A96F = [];
     var_2._id_AC82 = [];
     var_2._id_82C8 = [];
@@ -347,88 +347,88 @@ _id_E861()
 {
     self._id_A96F = [];
 
-    if ( _id_0A67::_id_8794( self._id_0457 ) )
+    if ( _id_0A67::_id_8794( self.target ) )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, -50 );
         self._id_FE97 = 0;
     }
-    else if ( _id_0A67::_id_8A66( self._id_0457 ) )
+    else if ( _id_0A67::_id_8A66( self.target ) )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, -100 );
         self._id_FE97 = 0;
     }
-    else if ( _id_0A67::_id_886F( self._id_0457 ) )
+    else if ( _id_0A67::_id_886F( self.target ) )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, 50 );
         self._id_FE97 = 0;
     }
-    else if ( _id_0A67::_id_879A( self._id_0457 ) )
+    else if ( _id_0A67::_id_879A( self.target ) )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, 40 );
         self._id_FE97 = 0;
     }
-    else if ( _id_0A67::_id_8A9D( self._id_0457 ) )
+    else if ( _id_0A67::_id_8A9D( self.target ) )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, 42 );
         self._id_A96F[self._id_A96F.size] = ( 0, 0, 5 );
         self._id_FE97 = 0;
     }
-    else if ( _id_0A67::_id_89B8( self._id_0457 ) )
+    else if ( _id_0A67::_id_89B8( self.target ) )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, 10 );
         self._id_FE97 = 0;
     }
-    else if ( _id_0A67::_id_8A00( self._id_0457 ) )
+    else if ( _id_0A67::_id_8A00( self.target ) )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, 15 );
         self._id_FE97 = 0;
     }
-    else if ( _id_0A67::_id_89B9( self._id_0457 ) )
+    else if ( _id_0A67::_id_89B9( self.target ) )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, -30 );
         self._id_FE97 = 0;
     }
-    else if ( isdefined( self._id_0457._id_1031C ) && self._id_0457._id_1031C == "light_tank" )
+    else if ( isdefined( self.target._id_1031C ) && self.target._id_1031C == "light_tank" )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, 72 );
         self._id_FE97 = 0;
     }
-    else if ( isdefined( self._id_0457._id_1031C ) && self._id_0457._id_1031C == "apc_russian" )
+    else if ( isdefined( self.target._id_1031C ) && self.target._id_1031C == "apc_russian" )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, 60 );
         self._id_FE97 = 0;
     }
-    else if ( isdefined( self._id_0457._id_1031C ) && self._id_0457._id_1031C == "cargo_truck" )
+    else if ( isdefined( self.target._id_1031C ) && self.target._id_1031C == "cargo_truck" )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, 60 );
         self._id_FE97 = 0;
     }
-    else if ( isdefined( self._id_0457._id_1031C ) && self._id_0457._id_1031C == "large_transport" )
+    else if ( isdefined( self.target._id_1031C ) && self.target._id_1031C == "large_transport" )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, 65 );
         self._id_FE97 = 0;
     }
-    else if ( isdefined( self._id_0457._id_1031C ) && self._id_0457._id_1031C == "medium_transport" )
+    else if ( isdefined( self.target._id_1031C ) && self.target._id_1031C == "medium_transport" )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, 60 );
         self._id_FE97 = 0;
     }
-    else if ( isdefined( self._id_0457._id_1031C ) && ( self._id_0457._id_1031C == "pickup_truck" || self._id_0457._id_1031C == "technical" ) )
+    else if ( isdefined( self.target._id_1031C ) && ( self.target._id_1031C == "pickup_truck" || self.target._id_1031C == "technical" ) )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, 55 );
         self._id_FE97 = 0;
     }
-    else if ( isdefined( self._id_0457._id_1031C ) && self._id_0457._id_1031C == "atv" )
+    else if ( isdefined( self.target._id_1031C ) && self.target._id_1031C == "atv" )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, 30 );
         self._id_FE97 = 0;
     }
-    else if ( isdefined( self._id_0457._id_1031C ) && ( self._id_0457._id_1031C == "jeep" || self._id_0457._id_1031C == "tac_rover" ) )
+    else if ( isdefined( self.target._id_1031C ) && ( self.target._id_1031C == "jeep" || self.target._id_1031C == "tac_rover" ) )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, 50 );
         self._id_FE97 = 0;
     }
-    else if ( isdefined( self._id_0457._id_1031C ) && self._id_0457._id_1031C == "loot_chopper" )
+    else if ( isdefined( self.target._id_1031C ) && self.target._id_1031C == "loot_chopper" )
     {
         self._id_A96F[self._id_A96F.size] = ( 0, 0, -100 );
         self._id_FE97 = 0;
@@ -439,8 +439,8 @@ _id_E861()
 
 _id_E862()
 {
-    var_0 = self._id_0457._id_02EA;
-    var_1 = self._id_0457._id_0054;
+    var_0 = self.target.origin;
+    var_1 = self.target.angles;
     var_2 = anglestoforward( var_1 );
     var_3 = anglestoright( var_1 );
     var_4 = anglestoup( var_1 );
@@ -458,11 +458,11 @@ _id_E860()
     {
         for ( var_2 = 0; var_2 < self._id_AC82.size; var_2++ )
         {
-            var_3 = self._id_030F _meth_845F( self._id_AC82[var_2], 65 );
+            var_3 = self.player _meth_845F( self._id_AC82[var_2], 65 );
 
             if ( isdefined( var_3 ) )
             {
-                var_4 = length( var_3 );
+                var_4 = _func_0132( var_3 );
 
                 if ( var_4 <= 2916 )
                 {
@@ -497,13 +497,13 @@ _id_E860()
 
 _id_E85F()
 {
-    var_0 = self._id_030F geteye();
-    var_1 = _func_02C4( [ "physicscontents_glass", "physicscontents_water", "physicscontents_vehicle", "physicscontents_item", "physicscontents_playernosight" ] );
-    var_2 = [ self._id_030F, self._id_0457 ];
-    var_3 = self._id_0457 _meth_8150();
+    var_0 = self.player geteye();
+    var_1 = physics_createcontents( [ "physicscontents_glass", "physicscontents_water", "physicscontents_vehicle", "physicscontents_item", "physicscontents_playernosight" ] );
+    var_2 = [ self.player, self.target ];
+    var_3 = self.target _meth_8150();
 
     if ( isdefined( var_3 ) && var_3.size > 0 )
-        var_2 = _id_077B::_id_1B72( var_2, var_3 );
+        var_2 = scripts\engine\utility::_id_1B72( var_2, var_3 );
 
     if ( !self._id_FE97 )
     {
@@ -522,8 +522,8 @@ _id_E85F()
     }
     else
     {
-        var_8 = self._id_0457 _meth_8174( 0, 0, 1 );
-        var_9 = _id_077A::_id_C042( var_0, var_8, var_2, var_1, 0 );
+        var_8 = self.target _meth_8174( 0, 0, 1 );
+        var_9 = scripts\engine\trace::ray_trace( var_0, var_8, var_2, var_1, 0 );
 
         if ( var_9["fraction"] == 1 )
         {
@@ -531,8 +531,8 @@ _id_E85F()
             return;
         }
 
-        var_18 = self._id_0457 _meth_8174( 1, 0, 0 );
-        var_9 = _id_077A::_id_C042( var_0, var_18, var_2, var_1, 0 );
+        var_18 = self.target _meth_8174( 1, 0, 0 );
+        var_9 = scripts\engine\trace::ray_trace( var_0, var_18, var_2, var_1, 0 );
 
         if ( var_9["fraction"] == 1 )
         {
@@ -540,8 +540,8 @@ _id_E85F()
             return;
         }
 
-        var_19 = self._id_0457 _meth_8174( -1, 0, 0 );
-        var_9 = _id_077A::_id_C042( var_0, var_19, var_2, var_1, 0 );
+        var_19 = self.target _meth_8174( -1, 0, 0 );
+        var_9 = scripts\engine\trace::ray_trace( var_0, var_19, var_2, var_1, 0 );
 
         if ( var_9["fraction"] == 1 )
         {

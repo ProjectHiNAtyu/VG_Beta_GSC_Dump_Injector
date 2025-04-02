@@ -6,8 +6,8 @@ _id_98F5( var_0, var_1 )
     if ( !isdefined( level._id_98F4 ) )
         level._id_98F4 = [];
 
-    if ( !isdefined( level._id_98F4[var_0] ) || !_id_077B::_id_1B78( level._id_98F4[var_0], var_1 ) )
-        level._id_98F4[var_0] = _id_077B::_id_1B65( level._id_98F4[var_0], var_1 );
+    if ( !isdefined( level._id_98F4[var_0] ) || !scripts\engine\utility::array_contains( level._id_98F4[var_0], var_1 ) )
+        level._id_98F4[var_0] = scripts\engine\utility::_id_1B65( level._id_98F4[var_0], var_1 );
 }
 
 _id_026B( var_0, var_1, var_2 )

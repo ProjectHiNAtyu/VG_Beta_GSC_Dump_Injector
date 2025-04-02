@@ -60,15 +60,15 @@ _id_BFC5( var_0, var_1 )
     var_2 = var_1[0];
     var_3 = var_1[1];
 
-    if ( _func_01B8( var_2 ) < var_3 )
+    if ( randomint( var_2 ) < var_3 )
         return anim._id_EAC8;
 
     return anim._id_58C3;
 }
 
-_id_3A02( var_0 )
+cointoss( var_0 )
 {
-    if ( _func_01B8( 100 ) < 50 )
+    if ( randomint( 100 ) < 50 )
         return anim._id_EAC8;
 
     return anim._id_58C3;
@@ -81,7 +81,7 @@ _id_7CE0( var_0, var_1 )
     else
         var_2 = self;
 
-    return isai( var_2 );
+    return isalive( var_2 );
 }
 
 _id_7CE1( var_0 )

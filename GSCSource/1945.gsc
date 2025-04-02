@@ -3,7 +3,7 @@
 
 _id_3FAF()
 {
-    level._id_6009 = _id_077B::_id_10697;
+    level._id_6009 = scripts\engine\utility::_id_10697;
     level._id_600A = ::_id_600A;
     level._id_6004 = _id_06AD::_id_9821;
     level._id_6005 = _id_06AD::_id_AABF;
@@ -12,15 +12,15 @@ _id_3FAF()
     level._id_600B = _id_06A5::_id_BD41;
     level._id_6007 = ::_id_6007;
     level._id_A281 = 1;
-    level._id_2F33 = _id_077B::_id_10697;
-    level._id_2F24 = _id_077B::_id_10697;
-    level._id_2F25 = _id_077B::_id_10697;
-    level._id_2F27 = _id_077B::_id_10697;
-    level._id_2F26 = _id_077B::_id_10697;
-    level._id_2F29 = _id_077B::_id_10697;
-    level._id_2F2A = _id_077B::_id_10697;
+    level._id_2F33 = scripts\engine\utility::_id_10697;
+    level._id_2F24 = scripts\engine\utility::_id_10697;
+    level._id_2F25 = scripts\engine\utility::_id_10697;
+    level._id_2F27 = scripts\engine\utility::_id_10697;
+    level._id_2F26 = scripts\engine\utility::_id_10697;
+    level._id_2F29 = scripts\engine\utility::_id_10697;
+    level._id_2F2A = scripts\engine\utility::_id_10697;
     level._id_2F25 = ::_id_2F11;
-    level._id_2F2B = _id_077B::_id_10697;
+    level._id_2F2B = scripts\engine\utility::_id_10697;
     thread _id_C18C();
     thread _id_C18B();
     thread _id_06A5::_id_5FFE();
@@ -30,21 +30,21 @@ _id_3FAF()
 
 _id_600A( var_0 )
 {
-    return level._id_030F._id_02EA;
+    return level.player.origin;
 }
 
 _id_2F11()
 {
     self waittill( "begin" );
 
-    if ( !isdefined( level._id_030F ) )
+    if ( !isdefined( level.player ) )
     {
         var_0 = getentarray( "mp_global_intermission", "classname" );
-        self solid( var_0[0]._id_02EA, var_0[0]._id_0054 );
-        _id_0A74::_id_FD24( "playing", "" );
-        self._id_027F = 10000000;
-        self._id_01FF = 10000000;
-        level._id_030F = self;
+        self _meth_83CF( var_0[0].origin, var_0[0].angles );
+        scripts\mp\utility\player::_id_FD24( "playing", "" );
+        self.maxhealth = 10000000;
+        self.health = 10000000;
+        level.player = self;
         thread _id_06A5::_id_3FC3();
     }
     else
@@ -54,8 +54,8 @@ _id_2F11()
 _id_6007()
 {
     var_0 = level._id_0B7E._id_B5CE / 190;
-    level._id_030F _meth_8353( var_0 );
-    _func_01D0( "#x34d8641fb1e697515", level._id_0B7E._id_B5CE );
+    level.player setmovespeedscale( var_0 );
+    setdvar( "#x34d8641fb1e697515", level._id_0B7E._id_B5CE );
 }
 
 _id_C18C()

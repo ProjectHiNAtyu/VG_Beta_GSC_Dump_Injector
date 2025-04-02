@@ -18,14 +18,14 @@ _id_5C62( var_0, var_1 )
     if ( isdefined( var_1 ) )
         var_2 = var_1;
 
-    _func_019D( self gettagorigin( var_2 ), "ks_apache_flares" );
-    _func_0197( level._id_0BA3[var_0], self, var_2 );
+    playsoundatpos( self gettagorigin( var_2 ), "ks_apache_flares" );
+    playfxontag( level._effect[var_0], self, var_2 );
 }
 
 _id_5C56()
 {
-    var_0 = _func_0205( "script_origin", self._id_02EA + ( 0, 0, -256 ) );
-    var_0._id_0054 = self._id_0054;
+    var_0 = spawn( "script_origin", self.origin + ( 0, 0, -256 ) );
+    var_0.angles = self.angles;
     var_0 _meth_8237( ( 0, 0, -1 ), 5.0 );
     self._id_5C69[self._id_5C69.size] = var_0;
     var_0 thread _id_5C55( 5.0, 2.0, self );
@@ -40,11 +40,11 @@ _id_5C55( var_0, var_1, var_2 )
         wait( var_1 );
 
         if ( isdefined( var_2 ) )
-            var_2._id_5C69 = _id_077B::_id_1B96( var_2._id_5C69, self );
+            var_2._id_5C69 = scripts\engine\utility::array_remove( var_2._id_5C69, self );
     }
 
     wait( var_0 );
-    self _meth_809A();
+    self delete();
 }
 
 _id_5C5D( var_0 )
@@ -68,7 +68,7 @@ _id_5C5C( var_0 )
 
 _id_5C54( var_0 )
 {
-    var_0._id_5C69 = _id_077B::_id_1BA9( var_0._id_5C69 );
+    var_0._id_5C69 = scripts\engine\utility::_id_1BA9( var_0._id_5C69 );
 }
 
 _id_5C5B( var_0 )
@@ -97,13 +97,13 @@ _id_8E2B()
         if ( !isdefined( var_2 ) || var_2 != self )
             continue;
 
-        if ( !isalive( var_1 ) )
+        if ( !_func_0106( var_1 ) )
             var_1 = [ var_1 ];
 
         foreach ( var_4 in var_1 )
         {
             if ( _func_0127( var_4 ) )
-                level thread _id_8E2C( var_4, var_0, var_0._id_045B, var_2 );
+                level thread _id_8E2C( var_4, var_0, var_0.team, var_2 );
         }
     }
 }
@@ -121,15 +121,15 @@ _id_8E2C( var_0, var_1, var_2, var_3 )
 
         var_4 = var_3 _meth_8174( 0, 0, 0 );
 
-        if ( distancesquared( var_0._id_02EA, var_4 ) < 4000000 )
+        if ( distancesquared( var_0.origin, var_4 ) < 4000000 )
         {
             var_5 = _id_5C5B( var_3 );
 
             if ( !isdefined( var_5 ) )
                 var_5 = _id_5C5C( var_3 );
 
-            _id_09A2::_id_394D( var_0 );
-            var_0 _meth_8232( var_5 );
+            scripts\cp_mp\utility\weapon_utility::_id_394D( var_0 );
+            var_0 missile_settargetent( var_5 );
             var_0 notify( "missile_pairedWithFlare" );
             break;
         }
@@ -155,11 +155,11 @@ _id_5C5E( var_0 )
 
         if ( isdefined( var_0 ) )
         {
-            level thread [[ var_0 ]]( var_1, var_1._id_045B, var_3, var_2 );
+            level thread [[ var_0 ]]( var_1, var_1.team, var_3, var_2 );
             continue;
         }
 
-        level thread _id_5C66( var_1, var_1._id_045B, var_3, var_2 );
+        level thread _id_5C66( var_1, var_1.team, var_3, var_2 );
     }
 }
 
@@ -176,7 +176,7 @@ _id_5C66( var_0, var_1, var_2, var_3 )
         for ( var_6 = 0; var_6 < var_3.size; var_6++ )
         {
             if ( isdefined( var_3[var_6] ) )
-                var_5[var_6] = distance( var_3[var_6]._id_02EA, var_4 );
+                var_5[var_6] = distance( var_3[var_6].origin, var_4 );
         }
 
         for ( var_6 = 0; var_6 < var_5.size; var_6++ )
@@ -193,8 +193,8 @@ _id_5C66( var_0, var_1, var_2, var_3 )
                     {
                         if ( isdefined( var_3[var_8] ) )
                         {
-                            _id_09A2::_id_394D( var_3[var_8] );
-                            var_3[var_8] _meth_8232( var_7 );
+                            scripts\cp_mp\utility\weapon_utility::_id_394D( var_3[var_8] );
+                            var_3[var_8] missile_settargetent( var_7 );
                             var_3[var_8] notify( "missile_pairedWithFlare" );
                         }
                     }
@@ -228,11 +228,11 @@ _id_5C5F( var_0, var_1 )
 
         if ( isdefined( var_0 ) )
         {
-            var_3 thread [[ var_0 ]]( var_2, var_2._id_045B, var_4, var_1 );
+            var_3 thread [[ var_0 ]]( var_2, var_2.team, var_4, var_1 );
             continue;
         }
 
-        var_3 thread _id_5C67( var_2, var_2._id_045B, var_4, var_1 );
+        var_3 thread _id_5C67( var_2, var_2.team, var_4, var_1 );
     }
 }
 
@@ -246,15 +246,15 @@ _id_5C67( var_0, var_1, var_2, var_3 )
             break;
 
         var_4 = var_2 _meth_8174( 0, 0, 0 );
-        var_5 = distance( self._id_02EA, var_4 );
+        var_5 = distance( self.origin, var_4 );
 
         if ( var_5 < 4000 && var_2._id_5C6A > 0 )
         {
             _id_5C64( var_2 );
             var_2 thread _id_5C62( undefined, var_3 );
             var_6 = var_2 _id_5C56();
-            _id_09A2::_id_394D( self );
-            self _meth_8232( var_6 );
+            scripts\cp_mp\utility\weapon_utility::_id_394D( self );
+            self missile_settargetent( var_6 );
             self notify( "missile_pairedWithFlare" );
             return;
         }
@@ -267,8 +267,8 @@ _id_5C64( var_0 )
 {
     var_0._id_5C6A--;
 
-    if ( isdefined( var_0._id_02F2 ) )
-        var_0._id_02F2 _meth_82F6( "ui_killstreak_flares", var_0._id_5C6A );
+    if ( isdefined( var_0.owner ) )
+        var_0.owner setclientomnvar( "ui_killstreak_flares", var_0._id_5C6A );
 }
 
 _id_8E30( var_0, var_1, var_2, var_3 )
@@ -277,7 +277,7 @@ _id_8E30( var_0, var_1, var_2, var_3 )
     self._id_5C69 = [];
 
     if ( isdefined( var_2 ) )
-        self._id_02F2 _meth_82F6( var_2, var_0 );
+        self.owner setclientomnvar( var_2, var_0 );
 
     thread _id_8E2F( var_1, var_2 );
     thread _id_8E2D( var_3 );
@@ -291,20 +291,20 @@ _id_8E2F( var_0, var_1 )
     self endon( "leaving" );
     self endon( "helicopter_done" );
 
-    if ( !_func_0104( self._id_02F2 ) )
-        self._id_02F2 _meth_824A( "manual_flare_popped", var_0 );
+    if ( !isai( self.owner ) )
+        self.owner notifyonplayercommand( "manual_flare_popped", var_0 );
 
     while ( _id_5C5D( self ) )
     {
-        self._id_02F2 waittill( "manual_flare_popped" );
+        self.owner waittill( "manual_flare_popped" );
         var_2 = _id_5C5C( self );
 
-        if ( isdefined( var_2 ) && isdefined( self._id_02F2 ) && !_func_0104( self._id_02F2 ) )
+        if ( isdefined( var_2 ) && isdefined( self.owner ) && !isai( self.owner ) )
         {
-            self._id_02F2 _meth_8275( "ks_ac130_flares" );
+            self.owner playlocalsound( "ks_ac130_flares" );
 
             if ( isdefined( var_1 ) )
-                self._id_02F2 _meth_82F6( var_1, _id_5C5D( self ) );
+                self.owner setclientomnvar( var_1, _id_5C5D( self ) );
         }
     }
 }
@@ -324,13 +324,13 @@ _id_8E2D( var_0 )
         if ( !isdefined( var_1 ) )
             continue;
 
-        self._id_02F2 thread _id_8E32( self, "missile_incoming" );
+        self.owner thread _id_8E32( self, "missile_incoming" );
 
         if ( isdefined( var_0 ) )
         {
-            var_2 = _func_025A( var_1[0]._id_02EA - self._id_02EA );
-            var_3 = _func_025A( anglestoright( self._id_0054 ) );
-            var_4 = _func_0257( var_2, var_3 );
+            var_2 = vectornormalize( var_1[0].origin - self.origin );
+            var_3 = vectornormalize( anglestoright( self.angles ) );
+            var_4 = vectordot( var_2, var_3 );
             var_5 = 1;
 
             if ( var_4 > 0 )
@@ -338,7 +338,7 @@ _id_8E2D( var_0 )
             else if ( var_4 < 0 )
                 var_5 = 3;
 
-            self._id_02F2 _meth_82F6( var_0, var_5 );
+            self.owner setclientomnvar( var_0, var_5 );
         }
 
         foreach ( var_7 in var_1 )
@@ -361,16 +361,16 @@ _id_8E2E( var_0 )
 
         var_1 = self _meth_8174( 0, 0, 0 );
 
-        if ( distancesquared( var_0._id_02EA, var_1 ) < 4000000 )
+        if ( distancesquared( var_0.origin, var_1 ) < 4000000 )
         {
             var_2 = _id_5C5B( self );
 
             if ( isdefined( var_2 ) )
             {
-                _id_09A2::_id_394D( var_0 );
-                var_0 _meth_8232( var_2 );
+                scripts\cp_mp\utility\weapon_utility::_id_394D( var_0 );
+                var_0 missile_settargetent( var_2 );
                 var_0 notify( "missile_pairedWithFlare" );
-                self._id_02F2 _meth_83EE( "missile_incoming" );
+                self.owner _meth_83EE( "missile_incoming" );
                 break;
             }
         }

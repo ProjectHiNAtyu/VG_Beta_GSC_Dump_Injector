@@ -24,7 +24,7 @@ _id_A5F9( var_0, var_1, var_2, var_3, var_4, var_5 )
     else
         var_7 = var_0._id_1887;
 
-    var_8 = _func_020F();
+    var_8 = spawnstruct();
     var_8._id_48D2 = [];
     var_9 = [];
 
@@ -71,7 +71,7 @@ _id_A5F9( var_0, var_1, var_2, var_3, var_4, var_5 )
         else
             var_0 waittill( var_1, var_23 );
 
-        if ( !isalive( var_23 ) )
+        if ( !_func_0106( var_23 ) )
             var_23 = [ var_23 ];
 
         var_0 _id_BD09( var_23 );
@@ -125,9 +125,9 @@ _id_17B3( var_0, var_1, var_2, var_3 )
     if ( isdefined( var_0["attach model"] ) )
     {
         if ( isdefined( var_0["selftag"] ) )
-            var_1 _meth_801E( var_0["attach model"], var_0["selftag"] );
+            var_1 attach( var_0["attach model"], var_0["selftag"] );
         else
-            var_3 _meth_801E( var_0["attach model"], var_0["tag"] );
+            var_3 attach( var_0["attach model"], var_0["tag"] );
 
         return;
     }
@@ -135,9 +135,9 @@ _id_17B3( var_0, var_1, var_2, var_3 )
     if ( isdefined( var_0["detach model"] ) )
     {
         if ( isdefined( var_0["selftag"] ) )
-            var_1 destroy( var_0["detach model"], var_0["selftag"] );
+            var_1 detach( var_0["detach model"], var_0["selftag"] );
         else
-            var_3 destroy( var_0["detach model"], var_0["tag"] );
+            var_3 detach( var_0["detach model"], var_0["tag"] );
     }
 
     if ( !var_2._id_4943 )
@@ -161,21 +161,21 @@ _id_17B3( var_0, var_1, var_2, var_3 )
             level thread _id_A5DF( var_1, var_0 );
 
         if ( isdefined( var_0["stop_effect"] ) )
-            _func_0218( level._id_0BA3[var_0["stop_effect"]], var_1, var_0["selftag"] );
+            stopfxontag( level._effect[var_0["stop_effect"]], var_1, var_0["selftag"] );
 
         if ( isdefined( var_0["swap_part_to_efx"] ) )
         {
-            _func_0197( level._id_0BA3[var_0["swap_part_to_efx"]], var_1, var_0["selftag"] );
+            playfxontag( level._effect[var_0["swap_part_to_efx"]], var_1, var_0["selftag"] );
             var_1 hidepart( var_0["selftag"] );
         }
 
         if ( isdefined( var_0["trace_part_for_efx"] ) )
         {
             var_4 = undefined;
-            var_5 = _id_077B::_id_6A40( var_0["trace_part_for_efx"] );
+            var_5 = scripts\engine\utility::getfx( var_0["trace_part_for_efx"] );
 
             if ( isdefined( var_0["trace_part_for_efx_water"] ) )
-                var_4 = _id_077B::_id_6A40( var_0["trace_part_for_efx_water"] );
+                var_4 = scripts\engine\utility::getfx( var_0["trace_part_for_efx_water"] );
 
             var_6 = 0;
 
@@ -190,10 +190,10 @@ _id_17B3( var_0, var_1, var_2, var_3 )
     }
 
     if ( isdefined( var_0["tag"] ) && isdefined( var_0["effect"] ) )
-        _func_0197( level._id_0BA3[var_0["effect"]], var_3, var_0["tag"] );
+        playfxontag( level._effect[var_0["effect"]], var_3, var_0["tag"] );
 
     if ( isdefined( var_0["selftag"] ) && isdefined( var_0["effect_looped"] ) )
-        _func_0197( level._id_0BA3[var_0["effect_looped"]], var_1, var_0["selftag"] );
+        playfxontag( level._effect[var_0["effect_looped"]], var_1, var_0["selftag"] );
 }
 
 _id_1772( var_0, var_1 )
@@ -202,10 +202,10 @@ _id_1772( var_0, var_1 )
         var_0._id_CF82 = [];
 
     var_2 = var_0._id_CF82.size;
-    var_0._id_CF82[var_2] = _func_0205( "script_model", ( 0, 0, 0 ) );
-    var_0._id_CF82[var_2] setmode( var_1["create model"] );
-    var_0._id_CF82[var_2]._id_02EA = var_0 gettagorigin( var_1["selftag"] );
-    var_0._id_CF82[var_2]._id_0054 = var_0 gettagangles( var_1["selftag"] );
+    var_0._id_CF82[var_2] = spawn( "script_model", ( 0, 0, 0 ) );
+    var_0._id_CF82[var_2] setmodel( var_1["create model"] );
+    var_0._id_CF82[var_2].origin = var_0 gettagorigin( var_1["selftag"] );
+    var_0._id_CF82[var_2].angles = var_0 gettagangles( var_1["selftag"] );
 }
 
 _id_1802( var_0, var_1 )
@@ -214,14 +214,14 @@ _id_1802( var_0, var_1 )
     {
         if ( isdefined( var_1["explosion"] ) )
         {
-            var_3 = anglestoforward( var_0._id_CF82[var_2]._id_0054 );
+            var_3 = anglestoforward( var_0._id_CF82[var_2].angles );
             var_3 = var_3 * 120;
-            var_3 = var_3 + var_0._id_CF82[var_2]._id_02EA;
-            _func_0196( level._id_0BA3[var_1["explosion"]], var_0._id_CF82[var_2]._id_02EA );
-            _func_01B5( var_0._id_CF82[var_2]._id_02EA, 350, 700, 50 );
+            var_3 = var_3 + var_0._id_CF82[var_2].origin;
+            playfx( level._effect[var_1["explosion"]], var_0._id_CF82[var_2].origin );
+            _func_01B5( var_0._id_CF82[var_2].origin, 350, 700, 50 );
         }
 
-        var_0._id_CF82[var_2] _meth_809A();
+        var_0._id_CF82[var_2] delete();
     }
 }
 
@@ -230,12 +230,12 @@ _id_A5DF( var_0, var_1 )
     var_2 = isdefined( var_1["moreThanThreeHack"] );
 
     if ( var_2 )
-        _id_077B::_id_96CA( "moreThanThreeHack" );
+        scripts\engine\utility::_id_96CA( "moreThanThreeHack" );
 
-    _func_0197( level._id_0BA3[var_1["effect"]], var_0, var_1["selftag"] );
+    playfxontag( level._effect[var_1["effect"]], var_0, var_1["selftag"] );
 
     if ( var_2 )
-        _id_077B::_id_F97E( "moreThanThreeHack" );
+        scripts\engine\utility::_id_F97E( "moreThanThreeHack" );
 }
 
 _id_F3BF( var_0 )
@@ -249,7 +249,7 @@ _id_F3BE( var_0, var_1, var_2, var_3 )
     self endon( "cancel_trace_for_part_" + var_0 );
     var_5 = self gettagorigin( var_0 );
     var_6 = 0;
-    var_7 = _func_020F();
+    var_7 = spawnstruct();
     var_7._id_8F35 = self gettagorigin( var_0 );
     var_7._id_7982 = 0;
     var_7._id_AE64 = var_0;
@@ -260,9 +260,9 @@ _id_F3BE( var_0, var_1, var_2, var_3 )
 
     while ( isdefined( self ) && !var_7._id_7982 )
     {
-        _id_077B::_id_96CA( var_4 );
+        scripts\engine\utility::_id_96CA( var_4 );
         _id_F0CB( var_7 );
-        _id_077B::_id_F987( var_4 );
+        scripts\engine\utility::_id_F987( var_4 );
 
         if ( var_7._id_E76B == 1 && gettime() - var_7._id_8F28 > 3000 )
             return;
@@ -274,7 +274,7 @@ _id_F3BE( var_0, var_1, var_2, var_3 )
     if ( isdefined( var_2 ) && var_7._id_7984 )
         var_1 = var_2;
 
-    _func_0196( var_1, var_7._id_8F35 );
+    playfx( var_1, var_7._id_8F35 );
 
     if ( var_3 == 0 )
         self hidepart( var_0 );
@@ -306,9 +306,9 @@ _id_F0CB( var_0 )
         var_0._id_8F28 = gettime();
         var_0._id_E76B = 0;
 
-        if ( !_id_077A::_id_0B4D( var_0._id_8F35, var_0._id_416F, 0, self ) )
+        if ( !scripts\engine\trace::_id_0B4D( var_0._id_8F35, var_0._id_416F, 0, self ) )
         {
-            var_2 = _id_077A::_id_0B4C( var_0._id_8F35, var_0._id_416F, 0, self );
+            var_2 = scripts\engine\trace::_bullet_trace( var_0._id_8F35, var_0._id_416F, 0, self );
 
             if ( var_2["fraction"] < 1.0 )
             {
@@ -347,7 +347,7 @@ _id_BD09( var_0 )
 _id_18B7( var_0, var_1 )
 {
     _id_1005();
-    var_2 = _func_020F();
+    var_2 = spawnstruct();
     var_2._id_187B = var_0;
     var_2._id_A5DD = "#" + var_0;
     var_2._id_1887 = var_1;
@@ -363,7 +363,7 @@ _id_18B8( var_0, var_1, var_2 )
 {
     _id_1005();
     var_0 = var_1 + var_0;
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
     var_3._id_187B = var_0;
     var_3._id_A5DD = "#" + var_0;
     var_3._id_1887 = var_2;
@@ -377,7 +377,7 @@ _id_18B8( var_0, var_1, var_2 )
 
 _id_18BA( var_0, var_1, var_2 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     _id_1005();
 
     if ( var_1 == "end" )
@@ -386,7 +386,7 @@ _id_18BA( var_0, var_1, var_2 )
     if ( _id_18B5( var_0, var_1 ) )
         return;
 
-    var_3 = _func_020F();
+    var_3 = spawnstruct();
     var_3._id_187B = var_0;
     var_3._id_A5DD = var_1;
     var_3._id_1887 = var_2;
@@ -396,7 +396,7 @@ _id_18BA( var_0, var_1, var_2 )
 
 _id_18B5( var_0, var_1 )
 {
-    var_1 = _func_0243( var_1 );
+    var_1 = tolower( var_1 );
     var_2 = getarraykeys( self._id_18BB );
 
     for ( var_3 = 0; var_3 < var_2.size; var_3++ )

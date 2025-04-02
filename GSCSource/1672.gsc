@@ -8,7 +8,7 @@ _id_826B( var_0 )
 
     if ( !isdefined( self._id_0B3E._id_CF17[var_0] ) )
     {
-        self._id_0B3E._id_CF17[var_0] = _func_020F();
+        self._id_0B3E._id_CF17[var_0] = spawnstruct();
         self._id_0B3E._id_CF17[var_0]._id_E744 = "normal";
     }
 }
@@ -48,7 +48,7 @@ _id_D38C( var_0, var_1, var_2 )
         }
     }
 
-    self _meth_8373( var_0, var_3 );
+    self setscriptablepartstate( var_0, var_3 );
 }
 
 _id_D507( var_0 )
@@ -58,7 +58,7 @@ _id_D507( var_0 )
 
     if ( var_2 == "normal" )
         var_2 = "undamaged";
-    else if ( _func_0121( var_2, "_both" ) )
+    else if ( issubstr( var_2, "_both" ) )
         var_2 = "dmg_both";
 
     if ( !isdefined( level._id_7D64 ) && isdefined( anim._id_4B23[self._id_0492] ) )
@@ -70,7 +70,7 @@ _id_D507( var_0 )
         }
     }
 
-    self _meth_8373( var_1, var_2 );
+    self setscriptablepartstate( var_1, var_2 );
 }
 
 _id_FE49( var_0 )

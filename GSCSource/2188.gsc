@@ -12,37 +12,37 @@ _id_64B2( var_0 )
 _id_71EE( var_0, var_1 )
 {
     var_2 = _id_64B3( var_0, var_1 );
-    _id_077B::_id_5BE4( var_2 );
+    scripts\engine\utility::_id_5BE4( var_2 );
     var_3 = level._id_03E1._id_71D7._id_01AF[var_0];
     var_4 = 1;
 
     foreach ( var_7, var_6 in var_3 )
     {
-        if ( !_func_0121( var_6, "allies" ) && _id_077B::_id_5BE0( var_6 ) )
+        if ( !issubstr( var_6, "allies" ) && scripts\engine\utility::_id_5BE0( var_6 ) )
             return;
     }
 
-    if ( _id_077B::_id_5BE0( var_2 ) && self != level )
+    if ( scripts\engine\utility::_id_5BE0( var_2 ) && self != level )
         self notify( var_0 );
 
-    _id_077B::_id_5BE4( var_0 );
+    scripts\engine\utility::_id_5BE4( var_0 );
 }
 
 _id_71F0( var_0 )
 {
     var_1 = _id_64B3( var_0 );
 
-    if ( !_id_077B::_id_5BE0( var_1 ) && self != level )
+    if ( !scripts\engine\utility::_id_5BE0( var_1 ) && self != level )
         self notify( var_0 );
 
-    _id_077B::_id_5BFB( var_1 );
-    _id_077B::_id_5BFB( var_0 );
+    scripts\engine\utility::_id_5BFB( var_1 );
+    scripts\engine\utility::_id_5BFB( var_0 );
 }
 
 _id_71ED( var_0 )
 {
     var_1 = _id_64B3( var_0 );
-    return _id_077B::_id_5BE0( var_1 );
+    return scripts\engine\utility::_id_5BE0( var_1 );
 }
 
 _id_64B3( var_0, var_1 )
@@ -57,45 +57,45 @@ _id_64B3( var_0, var_1 )
 _id_71F1( var_0 )
 {
     var_1 = _id_64B3( var_0 );
-    _id_077B::_id_5C04( var_1 );
+    scripts\engine\utility::_id_5C04( var_1 );
 }
 
 _id_71F3( var_0 )
 {
     var_1 = _id_64B3( var_0 );
-    _id_077B::_id_5C10( var_1 );
+    scripts\engine\utility::_id_5C10( var_1 );
 }
 
 _id_71F2( var_0, var_1 )
 {
     var_2 = _id_64B3( var_0 );
-    _id_077B::_id_5C0E( var_2, var_1 );
+    scripts\engine\utility::_id_5C0E( var_2, var_1 );
 }
 
 _id_71F4( var_0, var_1 )
 {
     var_2 = _id_64B3( var_0 );
-    _id_077B::_id_5C16( var_2, var_1 );
+    scripts\engine\utility::_id_5C16( var_2, var_1 );
 }
 
 _id_71EF( var_0 )
 {
     if ( isdefined( self._id_CE61 ) )
-        self._id_CE61 = _id_077B::_id_EA4F( self._id_CE61 );
+        self._id_CE61 = scripts\engine\utility::_id_EA4F( self._id_CE61 );
     else
         self._id_CE61 = "default";
 
-    if ( self._id_045B == "allies" )
+    if ( self.team == "allies" )
         self._id_CE61 = self._id_CE61 + "allies";
 
-    if ( !_id_077B::_id_5BEC( var_0 ) )
-        _id_077B::_id_5BF1( var_0 );
+    if ( !scripts\engine\utility::_id_5BEC( var_0 ) )
+        scripts\engine\utility::_id_5BF1( var_0 );
 
     var_1 = _id_64B3( var_0 );
 
-    if ( !_id_077B::_id_5BEC( var_1 ) )
+    if ( !scripts\engine\utility::_id_5BEC( var_1 ) )
     {
-        _id_077B::_id_5BF1( var_1 );
+        scripts\engine\utility::_id_5BF1( var_1 );
 
         if ( !isdefined( level._id_03E1._id_71D7._id_01AF[var_0] ) )
             level._id_03E1._id_71D7._id_01AF[var_0] = [];
@@ -126,20 +126,20 @@ _id_71DA()
 _id_71FF()
 {
     var_0 = _id_64B3( "stealth_spotted" );
-    return _id_077B::_id_5BE0( var_0 );
+    return scripts\engine\utility::_id_5BE0( var_0 );
 }
 
 _id_18DF( var_0 )
 {
-    if ( !_id_077B::_id_5BE0( "stealth_enabled" ) )
+    if ( !scripts\engine\utility::_id_5BE0( "stealth_enabled" ) )
         return 0;
 
     foreach ( var_2 in level._id_03E1._id_7208._id_7212 )
     {
-        if ( isdefined( var_0 ) && !_id_077B::_id_1B78( var_0, var_2._id_02BA ) )
+        if ( isdefined( var_0 ) && !scripts\engine\utility::array_contains( var_0, var_2.name ) )
             continue;
 
-        if ( _id_0886::_id_71DB( var_2._id_02BA ) )
+        if ( _id_0886::_id_71DB( var_2.name ) )
             return 1;
     }
 
@@ -256,20 +256,20 @@ _id_D283( var_0, var_1 )
 
 _id_4C07()
 {
-    if ( !isdefined( level._id_030F._id_03E1 ) )
+    if ( !isdefined( level.player._id_03E1 ) )
         _id_0887::_id_D3BA( 1 );
 
-    switch ( self._id_045B )
+    switch ( self.team )
     {
         case "team3":
         case "axis":
-            thread _id_0883::_id_0271();
+            thread _id_0883::main();
             break;
         case "allies":
-            thread _id_0885::_id_0271();
+            thread _id_0885::main();
             break;
         case "neutral":
-            thread _id_0889::_id_0271();
+            thread _id_0889::main();
             break;
     }
 }
@@ -284,11 +284,11 @@ _id_CB2B()
     if ( isdefined( self._id_8F40 ) )
         self._id_03E1._id_8F0B = self._id_8F40;
     else if ( isdefined( self._id_8F3F ) )
-        self._id_03E1._id_8F0B = self._id_8F3F._id_02EA;
+        self._id_03E1._id_8F0B = self._id_8F3F.origin;
     else if ( isdefined( self._id_8F41 ) )
         self._id_03E1._id_8F0B = self._id_8F41;
     else
-        self._id_03E1._id_8F0B = self._id_02EA;
+        self._id_03E1._id_8F0B = self.origin;
 }
 
 _id_D2D9( var_0 )
@@ -324,7 +324,7 @@ _id_D2DB( var_0, var_1, var_2, var_3 )
     if ( var_0 == "unaware" )
         var_0 = "patrol";
 
-    _id_06BB::_id_4786( var_0 );
+    scripts\common\utility::_id_4786( var_0 );
 
     if ( var_0 == "cqb" )
     {
@@ -333,7 +333,7 @@ _id_D2DB( var_0, var_1, var_2, var_3 )
         if ( isdefined( self._id_03E1._id_7BA9 ) )
             var_4 = self._id_03E1._id_7BA9;
 
-        _id_077B::_id_D288( var_4 );
+        scripts\engine\utility::set_movement_speed( var_4 );
     }
 
     if ( istrue( var_1 ) )
@@ -419,25 +419,25 @@ _id_13FD( var_0 )
         var_1 = self._id_03E1._id_9C37;
 
     if ( self [[ self._id_5D7C ]]() )
-        var_1 = _func_0148( 1.5, var_1 );
+        var_1 = min( 1.5, var_1 );
     else if ( self [[ self._id_5D79 ]]() )
-        var_1 = _func_0148( 1.0, var_1 );
+        var_1 = min( 1.0, var_1 );
 
     var_2 = 0.1;
     var_3 = 0.4;
     var_4 = 64;
     var_5 = 1024;
-    var_6 = distance2d( self._id_02EA, var_0._id_02EA );
+    var_6 = distance2d( self.origin, var_0.origin );
 
     if ( var_6 < var_4 )
     {
-        var_7 = _id_0777::_id_A5B2( 0, var_4, var_6 );
-        var_8 = _id_0777::_id_5878( var_2, var_3, var_7 );
+        var_7 = scripts\engine\math::_id_A5B2( 0, var_4, var_6 );
+        var_8 = scripts\engine\math::_id_5878( var_2, var_3, var_7 );
     }
     else
     {
-        var_7 = _id_0777::_id_A5B2( var_4, var_5, var_6 );
-        var_8 = _id_0777::_id_5878( var_3, var_1, var_7 );
+        var_7 = scripts\engine\math::_id_A5B2( var_4, var_5, var_6 );
+        var_8 = scripts\engine\math::_id_5878( var_3, var_1, var_7 );
     }
 
     return var_8;
@@ -445,12 +445,12 @@ _id_13FD( var_0 )
 
 _id_D2D7( var_0 )
 {
-    var_0._id_4B96 = _id_6624( self._id_02EA, var_0._id_02EA, self );
+    var_0._id_4B96 = _id_6624( self.origin, var_0.origin, self );
 }
 
 _id_6624( var_0, var_1, var_2 )
 {
-    var_3 = self allowslide( var_0, var_1 );
+    var_3 = self _meth_847A( var_0, var_1 );
 
     if ( isdefined( var_2 ) )
         var_2._id_AEB4 = var_3;
@@ -471,9 +471,9 @@ _id_C41D()
 
 _id_86F8( var_0 )
 {
-    if ( _func_0117( self ) )
+    if ( isplayer( self ) )
     {
-        if ( _id_077B::_id_10E74( self._id_02EA, self._id_0054, var_0._id_02EA, 0.766 ) )
+        if ( scripts\engine\utility::_id_10E74( self.origin, self.angles, var_0.origin, 0.766 ) )
         {
             if ( isdefined( var_0._id_ED64 ) || _id_ED5E() )
                 return 1;
@@ -498,13 +498,13 @@ _id_6968()
     if ( isdefined( level._id_03E1 ) )
     {
         if ( isdefined( level._id_03E1._id_10A4 ) && isdefined( level._id_03E1._id_10A4[self getentitynumber()] ) )
-            return self._id_02EA;
+            return self.origin;
 
         if ( isdefined( level._id_03E1._id_5D68 ) )
             return [[ level._id_03E1._id_5D68 ]]();
     }
 
-    return self._id_02EA;
+    return self.origin;
 }
 
 _id_D485( var_0 )
@@ -533,17 +533,17 @@ _id_E7B5( var_0, var_1 )
 
     for (;;)
     {
-        _id_077B::_id_5C04( "stealth_enabled" );
-        _id_077B::_id_5C10( "stealth_spotted" );
-        _id_077B::_id_5C10( "stealth_music_pause" );
+        scripts\engine\utility::_id_5C04( "stealth_enabled" );
+        scripts\engine\utility::_id_5C10( "stealth_spotted" );
+        scripts\engine\utility::_id_5C10( "stealth_music_pause" );
 
-        foreach ( var_3 in level._id_B758 )
+        foreach ( var_3 in level.players )
             var_3 thread _id_E7B9( var_0 );
 
-        _id_077B::_id_5C04( "stealth_spotted" );
-        _id_077B::_id_5C10( "stealth_music_pause" );
+        scripts\engine\utility::_id_5C04( "stealth_spotted" );
+        scripts\engine\utility::_id_5C10( "stealth_music_pause" );
 
-        foreach ( var_3 in level._id_B758 )
+        foreach ( var_3 in level.players )
             var_3 thread _id_E7B9( var_1 );
     }
 }
@@ -553,7 +553,7 @@ _id_E7B7()
     self notify( "stealth_music" );
     self notify( "stealth_music_pause_monitor" );
 
-    foreach ( var_1 in level._id_B758 )
+    foreach ( var_1 in level.players )
         var_1 thread _id_E7B9( undefined );
 }
 
@@ -564,22 +564,22 @@ _id_E7B6( var_0, var_1 )
 
     for (;;)
     {
-        _id_077B::_id_5C04( "stealth_music_pause" );
+        scripts\engine\utility::_id_5C04( "stealth_music_pause" );
 
-        foreach ( var_3 in level._id_B758 )
+        foreach ( var_3 in level.players )
             var_3 thread _id_E7B9( undefined );
 
-        _id_077B::_id_5C10( "stealth_music_pause" );
+        scripts\engine\utility::_id_5C10( "stealth_music_pause" );
 
-        if ( _id_077B::_id_5BE0( "stealth_spotted" ) )
+        if ( scripts\engine\utility::_id_5BE0( "stealth_spotted" ) )
         {
-            foreach ( var_3 in level._id_B758 )
+            foreach ( var_3 in level.players )
                 var_3 thread _id_E7B9( var_1 );
 
             continue;
         }
 
-        foreach ( var_3 in level._id_B758 )
+        foreach ( var_3 in level.players )
             var_3 thread _id_E7B9( var_0 );
     }
 }
@@ -615,10 +615,10 @@ _id_D1D0( var_0 )
         level._id_03E1._id_BDBE = 0;
         level._id_03E1._id_BDC0 = 0;
         level._id_03E1._id_BDBF = 0;
-        _func_01EA( "#x38b8e3afde018e32c", 0.25 );
-        _func_01EA( "#x3b2c2293119642503", cos( 90 ) );
-        _func_01EA( "#x3f00e4839cb5a6cda", 0.025 );
-        _func_01EA( "#x369c3046f22ec94c5", 0.25 );
+        setsaveddvar( "#x38b8e3afde018e32c", 0.25 );
+        setsaveddvar( "#x3b2c2293119642503", cos( 90 ) );
+        setsaveddvar( "#x3f00e4839cb5a6cda", 0.025 );
+        setsaveddvar( "#x369c3046f22ec94c5", 0.25 );
     }
     else
     {
@@ -628,17 +628,17 @@ _id_D1D0( var_0 )
         level._id_03E1._id_BDBE = 100;
         level._id_03E1._id_BDC0 = 150;
         level._id_03E1._id_BDBF = 60;
-        _func_01EA( "#x38b8e3afde018e32c", 0.5 );
-        _func_01EA( "#x3b2c2293119642503", cos( 180 ) );
-        _func_01EA( "#x3f00e4839cb5a6cda", 0.01 );
-        _func_01EA( "#x369c3046f22ec94c5", 0.1 );
+        setsaveddvar( "#x38b8e3afde018e32c", 0.5 );
+        setsaveddvar( "#x3b2c2293119642503", cos( 180 ) );
+        setsaveddvar( "#x3f00e4839cb5a6cda", 0.01 );
+        setsaveddvar( "#x369c3046f22ec94c5", 0.1 );
     }
 
     var_1 = _func_0070();
 
     foreach ( var_3 in var_1 )
     {
-        if ( !isai( var_3 ) )
+        if ( !isalive( var_3 ) )
             continue;
 
         if ( isdefined( var_3._id_03E1 ) && isdefined( var_3._id_03E1._id_F156 ) )
@@ -654,40 +654,40 @@ _id_E7D4( var_0 )
     if ( var_0 )
     {
         self._id_C3B4 = 1;
-        _id_077B::_id_5454( "stealth_override_goal" );
+        scripts\engine\utility::_id_5454( "stealth_override_goal" );
         _id_0883::_id_D166( 0 );
         self._id_8F3F = undefined;
     }
     else
-        _id_077B::_id_5450( "stealth_override_goal" );
+        scripts\engine\utility::_id_5450( "stealth_override_goal" );
 }
 
 _id_E794()
 {
-    return _id_077B::_id_5452( "stealth_override_goal" ) && _id_077B::_id_544E( "stealth_override_goal" );
+    return scripts\engine\utility::_id_5452( "stealth_override_goal" ) && scripts\engine\utility::_id_544E( "stealth_override_goal" );
 }
 
 _id_E795()
 {
     if ( _id_E794() )
-        _id_077B::_id_545B( "stealth_override_goal" );
+        scripts\engine\utility::_id_545B( "stealth_override_goal" );
 }
 
 _id_4A37()
 {
-    _id_077B::_id_5BE4( "stealth_enabled" );
+    scripts\engine\utility::_id_5BE4( "stealth_enabled" );
     _id_0887::_id_D3BA( 0 );
     var_0 = _func_0074( "all", "all" );
 
     foreach ( var_2 in var_0 )
         var_2 _id_5208( 0 );
 
-    foreach ( var_5 in level._id_B758 )
+    foreach ( var_5 in level.players )
     {
         var_5._id_0283 = 8192;
 
-        if ( var_5 _id_077B::_id_5452( "stealth_enabled" ) )
-            var_5 _id_077B::_id_5450( "stealth_enabled" );
+        if ( var_5 scripts\engine\utility::_id_5452( "stealth_enabled" ) )
+            var_5 scripts\engine\utility::_id_5450( "stealth_enabled" );
     }
 
     _id_0888::_id_5672( "spotted" );
@@ -700,12 +700,12 @@ _id_5209()
         if ( isdefined( level._id_5DA0 ) )
             [[ level._id_5DA0 ]]();
         else
-            _id_0887::_id_0271();
+            _id_0887::main();
     }
     else
-        _id_077B::_id_5BFB( "stealth_enabled" );
+        scripts\engine\utility::_id_5BFB( "stealth_enabled" );
 
-    if ( !isdefined( level._id_030F._id_03E1 ) )
+    if ( !isdefined( level.player._id_03E1 ) )
         _id_0887::_id_D3BA( 1 );
 
     var_0 = _func_0074( "all", "all" );
@@ -713,10 +713,10 @@ _id_5209()
     foreach ( var_2 in var_0 )
         var_2 _id_5208( 1 );
 
-    foreach ( var_5 in level._id_B758 )
+    foreach ( var_5 in level.players )
     {
-        if ( var_5 _id_077B::_id_5452( "stealth_enabled" ) )
-            var_5 _id_077B::_id_5454( "stealth_enabled" );
+        if ( var_5 scripts\engine\utility::_id_5452( "stealth_enabled" ) )
+            var_5 scripts\engine\utility::_id_5454( "stealth_enabled" );
     }
 }
 
@@ -726,12 +726,12 @@ _id_5208( var_0, var_1 )
     {
         self._id_0283 = 8192;
 
-        if ( _id_077B::_id_5452( "stealth_enabled" ) && _id_077B::_id_544E( "stealth_enabled" ) && self._id_045B == "axis" )
+        if ( scripts\engine\utility::_id_5452( "stealth_enabled" ) && scripts\engine\utility::_id_544E( "stealth_enabled" ) && self.team == "axis" )
         {
-            var_2 = _func_020F();
-            var_2._id_02EA = level._id_030F._id_02EA;
-            var_2._id_84F7 = level._id_030F._id_02EA;
-            var_2._id_84F8 = level._id_030F._id_02EA;
+            var_2 = spawnstruct();
+            var_2.origin = level.player.origin;
+            var_2._id_84F7 = level.player.origin;
+            var_2._id_84F8 = level.player.origin;
             var_2._id_048F = "combat";
             var_2._id_F8E1 = "attack";
             self._id_016A = 0;
@@ -742,12 +742,12 @@ _id_5208( var_0, var_1 )
             _id_38E4();
     }
 
-    if ( _id_077B::_id_5452( "stealth_enabled" ) )
+    if ( scripts\engine\utility::_id_5452( "stealth_enabled" ) )
     {
         if ( var_0 )
-            _id_077B::_id_5454( "stealth_enabled" );
+            scripts\engine\utility::_id_5454( "stealth_enabled" );
         else
-            _id_077B::_id_5450( "stealth_enabled" );
+            scripts\engine\utility::_id_5450( "stealth_enabled" );
     }
 
     if ( var_0 && istrue( var_1 ) )
@@ -803,7 +803,7 @@ _id_10938( var_0, var_1 )
     {
         self waittill( "goal" );
 
-        if ( distance( self._id_02EA, var_0 ) < var_1 + 10 )
+        if ( distance( self.origin, var_0 ) < var_1 + 10 )
             break;
     }
 }

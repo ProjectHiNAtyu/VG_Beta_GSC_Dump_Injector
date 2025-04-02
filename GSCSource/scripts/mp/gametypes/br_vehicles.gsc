@@ -23,7 +23,7 @@ _id_2C20()
     level._id_2AA5["tacrover_spawn"] = "tac_rover";
     level._id_2AA5["technical_spawn"] = "technical";
     level._id_2AA5["van_spawn"] = "van";
-    level._id_0BA3["vehicle_flares"] = _func_0139( "vfx/iw8_mp/killstreak/vfx_apache_angel_flares.vfx" );
+    level._effect["vehicle_flares"] = loadfx( "vfx/iw8_mp/killstreak/vfx_apache_angel_flares.vfx" );
 }
 
 _id_2C21()
@@ -47,12 +47,12 @@ _id_D8B3()
     level._id_2AA3 = [];
     level._id_2AA4 = [];
     level._id_2A36 = [];
-    var_4 = _id_09BB::_id_10273();
+    var_4 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10273();
 
     foreach ( var_14, var_6 in var_4._id_4335 )
     {
         var_7 = [[ var_6._id_6D3F ]]();
-        level._id_2AA3 = _id_077B::_id_1B75( level._id_2AA3, var_7 );
+        level._id_2AA3 = scripts\engine\utility::_id_1B75( level._id_2AA3, var_7 );
 
         foreach ( var_9 in var_7 )
         {
@@ -71,7 +71,7 @@ _id_D8B3()
 
             foreach ( var_2 in level._id_2C24 )
             {
-                if ( _func_0119( var_9._id_02EA, var_2 ) )
+                if ( _func_0119( var_9.origin, var_2 ) )
                 {
                     var_10 = var_2._id_10351.size;
                     var_2._id_10351[var_10] = var_9;
@@ -167,8 +167,8 @@ _id_51A9()
     {
         foreach ( var_3 in var_1 )
         {
-            if ( _id_09BA::_id_101B9( var_3 ) )
-                _id_09BA::_id_1017B( var_3 );
+            if ( scripts\cp_mp\vehicles\vehicle_occupancy::_id_101B9( var_3 ) )
+                scripts\cp_mp\vehicles\vehicle_occupancy::_id_1017B( var_3 );
         }
     }
 }
@@ -178,7 +178,7 @@ _id_474C()
     if ( !isdefined( level._id_FFF1 ) || !isdefined( level._id_FFF1._id_82E6 ) )
         return;
 
-    _id_09BB::_id_10266();
+    scripts\cp_mp\vehicles\vehicle_spawn::_id_10266();
     level._id_EBC0 = 1;
 
     foreach ( var_6, var_1 in level._id_FFF1._id_82E6 )
@@ -187,7 +187,7 @@ _id_474C()
 
         foreach ( var_4 in var_1 )
         {
-            _id_09BB::_id_10286( var_4 );
+            scripts\cp_mp\vehicles\vehicle_spawn::_id_10286( var_4 );
             var_4 [[ var_2 ]]( undefined );
         }
     }
@@ -200,7 +200,7 @@ _id_F75A( var_0, var_1, var_2, var_3 )
     if ( var_0 == "little_bird" && scripts\mp\gametypes\br_gametypes::_id_8839( "littleBirdSpawns" ) )
         return;
 
-    if ( _id_09BB::_id_10267( var_0 ) )
+    if ( scripts\cp_mp\vehicles\vehicle_spawn::_id_10267( var_0 ) )
     {
         var_4 = _id_E268( var_0, var_1, var_3 );
 
@@ -213,17 +213,17 @@ _id_F75A( var_0, var_1, var_2, var_3 )
 
 _id_E268( var_0, var_1, var_2 )
 {
-    var_3 = var_1._id_02EA;
-    var_4 = var_1._id_0054;
+    var_3 = var_1.origin;
+    var_4 = var_1.angles;
 
     if ( !isdefined( var_4 ) )
-        var_4 = ( 0, _func_01B6( 360 ), 0 );
+        var_4 = ( 0, randomfloat( 360 ), 0 );
 
-    var_5 = _func_020F();
-    var_5._id_02EA = var_3;
-    var_5._id_0054 = var_4;
-    var_5._id_E39A = "GAME_MODE";
-    var_6 = _id_09BB::_id_1028C( var_0, var_5, var_2 );
+    var_5 = spawnstruct();
+    var_5.origin = var_3;
+    var_5.angles = var_4;
+    var_5.spawntype = "GAME_MODE";
+    var_6 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle( var_0, var_5, var_2 );
 
     if ( isdefined( var_6 ) )
         scripts\mp\gametypes\br_analytics::_id_2AE7( var_6, var_0 );
@@ -233,16 +233,16 @@ _id_E268( var_0, var_1, var_2 )
 
 _id_E307()
 {
-    var_0 = _id_09BB::_id_10273();
+    var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10273();
     level._id_2A9E = 0;
     var_1 = 0;
     var_2 = [];
     var_3 = level._id_2AA3;
-    var_4 = _id_077B::_id_1B94( level._id_2AA4 );
+    var_4 = scripts\engine\utility::_id_1B94( level._id_2AA4 );
 
     foreach ( var_6 in var_4 )
     {
-        var_7 = _func_020F();
+        var_7 = spawnstruct();
         var_8 = level._id_2AA5[var_6._id_045A];
         var_9 = _id_F75A( var_8, var_6, "alwaysSpawn", var_7 );
 
@@ -254,7 +254,7 @@ _id_E307()
 
             foreach ( var_12 in level._id_2C24 )
             {
-                if ( _func_0119( var_6._id_02EA, var_12 ) )
+                if ( _func_0119( var_6.origin, var_12 ) )
                 {
                     var_12._id_10352++;
                     var_10 = 1;
@@ -281,7 +281,7 @@ _id_E307()
 
     if ( level._id_2A9E < level._id_2A9D )
     {
-        var_20 = _id_077B::_id_1B94( level._id_2C24 );
+        var_20 = scripts\engine\utility::_id_1B94( level._id_2C24 );
 
         foreach ( var_12 in var_20 )
         {
@@ -296,11 +296,11 @@ _id_E307()
 
                 if ( var_12._id_10352 < var_22 && var_12._id_10351.size > 0 )
                 {
-                    var_23 = _id_077B::_id_1B94( var_12._id_10351 );
+                    var_23 = scripts\engine\utility::_id_1B94( var_12._id_10351 );
 
                     for ( var_24 = 0; var_12._id_10352 < var_22 && var_24 < var_23.size; var_24++ )
                     {
-                        var_7 = _func_020F();
+                        var_7 = spawnstruct();
                         var_6 = var_23[var_24];
                         var_8 = level._id_2AA5[var_6._id_045A];
                         var_9 = _id_F75A( var_8, var_6, var_12._id_045A, var_7 );
@@ -331,11 +331,11 @@ _id_E307()
     if ( level._id_2A9E < level._id_2A9D )
     {
         var_26 = 0;
-        var_27 = _id_077B::_id_1B94( level._id_2A36 );
+        var_27 = scripts\engine\utility::_id_1B94( level._id_2A36 );
 
         foreach ( var_6 in var_27 )
         {
-            var_7 = _func_020F();
+            var_7 = spawnstruct();
             var_8 = level._id_2AA5[var_6._id_045A];
             var_9 = _id_F75A( var_8, var_6, "heloSpawn", var_7 );
 
@@ -359,17 +359,17 @@ _id_E307()
     if ( level._id_2A9E < level._id_2A9D )
     {
         var_23 = 0;
-        var_3 = _id_077B::_id_1B97( var_3, var_2 );
-        var_3 = _id_077B::_id_1B94( var_3 );
+        var_3 = scripts\engine\utility::_id_1B97( var_3, var_2 );
+        var_3 = scripts\engine\utility::_id_1B94( var_3 );
 
         foreach ( var_6 in var_3 )
         {
             var_8 = level._id_2AA5[var_6._id_045A];
 
-            while ( !_id_09BC::_id_31BB() )
+            while ( !scripts\cp_mp\vehicles\vehicle_tracking::_id_31BB() )
                 wait 1;
 
-            var_7 = _func_020F();
+            var_7 = spawnstruct();
             var_9 = _id_F75A( var_8, var_6, "randomSpawns", var_7 );
             level._id_2A9E++;
             var_23++;
@@ -391,7 +391,7 @@ _id_E307()
 _id_2C22()
 {
     level._id_2A9E = 0;
-    var_0 = _id_09BB::_id_10273();
+    var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10273();
 
     foreach ( var_2 in level._id_2C24 )
         var_2._id_10352 = 0;
@@ -439,7 +439,7 @@ _id_431E( var_0, var_1 )
         foreach ( var_8 in var_6 )
         {
             var_9 = 0;
-            var_10 = var_8._id_02EA;
+            var_10 = var_8.origin;
             var_11 = distance2d( var_0, var_10 );
 
             if ( var_11 + var_2 > var_1 )
@@ -455,10 +455,10 @@ _id_431E( var_0, var_1 )
 
             if ( var_9 )
             {
-                var_13 = var_8._id_01FF;
-                var_14 = var_8._id_027F;
+                var_13 = var_8.health;
+                var_14 = var_8.maxhealth;
                 var_15 = 100;
-                var_8 _meth_80B7( var_5, var_10, undefined, undefined, "MOD_TRIGGER_HURT", "danger_circle_br" );
+                var_8 dodamage( var_5, var_10, undefined, undefined, "MOD_TRIGGER_HURT", "danger_circle_br" );
             }
         }
     }

@@ -3,7 +3,7 @@
 
 _id_ECDA()
 {
-    _id_099D::_id_C2A5( "tac_rover", "spawnCallback", ::_id_ECDD );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "tac_rover", "spawnCallback", ::_id_ECDD );
     _id_ED22();
     _id_ECDB();
     scripts\mp\utility\killstreak::_id_10228( "tac_rover", _id_09B1::_id_ECCD );
@@ -11,8 +11,8 @@ _id_ECDA()
 
 _id_ECDB()
 {
-    var_0 = _id_09BB::_id_10274( "tac_rover", 1 );
-    var_0._id_0DD8 = _id_09BB::vehicle_spawn;
+    var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_10274( "tac_rover", 1 );
+    var_0._id_0DD8 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn;
 }
 
 _id_ED22()
@@ -31,7 +31,7 @@ _id_ECDD( var_0, var_1 )
 {
     var_2 = _id_09B1::_id_ECC6( var_0, var_1 );
 
-    if ( isdefined( var_2 ) && _id_09BB::_id_10270() )
+    if ( isdefined( var_2 ) && scripts\cp_mp\vehicles\vehicle_spawn::_id_10270() )
         var_2._id_AA96 = ::_id_ECDC;
 
     return var_2;
@@ -44,9 +44,9 @@ _id_ECDC()
 
 _id_ECDE()
 {
-    var_0 = _id_09BC::_id_6E22( self );
-    var_1 = _func_020F();
-    _id_09BC::_id_3D43( var_0, var_1 );
-    var_2 = _func_020F();
-    var_3 = _id_09BB::vehicle_spawn_spawnvehicle( "tac_rover", var_1, var_2 );
+    var_0 = scripts\cp_mp\vehicles\vehicle_tracking::_id_6E22( self );
+    var_1 = spawnstruct();
+    scripts\cp_mp\vehicles\vehicle_tracking::_id_3D43( var_0, var_1 );
+    var_2 = spawnstruct();
+    var_3 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028E( "tac_rover", var_1, var_2 );
 }

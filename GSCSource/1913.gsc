@@ -22,10 +22,10 @@ _id_CEE2( var_0 )
 
 _id_CEE3( var_0 )
 {
-    if ( _func_0121( var_0, "left" ) )
+    if ( issubstr( var_0, "left" ) )
         return "left";
 
-    if ( _func_0121( var_0, "right" ) )
+    if ( issubstr( var_0, "right" ) )
         return "right";
 
     return "none";
@@ -38,7 +38,7 @@ _id_CEE4( var_0, var_1 )
 
 _id_CED7()
 {
-    var_0 = _func_000B( self._id_0054[1] );
+    var_0 = _func_000B( self.angles[1] );
 
     if ( self._id_2287 < 0 && var_0 > 0 )
         var_0 = var_0 - 360;
@@ -84,12 +84,12 @@ _id_CEDC()
 {
     var_0 = self _meth_867B( "door", "setup", "scriptable_event_model", "radius" );
     self._id_ADF6 = var_0 * 0.5;
-    self._id_2287 = _func_000B( self._id_0054[1] );
+    self._id_2287 = _func_000B( self.angles[1] );
 }
 
 _id_CEE6()
 {
-    self._id_02F2 = undefined;
+    self.owner = undefined;
 }
 
 _id_CEE7()
@@ -98,12 +98,12 @@ _id_CEE7()
     {
         wait 1.0;
 
-        if ( !isdefined( self._id_02F2 ) )
+        if ( !isdefined( self.owner ) )
             return;
 
-        var_0 = _id_0777::_id_FFD9( self._id_02EA, self._id_0054, self._id_ADF6 * 0.5 );
+        var_0 = scripts\engine\math::_id_FFD9( self.origin, self.angles, self._id_ADF6 * 0.5 );
 
-        if ( distancesquared( self._id_02F2._id_02EA, var_0 ) > spawnstruct( self._id_ADF6 ) )
+        if ( distancesquared( self.owner.origin, var_0 ) > _func_0214( self._id_ADF6 ) )
         {
             _id_CEE6();
             return;
@@ -113,7 +113,7 @@ _id_CEE7()
 
 _id_CED1( var_0 )
 {
-    self._id_02F2 = var_0;
+    self.owner = var_0;
     thread _id_CEE7();
 }
 
@@ -121,44 +121,44 @@ _id_CED2( var_0, var_1 )
 {
     if ( var_1 == "closed" )
     {
-        if ( isdefined( self._id_02F2 ) )
+        if ( isdefined( self.owner ) )
             _id_CEE6();
     }
-    else if ( !isdefined( self._id_02F2 ) )
+    else if ( !isdefined( self.owner ) )
         _id_CED1( var_0 );
 }
 
 _id_2314( var_0 )
 {
-    if ( isdefined( var_0 ) && _func_0117( var_0 ) )
+    if ( isdefined( var_0 ) && isplayer( var_0 ) )
     {
-        if ( !_func_0104( var_0 ) )
+        if ( !isai( var_0 ) )
         {
-            var_0 _meth_8278( "grenade_rumble" );
-            var_0 _meth_849F( 0.35, 0.5, var_0._id_02EA, 200 );
+            var_0 playrumbleonentity( "grenade_rumble" );
+            var_0 earthquakeforplayer( 0.35, 0.5, var_0.origin, 200 );
         }
     }
 }
 
 _id_DB01( var_0 )
 {
-    if ( !isai( var_0 ) || isdefined( var_0._id_59C0 ) )
+    if ( !isalive( var_0 ) || isdefined( var_0._id_59C0 ) )
         return 0;
 
-    var_1 = anglestoforward( var_0._id_0054 );
-    var_2 = _id_0777::_id_FFD9( self._id_02EA, self._id_0054, self._id_ADF6 * 0.5 );
+    var_1 = anglestoforward( var_0.angles );
+    var_2 = scripts\engine\math::_id_FFD9( self.origin, self.angles, self._id_ADF6 * 0.5 );
     var_2 = var_2 + ( 0, 0, self._id_ADF6 );
 
-    if ( _id_077B::_id_10E74( var_0._id_02EA + var_1 * -45.0, var_0._id_0054, var_2, cos( 43 ) ) )
+    if ( scripts\engine\utility::_id_10E74( var_0.origin + var_1 * -45.0, var_0.angles, var_2, cos( 43 ) ) )
     {
-        var_3 = anglestoright( self._id_0054 );
-        var_4 = _func_025A( var_2 - var_0 geteye() );
-        var_5 = _func_0257( var_1, var_4 );
-        var_6 = _func_0257( var_1, var_3 );
+        var_3 = anglestoright( self.angles );
+        var_4 = vectornormalize( var_2 - var_0 geteye() );
+        var_5 = vectordot( var_1, var_4 );
+        var_6 = vectordot( var_1, var_3 );
         var_7 = var_0 getvelocity();
-        var_8 = _func_0257( _func_025A( var_7 ), ( 0, 0, 1 ) );
+        var_8 = vectordot( vectornormalize( var_7 ), ( 0, 0, 1 ) );
 
-        if ( _func_0130( var_7 ) >= 200 && abs( var_8 ) < 0.5 && abs( var_6 ) > 0.75 && var_5 > 0.75 )
+        if ( length( var_7 ) >= 200 && abs( var_8 ) < 0.5 && abs( var_6 ) > 0.75 && var_5 > 0.75 )
             return 1;
     }
 
@@ -169,7 +169,7 @@ _id_CEDB( var_0, var_1 )
 {
     var_2 = "door";
 
-    if ( isdefined( self._id_02F2 ) && var_0 != self._id_02F2 )
+    if ( isdefined( self.owner ) && var_0 != self.owner )
         return;
 
     if ( !isdefined( self._id_ADF6 ) )
@@ -192,8 +192,8 @@ _id_CEDB( var_0, var_1 )
             return;
     }
 
-    var_6 = _id_0777::_id_FFD9( self._id_02EA, self._id_0054, self._id_ADF6 );
-    var_7 = _id_0777::_id_B9A3( var_0._id_02EA, self._id_02EA, var_6 );
+    var_6 = scripts\engine\math::_id_FFD9( self.origin, self.angles, self._id_ADF6 );
+    var_7 = scripts\engine\math::_id_B9A3( var_0.origin, self.origin, var_6 );
     var_8 = _id_CEE2( var_7 );
     var_9 = _id_CEE3( var_3 );
     var_10 = _id_CEE4( var_8, 90 );
@@ -236,7 +236,7 @@ _id_CEDB( var_0, var_1 )
 
     _id_CED2( var_0, var_11 );
     thread _id_CECF( var_2, var_11 );
-    self _meth_8373( var_2, var_11 );
+    self setscriptablepartstate( var_2, var_11 );
     self._id_8FD7 = gettime();
     var_0 notify( "use_scriptable_door", self, var_0, var_2, var_11 );
 }
@@ -254,30 +254,30 @@ _id_CECF( var_0, var_1 )
 
     if ( var_1 == "closed" )
     {
-        level._id_CEE8[self.health] = undefined;
+        level._id_CEE8[self._id_0219] = undefined;
         return;
     }
 
-    level._id_CEE8[self.health] = self;
-    _id_077B::_id_108F3( "scriptable_door_auto_close", level._id_CED0 );
+    level._id_CEE8[self._id_0219] = self;
+    scripts\engine\utility::_id_108F3( "scriptable_door_auto_close", level._id_CED0 );
     var_2 = self _meth_8574( var_0 );
 
     if ( var_2 == "closed" )
         return;
 
     self _meth_86C7( 1 );
-    self _meth_8373( var_0, "closed" );
+    self setscriptablepartstate( var_0, "closed" );
     self._id_8FD7 = gettime();
-    level._id_CEE8[self.health] = undefined;
+    level._id_CEE8[self._id_0219] = undefined;
 }
 
 _id_CEE1( var_0, var_1, var_2, var_3, var_4, var_5 )
 {
     var_0 thread _id_CEDB( var_3, "use" );
 
-    if ( isdefined( var_0._id_0457 ) )
+    if ( isdefined( var_0.target ) )
     {
-        var_6 = _func_03BB( var_0._id_0457, "targetname" );
+        var_6 = _func_03BB( var_0.target, "targetname" );
 
         foreach ( var_8 in var_6 )
         {
@@ -300,10 +300,10 @@ _id_CEDF()
     foreach ( var_2 in var_0 )
     {
         var_2 _meth_86C7( 1 );
-        var_3 = anglestoforward( var_2._id_0054 );
-        var_4 = var_2._id_02EA + var_3 * 54 * 0.5;
+        var_3 = anglestoforward( var_2.angles );
+        var_4 = var_2.origin + var_3 * 54 * 0.5;
         var_2._id_39B3 = var_4;
-        var_2._id_39B2 = var_2._id_0054;
+        var_2._id_39B2 = var_2.angles;
     }
 }
 

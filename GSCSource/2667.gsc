@@ -3,7 +3,7 @@
 
 _id_6A9B( var_0 )
 {
-    var_1 = _id_077B::_id_6D7C( var_0, "targetname" );
+    var_1 = scripts\engine\utility::_id_6D7C( var_0, "targetname" );
 
     if ( !isdefined( var_1 ) )
         return;
@@ -25,13 +25,13 @@ _id_B603( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
     if ( var_1 _meth_81CB() )
-        var_1 _meth_8415();
+        var_1 unlink();
 }
 
 _id_B46B( var_0 )
@@ -39,8 +39,8 @@ _id_B46B( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -53,8 +53,8 @@ _id_B466( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -66,8 +66,8 @@ _id_B468( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -79,8 +79,8 @@ _id_B469( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -92,8 +92,8 @@ _id_B52C( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -106,8 +106,8 @@ _id_B52D( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -120,8 +120,8 @@ _id_B52E( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -134,8 +134,8 @@ _id_C989( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -147,12 +147,12 @@ _id_2FC6( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
-    var_1 thread _id_FD25( 0.06, 0.075, 2, var_1._id_02EA, 8000, "mig_rumble", 0.05, 0.1 );
+    var_1 thread _id_FD25( 0.06, 0.075, 2, var_1.origin, 8000, "mig_rumble", 0.05, 0.1 );
 }
 
 _id_2FC9( var_0 )
@@ -160,12 +160,12 @@ _id_2FC9( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
-    var_1 thread _id_FD25( 0.09, 0.115, 2, var_1._id_02EA, 8000, undefined, 0.15, 0.5 );
+    var_1 thread _id_FD25( 0.09, 0.115, 2, var_1.origin, 8000, undefined, 0.15, 0.5 );
 }
 
 _id_2FC8( var_0 )
@@ -173,12 +173,12 @@ _id_2FC8( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
-    var_1 thread _id_FD25( 0.065, 0.09, 0.5, var_1._id_02EA, 8000, undefined, 0.15, 0.5 );
+    var_1 thread _id_FD25( 0.065, 0.09, 0.5, var_1.origin, 8000, undefined, 0.15, 0.5 );
 }
 
 _id_2FC7( var_0 )
@@ -186,8 +186,8 @@ _id_2FC7( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -208,12 +208,12 @@ _id_FD25( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7 )
     while ( isdefined( self ) )
     {
         if ( isdefined( var_0 ) && isdefined( var_1 ) )
-            self _meth_849F( _func_01B7( var_0, var_1 ), var_2, var_3, var_4 );
+            self earthquakeforplayer( randomfloatrange( var_0, var_1 ), var_2, var_3, var_4 );
 
         if ( isdefined( var_5 ) )
-            self playrumbleonentity( var_5, self._id_02EA );
+            self _meth_8279( var_5, self.origin );
 
-        wait( _func_01B7( var_6, var_7 ) );
+        wait( randomfloatrange( var_6, var_7 ) );
     }
 }
 
@@ -232,7 +232,7 @@ _id_DC7B()
         return;
 
     foreach ( var_1 in self._id_0F56 )
-        var_1 _meth_83C3();
+        var_1 show();
 }
 
 _id_D4B5( var_0 )
@@ -240,8 +240,8 @@ _id_D4B5( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -253,8 +253,8 @@ _id_D4C2( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -266,8 +266,8 @@ _id_D4B4( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -276,10 +276,10 @@ _id_D4B4( var_0 )
 
 _id_D179( var_0 )
 {
-    self _meth_82F6( "handheld_camera_rotation_move_mod_override", var_0 );
-    self _meth_82F6( "handheld_camera_rotation_view_mod_override", var_0 );
-    self _meth_82F6( "handheld_camera_translation_move_mod_override", var_0 );
-    self _meth_82F6( "handheld_camera_translation_view_mod_override", var_0 );
+    self setclientomnvar( "handheld_camera_rotation_move_mod_override", var_0 );
+    self setclientomnvar( "handheld_camera_rotation_view_mod_override", var_0 );
+    self setclientomnvar( "handheld_camera_translation_move_mod_override", var_0 );
+    self setclientomnvar( "handheld_camera_translation_view_mod_override", var_0 );
 }
 
 _id_D17A( var_0, var_1, var_2 )
@@ -294,7 +294,7 @@ _id_D17A( var_0, var_1, var_2 )
     {
         var_3 = gettime();
         var_6 = clamp( 1.0 - ( var_4 - var_3 ) / var_2, 0.0, 1.0 );
-        var_7 = _id_077B::_id_F07F( var_0 < var_1, var_5 * var_6 + var_0, var_0 - var_5 * var_6 );
+        var_7 = scripts\engine\utility::ter_op( var_0 < var_1, var_5 * var_6 + var_0, var_0 - var_5 * var_6 );
         _id_D179( var_7 );
 
         if ( var_6 == 1.0 )
@@ -309,8 +309,8 @@ _id_D4BB( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -322,8 +322,8 @@ _id_D4B6( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -335,8 +335,8 @@ _id_D4B7( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -348,8 +348,8 @@ _id_D4B8( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -361,8 +361,8 @@ _id_D4B9( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -374,8 +374,8 @@ _id_D4BA( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -387,8 +387,8 @@ _id_D4C1( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -400,8 +400,8 @@ _id_D4BC( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -413,8 +413,8 @@ _id_D4BD( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -426,8 +426,8 @@ _id_D4BE( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -439,8 +439,8 @@ _id_D4BF( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -452,8 +452,8 @@ _id_D4C0( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -462,14 +462,14 @@ _id_D4C0( var_0 )
 
 _id_B42B( var_0 )
 {
-    if ( !_id_0999::_id_8926() )
+    if ( !scripts\cp_mp\utility\game_utility::isnightmap() )
         return;
 
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
@@ -481,16 +481,16 @@ _id_6A60( var_0 )
     if ( !isdefined( var_0 ) )
         return;
 
-    if ( isdefined( var_0._id_030F ) )
-        var_1 = var_0._id_030F;
+    if ( isdefined( var_0.player ) )
+        var_1 = var_0.player;
     else
         var_1 = var_0;
 
-    var_2 = var_1._id_02EA[2];
-    var_3 = _id_077A::_id_3F4E( 1 );
-    var_4 = var_1._id_02EA + ( 0, 0, 12 );
-    var_5 = var_1._id_02EA - ( 0, 0, 24 );
-    var_6 = _id_077A::_id_B5F4( var_4, var_5, var_1._id_0054, [ var_1, var_1._id_7E09._id_94FE ], var_3 )["position"];
+    var_2 = var_1.origin[2];
+    var_3 = scripts\engine\trace::_id_3F4E( 1 );
+    var_4 = var_1.origin + ( 0, 0, 12 );
+    var_5 = var_1.origin - ( 0, 0, 24 );
+    var_6 = scripts\engine\trace::_id_B5F4( var_4, var_5, var_1.angles, [ var_1, var_1._id_7E09._id_94FE ], var_3 )["position"];
     var_7 = var_6[2];
     var_1._id_7E51 = var_7 - var_2;
 }
@@ -500,17 +500,17 @@ _id_3AE7()
     level endon( "prematch_over" );
     self endon( "death_or_disconnect" );
     var_0 = 0.0;
-    self._id_B016 _meth_8415();
+    self._id_B016 unlink();
 
     while ( isdefined( self._id_B016 ) )
     {
         _id_6A60( self._id_B591 );
-        var_1 = ( self._id_B016._id_02EA[0], self._id_B016._id_02EA[1], self._id_B016._id_02EA[2] + self._id_7E51 );
+        var_1 = ( self._id_B016.origin[0], self._id_B016.origin[1], self._id_B016.origin[2] + self._id_7E51 );
 
         if ( abs( var_0 - self._id_7E51 ) > 0.01 )
         {
             var_0 = self._id_7E51;
-            self._id_B016 _meth_823B( var_1, 0.25, 0.05, 0.2 );
+            self._id_B016 moveto( var_1, 0.25, 0.05, 0.2 );
         }
 
         waitframe();
@@ -533,133 +533,133 @@ _id_7E37( var_0, var_1, var_2 )
 
     if ( !getdvarint( "scr_infil_uses_script_arms", 1 ) )
     {
-        var_3 = _func_0205( "script_model", var_1, 0, 0, self );
-        var_3 setmode( "tag_player" );
+        var_3 = spawn( "script_model", var_1, 0, 0, self );
+        var_3 setmodel( "tag_player" );
     }
     else
-        var_3 = _func_0205( "script_arms", var_1, 0, 0, self );
+        var_3 = spawn( "script_arms", var_1, 0, 0, self );
 
-    var_3._id_0054 = var_2;
-    var_3._id_030F = self;
+    var_3.angles = var_2;
+    var_3.player = self;
     self._id_B591 = var_3;
     self._id_B591 hide( 1 );
     self._id_B591._id_1887 = var_0;
-    self._id_B591 _meth_841D( #animtree );
+    self._id_B591 useanimtree( #animtree );
     self._id_B591._id_FC52 = 1;
     self._id_B591._id_10D17 = ::_id_7498;
     self._id_B591._id_36F3 = ::_id_740B;
     self._id_B591._id_4C7B = ::_id_741A;
-    self playerlinktoblend( self._id_B591, "tag_player", 1.0, 0, 0, 0, 0, 1 );
+    self playerlinktodelta( self._id_B591, "tag_player", 1.0, 0, 0, 0, 0, 1 );
     self notify( "rig_created" );
-    _id_077B::_id_1087E( "remove_rig", "player_free_spot" );
+    scripts\engine\utility::waittill_any_2( "remove_rig", "player_free_spot" );
 
     if ( istrue( level._id_609B ) )
         return;
 
     if ( isdefined( self ) )
     {
-        self _meth_8415();
+        self unlink();
         thread _id_EDC0();
     }
 
     if ( isdefined( var_3 ) )
-        var_3 _meth_809A();
+        var_3 delete();
 }
 
 _id_741A( var_0 )
 {
-    if ( !isdefined( self ) || !isdefined( self._id_030F ) )
+    if ( !isdefined( self ) || !isdefined( self.player ) )
         return;
 
     switch ( var_0 )
     {
         case "blima_interior":
-            self._id_030F _meth_865B();
+            self.player _meth_865B();
 
             switch ( self._id_1887 )
             {
                 case "slot_0":
-                    self._id_030F _meth_865E( 1.8, 40, 20, 20 );
+                    self.player _meth_865E( 1.8, 40, 20, 20 );
                     break;
                 case "slot_1":
-                    self._id_030F _meth_865E( 1.8, 60, 20, 20 );
+                    self.player _meth_865E( 1.8, 60, 20, 20 );
                     break;
                 case "slot_2":
-                    self._id_030F _meth_865E( 1.9, 50, 20, 20 );
+                    self.player _meth_865E( 1.9, 50, 20, 20 );
                     break;
             }
 
             break;
         case "blima_exit":
-            self._id_030F _meth_865B();
-            self._id_030F _meth_865E( 2.8, 500, 4, 4 );
+            self.player _meth_865B();
+            self.player _meth_865E( 2.8, 500, 4, 4 );
             break;
         case "umike_interior":
-            self._id_030F _meth_865B();
+            self.player _meth_865B();
 
             switch ( self._id_1887 )
             {
                 case "slot_0":
-                    self._id_030F _meth_865E( 2.4, 50, 20, 20 );
+                    self.player _meth_865E( 2.4, 50, 20, 20 );
                     break;
                 case "slot_1":
-                    self._id_030F _meth_865E( 2.4, 50, 20, 20 );
+                    self.player _meth_865E( 2.4, 50, 20, 20 );
                     break;
                 case "slot_2":
-                    self._id_030F _meth_865E( 2.4, 50, 20, 20 );
+                    self.player _meth_865E( 2.4, 50, 20, 20 );
                     break;
                 case "slot_3":
-                    self._id_030F _meth_865E( 2.4, 50, 20, 20 );
+                    self.player _meth_865E( 2.4, 50, 20, 20 );
                     break;
                 case "slot_4":
-                    self._id_030F _meth_865E( 2.4, 50, 20, 20 );
+                    self.player _meth_865E( 2.4, 50, 20, 20 );
                     break;
                 case "slot_5":
-                    self._id_030F _meth_865E( 2.4, 50, 20, 20 );
+                    self.player _meth_865E( 2.4, 50, 20, 20 );
                     break;
             }
 
             break;
         case "umike_exit":
-            self._id_030F _meth_865B();
-            self._id_030F _meth_865E( 2.8, 500, 4, 4 );
+            self.player _meth_865B();
+            self.player _meth_865E( 2.8, 500, 4, 4 );
             break;
         case "van_interior":
-            self._id_030F _meth_865B();
+            self.player _meth_865B();
 
             switch ( self._id_1887 )
             {
                 case "slot_0":
-                    self._id_030F _meth_865E( 2.1, 40, 20, 20 );
+                    self.player _meth_865E( 2.1, 40, 20, 20 );
                     break;
                 case "slot_1":
-                    self._id_030F _meth_865E( 2.1, 40, 20, 20 );
+                    self.player _meth_865E( 2.1, 40, 20, 20 );
                     break;
                 case "slot_2":
-                    self._id_030F _meth_865E( 2.1, 40, 20, 20 );
+                    self.player _meth_865E( 2.1, 40, 20, 20 );
                     break;
                 case "slot_3":
-                    self._id_030F _meth_865E( 2.1, 40, 20, 20 );
+                    self.player _meth_865E( 2.1, 40, 20, 20 );
                     break;
                 case "slot_4":
-                    self._id_030F _meth_865E( 2.3, 60, 20, 20 );
+                    self.player _meth_865E( 2.3, 60, 20, 20 );
                     break;
                 case "slot_5":
-                    self._id_030F _meth_865E( 2.3, 60, 20, 20 );
+                    self.player _meth_865E( 2.3, 60, 20, 20 );
                     break;
             }
 
             break;
         case "van_exit":
-            self._id_030F _meth_865B();
-            self._id_030F _meth_865E( 2.8, 500, 4, 4 );
+            self.player _meth_865B();
+            self.player _meth_865E( 2.8, 500, 4, 4 );
             break;
     }
 }
 
 _id_740B( var_0 )
 {
-    if ( !isdefined( self ) || !isdefined( self._id_030F ) )
+    if ( !isdefined( self ) || !isdefined( self.player ) )
         return;
 
     var_1 = _func_00D6( var_0, 0, 4 );
@@ -667,7 +667,7 @@ _id_740B( var_0 )
     if ( var_1 == "set_" )
     {
         var_2 = _func_00D6( var_0, 4 );
-        self._id_030F _meth_8636( var_2 );
+        self.player _meth_8636( var_2 );
         return;
     }
 
@@ -714,65 +714,65 @@ _id_740B( var_0 )
 
 _id_7498( var_0 )
 {
-    if ( !isdefined( self ) || !isdefined( self._id_030F ) )
+    if ( !isdefined( self ) || !isdefined( self.player ) )
         return;
 
     switch ( var_0 )
     {
         case "drop":
-            self._id_030F _meth_84AB( "normal" );
-            self._id_030F _id_077B::_id_5453( "swapLoadout_blocked" );
-            self._id_030F _id_077B::_id_5453( "swapLoadout_pending" );
-            self._id_030F _id_077B::_id_5453( "swapLoadout_complete" );
-            self._id_030F _id_077B::_id_5454( "swapLoadout_blocked" );
-            self._id_030F thread _id_387B();
+            self.player _meth_84AB( "normal" );
+            self.player scripts\engine\utility::_id_5453( "swapLoadout_blocked" );
+            self.player scripts\engine\utility::_id_5453( "swapLoadout_pending" );
+            self.player scripts\engine\utility::_id_5453( "swapLoadout_complete" );
+            self.player scripts\engine\utility::_id_5454( "swapLoadout_blocked" );
+            self.player thread _id_387B();
 
-            if ( !_func_0104( self._id_030F ) )
-                self._id_030F _id_6F83();
+            if ( !isai( self.player ) )
+                self.player _id_6F83();
 
             if ( istrue( self._id_FC52 ) )
-                self showpart( self._id_030F );
+                self _meth_83C9( self.player );
 
             break;
         case "raise":
-            if ( isdefined( self._id_030F._id_7E66 ) && self._id_030F hasweapon( self._id_030F._id_7E66 ) )
-                self._id_030F _id_099A::_id_0D6A( self._id_030F._id_7E66 );
+            if ( isdefined( self.player._id_7E66 ) && self.player hasweapon( self.player._id_7E66 ) )
+                self.player scripts\cp_mp\utility\inventory_utility::_takeweapon( self.player._id_7E66 );
 
-            self._id_030F._id_7E67 = 1;
+            self.player._id_7E67 = 1;
 
-            if ( self._id_030F _id_077B::_id_5452( "swapLoadout_blocked" ) && self._id_030F _id_077B::_id_544E( "swapLoadout_blocked" ) )
-                self._id_030F _id_077B::_id_5450( "swapLoadout_blocked" );
+            if ( self.player scripts\engine\utility::_id_5452( "swapLoadout_blocked" ) && self.player scripts\engine\utility::_id_544E( "swapLoadout_blocked" ) )
+                self.player scripts\engine\utility::_id_5450( "swapLoadout_blocked" );
 
-            self._id_030F _meth_84AB( "normal" );
+            self.player _meth_84AB( "normal" );
 
             if ( !istrue( self._id_FC52 ) )
-                self._id_030F _meth_8654();
+                self.player _meth_8654();
 
-            if ( _id_099D::_id_8A10( "player", "loadout_finalizeWeapons" ) )
-                self._id_030F [[ _id_099D::_id_6D05( "player", "loadout_finalizeWeapons" ) ]]();
+            if ( scripts\cp_mp\utility\script_utility::issharedfuncdefined( "player", "loadout_finalizeWeapons" ) )
+                self.player [[ scripts\cp_mp\utility\script_utility::getsharedfunc( "player", "loadout_finalizeWeapons" ) ]]();
 
-            if ( !_func_0104( self._id_030F ) )
-                self._id_030F _id_EDC0();
+            if ( !isai( self.player ) )
+                self.player _id_EDC0();
 
-            if ( istrue( self._id_FC52 ) && self._id_030F _meth_81CB() )
-                self._id_030F _meth_8263( 0 );
+            if ( istrue( self._id_FC52 ) && self.player _meth_81CB() )
+                self.player _meth_8263( 0 );
 
             break;
         case "safe":
-            self._id_030F _meth_84AB( "safe", "iw8_ges_demeanor_safe" );
+            self.player _meth_84AB( "safe", "iw8_ges_demeanor_safe" );
             break;
         case "normal":
-            self._id_030F _meth_84AB( "normal" );
+            self.player _meth_84AB( "normal" );
             break;
         case "free":
-            self._id_030F _id_06BB::_id_1516( 1 );
-            self._id_030F _id_06BB::_id_14F7( 1 );
-            self._id_030F _id_06BB::_id_154D( 1 );
+            self.player scripts\common\utility::_id_1516( 1 );
+            self.player scripts\common\utility::_id_14F7( 1 );
+            self.player scripts\common\utility::_id_154D( 1 );
             break;
         case "hold":
-            self._id_030F _id_06BB::_id_1516( 0 );
-            self._id_030F _id_06BB::_id_14F7( 0 );
-            self._id_030F _id_06BB::_id_154D( 0 );
+            self.player scripts\common\utility::_id_1516( 0 );
+            self.player scripts\common\utility::_id_14F7( 0 );
+            self.player scripts\common\utility::_id_154D( 0 );
             break;
     }
 }
@@ -780,10 +780,10 @@ _id_7498( var_0 )
 _id_387B()
 {
     self endon( "disconnect" );
-    _id_077B::_id_10886( self, "death", level, "prematch_over" );
-    _id_077B::_id_5450( "swapLoadout_blocked", 1 );
-    _id_077B::_id_5450( "swapLoadout_pending", 1 );
-    _id_077B::_id_5450( "swapLoadout_complete", 1 );
+    scripts\engine\utility::_id_10886( self, "death", level, "prematch_over" );
+    scripts\engine\utility::_id_5450( "swapLoadout_blocked", 1 );
+    scripts\engine\utility::_id_5450( "swapLoadout_pending", 1 );
+    scripts\engine\utility::_id_5450( "swapLoadout_complete", 1 );
 }
 
 _id_EDC0()
@@ -793,27 +793,27 @@ _id_EDC0()
     if ( !isdefined( self._id_72A7 ) || !self hasweapon( self._id_72A7 ) )
         return;
 
-    if ( _id_077B::_id_5452( "swapLoadout_pending" ) && _id_077B::_id_544E( "swapLoadout_pending" ) )
-        _id_077B::_id_5456( "swapLoadout_complete" );
+    if ( scripts\engine\utility::_id_5452( "swapLoadout_pending" ) && scripts\engine\utility::_id_544E( "swapLoadout_pending" ) )
+        scripts\engine\utility::_id_5456( "swapLoadout_complete" );
 
-    if ( !_id_06BB::_id_8692() )
-        _id_06BB::_id_1552( 1 );
+    if ( !scripts\common\utility::_id_8692() )
+        scripts\common\utility::_id_1552( 1 );
 
     while ( self hasweapon( self._id_72A7 ) )
     {
-        if ( !_id_099A::_id_87C6( self._id_72A7 ) )
-            _id_099A::_id_0DE3( self._id_72A7 );
+        if ( !scripts\cp_mp\utility\inventory_utility::_id_87C6( self._id_72A7 ) )
+            scripts\cp_mp\utility\inventory_utility::_id_0DE3( self._id_72A7 );
         else
         {
-            _id_099A::_id_0D6A( self._id_72A7 );
-            _id_099A::_id_5EB7();
+            scripts\cp_mp\utility\inventory_utility::_takeweapon( self._id_72A7 );
+            scripts\cp_mp\utility\inventory_utility::_id_5EB7();
         }
 
         waitframe();
     }
 
     self._id_72A7 = undefined;
-    _id_06BB::_id_1552( 0 );
+    scripts\common\utility::_id_1552( 0 );
 }
 
 _id_6F83()
@@ -823,22 +823,22 @@ _id_6F83()
     if ( isdefined( self._id_72A7 ) )
         return;
 
-    var_0 = _func_034C( "iw8_gunless_infil" );
-    _id_099A::_id_0BEB( var_0, undefined, undefined, 1 );
+    var_0 = makeweapon( "iw8_gunless_infil" );
+    scripts\cp_mp\utility\inventory_utility::_giveweapon( var_0, undefined, undefined, 1 );
 
-    if ( !_id_06BB::_id_8692() )
-        _id_06BB::_id_1552( 1 );
+    if ( !scripts\common\utility::_id_8692() )
+        scripts\common\utility::_id_1552( 1 );
 
-    var_1 = _id_099A::_id_4D21( var_0, 0 );
+    var_1 = scripts\cp_mp\utility\inventory_utility::_id_4D21( var_0, 0 );
 
     if ( var_1 )
         self._id_72A7 = var_0;
     else
     {
-        _id_099A::_id_0D6A( var_0 );
-        _id_099A::_id_5EB7();
+        scripts\cp_mp\utility\inventory_utility::_takeweapon( var_0 );
+        scripts\cp_mp\utility\inventory_utility::_id_5EB7();
     }
 
-    _id_06BB::_id_1552( 0 );
+    scripts\common\utility::_id_1552( 0 );
     return var_1;
 }

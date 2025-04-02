@@ -15,7 +15,7 @@ _id_19CB()
 {
     var_0 = self._id_0122;
 
-    if ( isdefined( var_0 ) && var_0._id_0084 != "none" )
+    if ( isdefined( var_0 ) && var_0.basename != "none" )
         _id_6FEA( var_0 );
 }
 
@@ -26,14 +26,14 @@ _id_10C2A()
     for (;;)
     {
         _id_19CB();
-        _id_077B::_id_108C3( "weapon_change", "giveLoadout" );
+        scripts\engine\utility::_id_108C3( "weapon_change", "giveLoadout" );
     }
 }
 
 _id_6FEA( var_0 )
 {
     _id_3944();
-    var_1 = _id_07C4::_id_6BF8( var_0._id_0084, var_0._id_04A4 );
+    var_1 = _id_07C4::_id_6BF8( var_0.basename, var_0._id_04A4 );
 
     if ( isdefined( var_1 ) )
     {
@@ -46,7 +46,7 @@ _id_6FEA( var_0 )
 
 _id_6FAF( var_0 )
 {
-    scripts\mp\tac_ops\hostage_utility::_id_6FA5( var_0 );
+    scripts\mp\utility\perk::_id_6FA5( var_0 );
     self._id_10DB7[self._id_10DB7.size] = var_0;
 }
 
@@ -55,7 +55,7 @@ _id_3944()
     if ( isdefined( self._id_10DB7 ) )
     {
         foreach ( var_1 in self._id_10DB7 )
-            scripts\mp\tac_ops\hostage_utility::_id_C4EF( var_1 );
+            scripts\mp\utility\perk::removeperk( var_1 );
     }
 
     self._id_10DB7 = [];
@@ -89,8 +89,8 @@ _id_D636( var_0, var_1 )
 
 _id_EFA5( var_0, var_1 )
 {
-    if ( level._id_EF62 )
-        return var_0._id_045B == var_1._id_045B;
+    if ( level.teambased )
+        return var_0.team == var_1.team;
 
     return var_0 == var_1;
 }
@@ -127,7 +127,7 @@ _id_F0DB( var_0, var_1 )
     if ( isdefined( var_3 ) )
     {
         var_4 = var_3 + var_1;
-        var_2 = _id_07B9::_id_F0D8( var_4 );
+        var_2 = scripts\mp\hud_message::_id_F0D8( var_4 );
     }
 
     if ( var_2 )
@@ -151,7 +151,7 @@ _id_350E( var_0, var_1 )
             var_1 = var_3;
         }
 
-        _id_07B9::_id_DCC3( var_2 + var_1 );
+        scripts\mp\hud_message::_id_DCC3( var_2 + var_1 );
     }
 }
 
@@ -192,7 +192,7 @@ _id_D6DF( var_0, var_1, var_2, var_3 )
 
     if ( !isdefined( self._id_E504[var_0] ) )
     {
-        var_4 = _func_020F();
+        var_4 = spawnstruct();
         var_4._id_7C71 = var_0;
         var_4._id_E502 = var_1;
         var_4._id_E501 = var_2;

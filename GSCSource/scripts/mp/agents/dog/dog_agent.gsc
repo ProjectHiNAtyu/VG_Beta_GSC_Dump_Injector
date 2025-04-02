@@ -3,7 +3,7 @@
 
 _id_C2A1()
 {
-    _id_0008::_id_021D();
+    _id_0008::init();
     _id_097D::_id_11CB();
 
     if ( !isdefined( level._id_E3D6 ) )
@@ -29,5 +29,5 @@ _id_D838()
 _id_D884( var_0, var_1 )
 {
     self._id_75F7 = undefined;
-    self setmode( "test_character_dog_mp" );
+    self setmodel( "test_character_dog_mp" );
 }

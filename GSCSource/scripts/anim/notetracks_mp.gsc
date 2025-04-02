@@ -28,8 +28,8 @@ _id_C26E()
 
 _id_A616( var_0, var_1 )
 {
-    var_2 = _func_0121( var_0, "left" );
-    var_3 = _func_0121( var_0, "large" );
+    var_2 = issubstr( var_0, "left" );
+    var_3 = issubstr( var_0, "large" );
     var_4 = "right";
 
     if ( var_2 )
@@ -56,7 +56,7 @@ _id_745A( var_0, var_1, var_2, var_3 )
         switch ( var_0 )
         {
             case "attach_clip_left":
-                if ( visionsetnight( self._id_04CE ) == "rocketlauncher" )
+                if ( weaponclass( self._id_04CE ) == "rocketlauncher" )
                     _id_A63B();
 
                 break;
@@ -83,14 +83,14 @@ _id_A5F3( var_0 )
 
 _id_A63B()
 {
-    if ( !isai( self ) )
+    if ( !isalive( self ) )
         return;
 
     if ( !scripts\anim\utility_common::_id_FF19() )
         return;
 
     if ( self tagexists( "tag_rocket" ) )
-        self _meth_83C8( "tag_rocket" );
+        self showpart( "tag_rocket" );
 }
 
 _id_A618( var_0, var_1 )

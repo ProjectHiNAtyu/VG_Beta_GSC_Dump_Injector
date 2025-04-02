@@ -3,9 +3,9 @@
 
 #using_animtree("dog");
 
-_id_0271()
+main()
 {
-    self setmode( "c_s4_doberman_01" );
+    self setmodel( "c_s4_doberman_01" );
     self._id_24D4 = 0;
     self._id_18CB = "dog";
     self._id_1874 = "dog";
@@ -16,19 +16,19 @@ _id_0271()
     if ( _func_011C( self ) )
         self _meth_84C3( "ai_lochit_dmgtable" );
 
-    self _meth_841D( #animtree );
+    self useanimtree( #animtree );
 }
 
 _id_031A()
 {
-    _func_01A8( "c_s4_doberman_01" );
+    precachemodel( "c_s4_doberman_01" );
 }
 
 _id_9950()
 {
     self._id_1874 = "dog";
     self._id_1068F = "unitednations";
-    self setmode( "c_s4_doberman_01" );
+    self setmodel( "c_s4_doberman_01" );
 }
 
 _id_BB52( var_0 )

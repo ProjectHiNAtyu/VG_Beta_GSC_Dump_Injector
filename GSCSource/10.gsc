@@ -7,19 +7,19 @@ _id_01CE()
         return;
 
     var_0 = self._id_03C2;
-    var_1 = _func_020F();
-    var_1._id_02EA = self._id_02EA;
-    var_1._id_0054 = self._id_0054;
+    var_1 = spawnstruct();
+    var_1.origin = self.origin;
+    var_1.angles = self.angles;
     var_1._id_EBE3 = gettime();
 
     if ( isdefined( self._id_EBE4 ) )
         var_1._id_EBE4 = self._id_EBE4;
     else
-        var_1._id_EBE4 = _func_020F();
+        var_1._id_EBE4 = spawnstruct();
 
     if ( isdefined( self._id_03E1 ) )
     {
-        var_1._id_03E1 = _func_020F();
+        var_1._id_03E1 = spawnstruct();
         var_1._id_03E1._id_2C30 = self._id_03E1._id_2C30;
         var_1._id_03E1._id_8508 = self._id_03E1._id_8508;
     }
@@ -29,12 +29,12 @@ _id_01CE()
         if ( isdefined( self._id_FEFA ) )
         {
             if ( isdefined( self._id_02CD._id_045A ) )
-                var_1._id_0457 = self._id_02CD._id_045A;
+                var_1.target = self._id_02CD._id_045A;
 
             var_1._id_02CD = self._id_02CD;
         }
 
-        var_1._id_0457 = self._id_02CD._id_045A;
+        var_1.target = self._id_02CD._id_045A;
     }
 
     var_0._id_EBE0 = var_1;
@@ -67,7 +67,7 @@ _id_5F27( var_0 )
 
         var_3._id_CD50 = 1;
         var_3 _id_01CE();
-        var_3 _meth_809A();
+        var_3 delete();
     }
 
     level._id_BD61[var_0] = undefined;
@@ -81,14 +81,14 @@ _id_3F70( var_0, var_1 )
 
         if ( !isdefined( var_0 ) )
             var_2 = _func_0370();
-        else if ( !isalive( var_0 ) && var_0 == "" )
+        else if ( !_func_0106( var_0 ) && var_0 == "" )
             var_2 = _func_0370();
-        else if ( isalive( var_0 ) )
-            var_2 = _func_034C( var_0[_func_01B8( var_0.size )] );
+        else if ( _func_0106( var_0 ) )
+            var_2 = makeweapon( var_0[randomint( var_0.size )] );
         else
-            var_2 = _func_034C( var_0 );
+            var_2 = makeweapon( var_0 );
 
-        if ( !_func_036F( var_2 ) )
+        if ( !isnullweapon( var_2 ) )
         {
             self._id_CF73 = 1;
 

@@ -5,18 +5,18 @@ _id_6187( var_0 )
 {
     self endon( "disconnect" );
     var_0 endon( "death" );
-    _id_0A77::_id_BD07( "gasGrenade spawn", var_0._id_02F2 );
+    _id_0A77::_id_BD07( "gasGrenade spawn", var_0.owner );
     thread scripts\mp\weapons::_id_A0F3( self, var_0 );
     var_0 waittill( "missile_stuck", var_1 );
     thread _id_618C( var_0 );
-    var_0 _meth_809F();
+    var_0 detonate();
 }
 
 _id_618C( var_0 )
 {
     var_0 thread _id_0A78::_id_A682( "death", "end_explode" );
     var_0 endon( "end_explode" );
-    var_1 = var_0._id_02F2;
+    var_1 = var_0.owner;
     var_0 waittill( "explode", var_2 );
     thread _id_6138( var_2, var_1 );
 }
@@ -26,24 +26,24 @@ _id_6169( var_0 )
     if ( var_0._id_9CBF == "MOD_IMPACT" )
         return 1;
 
-    if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_gasmask" ) )
+    if ( scripts\mp\utility\perk::_hasperk( "specialty_gasmask" ) )
         return 0;
 
-    if ( var_0._id_006E == var_0._id_103C0 )
+    if ( var_0.attacker == var_0._id_103C0 )
     {
-        if ( distancesquared( var_0._id_0317, var_0._id_103C0._id_02EA ) > 30625 )
+        if ( distancesquared( var_0._id_0317, var_0._id_103C0.origin ) > 30625 )
             return 0;
     }
     else
     {
-        var_0._id_006E _id_079A::_id_3A9F( "equip_gas_grenade" );
-        var_0._id_006E _id_0A7B::_id_7D93( "gasHits", 1 );
+        var_0.attacker _id_079A::_id_3A9F( "equip_gas_grenade" );
+        var_0.attacker _id_0A7B::_id_7D93( "gasHits", 1 );
 
-        if ( var_0._id_103C0 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_gas_grenade_resist" ) )
-            var_0._id_006E _id_079B::_id_FC44( "hittacresist", undefined, undefined, undefined, 1 );
+        if ( var_0._id_103C0 scripts\mp\utility\perk::_hasperk( "specialty_gas_grenade_resist" ) )
+            var_0.attacker _id_079B::_id_FC44( "hittacresist", undefined, undefined, undefined, 1 );
     }
 
-    var_0._id_103C0 thread _id_611E( var_0._id_006E, 1 );
+    var_0._id_103C0 thread _id_611E( var_0.attacker, 1 );
     return 1;
 }
 
@@ -75,13 +75,13 @@ _id_6138( var_0, var_1, var_2, var_3 )
     if ( !isdefined( var_3 ) )
         var_3 = 1;
 
-    var_4 = _func_0205( "trigger_radius", var_0 + ( 0, 0, int( -57.75 * var_3 ) ), 0, int( 256 * var_3 ), int( 175 * var_3 ) );
+    var_4 = spawn( "trigger_radius", var_0 + ( 0, 0, int( -57.75 * var_3 ) ), 0, int( 256 * var_3 ), int( 175 * var_3 ) );
     var_4 _id_0765::_id_C2A7( 1, ::_id_EC12 );
     var_4 endon( "death" );
-    var_4._id_02F2 = var_1;
+    var_4.owner = var_1;
 
     if ( isdefined( var_1 ) )
-        var_4._id_045B = var_1._id_045B;
+        var_4.team = var_1.team;
 
     var_4._id_B7AD = [];
     var_4 thread _id_618D();
@@ -107,7 +107,7 @@ _id_613A()
     }
 
     _id_0765::_id_47E6();
-    self _meth_809A();
+    self delete();
 }
 
 _id_6167( var_0 )
@@ -117,9 +117,9 @@ _id_6167( var_0 )
 
     var_1 = var_0 getentitynumber();
     self._id_61BE[var_1] = var_0;
-    var_2 = var_0._id_02F2;
+    var_2 = var_0.owner;
 
-    if ( isdefined( var_2 ) && var_2 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_tactical_outline" ) )
+    if ( isdefined( var_2 ) && var_2 scripts\mp\utility\perk::_hasperk( "specialty_tactical_outline" ) )
         _id_0A42::_id_ACDD( var_2, var_0 );
 
     self._id_8FC4 = gettime();
@@ -132,11 +132,11 @@ _id_6167( var_0 )
 
     if ( self._id_61BE.size == 1 )
     {
-        thread _id_611E( var_0._id_02F2, 0 );
+        thread _id_611E( var_0.owner, 0 );
         _id_0995::_id_523A();
     }
 
-    _id_0A74::_id_39FC( "gas", -1 );
+    scripts\mp\utility\player::_id_39FC( "gas", -1 );
     return var_1;
 }
 
@@ -147,10 +147,10 @@ _id_6168( var_0, var_1 )
 
     if ( isdefined( var_1 ) )
     {
-        var_2 = var_1._id_02F2;
+        var_2 = var_1.owner;
 
-        if ( isdefined( var_2 ) && var_2 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_tactical_outline" ) )
-            self notify( "gasExit", var_1._id_02F2 );
+        if ( isdefined( var_2 ) && var_2 scripts\mp\utility\perk::_hasperk( "specialty_tactical_outline" ) )
+            self notify( "gasExit", var_1.owner );
     }
 
     self._id_61BE[var_0] = undefined;
@@ -158,7 +158,7 @@ _id_6168( var_0, var_1 )
 
     if ( self._id_61BE.size == 0 )
     {
-        _id_0A74::_id_39FC( "gas", 0 );
+        scripts\mp\utility\player::_id_39FC( "gas", 0 );
         thread _id_6177();
         thread _id_6175();
         _id_0995::_id_4AA9();
@@ -174,29 +174,29 @@ _id_618D()
     {
         self waittill( "trigger", var_0 );
 
-        if ( !_func_0117( var_0 ) )
+        if ( !isplayer( var_0 ) )
             continue;
 
         if ( var_0 _id_0A6F::_id_88C5() )
             continue;
 
-        if ( var_0 scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_gasmask" ) )
+        if ( var_0 scripts\mp\utility\perk::_hasperk( "specialty_gasmask" ) )
             continue;
 
-        if ( !var_0 _id_099C::_giveweapon() )
+        if ( !var_0 scripts\cp_mp\utility\player_utility::_id_0C14() )
             continue;
 
         if ( isdefined( self._id_B7AD[var_0 getentitynumber()] ) )
             continue;
 
-        if ( level._id_EF62 )
+        if ( level.teambased )
         {
-            if ( isdefined( self._id_02F2 ) )
+            if ( isdefined( self.owner ) )
             {
-                if ( var_0 != self._id_02F2 && !_id_099C::_id_B779( var_0, self._id_02F2 ) )
+                if ( var_0 != self.owner && !scripts\cp_mp\utility\player_utility::_id_B779( var_0, self.owner ) )
                     continue;
             }
-            else if ( isdefined( self._id_045B ) && _id_0A74::_id_8852( self._id_045B, var_0 ) )
+            else if ( isdefined( self.team ) && scripts\mp\utility\player::_id_8852( self.team, var_0 ) )
                 continue;
         }
 
@@ -219,7 +219,7 @@ _id_618E()
                 continue;
             }
 
-            if ( !var_1 _id_099C::_giveweapon() )
+            if ( !var_1 scripts\cp_mp\utility\player_utility::_id_0C14() )
                 continue;
 
             if ( var_1 _meth_81EF( self ) )
@@ -235,7 +235,7 @@ _id_618E()
 
 _id_611E( var_0, var_1 )
 {
-    var_2 = scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_gas_grenade_resist" );
+    var_2 = scripts\mp\utility\perk::_hasperk( "specialty_gas_grenade_resist" );
     var_3 = isdefined( var_0 ) && self == var_0;
 
     if ( !var_3 && var_2 )
@@ -301,27 +301,27 @@ _id_6128( var_0 )
     self notify( "gas_begin_coughing" );
     self endon( "gas_begin_coughing" );
 
-    if ( !_func_036F( self _meth_8570() ) )
+    if ( !isnullweapon( self getheldoffhand() ) )
         childthread _id_6183();
 
     self._id_61AC = 1;
 
-    if ( self hasweapon( _func_034C( "s4_gas_cough_light_mp" ) ) )
-        _id_099A::_id_0D6A( "s4_gas_cough_light_mp" );
+    if ( self hasweapon( makeweapon( "s4_gas_cough_light_mp" ) ) )
+        scripts\cp_mp\utility\inventory_utility::_takeweapon( "s4_gas_cough_light_mp" );
 
-    if ( self hasweapon( _func_034C( "s4_gas_cough_heavy_mp" ) ) )
-        _id_099A::_id_0D6A( "s4_gas_cough_heavy_mp" );
+    if ( self hasweapon( makeweapon( "s4_gas_cough_heavy_mp" ) ) )
+        scripts\cp_mp\utility\inventory_utility::_takeweapon( "s4_gas_cough_heavy_mp" );
 
-    var_1 = _id_077B::_id_F07F( istrue( var_0 ), _func_034C( "s4_gas_cough_heavy_mp" ), _func_034C( "s4_gas_cough_light_mp" ) );
-    var_2 = _id_077B::_id_F07F( istrue( var_0 ), 1.2, 0.8 );
+    var_1 = scripts\engine\utility::ter_op( istrue( var_0 ), makeweapon( "s4_gas_cough_heavy_mp" ), makeweapon( "s4_gas_cough_light_mp" ) );
+    var_2 = scripts\engine\utility::ter_op( istrue( var_0 ), 1.2, 0.8 );
     self _meth_8529( var_1 );
     childthread _id_6164( var_1 );
     childthread _id_6165( var_1 );
     childthread _id_6163( var_2 );
-    _id_077B::_id_1087F( "gas_coughWeaponFired", "gas_coughWeaponTaken", "gas_coughDuration" );
+    scripts\engine\utility::_id_1087F( "gas_coughWeaponFired", "gas_coughWeaponTaken", "gas_coughDuration" );
 
     if ( self hasweapon( var_1 ) )
-        _id_099A::_id_0D6A( var_1 );
+        scripts\cp_mp\utility\inventory_utility::_takeweapon( var_1 );
 
     self._id_61AC = undefined;
 }
@@ -351,11 +351,11 @@ _id_6132( var_0 )
 
         if ( var_1 )
         {
-            if ( self hasweapon( _func_034C( "s4_gas_cough_light_mp" ) ) )
-                _id_099A::_id_0D6A( "s4_gas_cough_light_mp" );
+            if ( self hasweapon( makeweapon( "s4_gas_cough_light_mp" ) ) )
+                scripts\cp_mp\utility\inventory_utility::_takeweapon( "s4_gas_cough_light_mp" );
 
-            if ( self hasweapon( _func_034C( "s4_gas_cough_heavy_mp" ) ) )
-                _id_099A::_id_0D6A( "s4_gas_cough_heavy_mp" );
+            if ( self hasweapon( makeweapon( "s4_gas_cough_heavy_mp" ) ) )
+                scripts\cp_mp\utility\inventory_utility::_takeweapon( "s4_gas_cough_heavy_mp" );
 
             if ( isdefined( self._id_61BD ) )
                 _id_6178();
@@ -377,7 +377,7 @@ _id_6164( var_0 )
     {
         self waittill( "offhand_fired", var_1 );
 
-        if ( _func_036E( var_1, var_0 ) )
+        if ( issameweapon( var_1, var_0 ) )
             break;
     }
 
@@ -409,43 +409,43 @@ _id_6183()
         _id_6178();
 
     self endon( "gas_restoreHeldOffhand" );
-    self._id_61BD = self _meth_8570();
-    var_0 = scripts\engine\trace::_id_69F5( self._id_61BD );
+    self._id_61BD = self getheldoffhand();
+    var_0 = scripts\mp\equipment::_id_69F5( self._id_61BD );
 
-    if ( isdefined( var_0 ) && scripts\engine\trace::_id_753F( var_0 ) )
+    if ( isdefined( var_0 ) && scripts\mp\equipment::_id_753F( var_0 ) )
     {
-        self._id_61BC = scripts\engine\trace::_id_69F0( var_0 );
-        _id_099A::_id_0D6A( self._id_61BD );
+        self._id_61BC = scripts\mp\equipment::_id_69F0( var_0 );
+        scripts\cp_mp\utility\inventory_utility::_takeweapon( self._id_61BD );
         waitframe();
         thread _id_6178();
     }
 
-    var_1 = _id_07F2::_id_6D87( self._id_61BD );
+    var_1 = scripts\mp\supers::_id_6D87( self._id_61BD );
 
     if ( isdefined( var_1 ) )
     {
-        var_2 = _id_07F2::_id_6991();
+        var_2 = scripts\mp\supers::_id_6991();
 
         if ( isdefined( var_2 ) && var_2 == var_1 )
         {
             self._id_61BC = self _meth_8109( self._id_61BD );
-            _id_099A::_id_0D6A( self._id_61BD );
+            scripts\cp_mp\utility\inventory_utility::_takeweapon( self._id_61BD );
             waitframe();
             thread _id_6178();
         }
     }
 
-    var_3 = _id_0A7F::_id_8860( self._id_61BD );
+    var_3 = scripts\mp\utility\weapon::_id_8860( self._id_61BD );
 
     if ( var_3 )
     {
-        _id_099A::_id_0D6A( self._id_61BD );
+        scripts\cp_mp\utility\inventory_utility::_takeweapon( self._id_61BD );
         waitframe();
         thread _id_6178();
     }
 
     self._id_61BC = self _meth_8109( self._id_61BD );
-    _id_099A::_id_0D6A( self._id_61BD );
+    scripts\cp_mp\utility\inventory_utility::_takeweapon( self._id_61BD );
     waitframe();
     thread _id_6178();
 }
@@ -453,21 +453,21 @@ _id_6183()
 _id_6178()
 {
     self notify( "gas_restoreHeldOffhand" );
-    var_0 = scripts\engine\trace::_id_69F5( self._id_61BD );
+    var_0 = scripts\mp\equipment::_id_69F5( self._id_61BD );
 
-    if ( isdefined( var_0 ) && scripts\engine\trace::_id_753F( var_0 ) )
+    if ( isdefined( var_0 ) && scripts\mp\equipment::_id_753F( var_0 ) )
     {
-        if ( scripts\engine\trace::_id_753F( var_0 ) )
+        if ( scripts\mp\equipment::_id_753F( var_0 ) )
         {
-            _id_099A::_id_0BEB( self._id_61BD );
-            var_1 = scripts\engine\trace::_id_5ACA( var_0 );
+            scripts\cp_mp\utility\inventory_utility::_giveweapon( self._id_61BD );
+            var_1 = scripts\mp\equipment::_id_5ACA( var_0 );
 
             if ( var_1 == "primary" )
-                self launchgrenade( self._id_61BD );
+                self _meth_849B( self._id_61BD );
             else if ( var_1 == "secondary" )
                 self _meth_849C( self._id_61BD );
 
-            scripts\engine\trace::_id_D536( var_0, self._id_61BC );
+            scripts\mp\equipment::_id_D536( var_0, self._id_61BC );
             self._id_61BD = undefined;
             self._id_61BC = undefined;
         }
@@ -475,17 +475,17 @@ _id_6178()
         return;
     }
 
-    var_2 = _id_07F2::_id_6D87( self._id_61BD );
+    var_2 = scripts\mp\supers::_id_6D87( self._id_61BD );
 
     if ( isdefined( var_2 ) )
     {
-        var_3 = _id_07F2::_id_6991();
+        var_3 = scripts\mp\supers::_id_6991();
 
         if ( isdefined( var_3 ) && var_3 == var_2 )
         {
-            _id_099A::_id_0BEB( self._id_61BD );
+            scripts\cp_mp\utility\inventory_utility::_giveweapon( self._id_61BD );
             self _meth_84E8( self._id_61BD );
-            self _meth_83B5( self._id_61BD, self._id_61BC );
+            self setweaponammoclip( self._id_61BD, self._id_61BC );
             self._id_61BD = undefined;
             self._id_61BC = undefined;
         }
@@ -493,21 +493,21 @@ _id_6178()
         return;
     }
 
-    var_4 = _id_0A7F::_id_8860( self._id_61BD );
+    var_4 = scripts\mp\utility\weapon::_id_8860( self._id_61BD );
 
     if ( var_4 )
     {
-        if ( isdefined( self._id_62D2 ) && self._id_62D2 == self._id_61BD._id_0084 )
+        if ( isdefined( self._id_62D2 ) && self._id_62D2 == self._id_61BD.basename )
         {
-            _id_099A::_id_0BEB( self._id_61BD );
+            scripts\cp_mp\utility\inventory_utility::_giveweapon( self._id_61BD );
             self._id_61BD = undefined;
         }
 
         return;
     }
 
-    _id_099A::_id_0BEB( self._id_61BD );
-    self _meth_83B5( self._id_61BD, self._id_61BC );
+    scripts\cp_mp\utility\inventory_utility::_giveweapon( self._id_61BD );
+    self setweaponammoclip( self._id_61BD, self._id_61BC );
     self._id_61BD = undefined;
     self._id_61BC = undefined;
 }
@@ -522,7 +522,7 @@ _id_611F()
     {
         if ( self._id_61BB < -0.1 )
         {
-            if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_gas_grenade_resist" ) )
+            if ( scripts\mp\utility\perk::_hasperk( "specialty_gas_grenade_resist" ) )
             {
                 self._id_61BB = -0.1;
                 scripts\mp\weapons::_id_FCCA();
@@ -533,7 +533,7 @@ _id_611F()
             {
                 foreach ( var_1 in self._id_61BE )
                 {
-                    if ( isdefined( var_1 ) && isdefined( var_1._id_02F2 ) && var_1._id_02F2 == self )
+                    if ( isdefined( var_1 ) && isdefined( var_1.owner ) && var_1.owner == self )
                     {
                         self._id_61BB = -0.1;
                         scripts\mp\weapons::_id_FCCA();
@@ -548,13 +548,13 @@ _id_611F()
 
     var_3 = -0.3;
 
-    if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_gas_grenade_resist" ) )
+    if ( scripts\mp\utility\perk::_hasperk( "specialty_gas_grenade_resist" ) )
         var_3 = -0.1;
     else if ( isdefined( self._id_61BE ) )
     {
         foreach ( var_1 in self._id_61BE )
         {
-            if ( isdefined( var_1 ) && isdefined( var_1._id_02F2 ) && var_1._id_02F2 == self )
+            if ( isdefined( var_1 ) && isdefined( var_1.owner ) && var_1.owner == self )
                 var_3 = -0.1;
         }
     }
@@ -585,7 +585,7 @@ _id_6162( var_0 )
     while ( var_1 <= 0.45 )
     {
         var_1 = var_1 + 0.05;
-        self._id_61BB = _id_0777::_id_9192( self._id_61BB, var_0, _func_0148( 1, var_1 / 0.45 ) );
+        self._id_61BB = scripts\engine\math::_id_9192( self._id_61BB, var_0, min( 1, var_1 / 0.45 ) );
         scripts\mp\weapons::_id_FCCA();
         wait 0.05;
     }
@@ -607,13 +607,13 @@ _id_611D()
     self endon( "gas_modify_blur" );
     var_0 = "gas_grenade_heavy_mp";
 
-    if ( scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_gas_grenade_resist" ) )
+    if ( scripts\mp\utility\perk::_hasperk( "specialty_gas_grenade_resist" ) )
         var_0 = "gas_grenade_light_mp";
     else if ( isdefined( self._id_61BE ) )
     {
         foreach ( var_2 in self._id_61BE )
         {
-            if ( isdefined( var_2 ) && isdefined( var_2._id_02F2 ) && var_2._id_02F2 == self )
+            if ( isdefined( var_2 ) && isdefined( var_2.owner ) && var_2.owner == self )
                 var_0 = "gas_grenade_light_mp";
         }
     }
@@ -640,7 +640,7 @@ _id_6131( var_0 )
 
 _id_6179()
 {
-    switch ( self _meth_8570()._id_0084 )
+    switch ( self getheldoffhand().basename )
     {
         case "s4_super_delay_mp":
             return 0;
@@ -653,13 +653,13 @@ _id_6179()
 
 _id_6134()
 {
-    if ( !_id_06BB::_id_856C() )
+    if ( !scripts\common\utility::_id_856C() )
         return 1;
 
-    if ( !_id_06BB::_id_8636() )
+    if ( !scripts\common\utility::_id_8636() )
         return 1;
 
-    if ( !_func_036F( self _meth_8570() ) && !_id_6179() )
+    if ( !isnullweapon( self getheldoffhand() ) && !_id_6179() )
         return 1;
 
     return 0;
@@ -678,7 +678,7 @@ _id_614E()
 
 _id_6186()
 {
-    if ( _id_0A6F::_id_88C5() || scripts\mp\tac_ops\hostage_utility::_id_0BF6( "specialty_gasmask" ) )
+    if ( _id_0A6F::_id_88C5() || scripts\mp\utility\perk::_hasperk( "specialty_gasmask" ) )
     {
         _id_6130();
         return;
