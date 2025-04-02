@@ -75,7 +75,7 @@ _id_68FA( var_0 )
         {
             var_3._id_E364 = var_3._id_E364 + 1;
 
-            if ( scripts\engine\trace::_id_0B4D( var_6.origin + ( 0, 0, 32 ), var_3.origin, 0, var_6 ) )
+            if ( scripts\engine\trace::_bullet_trace_passed( var_6.origin + ( 0, 0, 32 ), var_3.origin, 0, var_6 ) )
                 var_3._id_E364 = var_3._id_E364 + 3;
 
             if ( var_3._id_E364 > var_13._id_E364 )

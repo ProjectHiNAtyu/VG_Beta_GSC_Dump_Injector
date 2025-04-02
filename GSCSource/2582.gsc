@@ -423,7 +423,7 @@ _id_68F0( var_0, var_1 )
                 continue;
             }
 
-            if ( scripts\engine\trace::_id_0B4D( var_11.origin + ( 0, 0, 32 ), var_9.origin, 0, var_11 ) )
+            if ( scripts\engine\trace::_bullet_trace_passed( var_11.origin + ( 0, 0, 32 ), var_9.origin, 0, var_11 ) )
             {
                 var_9._id_DD32 = var_9._id_DD32 + 1;
                 return var_9;

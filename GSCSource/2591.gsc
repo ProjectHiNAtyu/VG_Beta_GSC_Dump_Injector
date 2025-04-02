@@ -210,7 +210,7 @@ _id_FBFF( var_0 )
         {
             var_3._id_A567 = var_3._id_A567 + 1;
 
-            if ( scripts\engine\trace::_id_0B4D( var_6.origin + ( 0, 0, 32 ), var_12.origin, 0, var_6 ) )
+            if ( scripts\engine\trace::_bullet_trace_passed( var_6.origin + ( 0, 0, 32 ), var_12.origin, 0, var_6 ) )
                 var_3._id_A567 = var_3._id_A567 + 3;
         }
 
@@ -420,7 +420,7 @@ _id_68F4( var_0 )
         if ( var_2._id_F165 < var_4 )
             continue;
 
-        if ( !scripts\engine\trace::_id_0B4D( var_2.origin + ( 0, 0, 32 ), self.origin, 0, self ) )
+        if ( !scripts\engine\trace::_bullet_trace_passed( var_2.origin + ( 0, 0, 32 ), self.origin, 0, self ) )
         {
             wait 0.05;
             continue;

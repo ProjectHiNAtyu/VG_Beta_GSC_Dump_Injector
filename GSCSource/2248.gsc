@@ -2324,7 +2324,7 @@ _id_5BCE( var_0 )
             var_3 = var_0.origin + var_1;
             var_4 = var_3 + var_2 * 64.0;
             self._id_0B3E._id_5BD1 = gettime() + 1050;
-            self._id_0B3E._id_5BD0 = !scripts\engine\trace::_id_0B4D( var_3, var_4, 0, self );
+            self._id_0B3E._id_5BD0 = !scripts\engine\trace::_bullet_trace_passed( var_3, var_4, 0, self );
         }
 
         return self._id_0B3E._id_5BD0;

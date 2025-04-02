@@ -358,7 +358,7 @@ _id_69E4( var_0, var_1 )
 
 _id_2D16( var_0, var_1, var_2, var_3 )
 {
-    return scripts\engine\trace::_id_0B4D( var_0, var_1, var_2, var_3 );
+    return scripts\engine\trace::_bullet_trace_passed( var_0, var_1, var_2, var_3 );
 }
 
 isreallyalive( var_0 )

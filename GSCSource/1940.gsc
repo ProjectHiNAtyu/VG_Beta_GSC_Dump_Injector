@@ -517,7 +517,7 @@ _id_9607( var_0 )
     }
     else
     {
-        _id_0A44::_bullet_trace_passed();
+        _id_0A44::_id_0B76();
         self notify( "all_perks_cleared" );
     }
 

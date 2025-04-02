@@ -154,7 +154,7 @@ _id_27FB( var_0, var_1, var_2, var_3, var_4 )
 
                 foreach ( var_14 in var_21 )
                 {
-                    if ( scripts\engine\trace::_id_0B4D( var_14.origin + ( 0, 0, 30 ), var_14.origin + ( 0, 0, 400 ), 0, self ) )
+                    if ( scripts\engine\trace::_bullet_trace_passed( var_14.origin + ( 0, 0, 30 ), var_14.origin + ( 0, 0, 400 ), 0, self ) )
                     {
                         var_7 = var_14;
                         break;
@@ -737,7 +737,7 @@ _id_2721()
                     {
                         if ( _id_B9F3( self._id_1001E.origin + var_28 * 64 ) )
                         {
-                            if ( !scripts\engine\trace::_id_0B4D( self._id_1001E.origin, self._id_1001E.origin + var_28 * 64, 0, self._id_1001E ) )
+                            if ( !scripts\engine\trace::_bullet_trace_passed( self._id_1001E.origin, self._id_1001E.origin + var_28 * 64, 0, self._id_1001E ) )
                             {
                                 wait 0.05;
                                 continue;
@@ -801,7 +801,7 @@ _id_B9F3( var_0 )
     if ( var_2[2] <= var_1[2] )
         return 0;
 
-    var_3 = scripts\engine\trace::_id_0B4D( var_1, var_2, 0, undefined );
+    var_3 = scripts\engine\trace::_bullet_trace_passed( var_1, var_2, 0, undefined );
     return var_3;
 }
 

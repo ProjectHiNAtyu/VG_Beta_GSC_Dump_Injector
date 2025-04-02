@@ -306,7 +306,7 @@ _id_F0CB( var_0 )
         var_0._id_8F28 = gettime();
         var_0._id_E76B = 0;
 
-        if ( !scripts\engine\trace::_id_0B4D( var_0._id_8F35, var_0._id_416F, 0, self ) )
+        if ( !scripts\engine\trace::_bullet_trace_passed( var_0._id_8F35, var_0._id_416F, 0, self ) )
         {
             var_2 = scripts\engine\trace::_bullet_trace( var_0._id_8F35, var_0._id_416F, 0, self );
 

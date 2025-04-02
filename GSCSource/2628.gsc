@@ -786,7 +786,7 @@ _id_0D79( var_0 )
     self _meth_8417( var_0, !isdefined( level._id_CF88[var_0] ) );
 }
 
-_bullet_trace_passed()
+_id_0B76()
 {
     if ( isdefined( self._id_AFE4 ) )
     {

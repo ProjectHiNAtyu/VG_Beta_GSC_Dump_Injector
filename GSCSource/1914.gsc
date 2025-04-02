@@ -60,7 +60,7 @@ _bullet_trace( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
         return ray_trace( var_0, var_1, var_3, physics_createcontents( var_9 ), 1 );
 }
 
-_id_0B4D( var_0, var_1, var_2, var_3 )
+_bullet_trace_passed( var_0, var_1, var_2, var_3 )
 {
     return ray_trace_passed( var_0, var_1, var_3, _id_3ED4( !var_2 ) );
 }
