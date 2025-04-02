@@ -390,6 +390,7 @@ s4_token
 - { 0xC6CB, "restart" },
 - { 0x5E7E, "forceend" },
 - { 0x1B72, "array_combine" },
+- { 0x8803, "isenemy" },
 - { 0x6ABF, "getkillstreakcratedatabystreakname" },
 - { 0x10FD2, "xoffset" },
 - { 0x10FF0, "yoffset" },
