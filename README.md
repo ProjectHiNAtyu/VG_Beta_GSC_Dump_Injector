@@ -391,6 +391,7 @@ s4_token
 - { 0x5E7E, "forceend" },
 - { 0x1B72, "array_combine" },
 - { 0x8803, "isenemy" },
+- { 0x0B4D, "_bullet_trace_passed" },
 - { 0x6ABF, "getkillstreakcratedatabystreakname" },
 - { 0x10FD2, "xoffset" },
 - { 0x10FF0, "yoffset" },
