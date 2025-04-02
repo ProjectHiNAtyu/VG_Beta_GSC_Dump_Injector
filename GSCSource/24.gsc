@@ -1669,10 +1669,10 @@ _id_28D3()
         var_2 = level._id_3248;
 
         if ( !_id_09D1::_id_27D1() && isdefined( self._id_2964 ) )
-            var_2 = scripts\engine\utility::_id_1B72( var_2, self._id_2964 );
+            var_2 = scripts\engine\utility::array_combine( var_2, self._id_2964 );
 
         if ( isdefined( level._id_2887 ) && scripts\mp\utility\perk::_hasperk( "specialty_scavenger" ) )
-            var_2 = scripts\engine\utility::_id_1B72( var_2, level._id_2887 );
+            var_2 = scripts\engine\utility::array_combine( var_2, level._id_2887 );
 
         var_2 = scripts\engine\utility::_id_1BA9( var_2 );
 

@@ -556,7 +556,7 @@ _id_6D30( var_0, var_1 )
     }
 
     if ( isdefined( level._id_CF6D ) && isdefined( level._id_CF6D[var_0] ) )
-        var_8 = scripts\engine\utility::_id_1B72( var_8, level._id_CF6D[var_0] );
+        var_8 = scripts\engine\utility::array_combine( var_8, level._id_CF6D[var_0] );
 
     return var_8;
 }

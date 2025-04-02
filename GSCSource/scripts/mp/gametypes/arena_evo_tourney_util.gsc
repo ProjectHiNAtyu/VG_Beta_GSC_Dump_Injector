@@ -975,7 +975,7 @@ _id_81AC( var_0, var_1, var_2, var_3 )
         var_6 = _id_07EE::_id_6D30( "mp_tdm_spawn" );
         var_7 = _id_07EE::_id_6D30( "mp_tdm_spawn_secondary" );
         var_8 = _id_07EE::_id_6D30( "mp_dom_spawn" );
-        level._id_143D = scripts\engine\utility::_id_1B72( var_4, var_5, var_6, var_8, var_7 );
+        level._id_143D = scripts\engine\utility::array_combine( var_4, var_5, var_6, var_8, var_7 );
     }
 
     var_9 = scripts\engine\utility::_id_6D7A( var_0, "targetname" );
@@ -1083,7 +1083,7 @@ _id_65BA( var_0 )
 
 _id_1A4E( var_0, var_1 )
 {
-    var_2 = scripts\engine\utility::_id_1B72( var_1._id_E360["mp_tdm_spawn"], var_1._id_E360["mp_tdm_spawn_secondary"] );
+    var_2 = scripts\engine\utility::array_combine( var_1._id_E360["mp_tdm_spawn"], var_1._id_E360["mp_tdm_spawn_secondary"] );
     var_3 = undefined;
     var_4 = self.pers["team"];
     var_5 = _id_67A2( var_4 );
@@ -1140,7 +1140,7 @@ _id_1A4E( var_0, var_1 )
         var_3 = var_2[var_2.size - 1];
     else
     {
-        var_2 = scripts\engine\utility::_id_1B72( var_1._id_E360["mp_tdm_spawn"], var_1._id_E360["mp_tdm_spawn_secondary"] );
+        var_2 = scripts\engine\utility::array_combine( var_1._id_E360["mp_tdm_spawn"], var_1._id_E360["mp_tdm_spawn_secondary"] );
         var_2 = _func_01FF( var_2, var_23 );
         var_3 = var_2[var_2.size - 1];
     }
@@ -1272,7 +1272,7 @@ _id_E01D( var_0, var_1 )
         var_2[var_2.size] = var_7;
     }
 
-    var_2 = scripts\engine\utility::_id_1B72( var_2, var_3, var_4 );
+    var_2 = scripts\engine\utility::array_combine( var_2, var_3, var_4 );
     return var_2;
 }
 
@@ -1868,7 +1868,7 @@ _id_D66A()
                 var_11 = _id_67A2( var_3 );
                 var_0[var_3] = var_1;
                 var_0[var_11] = var_1;
-                var_4 = scripts\engine\utility::_id_1B72( _id_668A( var_3 ), _id_668A( var_11 ) );
+                var_4 = scripts\engine\utility::array_combine( _id_668A( var_3 ), _id_668A( var_11 ) );
 
                 foreach ( var_6 in var_4 )
                     var_6 _id_D655( var_1 );
@@ -2148,7 +2148,7 @@ _id_D3D2( var_0, var_1, var_2 )
     var_7 = [];
 
     foreach ( var_5 in var_0 )
-        var_7 = scripts\engine\utility::_id_1B72( var_7, _id_668A( var_5 ) );
+        var_7 = scripts\engine\utility::array_combine( var_7, _id_668A( var_5 ) );
 
     var_10 = scripts\engine\utility::_id_1B97( level.players, var_7 );
     var_11 = var_10;

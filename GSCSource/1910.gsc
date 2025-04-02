@@ -608,7 +608,7 @@ list_widget_shift_items( var_0, var_1 )
 
     var_4 = scripts\engine\utility::_id_1BAC( self._id_0F02[var_0]._id_9505, 0, var_3 );
     var_5 = scripts\engine\utility::_id_1BAC( self._id_0F02[var_0]._id_9505, var_3, var_2 );
-    self._id_0F02[var_0]._id_9505 = scripts\engine\utility::_id_1B72( var_5, var_4 );
+    self._id_0F02[var_0]._id_9505 = scripts\engine\utility::array_combine( var_5, var_4 );
     _list_widget_update_list( var_0 );
 }
 
@@ -1246,9 +1246,9 @@ _id_0C26( var_0 )
 _list_widget_add_items( var_0, var_1, var_2, var_3 )
 {
     if ( istrue( var_3 ) )
-        self._id_0F02[var_0]._id_9505 = scripts\engine\utility::_id_1B72( var_2, self._id_0F02[var_0]._id_9505 );
+        self._id_0F02[var_0]._id_9505 = scripts\engine\utility::array_combine( var_2, self._id_0F02[var_0]._id_9505 );
     else
-        self._id_0F02[var_0]._id_9505 = scripts\engine\utility::_id_1B72( self._id_0F02[var_0]._id_9505, var_2 );
+        self._id_0F02[var_0]._id_9505 = scripts\engine\utility::array_combine( self._id_0F02[var_0]._id_9505, var_2 );
 
     var_4 = level._id_7B23._id_CF5A;
 

@@ -1057,7 +1057,7 @@ _id_BA50( var_0, var_1 )
         }
     }
 
-    var_0 = scripts\engine\utility::_id_1B72( var_0, var_3 );
+    var_0 = scripts\engine\utility::array_combine( var_0, var_3 );
     return var_0;
 }
 

@@ -268,7 +268,7 @@ endlesslobbyfloor2tiles()
 
     if ( getdvarint( "scr_VAN_55455", 0 ) )
     {
-        foreach ( var_6 in scripts\engine\utility::_id_1B72( var_1, var_3 ) )
+        foreach ( var_6 in scripts\engine\utility::array_combine( var_1, var_3 ) )
             var_6 delete();
 
         var_1 = [];
@@ -356,7 +356,7 @@ endlesslobbyfloor3tiles()
 
     if ( getdvarint( "scr_VAN_55455", 0 ) )
     {
-        foreach ( var_7 in scripts\engine\utility::_id_1B72( var_1, var_3, var_5 ) )
+        foreach ( var_7 in scripts\engine\utility::array_combine( var_1, var_3, var_5 ) )
             var_7 delete();
 
         var_1 = [];

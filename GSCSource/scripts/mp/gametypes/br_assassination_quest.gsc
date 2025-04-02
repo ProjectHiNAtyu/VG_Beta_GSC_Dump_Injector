@@ -285,7 +285,7 @@ _id_4894( var_0 )
     }
 
     if ( isdefined( var_2 ) )
-        scripts\mp\gametypes\br_quest_util::_id_6C75( "assassination" )._id_15CA = scripts\engine\utility::_id_1B72( scripts\mp\gametypes\br_quest_util::_id_6C75( "assassination" )._id_15CA, scripts\mp\utility\teams::_id_6DAC( var_2, "players" ) );
+        scripts\mp\gametypes\br_quest_util::_id_6C75( "assassination" )._id_15CA = scripts\engine\utility::array_combine( scripts\mp\gametypes\br_quest_util::_id_6C75( "assassination" )._id_15CA, scripts\mp\utility\teams::_id_6DAC( var_2, "players" ) );
 
     return var_2;
 }

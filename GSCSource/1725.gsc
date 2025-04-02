@@ -24,7 +24,7 @@ _id_80EA()
 {
     scripts\engine\utility::_id_3F13( "aircraft_wash_math" );
     _id_06C0::_id_10253();
-    level._id_FFF1._id_775C = scripts\engine\utility::_id_1B72( level._id_FFF1._id_775C, scripts\engine\utility::_id_6D7D( "helicopter_crash_location", "targetname" ) );
+    level._id_FFF1._id_775C = scripts\engine\utility::array_combine( level._id_FFF1._id_775C, scripts\engine\utility::_id_6D7D( "helicopter_crash_location", "targetname" ) );
     _id_06C0::_id_10254();
     var_0 = _id_06C0::_id_10237();
     _id_06C0::_id_D82F( var_0 );

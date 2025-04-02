@@ -604,7 +604,7 @@ _id_DAA8( var_0 )
     var_2 = level._id_03E1._id_31D4;
 
     if ( isdefined( self._id_03E1._id_31D4 ) )
-        var_2 = scripts\engine\utility::_id_1B72( var_2, self._id_03E1._id_31D4 );
+        var_2 = scripts\engine\utility::array_combine( var_2, self._id_03E1._id_31D4 );
 
     if ( isplayer( var_0._id_0186 ) && scripts\engine\utility::_id_30D8( var_0.origin + var_1, self, var_2 ) )
     {

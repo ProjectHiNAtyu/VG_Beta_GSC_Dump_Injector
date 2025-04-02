@@ -696,7 +696,7 @@ _id_36C0( var_0, var_1 )
         var_6 = var_1 _meth_8150();
 
         if ( isdefined( var_6 ) && var_6.size > 0 )
-            var_5 = scripts\engine\utility::_id_1B72( var_5, var_6 );
+            var_5 = scripts\engine\utility::array_combine( var_5, var_6 );
     }
 
     for (;;)
@@ -874,7 +874,7 @@ _id_36B2( var_0 )
 
 _id_3699()
 {
-    var_0 = scripts\engine\utility::_id_1B72( level._id_7730, level._id_7731 );
+    var_0 = scripts\engine\utility::array_combine( level._id_7730, level._id_7731 );
     var_1 = undefined;
     var_2 = undefined;
     var_3 = undefined;
@@ -1200,7 +1200,7 @@ _id_36A8( var_0, var_1, var_2, var_3 )
             var_10 = var_9 _meth_8150();
 
             if ( isdefined( var_10 ) && var_10.size > 0 )
-                var_7 = scripts\engine\utility::_id_1B72( var_7, var_10 );
+                var_7 = scripts\engine\utility::array_combine( var_7, var_10 );
         }
     }
 

@@ -2361,7 +2361,7 @@ _id_1EF7( var_0 )
     var_1 = [];
 
     foreach ( var_3 in level._id_FF5C )
-        var_1 = scripts\engine\utility::_id_1B72( var_1, _func_03BD( "brloot_" + var_3 + "_tablet" ) );
+        var_1 = scripts\engine\utility::array_combine( var_1, _func_03BD( "brloot_" + var_3 + "_tablet" ) );
 
     var_1 = scripts\engine\utility::_id_1B94( var_1 );
     var_5 = undefined;

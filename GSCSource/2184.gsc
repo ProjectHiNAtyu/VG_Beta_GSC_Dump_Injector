@@ -391,7 +391,7 @@ _id_80AC()
     level._id_03E1._id_8504 = [];
     var_0 = getentarray( "info_volume_stealth_all", "classname" );
     var_1 = getentarray( "info_volume_stealth_combat", "classname" );
-    var_1 = scripts\engine\utility::_id_1B72( var_1, var_0 );
+    var_1 = scripts\engine\utility::array_combine( var_1, var_0 );
 
     if ( isdefined( var_1 ) )
     {
@@ -405,7 +405,7 @@ _id_80AC()
     }
 
     var_1 = getentarray( "info_volume_stealth_hunt", "classname" );
-    var_1 = scripts\engine\utility::_id_1B72( var_1, var_0 );
+    var_1 = scripts\engine\utility::array_combine( var_1, var_0 );
 
     if ( isdefined( var_1 ) )
     {
@@ -419,7 +419,7 @@ _id_80AC()
     }
 
     var_1 = getentarray( "info_volume_stealth_investigate", "classname" );
-    var_1 = scripts\engine\utility::_id_1B72( var_1, var_0 );
+    var_1 = scripts\engine\utility::array_combine( var_1, var_0 );
 
     if ( isdefined( var_1 ) )
     {

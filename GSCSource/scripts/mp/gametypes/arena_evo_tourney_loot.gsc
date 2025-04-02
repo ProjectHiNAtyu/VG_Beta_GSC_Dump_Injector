@@ -18,7 +18,7 @@ _id_9844()
     if ( isdefined( level.s4_armory_kiosk_scriptable_names ) )
     {
         foreach ( var_2 in level.s4_armory_kiosk_scriptable_names )
-            var_0 = scripts\engine\utility::_id_1B72( var_0, _func_03BB( var_2, "classname" ) );
+            var_0 = scripts\engine\utility::array_combine( var_0, _func_03BB( var_2, "classname" ) );
     }
     else
         var_0 = _func_03BB( level._id_CAA8, "classname" );
@@ -795,7 +795,7 @@ _id_E249()
 
         var_3++;
         var_4 = 0;
-        var_12 = scripts\engine\utility::_id_1B72( level._id_1A57["groundLoot"], level._id_1A57["groundLoot_handicap"] );
+        var_12 = scripts\engine\utility::array_combine( level._id_1A57["groundLoot"], level._id_1A57["groundLoot_handicap"] );
         var_12 = scripts\engine\utility::array_add( var_12, level._id_1A57["arena_evo_loot_extra_life"] );
 
         foreach ( var_14 in var_12 )
@@ -1140,8 +1140,8 @@ _id_6546( var_0 )
                 var_21 = scripts\engine\utility::_id_1B94( level._id_1A57["weaponLoot"] );
                 var_21 = scripts\engine\utility::_id_1BAC( var_21, 0, 3 );
                 var_22 = scripts\engine\utility::_id_1B94( level._id_1A57["groundLoot"] );
-                var_23 = scripts\engine\utility::_id_1B72( var_22, var_21 );
-                var_3 = scripts\engine\utility::_id_1B72( var_3, var_23 );
+                var_23 = scripts\engine\utility::array_combine( var_22, var_21 );
+                var_3 = scripts\engine\utility::array_combine( var_3, var_23 );
             }
         }
     }
@@ -1720,7 +1720,7 @@ playerhasitem( var_0 )
     if ( !isdefined( var_3 ) )
         var_3 = [];
 
-    var_4 = scripts\engine\utility::_id_1B72( var_2, var_3 );
+    var_4 = scripts\engine\utility::array_combine( var_2, var_3 );
 
     foreach ( var_6 in var_4 )
     {

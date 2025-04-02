@@ -412,7 +412,7 @@ send_match_end_telemetry( var_0 )
 
 add_match_interval_control_data( var_0 )
 {
-    var_0 = scripts\engine\utility::_id_1B72( var_0, [ "point1_tiers_captured", 0, "point2_tiers_captured", 0 ] );
+    var_0 = scripts\engine\utility::array_combine( var_0, [ "point1_tiers_captured", 0, "point2_tiers_captured", 0 ] );
     return var_0;
 }
 
@@ -445,7 +445,7 @@ send_round_end_telemetry( var_0 )
 add_objective_info_control_data( var_0 )
 {
     var_1 = [ "team1_lives", 0, "team2_lives", 0 ];
-    var_0 = scripts\engine\utility::_id_1B72( var_0, [ "control_info", var_1 ] );
+    var_0 = scripts\engine\utility::array_combine( var_0, [ "control_info", var_1 ] );
     return var_0;
 }
 
@@ -474,21 +474,21 @@ send_objective_info_telemetry()
 add_objective_state_changed_koth_data( var_0, var_1 )
 {
     var_2 = var_1.obj_team;
-    var_0 = scripts\engine\utility::_id_1B72( var_0, [ "obj_name", get_objective_name_koth(), "is_captured", var_2 != "none", "is_contested", self._id_E578 ] );
+    var_0 = scripts\engine\utility::array_combine( var_0, [ "obj_name", get_objective_name_koth(), "is_captured", var_2 != "none", "is_contested", self._id_E578 ] );
     return var_0;
 }
 
 add_objective_state_changed_sd_data( var_0, var_1 )
 {
     var_2 = var_1.credit_player;
-    var_0 = scripts\engine\utility::_id_1B72( var_0, [ "obj_name", get_objective_name_sd(), "is_bomb_picked_up", scripts\engine\utility::ter_op( isdefined( var_2 ), var_2._id_8769, 0 ), "is_bomb_planted", level._id_263D, "is_bomb_defused", level._id_260F ] );
+    var_0 = scripts\engine\utility::array_combine( var_0, [ "obj_name", get_objective_name_sd(), "is_bomb_picked_up", scripts\engine\utility::ter_op( isdefined( var_2 ), var_2._id_8769, 0 ), "is_bomb_planted", level._id_263D, "is_bomb_defused", level._id_260F ] );
     return var_0;
 }
 
 add_objective_state_changed_control_data( var_0, var_1 )
 {
     var_2 = var_1.obj_team;
-    var_0 = scripts\engine\utility::_id_1B72( var_0, [ "obj_name", get_objective_name_control(), "is_captured", var_2 != "none", "is_contested", 0, "team1_remaining_lives", 0, "team2_remaining_lives", 0, "point1_tiers_captured", 0, "point2_tiers_captured", 0 ] );
+    var_0 = scripts\engine\utility::array_combine( var_0, [ "obj_name", get_objective_name_control(), "is_captured", var_2 != "none", "is_contested", 0, "team1_remaining_lives", 0, "team2_remaining_lives", 0, "point1_tiers_captured", 0, "point2_tiers_captured", 0 ] );
     return var_0;
 }
 
@@ -649,6 +649,6 @@ send_player_loadout_changed_telemetry( var_0 )
     if ( isdefined( var_2._id_967D ) && var_2._id_967D.size > 0 )
         var_7 = var_2._id_967D;
 
-    var_8 = [ "player_name", var_1.name, "primary_weapon", var_2._id_966C, "primary_weapon_attachments", var_6, "secondary_weapon", var_2._id_967B, "secondary_weapon_attachments", var_7, "primary_grenade", var_2._id_9653, "secondary_grenade", var_2._id_9654, "field_upgrades", var_5, "streaks", var_4, "perks", scripts\engine\utility::_id_1B72( var_2._id_9668, var_2._id_9659 ), "match_time", _id_6566() ];
+    var_8 = [ "player_name", var_1.name, "primary_weapon", var_2._id_966C, "primary_weapon_attachments", var_6, "secondary_weapon", var_2._id_967B, "secondary_weapon_attachments", var_7, "primary_grenade", var_2._id_9653, "secondary_grenade", var_2._id_9654, "field_upgrades", var_5, "streaks", var_4, "perks", scripts\engine\utility::array_combine( var_2._id_9668, var_2._id_9659 ), "match_time", _id_6566() ];
     var_1 _meth_870C( "dlog_event_esports_player_loadout_changed", var_8 );
 }

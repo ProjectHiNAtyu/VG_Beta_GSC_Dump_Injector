@@ -1339,7 +1339,7 @@ _id_1B8B( var_0, var_1, var_2 )
     return var_3;
 }
 
-_id_1B72( var_0, var_1, var_2, var_3, var_4 )
+array_combine( var_0, var_1, var_2, var_3, var_4 )
 {
     var_5 = [];
 
@@ -3460,7 +3460,7 @@ _id_653D()
             var_3 = _id_6D7C( var_1[var_2], "script_linkname" );
 
             if ( var_3.size > 0 )
-                var_0 = _id_1B72( var_0, var_3 );
+                var_0 = array_combine( var_0, var_3 );
         }
     }
 

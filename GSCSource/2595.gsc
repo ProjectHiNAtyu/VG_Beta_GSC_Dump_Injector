@@ -759,7 +759,7 @@ _id_7AC8()
         if ( !isdefined( self._id_24A8 ) )
         {
             var_0 = [];
-            var_0 = scripts\engine\utility::_id_1B72( level._id_77BE, level._id_957C, level._id_EB97 );
+            var_0 = scripts\engine\utility::array_combine( level._id_77BE, level._id_957C, level._id_EB97 );
             self._id_24A8 = _id_7AD1( var_0 );
             self notify( "hoverJet_acquiringAirTarget", self._id_24A8 );
 
@@ -1258,7 +1258,7 @@ _id_7AF2( var_0, var_1, var_2 )
         var_7 = var_2 _meth_8150();
 
         if ( isdefined( var_7 ) && var_7.size > 0 )
-            var_6 = scripts\engine\utility::_id_1B72( var_6, var_7 );
+            var_6 = scripts\engine\utility::array_combine( var_6, var_7 );
     }
 
     for (;;)

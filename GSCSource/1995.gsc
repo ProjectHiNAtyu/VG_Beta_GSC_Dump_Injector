@@ -503,7 +503,7 @@ _id_E85F()
     var_3 = self.target _meth_8150();
 
     if ( isdefined( var_3 ) && var_3.size > 0 )
-        var_2 = scripts\engine\utility::_id_1B72( var_2, var_3 );
+        var_2 = scripts\engine\utility::array_combine( var_2, var_3 );
 
     if ( !self._id_FE97 )
     {

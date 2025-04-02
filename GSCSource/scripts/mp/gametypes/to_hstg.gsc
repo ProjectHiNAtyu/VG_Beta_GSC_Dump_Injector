@@ -224,7 +224,7 @@ _id_4051()
 {
     var_0 = scripts\engine\utility::_id_6D7C( "hostage_extract_zone_A", "targetname" );
     var_1 = scripts\engine\utility::_id_6D7C( "hostage_extract_zone_B", "targetname" );
-    level._id_5BCC = scripts\engine\utility::_id_1B72( var_0, var_1 );
+    level._id_5BCC = scripts\engine\utility::array_combine( var_0, var_1 );
     level._id_A8D5 = [];
 }
 

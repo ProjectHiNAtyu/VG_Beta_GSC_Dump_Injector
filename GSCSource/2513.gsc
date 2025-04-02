@@ -752,7 +752,7 @@ _id_287E()
 
         var_5 = _func_0021( 0, gettime() - 45000, 1, "kill", var_2, self );
         var_6 = _func_0021( 0, gettime() - 45000, 1, "death", var_1, self );
-        var_3 = scripts\engine\utility::random( scripts\engine\utility::_id_1B72( var_5, var_6 ) );
+        var_3 = scripts\engine\utility::random( scripts\engine\utility::array_combine( var_5, var_6 ) );
 
         if ( isdefined( var_3 ) > 0 && ( !isdefined( var_4 ) || distancesquared( var_4, var_3 ) > 1000000 ) )
         {
@@ -1468,7 +1468,7 @@ _id_27B4( var_0, var_1 )
             if ( var_6 < var_1 )
             {
                 var_7 = _id_27B4( var_5, var_1 - var_6 );
-                var_2 = scripts\engine\utility::_id_1B72( var_7, var_2 );
+                var_2 = scripts\engine\utility::array_combine( var_7, var_2 );
             }
         }
     }

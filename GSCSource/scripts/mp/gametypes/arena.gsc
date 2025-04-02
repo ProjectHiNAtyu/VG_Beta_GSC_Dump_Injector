@@ -1496,7 +1496,7 @@ _id_2CDD()
                 var_11[var_11.size] = _id_2CE5( var_18, var_16 );
         }
 
-        level._id_9697 = scripts\engine\utility::_id_1B72( var_10, var_11 );
+        level._id_9697 = scripts\engine\utility::array_combine( var_10, var_11 );
     }
 }
 

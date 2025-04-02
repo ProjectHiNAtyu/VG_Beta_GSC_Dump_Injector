@@ -445,7 +445,7 @@ _id_1C31( var_0, var_1, var_2, var_3 )
             if ( istrue( var_3 ) )
                 var_5[var_7] = var_8._id_005B;
             else if ( _func_0106( var_8._id_005B ) )
-                var_5 = scripts\engine\utility::_id_1B72( var_5, var_8._id_005B );
+                var_5 = scripts\engine\utility::array_combine( var_5, var_8._id_005B );
             else
                 var_5[var_5.size] = var_8._id_005B;
         }

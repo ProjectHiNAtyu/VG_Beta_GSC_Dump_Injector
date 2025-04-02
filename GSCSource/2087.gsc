@@ -378,7 +378,7 @@ _id_6DA2( var_0 )
     if ( scripts\common\utility::_id_8A2C() == 1 )
         var_3 = call [[ level._id_6B7B ]]( var_0, "targetname" );
 
-    var_5 = scripts\engine\utility::_id_1B72( var_1, var_2, var_3, var_4 );
+    var_5 = scripts\engine\utility::array_combine( var_1, var_2, var_3, var_4 );
     return var_5;
 }
 
@@ -1187,11 +1187,11 @@ _id_6706( var_0, var_1 )
     var_1 = scripts\engine\utility::_id_FF6A( var_1, 1 );
     var_2 = [];
     var_3 = scripts\engine\utility::_id_6D7C( var_0, "scriptbundlename" );
-    var_2 = scripts\engine\utility::_id_1B72( var_3, var_2 );
+    var_2 = scripts\engine\utility::array_combine( var_3, var_2 );
     var_4 = [];
-    var_2 = scripts\engine\utility::_id_1B72( var_4, var_2 );
+    var_2 = scripts\engine\utility::array_combine( var_4, var_2 );
     var_5 = [];
-    var_2 = scripts\engine\utility::_id_1B72( var_5, var_2 );
+    var_2 = scripts\engine\utility::array_combine( var_5, var_2 );
     var_6 = [];
 
     if ( _func_0106( var_2 ) && var_2.size > 0 )
@@ -1200,7 +1200,7 @@ _id_6706( var_0, var_1 )
         {
             if ( _func_0106( var_8._id_CBA5 ) )
             {
-                var_6 = scripts\engine\utility::_id_1B72( var_8._id_CBA5, var_6 );
+                var_6 = scripts\engine\utility::array_combine( var_8._id_CBA5, var_6 );
                 var_6 = scripts\engine\utility::_id_1BA9( var_6 );
 
                 if ( var_1 )

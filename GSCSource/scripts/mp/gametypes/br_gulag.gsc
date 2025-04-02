@@ -4612,7 +4612,7 @@ _id_FC02( var_0 )
 
     _id_D471( var_0, "playerJail0", var_3[0] );
     _id_D471( var_0, "playerJail1", var_3[1] );
-    var_4 = scripts\engine\utility::_id_1B72( var_0._id_8B43, var_0._id_1A96 );
+    var_4 = scripts\engine\utility::array_combine( var_0._id_8B43, var_0._id_1A96 );
 
     foreach ( var_2 in var_4 )
     {

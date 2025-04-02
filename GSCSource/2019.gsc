@@ -211,7 +211,7 @@ _id_FBFE()
 
 }
 
-array_combine( var_0, var_1 )
+_id_1B9A( var_0, var_1 )
 {
     if ( !isdefined( var_1 ) )
         return undefined;
@@ -351,7 +351,7 @@ _id_69E4( var_0, var_1 )
     var_3 = getentarray( var_0, var_1 );
 
     if ( var_3.size > 0 )
-        var_2 = scripts\engine\utility::_id_1B72( var_2, var_3 );
+        var_2 = scripts\engine\utility::array_combine( var_2, var_3 );
 
     return var_2;
 }

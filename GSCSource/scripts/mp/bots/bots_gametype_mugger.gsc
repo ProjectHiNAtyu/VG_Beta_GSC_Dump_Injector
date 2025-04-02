@@ -125,7 +125,7 @@ _id_2768()
     if ( isdefined( var_0 ) )
     {
         var_2 = 1000000;
-        var_3 = scripts\engine\utility::_id_1B72( level._id_4CC7, level._id_A2B3 );
+        var_3 = scripts\engine\utility::array_combine( level._id_4CC7, level._id_A2B3 );
 
         foreach ( var_5 in var_3 )
         {
@@ -154,7 +154,7 @@ _id_2771( var_0, var_1 )
 
     if ( isdefined( var_0 ) )
     {
-        var_3 = scripts\engine\utility::_id_1B72( level._id_4CC7, level._id_A2B3 );
+        var_3 = scripts\engine\utility::array_combine( level._id_4CC7, level._id_A2B3 );
 
         foreach ( var_5 in var_3 )
         {

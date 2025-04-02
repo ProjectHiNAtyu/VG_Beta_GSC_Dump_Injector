@@ -1496,7 +1496,7 @@ _id_1CC1( var_0, var_1 )
     }
 
     var_16 = getarraykeys( level._id_CC24 );
-    var_16 = scripts\engine\utility::_id_1B72( var_16, getarraykeys( level._id_CC39 ) );
+    var_16 = scripts\engine\utility::array_combine( var_16, getarraykeys( level._id_CC39 ) );
 
     foreach ( var_18 in var_16 )
     {

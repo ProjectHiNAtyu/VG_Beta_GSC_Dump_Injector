@@ -2294,7 +2294,7 @@ _id_B6EA( var_0 )
             var_21 = scripts\mp\utility\teams::_id_6A3A( var_1.team, 0 );
 
             if ( isdefined( var_21 ) && var_2.team != var_1.team )
-                var_19 = scripts\engine\utility::_id_1B72( var_21, var_19 );
+                var_19 = scripts\engine\utility::array_combine( var_21, var_19 );
         }
 
         if ( var_19.size > 0 )

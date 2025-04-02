@@ -12,7 +12,7 @@ _id_100E1()
 
     level._id_FFF1._id_F075 = spawnstruct();
     level._id_FFF1._id_775C = getentarray( "helicopter_crash_location", "targetname" );
-    level._id_FFF1._id_775C = scripts\engine\utility::_id_1B72( level._id_FFF1._id_775C, scripts\engine\utility::_id_6D7D( "helicopter_crash_location", "targetname" ) );
+    level._id_FFF1._id_775C = scripts\engine\utility::array_combine( level._id_FFF1._id_775C, scripts\engine\utility::_id_6D7D( "helicopter_crash_location", "targetname" ) );
     level._id_FFF1._id_F075.team = [];
     level._id_FFF1._id_F075._id_43D2 = [];
     level._id_FFF1._id_F075._id_43AE = [];
@@ -353,7 +353,7 @@ _id_E020( var_0 )
         var_2[var_2.size] = var_4;
     }
 
-    return scripts\engine\utility::_id_1B72( var_1, var_2 );
+    return scripts\engine\utility::array_combine( var_1, var_2 );
 }
 
 _id_C44C()
@@ -2010,7 +2010,7 @@ _id_F880()
         var_12 = [ self._id_9967 ];
 
     if ( isdefined( self._id_9E55 ) )
-        var_12 = scripts\engine\utility::_id_1B72( var_12, self._id_9E55 );
+        var_12 = scripts\engine\utility::array_combine( var_12, self._id_9E55 );
 
     foreach ( var_17, var_14 in var_12 )
     {

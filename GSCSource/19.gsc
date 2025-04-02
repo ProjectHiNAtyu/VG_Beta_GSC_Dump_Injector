@@ -2109,16 +2109,16 @@ _id_6886()
     var_0 = [];
 
     if ( isdefined( self._id_B1BB ) )
-        var_0 = scripts\engine\utility::_id_1B72( var_0, self._id_B1BB );
+        var_0 = scripts\engine\utility::array_combine( var_0, self._id_B1BB );
 
     if ( isdefined( self._id_B1BD ) )
-        var_0 = scripts\engine\utility::_id_1B72( var_0, self._id_B1BD );
+        var_0 = scripts\engine\utility::array_combine( var_0, self._id_B1BD );
 
     if ( isdefined( self._id_B1BC ) )
-        var_0 = scripts\engine\utility::_id_1B72( var_0, self._id_B1BC );
+        var_0 = scripts\engine\utility::array_combine( var_0, self._id_B1BC );
 
     if ( isdefined( self._id_B1B9 ) )
-        var_0 = scripts\engine\utility::_id_1B72( var_0, self._id_B1B9 );
+        var_0 = scripts\engine\utility::array_combine( var_0, self._id_B1B9 );
 
     return var_0;
 }
@@ -2140,7 +2140,7 @@ _id_C48A( var_0 )
 
 _id_34D7()
 {
-    var_0 = scripts\engine\utility::_id_1B72( self._id_B1BD, self._id_B1BB );
+    var_0 = scripts\engine\utility::array_combine( self._id_B1BD, self._id_B1BB );
 
     foreach ( var_2 in var_0 )
     {

@@ -325,7 +325,7 @@ _id_71F5( var_0, var_1, var_2 )
     var_5 = [];
     var_6 = _func_00B3( "seek_patrol", "targetname" );
     var_7 = scripts\engine\utility::_id_6D7C( "seek_patrol", "targetname" );
-    var_6 = scripts\engine\utility::_id_1B72( var_6, var_7 );
+    var_6 = scripts\engine\utility::array_combine( var_6, var_7 );
     var_8 = 0;
 
     while ( var_8 < var_6.size )
@@ -356,7 +356,7 @@ _id_71F5( var_0, var_1, var_2 )
 
     var_5 = _func_01FF( var_5, var_2 );
     var_6 = _func_01FF( var_6, var_2 );
-    var_0._id_850D = scripts\engine\utility::_id_1B72( var_5, var_6 );
+    var_0._id_850D = scripts\engine\utility::array_combine( var_5, var_6 );
 }
 
 _id_71EB( var_0, var_1 )

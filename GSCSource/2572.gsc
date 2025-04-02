@@ -996,7 +996,7 @@ _id_FD21( var_0 )
         var_2 = self _meth_8064( 1, 40 );
         var_0.origin = var_2["origin"];
         var_0.angles = var_2["angles"];
-        var_3 = scripts\engine\utility::_id_1B72( level._id_F894, level._id_9E6C, level._id_EB4B._id_F670, level._id_9ECB );
+        var_3 = scripts\engine\utility::array_combine( level._id_F894, level._id_9E6C, level._id_EB4B._id_F670, level._id_9ECB );
         var_4 = var_0 _meth_813D( var_3 );
         var_0._id_3126 = self isonground() && var_2["result"] && abs( var_0.origin[2] - self.origin[2] ) < 30 && !_id_0A67::_id_8A90( self ) && var_4.size == 0;
 

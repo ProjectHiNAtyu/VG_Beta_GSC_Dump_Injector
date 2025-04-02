@@ -159,7 +159,7 @@ _id_A1A4( var_0 )
     }
 
     var_5 = getscriptablearray( self.target, "targetname" );
-    var_1._id_9484 = scripts\engine\utility::_id_1B72( var_1._id_9484, var_5 );
+    var_1._id_9484 = scripts\engine\utility::array_combine( var_1._id_9484, var_5 );
 
     foreach ( var_7 in var_1._id_9484 )
     {

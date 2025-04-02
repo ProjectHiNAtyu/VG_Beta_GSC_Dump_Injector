@@ -1218,13 +1218,13 @@ _id_6C56()
         var_1 = _func_03BB( "extract_pad_boneyard", "targetname" );
 
         if ( var_1.size > 0 )
-            var_0 = scripts\engine\utility::_id_1B72( var_0, var_1 );
+            var_0 = scripts\engine\utility::array_combine( var_0, var_1 );
     }
     else
     {
         var_2 = _func_03BB( "plunder_extraction_01", "targetname" );
         var_3 = _func_03BB( "plunder_extraction_02", "targetname" );
-        var_0 = scripts\engine\utility::_id_1B72( var_2, var_3 );
+        var_0 = scripts\engine\utility::array_combine( var_2, var_3 );
     }
 
     if ( var_0.size > 0 )

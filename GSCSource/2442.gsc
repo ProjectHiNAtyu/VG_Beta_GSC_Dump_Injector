@@ -6,7 +6,7 @@ init()
     var_0 = getentarray( "trigger_hurt", "classname" );
 
     if ( isdefined( level._id_ACFC ) && _func_0106( level._id_ACFC ) && isdefined( var_0 ) && _func_0106( var_0 ) )
-        level.glidebomboutofboundstriggers = scripts\engine\utility::_id_1B72( level._id_ACFC, var_0 );
+        level.glidebomboutofboundstriggers = scripts\engine\utility::array_combine( level._id_ACFC, var_0 );
     else if ( isdefined( var_0 ) && _func_0106( var_0 ) )
         level.glidebomboutofboundstriggers = var_0;
 

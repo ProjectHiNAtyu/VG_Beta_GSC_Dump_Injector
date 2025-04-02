@@ -2146,7 +2146,7 @@ _id_95FB( var_0 )
     var_2 = scripts\cp_mp\utility\killstreak_utility::_id_6AC0( var_0 );
     var_1[var_1.size] = var_2;
     var_3 = scripts\cp_mp\utility\killstreak_utility::_id_6AC3( var_0 );
-    var_1 = scripts\engine\utility::_id_1B72( var_1, var_3 );
+    var_1 = scripts\engine\utility::array_combine( var_1, var_3 );
     self loadweaponsforplayer( var_1, 1 );
 }
 

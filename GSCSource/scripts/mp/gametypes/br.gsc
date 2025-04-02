@@ -1417,7 +1417,7 @@ _id_F3CE( var_0 )
     var_2 = var_0 - ( 0, 0, 10000 );
     var_3 = scripts\cp_mp\vehicles\vehicle_tracking::_id_102BB();
     var_4 = level._id_0F23;
-    var_5 = scripts\engine\utility::_id_1B72( var_3, var_4 );
+    var_5 = scripts\engine\utility::array_combine( var_3, var_4 );
     var_6 = scripts\engine\trace::_id_3EC3( 0, 1, 0, 1, 1, 0, 0, 0, 0 );
     return scripts\engine\trace::ray_trace( var_1, var_2, var_5, var_6, 0, 1 );
 }

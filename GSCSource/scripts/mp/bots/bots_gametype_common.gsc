@@ -127,8 +127,8 @@ _id_26E8( var_0, var_1, var_2, var_3 )
     }
     else
     {
-        level._id_54FC = scripts\engine\utility::_id_1B72( level._id_54FC, var_0 );
-        level._id_54FA = scripts\engine\utility::_id_1B72( level._id_54FA, var_1 );
+        level._id_54FC = scripts\engine\utility::array_combine( level._id_54FC, var_0 );
+        level._id_54FA = scripts\engine\utility::array_combine( level._id_54FA, var_1 );
         level._id_54FD = scripts\engine\utility::_id_1B74( level._id_54FD, var_10 );
     }
 
@@ -143,7 +143,7 @@ _id_26CC( var_0, var_1 )
         var_3 = scripts\engine\utility::_id_1B97( var_2, var_0 );
 
         if ( var_3.size > 0 )
-            var_0 = scripts\engine\utility::_id_1B72( var_0, var_3 );
+            var_0 = scripts\engine\utility::array_combine( var_0, var_3 );
     }
     else if ( var_1.classname == "trigger_multiple" || var_1.classname == "trigger_use_touch" )
     {

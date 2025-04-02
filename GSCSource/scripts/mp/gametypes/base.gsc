@@ -3324,7 +3324,7 @@ _id_1AED( var_0, var_1 )
     {
         var_4 = scripts\mp\utility\teams::_id_6DAC( "axis", "players" );
         var_5 = scripts\mp\utility\teams::_id_6DAC( "allies", "players" );
-        var_3 = scripts\engine\utility::_id_1B72( var_4, var_5 );
+        var_3 = scripts\engine\utility::array_combine( var_4, var_5 );
     }
     else if ( var_1 == "axis" || var_1 == "allies" )
         var_3 = scripts\mp\utility\teams::_id_6DAC( var_1, "players" );
@@ -3494,7 +3494,7 @@ _id_740A( var_0, var_1, var_2, var_3 )
 
 _id_61F0()
 {
-    self.players = scripts\engine\utility::_id_1B72( self.players, self._id_C6B6 );
+    self.players = scripts\engine\utility::array_combine( self.players, self._id_C6B6 );
     self._id_C6B6 = [];
     var_0 = 1400;
     var_1 = ( 30, 0, 0 );
@@ -4860,7 +4860,7 @@ _id_69FE()
 {
     var_0 = scripts\engine\utility::_id_6D7C( "airdropLocation_allies", "targetname" );
     var_1 = scripts\engine\utility::_id_6D7C( "airdropLocation_axis", "targetname" );
-    var_2 = scripts\engine\utility::_id_1B72( var_0, var_1 );
+    var_2 = scripts\engine\utility::array_combine( var_0, var_1 );
     var_3 = scripts\engine\utility::_id_694A( level._id_8E90._id_41BB._id_60B9.origin, var_2 );
     var_4 = scripts\engine\utility::_id_694A( level._id_8E91._id_41BB._id_60B9.origin, var_2 );
     var_5 = scripts\engine\utility::_id_694A( level._id_8E92._id_41BB._id_60B9.origin, var_2 );

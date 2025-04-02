@@ -72,7 +72,7 @@ _id_61F3( var_0, var_1 )
         var_6 = var_4._id_96B8 - ( 0, 0, 10000 );
         var_7 = scripts\cp_mp\vehicles\vehicle_tracking::_id_102BB();
         var_8 = level._id_0F23;
-        var_9 = scripts\engine\utility::_id_1B72( var_7, var_8 );
+        var_9 = scripts\engine\utility::array_combine( var_7, var_8 );
         var_10 = scripts\engine\trace::_id_3EC3( 0, 1, 0, 1, 1, 0, 0, 0, 0 );
         var_11 = scripts\engine\trace::ray_trace( var_5, var_6, var_9, var_10, 0, 1 );
         var_4._id_96B8 = var_11["position"];

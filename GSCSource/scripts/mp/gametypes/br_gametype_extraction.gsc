@@ -833,7 +833,7 @@ getentitiesinradius()
 
     if ( var_0.size > 0 || var_1.size > 0 )
     {
-        var_2 = scripts\engine\utility::_id_1B72( var_0, var_1 );
+        var_2 = scripts\engine\utility::array_combine( var_0, var_1 );
 
         foreach ( var_4 in var_2 )
         {

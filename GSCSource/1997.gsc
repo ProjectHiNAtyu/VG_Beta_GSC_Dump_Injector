@@ -22,7 +22,7 @@ main()
     var_1 = _id_CDC1();
 
     foreach ( var_3 in var_1 )
-        var_0 = scripts\engine\utility::_id_1B72( var_0, getentarray( var_3, "classname" ) );
+        var_0 = scripts\engine\utility::array_combine( var_0, getentarray( var_3, "classname" ) );
 
     scripts\engine\utility::_id_1BBA( var_0, ::_id_CDC9 );
 }
@@ -772,7 +772,7 @@ _id_F9A7( var_0, var_1, var_2 )
             var_0 _meth_8062();
             var_0 dontinterpolate();
             var_8 = _id_659D( var_2 );
-            var_9 = scripts\engine\utility::_id_1B72( var_8, level.characters );
+            var_9 = scripts\engine\utility::array_combine( var_8, level.characters );
 
             for ( var_10 = 0; var_10 < var_5.size; var_10++ )
             {

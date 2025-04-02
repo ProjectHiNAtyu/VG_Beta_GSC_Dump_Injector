@@ -158,7 +158,7 @@ _id_1F8A( var_0 )
     var_1 = level._id_9ECB;
 
     if ( isdefined( level._id_F4BD ) && level._id_F4BD.size > 0 )
-        var_1 = scripts\engine\utility::_id_1B72( var_1, level._id_F4BD );
+        var_1 = scripts\engine\utility::array_combine( var_1, level._id_F4BD );
 
     foreach ( var_3 in var_1 )
     {

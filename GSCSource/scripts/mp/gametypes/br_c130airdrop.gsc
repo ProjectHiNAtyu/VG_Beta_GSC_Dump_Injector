@@ -388,20 +388,20 @@ _id_2E04( var_0 )
     if ( !scripts\mp\gametypes\br_public::_id_87EB() )
     {
         var_3 = scripts\mp\gametypes\br_lootcache::_id_357C( 0, 1, "killstreak", var_1 );
-        var_2 = scripts\engine\utility::_id_1B72( var_2, var_3 );
+        var_2 = scripts\engine\utility::array_combine( var_2, var_3 );
     }
 
     var_3 = scripts\mp\gametypes\br_lootcache::_id_357C( 4, 1, "weapon", var_1 );
-    var_2 = scripts\engine\utility::_id_1B72( var_2, var_3 );
+    var_2 = scripts\engine\utility::array_combine( var_2, var_3 );
     var_3 = scripts\mp\gametypes\br_lootcache::_id_357C( 0, 2, "health", var_1 );
-    var_2 = scripts\engine\utility::_id_1B72( var_2, var_3 );
+    var_2 = scripts\engine\utility::array_combine( var_2, var_3 );
     var_3 = scripts\mp\gametypes\br_lootcache::_id_357C( 0, 2, "ammo", var_1 );
-    var_2 = scripts\engine\utility::_id_1B72( var_2, var_3 );
+    var_2 = scripts\engine\utility::array_combine( var_2, var_3 );
 
     if ( !scripts\mp\gametypes\br_public::_id_87EB() )
     {
         var_3 = scripts\mp\gametypes\br_lootcache::_id_357C( 0, 1, "tablet", var_1 );
-        var_2 = scripts\engine\utility::_id_1B72( var_2, var_3 );
+        var_2 = scripts\engine\utility::array_combine( var_2, var_3 );
     }
 
     var_4 = randomint( 3 );
@@ -409,7 +409,7 @@ _id_2E04( var_0 )
     if ( var_4 == 2 )
     {
         var_3 = scripts\mp\gametypes\br_lootcache::_id_357C( 0, 1, "revive", var_1 );
-        var_2 = scripts\engine\utility::_id_1B72( var_2, var_3 );
+        var_2 = scripts\engine\utility::array_combine( var_2, var_3 );
     }
 
     var_5 = 750;
@@ -421,7 +421,7 @@ _id_2E04( var_0 )
         var_5 = int( var_5 * level._id_AD5F );
 
     var_3 = scripts\mp\gametypes\br_plunder::_id_5032( var_5, 10 );
-    var_2 = scripts\engine\utility::_id_1B72( var_2, var_3 );
+    var_2 = scripts\engine\utility::array_combine( var_2, var_3 );
 
     foreach ( var_7 in var_2 )
         var_7._id_9881 = "c130_box";

@@ -1108,7 +1108,7 @@ _id_76E9()
             if ( randomfloat( 1.0 ) < var_6 )
                 self notify( "manual_flare_popped" );
 
-            var_0 = scripts\engine\utility::_id_1B72( var_0, var_1 );
+            var_0 = scripts\engine\utility::array_combine( var_0, var_1 );
             var_0 = scripts\engine\utility::_id_1BA9( var_0 );
             wait 3.0;
         }

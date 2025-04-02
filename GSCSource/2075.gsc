@@ -109,7 +109,7 @@ _id_66B3( var_0, var_1, var_2 )
     if ( level._id_0B1D[var_1].size <= var_2 )
     {
         var_3 = scripts\engine\utility::_id_1B94( scripts\engine\utility::_id_1B97( getarraykeys( var_0 ), level._id_0B1D[var_1] ) );
-        level._id_0B1D[var_1] = scripts\engine\utility::_id_1B72( var_3, level._id_0B1D[var_1] );
+        level._id_0B1D[var_1] = scripts\engine\utility::array_combine( var_3, level._id_0B1D[var_1] );
     }
 
     var_4 = level._id_0B1D[var_1][level._id_0B1D[var_1].size - 1];

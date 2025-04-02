@@ -999,9 +999,9 @@ _id_C52B()
     var_0 = self.team;
 
     if ( level.teambased )
-        level._id_F8F5[var_0] = _id_07E3::array_combine( self, level._id_F8F5[var_0] );
+        level._id_F8F5[var_0] = _id_07E3::_id_1B9A( self, level._id_F8F5[var_0] );
     else
-        level._id_F8F5 = _id_07E3::array_combine( self, level._id_F8F5 );
+        level._id_F8F5 = _id_07E3::_id_1B9A( self, level._id_F8F5 );
 }
 
 _id_105F( var_0 )

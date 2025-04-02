@@ -263,18 +263,18 @@ _id_DEDE( var_0 )
     {
         if ( !isdefined( var_3 ) )
         {
-            var_1 = scripts\engine\utility::_id_1B72( var_1, level._id_0CD7._id_0C4E );
+            var_1 = scripts\engine\utility::array_combine( var_1, level._id_0CD7._id_0C4E );
             continue;
         }
 
         if ( var_3 == level )
         {
-            var_1 = scripts\engine\utility::_id_1B72( var_1, level._id_0CD7._id_0D76 );
+            var_1 = scripts\engine\utility::array_combine( var_1, level._id_0CD7._id_0D76 );
             continue;
         }
 
         if ( isdefined( var_3._id_0D49 ) )
-            var_1 = scripts\engine\utility::_id_1B72( var_1, var_3._id_0D49 );
+            var_1 = scripts\engine\utility::array_combine( var_1, var_3._id_0D49 );
     }
 
     return var_1;
@@ -775,7 +775,7 @@ _id_0D41( var_0 )
             {
                 var_6 = _id_0827::_id_6DA2( var_0[0] );
                 var_7 = _id_0827::_id_6DA2( var_0[1] );
-                var_1 = scripts\engine\utility::_id_1B72( var_6, var_7 );
+                var_1 = scripts\engine\utility::array_combine( var_6, var_7 );
             }
             else
                 var_1 = var_0;
@@ -2257,7 +2257,7 @@ _id_DF32( var_0, var_1, var_2 )
         var_4 = getentarray( 0, var_1, var_2 );
 
     if ( _func_0106( var_4 ) )
-        var_3 = scripts\engine\utility::_id_1B72( var_3, var_4 );
+        var_3 = scripts\engine\utility::array_combine( var_3, var_4 );
 
     foreach ( var_6 in _id_0827::_id_1BCB( var_3 ) )
         var_6 thread _id_0D3E( var_0 );
