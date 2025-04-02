@@ -224,7 +224,7 @@ _id_10B89( var_0 )
         if ( !scripts\mp\utility\player::isreallyalive( var_3 ) || var_3.sessionstate != "playing" )
             continue;
 
-        if ( scripts\mp\utility\player::_id_8803( var_3 ) )
+        if ( scripts\mp\utility\player::isenemy( var_3 ) )
         {
             if ( !var_3 scripts\mp\utility\perk::_hasperk( "specialty_noplayertarget" ) )
             {
@@ -260,7 +260,7 @@ _id_10BE2()
     {
         level waittill( "player_spawned", var_0 );
 
-        if ( var_0.sessionstate == "playing" && self.owner scripts\mp\utility\player::_id_8803( var_0 ) )
+        if ( var_0.sessionstate == "playing" && self.owner scripts\mp\utility\player::isenemy( var_0 ) )
             var_0 thread _id_10B35( self );
     }
 }

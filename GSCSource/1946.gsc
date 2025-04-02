@@ -4633,7 +4633,7 @@ _id_AB00( var_0, var_1, var_2, var_3 )
         if ( isdefined( var_1.owner ) && isplayer( var_1.owner ) )
             var_1 = var_1.owner;
 
-        if ( isplayer( var_1 ) && self.owner scripts\mp\utility\player::_id_8803( var_1 ) )
+        if ( isplayer( var_1 ) && self.owner scripts\mp\utility\player::isenemy( var_1 ) )
             var_4 = var_1;
     }
 
@@ -4656,7 +4656,7 @@ _id_AB05( var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8 )
             if ( !_func_03D4( self.owner, var_1 ) )
                 var_10 = var_1;
         }
-        else if ( self.owner scripts\mp\utility\player::_id_8803( var_1 ) )
+        else if ( self.owner scripts\mp\utility\player::isenemy( var_1 ) )
             var_10 = var_1;
     }
 

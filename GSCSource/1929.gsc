@@ -646,7 +646,7 @@ _id_90DE( var_0 )
             if ( !isdefined( var_3 ) || !var_3 scripts\cp_mp\utility\player_utility::_id_0C14() )
                 continue;
 
-            if ( isdefined( var_0.owner ) && !var_0.owner scripts\mp\utility\player::_id_8803( var_3 ) )
+            if ( isdefined( var_0.owner ) && !var_0.owner scripts\mp\utility\player::isenemy( var_3 ) )
                 continue;
 
             level thread _id_F756( var_3, "incoming_rpg" );
@@ -896,7 +896,7 @@ _id_7153()
             if ( var_2 )
                 return;
 
-            if ( !isdefined( var_5 ) || var_5 scripts\cp_mp\utility\player_utility::_id_0C14() == 0 || isdefined( self.owner ) && self.owner scripts\mp\utility\player::_id_8803( var_5 ) == 0 )
+            if ( !isdefined( var_5 ) || var_5 scripts\cp_mp\utility\player_utility::_id_0C14() == 0 || isdefined( self.owner ) && self.owner scripts\mp\utility\player::isenemy( var_5 ) == 0 )
                 continue;
 
             var_6 = distancesquared( self.origin, var_5.origin );
@@ -927,7 +927,7 @@ enemyuseadrenaline()
         if ( var_0 )
             return;
 
-        if ( !isdefined( var_3 ) || var_3 scripts\cp_mp\utility\player_utility::_id_0C14() == 0 || isdefined( self ) && scripts\mp\utility\player::_id_8803( var_3 ) == 0 )
+        if ( !isdefined( var_3 ) || var_3 scripts\cp_mp\utility\player_utility::_id_0C14() == 0 || isdefined( self ) && scripts\mp\utility\player::isenemy( var_3 ) == 0 )
             continue;
 
         var_4 = distancesquared( self.origin, var_3.origin );

@@ -370,7 +370,7 @@ _id_243B()
 
             foreach ( var_2 in var_0 )
             {
-                var_3 = isdefined( var_2 ) && var_2 scripts\cp_mp\utility\player_utility::_id_0C14() && scripts\mp\utility\player::_id_8803( var_2 );
+                var_3 = isdefined( var_2 ) && var_2 scripts\cp_mp\utility\player_utility::_id_0C14() && scripts\mp\utility\player::isenemy( var_2 );
 
                 if ( !var_3 )
                     continue;

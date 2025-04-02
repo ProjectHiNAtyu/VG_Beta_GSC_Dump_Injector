@@ -31,7 +31,7 @@ _id_CA27( var_0, var_1 )
                     if ( !scripts\mp\utility\player::isreallyalive( var_7 ) )
                         continue;
 
-                    if ( !var_2 scripts\mp\utility\player::_id_8803( var_7 ) )
+                    if ( !var_2 scripts\mp\utility\player::isenemy( var_7 ) )
                         continue;
 
                     if ( var_7 scripts\mp\utility\perk::_hasperk( "specialty_location_marking" ) )

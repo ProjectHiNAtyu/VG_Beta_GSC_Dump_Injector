@@ -488,7 +488,7 @@ _id_D0E9( var_0 )
             if ( isdefined( var_1.owner ) && isplayer( var_1.owner ) )
                 var_9 = var_1.owner;
 
-            if ( self.owner scripts\mp\utility\player::_id_8803( var_9 ) )
+            if ( self.owner scripts\mp\utility\player::isenemy( var_9 ) )
                 var_8 = var_9;
         }
 

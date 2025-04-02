@@ -774,7 +774,7 @@ _id_69E1( var_0 )
 
     foreach ( var_3 in level.players )
     {
-        if ( var_0 scripts\mp\utility\player::_id_8803( var_3 ) )
+        if ( var_0 scripts\mp\utility\player::isenemy( var_3 ) )
             var_1[var_1.size] = var_3;
     }
 

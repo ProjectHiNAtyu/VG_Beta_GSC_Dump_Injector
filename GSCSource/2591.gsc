@@ -360,7 +360,7 @@ _id_31CC( var_0 )
     if ( distance( var_0.origin, self.origin ) > level._id_7740 )
         return 0;
 
-    if ( !self.owner scripts\mp\utility\player::_id_8803( var_0 ) )
+    if ( !self.owner scripts\mp\utility\player::isenemy( var_0 ) )
         return 0;
 
     if ( isdefined( var_0._id_E390 ) && ( gettime() - var_0._id_E390 ) / 1000 <= 5 )

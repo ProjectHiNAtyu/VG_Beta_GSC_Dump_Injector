@@ -3021,7 +3021,7 @@ _id_2691( var_0, var_1 )
         if ( var_1 == var_4 )
             continue;
 
-        if ( scripts\mp\utility\player::_id_8803( var_4 ) && isalive( var_4 ) && !var_4 scripts\mp\utility\perk::_hasperk( "specialty_gpsjammer" ) )
+        if ( scripts\mp\utility\player::isenemy( var_4 ) && isalive( var_4 ) && !var_4 scripts\mp\utility\perk::_hasperk( "specialty_gpsjammer" ) )
         {
 
         }

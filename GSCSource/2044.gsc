@@ -332,7 +332,7 @@ _id_FF49( var_0 )
     if ( _func_0414( "specialist_perk_1" ) || _func_0414( "specialist_perk_2" ) || _func_0414( "specialist_perk_3" ) )
         var_0._id_968C = 0;
 
-    if ( !scripts\mp\equipment::isenemy( var_0._id_9653 ) || !scripts\mp\equipment::_id_881F( var_0._id_9653 ) )
+    if ( !scripts\mp\equipment::_id_881D( var_0._id_9653 ) || !scripts\mp\equipment::_id_881F( var_0._id_9653 ) )
         var_0._id_9653 = "equip_frag";
     else if ( _func_0413( var_0._id_9653 ) )
     {

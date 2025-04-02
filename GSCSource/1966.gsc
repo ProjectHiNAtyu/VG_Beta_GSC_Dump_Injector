@@ -917,7 +917,7 @@ _id_1F9B( var_0, var_1 )
 
             var_7 = level._id_B77B[var_9];
 
-            if ( isdefined( var_7 ) && var_7.team != "spectator" && var_7.team != "follower" && var_7 scripts\mp\utility\player::_id_8803( var_1 ) )
+            if ( isdefined( var_7 ) && var_7.team != "spectator" && var_7.team != "follower" && var_7 scripts\mp\utility\player::isenemy( var_1 ) )
             {
                 var_8 = var_7._id_723F;
 
@@ -936,7 +936,7 @@ _id_1F9B( var_0, var_1 )
 
             var_7 = level._id_B77B[var_9];
 
-            if ( isdefined( var_7 ) && var_7.team != "spectator" && var_7.team != "follower" && var_7 scripts\mp\utility\player::_id_8803( var_1 ) )
+            if ( isdefined( var_7 ) && var_7.team != "spectator" && var_7.team != "follower" && var_7 scripts\mp\utility\player::isenemy( var_1 ) )
             {
                 var_8 = var_7._id_723F;
 

@@ -226,7 +226,7 @@ _id_AD55( var_0 )
     _func_0264( var_0 );
 }
 
-_id_8803( var_0 )
+isenemy( var_0 )
 {
     if ( level.teambased )
         return var_0.team != self.team;

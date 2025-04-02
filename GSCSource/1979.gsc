@@ -130,7 +130,7 @@ _id_B4E6()
     scripts\cp_mp\utility\script_utility::registersharedfunc( "player", "getPlayersInRadius", scripts\mp\utility\player::_id_6C40 );
     scripts\cp_mp\utility\script_utility::registersharedfunc( "player", "allowGesture", scripts\mp\utility\player::_id_151B );
     scripts\cp_mp\utility\script_utility::registersharedfunc( "player", "isReallyAlive", scripts\mp\utility\player::isreallyalive );
-    scripts\cp_mp\utility\script_utility::registersharedfunc( "player", "isEnemy", scripts\mp\utility\player::_id_8803 );
+    scripts\cp_mp\utility\script_utility::registersharedfunc( "player", "isEnemy", scripts\mp\utility\player::isenemy );
     scripts\cp_mp\utility\script_utility::registersharedfunc( "player", "loadout_finalizeWeapons", scripts\mp\class::_id_960F );
     scripts\cp_mp\utility\script_utility::registersharedfunc( "player", "lookupCurrentOperator", _id_07F7::_id_9800 );
     scripts\cp_mp\utility\script_utility::registersharedfunc( "player", "lookupOtherOperator", _id_07F7::_id_9803 );

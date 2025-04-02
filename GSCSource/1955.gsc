@@ -589,10 +589,10 @@ _id_5ACA( var_0 )
 
 _id_881C( var_0 )
 {
-    return isenemy( var_0 );
+    return _id_881D( var_0 );
 }
 
-isenemy( var_0 )
+_id_881D( var_0 )
 {
     if ( isdefined( level._id_5532._id_EC59[var_0] ) )
         return level._id_5532._id_EC59[var_0]._id_45A6 == "primary";
@@ -981,7 +981,7 @@ _id_44B2()
 
             for ( var_2 = 1; var_2 < level.players.size; var_2++ )
             {
-                if ( var_0 scripts\mp\utility\player::_id_8803( level.players[var_2] ) )
+                if ( var_0 scripts\mp\utility\player::isenemy( level.players[var_2] ) )
                 {
                     var_1 = level.players[var_2];
                     break;
