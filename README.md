@@ -6,14 +6,6 @@ Thank you always, and I support you.
 
 ----------
 
-[ Caution ]
-
-Regarding the GSC compiler and decompiler functions, many of the instructions are incorrect because we have not analyzed all of the hash tokens.
-Since I play Vanguard at Retail, I don't intend to make many modifications to the gsc-tool for the Beta build.
-If you want to seriously create GSC for the Beta build, please modify the gsc-tool's hash tokens on your own.
-
-----------
-
 [ Implemented ]
 
 The following items are currently completed:
@@ -22,10 +14,61 @@ The following items are currently completed:
 - GSC Injector
 - GSC Dumper
 - GSCBIN Dump Data
+- GSC Mod Menu - Project HiNAtyu ( Compiled )
+- GSC Mod Menu - Project HiNAtyu ( Sourcecode )
+
+----------
+
+[ Caution ]
+
+< Project HiNAtyu GSC Mod Menu >
+
+The Project HiNAtyu GSC Mod Menu in VG Beta lags the first time you open the Mod Menu due to some kind of issue with the Hud elements engine.
+Also, if you use a lot of functions from the Mod Menu, it becomes more prone to crashes.
+As for the crash when using this GSC, I think that it is not me but the problem with the VG Beta Cr3ck system that created the .r4v3n (because there are so many DEV ERRORs in the console window).
+Please contact .r4v3n for a fix for the GSC crash.
+
+----------
+
+< GSC Injector / dll Injector ( Face injector ) >
+
+Place this "VG_BETA_GSC_CUSTOM" folder in the Documents folder on your PC.
+Then, run "CoDV_dll_Face_Injector.exe" as an administrator.
+
+Since this Face Injector operates at the kernel level, it may be flagged as a virus. Before running the app, disable the Windows antivirus system in advance.
+
+After launching the app, once the driver is initialized, start Call of Duty Vanguard Public Beta.
+Once the game is launched, the Face Injector will recognize Vanguard and automatically begin the GSC Injection process.
+
+Note that this Face Injector uses a driver pattern that is detected in the retail version of Call of Duty.
+After using GSC in the Vanguard Beta, if you plan to launch other games, restart your PC beforehand.
+Shutting down the PC or unplugging the power cord will prevent the driver from initializing properly, increasing the risk of a ban.
+Be sure to carefully restart your PC to avoid this.
+
+----------
+
+< gsc-tool >
+
+This app is a command-line tool operated via cmd.
+HiNAtyu does not accept questions regarding the tool.
+Please direct your questions to xensik.
+
+Regarding the GSC compiler and decompiler functions, many of the instructions are incorrect because we have not analyzed all of the hash tokens.
+Since I play Vanguard at Retail, I don't intend to make many modifications to the gsc-tool for the Beta build.
+If you want to seriously create GSC for the Beta build, please modify the gsc-tool's hash tokens on your own.
 
 ----------
 
 [ Custom GSC ( gsc-tool ) ]
+
+< dump >
+* A "GSCBIN" folder containing the gscbin for s4 needs to be placed in the same directory hierarchy as gsc-tool_s4beta.exe.
+gsc-tool_s4beta -m decomp -g s4 -s pc GSCBIN
+
+< compile >
+* A "GSCModSource" folder containing the custom GSC source for s4 needs to be placed in the same directory hierarchy as gsc-tool_s4beta.exe.
+gsc-tool_s4beta -m comp -g s4 -s pc GSCModSource
+
 
 Currently, the following GSC functions and tokens can be used.
 All other commands are almost always incorrect and may cause a crash.
