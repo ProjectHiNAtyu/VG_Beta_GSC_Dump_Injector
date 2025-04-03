@@ -6,6 +6,14 @@ Thank you always, and I support you.
 
 ----------
 
+[ Video ]
+
+If you’d like to learn more about this GSC Mod Menu, please check out the YouTube video below.
+
+https://youtu.be/ho9-UawtaNM
+
+----------
+
 [ Implemented ]
 
 The following items are currently completed:
