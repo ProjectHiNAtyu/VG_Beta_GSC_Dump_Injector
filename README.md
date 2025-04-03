@@ -59,6 +59,30 @@ If you want to seriously create GSC for the Beta build, please modify the gsc-to
 
 ----------
 
+[ How to use ]
+
+01. Install the CoD VG Beta released by .r4v3n on your PC and get it ready to launch the game.  
+
+02. Download the file from this GitHub release page and extract the .zip archive.  
+
+03. Place the "VG_BETA_GSC_CUSTOM" folder, which is included in the extracted files, directly into your Documents folder.  
+
+04. Disable your antivirus system.  
+
+05. Run "CoDV_dll_Face_Injector.exe" with administrator privileges.  
+
+06. Once the driver initialization is complete, launch CoD VG Beta.  
+
+07. When the game starts, the display on the DLL Injector screen will change. If it shows that the injection was successful, wait as is.  
+
+08. Move to the lobby waiting screen and start a custom match with your preferred settings.  
+
+09. After the game starts, confirm that "Project HiNAtyu" is displayed on the screen.  
+
+10. After you’re done playing with the Mod Menu, be sure to restart your PC before playing any other games.
+
+----------
+
 [ Custom GSC ( gsc-tool ) ]
 
 < dump >
